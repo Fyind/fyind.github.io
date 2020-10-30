@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>虚拟机安装以及网站的搭建 | Fyind</title><meta name="keywords" content="网络安全,VMware,搭建网站"><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="虚拟机安装以及网站的搭建  一、 VMware WorkStation 安装和使用  Unity 模式 在该模式下，可以把虚拟机的窗口拖到真实机上。   快照 在这里添加快照   二、Windows Server 2003 下载安装完成后：  设置虚拟机交换机 设置虚拟机的交换机为VMnet1，下面的xp也一样设置   设置ip地址 运行中输入ncpa.cpl可以打开网络设置&#x2F;网卡 右键本地连接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟机安装以及网站的搭建">
+<meta property="og:url" content="http://fyind.github.io/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Fyind">
+<meta property="og:description" content="虚拟机安装以及网站的搭建  一、 VMware WorkStation 安装和使用  Unity 模式 在该模式下，可以把虚拟机的窗口拖到真实机上。   快照 在这里添加快照   二、Windows Server 2003 下载安装完成后：  设置虚拟机交换机 设置虚拟机的交换机为VMnet1，下面的xp也一样设置   设置ip地址 运行中输入ncpa.cpl可以打开网络设置&#x2F;网卡 右键本地连接">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-02-11T22:30:51.000Z">
+<meta property="article:modified_time" content="2020-05-26T16:06:07.387Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="网络安全">
+<meta property="article:tag" content="VMware">
+<meta property="article:tag" content="搭建网站">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://fyind.github.io/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//pingjs.qq.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var _mtac = {};
+(function() {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500732782");
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+})();
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2020-05-26 18:06:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Fyind</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">虚拟机安装以及网站的搭建</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-11T22:30:51.000Z" title="发表于 2020-02-11 23:30:51">2020-02-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-05-26T16:06:07.387Z" title="更新于 2020-05-26 18:06:07">2020-05-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="虚拟机安装以及网站的搭建"><a class="markdownIt-Anchor" href="#虚拟机安装以及网站的搭建"></a> 虚拟机安装以及网站的搭建</h1>
+<h2 id="一-vmware-workstation-安装和使用"><a class="markdownIt-Anchor" href="#一-vmware-workstation-安装和使用"></a> 一、 VMware WorkStation 安装和使用</h2>
+<h3 id="unity-模式"><a class="markdownIt-Anchor" href="#unity-模式"></a> Unity 模式</h3>
+<p>在该模式下，可以把虚拟机的窗口拖到真实机上。</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200203165854913.png" alt="image-20200203165854913"></p>
+<h3 id="快照"><a class="markdownIt-Anchor" href="#快照"></a> 快照</h3>
+<p>在这里添加快照</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200203170140749.png" alt="image-20200203170140749"></p>
+<h2 id="二-windows-server-2003"><a class="markdownIt-Anchor" href="#二-windows-server-2003"></a> 二、Windows Server 2003</h2>
+<p>下载安装完成后：</p>
+<h3 id="设置虚拟机交换机"><a class="markdownIt-Anchor" href="#设置虚拟机交换机"></a> 设置虚拟机交换机</h3>
+<p>设置虚拟机的交换机为VMnet1，下面的xp也一样设置</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204050331629.png" alt="image-20200204050331629"></p>
+<h3 id="设置ip地址"><a class="markdownIt-Anchor" href="#设置ip地址"></a> 设置ip地址</h3>
+<p>运行中输入ncpa.cpl可以打开网络设置/网卡</p>
+<p>右键本地连接属性-&gt; tcp/ip协议 ，右键属性</p>
+<p>在这里可以更改ip地址，下面的xp也一样设置，注意地址不要改一样的</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204050717616.png" alt="image-20200204050717616"></p>
+<h2 id="三-windows-xp-sp3"><a class="markdownIt-Anchor" href="#三-windows-xp-sp3"></a> 三、Windows Xp sp3</h2>
+<p>下载镜像后安装</p>
+<p>序列号：MRX3F-47B9T-2487J-KWKMF-RPWBY</p>
+<p>Windows也和上面一样设置，然后关闭防火墙，它们就可以ping通过了</p>
+<h4 id="关闭防火墙"><a class="markdownIt-Anchor" href="#关闭防火墙"></a> 关闭防火墙</h4>
+<p>控制面板—&gt;安全中心—&gt;关闭防火墙</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204054606147.png" alt="image-20200204054606147"></p>
+<p>成功ping通上面的windows server</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204054702176.png" alt="image-20200204054702176"></p>
+<h3 id="让虚拟机也连上网"><a class="markdownIt-Anchor" href="#让虚拟机也连上网"></a> 让虚拟机也连上网</h3>
+<p>在网卡中设置为共享主机ip</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204055126071.png" alt="image-20200204055126071"></p>
+<p>然后xp中把ip地址改为自动获取</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204055209339.png" alt="image-20200204055209339"></p>
+<p>然后就可以ping通外网了</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204055255912.png" alt="image-20200204055255912"></p>
+<p>然后xp会自动获取一个ip。其实这个ip也是可以更改的。在虚拟机编辑里的虚拟网络编辑器可以改</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204055515279.png" alt="image-20200204055515279"></p>
+<h2 id="四-搭建网站"><a class="markdownIt-Anchor" href="#四-搭建网站"></a> 四、搭建网站</h2>
+<h3 id="http-协议"><a class="markdownIt-Anchor" href="#http-协议"></a> HTTP 协议</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -I www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>用这个命令可以获取到请求网页HTTP的报头</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204113744549.png" alt="image-20200204113744549"></p>
+<h3 id="静态网站"><a class="markdownIt-Anchor" href="#静态网站"></a> 静态网站</h3>
+<p>后缀是html的是静态网站，它没有数据库，比动态网站安全性高</p>
+<h5 id="判断网站是否时静态的"><a class="markdownIt-Anchor" href="#判断网站是否时静态的"></a> 判断网站是否时静态的</h5>
+<p>在后面加上index.html如果没报错就是静态的</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204114201540.png" alt="image-20200204114201540"><strong>判断操作系统</strong></p>
+<p>改大小写字母，如果报错了就是Linux系统，否则时windows系统</p>
+<h5 id="判断伪静态网站"><a class="markdownIt-Anchor" href="#判断伪静态网站"></a> 判断伪静态网站</h5>
+<p>把html去掉，改成.php?id=加上阐述的形式，如果没报错就是伪静态</p>
+<h3 id="网站搭建windowsiisaspaccess"><a class="markdownIt-Anchor" href="#网站搭建windowsiisaspaccess"></a> 网站搭建Windows+iis+asp+access</h3>
+<h4 id="方法一"><a class="markdownIt-Anchor" href="#方法一"></a> 方法一</h4>
+<p>在开始菜单中，打开管理服务器</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204115108081.png" alt="image-20200204115108081"></p>
+<p>然后添加或者删除角色</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204115206076.png" alt="image-20200204115206076"></p>
+<p>然后点下一步，然后选择自定义配置，下一步</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204120320527.png" alt="image-20200204120320527"></p>
+<p>然后选择IIS的那个，下一步</p>
+<p>然后把这个勾选上，下一步。这里要保证光盘里有Windows Server 2003安装镜像</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204120709715.png" alt="image-20200204120709715"></p>
+<h4 id="方法二"><a class="markdownIt-Anchor" href="#方法二"></a> 方法二</h4>
+<p>控制面板中找到添加或删除程序，然后点添加删除组件，把安全性反选</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204115725118.png" alt="image-20200204115725118"></p>
+<p>找到应用程序服务器，点详细信息，把下面这几个勾选上</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204115923743.png" alt="image-20200204115923743"></p>
+<p>然后下一步下一步安装就可以了，这里要确定你的Windows 2003 Server的安装盘要在光驱里面</p>
+<h3 id="管理服务器"><a class="markdownIt-Anchor" href="#管理服务器"></a> 管理服务器</h3>
+<p>在开始中找这个可以管理你的服务器</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204121206245.png" alt="image-20200204121206245"></p>
+<p>右键打开默认网站，把里面的内容删了</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204121334591.png" alt="image-20200204121334591"></p>
+<p>可以在里面写一个简单的网页</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204121500327.png" alt="image-20200204121500327"></p>
+<p>右键默认网站，刷新一下。然后右键点权限</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204121635625.png" alt="image-20200204121635625"></p>
+<p>添加，高级，立即查找，双击everyone，添加进去</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204121815487.png" alt="image-20200204121815487"></p>
+<p>然后设置属性</p>
+<img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/Users/tarja/OneDrive/桌面/笔记/虚拟机安装以及网站的搭建/image-20200204122104384.png" alt="image-20200204122104384" style="zoom:50%;">
+<p>在文档这里，把里面的全部删了，加一个index.html</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200204122200968.png" alt="image-20200204122200968"></p>
+<p>然后再浏览器中输入localhost或者127.0.0.1就能访问网站</p>
+<h3 id="添加其他网站"><a class="markdownIt-Anchor" href="#添加其他网站"></a> 添加其他网站</h3>
+<p>一个服务器可以有多个网站。网站里右键新建网站</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210210716037.png" alt="image-20200210210716037"></p>
+<p>然后给个描述，然后下一步</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210211125225.png" alt="image-20200210211125225"></p>
+<p>然后选择源代码所在的目录（<a target="_blank" rel="noopener" href="http://down.chinaz.com/soft/32891.htm">可以在这里下载asp/access源码</a> ）,一般选中这个位置放源码</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210211934248.png" alt="image-20200210211934248"></p>
+<p>因为同一个ip的同一个端口只能运行一个网站，所以刚刚建立的test网站是停止的，我们把默认网站停止，开启我们的test</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210212223767.png" alt="image-20200210212223767"></p>
+<p>然后右键test打开属性进行设置</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210212323656.png" alt="image-20200210212323656"></p>
+<p>然后再文档那里全部删除，加入index.asp</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210212436455.png" alt="image-20200210212436455"></p>
+<p>然后给权限everyone（参加上面步骤）。右键打开目录，然后把test里面的东西替换成源码</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210214035530.png" alt="image-20200210214035530"></p>
+<p>然后去web服务扩展里启用Active Server Pages（这是asp的扩展）</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210214421977.png" alt="image-20200210214421977"></p>
+<p>然后再去test的属性里再主目录下，把执行权限改成纯脚本</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210214544939.png" alt="image-20200210214544939"></p>
+<p>然后点配置，再选项里启用父路径</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210214701247.png" alt="image-20200210214701247"></p>
+<p>然后再调试里，把这两个勾上</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200210214742152.png" alt="image-20200210214742152"></p>
+<p>然后再停止，并启动一下test网站，就可以在浏览器里看到了</p>
+<h3 id="在同一个服务器用不同ip搭建网站"><a class="markdownIt-Anchor" href="#在同一个服务器用不同ip搭建网站"></a> 在同一个服务器用不同ip搭建网站</h3>
+<p>把虚拟机的网卡设成vnet1，更改一下本机的ip地址</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211095504655.png" alt="image-20200211095504655"></p>
+<p>并且在高级一栏里面添加一个ip</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211095834282.png" alt="image-20200211095834282"></p>
+<p>此时添加网站的时候可以选择不同ip</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211095954768.png" alt="image-20200211095954768"></p>
+<h3 id="使用不同端口搭建不同网站"><a class="markdownIt-Anchor" href="#使用不同端口搭建不同网站"></a> 使用不同端口搭建不同网站</h3>
+<p>搭建完ss网站后，右键属性，更改端口为8080的其他端口</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211100236835.png" alt="image-20200211100236835"></p>
+<p>然后就可以同时启动了</p>
+<h3 id="使用域名搭建不同网站"><a class="markdownIt-Anchor" href="#使用域名搭建不同网站"></a> 使用域名搭建不同网站</h3>
+<p>在建立网站的时候指定域名</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211100421876.png" alt="image-20200211100421876"></p>
+<p>完成创建后配置dns服务器，在管理服务器里面添加或删除角色</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211100617236.png" alt="image-20200211100617236"></p>
+<p>选择自定义</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211100757950.png" alt="image-20200211100757950"></p>
+<p>然后选择dns服务器</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211100841840.png" alt="image-20200211100841840"></p>
+<p>然后一直下一步，这里设置成刚才的域名</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211101029215.png" alt="image-20200211101029215"></p>
+<p>这里点否，然后下一步</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211101132861.png" alt="image-20200211101132861"></p>
+<p>安装完成后可以在这里管理dns服务器</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211101243509.png" alt="image-20200211101243509"></p>
+<p>如果之前没有创建，可以在这里创建新的区域</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211101357826.png" alt="image-20200211101357826"></p>
+<p>然后再这里右键新建主机<img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211101545266.png" alt="image-20200211101545266"></p>
+<p>填上名字和ip</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211101707768.png" alt="image-20200211101707768"></p>
+<p>然后去配置一下dns服务器</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211102227104.png" alt="image-20200211102227104"></p>
+<p>然后再按之前的方法配置好网站，最后就可以用域名访问了</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211102347131.png" alt="image-20200211102347131"></p>
+<h2 id="五-在linux上搭建网站"><a class="markdownIt-Anchor" href="#五-在linux上搭建网站"></a> 五、在Linux上搭建网站</h2>
+<h3 id="安装apachephpmysql"><a class="markdownIt-Anchor" href="#安装apachephpmysql"></a> 安装apache，php，mysql</h3>
+<p>搭建好Redhat的环境之后, 安装apache(httpd)和php和mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install httpd php mysql-server php-mysql</span><br></pre></td></tr></table></figure>
+<p>网站的根目录在/var/www/html/ 下</p>
+<h3 id="启动服务"><a class="markdownIt-Anchor" href="#启动服务"></a> 启动服务</h3>
+<p>启动apache</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service httpd start <span class="comment"># 启动 apache</span></span><br><span class="line">service mysqld start <span class="comment"># 启动 mysql 数据库</span></span><br><span class="line">mysqladmin -uroot password 123456 <span class="comment"># 设置mysql初始密码</span></span><br><span class="line">mysql -uroot -p123456 <span class="comment"># 登录 mysql 数据库</span></span><br></pre></td></tr></table></figure>
+<p>然后就进来了mysql里面</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211222706928.png" alt="image-20200211222706928"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">show databases; # 查看数据库</span><br><span class="line">use mysql; # 使用这个数据库</span><br><span class="line">show tables; # 查看数据表</span><br><span class="line">select * from user; # 查看user这个表</span><br><span class="line">quit; # 推出</span><br></pre></td></tr></table></figure>
+<p>此时发现数据库已经配置完成。然后我们解除一下防护墙</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br></pre></td></tr></table></figure>
+<p>此时在外界浏览器中输入ip可以访问到网站</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211223304626.png" alt="image-20200211223304626"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var <span class="comment"># 到这个目录下</span></span><br><span class="line">chown -R apache www <span class="comment"># 把www的所有者改成apache</span></span><br></pre></td></tr></table></figure>
+<p>然后把网站拿进来。</p>
+<p>可以通过虚拟机设置里选项里面的共享文件夹功能，加入bbs_new文件夹</p>
+<p>网站源代码：</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1J_A7y3LNXtl3pU-9L0AxzQ">https://pan.baidu.com/s/1J_A7y3LNXtl3pU-9L0AxzQ</a><br>
+提取码：zrar</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211231151678.png" alt="image-20200211231151678"></p>
+<p>然后共享的文件夹在/mnt/hgfs/目录下。用cp命令把里面的文件复制到/var/www/html里面来</p>
+<p>然后就可以在外界访问到这个网站了</p>
+<p><img src="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/image-20200211231614902.png" alt="image-20200211231614902"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://fyind.github.io/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/">http://fyind.github.io/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://fyind.github.io" target="_blank">Fyind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><a class="post-meta__tags" href="/tags/VMware/">VMware</a><a class="post-meta__tags" href="/tags/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/">搭建网站</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/11/windows%E5%9F%BA%E7%A1%80/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">windows基础</div></div></a></div><div class="next-post pull-right"><a href="/2020/01/19/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java编程思想</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/09/16/网络安全/" title="网络安全"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-16</div><div class="title">网络安全</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text"> 虚拟机安装以及网站的搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-vmware-workstation-%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text"> 一、 VMware WorkStation 安装和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#unity-%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text"> Unity 模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E7%85%A7"><span class="toc-number">1.1.2.</span> <span class="toc-text"> 快照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-windows-server-2003"><span class="toc-number">1.2.</span> <span class="toc-text"> 二、Windows Server 2003</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="toc-number">1.2.1.</span> <span class="toc-text"> 设置虚拟机交换机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEip%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 设置ip地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-windows-xp-sp3"><span class="toc-number">1.3.</span> <span class="toc-text"> 三、Windows Xp sp3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.3.0.1.</span> <span class="toc-text"> 关闭防火墙</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A9%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B9%9F%E8%BF%9E%E4%B8%8A%E7%BD%91"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 让虚拟机也连上网</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99"><span class="toc-number">1.4.</span> <span class="toc-text"> 四、搭建网站</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.4.1.</span> <span class="toc-text"> HTTP 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 静态网站</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%BD%91%E7%AB%99%E6%98%AF%E5%90%A6%E6%97%B6%E9%9D%99%E6%80%81%E7%9A%84"><span class="toc-number">1.4.2.0.1.</span> <span class="toc-text"> 判断网站是否时静态的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E4%BC%AA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99"><span class="toc-number">1.4.2.0.2.</span> <span class="toc-text"> 判断伪静态网站</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BAwindowsiisaspaccess"><span class="toc-number">1.4.3.</span> <span class="toc-text"> 网站搭建Windows+iis+asp+access</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-number">1.4.3.1.</span> <span class="toc-text"> 方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">1.4.3.2.</span> <span class="toc-text"> 方法二</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.4.4.</span> <span class="toc-text"> 管理服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%B6%E4%BB%96%E7%BD%91%E7%AB%99"><span class="toc-number">1.4.5.</span> <span class="toc-text"> 添加其他网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E4%B8%8D%E5%90%8Cip%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99"><span class="toc-number">1.4.6.</span> <span class="toc-text"> 在同一个服务器用不同ip搭建网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%AB%AF%E5%8F%A3%E6%90%AD%E5%BB%BA%E4%B8%8D%E5%90%8C%E7%BD%91%E7%AB%99"><span class="toc-number">1.4.7.</span> <span class="toc-text"> 使用不同端口搭建不同网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9F%9F%E5%90%8D%E6%90%AD%E5%BB%BA%E4%B8%8D%E5%90%8C%E7%BD%91%E7%AB%99"><span class="toc-number">1.4.8.</span> <span class="toc-text"> 使用域名搭建不同网站</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E5%9C%A8linux%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99"><span class="toc-number">1.5.</span> <span class="toc-text"> 五、在Linux上搭建网站</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85apachephpmysql"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 安装apache，php，mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 启动服务</span></a></li></ol></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/10/30/Javaweb/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2020/10/30/Javaweb/" title="无题">无题</a><time datetime="2020-10-30T15:18:36.343Z" title="发表于 2020-10-30 16:18:36">2020-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/30/archlinux/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2020/10/30/archlinux/" title="无题">无题</a><time datetime="2020-10-30T15:18:36.336Z" title="发表于 2020-10-30 16:18:36">2020-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/16/LaTeX/" title="LaTeX"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LaTeX"/></a><div class="content"><a class="title" href="/2020/10/16/LaTeX/" title="LaTeX">LaTeX</a><time datetime="2020-10-16T15:08:38.000Z" title="发表于 2020-10-16 17:08:38">2020-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/23/QT%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="QT项目学习"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="QT项目学习"/></a><div class="content"><a class="title" href="/2020/09/23/QT%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="QT项目学习">QT项目学习</a><time datetime="2020-09-23T07:43:22.000Z" title="发表于 2020-09-23 09:43:22">2020-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库"/></a><div class="content"><a class="title" href="/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库">数据库</a><time datetime="2020-09-18T07:57:54.000Z" title="发表于 2020-09-18 09:57:54">2020-09-18</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By Fyind</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'OwA20W87tT3aQGeoc6ehQfYL-MdYXbMMI',
+      appKey: 'Ti9QPUvyLJMm6IMuQl464zKR',
+      placeholder: '记得留下昵称和邮箱....可以快速收到回复',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>

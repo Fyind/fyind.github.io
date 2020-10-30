@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fyind - 新鲜出炉的学习笔记...</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
+<meta property="og:title" content="Fyind">
+<meta property="og:url" content="http://fyind.github.io/page/4/index.html">
+<meta property="og:site_name" content="Fyind">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fyind.github.io/img/avatar.jpg">
+<meta property="article:author" content="Fyind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://fyind.github.io/page/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//pingjs.qq.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var _mtac = {};
+(function() {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500732782");
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+})();
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2020-10-30 16:19:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="no-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Fyind</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/03/05/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" title="人工智能">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="人工智能"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/03/05/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" title="人工智能">人工智能</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-03-05T10:20:56.000Z" title="发表于 2020-03-05 11:20:56">2020-03-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content"> 人工智能
+ 模型评估与选择
+ 经验误差与过拟合
+ 错误率
+如果mmm 个样本中有aaa 个错误，则错误率为 E=amE=\frac{a}{m}E=ma​ ,精度为 1−E1 - E1−E
+ 误差
+学习器在训练集上的误差是训练误差，在新样本上的误差是泛化误差
+ 过拟合和欠拟合
+过拟合是学习能力过于强大分类标准过于严格，欠拟合是学习能力低下分类标准过于松
+
+ 评估方法
+我们需要训练集来训练样本，测试集来测试样本。怎样更好地划分出这两个集合呢，有下面这几种办法。
+ 留出法
+直接把数据集 DDD 分成两个互斥的集合，一个作为训练集SSS 一个作为测试集 TTT 。可以直接三七分或者二八分。但是需要注意数据的平均性。
+
+比如有连续的10年内的数据。不能把前7年训练，后三年测试。但这会破坏数据的分布。应该随机抽取7成数据训练，剩下的再测试。
+
+ 交叉验证法
+
+把数据分为10分 D1D_{1}D1​ 到 D10D_{10}D10​ ，分别
+把D10D_{10}D10​  到D1D_{1}D1​ 作为测试集，其他的作为训练集，测试10次。然后取平均值。这对计算机的算力要求高。
+ 自助法
+从包含mmm ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/02/11/windows%E5%9F%BA%E7%A1%80/" title="windows基础">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="windows基础"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/02/11/windows%E5%9F%BA%E7%A1%80/" title="windows基础">windows基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-02-11T22:31:15.000Z" title="发表于 2020-02-11 23:31:15">2020-02-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content"> Windows 基础
+ 一、一些重要的目录
+ 用户
+用户登录后的配置文件。
+ 开机启动目录
+C:\Users\用户名\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+在这个目录下存放的文件会开机自启动
+ MyDrivers
+存放驱动
+ System32
+Windows\System32\Config
+目录下的SAM文件，存储的是计算机的用户名和密码
+Windows\System32\drivers\etc\hosts
+用来解析域名
+ PerfLogs
+用于存放系统日志。计算机管理中的windows日志中的安全可以查看访问情况
+ Program files
+存放安装程序目录，(x86)目录下安装的是32位程序
+ 二、服务
+ 打开服务：
+
+运行中输入 services.msc
+
+或者
+
+右键计算机管理，点开服务
+
+ 常见的服务
+web, dns, dhcp(自动获取ip), 邮件, telnet, ssh ,ftp, smb
+ telnet
+打开服务，找到telnet，右键属性
+
+然后调成自动，然后就可以启动服务 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/" title="虚拟机安装以及网站的搭建">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚拟机安装以及网站的搭建"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/" title="虚拟机安装以及网站的搭建">虚拟机安装以及网站的搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-02-11T22:30:51.000Z" title="发表于 2020-02-11 23:30:51">2020-02-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content"> 虚拟机安装以及网站的搭建
+ 一、 VMware WorkStation 安装和使用
+ Unity 模式
+在该模式下，可以把虚拟机的窗口拖到真实机上。
+
+ 快照
+在这里添加快照
+
+ 二、Windows Server 2003
+下载安装完成后：
+ 设置虚拟机交换机
+设置虚拟机的交换机为VMnet1，下面的xp也一样设置
+
+ 设置ip地址
+运行中输入ncpa.cpl可以打开网络设置/网卡
+右键本地连接属性-&gt; tcp/ip协议 ，右键属性
+在这里可以更改ip地址，下面的xp也一样设置，注意地址不要改一样的
+
+ 三、Windows Xp sp3
+下载镜像后安装
+序列号：MRX3F-47B9T-2487J-KWKMF-RPWBY
+Windows也和上面一样设置，然后关闭防火墙，它们就可以ping通过了
+ 关闭防火墙
+控制面板—&gt;安全中心—&gt;关闭防火墙
+
+成功ping通上面的windows server
+
+ 让虚拟机也连上网
+在网卡中设置为共享主机ip
+
+然后xp中把ip地址改为自动获取
+
+然后就可以ping通外网了
+
+然后xp会自动获取一个ip。其实这个ip也是可以更改的。在 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/01/19/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" title="Java编程思想">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java编程思想"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/01/19/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" title="Java编程思想">Java编程思想</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-01-19T20:23:27.000Z" title="发表于 2020-01-19 21:23:27">2020-01-19</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content"> Java 编程思想
+ 安装编程环境
+jdk下载链接
+Eclipse下载链接
+ 一、对象导论
+ 1、 抽象机制
+ 1.1 抽象过程
+所有编程语言都提供抽象机制。汇编语言是对机器指令的抽象，高级语言是对汇编语言的一种抽象。但它们抽象出来的东西还是基于计算机的一下东西，和问题没有直接关联。而面向对象是直接对问题的抽象。
+对象：问题空间中的元素及其在空间中的表示。
+面向对象的实质：程序可以通过添加新类型的对象使自身适应问题。OOP允许根据问题描述问题，而不是根据计算机描述问题。
+Java语言五个基本特性：
+
+万物皆对象
+程序是对象的几何，通过发送消息告诉彼此要做的
+每个对象都有自己的由其他对象构成的存储
+每个对象都有其类型
+某一特定类型的所有对象都可以接受相同的信息
+
+ 1.2 每个对象都有接口
+接口对应了某一特定对象所能发出的请求。但是，在程序中，不许有实现这些请求的代码，于是就有了实现。每一个请求都有方法与之关联。
+ 1.3 每个对象都提供服务
+当试图开发或者理解一个程序设计时，最好的办法时把对象想象成“服务提供者”。
+ 1.4 被隐藏的具体实现
+将程序开发人员按角色分为类创建者和客户端 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/01/18/Spring-Boot/" title="Spring Boot">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring Boot"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/01/18/Spring-Boot/" title="Spring Boot">Spring Boot</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-01-18T14:30:00.000Z" title="发表于 2020-01-18 15:30:00">2020-01-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content"> Spring
+Spring是一个开源框架。为企业级开发而设计。
+ 1、安装Spring插件
+参见这个博客 还有这个博客，还有这个博客
+ 2、HelloWorld
+经典的hello world实现
+1234567891011121314151617181920212223package spring.beans;public class HelloWorld &#123;	private String name;		public void setName(String name) &#123;		this.name = name;	&#125;    	public void hello() &#123;		System.out.println(&quot;hello: &quot; + name);	&#125;&#125;// main方法里面		// 创建 HelloWorld 对象		HelloWorld helloworld = new HelloWorld();		// 为 name 赋值		helloworld.setName(&quot;frank&quot;);		/ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/01/16/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" title="计算几何">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算几何"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/01/16/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" title="计算几何">计算几何</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-01-16T14:48:18.000Z" title="发表于 2020-01-16 15:48:18">2020-01-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">算法模板</a></span></div><div class="content"> 计算几何
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192const double ZERO = 1e-10; ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/01/16/%E5%B0%84%E5%BD%B1%E5%87%A0%E4%BD%95/" title="射影几何">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="射影几何"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/01/16/%E5%B0%84%E5%BD%B1%E5%87%A0%E4%BD%95/" title="射影几何">射影几何</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-01-16T10:37:36.000Z" title="发表于 2020-01-16 11:37:36">2020-01-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">算法模板</a></span></div><div class="content"> 射影几何(Projective Geometry)
+ 1. 点
+点P(x,y)P(x,y)P(x,y)二维坐标表示为
+P(x,y)∼(xy1)=λ(xy1)=(x′y′λ)∼(xyz)P(x,y)\sim\begin{pmatrix} x
+\\ y
+\\ 1
+\end{pmatrix} = \lambda \begin{pmatrix} x
+\\ y
+\\ 1
+\end{pmatrix} = \begin{pmatrix} x&#x27;
+\\ y&#x27;
+\\ \lambda
+\end{pmatrix}\sim \begin{pmatrix} x
+\\ y
+\\ z
+\end{pmatrix}
+P(x,y)∼⎝⎛​xy1​⎠⎞​=λ⎝⎛​xy1​⎠⎞​=⎝⎛​x′y′λ​⎠⎞​∼⎝⎛​xyz​⎠⎞​
+若z=0z = 0z=0 那么，它表示在O(0,0)到P(x,y)O(0,0)到P(x,y)O(0,0)到P(x,y)的直线上的最远端的无穷点
+ 2. 直线
+一个三位向量可以表示一条直线，我们通常使用法向量。其中，A,B,C≠0A,B,C \neq0A,B,C​=0
+Ax+By+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/01/01/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="ERA笔记">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ERA笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/01/01/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="ERA笔记">ERA笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-01-01T16:06:33.000Z" title="发表于 2020-01-01 17:06:33">2020-01-01</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content"> 一、冯诺依曼结构
+ Von-Neumann 概念
+
+计算机的结构与处理的问题无关
+计算机由4个单元构成
+主存储器里的格子是相同大小的，每个都有个地址
+程序和数据放在相同的存储器里
+使用二进制
+程序由一系列命令构成
+顺序可以通过跳转指令改变
+
+
+ Von-Neumann Architektur
+
+ RISC &amp; CISC
+CISC: Complex Instruction Set Computer
+
+
+通过微程序实现
+
+
+优点：易编程，少的存储需求
+
+
+缺点：复杂的解码
+
+
+RISC: Reduced Instruction Set Computer
+
+通过固定接线(feste Verdrahtung)实现
+优点：简单，高效的实施
+缺点：难编程
+
+
+ Befehlsformat
+ Einadressform
+
+ Zweiadressform（IA-32）
+
+
+计算结果覆盖第一个操作数
+
+
+只有一个操作数可以在主存储器里
+
+
+
+ Dreiadressform(CISC)
+
+操作数和结果被准确寻址
+
+
+ Codierung
+
+
+ 二、汇编/ISA
+ Register 寄存器
+
+
+  ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2019/12/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/" title="动态规划入门">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="动态规划入门"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/12/03/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8/" title="动态规划入门">动态规划入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-12-03T19:13:44.000Z" title="发表于 2019-12-03 20:13:44">2019-12-03</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="content"> 动态规划入门（一）
+动态规划(Dynamic Programming)，简称dp，是算法竞赛中一种非常重要的解决问题的手段之一。
+ 一、什么是动态规划
+从本质上来说，动态规划就是递推，我们先来看一个有关地推的例子。
+
+
+ 例题1、 斐波那契数列
+
+输入nnn, 求斐波那契数列的第n项
+
+
+
+我们在上小学的时候就知道，斐波那契数列的递推式是
+f(n)=f(n−1)+f(n−2),f(1)=f(2)=1f(n) = f(n-1) + f(n-2), f(1) = f(2) = 1
+f(n)=f(n−1)+f(n−2),f(1)=f(2)=1
+要计算第n项，需要先知道第n-1项和n-2项。要知道第n-1项就要知道n-2和n-3项…直到遇到边界条件f(1)和f(2)。那么反过来说，知道了第1项和第2项，就能知道第3项，第4项及以后。
+为什么我要从两种角度说明呢，因为这两种角度正是设计和编写动态规划算法的两种思路和实现方式
+第一种角度是从后往前推，用递归实现
+123int f(int x) &#123;	return x == 1 || x == 2 ? 1 : f(x-1) + f(x-2) ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2019/11/18/Python-basic/" title="Python基础">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python基础"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/11/18/Python-basic/" title="Python基础">Python基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-11-18T15:41:01.000Z" title="发表于 2019-11-18 16:41:01">2019-11-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="content"> Python 基础语法
+ 注释
+123456789# 单行注释print(&quot;helldo world&quot;)  # 行尾注释&quot;&quot;&quot;这是一个多行注释.....结束注释&quot;&quot;&quot;
+ 运算符操作
+12345620 // 6  #整除20 / 6   #除法10 % 3   #取余数2 ** 5	 #乘方1&lt;&lt;30  #位运算1 if x=2 else 2 # 三目运算符
+ 字符串
+
+双引号 中间可以加转义字符
+单引号  纯字符输出
+三引号  多行字符串
+
+123456&quot;Hello&quot; + &#x27;world&#x27;   # +号不能连接数字&quot;&quot;&quot;HelloWorld&quot;&quot;&quot;print(&quot;Hello&quot;*3)  #输出3次Hello
+ 字符串函数
+1len(&quot;ddd&quot;) # 字符串长度
+ 判断类型方法
+123456string.isspace() # 是否是单个空格&quot; &quot ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/10/30/Javaweb/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2020/10/30/Javaweb/" title="无题">无题</a><time datetime="2020-10-30T15:18:36.343Z" title="发表于 2020-10-30 16:18:36">2020-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/30/archlinux/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2020/10/30/archlinux/" title="无题">无题</a><time datetime="2020-10-30T15:18:36.336Z" title="发表于 2020-10-30 16:18:36">2020-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/16/LaTeX/" title="LaTeX"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LaTeX"/></a><div class="content"><a class="title" href="/2020/10/16/LaTeX/" title="LaTeX">LaTeX</a><time datetime="2020-10-16T15:08:38.000Z" title="发表于 2020-10-16 17:08:38">2020-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/23/QT%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="QT项目学习"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="QT项目学习"/></a><div class="content"><a class="title" href="/2020/09/23/QT%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="QT项目学习">QT项目学习</a><time datetime="2020-09-23T07:43:22.000Z" title="发表于 2020-09-23 09:43:22">2020-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库"/></a><div class="content"><a class="title" href="/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库">数据库</a><time datetime="2020-09-18T07:57:54.000Z" title="发表于 2020-09-18 09:57:54">2020-09-18</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">学习笔记</span><span class="card-category-list-count">24</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">笔记</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/"><span class="card-category-list-name">算法模板</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/"><span class="card-category-list-name">题解</span><span class="card-category-list-count">3</span></a></li>
+            
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Archlinux/" style="font-size: 1.1em; color: #999">Archlinux</a> <a href="/tags/C/" style="font-size: 1.3em; color: #99a1ac">C++</a> <a href="/tags/CPP/" style="font-size: 1.1em; color: #999">CPP</a> <a href="/tags/Functional-Programming/" style="font-size: 1.1em; color: #999">Functional Programming</a> <a href="/tags/Git/" style="font-size: 1.1em; color: #999">Git</a> <a href="/tags/Haskell/" style="font-size: 1.1em; color: #999">Haskell</a> <a href="/tags/Java/" style="font-size: 1.3em; color: #99a1ac">Java</a> <a href="/tags/LaTeX/" style="font-size: 1.1em; color: #999">LaTeX</a> <a href="/tags/Linux/" style="font-size: 1.2em; color: #999da3">Linux</a> <a href="/tags/Maven/" style="font-size: 1.1em; color: #999">Maven</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Python/" style="font-size: 1.2em; color: #999da3">Python</a> <a href="/tags/QT/" style="font-size: 1.1em; color: #999">QT</a> <a href="/tags/Spring-Boot/" style="font-size: 1.1em; color: #999">Spring Boot</a> <a href="/tags/VMware/" style="font-size: 1.1em; color: #999">VMware</a> <a href="/tags/Visual-Studio/" style="font-size: 1.1em; color: #999">Visual-Studio</a> <a href="/tags/Windows/" style="font-size: 1.1em; color: #999">Windows</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a> <a href="/tags/i3/" style="font-size: 1.1em; color: #999">i3</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 1.1em; color: #999">人工智能</a> <a href="/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">信号与系统</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.2em; color: #999da3">动态规划</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/" style="font-size: 1.1em; color: #999">搭建网站</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.3em; color: #99a1ac">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.2em; color: #999da3">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.3em; color: #99a1ac">数据结构</a> <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">汇编语言</a> <a href="/tags/%E6%B5%8B%E9%87%8F%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">测量技术</a> <a href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/" style="font-size: 1.1em; color: #999">理论计算机学</a> <a href="/tags/%E7%94%B5%E5%AD%90%E4%BF%A1%E6%81%AF/" style="font-size: 1.4em; color: #99a5b6">电子信息</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.5em; color: #99a9bf">算法</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.2em; color: #999da3">编程语言</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 1.1em; color: #999">编译原理</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 1.2em; color: #999da3">网络安全</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" style="font-size: 1.1em; color: #999">网络流</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" style="font-size: 1.2em; color: #999da3">计算几何</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%93%E6%9E%84/" style="font-size: 1.1em; color: #999">计算机结构</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">计算机网络</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">软件技术</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/04/"><span class="card-archive-list-date">四月 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/03/"><span class="card-archive-list-date">三月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
+              <span>查看更多</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">47</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">163.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2020-10-30T15:19:12.941Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By Fyind</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>

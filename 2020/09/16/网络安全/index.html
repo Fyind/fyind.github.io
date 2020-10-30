@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>网络安全 | Fyind</title><meta name="keywords" content="网络安全"><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="网络安全  Vmware Workstation  桥接网络配置  打开虚拟网络编辑器，发现没有桥接网络，点设置  让桥接模式解上正确的网卡  然后主机和虚拟机就可以互相ping通了   环境搭建  Kali Linux 镜像下载 https:&#x2F;&#x2F;www.kali.org&#x2F;downloads&#x2F; 安装完虚拟机后，更新一下源 123apt updateapt upgradeapt dist-upgr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络安全">
+<meta property="og:url" content="http://fyind.github.io/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Fyind">
+<meta property="og:description" content="网络安全  Vmware Workstation  桥接网络配置  打开虚拟网络编辑器，发现没有桥接网络，点设置  让桥接模式解上正确的网卡  然后主机和虚拟机就可以互相ping通了   环境搭建  Kali Linux 镜像下载 https:&#x2F;&#x2F;www.kali.org&#x2F;downloads&#x2F; 安装完虚拟机后，更新一下源 123apt updateapt upgradeapt dist-upgr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-09-16T19:03:33.000Z">
+<meta property="article:modified_time" content="2020-09-21T19:11:42.769Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://fyind.github.io/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//pingjs.qq.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var _mtac = {};
+(function() {
+    var mta = document.createElement("script");
+    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+    mta.setAttribute("name", "MTAH5");
+    mta.setAttribute("sid", "500732782");
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(mta, s);
+})();
+</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2020-09-21 21:11:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Fyind</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">网络安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-16T19:03:33.000Z" title="发表于 2020-09-16 21:03:33">2020-09-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-21T19:11:42.769Z" title="更新于 2020-09-21 21:11:42">2020-09-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">830</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="网络安全"><a class="markdownIt-Anchor" href="#网络安全"></a> 网络安全</h1>
+<h2 id="vmware-workstation"><a class="markdownIt-Anchor" href="#vmware-workstation"></a> Vmware Workstation</h2>
+<h3 id="桥接网络配置"><a class="markdownIt-Anchor" href="#桥接网络配置"></a> 桥接网络配置</h3>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200919203643934.png" alt="image-20200919203643934"></p>
+<p>打开虚拟网络编辑器，发现没有桥接网络，点设置</p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200919203722602.png" alt="image-20200919203722602"></p>
+<p>让桥接模式解上正确的网卡</p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200919203838977.png" alt="image-20200919203838977"></p>
+<p>然后主机和虚拟机就可以互相ping通了</p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200919204116816.png" alt="image-20200919204116816"></p>
+<h2 id="环境搭建"><a class="markdownIt-Anchor" href="#环境搭建"></a> 环境搭建</h2>
+<h3 id="kali-linux"><a class="markdownIt-Anchor" href="#kali-linux"></a> Kali Linux</h3>
+<p>镜像下载</p>
+<p><a target="_blank" rel="noopener" href="https://www.kali.org/downloads/">https://www.kali.org/downloads/</a></p>
+<p>安装完虚拟机后，更新一下源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt upgrade</span><br><span class="line">apt dist-upgrade</span><br></pre></td></tr></table></figure>
+<p>源列表位置</p>
+<p><code>/etc/apt/source.list</code></p>
+<p>设置开机启动软件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update-rc.d ssh enable</span><br><span class="line">update-rc.d postgresql enable</span><br></pre></td></tr></table></figure>
+<p>重启网络服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service networking restart</span><br></pre></td></tr></table></figure>
+<p>开启网卡</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 up</span><br><span class="line">ifup eth0</span><br></pre></td></tr></table></figure>
+<h3 id="windows-server-2003"><a class="markdownIt-Anchor" href="#windows-server-2003"></a> Windows Server 2003</h3>
+<p>桥接网络的时候，要把自己的网络设置位自动分配ip地址。</p>
+<h3 id="metasploitable2"><a class="markdownIt-Anchor" href="#metasploitable2"></a> Metasploitable2</h3>
+<p>这个是一个用于漏洞利用的虚拟机，<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/metasploitable/">下载地址</a></p>
+<p>默认用户名 <code>msfadmin</code> 密码 <code>msfadmin</code></p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200917213604936.png" alt="image-20200917213604936"></p>
+<p>点这个文件就能直接打开</p>
+<h3 id="linux-常用命令"><a class="markdownIt-Anchor" href="#linux-常用命令"></a> Linux 常用命令</h3>
+<p>查看端口状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -pantu</span><br></pre></td></tr></table></figure>
+<h2 id="第二阶段"><a class="markdownIt-Anchor" href="#第二阶段"></a> 第二阶段</h2>
+<h3 id="安装-nessus"><a class="markdownIt-Anchor" href="#安装-nessus"></a> 安装 Nessus</h3>
+<p><a href="www.tenable.com/downloads/nessus">下载地址</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i nessus.deb</span><br></pre></td></tr></table></figure>
+<p>启动服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nessusd.service</span><br></pre></td></tr></table></figure>
+<p>然后在 <code>https://kali:8834</code> 来配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/systemctl start nessusd.service</span><br></pre></td></tr></table></figure>
+<p>激活码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9130-217B-F54B-E675-C833</span><br></pre></td></tr></table></figure>
+<p>新建一个扫描 network basic scaning ，在底下输入ip就可以扫描了</p>
+<h3 id="配置win2003远程桌面"><a class="markdownIt-Anchor" href="#配置win2003远程桌面"></a> 配置win2003远程桌面</h3>
+<p><code>我的电脑</code>右键属性 找到远程，把这两个勾选上</p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200920195532447.png" alt="image-20200920195532447"></p>
+<p>由于必须要有有密码的用户，所以可以新建一个用户，</p>
+<p>新建好了之后就可以选择用户</p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200920195820252.png" alt="image-20200920195820252"></p>
+<p>然后本地运行 <code>mstsc</code> 进行远程连接</p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200920200111916.png" alt="image-20200920200111916"></p>
+<p>输入对应ip地址</p>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200920200052540.png" alt="image-20200920200052540"></p>
+<h2 id="主机探测"><a class="markdownIt-Anchor" href="#主机探测"></a> 主机探测</h2>
+<h3 id="二层发现"><a class="markdownIt-Anchor" href="#二层发现"></a> 二层发现</h3>
+<h4 id="arping"><a class="markdownIt-Anchor" href="#arping"></a> arping</h4>
+<p>只能对单个主机扫描</p>
+<p>向对应ip地址发送一个数据包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arping -c 1 [ip]</span><br></pre></td></tr></table></figure>
+<h4 id="netdiscover"><a class="markdownIt-Anchor" href="#netdiscover"></a> netdiscover</h4>
+<p>它可以对多主机进行扫描</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover</span><br></pre></td></tr></table></figure>
+<p>指定范围</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -r 192.168.1.9/24</span><br></pre></td></tr></table></figure>
+<h3 id="三层发现"><a class="markdownIt-Anchor" href="#三层发现"></a> 三层发现</h3>
+<p>容易被防火墙过滤</p>
+<h4 id="ping"><a class="markdownIt-Anchor" href="#ping"></a> ping</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping [ip]</span><br></pre></td></tr></table></figure>
+<h4 id="fping"><a class="markdownIt-Anchor" href="#fping"></a> fping</h4>
+<p>可以扫描多主机</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fping -g 192.168.1.0/24</span><br></pre></td></tr></table></figure>
+<h4 id="hping3"><a class="markdownIt-Anchor" href="#hping3"></a> hping3</h4>
+<p>可以修改 ICMP 协议的具体内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 -c 3 -1 192.168.1.1 --icmpcode 1</span><br></pre></td></tr></table></figure>
+<h3 id="四层发现"><a class="markdownIt-Anchor" href="#四层发现"></a> 四层发现</h3>
+<p>比三层发现更为可靠，可以探测远程主机</p>
+<h4 id="nmap"><a class="markdownIt-Anchor" href="#nmap"></a> nmap</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping edu.51cto.com</span><br><span class="line">nmap [ip]</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/image-20200920210256528.png" alt="image-20200920210256528"></p>
+<h4 id="hping3-2"><a class="markdownIt-Anchor" href="#hping3-2"></a> hping3</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 -c 3 -udp [ip]</span><br></pre></td></tr></table></figure>
+<h4 id="nwatch"><a class="markdownIt-Anchor" href="#nwatch"></a> nWatch</h4>
+<p>这是在GitHub上的一个<a target="_blank" rel="noopener" href="https://github.com/Cyber-Forensic/nWatch">项目</a>，用python写的脚本</p>
+<p>它需要<code>nmap</code>这个包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install python-nmap</span><br></pre></td></tr></table></figure>
+<h2 id="端口扫描"><a class="markdownIt-Anchor" href="#端口扫描"></a> 端口扫描</h2>
+<h4 id="nmap-2"><a class="markdownIt-Anchor" href="#nmap-2"></a> nmap</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap [ip]</span><br></pre></td></tr></table></figure>
+<h4 id="dmitry"><a class="markdownIt-Anchor" href="#dmitry"></a> dmitry</h4>
+<p>tcp 端口扫描</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmitry -p [ip]</span><br></pre></td></tr></table></figure>
+<h4 id="netcat"><a class="markdownIt-Anchor" href="#netcat"></a> netcat</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -nvz [ip] 20-30 </span><br></pre></td></tr></table></figure>
+<h3 id="端口分类"><a class="markdownIt-Anchor" href="#端口分类"></a> 端口分类</h3>
+<ul>
+<li>0-65535 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>16</mn></msup></mrow><annotation encoding="application/x-tex">2^{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<p>TCP 和UDP端口是独立的，两个协议的端口号也是独立的。可以同时拥有比如 235端口</p>
+<h4 id="周知端口"><a class="markdownIt-Anchor" href="#周知端口"></a> 周知端口</h4>
+<p>0-1023, 其中 80是www服务，21是FTP服务</p>
+<h4 id="动态端口"><a class="markdownIt-Anchor" href="#动态端口"></a> 动态端口</h4>
+<p>49152-65535 进行动态分配的端口</p>
+<h4 id="注册端口"><a class="markdownIt-Anchor" href="#注册端口"></a> 注册端口</h4>
+<p>1024到49251.分配给已经安装的程序</p>
+<h4 id="nmap获取banner"><a class="markdownIt-Anchor" href="#nmap获取banner"></a> nmap获取Banner</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap [ip] --script banner -p [端口号]</span><br></pre></td></tr></table></figure>
+<h4 id="dimitry获取banner"><a class="markdownIt-Anchor" href="#dimitry获取banner"></a> dimitry获取banner</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dimitry -pb [ip]</span><br></pre></td></tr></table></figure>
+<p>netcat 获取banner</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -nv [ip] [端口]</span><br></pre></td></tr></table></figure>
+<h3 id="端口操作系统信息获取"><a class="markdownIt-Anchor" href="#端口操作系统信息获取"></a> 端口，操作系统信息获取</h3>
+<h4 id="端口程序信息"><a class="markdownIt-Anchor" href="#端口程序信息"></a> 端口程序信息</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p [端口] -sV [ip]</span><br></pre></td></tr></table></figure>
+<h4 id="操作系统信息"><a class="markdownIt-Anchor" href="#操作系统信息"></a> 操作系统信息</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -O [ip]</span><br></pre></td></tr></table></figure>
+<p>有授权下，完整测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">namp -A -v -T4 [ip]</span><br></pre></td></tr></table></figure>
+<h2 id="漏洞扫描"><a class="markdownIt-Anchor" href="#漏洞扫描"></a> 漏洞扫描</h2>
+<h3 id="系统漏洞扫描"><a class="markdownIt-Anchor" href="#系统漏洞扫描"></a> 系统漏洞扫描</h3>
+<h4 id="扫描原理"><a class="markdownIt-Anchor" href="#扫描原理"></a> 扫描原理</h4>
+<p>漏洞扫描器对漏洞进行扫描，来验证目标是否存在具体漏洞。也存在错误扫描，需要对漏洞进行验证</p>
+<h4 id="nmap扫描漏洞"><a class="markdownIt-Anchor" href="#nmap扫描漏洞"></a> nmap扫描漏洞</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script vuln [ip]</span><br></pre></td></tr></table></figure>
+<h4 id="nessus"><a class="markdownIt-Anchor" href="#nessus"></a> nessus</h4>
+<p>使用者者比较多</p>
+<h4 id="漏洞利用"><a class="markdownIt-Anchor" href="#漏洞利用"></a> 漏洞利用</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">search vsftpd</span><br><span class="line">user exploit/unix/ftp/vsftpd_234_backdoor</span><br><span class="line">show payloads</span><br><span class="line">set payload cmd/unix/interact</span><br><span class="line">show options</span><br><span class="line">set rhost [ip]</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+<h3 id="web应用漏洞扫描"><a class="markdownIt-Anchor" href="#web应用漏洞扫描"></a> Web应用漏洞扫描</h3>
+<h4 id="owasp-zap"><a class="markdownIt-Anchor" href="#owasp-zap"></a> owasp-zap</h4>
+<h4 id="nikto"><a class="markdownIt-Anchor" href="#nikto"></a> nikto</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nikto -host [ip]</span><br></pre></td></tr></table></figure>
+<p>漏洞利用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;codes..&quot;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://fyind.github.io/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">http://fyind.github.io/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://fyind.github.io" target="_blank">Fyind</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数据库</div></div></a></div><div class="next-post pull-right"><a href="/2020/08/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据结构</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/11/虚拟机安装以及网站的搭建/" title="虚拟机安装以及网站的搭建"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-11</div><div class="title">虚拟机安装以及网站的搭建</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8"><span class="toc-number">1.</span> <span class="toc-text"> 网络安全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#vmware-workstation"><span class="toc-number">1.1.</span> <span class="toc-text"> Vmware Workstation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text"> 桥接网络配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.2.</span> <span class="toc-text"> 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#kali-linux"><span class="toc-number">1.2.1.</span> <span class="toc-text"> Kali Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows-server-2003"><span class="toc-number">1.2.2.</span> <span class="toc-text"> Windows Server 2003</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#metasploitable2"><span class="toc-number">1.2.3.</span> <span class="toc-text"> Metasploitable2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.4.</span> <span class="toc-text"> Linux 常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">1.3.</span> <span class="toc-text"> 第二阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-nessus"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 安装 Nessus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEwin2003%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="toc-number">1.3.2.</span> <span class="toc-text"> 配置win2003远程桌面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="toc-number">1.4.</span> <span class="toc-text"> 主机探测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%B1%82%E5%8F%91%E7%8E%B0"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 二层发现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#arping"><span class="toc-number">1.4.1.1.</span> <span class="toc-text"> arping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#netdiscover"><span class="toc-number">1.4.1.2.</span> <span class="toc-text"> netdiscover</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%B1%82%E5%8F%91%E7%8E%B0"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 三层发现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ping"><span class="toc-number">1.4.2.1.</span> <span class="toc-text"> ping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fping"><span class="toc-number">1.4.2.2.</span> <span class="toc-text"> fping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hping3"><span class="toc-number">1.4.2.3.</span> <span class="toc-text"> hping3</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E5%B1%82%E5%8F%91%E7%8E%B0"><span class="toc-number">1.4.3.</span> <span class="toc-text"> 四层发现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nmap"><span class="toc-number">1.4.3.1.</span> <span class="toc-text"> nmap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hping3-2"><span class="toc-number">1.4.3.2.</span> <span class="toc-text"> hping3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nwatch"><span class="toc-number">1.4.3.3.</span> <span class="toc-text"> nWatch</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">1.5.</span> <span class="toc-text"> 端口扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nmap-2"><span class="toc-number">1.5.0.1.</span> <span class="toc-text"> nmap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dmitry"><span class="toc-number">1.5.0.2.</span> <span class="toc-text"> dmitry</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#netcat"><span class="toc-number">1.5.0.3.</span> <span class="toc-text"> netcat</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%88%86%E7%B1%BB"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 端口分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%A8%E7%9F%A5%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.5.1.1.</span> <span class="toc-text"> 周知端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.5.1.2.</span> <span class="toc-text"> 动态端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.5.1.3.</span> <span class="toc-text"> 注册端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nmap%E8%8E%B7%E5%8F%96banner"><span class="toc-number">1.5.1.4.</span> <span class="toc-text"> nmap获取Banner</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dimitry%E8%8E%B7%E5%8F%96banner"><span class="toc-number">1.5.1.5.</span> <span class="toc-text"> dimitry获取banner</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 端口，操作系统信息获取</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E7%A8%8B%E5%BA%8F%E4%BF%A1%E6%81%AF"><span class="toc-number">1.5.2.1.</span> <span class="toc-text"> 端口程序信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="toc-number">1.5.2.2.</span> <span class="toc-text"> 操作系统信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F"><span class="toc-number">1.6.</span> <span class="toc-text"> 漏洞扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F"><span class="toc-number">1.6.1.</span> <span class="toc-text"> 系统漏洞扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E5%8E%9F%E7%90%86"><span class="toc-number">1.6.1.1.</span> <span class="toc-text"> 扫描原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nmap%E6%89%AB%E6%8F%8F%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.6.1.2.</span> <span class="toc-text"> nmap扫描漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nessus"><span class="toc-number">1.6.1.3.</span> <span class="toc-text"> nessus</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">1.6.1.4.</span> <span class="toc-text"> 漏洞利用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E5%BA%94%E7%94%A8%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text"> Web应用漏洞扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#owasp-zap"><span class="toc-number">1.6.2.1.</span> <span class="toc-text"> owasp-zap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nikto"><span class="toc-number">1.6.2.2.</span> <span class="toc-text"> nikto</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/10/30/Javaweb/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2020/10/30/Javaweb/" title="无题">无题</a><time datetime="2020-10-30T15:18:36.343Z" title="发表于 2020-10-30 16:18:36">2020-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/30/archlinux/" title="无题"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2020/10/30/archlinux/" title="无题">无题</a><time datetime="2020-10-30T15:18:36.336Z" title="发表于 2020-10-30 16:18:36">2020-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/16/LaTeX/" title="LaTeX"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LaTeX"/></a><div class="content"><a class="title" href="/2020/10/16/LaTeX/" title="LaTeX">LaTeX</a><time datetime="2020-10-16T15:08:38.000Z" title="发表于 2020-10-16 17:08:38">2020-10-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/23/QT%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="QT项目学习"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="QT项目学习"/></a><div class="content"><a class="title" href="/2020/09/23/QT%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="QT项目学习">QT项目学习</a><time datetime="2020-09-23T07:43:22.000Z" title="发表于 2020-09-23 09:43:22">2020-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库"/></a><div class="content"><a class="title" href="/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库">数据库</a><time datetime="2020-09-18T07:57:54.000Z" title="发表于 2020-09-18 09:57:54">2020-09-18</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By Fyind</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'OwA20W87tT3aQGeoc6ehQfYL-MdYXbMMI',
+      appKey: 'Ti9QPUvyLJMm6IMuQl464zKR',
+      placeholder: '记得留下昵称和邮箱....可以快速收到回复',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>
