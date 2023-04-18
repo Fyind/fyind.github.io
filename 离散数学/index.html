@@ -1,0 +1,1819 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>离散数学 | Hexo</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="离散数学 基础概念 集合的概念 包含$ M_{1} M_{2} $ : 每一个\(M_{1}\)的元素都属于\(M_{2}\) 不包含于 $ M_{1} M_{2}\(：有一个\)M_{1}\(的元素不属于\)M_{2}$ 差集 \(M_{2} \backslash M_{1}\): \(M_{2}\)里去除\(M_{1}\) 的元素 真包含于 \(M_{1} \subsetneq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学">
+<meta property="og:url" content="http://fyind.github.io/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="离散数学 基础概念 集合的概念 包含$ M_{1} M_{2} $ : 每一个\(M_{1}\)的元素都属于\(M_{2}\) 不包含于 $ M_{1} M_{2}\(：有一个\)M_{1}\(的元素不属于\)M_{2}$ 差集 \(M_{2} \backslash M_{1}\): \(M_{2}\)里去除\(M_{1}\) 的元素 真包含于 \(M_{1} \subsetneq">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.github.io/img/pic1.PNG">
+<meta property="article:published_time" content="2020-03-07T09:24:49.000Z">
+<meta property="article:modified_time" content="2022-11-30T20:35:30.118Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.github.io/img/pic1.PNG"><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.github.io/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '离散数学',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-30 21:35:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/pic1.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/a3.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">离散数学</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-03-07T09:24:49.000Z" title="Created 2020-03-07 10:24:49">2020-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-11-30T20:35:30.118Z" title="Updated 2022-11-30 21:35:30">2022-11-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="离散数学"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="离散数学">离散数学</h1>
+<h2 id="基础概念">基础概念</h2>
+<h3 id="集合的概念">集合的概念</h3>
+<p>包含$ M_{1} M_{2} $ : 每一个<span class="math inline">\(M_{1}\)</span>的元素都属于<span class="math inline">\(M_{2}\)</span></p>
+<p>不包含于 $ M_{1} M_{2}<span class="math inline">\(：有一个\)</span>M_{1}<span class="math inline">\(的元素不属于\)</span>M_{2}$</p>
+<p>差集 <span class="math inline">\(M_{2} \backslash M_{1}\)</span>:
+<span class="math inline">\(M_{2}\)</span>里去除<span class="math inline">\(M_{1}\)</span> 的元素</p>
+<p>真包含于 <span class="math inline">\(M_{1} \subsetneq M_{2}\)</span>:
+满足$ M_{1} M_{2} $，且 <span class="math inline">\(M_{2} \backslash
+M_{1}\)</span>不是空集</p>
+<p>对称差集 (symmetrische Diﬀerenz) <span class="math inline">\(M_{1}
+\Delta M_{2}\)</span>： 在<span class="math inline">\(M_{1}\)</span>不在<span class="math inline">\(M_{2}\)</span>和在<span class="math inline">\(M_{2}\)</span>不在<span class="math inline">\(M_{1}\)</span>的元素</p>
+<p>集合的容量(Mächtigkeit/Kardinalität) <span class="math inline">\(|M|\)</span>: 集合中(不同)元素的个数</p>
+<p>有限集： <span class="math inline">\(|M|&lt;\infty\)</span></p>
+<p>全集(Universum)：<span class="math inline">\(\Omega\)</span></p>
+<p>补集(Komplement)：<span class="math inline">\(\bar{A}\)</span></p>
+<h4 id="交集和并集schnitt-und-vereinigung">交集和并集(Schnitt und
+Vereinigung )</h4>
+<p>交集：<span class="math inline">\(M_{1} \cap M_{2}\)</span></p>
+<ul>
+<li>如果 <span class="math inline">\(M_{1} \cap
+M_{2}=\emptyset\)</span>，那么<span class="math inline">\(M_{1}\)</span>和<span class="math inline">\(M_{2}\)</span>是分离的(disjunkt)</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned} \cap S &amp;:=\bigcap_{M \in S} M \\  \cup S
+&amp;:=\bigcup_{M \in S} M \end{aligned}
+\]</span></p>
+<p><span class="math inline">\(S\)</span>是集合的集合。交集表示所有M取交集，并集表示苏哟M取并集</p>
+<p>若 <span class="math display">\[S=\left\{M_{1}, \ldots,
+M_{k}\right\}\]</span> ,那么可以写成 <span class="math inline">\(\bigcup_{i=1}^{k} M_{i}:=\cup S \quad
+\bigcap_{i=1}^{k} M_{i}:=\cap S\)</span></p>
+<h4 id="幂集potenzmenge">幂集(Potenzmenge)</h4>
+<p><span class="math display">\[
+\mathcal{P}(M):=2^{M}:=\{A | A \subseteq M\}
+\]</span></p>
+<p>幂集包含所有子集，比如 <span class="math display">\[
+\begin{aligned}
+\mathcal{P}(\{1,2\}) &amp;=\{\emptyset,\{1\},\{2\},\{1,2\}\} \\
+\mathcal{P}(\{1,2,3\}) &amp;=\{\emptyset,\{1\},\{2\},\{3\}\\
+&amp;\{1,2\},\{1,3\},\{2,3\},\{1,2,3\}\} \\
+\mathcal{P}(\emptyset) &amp;=\{\emptyset\} \\
+\mathcal{P}(\{\emptyset,\{\emptyset\}\})
+&amp;=\{\emptyset,\{\emptyset\},\{\{\emptyset\}\},\{\emptyset,\{\emptyset\}\}\}
+\end{aligned}
+\]</span></p>
+<h4 id="划分partition">划分(Partition)</h4>
+<p>划分<span class="math inline">\(P\)</span>是幂集的子集，它们之间都是分离的，而且并起来刚好是M全集
+<span class="math display">\[
+P \subseteq \mathcal{P}(M)
+\]</span> 比如<span class="math inline">\(\{1,2,3\}\)</span>的划分可以是： <span class="math display">\[
+\{\{1,2,3\}\},\{\{1\},\{2,3\}\},\{\{1,2\},\{3\}\},\{\{1,3\},\{2\}\},\{\{1\},\{2\},\{3\}\}
+\]</span></p>
+<h4 id="韦恩图和卡诺图">韦恩图和卡诺图</h4>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200303111207656.png" alt="image-20200303111207656" style="zoom: 50%;"></p>
+<p>4个变量：</p>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200303111338346.png" alt="image-20200303111338346" style="zoom:50%;"></p>
+<p>5个变量：</p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200303111311065.png" alt="image-20200303111311065">
+<figcaption aria-hidden="true">image-20200303111311065</figcaption>
+</figure>
+<h4 id="集合的关系公式">集合的关系公式</h4>
+<p>交换律，结合律 <span class="math display">\[
+\begin{array}{rlrl}
+A &amp; =A \cup A &amp; A \cup B &amp; =B \cup A \\
+A &amp; =A \cap A &amp; A \cap B &amp; =B \cap A \\
+A &amp; =A \cup \emptyset &amp; A \cup(B \cup C) &amp; =(A \cup B) \cup
+C \\
+\emptyset &amp; =A \cap \emptyset &amp; A \cap(B \cap C) &amp; =(A \cap
+B) \cap C
+\end{array}
+\]</span> 德摩根定律，和其他性质 <span class="math display">\[
+\begin{aligned}
+A \cap(B \cup C) &amp;=(A \cap B) \cup(A \cap C) \\
+A \cup(B \cap C) &amp;=(A \cup B) \cap(A \cup C) \\
+A \backslash(B \cup C) &amp;=(A \backslash B) \cap(A \backslash C) \\
+A \backslash(B \cap C) &amp;=(A \backslash B) \cup(A \backslash C) \\
+A &amp;=A \cup(A \cap B) \\
+A &amp;=A \cap(A \cup B) \\
+A \Delta B &amp;=(A \backslash B) \cup(B \backslash A)
+\end{aligned}
+\]</span> 带全集 <span class="math display">\[
+\begin{aligned}
+&amp;A \cap \bar{A}=\emptyset \quad \quad \quad \bar{\bar{A}} = A\\
+&amp;\begin{array}{ll}
+A \cup \bar{A}=\Omega &amp; \overline{A \cup B}=\bar{A} \cap \bar{B} \\
+A \backslash B=A \cap \bar{B} &amp; \frac{\overline{A \cap B}}{\bar{A}
+\cup \bar{B}}
+\end{array}
+\end{aligned}
+\]</span></p>
+<h4 id="练习题">练习题</h4>
+<h5 id="根据式子化卡诺图">根据式子化卡诺图</h5>
+<blockquote>
+<p><span class="math inline">\(G_{b}:=\overline{((B \cap A) \ \bar{B})
+\backslash((B \cap A) \cap(C \cup A))}\)</span></p>
+</blockquote>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200305113718839.png" alt="image-20200305113718839">
+<figcaption aria-hidden="true">image-20200305113718839</figcaption>
+</figure>
+<h5 id="转换式子式子">转换式子式子</h5>
+<blockquote>
+<p>证明等式: <span class="math inline">\(\overline{
+\overline{(\overline{C} \cup B) \cap(\overline{C} \cup A)} \cup
+\overline{B}}=(\overline{C} \cup(B \cap A)) \cap B\)</span></p>
+</blockquote>
+<p><span class="math display">\[
+\begin{array}{rll}
+&amp; \overline{ \overline{(\overline{C} \cup B) \cap(\overline{C} \cup
+A)} \cup \overline{B}} &amp; (\overline{(F \cap G)}=\bar{F} \cup
+\bar{G}) \\
+= &amp;\overline{ \overline{((\bar{C} \cup B) \cap(\bar{C} \cup A)) \cap
+B}} &amp; (F=\bar{F}) \\
+= &amp; ((\bar{C} \cup B) \cap(\bar{C} \cup A)) \cap B &amp; (F \cup(G
+\cap H)=(F \cap G) \cup(F \cap H)) \\
+= &amp; (\bar{C} \cup(B \cap A)) \cap B &amp; ()
+\end{array}
+\]</span></p>
+<h4 id="元组tupel">元组Tupel</h4>
+<p>Tupel是带顺序和重复的集合 <span class="math display">\[
+(a, b, \emptyset,\{b, a\}, a) \neq(\emptyset,\{a, b\}, a, b)
+\]</span></p>
+<h5 id="序列sequenzfolge">序列Sequenz/Folge</h5>
+<p>序列以一定顺序列出对象:<span class="math inline">\(\left(a_{1},
+a_{2}, \dots\right)\)</span>， 简短写为：<span class="math inline">\(\left(a_{i}\right)_{i \in \mathbb{N}}\)</span></p>
+<p>比如 <span class="math inline">\((i)_{i \in \mathbb{N}_{0}}=(0,1,2,3,
+\dots),(1 / i)_{i \in \mathbb{N}}=(1,1 / 2,1 / 3,1 / 4,
+\dots)\)</span></p>
+<ul>
+<li>对于 <span class="math inline">\(k \in \mathbb{N}\)</span> 我们定义
+<span class="math inline">\([k]:=\{1,2, \ldots, k\}\)</span> ，且<span class="math inline">\([0]=\emptyset\)</span></li>
+</ul>
+<h5 id="序列的长度">序列的长度</h5>
+<p><span class="math inline">\(|t|\)</span> 或者<span class="math inline">\(\#t\)</span> 表示一个Tupel的长度。比如 <span class="math display">\[
+\begin{aligned}
+&amp;|(a,(b, c))|=2\\
+&amp;|(a, a, a, a, a, a)|=6\\
+&amp;|(\{a, b\},\{b, a\}, \emptyset,(a,\{(b, \emptyset)\}))|=4
+\end{aligned}
+\]</span></p>
+<h5 id="笛卡尔积kartesische-produkt">笛卡尔积(kartesische Produkt)</h5>
+<p><span class="math display">\[
+A \times B=\{(a, b) | a \in A, b \in B\}
+\]</span></p>
+<p><span class="math display">\[
+A_{1} \times A_{2} \times \ldots \times A_{k}=\left\{\left(a_{1}, a_{2},
+\ldots, a_{k}\right) | a_{1} \in A_{1}, a_{2} \in A_{2}, \ldots, a_{k}
+\in A_{k}\right\}
+\]</span></p>
+<h5 id="tupel的次幂">Tupel的次幂</h5>
+<p><span class="math display">\[
+A^{k}=\underbrace{A \times \ldots \times A}_{k \text { mal
+}}=\left\{\left(a_{1}, \ldots, a_{k}\right) | a_{1} \in A, a_{2} \in A,
+\ldots, a_{k} \in A\right\}
+\]</span></p>
+<p>同时满足：<span class="math inline">\(A^{0}:=\{()\}\)</span> 且 <span class="math inline">\(A^{1}:=\{(a) | a \in A\} \neq A\)</span></p>
+<h4 id="文字和语言wörter-und-sprachen">文字和语言(Wörter und
+Sprachen)</h4>
+<h5 id="字符集alphabet">字符集(Alphabet)</h5>
+<p>字符集一般用<span class="math inline">\(\Sigma\)</span> 或者 <span class="math inline">\(\Gamma\)</span>表示，如<span class="math inline">\(\{a, \ldots, z, A, \ldots, Z, 0, \ldots,
+9\}\)</span> <span class="math display">\[
+\Sigma^{*}:=\bigcup_{k \in \mathbb{N}_{0}}
+\Sigma^{k}=\cup\left\{\Sigma^{k} | k \in \mathbb{N}_{0}\right\}
+\]</span> <span class="math inline">\(\Sigma^{*}\)</span>
+中的元素叫文字。对于空集 <span class="math inline">\(()\)</span> 通常用
+<span class="math inline">\(\varepsilon\)</span> 或者 <span class="math inline">\(\lambda\)</span> 表示</p>
+<p>为了避免疑惑，通常把文字<span class="math inline">\(\left(a_{1},
+a_{2}, \dots, a_{k}\right)\)</span> 写成 <span class="math inline">\(a_{1} a_{2} \dots a_{k}\)</span></p>
+<h3 id="关系">关系</h3>
+<p>给定集合 <span class="math inline">\(A_{1}, A_{2}, \ldots,
+A_{k},\)</span> 于是关系表示为 <span class="math inline">\(R \subseteq
+A_{1} \times A_{2} \times \ldots \times A_{k}\)</span></p>
+<h4 id="组合和投影">组合和投影</h4>
+<h5 id="join">Join</h5>
+<p><span class="math display">\[
+R \bowtie_{i=j} S=\left\{\begin{array}{cc}
+\left(r_{1}, \ldots, r_{k}, s_{1}, \ldots, s_{l}\right) |\left(r_{1},
+\ldots, r_{k}\right) \in R, &amp; \left(s_{1}, \ldots, s_{l}\right) \in
+S,&amp;r_{i}=s_{j}
+\end{array}\right\}
+\]</span></p>
+<h5 id="projektion">Projektion</h5>
+<p><span class="math display">\[
+\pi_{i_{1}, i_{2}, \ldots, i_{j}}(R)=\left\{\left(r_{i_{1}}, r_{i_{2}},
+\ldots, r_{i_{j}}\right) |\left(r_{1}, \ldots, r_{k}\right) \in
+R\right\}
+\]</span></p>
+<p>例如对于下面的数据表 <span class="math display">\[
+\begin{array}{c|c|cc|cc|c}
+A_{\mathrm{ld}} &amp; A_{\text {Nachname }} &amp; A_{\text {Vorname }}
+&amp; A_{\text {ld }} &amp; A_{\text {Matrikelnummer }} &amp; A_{\text
+{ld }} &amp; A_{\text {Geschlecht }} \\
+\hline 1 &amp; \text { Man } &amp; \text { Spider } &amp; 1 &amp; 3141
+&amp; 1 &amp; \mathrm{m} \\
+2 &amp; \text { Brot } &amp; \text { Bernd } &amp; 2 &amp; 271828 &amp;
+2 &amp; \mathrm{b} \\
+3 &amp; \text { Woman } &amp; \text { Wonder } &amp; 3 &amp; 2017 &amp;
+3 &amp; \mathrm{w} \\
+4 &amp; \text { Gaga } &amp; \text { Lady } &amp; 4 &amp; 3694 &amp; 4
+&amp; \mathrm{w}
+\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\pi_{3}\left(R \bowtie_{1=1}\left(T \bowtie_{2=1}\{(w)\}\right)\right)
+\]</span></p>
+<h4 id="二元关系">二元关系</h4>
+<p>在二元关系中，只有两个集合<span class="math inline">\(R \subseteq A
+\times B\)</span></p>
+<p>常用中缀表示法来表示二元关系：<span class="math inline">\(a R
+b\)</span> 代替 <span class="math inline">\((a, b) \in R\)</span></p>
+<p>它经常用在图论中</p>
+<h5 id="关系乘积">关系乘积</h5>
+<p><span class="math display">\[
+R S=\{(a, d) | \text { es gibt } x \in B \cap C \text { mit }(a, x) \in
+R \text { und }(x, d) \in S\}
+\]</span></p>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200304101640104.png" alt="image-20200304101640104" style="zoom:67%;"></p>
+<h5 id="关系次幂">关系次幂</h5>
+<p>可以理解为，走几步可以到达的点 <span class="math display">\[
+\begin{aligned}
+&amp;R^{0}:=\operatorname{ld}_{A}:=\{(a, a) | a \in A\}\\
+&amp;R^{1}:=R=R^{0} R\\
+&amp;R^{2}:=R R=R^{1} R\\
+&amp;R^{k+1}:=R^{k} R=R R^{k}=\underbrace{R R \ldots R}_{k+1
+\mathrm{mal}} \text { für beliebiges } k \in \mathbb{N}_{0}
+\end{aligned}
+\]</span> 特别的，有逆关系。可以理解为反向图 <span class="math display">\[
+R^{-1}:=\{(b, a) |(a, b) \in R\}
+\]</span> 其他符号：</p>
+<p>走1步以上能到的 <span class="math display">\[
+R^{+}:=\bigcup_{k \in \mathbb{N}} R^{k}
+\]</span> 联通的 <span class="math display">\[
+R^{*}:=\bigcup_{k \in \mathbb{N}_{0}} R^{k}=R^{0} \cup R^{+}
+\]</span> 最多走k步能到的 <span class="math display">\[
+R^{\leq k}:=\bigcup_{i=0}^{k} R^{i}
+\]</span></p>
+<h5 id="证明">证明</h5>
+<blockquote>
+<p><span class="math inline">\(A\)</span> 是有限集且，<span class="math inline">\(n=|A|,\)</span> 那么 <span class="math inline">\(R^{*}=R^{\leq n-1}:\)</span></p>
+</blockquote>
+<p>先证明<span class="math inline">\(R^{*} \subseteq R^{\leq
+n-1}\)</span>， 再证明<span class="math inline">\(R^{\leq n-1} \subseteq
+R^{*}\)</span> 。后者根据定义显而易见</p>
+<p>也就是证明，对于<span class="math inline">\(s\)</span> 到 <span class="math inline">\(t\)</span>最多走<span class="math inline">\(n-1\)</span>步。
+假设s先走到u，然后绕一圈再走到<span class="math inline">\(u\)</span>，然后走到<span class="math inline">\(t\)</span>。那么可以简化为<span class="math inline">\(s\)</span>到<span class="math inline">\(u\)</span>到<span class="math inline">\(t\)</span>。所以我们可以得到一条简单路径(走过的所有点都不一样)。由于一共<span class="math inline">\(n\)</span>个点，所以最多<span class="math inline">\(n-1\)</span>步，得证。</p>
+<h4 id="二元关系的性质">二元关系的性质</h4>
+<ul>
+<li><p>reflexiv I</p>
+<p><span class="math inline">\(\mathrm{Id}_{A} \subseteq R\)</span>,
+每个点有自环</p></li>
+<li><p>symmetrisch</p>
+<p>对于所有<span class="math inline">\((s, t) \in R,\)</span>有<span class="math inline">\((t, s) \in R\)</span>。 每条边都有反向边</p></li>
+<li><p>asymmetrisch</p>
+<p>对于所有<span class="math inline">\((s, t) \in R,\)</span>有。<span class="math inline">\((t, s) \notin R\)</span>
+。无自环，且无反向边</p></li>
+<li><p>antisymmetrisch</p>
+<p>若<span class="math inline">\((s, t) \in R,\)</span>且<span class="math inline">\((t, s) \in R\)</span>，那么<span class="math inline">\(s=t\)</span>。 无反向边</p></li>
+<li><p>transitiv</p>
+<p>若<span class="math inline">\((s, t) \in R\)</span> ，且 <span class="math inline">\((t, u) \in R\)</span>，那么<span class="math inline">\((s, u) \in R\)</span>。 传递性</p></li>
+</ul>
+<h5 id="分类">分类</h5>
+<ul>
+<li><p>partielle Ordnungen</p>
+<p>reﬂexiv, transitiv, antisymmetrisch</p></li>
+<li><p>Äquivalenzrelationen</p>
+<p>reﬂexiv, transitiv, symmetrisch</p></li>
+</ul>
+<h4 id="等价关系äquivalenzrelationen">等价关系(Äquivalenzrelationen)</h4>
+<p>共同点：reﬂexiv, transitiv, symmetrisch</p>
+<h5 id="等价类äquivalenzklasse">等价类（Äquivalenzklasse）</h5>
+<p><span class="math display">\[
+[a]_{R}=\{b \in A | a R b\}
+\]</span></p>
+<p>例如：<span class="math inline">\([1]_{=z}=\{1\},[-5] \equiv_{3}=3
+\mathbb{Z}+1\)</span></p>
+<h5 id="商quotient">商(Quotient)</h5>
+<p>A集合关于R的商： <span class="math display">\[
+A / R=\left\{[a]_{R} | a \in A\right\}
+\]</span> 例如：<span class="math inline">\(\mathbb{Z}
+/=_{\mathbf{z}}=\{\{x\} | x \in \mathbb{Z}\}, \mathbb{Z} /
+\equiv_{3}=\{3 \mathbb{Z}, 3 \mathbb{Z}+1,3 \mathbb{Z}+2\}\)</span></p>
+<h4 id="序关系ordnungsrelationen">序关系（Ordnungsrelationen）</h4>
+<p>共同点: reﬂexiv, antisymmetrisch, transitiv</p>
+<h5 id="halbordnung">Halbordnung</h5>
+<p><span class="math inline">\(R \subseteq A \times A\)</span> 是 <span class="math inline">\(A\)</span>上的偏序关系(partielle Ordnung)，当<span class="math inline">\(R\)</span> 满足reﬂexiv, antisymmetrisch,
+transitiv</p>
+<h5 id="totalordnung">Totalordnung</h5>
+<p><span class="math inline">\(R\)</span> 是 <span class="math inline">\(A\)</span> 上的偏序关系，且对于每个再<span class="math inline">\(R\)</span>中的 <span class="math inline">\(a,
+b\)</span> , 至少有 <span class="math inline">\(aRb\)</span> 或者 <span class="math inline">\(bRa\)</span> 。</p>
+<h5 id="irreﬂexiv">Irreﬂexiv</h5>
+<p><span class="math inline">\((a, a) \notin R\)</span>， 无自环，
+也可以表示成：<span class="math inline">\(R \cap
+\operatorname{ld}_{A}=\emptyset\)</span></p>
+<p>例如：<span class="math inline">\(&lt;_{\mathrm{z}}=\leq_{
+\mathrm{z}} \backslash \mathrm{Id}_{\mathrm{Z}}\)</span></p>
+<h5 id="hasse图">Hasse图</h5>
+<p>Hasse图是画一张尽可能少边，表示关系的图</p>
+<p><span class="math inline">\(S \subseteq R\)</span> ，且<span class="math inline">\(S^{*}=R\)</span> 的最少 <span class="math inline">\(S\)</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200305105812626.png" alt="image-20200305105812626">
+<figcaption aria-hidden="true">image-20200305105812626</figcaption>
+</figure>
+<h5 id="maximalesminimales-element">maximales/minimales Element</h5>
+<p><span class="math inline">\(m \in A\)</span> 是关于 <span class="math inline">\(R\)</span> 的局部最大元素，若 <span class="math inline">\(m R a\)</span> 对于 <span class="math inline">\(a
+\in A,\)</span> 那么 <span class="math inline">\(aR m\)</span> 且 <span class="math inline">\(a=m\)</span></p>
+<ul>
+<li>没有到其他元素的边</li>
+</ul>
+<p><span class="math inline">\(m \in A\)</span>是关于 <span class="math inline">\(R\)</span> 的局部最小元素，若 <span class="math inline">\(a R m\)</span> 对于 <span class="math inline">\(a
+\in A,\)</span> 那么 <span class="math inline">\(mR a\)</span> 且 <span class="math inline">\(a=m\)</span></p>
+<ul>
+<li>其他的点没有到它的边</li>
+</ul>
+<h5 id="größteskleinstes-element">größtes/kleinstes Element</h5>
+<p><span class="math inline">\(m\)</span> 是关于 <span class="math inline">\(R\)</span> 的最大元素，若 <span class="math inline">\(m R a\)</span> 对于每个 <span class="math inline">\(a \in A\)</span> 成立</p>
+<ul>
+<li>没有到其他元素的边，但每个元素都有一条边到它</li>
+</ul>
+<p><span class="math inline">\(m\)</span> 是关于 <span class="math inline">\(R\)</span> 的最小元素，若 <span class="math inline">\(a R m\)</span> 对于每个 <span class="math inline">\(a \in A\)</span> 成立</p>
+<ul>
+<li>其他元素没有到自己的边，自己到每个元素都有边</li>
+</ul>
+<h3 id="函数">函数</h3>
+<p>一个关系<span class="math inline">\(R \subseteq A \times B\)</span>
+是一个函数，若对于<strong>每个</strong> <span class="math inline">\(a
+\in A\)</span> , 只有一个 <span class="math inline">\(b \in B\)</span>
+使得 <span class="math inline">\((a, b) \in R\)</span> 。</p>
+<h4 id="一些记号">一些记号</h4>
+<ul>
+<li><p><span class="math inline">\(f, g, h, \ldots\)</span>
+可以表示函数</p></li>
+<li><p><span class="math inline">\(f: A \rightarrow B\)</span>
+的意思是，<span class="math inline">\(f \subseteq A \times B\)</span> 。
+也就是从A映射到B的函数</p></li>
+<li><p><span class="math inline">\(f(a)\)</span> 表示那个唯一的 <span class="math inline">\(b \in B\)</span> 使得 <span class="math inline">\((a, b) \in R\)</span> 。</p></li>
+<li><p>可以用右箭头 <span class="math inline">\(\mapsto\)</span>
+来定义， <span class="math inline">\(f: \mathbb{R} \rightarrow
+\mathbb{R}, x \mapsto x^{2}+1\)</span></p></li>
+<li><p><span class="math inline">\(B^{A}:=\{f: A \rightarrow
+B\}\)</span> , 也是A到B的函数</p></li>
+<li><p><span class="math inline">\(A=\times_{i=1}^{k} A_{i}\)</span>
+写成 <span class="math inline">\(f\left(a_{1}, \dots,
+a_{k}\right)\)</span> ，而不是<span class="math inline">\(f\left(\left(a_{1}, \dots,
+a_{k}\right)\right)\)</span></p></li>
+<li><p><span class="math inline">\(f:\{()\} \rightarrow B\)</span>
+表示空函数</p></li>
+</ul>
+<h5 id="定义域和值域">定义域和值域</h5>
+<ul>
+<li><span class="math inline">\(Dom(f)\)</span> 是定义域 <span class="math inline">\(A\)</span></li>
+<li><span class="math inline">\(Rng(f)\)</span> 是集合 <span class="math inline">\(\{f(a) | a \in A\}\)</span></li>
+</ul>
+<p><span class="math inline">\(f: A \rightarrow B\ ,X \subseteq
+A\)</span> 且<span class="math inline">\(Y \subseteq B\)</span></p>
+<p><span class="math inline">\(f^{-1}(Y)=\{a \in A | f(a) \in Y\}
+\subseteq \operatorname{Dom}(f)\)</span></p>
+<p><span class="math inline">\(f(X)=\{f(a) | a \in X\} \subseteq
+\operatorname{Rng}(f)\)</span></p>
+<h5 id="半函数partielle-funktion">半函数(partielle Funktion)</h5>
+<p>对于每个 <span class="math inline">\(a \in A\)</span> , 最多只有一个
+<span class="math inline">\(b \in B\)</span> 使得 <span class="math inline">\((a, b) \in R\)</span> 。</p>
+<ul>
+<li>标记：<span class="math inline">\(f: A \hookrightarrow B\)</span> :
+<span class="math inline">\(\operatorname{Dom}(f) \subseteq
+A\)</span></li>
+</ul>
+<h4 id="操作">操作</h4>
+<p><span class="math inline">\(f: A^{k} \rightarrow A\)</span>
+被称作关于A的k元操作(k-stellige Operationen)</p>
+<h5 id="二元操作">二元操作</h5>
+<p><span class="math inline">\(\odot: A \times A \rightarrow
+A\)</span>。 像这写二元操作经常会写中缀形式。如 <span class="math inline">\(\left(x+_{\mathbb{R}} y\right)\)</span> 代替 <span class="math inline">\(+_{\mathbb{R}}(x, y)\)</span></p>
+<ul>
+<li>assoziativ ，若 <span class="math inline">\((a \odot b) \odot c=a
+\odot(b \odot c)\)</span></li>
+<li>kommutativ ，若 <span class="math inline">\(a \odot b=b \odot
+a\)</span></li>
+<li>idempotent ，若 <span class="math inline">\(a \odot
+a=a\)</span></li>
+</ul>
+<h4 id="复合">复合</h4>
+<p><span class="math inline">\((g \circ f)(a):=g(f(a))\)</span> 是<span class="math inline">\(f: A \rightarrow B\)</span> 和 <span class="math inline">\(g: B \rightarrow C\)</span> 的复合函数 <span class="math display">\[
+(g \circ f): A \rightarrow C, a \mapsto g(f(a))
+\]</span> 函数符合满足结合律，但不满足交换律 <span class="math display">\[
+\begin{aligned}
+(h \circ(g \circ f))(a) &amp;=h((g \circ f)(a)) \\
+&amp;=h(g(f(a))) \\
+&amp;=(h \circ g)(f(a))=((h \circ g) \circ f)(a)
+\end{aligned}
+\]</span></p>
+<h4 id="函数的性质">函数的性质</h4>
+<ul>
+<li><p>injektiv，若从<span class="math inline">\(f(a)=f\left(a^{\prime}\right)\)</span> 可以推出
+<span class="math inline">\(a=a^{\prime}\)</span></p>
+<p>等价于： <span class="math inline">\(\left|f^{-1}(\{b\})\right| \leq
+1\)</span> 对于每个 <span class="math inline">\(b \in
+B\)</span></p></li>
+<li><p>surjektiv，若对每个 <span class="math inline">\(b \in B\)</span>
+有 <span class="math inline">\(a \in A\)</span> 使得 <span class="math inline">\(f(a)=b\)</span></p>
+<p>等价于：<span class="math inline">\(f(A)=B,
+\operatorname{Rng}(f)=B,\left|f^{-1}(\{b\})\right| \geq 1\)</span>
+对于每个 <span class="math inline">\(b \in B\)</span> 成立</p></li>
+<li><p>bijektiv，同时满足injektiv和surjektiv</p>
+<p>等价于：<span class="math inline">\(\left|f^{-1}(\{b\})\right|=1\)</span> 对于每个
+<span class="math inline">\(b \in B\)</span></p></li>
+</ul>
+<p>一个bijektiv的函数我们叫Permutation</p>
+<h4 id="反函数">反函数</h4>
+<p>若 <span class="math inline">\(f\)</span> 是bijektiv的，那么<span class="math inline">\(\left\{(b, a) | b \in B, a \in
+f^{-1}(\{b\})\right\} \in A^{B}\)</span>
+也是一个函数，且是它的反函数，用<span class="math inline">\(f^{-1}\)</span> 表示</p>
+<h5 id="证明-1">证明</h5>
+<blockquote>
+<p><span class="math inline">\(R:=\left\{(b, a) | b \in B, a \in
+f^{-1}(\{b\})\right\} \in A^{B}\)</span>是一个函数</p>
+</blockquote>
+<p>也就是要证明每个 <span class="math inline">\(b \in B\)</span> 只有1
+个 <span class="math inline">\(a \in A\)</span></p>
+<ul>
+<li><p>每个 <span class="math inline">\(b\)</span> 有一个映射值</p>
+<p>对于任意的<span class="math inline">\(b \in B\)</span>, 由于<span class="math inline">\(f\)</span> 是surjektiv的，那么每个<span class="math inline">\(b \in B\)</span> 有 <span class="math inline">\(a
+\in A\)</span> 使得 <span class="math inline">\(f(a)=b\)</span></p></li>
+<li><p>若存在 <span class="math inline">\((b, a) \in R\)</span> 且<span class="math inline">\(\left(b, a^{\prime}\right) \in R,\)</span> 那么$
+a=a^{}$</p>
+<p>由于<span class="math inline">\(f(a)=b=f\left(a^{\prime}\right)\)</span> ，且<span class="math inline">\(f\)</span> 是injektiv的，那么$ a=a^{}$</p></li>
+</ul>
+<h5 id="一些性质和证明">一些性质和证明</h5>
+<blockquote>
+<p><span class="math inline">\(f^{-1}\)</span>
+也是一个bijektiv的函数</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(f^{-1}\)</span>
+是一个injektiv的函数</p>
+<p>任取 <span class="math inline">\(b, b^{\prime} \in B\)</span> 且<span class="math inline">\(b \neq b^{\prime}\)</span>， 则要证 <span class="math inline">\(f^{-1}(b) \neq
+f^{-1}\left(b^{\prime}\right)\)</span>。它的逆否命题(Kontraposition)是:</p>
+<p>若 <span class="math inline">\(f^{-1}(b)=f^{-1}\left(b^{\prime}\right)\)</span>
+那么 <span class="math inline">\(b=b^{\prime}\)</span> 或者<span class="math inline">\(f: A \rightarrow
+B\)</span>不是函数（或两个都成立）</p>
+<p>而若 <span class="math inline">\(f^{-1}(b)=f^{-1}\left(b^{\prime}\right):=a\)</span>
+且 <span class="math inline">\(b \neq b^{\prime}\)</span>，那 <span class="math inline">\(f: A \rightarrow B\)</span> 就不是函数</p></li>
+<li><p><span class="math inline">\(f^{-1}\)</span>
+是一个surjektiv的函数</p>
+<p>任取<span class="math inline">\(a \in A\)</span> ，让 <span class="math inline">\(b:=f(a)\)</span>， 那么 <span class="math inline">\(f^{-1}(b)=a\)</span></p></li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(f: A \rightarrow B\)</span>
+是一个bijektiv的函数，那么 <span class="math inline">\(f^{-1}\)</span>
+是唯一一个函数 <span class="math inline">\(g\)</span> 使得<span class="math inline">\((g \circ f)=\operatorname{ld}_{A}\)</span> 且<span class="math inline">\((f \circ g)=\operatorname{ld}_{B}\)</span></p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(\left(f^{-1} \circ
+f\right)=\operatorname{ld}_{A}\)</span> 成立</p>
+<p>任取<span class="math inline">\(a \in A\)</span> ，让 <span class="math inline">\(b:=f(a)\)</span>， 那么 <span class="math inline">\(a \in f^{-1}(\{b\})\)</span>， 也就是 <span class="math inline">\(a=f^{-1}(b)=f^{-1}(f(a))\)</span></p></li>
+<li><p>若 <span class="math inline">\(g: B \rightarrow A\)</span> 有性质
+<span class="math inline">\((g \circ f)=\operatorname{ld}_{A},\)</span>
+那么 <span class="math inline">\(g=f^{-1}\)</span></p>
+<p><span class="math inline">\(f^{-1}=\operatorname{ld}_{A} \circ
+f^{-1}=(g \circ f) \circ f^{-1}=g \circ\left(f \circ f^{-1}\right)=g
+\circ \operatorname{ld}_{B}=g\)</span></p></li>
+</ul>
+<blockquote>
+<p>若 <span class="math inline">\(f: A \rightarrow B\)</span> 且 <span class="math inline">\(g: B \rightarrow A\)</span> 满足 <span class="math inline">\((g \circ f)=\operatorname{ld}_{A}\)</span> 和<span class="math inline">\((f \circ g)=\operatorname{ld}_{B}\)</span>， 那么
+<span class="math inline">\(f, g\)</span> 是 bijektiv的，且 <span class="math inline">\(f^{-1}=g\)</span> 和<span class="math inline">\(g^{-1}=f\)</span></p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(f\)</span> 是 injektiv 的</p>
+<p>若 <span class="math inline">\(a, a^{\prime} \in A\)</span> 且<span class="math inline">\(f(a)=f\left(a^{\prime}\right)\)</span>， 那么</p>
+<p><span class="math inline">\(a=\operatorname{ld}_{A}(a)=(g \circ
+f)(a)=g(f(a))=g\left(f\left(a^{\prime}\right)\right)=(g \circ
+f)\left(a^{\prime}\right)=\operatorname{ld}_{A}\left(a^{\prime}\right)=a^{\prime}\)</span></p></li>
+<li><p><span class="math inline">\(f\)</span> 是 surjektiv 的</p>
+<p>对于每个 <span class="math inline">\(b \in B\)</span>， <span class="math inline">\(g(b)\)</span> 是一个原映射</p>
+<p><span class="math inline">\(b=\operatorname{ld}_{B}(b)=(f \circ
+g)(b)=f(g(b))\)</span></p></li>
+</ul>
+<p>因为<span class="math inline">\(f^{-1}, g^{-1}\)</span>
+唯一，所以<span class="math inline">\(f=g^{-1}\)</span> 且 <span class="math inline">\(g=f^{-1}\)</span></p>
+<blockquote>
+<p><span class="math inline">\(f: A \rightarrow B\)</span> 且 <span class="math inline">\(g: B \rightarrow C\)</span> bijektiv, 那么 <span class="math inline">\((g \circ f): A \rightarrow C\)</span> 有 <span class="math inline">\((g \circ f)^{-1}=\left(f^{-1} \circ
+g^{-1}\right)\)</span></p>
+</blockquote>
+<ul>
+<li><p>由于它们bijektiv, 那么存在 <span class="math inline">\(f^{-1},
+g^{-1}\)</span></p></li>
+<li><p><span class="math inline">\((g \circ f) \circ\left(f^{-1} \circ
+g^{-1}\right)=\operatorname{ld}_{C}\)</span> 和<span class="math inline">\(\left(f^{-1} \circ g^{-1}\right) \circ(g \circ
+f)=\operatorname{ld}_{A}\)</span>成立</p>
+<p><span class="math inline">\((g \circ f) \circ\left(f^{-1} \circ
+g^{-1}\right)=g \circ f \circ f^{-1} \circ g^{-1}=g \circ
+\operatorname{ld}_{B} \circ g^{-1}=g \circ
+g^{-1}=\operatorname{ld}_{C}\)</span></p></li>
+</ul>
+<p>所以根据上一个定理<span class="math inline">\((g \circ
+f),\left(f^{-1} \circ g^{-1}\right)\)</span> bijektiv，且 <span class="math inline">\((g \circ f)^{-1}=\left(f^{-1} \circ
+g^{-1}\right)\)</span></p>
+<blockquote>
+<p>若 <span class="math inline">\((g \circ f): A \rightarrow C\)</span>
+bijektiv, 那么 <span class="math inline">\(f: A \rightarrow B\)</span>
+injektiv 且<span class="math inline">\(g: B \rightarrow C\)</span>
+surjektiv</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(h:=(g \circ f)\)</span>, 由于
+bijektiv ，存在 <span class="math inline">\(h^{-1}\)</span></p></li>
+<li><p><span class="math inline">\(f: A \rightarrow B\)</span>
+injektiv</p></li>
+</ul>
+<p>若<span class="math inline">\(f(a)=f\left(a^{\prime}\right)\)</span>
+，那么 <span class="math inline">\(h(a)=h(a)=: c\)</span> , 有<span class="math inline">\(a=h^{-1}(c)=a^{\prime}\)</span></p>
+<ul>
+<li><span class="math inline">\(g\)</span> 是 surjektiv, 因为 <span class="math inline">\(b=f\left(h^{-1}(c)\right)\)</span> 是c的原射 <span class="math inline">\(c \in C\)</span> ist</li>
+</ul>
+<h3 id="集合的势kardinalität">集合的势(Kardinalität)</h3>
+<p>集合的势是用来比较无限集的手段。</p>
+<p>我们定义：</p>
+<p><span class="math inline">\(|A| \leq|B|\)</span>
+，若存在一个injektiv的函数 <span class="math inline">\(f: A \rightarrow
+B\)</span></p>
+<p><span class="math inline">\(|A|=|B|\)</span>，若存在一个bijektiv的函数 <span class="math inline">\(f: A \rightarrow B\)</span></p>
+<p>例如</p>
+<p><span class="math inline">\(|\mathbb{N}|=|2 \mathbb{N}|\)</span>
+，因为<span class="math inline">\(\mathbb{N} \rightarrow 2 \mathbb{N}, n
+\mapsto 2 n\)</span> 且 <span class="math inline">\(2 \mathbb{N}
+\rightarrow \mathbb{N}, n \mapsto n\)</span></p>
+<p>我们说一个集合是可数的(abzählbar), 若<span class="math inline">\(|A|
+\leq|\mathbb{N}|\)</span> ，否则就是不可数的 (überabzählbar)</p>
+<p><span class="math inline">\(|A|\)</span>
+就是集合的势数(Kardinalzahl)</p>
+<h4 id="不可数集合">不可数集合</h4>
+<blockquote>
+<p>康托尔定理((Satz von Cantor)： <span class="math inline">\(|A|&lt;|\mathcal{P}(A)|\)</span></p>
+</blockquote>
+<p><strong>证明：</strong>通过 <span class="math inline">\(f: A
+\rightarrow \mathcal{P}(A), a \mapsto\{a\}\)</span> 有 <span class="math inline">\(|A| \leq|\mathcal{P}(A)|\)</span></p>
+<p>我们只要再证明：没有bijektiv的函数 <span class="math inline">\(f: A
+\rightarrow \mathcal{P}(A)\)</span>。
+我们通过反证法Diagonalisierung证明</p>
+<p>假设 <span class="math inline">\(g: A \rightarrow
+\mathcal{P}(A)\)</span> bijektiv。 让 <span class="math inline">\(M=\{a
+\in A | a \notin g(a)\} \in \mathcal{P}(A)\)</span></p>
+<p>由于 <span class="math inline">\(g\)</span>
+已经是bijektiv的，那么存在 <span class="math inline">\(m \in A\)</span>
+使得 <span class="math inline">\(g(m)=M\)</span> 。那么问题来了 <span class="math inline">\(m \in M\)</span> 吗</p>
+<ul>
+<li><span class="math inline">\(m \in M\)</span>，那么 <span class="math inline">\(m \notin g(m)\)</span> , 而 <span class="math inline">\(g(m) = M\)</span> 所以 <span class="math inline">\(m \notin M\)</span> 矛盾</li>
+<li><span class="math inline">\(m \notin M\)</span>，那么 <span class="math inline">\(m \in g(m) = M\)</span> ，又矛盾了</li>
+</ul>
+<p>综上，不存在这个bijektiv的函数</p>
+<h4 id="多重集合">多重集合</h4>
+<p>多重集合是考虑顺序的集合，我们用 <span class="math inline">\(\{\}_{M}\)</span>来表示多重集 <span class="math display">\[
+\begin{aligned}
+\{a, b, c, a\}_{\mathrm{M}}=\{b, c, a, a\}_{\mathrm{M}} &amp; \neq\{b,
+a, c\}_{\mathrm{M}} \\
+&amp;=\{a, b, c\}=\{a, b, b, c\} \neq\{a, b, b, c\}_{\mathrm{M}}
+\end{aligned}
+\]</span> 对于固定的全集 <span class="math inline">\(\Omega\)</span> ,
+我们可以用数函数(Zählfunktionen) $ m _{0}^{} $来表达, 例如 <span class="math inline">\(\Omega=\{a, b, c, d\}\)</span> <span class="math display">\[
+\{a, b, c, a\}_{\mathrm{M}}=\{(a, 2),(b, 1),(c, 1),(d, 0)\}
+\]</span> 表示a出现2次，b出现1次，c出现1次，d出现0次</p>
+<h2 id="图论">图论</h2>
+<h3 id="有向图digraphtn">有向图(Digraphtn)</h3>
+<p>有向图由边集和点集构成 <span class="math inline">\(G=(V, E)\)</span>
+，<span class="math inline">\(E \subseteq V \times V\)</span>，
+若点集合<span class="math inline">\(V\)</span>
+有限，那么图就是有限的</p>
+<h4 id="二分图">二分图</h4>
+<p>一个图是二分图(bipartit)，若 <span class="math inline">\(V=A \cup
+B\)</span> 且 <span class="math inline">\(A \cap B=\emptyset\)</span>
+(简写：<span class="math inline">\(V=A \uplus B\)</span>) ，并且 <span class="math inline">\(E \subseteq A \times B \cup B \times
+A\)</span></p>
+<p>没有A和B中自己的边。</p>
+<h4 id="路径">路径</h4>
+<p>点的序列 <span class="math inline">\(v_{0}, v_{1}, \dots,
+v_{l}\)</span> ，叫路径(Pfad), 若对于每个 <span class="math inline">\(i
+\in[l]\)</span> 满足 <span class="math inline">\(\left(v_{i-1},
+v_{i}\right) \in E\)</span>， 路径的长度是 <span class="math inline">\(l\)</span></p>
+<h5 id="简单路径">简单路径</h5>
+<p>一个路径是简单路径，若每个点不重复出现。也就是最多有 <span class="math inline">\(|V|-1\)</span> 长度的简单路径</p>
+<h4 id="子图teilgraphen">子图(Teilgraphen)</h4>
+<p>对于 <span class="math inline">\(U \subseteq V\)</span> ，我们写
+<span class="math inline">\(G[U]\)</span> 表示 <span class="math inline">\((U, E \cap(U \times U))\)</span> 子图。</p>
+<p>一个有向图 <span class="math inline">\(H=\left(V_{H},
+E_{H}\right)\)</span> 是 <span class="math inline">\(G=\left(V_{G},
+E_{G}\right)\)</span> 的子图，若满足 <span class="math inline">\(V_{H}
+\subseteq V_{G}\)</span> 和 <span class="math inline">\(E_{H} \subseteq
+E_{G}\)</span></p>
+<h4 id="连通zusammenhang">连通(Zusammenhang)</h4>
+<p><span class="math inline">\(G\)</span> 是连通的(zusammenhängend)，
+若对于每个 <span class="math inline">\(u, v \in V\)</span> 满足 <span class="math inline">\(u\left(E \cup E^{-1}\right)^{*} v\)</span></p>
+<p><span class="math inline">\(G\)</span> 是强连通的(stark
+zusammenhängend)， 若对于每个 <span class="math inline">\(u, v \in
+V\)</span> 满足 <span class="math inline">\(u E^{*} v\)</span> 和 <span class="math inline">\(v E^{*} u\)</span></p>
+<p><span class="math inline">\(U \subseteq V\)</span>
+是一个(强)连通分量，若 <span class="math inline">\(G[U]\)</span>
+(强)连通</p>
+<p><span class="math inline">\(U\)</span> 是一个最大(强)连通分类，
+若没有满足 <span class="math inline">\(U \subsetneq U^{\prime} \subseteq
+V\)</span> 的 <span class="math inline">\(U^{\prime}\)</span> 使得 <span class="math inline">\(G\left[U^{\prime}\right]\)</span>
+是一个(强)连通分量</p>
+<h4 id="环kreis">环(Kreis)</h4>
+<p>环是一个路径 <span class="math inline">\(v_{0}, v_{1}, \dots,
+v_{l}\)</span> ， 且<span class="math inline">\(l \geq 1\)</span>
+，<span class="math inline">\(v_{0}=v_{l}\)</span>。</p>
+<p>一个环是简单的，若 <span class="math inline">\(v_{0}, v_{1}, \dots,
+v_{l-1}\)</span> 每2个都不同，即 <span class="math inline">\(\left|\left\{v_{0}, v_{1}, \dots,
+v_{l}\right\}\right|=l\)</span> 该环不包含更小的环</p>
+<p>连向自己的边 <span class="math inline">\((u, u) \in E\)</span>，
+叫自环(Schleife)</p>
+<p>有向无环图叫 azyklisch (DAG)</p>
+<p>若 <span class="math inline">\(u E v\)</span> ，那么 <span class="math inline">\(u\)</span> 是 <span class="math inline">\(v\)</span> 的前驱(Vorgänger)， <span class="math inline">\(v\)</span> 是 <span class="math inline">\(u\)</span> 的后继(Nachfolger)</p>
+<h4 id="图同构isomorphie">图同构(Isomorphie)</h4>
+<p>两个图 <span class="math inline">\(G, H\)</span> 是同构的 <span class="math inline">\(G \cong H\)</span> ，若存在一个双射(Bijektion)
+<span class="math inline">\(\beta: V_{G} \rightarrow V_{H}\)</span> 使得
+<span class="math inline">\(u E_{G} v\)</span> 等价于 <span class="math inline">\(\beta(u) E_{H} \beta(v)\)</span></p>
+<p>例如： <span class="math inline">\(\beta(1)=5, \beta(2)=3,
+\beta(a)=7, \beta(b)=2\)</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200307085616335.png" alt="image-20200307085616335">
+<figcaption aria-hidden="true">image-20200307085616335</figcaption>
+</figure>
+<h3 id="无向图和简单图">无向图和简单图</h3>
+<p>一个有向图 <span class="math inline">\(G=(V, E)\)</span>
+是无向的，若它对称 symmetrisch</p>
+<p>一个有限的有向图是一个简单图，若它无向且没有自环，即 symmetrisch 和
+irreflexiv</p>
+<p>我们把 <span class="math inline">\((u, v),(v, u) \in E \subseteq V
+\times V\)</span> 替换成 <span class="math inline">\(\{u, v\} \in E
+\subseteq\left(\begin{array}{l}V \\ 2\end{array}\right)\)</span></p>
+<ul>
+<li><span class="math inline">\(\left(\begin{array}{l}V \\
+2\end{array}\right):=\{\{u, v\} \subseteq V | u \neq v\}\)</span>
+是所有两个元素的子集</li>
+</ul>
+<p>我们不说前驱和后继，而是邻居(Nachbarschaft) <span class="math inline">\(\Gamma(u)=\{v \in V |\{u, v\} \in
+E\}\)</span>，和度数 <span class="math inline">\(\operatorname{deg}(u):=|\Gamma(u)|\)</span></p>
+<h4 id="环">环</h4>
+<p>在无向图中，环的定义有些变换：<span class="math inline">\(v_{0},
+v_{1}, \ldots, v_{l}\)</span> 且满足 <span class="math inline">\(l \geq
+3, v_{0}=v_{l}\)</span>，<span class="math inline">\(\left|\left\{v_{0},
+\ldots, v_{l}\right\}\right|=l\)</span> 的是一个环</p>
+<h4 id="定理判定二分图">定理(判定二分图)</h4>
+<blockquote>
+<p>一个图是二分的，当且仅当没有奇数长度的环存在</p>
+</blockquote>
+<ul>
+<li><p>一个二分图不含奇数长度的环</p>
+<p>我们用反证法，假设 <span class="math inline">\(G=(A \uplus B,
+E)\)</span> 是一个有奇数长度环的二分图。不妨设(OBdA) <span class="math inline">\(v_{0} \in A\)</span></p>
+<p>那么 <span class="math inline">\(v_{1} \in B, v_{2} \in A\)</span>
+，<span class="math inline">\(v_{l} \in B\)</span> 因为 <span class="math inline">\(l\)</span> 是奇数。所以矛盾了</p></li>
+<li><p>一个不含奇数长度的环是二分图</p>
+<p>设 <span class="math inline">\(G=(V, E)\)</span>
+是一个不含奇数长度环的图。不妨设<span class="math inline">\(G\)</span>
+连通，否则可以分开看。</p>
+<p>我们任取一个点 <span class="math inline">\(x \in V\)</span>
+。定义<span class="math inline">\(A, B \subseteq V,\)</span> 使得 <span class="math inline">\(x \in A\)</span> ，对于其他的点 <span class="math inline">\(v \in V \backslash\{x\}\)</span>：</p>
+<ul>
+<li>若<span class="math inline">\(v\)</span> 到 <span class="math inline">\(x\)</span> 的最短路径是偶数 <span class="math inline">\(v \in A\)</span></li>
+<li>若<span class="math inline">\(v\)</span> 到 <span class="math inline">\(x\)</span> 的最短路径是奇数 <span class="math inline">\(v \in B\)</span></li>
+</ul>
+<p>若 <span class="math inline">\(v_{1}, v_{2} \in A\)</span> 或者 <span class="math inline">\(v_{1}, v_{2} \in B\)</span>
+，由于这样构造图，那么有两条路径 <span class="math inline">\(v_{1},
+\dots, x\)</span> 和 <span class="math inline">\(v_{2}, \dots,
+x\)</span>， 它们要么都是奇数或者都是偶数。</p>
+<p>假如 <span class="math inline">\(x^{\prime}\)</span>
+是第一个这两条路径中相同的点。那么<span class="math inline">\(v_{1},
+\ldots, x^{\prime}\)</span> 和 <span class="math inline">\(v_{2},
+\ldots, x^{\prime}\)</span>，要么都是奇数，要么都是偶数。<span class="math inline">\(v_{1}, \dots, x^{\prime}, \dots, v_{2}\)</span>
+它肯定是偶数长度的路径。所以不可能有 <span class="math inline">\(\left\{v_{1}, v_{2}\right\} \in E\)</span>，
+因为不存在这样的环：<span class="math inline">\(v_{1}, \dots,
+x^{\prime}, \dots, v_{2}, v_{1}\)</span>。 所以它是二分图。</p></li>
+</ul>
+<h3 id="特殊图的分类">特殊图的分类</h3>
+<h4 id="完全图vollständiger-graph">完全图(Vollständiger Graph)</h4>
+<p><span class="math display">\[
+K_{n}:=\left([n],\left(\begin{array}{c}
+[n] \\
+2
+\end{array}\right)\right)
+\]</span></p>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200308163039032.png" alt="image-20200308163039032" style="zoom: 50%;"></p>
+<h4 id="环图kreisgraph">环图(Kreisgraph)</h4>
+<p><span class="math display">\[
+C_{n}:=([n],\{\{i,(i \bmod n)+1\} | i \in[n]\}) \text { 对于 } n \geq 3
+\]</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200308163317769.png" alt="image-20200308163317769">
+<figcaption aria-hidden="true">image-20200308163317769</figcaption>
+</figure>
+<h4 id="路径图pfadgraph">路径图(Pfadgraph)</h4>
+<p><span class="math display">\[
+P_{n}:=([n],\{\{i, i+1\} | i \in[n-1]\})
+\]</span></p>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200308163423394.png" alt="image-20200308163423394" style="zoom:50%;"></p>
+<h4 id="完全二分图">完全二分图</h4>
+<p><span class="math display">\[
+K_{m, n}:=([m+n],\{\{i, j\} | i \in[m], j \in[m+n] \backslash[m]\})(m
+\leq n)
+\]</span></p>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200308163813731.png" alt="image-20200308163813731" style="zoom:50%;"></p>
+<h4 id="矩阵图gittergraph">矩阵图(Gittergraph)</h4>
+<p><span class="math display">\[
+M_{m, n}:=([m] \times[n],\{\{(i, j),(k, l)\}|| i-k|+| j-l |=1\})
+\]</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200308164036624.png" alt="image-20200308164036624">
+<figcaption aria-hidden="true">image-20200308164036624</figcaption>
+</figure>
+<h4 id="立方体图">立方体图</h4>
+<p><span class="math display">\[
+Q_{n}:=\left(\{0,1\}^{n},\left\{\{u, v\}|\quad\sum_{i=1}^{n}|
+u_{i}-v_{i} |=1\right\}\right) \text { mit } Q_{0}:=(\{\varepsilon\},
+\emptyset)
+\]</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200308164412835.png" alt="image-20200308164412835">
+<figcaption aria-hidden="true">image-20200308164412835</figcaption>
+</figure>
+<h4 id="满二叉树perfekter-binärbaum">满二叉树(Perfekter Binärbaum)</h4>
+<p>高度为h的满二叉树 <span class="math display">\[
+B_{h}:=\left(\{0,1\} \leq h,\left\{\{u, u x\} | u \in\{0,1\}^{&lt;h}, x
+\in\{0,1\}\right\}\right)
+\]</span> <img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200308164606228.png" alt="image-20200308164606228"></p>
+<p>节点 <span class="math inline">\(u\)</span> 有 <span class="math inline">\(\operatorname{deg}(u) \leq 1\)</span>
+叫叶子(Blatt)，其他叫内部节点(innere Knoten)</p>
+<h3 id="数学归纳法证明">数学归纳法证明</h3>
+<blockquote>
+<p>对于所有 <span class="math inline">\(h \in \mathbb{N}_{0}:
+B_{h}\)</span> 有 <span class="math inline">\(2^{h}\)</span> 个叶子</p>
+</blockquote>
+<p>我们用数学归纳法证明</p>
+<ul>
+<li>Induktionsbasis：证明 <span class="math inline">\(B_{0}\)</span> 有
+<span class="math inline">\(2^{0}=1\)</span>个叶子</li>
+<li>Induktionsschritt：任选一个固定的<span class="math inline">\(h \in
+\mathbb{N}_{0}\)</span>
+<ul>
+<li>Induktionsannahme: $ B_{h} $它有 <span class="math inline">\(2^{h}\)</span> 个叶子</li>
+<li>Induktionsbehauptung: $ B_{h+1} $它有 <span class="math inline">\(2^{h+1}\)</span> 个叶子</li>
+<li>Beweis der Induktionsbehauptung:
+<ul>
+<li>$ B_{h+1} $ 中对于 $ B_{h} $ 的每一个叶子 $v $ 有两个叶子 <span class="math inline">\(v_{1}, v_{2}\)</span> 。所以 $ B_{h+1} $ 有 $
+B_{h} $ 2倍的叶子</li>
+<li>所以 $ B_{h+1} $有 $ 2 <sup>{h}=2</sup>{h+1}$ 个叶子</li>
+</ul></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>对于所有 <span class="math inline">\(h \in \mathbb{N}_{0}:
+B_{h}\)</span> 有 <span class="math inline">\(2^{h+1}-1\)</span>
+个节点</p>
+</blockquote>
+<ul>
+<li>Induktionsbasis：<span class="math inline">\(B_{0}\)</span> 有 <span class="math inline">\(2^{1}-1=1\)</span>个节点</li>
+<li>Induktionsschritt：任选一个固定的<span class="math inline">\(h \in
+\mathbb{N}_{0}\)</span>
+<ul>
+<li>Induktionsannahme: $ B_{h} $它有 <span class="math inline">\(2^{h-1}-1\)</span> 个节点</li>
+<li>Induktionsbehauptung: $ B_{h+1} $它有 <span class="math inline">\(2^{h+2}-1\)</span> 个叶子</li>
+<li>Beweis der Induktionsbehauptung:
+<ul>
+<li>$ B_{h+1} $ 的节点数是 $ B_{h} $ 的节点数和 $ B_{h+1} $
+的叶子数之和。所以 $ B_{h+1} $ 有 $ B_{h} $ 2倍的叶子</li>
+<li>所以 $ B_{h+1} <span class="math inline">\(的节点数\)</span>=(2<sup>{h+1}-1)+2</sup>{h+1}=2
+<sup>{h+1}-1=2</sup>{h+2}-1$</li>
+</ul></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>每个简单的有 <span class="math inline">\(n \geq 1\)</span>
+个节点的连通图，有至少 <span class="math inline">\(n - 1\)</span>
+条边</p>
+</blockquote>
+<ul>
+<li><p>Induktionsbasis： 只有1个节点的图，需要0条边连通n</p></li>
+<li><p>Induktionsschritt：任选一个固定的<span class="math inline">\(n
+\in \mathbb{N}\)</span></p>
+<ul>
+<li><p>Induktionsbehauptung: 每个有 <span class="math inline">\(n
++1\)</span> 个节点的连通图，有至少 <span class="math inline">\(n\)</span> 条边</p></li>
+<li><p>Induktionsannahme: 每个有 <span class="math inline">\(m&lt;n
++1\)</span> 个节点的连通图，有至少 <span class="math inline">\(m-1\)</span> 条边</p></li>
+<li><p>Beweis der Induktionsbehauptung:</p>
+<p>假设 <span class="math inline">\(G=(V, E)\)</span> 是一个连通图有
+<span class="math inline">\(|V|=n+1\)</span> 条边。假设 <span class="math inline">\(u\)</span>
+是其中任意一个固定的点，我们移除它，并且考虑<span class="math inline">\(G^{\prime}=G[V \backslash\{u\}]\)</span>
+，那么对于子图<span class="math inline">\(G^{\prime}\)</span> 中的<span class="math inline">\(G_{1}, \dots, G_{r}\)</span>有 <span class="math display">\[
+1 \leq r \leq \operatorname{deg}(u) \quad|V|=1+\sum_{i
+\in[r]}\left|V_{i}\right| \quad|E|=\operatorname{deg}(u)+\sum_{i
+\in[r]}\left|E_{i}\right|
+\]</span> 对于每个连通分量 <span class="math inline">\(G_{i}=\left(V_{i}, E_{i}\right)\)</span> 有 <span class="math inline">\(\left|V_{i}\right| \leq n\)</span> 且 <span class="math inline">\(\left|E_{i}\right|
+\geq\left|V_{i}\right|-1\)</span> 那么 <span class="math display">\[
+\begin{aligned}
+|E| &amp;=\operatorname{deg}(u)+\sum_{i \in[r]}\left|E_{i}\right| \\
+&amp; \geq \operatorname{deg}(u)+\sum_{i
+\in[r]}\left(\left|V_{i}\right|-1\right) \\
+&amp;=|V|-1-r+\operatorname{deg}(u) \\
+&amp; \geq|V|-1 \\
+&amp;=n
+\end{aligned}
+\]</span></p></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>每个简单的有 <span class="math inline">\(n \geq 3\)</span>
+个节点的连通图，且有至少 <span class="math inline">\(n\)</span>
+条边的图一定存在环</p>
+</blockquote>
+<ul>
+<li><p>Induktionsbasis：对于 <span class="math inline">\(n=3\)</span>
+只有 <span class="math inline">\(C_{3}\)</span></p></li>
+<li><p>Induktionsschritt：任选一个固定的<span class="math inline">\(n
+\geq 3\)</span></p>
+<ul>
+<li><p>Induktionsbehauptung: 每个有 <span class="math inline">\(n+1\)</span> 个节点，<span class="math inline">\(n+1\)</span> 条边的连通图存在环</p></li>
+<li><p>Induktionsannahme: 对于所有 <span class="math inline">\(3 \leq m
+\leq n\)</span> 每个有 <span class="math inline">\(m\)</span>
+个节点，<span class="math inline">\(m\)</span>
+条边的连通图存在环</p></li>
+<li><p>Beweis der Induktionsbehauptung:</p>
+<p>假设 <span class="math inline">\(G\)</span> 是连通图，有 <span class="math inline">\(n+1 \geq 4\)</span> 个点和 <span class="math inline">\(m \geq n+1\)</span> 条边。我们取任意一条固定的边
+<span class="math inline">\(\{u, v\} \in E\)</span> 假设 <span class="math inline">\(G&#39;\)</span> 是溢出这条边后的图。</p>
+<p>若<span class="math inline">\(G&#39;\)</span> 仍然连通，那么从<span class="math inline">\(u\)</span> 到 <span class="math inline">\(v\)</span>
+一定存在一条路径，通过我们去除的边就一定存在一个环</p>
+<p>若<span class="math inline">\(G&#39;\)</span>
+不连通，那么存在两个连通分量 <span class="math inline">\(G_{u},
+G_{v}\)</span>。 假设 $ n_{u}, n_{v}$ 是点的个数，<span class="math inline">\(m_{u}, m_{v}\)</span> 是边的数量，那么 <span class="math display">\[
+n+1=n_{u}+n_{v} \quad m=m_{u}+m_{v}+1
+\]</span> 若这两个子图都不存在环，那么 <span class="math inline">\(m_{u}&lt;n_{u}\)</span> 且 <span class="math inline">\(m_{v}&lt;n_{v}\)</span>， 所以 <span class="math inline">\(m=m_{u}+m_{v}+1&lt;n_{u}+n_{v}=n+1\)</span>
+和<span class="math inline">\(m \geq n+1\)</span> 矛盾了。</p></li>
+</ul></li>
+</ul>
+<h3 id="度数">度数</h3>
+<p>对于每个简单图 <span class="math inline">\(G=(V, E)\)</span>
+，我们可以对度数排列：</p>
+<p>对于<span class="math inline">\(V=\left\{v_{1}, v_{2}, \ldots,
+v_{n}\right\}\)</span> 有 <span class="math inline">\(\left(\operatorname{deg}\left(v_{1}\right),
+\operatorname{deg}\left(v_{2}\right), \ldots,
+\operatorname{deg}\left(v_{n}\right)\right)\)</span></p>
+<p>一个图叫 <span class="math inline">\(k\)</span> -regulär
+图，若对于每个 <span class="math inline">\(v \in V\)</span> 满足 <span class="math inline">\(\operatorname{deg}(v)=k\)</span></p>
+<h4 id="handschlag定理">Handschlag定理</h4>
+<blockquote>
+<p>对于每个图 <span class="math inline">\(G=(V, E)\)</span> ，满足 <span class="math display">\[
+2|E|=\sum_{i \in[n]} \operatorname{deg}\left(v_{i}\right)
+\]</span></p>
+</blockquote>
+<p>证明：每条边 <span class="math inline">\(\{u, v\} \in E\)</span>
+贡献了 <span class="math inline">\(\operatorname{deg}(u)\)</span> 和
+<span class="math inline">\(\operatorname{deg}(v)\)</span> 两个度数</p>
+<h4 id="图的可实现性realisierbarkeit">图的可实现性(Realisierbarkeit
+)</h4>
+<h5 id="定理">定理</h5>
+<blockquote>
+<p>存在一个 <span class="math inline">\(n\)</span> 个节点，度数是 <span class="math inline">\(\left(d_{1}, \ldots, d_{n}\right)\)</span>
+的简单图当且仅当存在一个 <span class="math inline">\(n-1\)</span>
+个节点，度数为 <span class="math inline">\(\operatorname{sort}\left(d_{1}, \ldots,
+d_{n-d_{n}-1}, d_{n-d_{n}}-1, \ldots, d_{n-1}-1\right)\)</span>
+的简单图。其中 <span class="math inline">\(\operatorname{sort}(t)\)</span> 是升序排列</p>
+</blockquote>
+<ul>
+<li>充分性：若存在一个 <span class="math inline">\(n\)</span>
+个节点，度数是 <span class="math inline">\(\left(d_{1}, \ldots,
+d_{n}\right)\)</span>
+的简单图，那么去除度数最大的边也存在。若度数不是升序，重新排序即可。</li>
+<li>必要性：若存在一个 <span class="math inline">\(n-1\)</span>
+个节点，度数是 <span class="math inline">\(\left(d_{1}, \ldots,
+d_{n-1}\right)\)</span> 的简单图，那么加入最大边也符合。</li>
+</ul>
+<h5 id="havel-hakimi算法">Havel-Hakimi算法</h5>
+<p>输入： 升序度数 <span class="math inline">\(\left(d_{1}, d_{2},
+\ldots, d_{n}\right)\)</span></p>
+<p>若 <span class="math inline">\(d_{1}&lt;0\)</span> 或 <span class="math inline">\(d_{n} &gt; n-1\)</span> 那么不存在</p>
+<p>若 <span class="math inline">\(d_{n} = 0\)</span> ，返回 <span class="math inline">\(([n], \emptyset)\)</span></p>
+<p>否则 <span class="math inline">\(\left(d_{1}^{\prime}, \ldots,
+d_{n-1}^{\prime}\right):=\left(d_{1}, \ldots, d_{n-d_{n}-1},
+d_{n-d_{n}}-1, \ldots, d_{n-1}-1\right)\)</span></p>
+<p>求一个 Permutation函数 <span class="math inline">\(\pi:[n-1]
+\rightarrow[n-1]\)</span>，使得 <span class="math inline">\(\left(d_{\pi(1)}^{\prime}, \dots,
+d_{\pi(n-1)}^{\prime}\right)\)</span> 重新升序排列。</p>
+<p>然后递归求解 <span class="math inline">\(G^{\prime}=\left([n-1],
+E^{\prime}\right)\)</span> ，其中 <span class="math inline">\(\operatorname{deg}(i)=d_{\pi(i)}^{\prime}\)</span></p>
+<p>返回 <span class="math inline">\(G=([n], E)\)</span> ，<span class="math inline">\(E=\left\{\{\pi(u), \pi(v)\} |\{u, v\} \in
+E^{\prime}\right\} \cup\left\{\{n, n-1\}, \ldots,\left\{n,
+n-d_{n}\right\}\right\}\)</span></p>
+<h3 id="树">树</h3>
+<ul>
+<li><p>一个简单图 <span class="math inline">\(G=(V, E)\)</span>
+若无环且连通，那么它是一棵树</p></li>
+<li><p>节点 <span class="math inline">\(u\)</span> 有 <span class="math inline">\(\operatorname{deg}(u) \leq 1\)</span>
+叫叶子(Blatt)，其他叫内部节点(innere Knoten)</p></li>
+</ul>
+<h4 id="树的性质">树的性质</h4>
+<blockquote>
+<p>若 <span class="math inline">\(G=(V, E)\)</span> 是一个树，那么 <span class="math inline">\(|E|=|V|-1\)</span></p>
+</blockquote>
+<p>证：每个 <span class="math inline">\(G=(V, E)\)</span> 图，若<span class="math inline">\(|E| \geq|V|\)</span> 那么存在环。每个连通图有
+<span class="math inline">\(|E| \geq|V|-1\)</span> 条边。所以 <span class="math inline">\(|V|-1 \leq|E|&lt;|V|\)</span></p>
+<blockquote>
+<p>每个节点数 <span class="math inline">\(|V| \geq 2\)</span> 的树 <span class="math inline">\(G=(V, E)\)</span> 只少有2个叶子</p>
+</blockquote>
+<ul>
+<li><p>Induktionsbasis：对于 <span class="math inline">\(n=2\)</span>
+命题正确</p></li>
+<li><p>Induktionsschritt：任选一个固定的<span class="math inline">\(n
+\geq 2\)</span></p>
+<ul>
+<li><p>Induktionsbehauptung: 每个有 <span class="math inline">\(n+1\)</span> 个节点的树有2个叶子</p></li>
+<li><p>Induktionsannahme: 每个有 <span class="math inline">\(2 \leq m
+\leq n\)</span> 有2个叶子</p></li>
+<li><p>Beweis der Induktionsbehauptung:</p>
+<p>假设 <span class="math inline">\(G\)</span> 是连通图，有 <span class="math inline">\(n+1 \geq 3\)</span> 个点。我们知道，至少有一个点
+<span class="math inline">\(u\in V\)</span> 度数为1。因为连通且无环</p>
+<p>假设 <span class="math inline">\(w \in V\)</span> 是 <span class="math inline">\(u\)</span> 的唯一个邻居，我们把 <span class="math inline">\(u\)</span> 和 <span class="math inline">\(\{u,w\}\)</span> 这条边。于是剩下的图 <span class="math inline">\(G&#39;\)</span> 有 <span class="math inline">\(n\)</span>
+个点，而且仍然是无环的，因为只是去除了一条边。<span class="math inline">\(G&#39;\)</span> 仍然连通其他点到<span class="math inline">\(u\)</span> 的边都不使用 <span class="math inline">\(\{u,w\}\)</span> 这条边。所以<span class="math inline">\(G&#39;\)</span> 只少有2个叶子。最高1个叶子是 <span class="math inline">\(w\)</span> 。若 <span class="math inline">\(v \neq
+w\)</span> 那么 <span class="math inline">\(w,v\)</span> 就是 <span class="math inline">\(G\)</span> 的叶子。</p></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>定义： 假设 <span class="math inline">\(G=(V, E)\)</span>
+是一个简单图，那么子图 <span class="math inline">\(T=\left(V,
+E^{\prime}\right)\)</span> ，<span class="math inline">\(E^{\prime}
+\subseteq E\)</span> 若是树，那它是一个<span class="math inline">\(G\)</span> 的生成树（Spannbaum）。</p>
+<p>每个连通图 <span class="math inline">\(G=(V, E)\)</span>
+至少有一个生成树</p>
+</blockquote>
+<p>我们通过对 <span class="math inline">\(k:=|E| \in N _{0}\)</span>
+的数学归纳法证明</p>
+<ul>
+<li><p>Induktionsbasis：对于 <span class="math inline">\(k=0\)</span>
+命题正确</p></li>
+<li><p>Induktionsschritt：任选一个固定的<span class="math inline">\(k
+\geq 0\)</span></p>
+<ul>
+<li><p>Induktionsbehauptung: 每个有 <span class="math inline">\(k+1\)</span> 条边的树生成树</p></li>
+<li><p>Induktionsannahme: 每个有 <span class="math inline">\(\leq
+k\)</span> 条有生成树</p></li>
+<li><p>Beweis der Induktionsbehauptung:</p>
+<p>假设 <span class="math inline">\(G=(V, E)\)</span> 是连通图，有 <span class="math inline">\(k+1\)</span> 条边。任取 <span class="math inline">\(\{u, w\} \in E\)</span> 一条边。若 <span class="math inline">\(G^{\prime}=\left(V, E^{\prime}\right)\)</span>
+是移除这条边后的图。我们最多可以有2个连通的子图 <span class="math inline">\(T_{i}=\left(V_{i}, E_{i}\right)\)</span>。
+若只有一个图，那么 <span class="math inline">\(T_{1}\)</span> 就是 <span class="math inline">\(G\)</span>
+的一个生成树。否则两个子图的生成树加上去除的边 <span class="math inline">\(T=\left(V, E_{1} \uplus E_{2} \uplus \{\{u,
+w\}\}\right)\)</span> 是 <span class="math inline">\(G\)</span>
+的生成树</p></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>若 <span class="math inline">\(G=(V, E)\)</span>
+是一个简单图，下面的命题是等价的</p>
+<ol type="1">
+<li><span class="math inline">\(G\)</span> 是树</li>
+<li><span class="math inline">\(G\)</span> 连通且 <span class="math inline">\(|V|=|E|+1\)</span></li>
+<li><span class="math inline">\(G\)</span> 无环且 <span class="math inline">\(|V|=|E|+1\)</span></li>
+<li>任意两个点都只有一条路径</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>若1则2</p>
+<p>因为树连通且 <span class="math inline">\(|V|=|E|+1\)</span>
+满足</p></li>
+<li><p>若2则3</p>
+<p>加上 <span class="math inline">\(G\)</span> 满足 <span class="math inline">\(|V|=|E|+1\)</span>
+且有环。我们移除任意一条边会得到一个图 <span class="math inline">\(G^{\prime}=\left(V, E^{\prime}\right)\)</span> 且
+<span class="math inline">\(\left|E^{\prime}\right|=|E|-1=|V|-2\)</span>
+那么它不可能连通</p></li>
+<li><p>若3则4</p>
+<p>加上 <span class="math inline">\(G\)</span> 满足 <span class="math inline">\(|V|=|E|+1\)</span>
+。首先我们证明连通性。也就是每2个点至少有一条简单路径。若<span class="math inline">\(G_{1}, \dots, G_{l}\)</span> 是 <span class="math inline">\(G\)</span> 的最大连通分量，由于<span class="math inline">\(G\)</span> 无环，那么 <span class="math inline">\(G_{i}=\left(V_{i}, E_{i}\right)\)</span>
+也是无环的，而 <span class="math inline">\(G_{i}\)</span>
+是连通的。所以它们都满足 <span class="math inline">\(\left|V_{i}\right|=\left|E_{i}\right|+1\)</span>，所以有
+<span class="math display">\[
+|V|=\sum_{i \in[l]}\left|V_{i}\right|=\sum_{i
+\in[l]}\left(\left|E_{i}\right|+1\right)=|E|+l
+\]</span> 所以<span class="math inline">\(l=1\)</span> 所以<span class="math inline">\(G\)</span> 连通。</p>
+<p>假设有两个点 <span class="math inline">\(u,v\)</span>
+有两条不同的路径<span class="math inline">\(v_{0}, v_{1}, \dots,
+v_{l}\)</span> 和 <span class="math inline">\(v_{0}^{\prime},
+v_{1}^{\prime}, \dots, v_{l}^{\prime}\)</span>。假设 <span class="math inline">\(a\)</span> 是两条路径第一个不同的下标，<span class="math inline">\(b\)</span> 是<span class="math inline">\(a\)</span> 后第一个使得两条路径重合的下标。那么
+<span class="math inline">\(v_{a}, v_{a+1}, \dots, v_{b},
+v_{b^{\prime}-1}^{\prime}, \dots, v_{a}^{\prime}\)</span>
+就是一个简单环。矛盾。</p></li>
+<li><p>若4则1</p>
+<p>显然满足4的必然无环且连通</p></li>
+</ul>
+<h4 id="有根树wurzelbaum">有根树(Wurzelbaum)</h4>
+<p><span class="math inline">\(G=(V, E, r)\)</span> 是树 <span class="math inline">\(G=(V, E)\)</span> 以 <span class="math inline">\(r
+\in V\)</span> 为根的有根树</p>
+<ul>
+<li>高度 <span class="math inline">\(h_{G}(v)\)</span> 是一个节点 <span class="math inline">\(v\)</span> 在 <span class="math inline">\(G\)</span> 中的到根的距离</li>
+<li>树的高度是 <span class="math inline">\(h(G)=\max \left\{h_{G}(v) | v
+\in V\right\}\)</span>
+<ul>
+<li>我们写 <span class="math inline">\(u E v\)</span> 表示 <span class="math inline">\(\{u, v\} \in E\)</span> 且 <span class="math inline">\(h_{G}(v)=h_{G}(u)+1\)</span>。 若 <span class="math inline">\(u E v\)</span> 那么<span class="math inline">\(u\)</span> 是 <span class="math inline">\(v\)</span> 的爸爸，<span class="math inline">\(v\)</span> 是 <span class="math inline">\(u\)</span> 的孩子。<span class="math inline">\(u
+E^{*} v\)</span>表示<span class="math inline">\(u\)</span> 是 <span class="math inline">\(v\)</span> 的前驱，<span class="math inline">\(v\)</span> 是 <span class="math inline">\(u\)</span> 的后驱</li>
+<li>对于 <span class="math inline">\(u \in V\)</span> ，<span class="math inline">\(\left(u E^{*}, E \cap\left(\begin{array}{c}u E^{*}
+\\ 2\end{array}\right), u\right)\)</span>是通过 <span class="math inline">\(u\)</span> 生成的子树(induzierte Teilbaum)</li>
+</ul></li>
+</ul>
+<p>比如以 <span class="math inline">\(\varepsilon\)</span>
+为根的完美二叉树 <span class="math display">\[
+(\underbrace{[2]^{&lt;h},\left\{\{u, u 1\},\{u, u 2\} | u
+\in[2]^{&lt;h-1}\right\}}_{=B_{h}}, \varepsilon)
+\]</span> <img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200311122147882.png" alt="image-20200311122147882"></p>
+<h3 id="欧拉回路和哈密顿环">欧拉回路和哈密顿环</h3>
+<p>哈密顿环(Hamiltonkreise)
+是每个节点只访问一个的环。欧拉路径是每条边只经过1次的回路。</p>
+<p>我们接下来只讨论简单图。</p>
+<p>若 <span class="math inline">\(G=(V, E)\)</span>
+是一个简单连通图，那么 <span class="math inline">\(v_{0}, v_{1}, \ldots,
+v_{l}\)</span> 在 <span class="math inline">\(G\)</span> 中的路径，且
+<span class="math inline">\(v_{0}=v_{l}\)</span></p>
+<ul>
+<li>欧拉回路，若<span class="math inline">\(\left|\left\{\left\{v_{0},
+v_{1}\right\},\left\{v_{1}, v_{2}\right\}, \ldots,\left\{v_{l-1},
+v_{l}\right\}\right\}\right|=|E|\)</span></li>
+<li>哈密顿回路，若<span class="math inline">\(\left|\left\{v_{0}, v_{1},
+\dots, v_{l-1}\right\}\right|=|V|\)</span></li>
+</ul>
+<h4 id="定理-1">定理</h4>
+<blockquote>
+<p>一个简单连通图 <span class="math inline">\(G=(V, E)\)</span>
+有欧拉回路，当且仅当每个节点的度数是偶数</p>
+</blockquote>
+<p>充分性：每个点都要有一个出去的度数和进来的度数，所以每个点的度数是偶数</p>
+<p>必要性：我们通过对 <span class="math inline">\(k:=|E| \in N
+_{0}\)</span> 的数学归纳法证明</p>
+<ul>
+<li><p>Induktionsbasis：对于 <span class="math inline">\(k=3\)</span>
+，每个图都是<span class="math inline">\(C_{3}\)</span>的同构图，</p></li>
+<li><p>Induktionsschritt：任选一个固定的<span class="math inline">\(k
+\geq 3\)</span></p>
+<ul>
+<li><p>Induktionsbehauptung: 有 <span class="math inline">\(k+1\)</span>
+条边，每个点度数偶数的图有欧拉回路</p></li>
+<li><p>Induktionsannahme: 有 <span class="math inline">\(|E|\leq
+k\)</span> 每个点度数偶数的图有欧拉回路</p></li>
+<li><p>Beweis der Induktionsbehauptung:</p>
+<p>假设 <span class="math inline">\(G=(V, E)\)</span> 是连通图，有 <span class="math inline">\(k+1\)</span> 条边，每个点度数偶数。任取 <span class="math inline">\(\{u, w\} \in E\)</span> 一条边。若 <span class="math inline">\(G^{\prime}=\left(V, E^{\prime}\right)\)</span>
+是移除这条边后的图，那么在<span class="math inline">\(G&#39;\)</span>
+中一定有一条从 <span class="math inline">\(u\)</span> 到 <span class="math inline">\(w\)</span> 的图。因为<span class="math inline">\(u\)</span> 在 <span class="math inline">\(G\)</span>
+中的连通分量有偶数个奇数度数的节点，这不可能因为度数永远是边数的两倍。所以
+<span class="math inline">\(w\)</span> 必然也在 <span class="math inline">\(u\)</span> 的连通分量中，所以 <span class="math inline">\(u\)</span> 到 <span class="math inline">\(w\)</span>
+至少会有一条路径。所以这条路径就和前面移除的边形成了一个环 <span class="math inline">\(\kappa=v_{0}, v_{1}, \dots, v_{l},
+v_{0}\)</span></p>
+<p>假设 <span class="math inline">\(G&#39;&#39;\)</span>
+是把这个环移除后的图，所以它最多有<span class="math inline">\(k\)</span>
+条边(实际上<span class="math inline">\(k-2\)</span>)。如果<span class="math inline">\(G&#39;&#39;\)</span>
+没有边，那么我们已经找到了欧拉回路。否则<span class="math inline">\(G&#39;&#39;\)</span>
+就有偶数度数的边。所以子图也存在欧拉回路，把两者合并就可以得证。</p></li>
+</ul></li>
+</ul>
+<blockquote>
+<p>一个简单连通图 <span class="math inline">\(G=(V, E)\)</span> ，<span class="math inline">\(|V|\ge 3\)</span>，若每个节点的度数至少是<span class="math inline">\(\frac{|V|}{2}\)</span> ，有哈密顿回路</p>
+</blockquote>
+<p>假设 <span class="math inline">\(G=(V, E)\)</span> 是这样的图。令
+<span class="math inline">\(n=|V|\)</span> 。那么<span class="math inline">\(G\)</span>
+肯定连通。因为若有两个最大连通分量，那么小的那个最多 <span class="math inline">\(\frac{n}{2}\)</span> 个节点，所以节点度数最多
+<span class="math inline">\(\frac{n}{2} -1\)</span>。若 <span class="math inline">\(\pi=v_{0}, v_{1}, \dots, v_{m}\)</span> 是<span class="math inline">\(G\)</span> 中最长的简单路径，那么 <span class="math inline">\(v_{0}\)</span>
+的每个邻居肯定在这条路径上，否则就不是最大的路径。若 <span class="math inline">\(0&lt;i_{1}&lt;\ldots&lt;i_{k} \leq m\)</span>
+是这些邻居的位置，那么 <span class="math inline">\(\operatorname{deg}\left(v_{0}\right)=k \geq
+\frac{n}{2}\)</span> ，<span class="math inline">\(v_{i_{1}-1}, \dots,
+v_{i_{k}-1}\)</span> 一定有一个是 <span class="math inline">\(v_{m}\)</span> 的邻居，否则它就只有<span class="math inline">\(n-1-k \leq n-1-\frac{n}{2}&lt;\frac{n}{2}\)</span>
+个度数了。所以我们可以找到这样一个<span class="math inline">\(j \in
+[k]\)</span> ，<span class="math inline">\(\left\{v_{0},
+v_{i_{j}}\right\},\left\{v_{i_{j}-1}, v_{m}\right\} \in E\)</span>
+。于是我们可以找到一个环 <span class="math inline">\(\kappa=v_{0},
+v_{1}, \dots, v_{i_{j}-1}, v_{m}, v_{m-1}, \dots, v_{i_{j}},
+v_{0}\)</span> 。假设有另一个不在路径上的节点<span class="math inline">\(w\)</span>
+，那么之前就会有最长的路径。所以所有节点都必须在 <span class="math inline">\(\kappa\)</span> 上，它就是一个哈密顿回路。</p>
+<h3 id="平面图和节点染色">平面图和节点染色</h3>
+<h4 id="欧拉公式eulersche-polyederformel">欧拉公式(Eulersche
+Polyederformel)</h4>
+<blockquote>
+<p>若 <span class="math inline">\(G=(V, E)\)</span>
+是个连通的平面图，<span class="math inline">\(f\)</span>
+是平面的数量，那么满足： <span class="math display">\[
+f-|E|+|V|=2
+\]</span></p>
+</blockquote>
+<p>通过对 <span class="math inline">\(n=|E|-|V|+1 \in N
+_{0}\)</span>数学归纳法证明</p>
+<ul>
+<li><p>Induktionsbasis：对于 <span class="math inline">\(n=0\)</span>
+，那么 <span class="math inline">\(|E|=|V|-1\)</span>
+，那么它是一个树<span class="math inline">\(f=1\)</span>。</p></li>
+<li><p>Induktionsschritt：任选一个固定的<span class="math inline">\(n
+\geq 0\)</span></p>
+<ul>
+<li><p>Induktionsbehauptung:欧拉公式对每个 <span class="math inline">\(|E|-|V|+1=n+1\)</span> 的图成立</p></li>
+<li><p>Induktionsannahme:欧拉公式对每个<span class="math inline">\(|E|-|V|+1 \leq n\)</span>的图成立</p></li>
+<li><p>Beweis der Induktionsbehauptung:</p>
+<p>假设 <span class="math inline">\(G=(V, E)\)</span> 是连通平面图，且
+<span class="math inline">\(|E|-|V|+1=n+1\)</span> 。可以发现 <span class="math inline">\(|E| \geq|V|\)</span>。所以它一定有个环<span class="math inline">\(\kappa\)</span>
+，我们把这个环中的任意一条边移除，剩下图 <span class="math inline">\(G^{\prime}=G[E \backslash\{\{u, w\}\}]\)</span>
+，由于少了一条边，所以肯定会少一个平面。而<span class="math inline">\(G&#39;\)</span> 是连通的平面图，所以有 <span class="math inline">\((f-1)-(|E|-1)+|V|=2\)</span> 。也就是<span class="math inline">\(f-|E|+|V|=2\)</span></p></li>
+</ul></li>
+</ul>
+<p>此外，欧拉公式在 <span class="math inline">\(k\)</span>
+个连通分类里满足： <span class="math display">\[
+f-|E|+|V|=1+k
+\]</span> 由欧拉公式得出的结论：</p>
+<h4 id="minoren-und-satz-von-kuratowski">Minoren und Satz von
+Kuratowski</h4>
+<p>若 <span class="math inline">\(G = (V, E)\)</span>
+是一个简单图，给定任意一条边 <span class="math inline">\(e =(u,w) \in
+E\)</span> . 那么 <span class="math inline">\(G \setminus e\)</span>
+是移除 <span class="math inline">\(e\)</span> 后的简单图 <span class="math display">\[
+G / e=\left(V-\{w\},\left(E \cap\left(\begin{array}{c}
+V-\{w\} \\
+2
+\end{array}\right)\right) \cup\{\{u, x\} \mid\{w, x\} \in E\}\right)
+\]</span> 就是要把这条边的某个节点，以及它所连接的边都删除</p>
+<h5 id="kuratowski-定理">Kuratowski 定理</h5>
+<h3 id="节点染色">节点染色</h3>
+<h4 id="定义染色">定义：染色</h4>
+<h4 id="四色定理">四色定理</h4>
+<h4 id="五色定理">五色定理</h4>
+<h3 id="匹配">匹配</h3>
+<h4 id="定义">定义</h4>
+<h4 id="heirats问题">Heirats问题</h4>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20210202132723370.png" alt="image-20210202132723370">
+<figcaption aria-hidden="true">image-20210202132723370</figcaption>
+</figure>
+<p>https://www.cnblogs.com/cly-none/p/Hall_Theorem.html</p>
+<h4 id="有优先级的匹配">有优先级的匹配</h4>
+<h4 id="gale-shapley-algorithmus">Gale-Shapley-Algorithmus</h4>
+<p>首先，男生需要按照希望与之交往的顺序给所有女生排序，即最理想的女友排在最前、最不理想的放在最后。同样，每个女生也需要给男生排序。接着，男生将按照自己的名单一轮一轮地去追求喜欢的女生，女生也将按照自己的名单接受或拒绝对方的追求。</p>
+<p>  
+第一轮，每个男生都向自己名单上排在首位的女生表白。此时，一个女生可能面对的情况有三种：没有人跟她表白、只有一人跟她表白、有不止一人跟她表白。在第一种情况下，这个女生什么都不做，继续等待即可；在第二种情况下，女生接受那个人的表白，答应暂时和他做男女朋友；在第三种情况下，女生从所有追求者中选择自己最喜欢的那一位，答应和他暂时做男女朋友，并拒绝其他所有的追求者。</p>
+<p>  
+第一轮结束后，有些男生已经有女朋友了而有些男生仍然是单身狗。在第二轮表白行动中，每个单身男都会从所有还没拒绝过自己的女生中选出自己最喜欢的那一个，并向她表白，不管她现在是否是单身。和第一轮一样，每个被表白的女生需要从表白者中选择最喜欢的男生，并拒绝其他追求者。注意，如果这个女生当前已经有男朋友了，当她遇到了更好的追求者时，她将毫不犹豫地和现男友分手，投向新追求者的怀抱。这样以来，一些单身狗将脱单，而一些倒霉的恩爱狗（男）也会被分手，重新进入单身狗的行列。</p>
+<p>  
+在以后的每一轮中，单身狗们将发扬愈挫愈勇的顽强精神，继续追求列表中的下一个女生；女生则从包括现男友在内的所有追求者中选择最好的一个，并给其他所有追求者发好人卡。这样一轮一轮地进行下去，直到某个时刻所有人都不再单身，那么下一轮将不会有任何新的表白，每个人的对象也都将固定下来，整个过程自动结束——此时的搭配就一定是稳定的了。</p>
+<h3 id="邻接矩阵">邻接矩阵</h3>
+<h4 id="定义-1">定义</h4>
+<h4 id="寻找路径">寻找路径</h4>
+<h1 id="群论">群论</h1>
+<p>代数结构algebraische Struktur <span class="math inline">\(\mathcal{S}\)</span> 是一个由全集和操作构成的</p>
+<p><span class="math inline">\(U_{\mathcal{S}}\)</span> 是全集
+Grundmenge</p>
+<p><span class="math inline">\(\operatorname{ar}(f)\)</span>
+是一种操作的元</p>
+<p>比如可以这样写 <span class="math inline">\(\left\langle U, f_{1},
+\ldots, f_{k}\right\rangle\)</span></p>
+<h4 id="halbgruppe">Halbgruppe</h4>
+<p>Halbgruppe 是 满足结合律assoziativ和交换律kommutativ的代数结构 <span class="math inline">\(\left\langle A,
+\bullet^{2}\right\rangle\)</span></p>
+<h4 id="kommutatives-monoid">(kommutatives) Monoid</h4>
+<p>(kommutatives) Monoid <span class="math inline">\(\left\langle A,
+\bullet^{2}, 1^{0}\right\rangle\)</span>
+是Halbgruppe且有一个单位元，它满足 <span class="math inline">\(\forall
+a:(a \cdot 1)=a=(1 \cdot a)\)</span></p>
+<h4 id="kommutative-gruppe">(kommutative) Gruppe</h4>
+<p>是一个Monoid <span class="math inline">\(\left\langle A, \bullet^{2},
+1^{0}\right\rangle\)</span>，且有逆元，满足 <span class="math inline">\(\forall a \exists b:(a \bullet b)=1=(b \cdot
+a)\)</span></p>
+<p>它也叫 abelsche Gruppe</p>
+<h4 id="unitärer-ring">(unitärer) Ring</h4>
+<p><span class="math inline">\(\left\langle A,+^{2}, \bullet^{2}, 0^{0},
+1^{0}\right\rangle\)</span>是 Ring， 满足</p>
+<ul>
+<li><p><span class="math inline">\(\left\langle A,
+\bullet^{2}\right\rangle\)</span> 是 Halbgruppe, <span class="math inline">\(\left\langle A, \bullet^{2},
+1^{0}\right\rangle\)</span> 是 Monoid</p></li>
+<li><p><span class="math inline">\(\left\langle A,+^{2},
+0^{0}\right\rangle\)</span> 是 Gruppe</p></li>
+<li><p>满足分配律 <span class="math display">\[
+\forall a, b, c:(a \bullet(b+c))=(a \bullet b+a \bullet c) \wedge((a+b)
+\bullet c)=((a \bullet c)+(b \bullet c))
+\]</span></p></li>
+</ul>
+<h4 id="körper">Körper</h4>
+<p><span class="math inline">\(\left\langle A,+^{2}, \bullet^{2}, 0^{0},
+1^{0}\right\rangle\)</span> 的Ring是 Körper 满足</p>
+<ul>
+<li><span class="math inline">\(\left\langle A \backslash\{0\},
+\bullet^{2}, 1^{0}\right\rangle\)</span> 是Gruppe</li>
+</ul>
+<h4 id="verband">Verband</h4>
+<p>Verband是<span class="math inline">\(\left\langle A, \sqcup^{2},
+\sqcap^{2}\right\rangle\)</span>，其中<span class="math inline">\(\left\langle A, \sqcup^{2}\right\rangle\)</span>
+和<span class="math inline">\(\left\langle A,
+\sqcap^{2}\right\rangle\)</span> 都是 Halbgruppe</p>
+<p>满足 <span class="math inline">\(\forall a, b, c: a \sqcap(a \sqcup
+b)=a=a \sqcup(a \sqcap b)\)</span> 和分配律：<span class="math inline">\(a \sqcap(b \sqcup c)=(a \sqcap b) \sqcup(a \sqcap
+c)\)</span></p>
+<h2 id="数论">数论</h2>
+<p>定义：</p>
+<p><span class="math inline">\(\mathbb{Z}_{N}:=\{0,1,2, \ldots,
+N-1\}\)</span></p>
+<h3 id="取模运算">取模运算</h3>
+<p><span class="math display">\[
+a \bmod N:=\min \left\{r \in \mathbb{Z}_{N}: \frac{a-r}{N} \in
+\mathbb{Z}\right\}=a-\left\lfloor\frac{a}{N}\right\rfloor \cdot N \in
+\mathbb{Z}_{N}
+\]</span></p>
+<h3 id="互质的集合">互质的集合</h3>
+<p><span class="math display">\[
+\mathbb{Z}_{N}^{*}:=\left\{k \in \mathbb{Z}_{N} \mid \operatorname{gg}
+T(k, N)=1\right\}
+\]</span></p>
+<h3 id="欧拉函数">欧拉函数</h3>
+<p><span class="math display">\[
+\varphi(N):=\left|\mathbb{Z}_{N}^{*}\right|
+\]</span></p>
+<p><span class="math display">\[
+\varphi(N)=\left|\mathbb{Z}_{N}^{*}\right|=N \prod_{p \in \mathbb{P}: p
+\mid N}\left(1-p^{-1}\right)
+\]</span></p>
+<p>倍数集合</p>
+<p><span class="math inline">\(V_{N, d}=\left\{x \in \mathbb{Z}_{N}: d
+\mid N\right\}\)</span></p>
+<p><span class="math inline">\(\left|V_{N, d}\right|=\lfloor N /
+d\rfloor\)</span></p>
+<h3 id="排列的循环写法">排列的循环写法</h3>
+<p><span class="math display">\[
+f=\left(x_{0}^{(1)}, x_{1}^{(1)}, \ldots,
+x_{l_{1}-1}^{(1)}\right)\left(x_{0}^{(2)}, x_{1}^{(2)}, \ldots
+x_{l_{2}-1}^{(2)}\right) \ldots\left(x_{0}^{(k)}, x_{1}^{(k)}, \ldots
+x_{l_{k}-1}^{(k)}\right)
+\]</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20220405211806292.png" alt="image-20220405211806292">
+<figcaption aria-hidden="true">image-20220405211806292</figcaption>
+</figure>
+<h3 id="等价类">等价类</h3>
+<p><span class="math display">\[
+{ }_{, n} a \equiv_{f} b \mathrm{gdw} . f(a)=f(b)^{\prime \prime}
+\]</span></p>
+<p><span class="math display">\[
+[a]_{n}=\{a+n z \mid z \in \mathbb{Z}\}=: a+n \mathbb{Z}
+\]</span></p>
+<p>是剩余类</p>
+<h1 id="复习考试">复习考试</h1>
+<h3 id="数学归纳法">数学归纳法</h3>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200715162024548.png" alt="image-20200715162024548">
+<figcaption aria-hidden="true">image-20200715162024548</figcaption>
+</figure>
+<p>答案格式：</p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200715162042386.png" alt="image-20200715162042386">
+<figcaption aria-hidden="true">image-20200715162042386</figcaption>
+</figure>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200715162106147.png" alt="image-20200715162106147">
+<figcaption aria-hidden="true">image-20200715162106147</figcaption>
+</figure>
+<h2 id="布尔值">布尔值</h2>
+<h4 id="基本题">基本题</h4>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200708194727731.png" alt="image-20200708194727731">
+<figcaption aria-hidden="true">image-20200708194727731</figcaption>
+</figure>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200708194708009.png" alt="image-20200708194708009">
+<figcaption aria-hidden="true">image-20200708194708009</figcaption>
+</figure>
+<blockquote>
+<p>给定一个布尔关系式, 写 Syntaxbaum, Wahrscheinlichkeitstabelle</p>
+</blockquote>
+<p><span class="math display">\[
+\begin{array}{ll}
+F_{1}:=\neg(p \wedge(\neg q \leftrightarrow p)) &amp; F_{2}:=(\neg \neg
+\neg p \vee \neg \neg(q \vee(r \rightarrow p))) \\
+F_{3}:=(((q \vee p) \leftrightarrow(q \wedge r)) \wedge \neg(p
+\rightarrow r)) &amp; F_{4}:=((q \leftrightarrow p) \wedge((\neg p
+\rightarrow r) \wedge(\neg q \leftrightarrow r))) \\
+F_{5}:=(((p \rightarrow r) \rightarrow(q \rightarrow r)) \rightarrow(p
+\rightarrow q)) &amp; F_{6}:=((p \oplus q) \rightarrow((p
+\leftrightarrow s) \vee \neg r))
+\end{array}
+\]</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200708195443793.png" alt="image-20200708195443793">
+<figcaption aria-hidden="true">image-20200708195443793</figcaption>
+</figure>
+<h3 id="knf和dnf">KNF和DNF</h3>
+<p>disjunktiver Normalform (DNF): <span class="math display">\[
+\bigvee_{i=1}^{m}\left(\bigwedge_{j=1}^{m_{i}} L_{i, j}\right)
+\]</span> konjunktiver Normalform KNF: <span class="math display">\[
+\bigwedge_{i=1}^{m}\left(\bigvee_{j=1}^{m_{i}} L_{i, j}\right)
+\]</span></p>
+<h4 id="把一个式子转化成dnf">把一个式子转化成DNF</h4>
+<ol type="1">
+<li><p>全化成not and or <span class="math display">\[
+\begin{aligned}
+(F \rightarrow G) &amp; \equiv(\neg F \vee G) \\
+(F \leftrightarrow G) &amp; \equiv((F \rightarrow G) \wedge(G
+\rightarrow F)) \\
+&amp; \equiv \neg(F \oplus G) \\
+(F \oplus G) &amp; \equiv((F \vee G) \wedge(\neg F \vee \neg G)) \\
+&amp;\equiv((F \wedge \neg G) \vee(\neg F \wedge G)))
+\end{aligned}
+\]</span></p></li>
+<li><p>把not 全移到syntaxbaum的最底下</p></li>
+<li><p>然后用公式转化 <span class="math display">\[
+(F \wedge(G \vee H)) \equiv((F \wedge G) \vee(F \wedge H)) \quad \text {
+und } \quad((G \vee H) \wedge F) \equiv((G \wedge F) \vee(H \wedge F))
+\]</span></p></li>
+</ol>
+<h4 id="根据真值表转化dnf和knf">根据真值表转化DNF和KNF</h4>
+<p>比如这个 <span class="math display">\[
+\text { ITE }(p, q, r):=((p \rightarrow q) \wedge(\neg p \rightarrow r))
+\]</span> <img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200709181443205.png" alt="image-20200709181443205"></p>
+<h5 id="dnf">DNF</h5>
+<p>把真值为1的行全找出来，然后对应p, q, r 来构造1 <span class="math display">\[
+\begin{aligned}
+\operatorname{ITE}(p, q, r) \equiv D_{F}=&amp;(\neg p \wedge \neg q
+\wedge r) \vee(\neg p \wedge q \wedge r) \\
+&amp;(p \wedge q \wedge \neg r) \vee(p \wedge q \wedge r)
+\end{aligned}
+\]</span></p>
+<p>画图，直接填色即可</p>
+<h5 id="knf">KNF</h5>
+<p>把真值为0的找出来，然后对应p，q，r构造0 <span class="math display">\[
+\begin{aligned}
+\operatorname{ITE}(p, q, r) \equiv K_{F}=&amp;(p \vee q \vee r) \wedge(p
+\vee \neg q \vee r) \\
+&amp;(\neg p \vee q \vee r) \wedge(\neg p \vee q \wedge \neg r)
+\end{aligned}
+\]</span></p>
+<p>画图，先取反转成DNF，然后根据DNF画图，然后画完再反过来</p>
+<h4 id="knf转dnf">KNF转DNF</h4>
+<p>先画出Syntaxbaum, 然后给每一个中间节点一个变量名，然后就可以构造
+<span class="math display">\[
+q_{0} \wedge\left(q_{0} \leftrightarrow\left(q_{1} \vee
+q_{2}\right)\right) \wedge\left(q_{1} \leftrightarrow\left(p_{1} \wedge
+p_{2}\right)\right) \wedge\left(q_{2} \leftrightarrow\left(p_{3} \wedge
+p_{4}\right)\right)
+\]</span> 然后变形 <span class="math display">\[
+\begin{aligned}
+E_{F}:=q_{0} &amp; \wedge\left(\neg q_{0} \vee q_{1} \vee q_{2}\right)
+\wedge\left(q_{0} \vee \neg q_{1}\right) \wedge\left(q_{0} \vee \neg
+q_{2}\right) \\
+\wedge &amp;\left(q_{1} \vee \neg p_{1} \vee \neg p_{2}\right)
+\wedge\left(\neg q_{1} \vee p_{1}\right) \wedge\left(\neg q_{1} \vee
+p_{2}\right) \\
+\wedge &amp;\left(q_{2} \vee \neg p_{3} \vee \neg p_{4}\right)
+\wedge\left(\neg q_{2} \vee p_{3}\right) \wedge\left(\neg q_{2} \vee
+p_{4}\right)
+\end{aligned}
+\]</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20210301095904467.png" alt="image-20210301095904467">
+<figcaption aria-hidden="true">image-20210301095904467</figcaption>
+</figure>
+<h3 id="dnf转knf">DNF转KNF</h3>
+<p>分配率展开</p>
+<h3 id="dpll算法">DPLL算法</h3>
+<p>给定一个KNF, 可以看这个式子是否有肯能成立。就是分类讨论思想。最后得到
+<span class="math inline">\(\{\{\}\}\)</span> 是不满足, <span class="math inline">\(\{\}\)</span> 是可满足。</p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200709185041606.png" alt="image-20200709185041606">
+<figcaption aria-hidden="true">image-20200709185041606</figcaption>
+</figure>
+<h4 id="扩展dpll">扩展DPLL</h4>
+<p>OLR: 只有1个变量的式子，直接把那个变量设置为true</p>
+<p>PLR：只有 p
+出现，没有非p出现（或者反过来），那么直接设为true/false</p>
+<p>然后再分类讨论</p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200709184817055.png" alt="image-20200709184817055">
+<figcaption aria-hidden="true">image-20200709184817055</figcaption>
+</figure>
+<h4 id="怎么找最小的dnf和knf">怎么找最小的DNF和KNF</h4>
+<p>从KV图中看出来</p>
+<h4 id="erfüllbarkeit">Erfüllbarkeit</h4>
+<p>gültig <span class="math inline">\(F = 1\)</span></p>
+<p>unerfüllbar <span class="math inline">\(F=0\)</span></p>
+<p>erfüllbar 存在一个Belengung 使得 <span class="math inline">\(F=1\)</span></p>
+<p><span class="math inline">\(F \models G\)</span> 意思是 <span class="math inline">\(F\rightarrow G\)</span> 是 gültig 的</p>
+<h4 id="基本等价式">基本等价式</h4>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20210202132253887.png"></p>
+<p><img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20210202132314837.png"></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20210202132340519.png" alt="image-20210202132340519">
+<figcaption aria-hidden="true">image-20210202132340519</figcaption>
+</figure>
+<p><span class="math display">\[
+F \leftrightarrow G \equiv(F \wedge G) \vee(\neg F \wedge \neg G)
+\]</span></p>
+<h4 id="合并项resolution">合并项Resolution</h4>
+<h2 id="图论-1">图论</h2>
+<h3 id="平面个数">平面个数</h3>
+<p><span class="math display">\[
+f-|E|+|V|=1+k
+\]</span></p>
+<p>其中 <span class="math inline">\(k\)</span> 是强连通分量的个数。</p>
+<h3 id="baum">Baum</h3>
+<p>若 <span class="math inline">\(G=(V, E)\)</span> 是一个树，那么 <span class="math inline">\(|E|=|V|-1\)</span></p>
+<p><span class="math inline">\((1,1,1,2,2,2,3)\)</span> 不是树，因为
+<span class="math inline">\((2,2,2)\)</span>
+可以组成一个环，另一个组成树</p>
+<h3 id="dreifärbbar">dreifärbbar</h3>
+<p>找一个isomorph 的图，然后染色</p>
+<h3 id="hamilton-kreis">Hamilton-Kreis</h3>
+<p>一个简单连通图 <span class="math inline">\(G=(V, E)\)</span> ，<span class="math inline">\(|V|\ge 3\)</span>，若每个节点的度数至少是<span class="math inline">\(\frac{|V|}{2}\)</span> ，有哈密顿回路</p>
+<h3 id="euler-kreis">Euler-Kreis</h3>
+<p>一个简单连通图 <span class="math inline">\(G=(V, E)\)</span>
+有欧拉回路，当且仅当每个节点的度数是偶数</p>
+<h2 id="排列组合">排列组合</h2>
+<p><span class="math inline">\(\N^{12}\)</span> 是正整数 <span class="math inline">\(12\)</span> 个, <span class="math inline">\(\N_{0}^{12}\)</span> 是自然数 <span class="math inline">\(12\)</span> 个, <span class="math inline">\([n]^k\)</span> 是正整数 <span class="math inline">\(k\)</span> 个，<span class="math inline">\([n]_{0}^{k}\)</span> 是自然数</p>
+<h3 id="拿取模型">拿取模型</h3>
+<p>一共 <span class="math inline">\(n\)</span> 个球， 从 <span class="math inline">\(1\)</span> 编号到 <span class="math inline">\(n\)</span>.</p>
+<ul>
+<li><p>不放回拿取，考虑顺序 <span class="math display">\[
+A_{n, k}:=\left\{\left(s_{1}, \ldots, s_{k}\right)
+\in[n]^{k}||\left\{s_{1}, s_{2}, \ldots, s_{k}\right\} \mid=k\right\} \\
+\left|A_{n, k}\right|=n \cdot(n-1) \cdot \ldots \cdot(n-k+1)=\frac{n
+!}{(n-k) !}
+\]</span></p></li>
+<li><p>不放回拿球，不考虑顺序 <span class="math display">\[
+B_{n, k}:=\left\{\left(s_{1}, \ldots, s_{k}\right) \in[n]^{k}:
+s_{1}&lt;s_{2}&lt;\ldots&lt;s_{k}\right\} \\
+\left|B_{n, k}\right|=\frac{n !}{(n-k) ! k !}
+\]</span></p></li>
+<li><p>有放回拿取，不考虑顺序</p></li>
+</ul>
+<p><span class="math display">\[
+C_{n, k}:=\left\{\left(s_{1}, \ldots, s_{k}\right) \in[n]^{k}: s_{1}
+\leq s_{2} \leq \ldots \leq s_{k}\right\} \\
+  \left|D_{k, n}\right|=\left(\begin{array}{c}
+  k+n-1 \\
+  k
+  \end{array}\right)=\left|C_{n, k}\right| \\
+  D_{k, n}:=\left\{\left(k_{1}, \ldots, k_{n}\right) \in
+\mathbb{N}_{0}^{n} \mid k_{1}+k_{2}+\ldots+k_{n}=k\right\}
+\]</span></p>
+<p>考虑顺序： <span class="math inline">\([n]^{k}\)</span></p>
+<h3 id="二项式定理">二项式定理</h3>
+<p><span class="math display">\[
+(x+y)^{n}=\sum_{k=0}^{n}\left(\begin{array}{l}
+n \\
+k
+\end{array}\right) x^{k} y^{n-k}
+\]</span></p>
+<h3 id="第二类斯特林数">第二类斯特林数</h3>
+<p>把 <span class="math inline">\(n\)</span> 个物品分给 <span class="math inline">\(k\)</span> 个小孩，使得每个人至少有 <span class="math inline">\(1\)</span> 个物品,
+所有可能性是(物品和小孩都是有序的)</p>
+<p><span class="math display">\[
+F_{n, k}:=\left\{\left(s_{1}, \ldots, s_{k}\right)
+\in[n]^{k}||\left\{s_{1}, s_{2}, \ldots, s_{k}\right\} \mid=n\right\}
+\]</span> &gt; <span class="math inline">\(n=6,k=4\)</span> 时候， <span class="math inline">\((3,1,3,2,2,4)\)</span>表示
+1号礼物给3号小孩，2号礼物给1号小孩，3号礼物给3号小孩......</p>
+<p>如果小孩是无序的，那么是 <span class="math display">\[
+S_{k,n}
+\]</span> 第二类斯特林数： <span class="math display">\[
+\left|F_{n, k}\right|=n ! \cdot S_{k, n}
+\]</span> 计算： <span class="math display">\[
+\begin{array}{lll}
+S_{n, k} &amp; =S_{n-1, k-1}+k \cdot S_{n-1, k} &amp; \text { für }
+n&gt;k&gt;0 \\
+S_{n, 0} &amp; =0 &amp; \text { für } n&gt;0 \\
+S_{n, n} &amp; =1
+\end{array}
+\]</span> 第二类斯特林数可以看成是一个surjektiv的函数<span class="math inline">\([k]\)</span> 映射到 <span class="math inline">\([n]\)</span>上.</p>
+<h3 id="第一类斯特林数">第一类斯特林数</h3>
+<p><span class="math inline">\([n]\)</span> 的排列中有 <span class="math inline">\(k\)</span> 个环的数量<span class="math inline">\(s_{n, k}=\left[\begin{array}{l}n \\
+k\end{array}\right]\)</span> <span class="math display">\[
+\left[\begin{array}{c}
+n+1 \\
+k
+\end{array}\right]=\left[\begin{array}{c}
+n \\
+k-1
+\end{array}\right]+n \cdot\left[\begin{array}{l}
+n \\
+k
+\end{array}\right] \operatorname{mit}\left[\begin{array}{l}
+n \\
+n
+\end{array}\right]=1,\left[\begin{array}{c}
+n+1 \\
+0
+\end{array}\right]=0
+\]</span></p>
+<h3 id="划分为制定个数的组">划分为制定个数的组</h3>
+<p><span class="math inline">\(n\)</span> 个人，分成 <span class="math inline">\(\lambda_{1}\)</span> 个 <span class="math inline">\(1\)</span> 元组， <span class="math inline">\(\lambda_{2}\)</span> 个2元组 ... <span class="math inline">\(\lambda_{n}\)</span> 个n元组，有多少种情况。其中
+<span class="math inline">\(\sum_{i=1}^{n} i \lambda_{i}=n\)</span>
+<span class="math display">\[
+\frac{n !}{(1 !)^{\lambda_{1}} \cdots(n !)^{\lambda_{n}} \cdot
+\lambda_{1} ! \cdots \lambda_{n} !}
+\]</span> 一共 <span class="math inline">\(n!\)</span>
+种情况，每个组可以不同排列于是除以$ (1 !)^{<em>{1}} (n
+!)^{</em>{n}}$，相同元组之间又可以互相交换， 于是除以 $ <em>{1} !
+</em>{n} !$.</p>
+<h3 id="无序划分">无序划分</h3>
+<p><span class="math inline">\(n\)</span> 元钱放到 <span class="math inline">\(k\)</span> 个兜里, 使得每个兜至少有 <span class="math inline">\(1\)</span> 元钱。 <span class="math display">\[
+P_{n, k}:=\left\{\left(s_{1}, \ldots, s_{k}\right) \in \mathbb{N}^{k}
+\mid s_{1}+\ldots+s_{k}=n, s_{1} \leq s_{2} \leq \ldots \leq
+s_{k}\right\}
+\]</span> 计算： <span class="math display">\[
+\begin{array}{lll}
+\left|P_{n, k}\right|=\left|P_{n-1, k-1}\right|+\left|P_{n-k, k}\right|
+\quad &amp; \text { für } k&gt;0 \\
+\left|P_{n, 0}\right|=0 \quad &amp;\text { für } n&gt;0 \\
+\left|P_{n, k}\right|=0 \quad &amp;\text { für } k&gt;n \\
+\left|P_{n, n}\right|=1
+\end{array}
+\]</span></p>
+<p>如果兜是有区别的，那么就是 <span class="math display">\[
+n-1\choose k-1
+\]</span></p>
+<h2 id="群论-1">群论</h2>
+<h3 id="扩展欧几里得算法eek">扩展欧几里得算法(EEK)</h3>
+<p>先算a，b和k。 其中 <span class="math inline">\(a&#39; = b \%
+a\)</span> , <span class="math inline">\(k = 倍数\)</span> , <span class="math inline">\(t&#39; = s\)</span> , <span class="math inline">\(s&#39; = t-k&#39; \cdot s\)</span></p>
+<figure>
+<img src="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/image-20200715145838775.png" alt="image-20200715145838775">
+<figcaption aria-hidden="true">image-20200715145838775</figcaption>
+</figure>
+<blockquote>
+<p>求乘法逆元 <span class="math inline">\(a^{-1} \equiv_{n}(\alpha \bmod
+n)=716\)</span></p>
+</blockquote>
+<h3 id="teilerfremende-reste-modulo">Teilerfremende Reste modulo</h3>
+<p>和 <span class="math inline">\(N\)</span> 互素的集合<br>
+<span class="math display">\[
+\mathbb{Z}_{N}^{*}:=\left\{k \in \mathbb{Z}_{N} \mid
+\operatorname{ggT}(k, N)=1\right\}
+\]</span> &gt; <span class="math inline">\(\mathbb{Z}_{15}^{*}=\{1,2,4,7,8,11,13,14\}\)</span></p>
+<h4 id="欧拉函数-1">欧拉函数</h4>
+<p><span class="math display">\[
+\varphi(N):=\left|\mathbb{Z}_{N}^{*}\right|
+\]</span> &gt; <span class="math inline">\(\varphi(15)=\left|\mathbb{Z}_{15}^{*}\right|=|\{1,2,4,7,8,11,13,14\}|=8\)</span>
+<span class="math display">\[
+\varphi(n)=n \cdot \prod_{p \in \mathbb{P}_{n}}\left(1-p^{-1}\right)
+\]</span> &gt; <span class="math inline">\(\varphi(15)=15\left(1-\frac{1}{5}\right)\left(1-\frac{1}{3}\right)=(5-1)(3-1)=8\)</span></p>
+<h3 id="ordnung-eines-elements">Ordnung eines Elements</h3>
+<p>对于群 <span class="math inline">\(\mathbb{G}
+\hat{=}\langle\mathbb{G}, \bullet, 1\rangle\)</span> , <span class="math inline">\(a \in \mathbb{G}\)</span> , <span class="math inline">\(k \in \mathbb{N}_{0}\)</span>: <span class="math display">\[
+a^{0}:=1 \quad a^{k+1}:=a \cdot\left(a^{k}\right) \quad
+a^{-(k+1)}:=\left(a^{-1}\right) \cdot\left(a^{-k}\right)
+\]</span> 并且 <span class="math inline">\(\langle
+a\rangle:=\left\{a^{k} \mid k \in
+\mathbb{Z}\right\}=\left\{\ldots,\left(a^{-1}\right)^{3},\left(a^{-1}\right)^{2},
+a^{-1}, 1, a, a^{2}, a^{3}, \ldots\right\}\)</span>，</p>
+<p><span class="math inline">\(\left. \text{ord}(a):=\min \left\{k \in
+\mathbb{N} \mid a^{k}=1\right\} \text { (mit min }
+\emptyset:=\infty\right)\)</span></p>
+<ul>
+<li><p>Die Ordnung von a muss ein Teiler von <span class="math inline">\(\left|\mathbb{Z}_{n}^{*}\right|=\varphi(n)\)</span>
+sein.</p>
+<p>若 <span class="math inline">\(\langle a\rangle= \mathbb{G}\)</span>
+那么 <span class="math inline">\(a\)</span> 是 Erzeuger</p></li>
+</ul>
+<blockquote>
+<p>求ord，它是 <span class="math inline">\(\left|\mathbb{Z}_{n}^{*}\right|\)</span>
+因子的倍数，所以可以一个个尝试。</p>
+</blockquote>
+<h4 id="定理-2">定理</h4>
+<p><span class="math display">\[
+\operatorname{ord}(a)=\operatorname{ord}\left(a^{-1}\right)
+\]</span></p>
+<p><span class="math display">\[
+a^{k}=a^{k \ \bmod \ \operatorname{ord}(a)}
+\]</span></p>
+<p><span class="math display">\[
+a^{-1}=a^{\text {ord }(a)-1}
+\]</span> &gt; 求大的次幂 <span class="math inline">\(113^{90} \bmod
+47\)</span></p>
+<h4 id="费尔马小定理">费尔马小定理</h4>
+<p><span class="math display">\[
+a^{p-1} \equiv 1(\bmod p), gcd(a,p)=1
+\]</span></p>
+<h4 id="欧拉降幂">欧拉降幂</h4>
+<p>若 <span class="math inline">\(a\)</span> 和 <span class="math inline">\(n\)</span> 互质 <span class="math display">\[
+a^b = a^{b \% \varphi(n)}
+\]</span></p>
+<h4 id="判断erzeuger">判断Erzeuger</h4>
+<p>若 <span class="math inline">\(\langle\mathbb{G}, \bullet,
+1\rangle\)</span> 循环的zyklisch 且有限 <span class="math inline">\(N:=|\mathbb{G}|\)</span> 那么满足</p>
+<p><span class="math inline">\(a\in \mathbb{G}\)</span> , <span class="math inline">\(\langle a\rangle = \mathbb{G}\)</span> 当且仅当
+<span class="math inline">\(\forall p \in\{p \in \mathbb{P}: p \mid N\}:
+a^{N / p} \neq 1\)</span> ，也就是对于所有除了 <span class="math inline">\(N\)</span> 所有约数算出来都不等于1</p>
+<h3 id="gruppenexponent">Gruppenexponent</h3>
+<p><span class="math display">\[
+\lambda_{\mathbb{G}}:=\operatorname{kgV}(\{\operatorname{ord}(a) \mid a
+\in \mathbb{G}\})
+\]</span></p>
+<p><span class="math display">\[
+\lambda_{\mathbb{G}}=\min \left\{\lambda \in \mathbb{N} \mid \forall a
+\in \mathbb{G}: a^{\lambda}=1\right\}
+\]</span></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://fyind.github.io">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://fyind.github.io/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">http://fyind.github.io/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a><a class="post-meta__tags" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a></div><div class="post_share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E7%BD%91%E7%BB%9C%E6%B5%81%E6%80%9D%E8%B7%AF%E6%B1%87%E6%80%BB/" title="网络流思路汇总"><img class="cover" src="/img/a3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">网络流思路汇总</div></div></a></div><div class="next-post pull-right"><a href="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" title="人工智能"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">人工智能</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/CF680div2/" title="Codeforces Round 680 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-01</div><div class="title">Codeforces Round 680 (Div. 2)</div></div></a></div><div><a href="/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-23</div><div class="title">二进制与位运算</div></div></a></div><div><a href="/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-01</div><div class="title">建模和仿真</div></div></a></div><div><a href="/%E6%95%B0%E5%AD%97%E5%8C%96%E7%BC%96%E7%A8%8B/" title="数字化编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">数字化编程</div></div></a></div><div><a href="/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" title="数学分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-03</div><div class="title">数学分析</div></div></a></div><div><a href="/%E6%95%B0%E8%AE%BA%E6%95%B0%E5%AD%A6/" title="数学"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-14</div><div class="title">数学</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6"><span class="toc-number">1.</span> <span class="toc-text">离散数学</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">集合的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E9%9B%86%E5%92%8C%E5%B9%B6%E9%9B%86schnitt-und-vereinigung"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">交集和并集(Schnitt und
+Vereinigung )</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%82%E9%9B%86potenzmenge"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">幂集(Potenzmenge)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%92%E5%88%86partition"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">划分(Partition)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9F%A6%E6%81%A9%E5%9B%BE%E5%92%8C%E5%8D%A1%E8%AF%BA%E5%9B%BE"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">韦恩图和卡诺图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%85%B3%E7%B3%BB%E5%85%AC%E5%BC%8F"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">集合的关系公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">练习题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%BC%8F%E5%AD%90%E5%8C%96%E5%8D%A1%E8%AF%BA%E5%9B%BE"><span class="toc-number">1.1.1.6.1.</span> <span class="toc-text">根据式子化卡诺图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E5%BC%8F%E5%AD%90%E5%BC%8F%E5%AD%90"><span class="toc-number">1.1.1.6.2.</span> <span class="toc-text">转换式子式子</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%BB%84tupel"><span class="toc-number">1.1.1.7.</span> <span class="toc-text">元组Tupel</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BA%8F%E5%88%97sequenzfolge"><span class="toc-number">1.1.1.7.1.</span> <span class="toc-text">序列Sequenz&#x2F;Folge</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="toc-number">1.1.1.7.2.</span> <span class="toc-text">序列的长度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AFkartesische-produkt"><span class="toc-number">1.1.1.7.3.</span> <span class="toc-text">笛卡尔积(kartesische Produkt)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#tupel%E7%9A%84%E6%AC%A1%E5%B9%82"><span class="toc-number">1.1.1.7.4.</span> <span class="toc-text">Tupel的次幂</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E5%92%8C%E8%AF%AD%E8%A8%80w%C3%B6rter-und-sprachen"><span class="toc-number">1.1.1.8.</span> <span class="toc-text">文字和语言(Wörter und
+Sprachen)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86alphabet"><span class="toc-number">1.1.1.8.1.</span> <span class="toc-text">字符集(Alphabet)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">关系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E5%92%8C%E6%8A%95%E5%BD%B1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">组合和投影</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#join"><span class="toc-number">1.1.2.1.1.</span> <span class="toc-text">Join</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#projektion"><span class="toc-number">1.1.2.1.2.</span> <span class="toc-text">Projektion</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">二元关系</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E4%B9%98%E7%A7%AF"><span class="toc-number">1.1.2.2.1.</span> <span class="toc-text">关系乘积</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%AC%A1%E5%B9%82"><span class="toc-number">1.1.2.2.2.</span> <span class="toc-text">关系次幂</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%81%E6%98%8E"><span class="toc-number">1.1.2.2.3.</span> <span class="toc-text">证明</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">二元关系的性质</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">分类</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E4%BB%B7%E5%85%B3%E7%B3%BB%C3%A4quivalenzrelationen"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">等价关系(Äquivalenzrelationen)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AD%89%E4%BB%B7%E7%B1%BB%C3%A4quivalenzklasse"><span class="toc-number">1.1.2.4.1.</span> <span class="toc-text">等价类（Äquivalenzklasse）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%95%86quotient"><span class="toc-number">1.1.2.4.2.</span> <span class="toc-text">商(Quotient)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%8F%E5%85%B3%E7%B3%BBordnungsrelationen"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">序关系（Ordnungsrelationen）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#halbordnung"><span class="toc-number">1.1.2.5.1.</span> <span class="toc-text">Halbordnung</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#totalordnung"><span class="toc-number">1.1.2.5.2.</span> <span class="toc-text">Totalordnung</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#irre%EF%AC%82exiv"><span class="toc-number">1.1.2.5.3.</span> <span class="toc-text">Irreﬂexiv</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#hasse%E5%9B%BE"><span class="toc-number">1.1.2.5.4.</span> <span class="toc-text">Hasse图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#maximalesminimales-element"><span class="toc-number">1.1.2.5.5.</span> <span class="toc-text">maximales&#x2F;minimales Element</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#gr%C3%B6%C3%9Fteskleinstes-element"><span class="toc-number">1.1.2.5.6.</span> <span class="toc-text">größtes&#x2F;kleinstes Element</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%8F%B7"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">一些记号</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%92%8C%E5%80%BC%E5%9F%9F"><span class="toc-number">1.1.3.1.1.</span> <span class="toc-text">定义域和值域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8A%E5%87%BD%E6%95%B0partielle-funktion"><span class="toc-number">1.1.3.1.2.</span> <span class="toc-text">半函数(partielle Funktion)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.3.2.1.</span> <span class="toc-text">二元操作</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%90%88"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">复合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">函数的性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">反函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%81%E6%98%8E-1"><span class="toc-number">1.1.3.5.1.</span> <span class="toc-text">证明</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%80%A7%E8%B4%A8%E5%92%8C%E8%AF%81%E6%98%8E"><span class="toc-number">1.1.3.5.2.</span> <span class="toc-text">一些性质和证明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%8A%BFkardinalit%C3%A4t"><span class="toc-number">1.1.4.</span> <span class="toc-text">集合的势(Kardinalität)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E6%95%B0%E9%9B%86%E5%90%88"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">不可数集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E9%87%8D%E9%9B%86%E5%90%88"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">多重集合</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E8%AE%BA"><span class="toc-number">1.2.</span> <span class="toc-text">图论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%90%91%E5%9B%BEdigraphtn"><span class="toc-number">1.2.1.</span> <span class="toc-text">有向图(Digraphtn)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">二分图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">路径</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%B7%AF%E5%BE%84"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">简单路径</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E5%9B%BEteilgraphen"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">子图(Teilgraphen)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E9%80%9Azusammenhang"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">连通(Zusammenhang)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AFkreis"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">环(Kreis)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%90%8C%E6%9E%84isomorphie"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">图同构(Isomorphie)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%90%91%E5%9B%BE%E5%92%8C%E7%AE%80%E5%8D%95%E5%9B%BE"><span class="toc-number">1.2.2.</span> <span class="toc-text">无向图和简单图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86%E5%88%A4%E5%AE%9A%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">定理(判定二分图)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%9B%BE%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.3.</span> <span class="toc-text">特殊图的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E5%9B%BEvollst%C3%A4ndiger-graph"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">完全图(Vollständiger Graph)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%9B%BEkreisgraph"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">环图(Kreisgraph)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%9B%BEpfadgraph"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">路径图(Pfadgraph)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%88%86%E5%9B%BE"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">完全二分图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%9B%BEgittergraph"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">矩阵图(Gittergraph)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%8B%E6%96%B9%E4%BD%93%E5%9B%BE"><span class="toc-number">1.2.3.6.</span> <span class="toc-text">立方体图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91perfekter-bin%C3%A4rbaum"><span class="toc-number">1.2.3.7.</span> <span class="toc-text">满二叉树(Perfekter Binärbaum)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95%E8%AF%81%E6%98%8E"><span class="toc-number">1.2.4.</span> <span class="toc-text">数学归纳法证明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%A6%E6%95%B0"><span class="toc-number">1.2.5.</span> <span class="toc-text">度数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#handschlag%E5%AE%9A%E7%90%86"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">Handschlag定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%8F%AF%E5%AE%9E%E7%8E%B0%E6%80%A7realisierbarkeit"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">图的可实现性(Realisierbarkeit
+)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86"><span class="toc-number">1.2.5.2.1.</span> <span class="toc-text">定理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#havel-hakimi%E7%AE%97%E6%B3%95"><span class="toc-number">1.2.5.2.2.</span> <span class="toc-text">Havel-Hakimi算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%91"><span class="toc-number">1.2.6.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">树的性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E6%A0%B9%E6%A0%91wurzelbaum"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">有根树(Wurzelbaum)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%9B%9E%E8%B7%AF%E5%92%8C%E5%93%88%E5%AF%86%E9%A1%BF%E7%8E%AF"><span class="toc-number">1.2.7.</span> <span class="toc-text">欧拉回路和哈密顿环</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-1"><span class="toc-number">1.2.7.1.</span> <span class="toc-text">定理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E9%9D%A2%E5%9B%BE%E5%92%8C%E8%8A%82%E7%82%B9%E6%9F%93%E8%89%B2"><span class="toc-number">1.2.8.</span> <span class="toc-text">平面图和节点染色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8Feulersche-polyederformel"><span class="toc-number">1.2.8.1.</span> <span class="toc-text">欧拉公式(Eulersche
+Polyederformel)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#minoren-und-satz-von-kuratowski"><span class="toc-number">1.2.8.2.</span> <span class="toc-text">Minoren und Satz von
+Kuratowski</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#kuratowski-%E5%AE%9A%E7%90%86"><span class="toc-number">1.2.8.2.1.</span> <span class="toc-text">Kuratowski 定理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E6%9F%93%E8%89%B2"><span class="toc-number">1.2.9.</span> <span class="toc-text">节点染色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%9F%93%E8%89%B2"><span class="toc-number">1.2.9.1.</span> <span class="toc-text">定义：染色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E8%89%B2%E5%AE%9A%E7%90%86"><span class="toc-number">1.2.9.2.</span> <span class="toc-text">四色定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E8%89%B2%E5%AE%9A%E7%90%86"><span class="toc-number">1.2.9.3.</span> <span class="toc-text">五色定理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D"><span class="toc-number">1.2.10.</span> <span class="toc-text">匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.10.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#heirats%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.10.2.</span> <span class="toc-text">Heirats问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E4%BC%98%E5%85%88%E7%BA%A7%E7%9A%84%E5%8C%B9%E9%85%8D"><span class="toc-number">1.2.10.3.</span> <span class="toc-text">有优先级的匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gale-shapley-algorithmus"><span class="toc-number">1.2.10.4.</span> <span class="toc-text">Gale-Shapley-Algorithmus</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="toc-number">1.2.11.</span> <span class="toc-text">邻接矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">1.2.11.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E8%B7%AF%E5%BE%84"><span class="toc-number">1.2.11.2.</span> <span class="toc-text">寻找路径</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%A4%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">群论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#halbgruppe"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">Halbgruppe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#kommutatives-monoid"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">(kommutatives) Monoid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#kommutative-gruppe"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">(kommutative) Gruppe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unit%C3%A4rer-ring"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">(unitärer) Ring</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#k%C3%B6rper"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">Körper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#verband"><span class="toc-number">2.0.0.6.</span> <span class="toc-text">Verband</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E8%AE%BA"><span class="toc-number">2.1.</span> <span class="toc-text">数论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%A8%A1%E8%BF%90%E7%AE%97"><span class="toc-number">2.1.1.</span> <span class="toc-text">取模运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E8%B4%A8%E7%9A%84%E9%9B%86%E5%90%88"><span class="toc-number">2.1.2.</span> <span class="toc-text">互质的集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.3.</span> <span class="toc-text">欧拉函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E5%88%97%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%86%99%E6%B3%95"><span class="toc-number">2.1.4.</span> <span class="toc-text">排列的循环写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%89%E4%BB%B7%E7%B1%BB"><span class="toc-number">2.1.5.</span> <span class="toc-text">等价类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%8D%E4%B9%A0%E8%80%83%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">复习考试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95"><span class="toc-number">3.0.1.</span> <span class="toc-text">数学归纳法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-number">3.1.</span> <span class="toc-text">布尔值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%A2%98"><span class="toc-number">3.1.0.1.</span> <span class="toc-text">基本题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#knf%E5%92%8Cdnf"><span class="toc-number">3.1.1.</span> <span class="toc-text">KNF和DNF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%8A%E4%B8%80%E4%B8%AA%E5%BC%8F%E5%AD%90%E8%BD%AC%E5%8C%96%E6%88%90dnf"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">把一个式子转化成DNF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E7%9C%9F%E5%80%BC%E8%A1%A8%E8%BD%AC%E5%8C%96dnf%E5%92%8Cknf"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">根据真值表转化DNF和KNF</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#dnf"><span class="toc-number">3.1.1.2.1.</span> <span class="toc-text">DNF</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#knf"><span class="toc-number">3.1.1.2.2.</span> <span class="toc-text">KNF</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#knf%E8%BD%ACdnf"><span class="toc-number">3.1.1.3.</span> <span class="toc-text">KNF转DNF</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dnf%E8%BD%ACknf"><span class="toc-number">3.1.2.</span> <span class="toc-text">DNF转KNF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dpll%E7%AE%97%E6%B3%95"><span class="toc-number">3.1.3.</span> <span class="toc-text">DPLL算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95dpll"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">扩展DPLL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E6%89%BE%E6%9C%80%E5%B0%8F%E7%9A%84dnf%E5%92%8Cknf"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">怎么找最小的DNF和KNF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#erf%C3%BCllbarkeit"><span class="toc-number">3.1.3.3.</span> <span class="toc-text">Erfüllbarkeit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%AD%89%E4%BB%B7%E5%BC%8F"><span class="toc-number">3.1.3.4.</span> <span class="toc-text">基本等价式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E9%A1%B9resolution"><span class="toc-number">3.1.3.5.</span> <span class="toc-text">合并项Resolution</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E8%AE%BA-1"><span class="toc-number">3.2.</span> <span class="toc-text">图论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E9%9D%A2%E4%B8%AA%E6%95%B0"><span class="toc-number">3.2.1.</span> <span class="toc-text">平面个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baum"><span class="toc-number">3.2.2.</span> <span class="toc-text">Baum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dreif%C3%A4rbbar"><span class="toc-number">3.2.3.</span> <span class="toc-text">dreifärbbar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hamilton-kreis"><span class="toc-number">3.2.4.</span> <span class="toc-text">Hamilton-Kreis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#euler-kreis"><span class="toc-number">3.2.5.</span> <span class="toc-text">Euler-Kreis</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88"><span class="toc-number">3.3.</span> <span class="toc-text">排列组合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%BF%E5%8F%96%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.3.1.</span> <span class="toc-text">拿取模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86"><span class="toc-number">3.3.2.</span> <span class="toc-text">二项式定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0"><span class="toc-number">3.3.3.</span> <span class="toc-text">第二类斯特林数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0"><span class="toc-number">3.3.4.</span> <span class="toc-text">第一类斯特林数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%92%E5%88%86%E4%B8%BA%E5%88%B6%E5%AE%9A%E4%B8%AA%E6%95%B0%E7%9A%84%E7%BB%84"><span class="toc-number">3.3.5.</span> <span class="toc-text">划分为制定个数的组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%BA%8F%E5%88%92%E5%88%86"><span class="toc-number">3.3.6.</span> <span class="toc-text">无序划分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%A4%E8%AE%BA-1"><span class="toc-number">3.4.</span> <span class="toc-text">群论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95eek"><span class="toc-number">3.4.1.</span> <span class="toc-text">扩展欧几里得算法(EEK)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#teilerfremende-reste-modulo"><span class="toc-number">3.4.2.</span> <span class="toc-text">Teilerfremende Reste modulo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0-1"><span class="toc-number">3.4.2.1.</span> <span class="toc-text">欧拉函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ordnung-eines-elements"><span class="toc-number">3.4.3.</span> <span class="toc-text">Ordnung eines Elements</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-2"><span class="toc-number">3.4.3.1.</span> <span class="toc-text">定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%B9%E5%B0%94%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86"><span class="toc-number">3.4.3.2.</span> <span class="toc-text">费尔马小定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E9%99%8D%E5%B9%82"><span class="toc-number">3.4.3.3.</span> <span class="toc-text">欧拉降幂</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%ADerzeuger"><span class="toc-number">3.4.3.4.</span> <span class="toc-text">判断Erzeuger</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gruppenexponent"><span class="toc-number">3.4.4.</span> <span class="toc-text">Gruppenexponent</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/" title="统计学基础">统计学基础</a><time datetime="2021-11-18T15:41:01.000Z" title="Created 2021-11-18 16:41:01">2021-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93DIV1C/" title="刷题总结DIV1C">刷题总结DIV1C</a><time datetime="2021-10-30T20:10:14.000Z" title="Created 2021-10-30 22:10:14">2021-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" title="非线性优化">非线性优化</a><time datetime="2021-10-22T15:26:33.000Z" title="Created 2021-10-22 17:26:33">2021-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" title="线性规划">线性规划</a><time datetime="2021-10-13T12:29:31.000Z" title="Created 2021-10-13 14:29:31">2021-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算">二进制与位运算</a><time datetime="2021-09-23T11:53:43.000Z" title="Created 2021-09-23 13:53:43">2021-09-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fyind</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

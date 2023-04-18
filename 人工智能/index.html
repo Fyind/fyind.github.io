@@ -1,0 +1,866 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>人工智能 | Hexo</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="人工智能 Intelligent Agent  通过传感器(sensors)察觉周围环境 执行器(actuators)根据环境做出反应  Agents interact with environments through actuators and sensors. Percept sequence 感知的序列 Agent function 根据感知的序列映射出一个动作 可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能">
+<meta property="og:url" content="http://fyind.github.io/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="人工智能 Intelligent Agent  通过传感器(sensors)察觉周围环境 执行器(actuators)根据环境做出反应  Agents interact with environments through actuators and sensors. Percept sequence 感知的序列 Agent function 根据感知的序列映射出一个动作 可以">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.github.io/img/pic1.PNG">
+<meta property="article:published_time" content="2020-03-05T10:20:56.000Z">
+<meta property="article:modified_time" content="2022-07-13T17:23:31.002Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.github.io/img/pic1.PNG"><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.github.io/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '人工智能',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-13 19:23:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/pic1.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/a3.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">人工智能</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-03-05T10:20:56.000Z" title="Created 2020-03-05 11:20:56">2020-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-07-13T17:23:31.002Z" title="Updated 2022-07-13 19:23:31">2022-07-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="人工智能"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="人工智能">人工智能</h1>
+<h3 id="intelligent-agent">Intelligent Agent</h3>
+<ul>
+<li>通过传感器(sensors)察觉周围环境</li>
+<li>执行器(actuators)根据环境做出反应</li>
+</ul>
+<p>Agents interact with environments through actuators and sensors.</p>
+<h4 id="percept-sequence">Percept sequence</h4>
+<p>感知的序列</p>
+<h4 id="agent-function">Agent function</h4>
+<p>根据感知的序列映射出一个动作</p>
+<p>可以选择列表(Tabular Agent Function)或者写程序(Agent Program)。
+表格可以在理论上很好的描述(Expressiveness)一个agent的行为，但是缺乏实践意义(Practicality)</p>
+<p>Agent program 是agent function的实际实现(practical
+implementation)</p>
+<h4 id="rational-agent">Rational Agent</h4>
+<p>理想的agent， 一直做"正确的"事情</p>
+<ul>
+<li>显然的表现评估法则(performance measure)并不总有</li>
+<li>设计者需要找到一个可接受的评估法则</li>
+</ul>
+<p>对于一个感知序列，一个理想的agent需要选择行动，使得它在给定的知识范围的表现期望最大化</p>
+<h4 id="omniscience-agent">Omniscience agent</h4>
+<p>知道它行为的最终结果(实际不可能)</p>
+<h4 id="learning学习">Learning学习</h4>
+<p>Rational agent 可以通过它的感知学习，改进它的知识</p>
+<h4 id="autonomy">Autonomy</h4>
+<p>一个 rational agent 是autonomous，
+如果它相比已经获得的知识，更加依赖于新获得的知识</p>
+<h3 id="task-environment">Task Environment</h3>
+<p>我们用PEAS来描述</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20211022153701200.png" alt="image-20211022153701200">
+<figcaption aria-hidden="true">image-20211022153701200</figcaption>
+</figure>
+<h4 id="fully-observablepartially-observable">Fully observable/partially
+observable</h4>
+<p>一个环境是可全部观测的，若agent可以检测到环境完整的状态，否则就是部分可观测</p>
+<h4 id="single-agentmulti-agent">Single-agent/multi-agent</h4>
+<p>一个环境是multi agent环境，若它包含多个agent</p>
+<h4 id="deterministicstochastic">Deterministic/stochastic</h4>
+<p>有确定性若下一个状态完全取决于当前状态</p>
+<h4 id="episodicsequential">Episodic/sequential</h4>
+<p>episodic若在一个时期(episode,机器人感知和做出行为的时期)的行为不会影响到下一个时期</p>
+<h4 id="discretecontinuous">discrete/continuous</h4>
+<p>分为状态的离散/连续和时间的离散/连续</p>
+<h4 id="staticdynamic">static/dynamic</h4>
+<p>如果环境的变化只基于agent，那么他是static的</p>
+<h4 id="knownunknown">known/unknown</h4>
+<p>known：如果agent知道行为结果或者结果的概率</p>
+<h3 id="agent-types">Agent Types</h3>
+<ul>
+<li>simple reflex agent</li>
+<li>reflex agents with state</li>
+<li>goal-based agents</li>
+<li>utility-based agents</li>
+</ul>
+<h4 id="simple-reflex-agents">simple reflex agents</h4>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20211022154656330.png" alt="image-20211022154656330">
+<figcaption aria-hidden="true">image-20211022154656330</figcaption>
+</figure>
+<p>agent的决定基于当前的感知</p>
+<h4 id="model-based-reflex-agents">model-based reflex agents</h4>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20211022154820184.png" alt="image-20211022154820184">
+<figcaption aria-hidden="true">image-20211022154820184</figcaption>
+</figure>
+<p>simple reflex agent的扩展版本，可以处理partial observability
+通过追踪不能观测的环境</p>
+<h4 id="goal-based-agents">goal-based agents</h4>
+<p>model-based reflex agents的拓展版本。agent的目标会被explicitly
+considered明确的考虑</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20211022155338018.png" alt="image-20211022155338018">
+<figcaption aria-hidden="true">image-20211022155338018</figcaption>
+</figure>
+<h4 id="utility-based-agents">utility-based agents</h4>
+<p>goal-based reflex agents的扩展版本。</p>
+<p>会最大化效用(utility)，比如最大化agent的幸福程度</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20211022155621968.png" alt="image-20211022155621968">
+<figcaption aria-hidden="true">image-20211022155621968</figcaption>
+</figure>
+<h4 id="learning-agents">Learning agents</h4>
+<p>所有agent都可以扩展为学习agent</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20211022155611372.png" alt="image-20211022155611372">
+<figcaption aria-hidden="true">image-20211022155611372</figcaption>
+</figure>
+<h2 id="constraint-satisfaction-problems">Constraint Satisfaction
+Problems</h2>
+<p>A constraint satisfaction problem is a tuple <span class="math inline">\((X,D,C)\)</span></p>
+<p><span class="math inline">\(X\)</span> 是变量集合， <span class="math inline">\(D\)</span> 是变量的值域，<span class="math inline">\(C\)</span> 是限制的集合</p>
+<h3 id="限制的种类">限制的种类</h3>
+<ul>
+<li>unary 单个值 <span class="math inline">\(sa \ne green\)</span></li>
+<li>binary 两个变量 <span class="math inline">\(sa \ne wa\)</span></li>
+<li>high-order 多个变量 <span class="math inline">\(sa\ne wa \ne
+nt\)</span></li>
+</ul>
+<h1 id="人工智能深度学习">人工智能深度学习</h1>
+<h2 id="模型评估与选择">模型评估与选择</h2>
+<h3 id="经验误差与过拟合">经验误差与过拟合</h3>
+<h4 id="错误率">错误率</h4>
+<p>如果<span class="math inline">\(m\)</span> 个样本中有<span class="math inline">\(a\)</span> 个错误，则错误率为 <span class="math inline">\(E=\frac{a}{m}\)</span> ,精度为 <span class="math inline">\(1 - E\)</span></p>
+<h4 id="误差">误差</h4>
+<p>学习器在训练集上的误差是训练误差，在新样本上的误差是泛化误差</p>
+<h4 id="过拟合和欠拟合">过拟合和欠拟合</h4>
+<p>过拟合是学习能力过于强大分类标准过于严格，欠拟合是学习能力低下分类标准过于松</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200626134647139.png" alt="image-20200626134647139">
+<figcaption aria-hidden="true">image-20200626134647139</figcaption>
+</figure>
+<h3 id="评估方法">评估方法</h3>
+<p>我们需要训练集来训练样本，测试集来测试样本。怎样更好地划分出这两个集合呢，有下面这几种办法。</p>
+<h4 id="留出法">留出法</h4>
+<p>直接把数据集 <span class="math inline">\(D\)</span>
+分成两个互斥的集合，一个作为训练集<span class="math inline">\(S\)</span>
+一个作为测试集 <span class="math inline">\(T\)</span>
+。可以直接三七分或者二八分。但是需要注意数据的平均性。</p>
+<blockquote>
+<p>比如有连续的10年内的数据。不能把前7年训练，后三年测试。但这会破坏数据的分布。应该随机抽取7成数据训练，剩下的再测试。</p>
+</blockquote>
+<h4 id="交叉验证法">交叉验证法</h4>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200626141117111.png" alt="image-20200626141117111">
+<figcaption aria-hidden="true">image-20200626141117111</figcaption>
+</figure>
+<p>把数据分为10分 <span class="math inline">\(D_{1}\)</span> 到 <span class="math inline">\(D_{10}\)</span> ，分别</p>
+<p>把<font color="red"><span class="math inline">\(D_{10}\)</span></font> 到<font color="red"><span class="math inline">\(D_{1}\)</span></font>
+作为测试集，其他的作为训练集，测试10次。然后取平均值。这对计算机的算力要求高。</p>
+<h4 id="自助法">自助法</h4>
+<p>从包含<span class="math inline">\(m\)</span>个样本的数据集中每次都随机抽取样本(可以重复),
+抽<span class="math inline">\(m\)</span>
+次，对于每个元素，被抽中的概率是 <span class="math inline">\(\frac{1}{m}\)</span> ,没被抽中的概率是 <span class="math inline">\(1-\frac{1}{m}\)</span> .所以始终没被选中的概率有
+<span class="math display">\[
+\lim _{m \rightarrow \infty}\left(1-\frac{1}{m}\right)^{m} \mapsto
+\frac{1}{e} \approx 0.368
+\]</span> 也就是大概<span class="math inline">\(36.8\%\)</span>的数据没有被选中，可以作为测试集。</p>
+<h4 id="调参与最终模型">调参与最终模型</h4>
+<p>大多数学习算法都有些参数(parameter)需要设定，参数配置不同，学得模型的性能往往有显著差别.因此，在进行模型评估与选择时，除了要对适用学习算法进行选择，还需调参。</p>
+<p>每次选定一个参数，都要重新训练一次。所以我们需要一个验证集来多次验证每一次的训练结果。等调好参数后，最终再用测试集测试最终的结果</p>
+<h3 id="性能度量">性能度量</h3>
+<p>对学习器的泛化性能进行评估需要有衡量模型泛化能力的评价标准，这就是性能度量。</p>
+<p>如果训练集是 <span class="math inline">\(D=\left\{\left( x _{1},
+y_{1}\right),\left( x _{2}, y_{2}\right), \ldots,\left( x _{m},
+y_{m}\right)\right\}\)</span></p>
+<p>回归任务最常用的是<strong>均方误差</strong>: <span class="math display">\[
+E(f ; D)=\frac{1}{m} \sum_{i=1}^{m}\left(f\left( x
+_{i}\right)-y_{i}\right)^{2}
+\]</span> 对于数据分布 <span class="math inline">\(\mathcal{D}\)</span>
+和概率密度函数 <span class="math inline">\(p(\cdot)\)</span> ,
+它可以描述为 <span class="math display">\[
+E(f ; D )=\int_{ x \sim D }(f( x )-y)^{2} p( x ) d x
+\]</span> 也就是对每个样本出现的概率加权，然后在求和。</p>
+<h4 id="错误率和精度">错误率和精度</h4>
+<h5 id="错误率-1">错误率</h5>
+<p>统计错误个数, 然后除以总个数 <span class="math display">\[
+E(f ; D)=\frac{1}{m} \sum_{i=1}^{m} \mathbb{I} \left(f\left( x
+_{i}\right) \neq y_{i}\right)
+\]</span> 这个 <span class="math inline">\(\mathbb{I}\)</span> 是 判断
+<span class="math inline">\(f \left( x _{i}\right) \neq y_{i}\)</span>
+是否成立，如何是就是 <span class="math inline">\(1\)</span> 否则就是
+<span class="math inline">\(0\)</span>.</p>
+<h5 id="精度">精度</h5>
+<p><span class="math display">\[
+\operatorname{acc}(f ; D)=\frac{1}{m} \sum_{i=1}^{m} \mathbb{I}
+\left(f\left( x _{i}\right)=y_{i}\right)
+\]</span></p>
+<h4 id="查准率查全率与f1">查准率，查全率与F1</h4>
+<p>对于2分类问题，正例是答案正确的，反例是答案错误的。<span class="math inline">\(TP\)</span>是有多少个正确的答案算对了, <span class="math inline">\(FN\)</span> 是有多少个正确的答案算错了，<span class="math inline">\(FP\)</span> 是有多少个错误答案算对了。</p>
+<blockquote>
+<p>比如100个数据，70个标答是正确。预测这70个样本中80个是正例，其中正确的是60个，错误的是20个。那么TP就是60，FP就是20，FN就是10</p>
+</blockquote>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200626144341011.png" alt="image-20200626144341011">
+<figcaption aria-hidden="true">image-20200626144341011</figcaption>
+</figure>
+<p>查准率<span class="math inline">\(P\)</span> 和查全率<span class="math inline">\(R\)</span> 定义为 <span class="math display">\[
+\begin{array}{l}
+P=\frac{T P}{T P+F P} \\
+R=\frac{T P}{T P+F N}
+\end{array}
+\]</span>
+查准率是我预测出来的正例中的正确率是多少。查全率是所有的样本中我预测出来了多少个正例。</p>
+<h2 id="人工智能基础概念">人工智能基础概念</h2>
+<h3 id="预测">预测</h3>
+<p><span class="math inline">\(z = dot(w,x) + b\)</span></p>
+<p>人工智能通上面的公式来预测。w和x是向量，dot是向量积。b是阈值。x是输入。w1是权值，表示每个输入的重要程度。</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200302204254840.png" alt="image-20200302204254840">
+<figcaption aria-hidden="true">image-20200302204254840</figcaption>
+</figure>
+<h3 id="激活函数">激活函数</h3>
+<p>在实际的神经网络中，我们不能直接用逻辑回归。必须要在逻辑回归外面再套上一个函数。这个函数我们就称它为激活函数。激活函数非常非常重要，如果没有它，那么神经网络的智商永远高不起来。
+<span class="math display">\[
+\sigma(z)=\frac{1}{1+e^{-z}}
+\]</span> 我们可以画出它的图像。</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200302204352817.png" alt="image-20200302204352817">
+<figcaption aria-hidden="true">image-20200302204352817</figcaption>
+</figure>
+<p>我们在这里先只介绍它的一个用途——把z映射到[0,1]之间。也可以理解为结果的概率</p>
+<h3 id="损失函数">损失函数</h3>
+<p>神经网络里如何判断自己预测的结果是否准确 <span class="math display">\[
+\begin{aligned}
+&amp;\hat{y}^{(i)}=\sigma\left(w^{T} x^{(i)}+b\right)\\
+&amp;\sigma\left(Z^{(i)}\right)=\frac{1}{1+e^{-Z^{(i)}}}
+\end{aligned}
+\]</span> 在上面的公式中: <span class="math inline">\(\hat{y}\)</span>表示预测的结果，<span class="math inline">\(\hat{y}^{(i)}\)</span>上面的i表示针对某个训练样本。比如<span class="math inline">\(\hat{y}^{(i)}\)</span>是针对<span class="math inline">\(x^{(i)}\)</span>的预测结果。在实践中，我们会用到下面的公式：
+<span class="math display">\[
+L\left(\hat{y}^{(i)}, y^{(i)}\right)=-\left(y^{(i)} \log
+\left(\hat{y}^{(i)}\right)+\left(1-y^{(i)}\right) \log
+\left(1-\hat{y}^{(i)}\right)\right)
+\]</span>
+但是这只是单个样本的公式，如果我们要堆所有的样本进行精度的预测，那么我们就要用到下面的公式，也就是求和再求平均值
+<span class="math display">\[
+J(w, b)=\frac{1}{m} \sum_{i=1}^{m} L\left(\hat{y}^{(i)},
+y^{(i)}\right)=-\frac{1}{m} \sum_{i=1}^{m}\left[\left(y^{(i)} \log
+\left(\hat{y}^{(i)}\right)+\left(1-y^{(i)}\right) \log
+\left(1-\hat{y}^{(i)}\right)\right]\right.
+\]</span></p>
+<h3 id="梯度下降">梯度下降</h3>
+<p>在预测的公式里。w和b决定了预测结果是否准确。所以得到这两个参数的值的方式是梯度下降，它会一步步改变w和b的值，让预测的结果更加精确。上面的公式是一个漏斗型的函数，我们需要求出再函数底部的一组w和b。</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200302205325728.png" alt="image-20200302205325728">
+<figcaption aria-hidden="true">image-20200302205325728</figcaption>
+</figure>
+<p>这是一个凸函数（向下凸的函数），我们选择J也是因为它是个凸函数</p>
+<h4 id="计算图">计算图</h4>
+<p>计算图是研究人工智能的重要手段。</p>
+<p>神经网络的计算是由一个向前传播和一个反向传播构成的。向前传播计算出预测结果和损失。反向传播计算损失函数关于每个参数(w,b)的偏导数来梯度下降。由此往复达到最优的值。</p>
+<p>例如：<span class="math inline">\(J(a, b, c)=3(a+b c)\)</span></p>
+<p><img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200304194503021.png" alt="image-20200304194503021"> <span class="math display">\[
+\left\{\begin{array}{l}
+U=b c \\
+v=a+U \\
+J=3 V
+\end{array}\right.
+\]</span> 我们可以求出对于的偏导数 <span class="math display">\[
+\frac{\mathrm{d} \mathrm{J}}{\mathrm{d} \mathrm{V}}=3  ,
+  \frac{\mathrm{d} \mathrm{V}}{\mathrm{d} \mathrm{U}}=1 ,
+\frac{\mathrm{d} \mathrm{U}}{\mathrm{d} \mathrm{b}}=c=2 \\
+\Rightarrow\frac{\mathrm{d} \mathrm{J}}{\mathrm{d} \mathrm{U}}
+=\frac{\mathrm{d} \mathrm{J}}{\mathrm{d} \mathrm{V}} \cdot
+\frac{\mathrm{d} \mathrm{V}}{\mathrm{d} \mathrm{U}}=3\cdot1=3
+\Rightarrow\frac{\mathrm{d} \mathrm{J}}{\mathrm{d} \mathrm{b}}
+=\frac{\mathrm{d} \mathrm{J}}{\mathrm{d} \mathrm{U}} \cdot
+\frac{\mathrm{d} \mathrm{U}}{\mathrm{d} \mathrm{b}}=3\cdot2=6 \\
+\Rightarrow\frac{\mathrm{d} \mathrm{J}}{\mathrm{d} \mathrm{a}} =3
+,\frac{\mathrm{d} \mathrm{J}}{\mathrm{d} \mathrm{b}} =6,\frac{\mathrm{d}
+\mathrm{J}}{\mathrm{d} \mathrm{c}} =9 \\
+\Rightarrow \mathrm{d} \mathrm{a}=3,\mathrm{d} \mathrm{b}=6,\mathrm{d}
+\mathrm{c}=9
+\]</span></p>
+<h4 id="计算梯度下降的偏导数">计算梯度下降的偏导数</h4>
+<p>例如两个变量的模型，先算出z再算出预测值，然后计算损失函数 <span class="math display">\[
+\begin{aligned}
+&amp;z=w^{T} x+b\\
+&amp;\hat{y}=a=\sigma(z)\\
+&amp;\mathcal{L}(a, y)=-(y \log (a)+(1-y) \log (1-a))
+\end{aligned}
+\]</span> <img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200304203450916.png" alt="image-20200304203450916"></p>
+<p>目的是计算出 <span class="math inline">\(d\mathcal{L}/dw_{1},d\mathcal{L}/dw_{2},d\mathcal{L}/db\)</span>,
+然后更新 <span class="math inline">\(w_{1},w_{2},b\)</span>
+来小损失函数。首先需要计算dL/da和da/dz。dL/da可以直接求导， <span class="math display">\[
+\frac{d L}{d a}=-\frac{y}{a}+\frac{1-y}{1-a}
+\]</span> da/dz需要用到换元法 <span class="math display">\[
+a=\sigma\left(z\right)=\frac{1}{1+e^{-z}} = (1+e^{-z})^{-1} , g
+=  (1+e^{-z}) \Rightarrow a=g^{-1} \\
+\frac{da}{dg}=-g^{-2}, \frac{dg}{dz} = -e^{-z} \Rightarrow
+\frac{da}{dz}=g^{-2} \cdot e^{-z} \\
+\frac{da}{dz}= (1+e^{-z})^{-2} \cdot e^{-z}=
+\frac{e^{-z}}{(1+e^{-z})^{2}}, 1-a
+=  \frac{1+e^{-z}}{1+e^{-z}}-\frac{1}{1+e^{-z}}=\frac{e^{-z}}{1+e^{-z}}
+\\
+\Rightarrow \frac{da}{dz}= a(1-a)
+\]</span> 综上可以算出dL/dz <span class="math display">\[
+\frac{d L}{d a}=-\frac{y}{a}+\frac{1-y}{1-a} ,\quad \frac{d a}{d
+z}=a(1-a) \\
+\begin{aligned}
+\frac{d L}{d z}=\frac{d L}{d a} \cdot \frac{d a}{d z}
+&amp;=-y(1-a)+(1-y) a \\
+&amp;=-y+ya+a-ya \\
+&amp;=a-y
+\end{aligned}
+\]</span> 于是有 <span class="math display">\[
+dw_{1}=\frac{d L}{d w_{1}}=\frac{d L}{d z} \cdot \frac{d z}{d
+w_{1}}=(a-y) \cdot x_{1} \\
+dw_{2}=\frac{d L}{d w_{2}}=\frac{d L}{d z} \cdot \frac{d z}{d
+w_{2}}=(a-y) \cdot x_{2} \\
+db=\frac{d L}{d b}=\frac{d L}{d z} \cdot \frac{d z}{db}=(a-y) \cdot 1 \\
+\]</span> 得到这三个值之后，就可以利用它们梯度下降 <span class="math display">\[
+\begin{array}{l}
+w_{1}:=w_{1}-\alpha d w_{1} \\
+w_{2}:=w_{2}-\alpha d w_{2} \\
+b:=b-\alpha d b
+\end{array}
+\]</span></p>
+<h3 id="向量化">向量化</h3>
+<p>如果用上面的计算很大的数据，效率是很慢的。我们需要向量化来提速。例如
+<span class="math display">\[
+\sum_{i=1}^{3} A_{i} \cdot B_{i} = A_{1} \cdot B_{1} +A_{2} \cdot B_{2}
++A_{3} \cdot B_{3}
+\]</span> 它等价于 <span class="math display">\[
+\begin{aligned}
+&amp;A=[1,2,3]\\
+&amp;\mathrm{B}=[1,2,3]
+\end{aligned}
+\\ sum=A \cdot B
+\]</span></p>
+<h3 id="python环境">Python环境</h3>
+<p>Anaconda集成了Jupiter Notebook，是很好的Python开发环境。</p>
+<blockquote>
+<p>链接：https://pan.baidu.com/s/1cTTOBWvLzps1F4XfP875Ig
+提取码：050r</p>
+</blockquote>
+<p>下载好后安装完成。打开Anaconda Navigator，点jupyter的launch。</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200305173816371.png" alt="image-20200305173816371">
+<figcaption aria-hidden="true">image-20200305173816371</figcaption>
+</figure>
+<p>然后点击右上角的new中的Python3</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200305173953898.png" alt="image-20200305173953898">
+<figcaption aria-hidden="true">image-20200305173953898</figcaption>
+</figure>
+<h3 id="写程序的前置知识">写程序的前置知识</h3>
+<h4 id="hd5文件">HD5文件</h4>
+<p>HD5文件。Hierarchical Data
+Format(HDF)是一种针对大量数据进行组织和存储的。文件格式,大数据行业和人工智能行业都用它来保存数据。</p>
+<p>Python读取HD5文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> h5py <span class="comment"># 加载库</span></span><br><span class="line"></span><br><span class="line">train_dataset = h5py.File(<span class="string">&#x27;datasets/train_catvnoncat.h5&#x27;</span>, <span class="string">&quot;r&quot;</span>) <span class="comment"># 加载训练数据</span></span><br></pre></td></tr></table></figure>
+<h4 id="numpy语法">numpy语法</h4>
+<h5 id="shape">shape</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">2</span>,<span class="number">5</span>]]) <span class="comment"># 定义np数组</span></span><br><span class="line"><span class="built_in">print</span>(a.shape)  <span class="comment"># (2, 3)  输出数组的规格</span></span><br></pre></td></tr></table></figure>
+<h5 id="reshape">reshape</h5>
+<p>改变数组的规格</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr=np.arange(<span class="number">16</span>).reshape(<span class="number">2</span>,<span class="number">8</span>) <span class="comment"># 生产一个数组</span></span><br><span class="line"><span class="built_in">print</span>(arr)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200306230719097.png" alt="image-20200306230719097">
+<figcaption aria-hidden="true">image-20200306230719097</figcaption>
+</figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = arr.reshape(<span class="number">4</span>,-<span class="number">1</span>) <span class="comment"># 改成4行</span></span><br><span class="line"><span class="built_in">print</span>(arr)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200306230804870.png" alt="image-20200306230804870">
+<figcaption aria-hidden="true">image-20200306230804870</figcaption>
+</figure>
+<h5 id="t-转置">T： 转置</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr=np.arange(<span class="number">16</span>).reshape(<span class="number">2</span>,<span class="number">8</span>) <span class="comment"># 上面的2*8数组</span></span><br><span class="line">arr = arr.reshape(<span class="number">8</span>,-<span class="number">1</span>).T  <span class="comment"># 改成8行并且转置</span></span><br><span class="line"><span class="built_in">print</span>(arr)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200306231055669.png" alt="image-20200306231055669">
+<figcaption aria-hidden="true">image-20200306231055669</figcaption>
+</figure>
+<h5 id="取出列">取出列</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(arr[:, <span class="number">1</span>]) <span class="comment"># 取出第1列的数据</span></span><br><span class="line">b = a[:<span class="number">2</span>, :<span class="number">2</span>] <span class="comment">#取出2*2的数据</span></span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200307103625043.png" alt="image-20200307103625043">
+<figcaption aria-hidden="true">image-20200307103625043</figcaption>
+</figure>
+<h5 id="交换行列">交换行列</h5>
+<p>用切片操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 交互第1行和第3行</span></span><br><span class="line">a[[<span class="number">1</span>,<span class="number">3</span>],:] = a[[<span class="number">3</span>,<span class="number">1</span>],:] </span><br></pre></td></tr></table></figure>
+<h5 id="初始化">初始化</h5>
+<p>.zero 函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m = np.zeros((<span class="number">3</span>,<span class="number">2</span>)) <span class="comment"># 创建一个3行2列的矩阵并初始化成0</span></span><br></pre></td></tr></table></figure>
+<h5 id="指数函数exp">指数函数exp</h5>
+<p><span class="math display">\[
+e^{x}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">arr = np.exp(arr)  <span class="comment"># 对每个值都进行指数运算</span></span><br></pre></td></tr></table></figure>
+<h5 id="求和sum">求和sum</h5>
+<p><span class="math display">\[
+\sum_{i=1}^{m} arr_{i} \cdot a_{i}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">arr = np.<span class="built_in">sum</span>(arr*a)</span><br></pre></td></tr></table></figure>
+<h4 id="matplotlib">matplotlib</h4>
+<p>显示图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index =<span class="number">2</span></span><br><span class="line">plt.imshow(train_set_x_orig[index])</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Load the image first</span></span><br><span class="line">image = Image.<span class="built_in">open</span>(<span class="string">&#x27;images/sample_image.jpg&#x27;</span>)</span><br><span class="line">plt.imshow(image)</span><br></pre></td></tr></table></figure>
+<h3 id="python第一个机器学习的例子">Python第一个机器学习的例子</h3>
+<h4 id="加载库和数据">加载库和数据</h4>
+<p>加载库文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> skimage.transform <span class="keyword">as</span> tf</span><br><span class="line">%matplotlib inline  <span class="comment">#这是jupyter notebook里的命令, 意思是将那些用matplotlib绘制的图显示在页面里而不是弹出一个窗口</span></span><br></pre></td></tr></table></figure>
+<p>加载训练和测试数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">load_dataset</span>():</span><br><span class="line">    train_dataset = h5py.File(<span class="string">&#x27;datasets/train_catvnoncat.h5&#x27;</span>, <span class="string">&quot;r&quot;</span>) <span class="comment"># 加载训练数据</span></span><br><span class="line">    train_set_x_orig = np.array(train_dataset[<span class="string">&quot;train_set_x&quot;</span>][:]) <span class="comment"># 从训练数据中提取出图片的特征数据</span></span><br><span class="line">    train_set_y_orig = np.array(train_dataset[<span class="string">&quot;train_set_y&quot;</span>][:]) <span class="comment"># 从训练数据中提取出图片的标签数据</span></span><br><span class="line"></span><br><span class="line">    test_dataset = h5py.File(<span class="string">&#x27;datasets/test_catvnoncat.h5&#x27;</span>, <span class="string">&quot;r&quot;</span>) <span class="comment"># 加载测试数据</span></span><br><span class="line">    test_set_x_orig = np.array(test_dataset[<span class="string">&quot;test_set_x&quot;</span>][:]) </span><br><span class="line">    test_set_y_orig = np.array(test_dataset[<span class="string">&quot;test_set_y&quot;</span>][:]) </span><br><span class="line"></span><br><span class="line">    classes = np.array(test_dataset[<span class="string">&quot;list_classes&quot;</span>][:]) <span class="comment"># 加载标签类别数据，这里的类别只有两种，1代表有猫，0代表无猫</span></span><br><span class="line">        </span><br><span class="line">    train_set_y_orig = train_set_y_orig.reshape((<span class="number">1</span>, train_set_y_orig.shape[<span class="number">0</span>])) <span class="comment"># 把数组的维度从(209,)变成(1, 209)，这样好方便后面进行计算</span></span><br><span class="line">    test_set_y_orig = test_set_y_orig.reshape((<span class="number">1</span>, test_set_y_orig.shape[<span class="number">0</span>])) <span class="comment"># 从(50,)变成(1, 50)</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用上面定义的函数将数据加载到各个变量中</span></span><br><span class="line">train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()</span><br></pre></td></tr></table></figure>
+<h4 id="预处理">预处理</h4>
+<p>数据扁平化和转置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_set_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[<span class="number">0</span>], -<span class="number">1</span>).T</span><br><span class="line">test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[<span class="number">0</span>], -<span class="number">1</span>).T </span><br></pre></td></tr></table></figure>
+<p>全部除以255，使得每个像素点都在<span class="math inline">\([0,1]\)</span> 里，方便以后处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_set_x = train_set_x_flatten/<span class="number">255.</span></span><br><span class="line">test_set_x = test_set_x_flatten/<span class="number">255.</span>  <span class="comment"># 255. === 255.0</span></span><br></pre></td></tr></table></figure>
+<p>我们的神经网络图如下</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/猫.png" alt="猫">
+<figcaption aria-hidden="true">猫</figcaption>
+</figure>
+<h4 id="编写工具函数">编写工具函数</h4>
+<h5 id="sigmoid">sigmoid</h5>
+<p><span class="math display">\[
+\sigma(z)=\frac{1}{1+e^{-z}}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sigmoid</span>(<span class="params">z</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-z)) </span><br></pre></td></tr></table></figure>
+<h5 id="初始化-1">初始化</h5>
+<p>我们要初始化权重数组w和阈值b， dim是w的大小,在本例中是12288</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_with_zeros</span>(<span class="params">dim</span>):</span><br><span class="line">    w = np.zeros((dim,<span class="number">1</span>))</span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> w, b</span><br></pre></td></tr></table></figure>
+<h5 id="向前传播和反向传播">向前传播和反向传播</h5>
+<p>向前传播： <span class="math display">\[
+\begin{aligned}
+&amp;A=\sigma\left(w^{T} X+b\right)=\left(a^{(1)}, a^{(2)}, \ldots,
+a^{(m-1)}, a^{(m)}\right)\\
+&amp;J=-\frac{1}{m} \sum_{i=1}^{m} y^{(i)} \log
+\left(a^{(i)}\right)+\left(1-y^{(i)}\right) \log \left(1-a^{(i)}\right)
+\end{aligned}
+\]</span> 反向传播： <span class="math display">\[
+\begin{aligned}
+&amp;\frac{\partial J}{\partial w}=\frac{1}{m} X(A-Y)^{T}\\
+&amp;\frac{\partial J}{\partial b}=\frac{1}{m}
+\sum_{i=1}^{m}\left(a^{(i)}-y^{(i)}\right)
+\end{aligned}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">propagate</span>(<span class="params">w, b, X, Y</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    w -- 权重数组，维度是(12288, 1)</span></span><br><span class="line"><span class="string">    b -- 偏置bias</span></span><br><span class="line"><span class="string">    X -- 图片的特征数据，维度是 (12288, 209)</span></span><br><span class="line"><span class="string">    Y -- 图片对应的标签，0或1，0是无猫，1是有猫，维度是(1,209)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回值:</span></span><br><span class="line"><span class="string">    cost -- 成本</span></span><br><span class="line"><span class="string">    dw -- w的梯度</span></span><br><span class="line"><span class="string">    db -- b的梯度</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 前向传播</span></span><br><span class="line">    A = sigmoid(np.dot(w.T, X) + b)                             </span><br><span class="line">    cost = -np.<span class="built_in">sum</span>(Y*np.log(A) + (<span class="number">1</span>-Y)*np.log(<span class="number">1</span>-A)) / m  </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 反向传播</span></span><br><span class="line">    dZ = A - Y</span><br><span class="line">    dw = np.dot(X,dZ.T) / m</span><br><span class="line">    db = np.<span class="built_in">sum</span>(dZ) / m</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将dw和db保存到字典里面</span></span><br><span class="line">    grads = &#123;<span class="string">&quot;dw&quot;</span>: dw,</span><br><span class="line">             <span class="string">&quot;db&quot;</span>: db&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> grads, cost</span><br></pre></td></tr></table></figure>
+<h5 id="更新w和b">更新w和b</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">optimize</span>(<span class="params">w, b, X, Y, num_iterations, learning_rate, print_cost = <span class="literal">False</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;    </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    w -- 权重数组，维度是 (12288, 1)</span></span><br><span class="line"><span class="string">    b -- 偏置bias</span></span><br><span class="line"><span class="string">    X -- 图片的特征数据，维度是 (12288, 209)</span></span><br><span class="line"><span class="string">    Y -- 图片对应的标签，0或1，0是无猫，1是有猫，维度是(1,209)</span></span><br><span class="line"><span class="string">    num_iterations -- 指定要优化多少次</span></span><br><span class="line"><span class="string">    learning_rate -- 学习步进，是我们用来控制优化步进的参数</span></span><br><span class="line"><span class="string">    print_cost -- 为True时，每优化100次就把成本cost打印出来,以便我们观察成本的变化</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回值:</span></span><br><span class="line"><span class="string">    params -- 优化后的w和b</span></span><br><span class="line"><span class="string">    costs -- 每优化100次，将成本记录下来，成本越小，表示参数越优化</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    costs = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_iterations):        </span><br><span class="line">        grads, cost = propagate(w, b, X, Y) <span class="comment"># 计算得出梯度和成本</span></span><br><span class="line">                </span><br><span class="line">        <span class="comment"># 从字典中取出梯度</span></span><br><span class="line">        dw = grads[<span class="string">&quot;dw&quot;</span>]</span><br><span class="line">        db = grads[<span class="string">&quot;db&quot;</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 进行梯度下降，更新参数，使其越来越优化，使成本越来越小</span></span><br><span class="line">        w = w - learning_rate * dw</span><br><span class="line">        b = b - learning_rate * db</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将成本记录下来</span></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            costs.append(cost)</span><br><span class="line">            <span class="keyword">if</span> print_cost:</span><br><span class="line">                <span class="built_in">print</span> (<span class="string">&quot;优化%i次后成本是: %f&quot;</span> %(i, cost))</span><br><span class="line">    </span><br><span class="line">    params = &#123;<span class="string">&quot;w&quot;</span>: w,</span><br><span class="line">              <span class="string">&quot;b&quot;</span>: b&#125;</span><br><span class="line">    <span class="keyword">return</span> params, costs</span><br></pre></td></tr></table></figure>
+<h5 id="预测函数">预测函数</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">w, b, X</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;    </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    w -- 权重数组，维度是 (12288, 1)</span></span><br><span class="line"><span class="string">    b -- 偏置bias</span></span><br><span class="line"><span class="string">    X -- 图片的特征数据，维度是 (12288, 图片张数)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回值:</span></span><br><span class="line"><span class="string">    Y_prediction -- 对每张图片的预测结果</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span>    </span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    Y_prediction = np.zeros((<span class="number">1</span>,m))</span><br><span class="line">       </span><br><span class="line">    A = sigmoid(np.dot(w.T, X) + b)  <span class="comment"># 通过这行代码来对图片进行预测</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 上面得出的预测结果是小数的形式，为了方便后面显示，我们将其转换成0和1的形式（大于等于0.5就是1/有猫，小于0.5就是0/无猫）</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(A.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> A[<span class="number">0</span>,i] &gt;= <span class="number">0.5</span>:</span><br><span class="line">            Y_prediction[<span class="number">0</span>,i] = <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> Y_prediction</span><br></pre></td></tr></table></figure>
+<h4 id="将函数组合">将函数组合</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">model</span>(<span class="params">X_train, Y_train, X_test, Y_test, num_iterations = <span class="number">2000</span>, learning_rate = <span class="number">0.5</span>, print_cost = <span class="literal">False</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;    </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    X_train -- 训练图片,维度是(12288, 209)</span></span><br><span class="line"><span class="string">    Y_train -- 训练图片对应的标签,维度是 (1, 209)</span></span><br><span class="line"><span class="string">    X_test -- 测试图片,维度是(12288, 50)</span></span><br><span class="line"><span class="string">    Y_test -- 测试图片对应的标签,维度是 (1, 50)</span></span><br><span class="line"><span class="string">    num_iterations -- 需要训练/优化多少次</span></span><br><span class="line"><span class="string">    learning_rate -- 学习步进，是我们用来控制优化步进的参数</span></span><br><span class="line"><span class="string">    print_cost -- 为True时，每优化100次就把成本cost打印出来,以便我们观察成本的变化</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回值:</span></span><br><span class="line"><span class="string">    d -- 返回一些信息</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化待训练的参数</span></span><br><span class="line">    w, b = initialize_with_zeros(X_train.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用训练数据来训练/优化参数</span></span><br><span class="line">    parameters, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 从字典中分别取出训练好的w和b</span></span><br><span class="line">    w = parameters[<span class="string">&quot;w&quot;</span>]</span><br><span class="line">    b = parameters[<span class="string">&quot;b&quot;</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 使用训练好的w和b来分别对训练图片和测试图片进行预测</span></span><br><span class="line">    Y_prediction_train = predict(w, b, X_train)</span><br><span class="line">    Y_prediction_test = predict(w, b, X_test)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 打印出预测的准确率</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;对训练图片的预测准确率为: &#123;&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span> - np.mean(np.<span class="built_in">abs</span>(Y_prediction_train - Y_train)) * <span class="number">100</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;对测试图片的预测准确率为: &#123;&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span> - np.mean(np.<span class="built_in">abs</span>(Y_prediction_test - Y_test)) * <span class="number">100</span>))</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    d = &#123;<span class="string">&quot;costs&quot;</span>: costs,</span><br><span class="line">         <span class="string">&quot;Y_prediction_test&quot;</span>: Y_prediction_test, </span><br><span class="line">         <span class="string">&quot;Y_prediction_train&quot;</span> : Y_prediction_train, </span><br><span class="line">         <span class="string">&quot;w&quot;</span> : w, </span><br><span class="line">         <span class="string">&quot;b&quot;</span> : b,</span><br><span class="line">         <span class="string">&quot;learning_rate&quot;</span> : learning_rate,</span><br><span class="line">         <span class="string">&quot;num_iterations&quot;</span>: num_iterations&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> d</span><br></pre></td></tr></table></figure>
+<h3 id="浅层神经网络">浅层神经网络</h3>
+<p>之前我们学习的是单神经元的神经网络，其实还有多神经元的，比如下面这个</p>
+<p><img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200307183507940.png" alt="image-20200307183507940" style="zoom:50%;"></p>
+<p>其中的每一个都是单个的神经元</p>
+<h4 id="计算向前传播">计算向前传播</h4>
+<p>我们可以先算出第一层神经元的预测值a，上角标表示层数</p>
+<p><img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200307183927759.png" alt="image-20200307183927759" style="zoom:50%;">
+<span class="math display">\[
+\mathrm{z}_{1}^{[1]}=\mathrm{w}_{1}^{[1]\mathrm{T}}\mathrm{x}+\mathrm{b}_{1}^{[1]},\quad
+\mathbf{a}_{1}^{[1]}=\sigma(z_{1}^{[1]}) \\
+\mathrm{z}_{2}^{[1]}=\mathrm{w}_{2}^{[1]\mathrm{T}}\mathrm{x}+\mathrm{b}_{2}^{[1]},\quad
+\mathbf{a}_{2}^{[1]}=\sigma(z_{2}^{[1]}) \\
+\mathrm{z}_{3}^{[1]}=\mathrm{w}_{3}^{[1]\mathrm{T}}\mathrm{x}+\mathrm{b}_{3}^{[1]},\quad
+\mathbf{a}_{3}^{[1]}=\sigma(z_{3}^{[1]}) \\
+\mathrm{z}_{4}^{[1]}=\mathrm{w}_{4}^{[1]\mathrm{T}}\mathrm{x}+\mathrm{b}_{4}^{[1]},\quad
+\mathbf{a}_{4}^{[1]}=\sigma(z_{4}^{[1]}) \\
+\]</span>
+如果有很多神经元，一个个算效率很低，所以我们可以向量化。我们把w值组成一个矩阵
+<span class="math display">\[
+\left[\begin{array}{l}
+--\mathrm{w}_{1}^{[1] \mathrm{T}}-- \\
+--\mathrm{w}_{2}^{[1] \mathrm{T}}-- \\
+--\mathrm{w}_{3}^{[1] \mathrm{T}}-- \\
+--\mathrm{w}_{4}^{[1] \mathrm{T}}--
+\end{array}\right]\left[\begin{array}{l}
+\times 1 \\
+\times 2 \\
+\times 3
+\end{array}\right]+\left[\begin{array}{l}
+\mathrm{b}_{1}^{[1]} \\
+\mathrm{b}_{2}^{[1]} \\
+\mathrm{b}_{3}^{[1]} \\
+\mathrm{b}_{4}^{[1]}
+\end{array}\right]
+\]</span> 于是我们就可以将上面4个式子简化成1个： <span class="math display">\[
+\mathrm{z}^{[1]}=\mathrm{W}^{[1]\top}\mathrm{x}+\mathrm{b}^{[1]},\quad
+\mathbf{a}^{[1]}=\sigma(z^{[1]}) \\
+\mathrm{z}^{[2]}=\mathrm{W}^{[2]\top}\mathrm{a}^{[1]}+\mathrm{b}^{[2]},\quad
+\mathbf{a}^{[2]}=\sigma(z^{[2]}) \\
+\]</span>
+上面的式子只使用于计算单个样本。而我们通常是由多个样本的，我们可以把每组数据的特征值组合成矩阵
+<span class="math display">\[
+X=\left[\begin{array}{cccc}
+| &amp; | &amp; &amp; | \\
+x^{(1)} &amp; x^{(2)} &amp; ... &amp; x^{(m)} \\
+| &amp; | &amp; &amp; |
+\end{array}\right]
+\]</span> 于是计算所有样本又可以这样简化： <span class="math display">\[
+\mathrm{Z}^{[1]}=\mathrm{W}^{[1]\mathrm{T}}\mathrm{X}+\mathrm{b}^{[1]},\quad
+\mathbf{A}^{[1]}=\sigma(Z^{[1]}) \\
+\mathrm{Z}^{[2]}=\mathrm{W}^{[2]\mathrm{T}}\mathrm{A}^{[1]}+\mathrm{b}^{[2]},\quad
+\mathbf{a}^{[2]}=\sigma(Z^{[2]}) \\
+\]</span></p>
+<h4 id="计算反向传播">计算反向传播</h4>
+<p>我们先计算出第二层预测值的偏导数</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200309195811339.png" alt="image-20200309195811339">
+<figcaption aria-hidden="true">image-20200309195811339</figcaption>
+</figure>
+<p>之前我们计算量单神经元的公式： <span class="math display">\[
+dz=a-y\\
+dw_{1}=dz \cdot x_{1} \\
+dw_{2}=dz \cdot x_{2} \\
+db=dz \\
+\]</span> 这个模型和上个单神经元的模型一样，所以我们可以直接套用公式得出
+<span class="math display">\[
+\begin{aligned}
+&amp;\mathrm{d} \mathrm{z}^{[2]}=\mathrm{a}^{[2]}-\mathrm{y}\\
+&amp;\mathrm{d} \mathrm{W}^{[2]}=\mathrm{d} \mathrm{z}^{[2]}
+\mathrm{A}^{[1] \top}\\
+&amp;\mathrm{d} \mathrm{b}^{[2]}=\mathrm{d} \mathrm{z}^{[2]}
+\end{aligned}
+\]</span> <img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200309200115862.png" alt="image-20200309200115862"></p>
+<p>然后我们可以求出<span class="math inline">\(\frac{dL}{da^{[1]}}\)</span><br>
+<span class="math display">\[
+\frac{dL}{da^{[1]}}=\frac{dL}{dz^{[2]}} \cdot \frac{dz^{[2]}}{da^{[1]}}
+= (\mathrm{a}^{[2]}-\mathrm{y}) \cdot W^{[2]\top} = W^{[2]\top}dz^{[2]}
+\]</span> 由于激活函数不知有sigmoid，之后我们会具体介绍，我们先用 <span class="math inline">\({g^{[1]}}&#39;(z^{[1]})\)</span> 来表示激活函数
+<span class="math inline">\(a^{[1]}\)</span> 关于 <span class="math inline">\(z^{[1]}\)</span> 的偏导数 <span class="math display">\[
+dz^{[1]}=\frac{dL}{dz^{[1]}}=\frac{dL}{da^{[1]}} \cdot
+\frac{da^{[1]}}{dz^{[1]}} =W^{[2]\top}dz^{[2]} \cdot
+{g^{[1]}}&#39;(z^{[1]})
+\]</span> 得出 <span class="math inline">\(dz^{[1]}\)</span> 后，<span class="math inline">\(dW^{[1]}\)</span> 和 <span class="math inline">\(db^{[1]}\)</span> 就可以通过 <span class="math inline">\(dz^{[1]}\)</span> 算出来： <span class="math display">\[
+\begin{aligned}
+&amp;d W ^{[1]}= d z ^{[1]} x ^{\top}\\
+&amp;db ^{[1]}= d z ^{[1]}
+\end{aligned}
+\]</span> 以上的出来的公式是单样本的公式，多样本的公式如下 <span class="math display">\[
+\mathrm{d} \mathrm{Z}^{[2]}=\mathrm{A}^{[2]}-\mathrm{Y}\\
+\mathrm{d} \mathrm{W}^{[2]}=\mathrm{d} \mathrm{Z}^{[2]} \mathrm{A}^{[1]
+\top}/m \\
+\mathrm{d} \mathrm{b}^{[2]}=np.sum(\mathrm{d} \mathrm{z}^{[2]})/m\\
+dZ^{[1]}=W^{[2]\top}dZ^{[2]} \cdot {g^{[1]}}&#39;(Z^{[1]}) \\
+d W ^{[1]}= d Z ^{[1]} X ^{\top}/m\\
+db ^{[1]}= np.sum(d z ^{[1]},axis=1,keepdims=True)/m
+\]</span> 最后一行中 axis=1
+的作用是让sum只把每一行的加起来，keepdims是保持维度，以免出现 <span class="math inline">\((n^{[1]},)\)</span> 的形式</p>
+<h4 id="激活函数-1">激活函数</h4>
+<p>为什么要激活函数？因为我们每一层计算的都是线性的，无法表示复杂情况。就算有多层神经网络也没有用（因为代入之后依然是线性函数）。只有加入了激活函数，才可以表达复杂情况。下面是几种常见的激活函数。</p>
+<h5 id="sigmoid-1">sigmoid</h5>
+<p>尤其使用于二元分类的问题中，因为0到1的输出值可以表示概率</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200309220559907.png" alt="image-20200309220559907">
+<figcaption aria-hidden="true">image-20200309220559907</figcaption>
+</figure>
+<p>它的偏导数 <span class="math display">\[
+g&#39;(z)= a(1-a)
+\]</span></p>
+<h5 id="tanh">tanh</h5>
+<p>它是sigmoid的升级版，各方面都比sigmoid优秀一点</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200309220623741.png" alt="image-20200309220623741">
+<figcaption aria-hidden="true">image-20200309220623741</figcaption>
+</figure>
+<p>它的偏导数 <span class="math display">\[
+g&#39;(z)= 1-a^{2}
+\]</span></p>
+<h5 id="relu">relu</h5>
+<p>一般来说，relu用到的最多</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200309220752575.png" alt="image-20200309220752575">
+<figcaption aria-hidden="true">image-20200309220752575</figcaption>
+</figure>
+<p>偏导数： <span class="math display">\[
+g&#39;(z)=\left\{\begin{array}{ll}
+0 &amp; , z&lt;0 \\
+1 &amp; , z&gt;=0
+\end{array}\right.
+\]</span></p>
+<h5 id="leaky-relu">leaky relu</h5>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200309221413860.png" alt="image-20200309221413860">
+<figcaption aria-hidden="true">image-20200309221413860</figcaption>
+</figure>
+<p>偏导数： <span class="math display">\[
+g&#39;(z)=\left\{\begin{array}{ll}
+0.01 &amp; , z&lt;0 \\
+1 &amp; , z&gt;=0
+\end{array}\right.
+\]</span></p>
+<h4 id="随机初始化参数">随机初始化参数</h4>
+<p>对于多层神经网络来说，初始化参数不能都设置成0。否则它就变成了单个神经元。因为输入参数一样，计算结果一样。</p>
+<p>一般使用numpy.random.randn来进行随机初始化。</p>
+<p>比如 <span class="math inline">\(w^{[1]} =
+numpy.random.randn((2,2))*0.01\)</span>
+。我们在后面乘0.01的目的是把w变得更加小一点，这样带入sigmod函数里计算出的斜率会大，这样梯度下降的速度就快，神经网络的学习速度就快。</p>
+<h3 id="实战编写浅层神经网络">实战编写浅层神经网络</h3>
+<p>给定一个坐标，判断是蓝色还是红色</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200310095545501.png" alt="image-20200310095545501">
+<figcaption aria-hidden="true">image-20200310095545501</figcaption>
+</figure>
+<h4 id="python知识">Python知识</h4>
+<h5 id="ravel扁平化">ravel扁平化</h5>
+<p>可以把多维数组压缩成1维数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(Y.shape, Y.ravel().shape)</span><br><span class="line"><span class="comment"># 输出 (1, 400) (400,)</span></span><br></pre></td></tr></table></figure>
+<h5 id="matplotlib.pyplot.scatter绘制散点">matplotlib.pyplot.scatter绘制散点</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(X[<span class="number">0</span>, :], X[<span class="number">1</span>, :], c=Y.ravel(), s=<span class="number">40</span>, cmap=plt.cm.Spectral)</span><br><span class="line"><span class="comment">#        X坐标数组    Y坐标数组   颜色        大小    python自动给不同颜色标签的分配颜色</span></span><br></pre></td></tr></table></figure>
+<p>例如画一个tanh函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">100</span></span><br><span class="line">x = np.random.randn(n)</span><br><span class="line">y = np.tanh(x)</span><br><span class="line">plt.scatter(x, y, s=<span class="number">40</span>)</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200310102318210.png" alt="image-20200310102318210">
+<figcaption aria-hidden="true">image-20200310102318210</figcaption>
+</figure>
+<h5 id="sklearn单神经元学习">sklearn单神经元学习</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clf = sklearn.linear_model.LogisticRegressionCV()</span><br><span class="line">clf.fit(X.T, Y.T.ravel()) <span class="comment"># 训练样本</span></span><br><span class="line">LR_predictions = clf.predict(X.T)</span><br></pre></td></tr></table></figure>
+<h4 id="库文件">库文件</h4>
+<p>这次多了sklearn。它是数据挖掘，数据分析和机器学习的库，里面内置了很多人工智能的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> sklearn </span><br><span class="line"><span class="keyword">import</span> sklearn.datasets</span><br><span class="line"><span class="keyword">import</span> sklearn.linear_model</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这两个是自己写的库文件</span></span><br><span class="line"><span class="keyword">from</span> planar_utils <span class="keyword">import</span> plot_decision_boundary, sigmoid, load_planar_dataset, load_extra_datasets </span><br><span class="line"><span class="keyword">from</span> testCases <span class="keyword">import</span> * </span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">1</span>) <span class="comment"># 设置随机种子</span></span><br></pre></td></tr></table></figure>
+<h4 id="函数">函数</h4>
+<h5 id="初始化参数">初始化参数</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_parameters</span>(<span class="params">n_x, n_h, n_y</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    n_x -- 输入层的神经元个数</span></span><br><span class="line"><span class="string">    n_h -- 隐藏层的神经元个数</span></span><br><span class="line"><span class="string">    n_y -- 输出层的神经元个数</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(<span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 随机初始化第一层（隐藏层）相关的参数w.</span></span><br><span class="line">    <span class="comment"># 每一个隐藏层神经元都与输入层的每一个神经元相连。每一个相连都会有一个对应的参数w。</span></span><br><span class="line">    <span class="comment"># 所以W1的维度是（n_h, n_x）,表示（隐藏层的神经元个数，输入层神经元个数）</span></span><br><span class="line">    W1 = np.random.randn(n_h, n_x) * <span class="number">0.01</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将第一层的参数b赋值为0，因为w已经非0了，所以b可以为0</span></span><br><span class="line">    <span class="comment"># 因为每一个神经元只有一个对应的b，所以b1的维度是(n_h, 1)，表示（隐藏层神经元个数，1）</span></span><br><span class="line">    b1 = np.zeros(shape=(n_h, <span class="number">1</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 同理，初始化第二层的w和b</span></span><br><span class="line">    W2 = np.random.randn(n_y, n_h) * <span class="number">0.01</span></span><br><span class="line">    b2 = np.zeros(shape=(n_y, <span class="number">1</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将初始化好的参数放入一个字典变量中</span></span><br><span class="line">    parameters = &#123;<span class="string">&quot;W1&quot;</span>: W1,</span><br><span class="line">                  <span class="string">&quot;b1&quot;</span>: b1,</span><br><span class="line">                  <span class="string">&quot;W2&quot;</span>: W2,</span><br><span class="line">                  <span class="string">&quot;b2&quot;</span>: b2&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<h5 id="向前传播">向前传播</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward_propagation</span>(<span class="params">X, parameters</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    X -- 输入特征，维度是 (横纵坐标, 样本数)</span></span><br><span class="line"><span class="string">    parameters -- 参数w和b</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    A2 -- The sigmoid output of the second activation</span></span><br><span class="line"><span class="string">    cache -- a dictionary containing &quot;Z1&quot;, &quot;A1&quot;, &quot;Z2&quot; and &quot;A2&quot;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 从字典中取出参数</span></span><br><span class="line">    W1 = parameters[<span class="string">&#x27;W1&#x27;</span>]</span><br><span class="line">    b1 = parameters[<span class="string">&#x27;b1&#x27;</span>]</span><br><span class="line">    W2 = parameters[<span class="string">&#x27;W2&#x27;</span>]</span><br><span class="line">    b2 = parameters[<span class="string">&#x27;b2&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 实现前向传播算法</span></span><br><span class="line">    Z1 = np.dot(W1, X) + b1</span><br><span class="line">    A1 = np.tanh(Z1) <span class="comment"># 第一层的激活函数我们使用tanh。numpy库里面已经帮我们实现了tanh工具函数</span></span><br><span class="line">    Z2 = np.dot(W2, A1) + b2</span><br><span class="line">    A2 = sigmoid(Z2) <span class="comment"># 第二层我们使用sigmoid，因为我们要解决的这个问题属于二分问题。这个函数是我们自己在planar_utils里面实现的。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将这些前向传播时得出的值保存起来，因为在后面进行反向传播计算时会用到他们。</span></span><br><span class="line">    cache = &#123;<span class="string">&quot;Z1&quot;</span>: Z1,</span><br><span class="line">             <span class="string">&quot;A1&quot;</span>: A1,</span><br><span class="line">             <span class="string">&quot;Z2&quot;</span>: Z2,</span><br><span class="line">             <span class="string">&quot;A2&quot;</span>: A2&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> A2, cache</span><br></pre></td></tr></table></figure>
+<h5 id="计算成本函数">计算成本函数</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这个函数被用来计算成本</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">compute_cost</span>(<span class="params">A2, Y, parameters</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;   </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    A2 -- 神经网络最后一层的输出结果</span></span><br><span class="line"><span class="string">    Y -- 数据的颜色标签</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    m = Y.shape[<span class="number">1</span>] </span><br><span class="line">    </span><br><span class="line">    logprobs = np.multiply(np.log(A2), Y) + np.multiply((<span class="number">1</span> - Y), np.log(<span class="number">1</span> - A2))</span><br><span class="line">    cost = - np.<span class="built_in">sum</span>(logprobs) / m</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
+<h5 id="反向传播">反向传播</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">backward_propagation</span>(<span class="params">parameters, cache, X, Y</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    parameters -- 参数w和b</span></span><br><span class="line"><span class="string">    cache -- 前向传播时保存起来的一些数据</span></span><br><span class="line"><span class="string">    X -- 输入特征</span></span><br><span class="line"><span class="string">    Y -- 标签</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>] <span class="comment"># 获取样本数</span></span><br><span class="line">    </span><br><span class="line">    W1 = parameters[<span class="string">&#x27;W1&#x27;</span>]</span><br><span class="line">    W2 = parameters[<span class="string">&#x27;W2&#x27;</span>]</span><br><span class="line">        </span><br><span class="line">    A1 = cache[<span class="string">&#x27;A1&#x27;</span>]</span><br><span class="line">    A2 = cache[<span class="string">&#x27;A2&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 根据我们文章中介绍的算法公式来计算梯度（偏导数）</span></span><br><span class="line">    dZ2= A2 - Y</span><br><span class="line">    dW2 = (<span class="number">1</span> / m) * np.dot(dZ2, A1.T)</span><br><span class="line">    db2 = (<span class="number">1</span> / m) * np.<span class="built_in">sum</span>(dZ2, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    dZ1 = np.multiply(np.dot(W2.T, dZ2), <span class="number">1</span> - np.power(A1, <span class="number">2</span>))</span><br><span class="line">    dW1 = (<span class="number">1</span> / m) * np.dot(dZ1, X.T)</span><br><span class="line">    db1 = (<span class="number">1</span> / m) * np.<span class="built_in">sum</span>(dZ1, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;W1 dim:&quot;</span> + <span class="built_in">str</span>(W1.shape))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;W2 dim:&quot;</span> + <span class="built_in">str</span>(W2.shape))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;------------------------------&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;dZ2 dim:&quot;</span> + <span class="built_in">str</span>(dZ2.shape))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;dZ1 dim:&quot;</span> + <span class="built_in">str</span>(dZ1.shape))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;------------------------------&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    grads = &#123;<span class="string">&quot;dW1&quot;</span>: dW1,</span><br><span class="line">             <span class="string">&quot;db1&quot;</span>: db1,</span><br><span class="line">             <span class="string">&quot;dW2&quot;</span>: dW2,</span><br><span class="line">             <span class="string">&quot;db2&quot;</span>: db2&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> grads <span class="comment"># 返回计算得到的梯度</span></span><br></pre></td></tr></table></figure>
+<h5 id="梯度下降-1">梯度下降</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用上面得到的梯度来进行梯度下降（更新参数w和b，使其更优化）</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_parameters</span>(<span class="params">parameters, grads, learning_rate=<span class="number">1.2</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    parameters -- 参数w和b </span></span><br><span class="line"><span class="string">    grads -- 梯度</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    W1 = parameters[<span class="string">&#x27;W1&#x27;</span>]</span><br><span class="line">    b1 = parameters[<span class="string">&#x27;b1&#x27;</span>]</span><br><span class="line">    W2 = parameters[<span class="string">&#x27;W2&#x27;</span>]</span><br><span class="line">    b2 = parameters[<span class="string">&#x27;b2&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    dW1 = grads[<span class="string">&#x27;dW1&#x27;</span>]</span><br><span class="line">    db1 = grads[<span class="string">&#x27;db1&#x27;</span>]</span><br><span class="line">    dW2 = grads[<span class="string">&#x27;dW2&#x27;</span>]</span><br><span class="line">    db2 = grads[<span class="string">&#x27;db2&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 根据梯度和学习率来更新参数，使其更优</span></span><br><span class="line">    W1 = W1 - learning_rate * dW1</span><br><span class="line">    b1 = b1 - learning_rate * db1</span><br><span class="line">    W2 = W2 - learning_rate * dW2</span><br><span class="line">    b2 = b2 - learning_rate * db2</span><br><span class="line">    </span><br><span class="line">    parameters = &#123;<span class="string">&quot;W1&quot;</span>: W1,</span><br><span class="line">                  <span class="string">&quot;b1&quot;</span>: b1,</span><br><span class="line">                  <span class="string">&quot;W2&quot;</span>: W2,</span><br><span class="line">                  <span class="string">&quot;b2&quot;</span>: b2&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters	</span><br></pre></td></tr></table></figure>
+<h4 id="把函数组合在一起">把函数组合在一起</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上面已经将各个所需的功能函数都编写好了。现在我们将它们组合在一个大函数中来构建出一个训练模型。</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">nn_model</span>(<span class="params">X, Y, n_h, num_iterations=<span class="number">10000</span>, print_cost=<span class="literal">False</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- 输入特征</span></span><br><span class="line"><span class="string">    Y -- 标签</span></span><br><span class="line"><span class="string">    n_h -- 隐藏层的神经元个数</span></span><br><span class="line"><span class="string">    num_iterations -- 训练多少次</span></span><br><span class="line"><span class="string">    print_cost -- 是否打印出成本</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(<span class="number">3</span>)</span><br><span class="line">    n_x = X.shape[<span class="number">0</span>] <span class="comment"># 根据输入特征的维度得出输入层的神经元个数</span></span><br><span class="line">    n_y = Y.shape[<span class="number">0</span>] <span class="comment"># 根据标签的维度得出输出层的神经元个数</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化参数</span></span><br><span class="line">    parameters = initialize_parameters(n_x, n_h, n_y)</span><br><span class="line">    W1 = parameters[<span class="string">&#x27;W1&#x27;</span>]</span><br><span class="line">    b1 = parameters[<span class="string">&#x27;b1&#x27;</span>]</span><br><span class="line">    W2 = parameters[<span class="string">&#x27;W2&#x27;</span>]</span><br><span class="line">    b2 = parameters[<span class="string">&#x27;b2&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 在这个循环里进行训练，一次一次地对参数进行优化</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, num_iterations):</span><br><span class="line">        <span class="comment"># 进行前向传播</span></span><br><span class="line">        A2, cache = forward_propagation(X, parameters)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算出本次的成本</span></span><br><span class="line">        cost = compute_cost(A2, Y, parameters)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># 进行反向传播。根据前向传播得到的一些值算出梯度。</span></span><br><span class="line">        grads = backward_propagation(parameters, cache, X, Y)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># 根据梯度对参数进行一次优化（下降）</span></span><br><span class="line">        parameters = update_parameters(parameters, grads)</span><br><span class="line">                </span><br><span class="line">        <span class="comment"># 将本次训练的成本打印出来</span></span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;在训练%i次后，成本是: %f&quot;</span> % (i, cost))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<h4 id="预测新数据">预测新数据</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们已经可以通过上面的函数来进行参数训练。</span></span><br><span class="line"><span class="comment"># 这个函数可以利用上面学习到的参数来对新数据进行预测</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">parameters, X</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;    </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    parameters -- 训练得出的参数（学习到的参数）</span></span><br><span class="line"><span class="string">    X -- 预测数据</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 预测其实就是简单地执行一次前向传播</span></span><br><span class="line">    A2, cache = forward_propagation(X, parameters)</span><br><span class="line">    predictions = np.<span class="built_in">round</span>(A2) <span class="comment"># 对结果进行四舍五入，小于0.5就是0，否则就是1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> predictions</span><br></pre></td></tr></table></figure>
+<h4 id="评估">评估</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 好，所有函数都实现完毕了，我们已经构建好了一个浅层神经网络了。</span></span><br><span class="line"><span class="comment"># 现在用这个浅层神经网络来执行与文章开头的单神经元网络同样的任务——将花形图案中的红蓝点区分开</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 首先是根据训练数据来进行参数学习（训练数据是与单神经元网络一样一样的）</span></span><br><span class="line">parameters = nn_model(X, Y, n_h = <span class="number">4</span>, num_iterations=<span class="number">10000</span>, print_cost=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后用训练得出的参数进行预测。</span></span><br><span class="line">predictions = predict(parameters, X)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;预测准确率是: %d&#x27;</span> % <span class="built_in">float</span>((np.dot(Y, predictions.T) + np.dot(<span class="number">1</span> - Y, <span class="number">1</span> - predictions.T)) / <span class="built_in">float</span>(Y.size) * <span class="number">100</span>) + <span class="string">&#x27;%&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将预测结果画出来。</span></span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict(parameters, x.T), X, Y.ravel())</span><br></pre></td></tr></table></figure>
+<h3 id="深层神经网络">深层神经网络</h3>
+<p>浅层神经网络只有两层。而深层神经网络可以由任意层。简单来说，就是把上一层的结果作为下一层的输入。</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200329180212175.png" alt="image-20200329180212175">
+<figcaption aria-hidden="true">image-20200329180212175</figcaption>
+</figure>
+<h4 id="核对矩阵的维度">核对矩阵的维度</h4>
+<p>编写程序的时候，我们很容易由于维度的错误而出现错误。比如下面这张图。</p>
+<figure>
+<img src="/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/image-20200329180639884.png" alt="image-20200329180639884">
+<figcaption aria-hidden="true">image-20200329180639884</figcaption>
+</figure>
+<p>输入层有2个元素，所以<span class="math inline">\(n^{[0]}=2\)</span>
+<span class="math display">\[
+W^{[l]} \rightarrow (n^{[l]},n^{[l-1]}) \\
+b^{[l]} \rightarrow (n^{[l]},1) \\
+z^{[l]} \rightarrow (n^{[l]},1) \\
+a^{[l]} \rightarrow (n^{[l]},1) \\
+da^{[l]} \rightarrow (n^{[l]},1) \\
+dz^{[l]} \rightarrow (n^{[l]},1) \\
+db^{[l]} \rightarrow (n^{[l]},1) \\
+dW^{[l]} \rightarrow (n^{[l]},n^{[l-1]}) \\
+\]</span></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://fyind.github.io">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://fyind.github.io/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">http://fyind.github.io/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><a class="post-meta__tags" href="/tags/python/">python</a></div><div class="post_share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" title="离散数学"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">离散数学</div></div></a></div><div class="next-post pull-right"><a href="/windows%E5%9F%BA%E7%A1%80/" title="windows基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">windows基础</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span class="toc-number">1.</span> <span class="toc-text">人工智能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intelligent-agent"><span class="toc-number">1.0.1.</span> <span class="toc-text">Intelligent Agent</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#percept-sequence"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">Percept sequence</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#agent-function"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">Agent function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rational-agent"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">Rational Agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#omniscience-agent"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">Omniscience agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#learning%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">Learning学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#autonomy"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">Autonomy</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#task-environment"><span class="toc-number">1.0.2.</span> <span class="toc-text">Task Environment</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fully-observablepartially-observable"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">Fully observable&#x2F;partially
+observable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#single-agentmulti-agent"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">Single-agent&#x2F;multi-agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#deterministicstochastic"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">Deterministic&#x2F;stochastic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#episodicsequential"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">Episodic&#x2F;sequential</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#discretecontinuous"><span class="toc-number">1.0.2.5.</span> <span class="toc-text">discrete&#x2F;continuous</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#staticdynamic"><span class="toc-number">1.0.2.6.</span> <span class="toc-text">static&#x2F;dynamic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#knownunknown"><span class="toc-number">1.0.2.7.</span> <span class="toc-text">known&#x2F;unknown</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#agent-types"><span class="toc-number">1.0.3.</span> <span class="toc-text">Agent Types</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#simple-reflex-agents"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">simple reflex agents</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#model-based-reflex-agents"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">model-based reflex agents</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#goal-based-agents"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">goal-based agents</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#utility-based-agents"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">utility-based agents</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#learning-agents"><span class="toc-number">1.0.3.5.</span> <span class="toc-text">Learning agents</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#constraint-satisfaction-problems"><span class="toc-number">1.1.</span> <span class="toc-text">Constraint Satisfaction
+Problems</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">限制的种类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">人工智能深度学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9"><span class="toc-number">2.1.</span> <span class="toc-text">模型评估与选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E8%AF%AF%E5%B7%AE%E4%B8%8E%E8%BF%87%E6%8B%9F%E5%90%88"><span class="toc-number">2.1.1.</span> <span class="toc-text">经验误差与过拟合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E7%8E%87"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">错误率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AF%E5%B7%AE"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">误差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88"><span class="toc-number">2.1.1.3.</span> <span class="toc-text">过拟合和欠拟合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%95%99%E5%87%BA%E6%B3%95"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">留出法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E6%B3%95"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">交叉验证法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A9%E6%B3%95"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">自助法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%8F%82%E4%B8%8E%E6%9C%80%E7%BB%88%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.2.4.</span> <span class="toc-text">调参与最终模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F"><span class="toc-number">2.1.3.</span> <span class="toc-text">性能度量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E7%8E%87%E5%92%8C%E7%B2%BE%E5%BA%A6"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">错误率和精度</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E7%8E%87-1"><span class="toc-number">2.1.3.1.1.</span> <span class="toc-text">错误率</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B2%BE%E5%BA%A6"><span class="toc-number">2.1.3.1.2.</span> <span class="toc-text">精度</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E5%87%86%E7%8E%87%E6%9F%A5%E5%85%A8%E7%8E%87%E4%B8%8Ef1"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">查准率，查全率与F1</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">2.2.</span> <span class="toc-text">人工智能基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.2.</span> <span class="toc-text">激活函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.3.</span> <span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="toc-number">2.2.4.</span> <span class="toc-text">梯度下降</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">计算图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%9A%84%E5%81%8F%E5%AF%BC%E6%95%B0"><span class="toc-number">2.2.4.2.</span> <span class="toc-text">计算梯度下降的偏导数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%8C%96"><span class="toc-number">2.2.5.</span> <span class="toc-text">向量化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python%E7%8E%AF%E5%A2%83"><span class="toc-number">2.2.6.</span> <span class="toc-text">Python环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">2.2.7.</span> <span class="toc-text">写程序的前置知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hd5%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.7.1.</span> <span class="toc-text">HD5文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#numpy%E8%AF%AD%E6%B3%95"><span class="toc-number">2.2.7.2.</span> <span class="toc-text">numpy语法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#shape"><span class="toc-number">2.2.7.2.1.</span> <span class="toc-text">shape</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#reshape"><span class="toc-number">2.2.7.2.2.</span> <span class="toc-text">reshape</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t-%E8%BD%AC%E7%BD%AE"><span class="toc-number">2.2.7.2.3.</span> <span class="toc-text">T： 转置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%96%E5%87%BA%E5%88%97"><span class="toc-number">2.2.7.2.4.</span> <span class="toc-text">取出列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E8%A1%8C%E5%88%97"><span class="toc-number">2.2.7.2.5.</span> <span class="toc-text">交换行列</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.7.2.6.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E5%87%BD%E6%95%B0exp"><span class="toc-number">2.2.7.2.7.</span> <span class="toc-text">指数函数exp</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B1%82%E5%92%8Csum"><span class="toc-number">2.2.7.2.8.</span> <span class="toc-text">求和sum</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#matplotlib"><span class="toc-number">2.2.7.3.</span> <span class="toc-text">matplotlib</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">2.2.8.</span> <span class="toc-text">Python第一个机器学习的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%BA%93%E5%92%8C%E6%95%B0%E6%8D%AE"><span class="toc-number">2.2.8.1.</span> <span class="toc-text">加载库和数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">2.2.8.2.</span> <span class="toc-text">预处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.8.3.</span> <span class="toc-text">编写工具函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#sigmoid"><span class="toc-number">2.2.8.3.1.</span> <span class="toc-text">sigmoid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-1"><span class="toc-number">2.2.8.3.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%91%E5%89%8D%E4%BC%A0%E6%92%AD%E5%92%8C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-number">2.2.8.3.3.</span> <span class="toc-text">向前传播和反向传播</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0w%E5%92%8Cb"><span class="toc-number">2.2.8.3.4.</span> <span class="toc-text">更新w和b</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.8.3.5.</span> <span class="toc-text">预测函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E5%87%BD%E6%95%B0%E7%BB%84%E5%90%88"><span class="toc-number">2.2.8.4.</span> <span class="toc-text">将函数组合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">2.2.9.</span> <span class="toc-text">浅层神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%90%91%E5%89%8D%E4%BC%A0%E6%92%AD"><span class="toc-number">2.2.9.1.</span> <span class="toc-text">计算向前传播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-number">2.2.9.2.</span> <span class="toc-text">计算反向传播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0-1"><span class="toc-number">2.2.9.3.</span> <span class="toc-text">激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#sigmoid-1"><span class="toc-number">2.2.9.3.1.</span> <span class="toc-text">sigmoid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#tanh"><span class="toc-number">2.2.9.3.2.</span> <span class="toc-text">tanh</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#relu"><span class="toc-number">2.2.9.3.3.</span> <span class="toc-text">relu</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#leaky-relu"><span class="toc-number">2.2.9.3.4.</span> <span class="toc-text">leaky relu</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.9.4.</span> <span class="toc-text">随机初始化参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E7%BC%96%E5%86%99%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">2.2.10.</span> <span class="toc-text">实战编写浅层神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#python%E7%9F%A5%E8%AF%86"><span class="toc-number">2.2.10.1.</span> <span class="toc-text">Python知识</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ravel%E6%89%81%E5%B9%B3%E5%8C%96"><span class="toc-number">2.2.10.1.1.</span> <span class="toc-text">ravel扁平化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#matplotlib.pyplot.scatter%E7%BB%98%E5%88%B6%E6%95%A3%E7%82%B9"><span class="toc-number">2.2.10.1.2.</span> <span class="toc-text">matplotlib.pyplot.scatter绘制散点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sklearn%E5%8D%95%E7%A5%9E%E7%BB%8F%E5%85%83%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.2.10.1.3.</span> <span class="toc-text">sklearn单神经元学习</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.10.2.</span> <span class="toc-text">库文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.10.3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.10.3.1.</span> <span class="toc-text">初始化参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%91%E5%89%8D%E4%BC%A0%E6%92%AD"><span class="toc-number">2.2.10.3.2.</span> <span class="toc-text">向前传播</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%88%90%E6%9C%AC%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.10.3.3.</span> <span class="toc-text">计算成本函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-number">2.2.10.3.4.</span> <span class="toc-text">反向传播</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D-1"><span class="toc-number">2.2.10.3.5.</span> <span class="toc-text">梯度下降</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%8A%E5%87%BD%E6%95%B0%E7%BB%84%E5%90%88%E5%9C%A8%E4%B8%80%E8%B5%B7"><span class="toc-number">2.2.10.4.</span> <span class="toc-text">把函数组合在一起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="toc-number">2.2.10.5.</span> <span class="toc-text">预测新数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0"><span class="toc-number">2.2.10.6.</span> <span class="toc-text">评估</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-number">2.2.11.</span> <span class="toc-text">深层神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%AF%B9%E7%9F%A9%E9%98%B5%E7%9A%84%E7%BB%B4%E5%BA%A6"><span class="toc-number">2.2.11.1.</span> <span class="toc-text">核对矩阵的维度</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/" title="统计学基础">统计学基础</a><time datetime="2021-11-18T15:41:01.000Z" title="Created 2021-11-18 16:41:01">2021-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93DIV1C/" title="刷题总结DIV1C">刷题总结DIV1C</a><time datetime="2021-10-30T20:10:14.000Z" title="Created 2021-10-30 22:10:14">2021-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" title="非线性优化">非线性优化</a><time datetime="2021-10-22T15:26:33.000Z" title="Created 2021-10-22 17:26:33">2021-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" title="线性规划">线性规划</a><time datetime="2021-10-13T12:29:31.000Z" title="Created 2021-10-13 14:29:31">2021-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算">二进制与位运算</a><time datetime="2021-09-23T11:53:43.000Z" title="Created 2021-09-23 13:53:43">2021-09-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fyind</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

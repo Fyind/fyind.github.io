@@ -1,0 +1,842 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>理论计算机学 | Hexo</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Formale Sprachen 语言问题(Wortproblem)：给定一个字符串，这个字符串是由某个语法生成的吗？也就是它是否符合某个语法规则。 识别器(Recognizer): 一个能解决对应语法的语言问题的抽象 基本概念 定义2.1  一个字母表(Alphabet) \(\Sigma\) 是一个有限集合。比如 ASCII, Unicode 一个语句(Wort&#x2F;String">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理论计算机学">
+<meta property="og:url" content="http://fyind.github.io/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Formale Sprachen 语言问题(Wortproblem)：给定一个字符串，这个字符串是由某个语法生成的吗？也就是它是否符合某个语法规则。 识别器(Recognizer): 一个能解决对应语法的语言问题的抽象 基本概念 定义2.1  一个字母表(Alphabet) \(\Sigma\) 是一个有限集合。比如 ASCII, Unicode 一个语句(Wort&#x2F;String">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.github.io/img/pic1.PNG">
+<meta property="article:published_time" content="2020-04-25T09:45:12.000Z">
+<meta property="article:modified_time" content="2021-10-12T17:34:56.405Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="理论计算机学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.github.io/img/pic1.PNG"><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.github.io/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '理论计算机学',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-12 19:34:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/pic1.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/a3.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">理论计算机学</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-04-25T09:45:12.000Z" title="Created 2020-04-25 11:45:12">2020-04-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-10-12T17:34:56.405Z" title="Updated 2021-10-12 19:34:56">2021-10-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="理论计算机学"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="formale-sprachen">Formale Sprachen</h2>
+<p><strong>语言问题</strong>(Wortproblem)：给定一个字符串，这个字符串是由某个语法生成的吗？也就是它是否符合某个语法规则。</p>
+<p><strong>识别器</strong>(Recognizer):
+一个能解决对应语法的语言问题的抽象</p>
+<h3 id="基本概念">基本概念</h3>
+<h4 id="定义2.1">定义2.1</h4>
+<ul>
+<li><p>一个字母表(Alphabet) <span class="math inline">\(\Sigma\)</span>
+是一个有限集合。比如 ASCII, Unicode</p></li>
+<li><p>一个语句(Wort/String) 是从字母表中组合出的有限字母序列，比如
+010</p></li>
+<li><p><span class="math inline">\(|w|\)</span> 指代语句的长度</p></li>
+<li><p>空字符串是 $$</p></li>
+<li><p>若 <span class="math inline">\(u,v\)</span> 是语句，那么 <span class="math inline">\(uv\)</span> 是它们的组合(Konkatenation)</p></li>
+<li><p>若 <span class="math inline">\(w\)</span> 是一个语句，那么 <span class="math inline">\(w^{n}\)</span> 是如下定义的： <span class="math display">\[
+w^{0}=\epsilon \text { , } w^{n+1}=w w^{n} . \text { Bsp: }(a b)^{3}=a b
+a b a b
+\]</span></p></li>
+<li><p><span class="math inline">\(\Sigma ^{*}\)</span> 是字符集 <span class="math inline">\(\Sigma\)</span> 的所有语句</p></li>
+<li><p>子集 <span class="math inline">\(L \subseteq \Sigma^{*}\)</span>
+是一个语言(formale Sprache)</p></li>
+</ul>
+<h4 id="定义2.3-语言的操作">定义2.3 语言的操作</h4>
+<ul>
+<li>连接: <span class="math inline">\(AB = \{uv | u \in A \land v \in
+B\}\)</span></li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{l}
+\text { Bsp: }\{a b, b\}\{a, b b\}=\{a b a, a b b b, b a, b b b\} \\
+\text { NB: }\{a b, b\} \times\{a, b b\}=\{(a b, a),(a b, b b),(b,
+a),(b, b b)\}
+\end{array}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(A^{n}=\left\{w_{1} \cdots w_{n} | w_{1},
+\ldots, w_{n} \in A\right\}=\underbrace{A \cdots A}_{n}\)</span></li>
+<li><span class="math inline">\(A^{*}=\left\{w_{1} \cdots w_{n} | n \geq
+0 \wedge w_{1}, \ldots, w_{n} \in A\right\}=\bigcup_{n \in N }
+A^{n}\)</span></li>
+<li><span class="math inline">\(A^{+}=A A^{*}=\bigcup_{n \ge 1}
+A^{n}\)</span></li>
+</ul>
+<h5 id="计算规则">计算规则</h5>
+<ul>
+<li><span class="math inline">\(\emptyset A=\emptyset\)</span></li>
+<li><span class="math inline">\(\{\epsilon\} A=A\)</span></li>
+<li><span class="math inline">\(A(B \cup C)=A B \cup A C\)</span></li>
+<li><span class="math inline">\((A \cup B) C=A C \cup B C\)</span></li>
+<li><span class="math inline">\(A^{*} A^{*}=A^{*}\)</span></li>
+</ul>
+<h4 id="定义-2.7-语法">定义 2.7 语法</h4>
+<p>一个语法(Grammatik)是4元组 <span class="math inline">\(G = (V,
+\Sigma, P, S)\)</span></p>
+<p><span class="math inline">\(V\)</span> 是变量符号集合(Menge von
+Nichtterminalzeichen), 它是组织语言的字符。</p>
+<p><span class="math inline">\(\Sigma\)</span> 是字符集(Menge von
+Terminalzeichen)</p>
+<p><span class="math inline">\(P \subseteq(V \cup \Sigma)^{*} \times(V
+\cup \Sigma)^{*}\)</span> 是Produktionen的有限集合</p>
+<p><span class="math inline">\(S \in V\)</span> 是其实字符</p>
+<h5 id="一些约定">一些约定</h5>
+<ul>
+<li><p><span class="math inline">\(A, B, C, \ldots\)</span> 和 <span class="math inline">\(\langle\text { Term }\rangle,\langle\text { Faktor
+}\rangle\)</span>是 Nichtterminale,</p></li>
+<li><p><span class="math inline">\(a, b, c, \ldots\)</span>
+是Terminale</p></li>
+<li><p><span class="math inline">\(\alpha, \beta, \gamma, \ldots \in(V
+\cup \Sigma)^{*}\)</span></p></li>
+<li><p>Produktion 写成 <span class="math inline">\(\alpha \rightarrow
+\beta\)</span> ,代替 <span class="math inline">\((\alpha, \beta) \in
+P\)</span></p></li>
+<li><p>多个Produktion：<span class="math inline">\(\alpha \rightarrow
+\beta_{1}|\cdots| \beta_{n}\)</span></p></li>
+</ul>
+<p>比如算数表达式</p>
+<ul>
+<li><p><span class="math inline">\(V=\{\langle E x p
+r\rangle,\langle\text { Term }\rangle,\langle F a k t o
+r\rangle\}\)</span></p></li>
+<li><p><span class="math inline">\(\Sigma=\{a, b, c,+,
+*,(,)\}\)</span></p></li>
+<li><p><span class="math inline">\(S=\langle E x p
+r\rangle\)</span></p></li>
+<li><p><span class="math inline">\(P\)</span> 如下: <span class="math display">\[
+\begin{aligned}
+\langle Expr \rangle &amp; \rightarrow\langle\text { Term }\rangle \\
+\langle Expr \rangle &amp; \rightarrow\langle Expr \rangle+\langle\text
+{ Term }\rangle \\
+\langle Term \rangle &amp; \rightarrow\langle Factor \rangle \\
+\langle Term \rangle &amp; \rightarrow\langle\text { Term }\rangle
+*\langle Factor \rangle \\
+\langle Factor \rangle &amp; \rightarrow a|b| c \\
+\langle Factor \rangle &amp; \rightarrow(\langle Expr \rangle)
+\end{aligned}
+\]</span></p></li>
+</ul>
+<h4 id="定义2.9">定义2.9</h4>
+<p>一个语法 <span class="math inline">\(G=(V, \Sigma, P, S)\)</span>
+有一个推导关系 (Ableitungsrelation) <span class="math inline">\(\rightarrow _{G}\)</span> 在<span class="math inline">\(V \cup \Sigma\)</span> 上： <span class="math display">\[
+\alpha \rightarrow_{G} \alpha^{\prime}
+\]</span> 当且仅当： <span class="math inline">\(P\)</span> 里有一个规则
+<span class="math inline">\(\beta \rightarrow \beta^{\prime}\)</span>
+和语句 <span class="math inline">\(\alpha_{1}, \alpha_{2}\)</span>，使得
+<span class="math display">\[
+\alpha=\alpha_{1} \beta \alpha_{2} \quad \text { und } \quad
+\alpha^{\prime}=\alpha_{1} \beta^{\prime} \alpha_{2}
+\]</span>
+比如，下面的两个表达式可以互相转换(Term可以拆开来看，也可以组合起来看)：
+<span class="math display">\[
+a+\langle\text { Term }\rangle+b \quad \rightarrow_{G} \quad
+a+\langle\text { Term }\rangle *\langle\text { Factor }\rangle+b
+\]</span> 一个序列 <span class="math inline">\(\alpha_{1}
+\rightarrow_{G} \cdots \rightarrow_{G} \alpha_{n}\)</span> 是从 <span class="math inline">\(\alpha _{1}\)</span> 到 <span class="math inline">\(\alpha _{n}\)</span> 的推导(Ableitung)</p>
+<p>若 <span class="math inline">\(\alpha_{1}=S\)</span> 且 <span class="math inline">\(\alpha_{n} \in \Sigma^{*}\)</span> 那么 <span class="math inline">\(G\)</span> 生成了(erzeugt) <span class="math inline">\(\alpha_{n}\)</span></p>
+<p><span class="math inline">\(G\)</span> 的语言是所有 <span class="math inline">\(G\)</span> 能生成的语句的集合, 记为 <span class="math inline">\(L(G)\)</span></p>
+<h4 id="定义2.12-推导的迭代">定义2.12 推导的迭代</h4>
+<p>也就是推导多次的关系： <span class="math display">\[
+\begin{array}{c}
+\alpha \rightarrow_{G}^{0} \alpha \\
+\alpha \rightarrow_{G}^{n+1} \gamma \quad: \Leftrightarrow \quad \exists
+\beta . \alpha \rightarrow_{G}^{n} \beta \rightarrow_{G} \gamma
+\end{array}
+\]</span> 写成闭包： <span class="math display">\[
+\alpha \rightarrow_{G}^{*} \beta \quad: \Leftrightarrow \quad \exists n
+. \alpha \rightarrow_{G}^{n} \beta \\
+\alpha \rightarrow_{G}^{+} \beta \quad: \Leftrightarrow \quad \exists
+n&gt;0 . \alpha \rightarrow_{G}^{n} \beta
+\]</span> 于是语言的定义还可以这样： <span class="math inline">\(L(G)=\left\{w \in \Sigma^{*} | S
+\rightarrow_{G}^{*} w\right\}\)</span></p>
+<h4 id="乔姆斯基谱系chomsky-hierarchie">乔姆斯基谱系(Chomsky-Hierarchie)</h4>
+<p>一个语法 <span class="math inline">\(G\)</span> 是：</p>
+<ul>
+<li>Typ 0 (Phrasenstrukturgrammatik )全部都是</li>
+<li>Typ 1 (Kontextsensitive Grammatik)若对于每个Produktion <span class="math inline">\(\alpha \rightarrow \beta\)</span> 除了<span class="math inline">\(S \rightarrow \epsilon\)</span> 满足 <span class="math inline">\(|\alpha|
+\leq|\beta|\)</span>。也就是每次不会减少长度</li>
+<li>Typ 2 (Kontextfreie Grammatik)若它是Typ 1 且对于每个 Produktion
+<span class="math inline">\(\alpha \rightarrow \beta\)</span>,满足<span class="math inline">\(\alpha \in V\)</span></li>
+<li>Typ 3 ( Rechtslineare Grammatik)若是 Typ 2, 若对于每个Produktion
+<span class="math inline">\(\alpha \rightarrow \beta\)</span> 除了<span class="math inline">\(S \rightarrow \epsilon\)</span> 满足 <span class="math inline">\(\beta \in \Sigma \cup \Sigma V\)</span></li>
+</ul>
+<h3 id="正则表达式">正则表达式</h3>
+<h4 id="定义3.1-确定有限自动机deterministische-endliche-automatendfa">定义3.1
+确定有限自动机Deterministische endliche Automaten（DFA）</h4>
+<p><img src="https://i.loli.net/2021/05/14/kSnRGXfNT5vuMc1.png" alt="image-20210514081810448" style="zoom:50%;"></p>
+<p><span class="math inline">\(M=\left(Q, \Sigma, \delta, q_{0},
+F\right)\)</span> 是一个确定有限状态自动机</p>
+<ul>
+<li><p>有限的状态集合 <span class="math inline">\(Q\)</span></p></li>
+<li><p>有限的输入字符集Eingabealphabet <span class="math inline">\(\Sigma\)</span></p></li>
+<li><p>一个完全(total)的传递函数 <span class="math inline">\(\delta: Q
+\times \Sigma \rightarrow Q\)</span></p></li>
+<li><p>一个开始状态 <span class="math inline">\(q_0\)</span></p></li>
+<li><p>终止状态的集合 <span class="math inline">\(F \subseteq
+Q\)</span></p></li>
+</ul>
+<h4 id="定义3.2-语言">定义3.2 语言</h4>
+<p>被 <span class="math inline">\(M\)</span> 接受的语言是 <span class="math display">\[
+L(M):=\left\{w \in \Sigma^{*} \mid \hat{\delta}\left(q_{0}, w\right) \in
+F\right\}
+\]</span> 其中 <span class="math inline">\(\hat{\delta}: Q \times
+\Sigma^{*} \rightarrow Q\)</span> 是递归定义的： <span class="math display">\[
+\begin{aligned}
+\hat{\delta}(q, \epsilon) &amp;=q \\
+\hat{\delta}(q, a w) &amp;=\hat{\delta}(\delta(q, a), w) \text { für } a
+\in \Sigma, w \in \Sigma^{*}
+\end{aligned}
+\]</span> 一个语言是正则的(regulär)，当且仅当它被一个 <span class="math inline">\(DFA\)</span> 所接受</p>
+<p><span class="math inline">\(\hat{\delta}\)</span> 的性质</p>
+<ul>
+<li><span class="math inline">\(\hat{\delta}(q, a)=\delta(q,
+a)\)</span></li>
+<li><span class="math inline">\(\hat{\delta}(q, w
+a)=\delta(\hat{\delta}(q, w), a)\)</span></li>
+</ul>
+<h4 id="定义3.8-非确定有限自动机nfa">定义3.8
+非确定有限自动机（NFA）</h4>
+<p><span class="math inline">\(N=\left(Q, \Sigma, \delta, q_{0},
+F\right)\)</span> 是一个非确定有限自动机</p>
+<ul>
+<li><span class="math inline">\(Q,\Sigma,q_0,F\)</span> 和DFA一样</li>
+<li><span class="math inline">\(\delta: Q \times \Sigma \rightarrow
+\mathcal{P}(Q)\)</span></li>
+</ul>
+<figure>
+<img src="https://i.loli.net/2021/05/14/JduIaZF6ML3GPCW.png" alt="image-20210514082957779">
+<figcaption aria-hidden="true">image-20210514082957779</figcaption>
+</figure>
+<h4 id="定理-3.9-rechtslineare-grammatik和nfa">定理 3.9 rechtslineare
+Grammatik和NFA</h4>
+<p>对于每个rechtslineare Grammatik <span class="math inline">\(G\)</span> 存在一个 NFA <span class="math inline">\(M\)</span> 使得 <span class="math display">\[
+L(G)=L(M)
+\]</span></p>
+<h4 id="定理-3.10-dfa和nfa">定理 3.10 DFA和NFA</h4>
+<p>对于每个NFA <span class="math inline">\(N\)</span> 存在一个 DFA <span class="math inline">\(M\)</span> 使得 <span class="math display">\[
+L(N) = L(M)
+\]</span></p>
+<h4 id="定理-3.12-dfa-的状态">定理 3.12 DFA 的状态</h4>
+<p><span class="math display">\[
+L_{k}:=\left\{w \in\{0,1\}^{*} \mid \text { das } k \text {-letzte Bit
+von } w \text { ist } 1\right\}
+\]</span></p>
+<p>每个 DFA <span class="math inline">\(M\)</span>,且 <span class="math inline">\(L(M)=L_k\)</span> 有至少 <span class="math inline">\(2^{k}\)</span> 个状态</p>
+<h4 id="定理-3.13-dfa和-g">定理 3.13 DFA和 G</h4>
+<p>对于每个 DFA <span class="math inline">\(M\)</span> , 存在一个
+rechtslineare Grammatik <span class="math inline">\(G\)</span> 使得
+<span class="math display">\[
+L(M) = L (G)
+\]</span></p>
+<h4 id="定义-3.15-epsilon-nfa">定义 3.15 (<span class="math inline">\(\epsilon\)</span>-NFA)</h4>
+<p>一个 NFA 带有 <span class="math inline">\(\epsilon\)</span>-传递
+(<span class="math inline">\(\epsilon\)</span>-NFA) 是一个 NFA,
+它带有一个特殊字符 <span class="math inline">\(\epsilon \notin
+\Sigma\)</span> <span class="math display">\[
+\delta: Q \times(\Sigma \cup\{\epsilon\}) \rightarrow \mathcal{P}(Q)
+\]</span></p>
+<h4 id="定理3.16-epsilon-nfa和-nfa">定理3.16 (<span class="math inline">\(\epsilon\)</span>-NFA)和 NFA</h4>
+<p>对于每个 <span class="math inline">\(\epsilon\)</span>-NFA <span class="math inline">\(N\)</span> 存在一个 NFA <span class="math inline">\(N&#39;\)</span> 使得 <span class="math inline">\(L(N)=L(N&#39;)\)</span></p>
+<h4 id="定义-3.19-正则表达式">定义 3.19 正则表达式</h4>
+<p>正则表达式是归纳定义的：</p>
+<ul>
+<li><p><span class="math inline">\(\empty\)</span>
+是一个正则表达式</p></li>
+<li><p><span class="math inline">\(\epsilon\)</span>
+是一个正则表达式</p></li>
+<li><p>对于每个 <span class="math inline">\(a \in \Sigma\)</span>
+是一个正则表达式</p></li>
+<li><p>当 <span class="math inline">\(\alpha,\beta\)</span>
+是正则表达式时</p>
+<ul>
+<li><span class="math inline">\(\alpha \beta\)</span></li>
+<li><span class="math inline">\(\alpha | \beta\)</span></li>
+<li><span class="math display">\[\alpha ^{*}\]</span></li>
+</ul>
+<p>是正则表达式</p></li>
+<li><p>其他都不是正则表达式</p></li>
+</ul>
+<h4 id="定义-3.20-正则表达式的语言">定义 3.20 正则表达式的语言</h4>
+<p>对于一个正则表达式 <span class="math inline">\(\gamma\)</span>
+，<span class="math inline">\(L(\gamma)\)</span> 如下定义 <span class="math display">\[
+\begin{array}{l}
+L(\emptyset)=\emptyset \\
+L(\boldsymbol{\epsilon})=\{\epsilon\} \\
+L(a)=\{a\} \\
+L(\alpha \beta)=L(\alpha) L(\beta) \\
+L(\alpha \mid \beta)=L(\alpha) \cup L(\beta) \\
+L\left(\alpha^{*}\right)=L(\alpha)^{*}
+\end{array}
+\]</span></p>
+<h4 id="定理-3.23-kleene">定理 3.23 Kleene</h4>
+<p>一个语言<span class="math inline">\(L \subseteq
+\Sigma^{*}\)</span>可以通过正则表达式表达，当且仅当它是正则的</p>
+<h4 id="定理-3.34-运算">定理 3.34 运算</h4>
+<p>若 <span class="math inline">\(R, R_{1}, R_{2} \subseteq
+\Sigma^{*}\)</span> 是正则语言，那么 <span class="math display">\[
+R_{1} R_{2}, R_{1} \cup R_{2}, R^{*}, \bar{R}\left(:=\Sigma^{*}
+\backslash R\right), R_{1} \cap R_{2}, R_{1} \backslash R_{2}
+\]</span> 也是正则语言</p>
+<h4 id="定理-3.25">定理 3.25</h4>
+<p>若 <span class="math inline">\(M_{1}=\left(Q_{1}, \Sigma, \delta_{1},
+s_{1}, F_{i}\right)\)</span> 和 <span class="math inline">\(M_{2}=\left(Q_{2}, \Sigma, \delta_{2}, s_{2},
+F_{2}\right)\)</span> 都是DFA 那么他们的乘法自动机Produkt-Automat是
+<span class="math display">\[
+\begin{array}{c}
+M:=\left(Q_{1} \times Q_{2}, \Sigma, \delta,\left(s_{1}, s_{2}\right),
+F_{1} \times F_{2}\right) \\
+\delta\left(\left(q_{1}, q_{2}\right),
+a\right):=\left(\delta_{1}\left(q_{1}, a\right), \delta_{2}\left(q_{2},
+a\right)\right)
+\end{array}
+\]</span> 是 DFA， 它接受 <span class="math inline">\(L\left(M_{1}\right) \cap
+L\left(M_{2}\right)\)</span></p>
+<h4 id="定义-3.26-等价">定义 3.26 等价</h4>
+<p>两个正则表达式是等价的，当且仅当他们有相同的语言 <span class="math display">\[
+\alpha \equiv \beta: \Leftrightarrow L(\alpha)=L(\beta)
+\]</span></p>
+<h4 id="定理-3.27-0和1">定理 3.27 0和1</h4>
+<p><span class="math display">\[
+\begin{array}{l}
+\emptyset|\alpha \equiv \alpha| \emptyset \equiv \alpha \\
+\emptyset \alpha \equiv \alpha \emptyset \equiv \emptyset \\
+\epsilon \alpha \equiv \alpha \epsilon \equiv \alpha \\
+\emptyset^{*} \equiv \epsilon \\
+\epsilon^{*} \equiv \epsilon
+\end{array}
+\]</span></p>
+<h4 id="定理3.28-运算法则">定理3.28 运算法则</h4>
+<ul>
+<li>结合律</li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{l}
+(\alpha \mid \beta)|\gamma \equiv \alpha|(\beta \mid \gamma) \\
+(\alpha \beta) \gamma \equiv \alpha(\beta \gamma)
+\end{array}
+\]</span></p>
+<ul>
+<li>交换律</li>
+</ul>
+<p><span class="math display">\[
+\alpha|\beta \equiv \beta| \alpha
+\]</span></p>
+<ul>
+<li>分配率</li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{l}
+\alpha(\beta \mid \gamma) \equiv \alpha \beta \mid \alpha \gamma \\
+(\alpha \mid \beta) \gamma \equiv \alpha \gamma \mid \beta \gamma
+\end{array}
+\]</span></p>
+<ul>
+<li>幂等元</li>
+</ul>
+<p><span class="math display">\[
+\alpha \mid \alpha \equiv \alpha
+\]</span></p>
+<h4 id="定理-3.29-运算法则2">定理 3.29 运算法则2</h4>
+<p><span class="math display">\[
+\begin{array}{c}
+\boldsymbol{\epsilon} \mid \alpha \alpha^{*} \equiv \alpha^{*} \\
+\alpha^{*} \alpha \equiv \alpha \alpha^{*} \\
+\left(\alpha^{*}\right)^{*} \equiv \alpha^{*}
+\end{array}
+\]</span></p>
+<h4 id="定理-3.31-redko">定理 3.31 Redko</h4>
+<p>不存在有限的等价关系集合，从中可以推出其他所有的等价关系</p>
+<h4 id="定理-3.32-pumping-lemma-fur-reguläre-sprachen">定理 3.32 Pumping
+Lemma fur reguläre Sprachen</h4>
+<p>若 <span class="math inline">\(R \subseteq \Sigma^{*}\)</span>
+是正则的，那么存在一个 <span class="math inline">\(n&gt;0\)</span>
+,使得每个 <span class="math inline">\(z \in R\)</span> 且 <span class="math inline">\(|z| \ge n\)</span> 可以分解为 <span class="math inline">\(z=uvw\)</span>， 其中</p>
+<ul>
+<li><span class="math inline">\(v \ne \epsilon\)</span></li>
+<li><span class="math inline">\(|u v| \leq n\)</span></li>
+<li><span class="math inline">\(\forall i \geq 0 . u v^{i} w \in
+R\)</span></li>
+</ul>
+<h4 id="定理-3.33-非正则1">定理 3.33 非正则1</h4>
+<p>语言<span class="math inline">\(\left\{a^{i} b^{i} \mid i \in
+\mathbb{N}\right\}\)</span> 不是正则的</p>
+<h4 id="定理-3.34-非正则2">定理 3.34 非正则2</h4>
+<p>语言<span class="math inline">\(L=\left\{0^{m^{2}} \mid m \geq
+0\right\}\)</span> 不是正则的</p>
+<h4 id="定理-3.35-括号式子">定理 3.35 括号式子</h4>
+<p>通过括号 <span class="math inline">\(\{(,)\}\)</span>
+括起来的式子不是正则的</p>
+<h4 id="定理3.36-数学公式">定理3.36 数学公式</h4>
+<p>数学公式 arithmetischen Ausdrücken 不是正则的</p>
+<h4 id="定义-3.37-问题分类">定义 3.37 问题分类</h4>
+<p>设 <span class="math inline">\(D\)</span> 是一个 DFA, NFA, RE,
+rechtslineare Grammatik ...</p>
+<ul>
+<li>Wortproblem： 给定 <span class="math inline">\(w\)</span> 和 <span class="math inline">\(D\)</span> ，是否 <span class="math inline">\(w
+\in L(D)\)</span></li>
+<li>Leerheitsproblem : 给定 <span class="math inline">\(D\)</span> ，
+是否 <span class="math inline">\(L(D) = \empty\)</span></li>
+<li>Endlichkeitsproblem: 给定 <span class="math inline">\(D\)</span> ,
+<span class="math inline">\(L(D)\)</span> 是否有限</li>
+<li>Äquivalenzproblem：给定 <span class="math inline">\(D_1,
+D_2\)</span> 是否满足 <span class="math inline">\(L(D_1) \equiv
+L(D_2)\)</span></li>
+</ul>
+<h4 id="定理-3.38-wortproblem">定理 3.38 Wortproblem</h4>
+<p>给定 <span class="math inline">\(w\)</span> 和 DFA <span class="math inline">\(M\)</span>, Wortproblem是可以在 <span class="math inline">\(O(|w|+|M|)\)</span> 确定的</p>
+<h4 id="定理-3.39-wortproblem">定理 3.39 Wortproblem</h4>
+<p>给定 <span class="math inline">\(w\)</span> 和 NFA <span class="math inline">\(N\)</span>, Wortproblem是可以在 <span class="math inline">\(O(|Q|^2|w|+|N|)\)</span> 确定的</p>
+<h4 id="定理-3.40-leerheitsproblem">定理 3.40 Leerheitsproblem</h4>
+<p>对于 NFA和DFA， Leerheitsproblem可以分别在时间<span class="math inline">\(O\left(|Q|^{2}|\Sigma|\right)\)</span> 和 <span class="math inline">\(O\left(|Q||\Sigma|\right)\)</span> 中确定</p>
+<h4 id="定理-3.41-endlichkeitsproblem">定理 3.41
+Endlichkeitsproblem</h4>
+<p>对于 DFA和NFA，Endlichkeitsproblem是可以确定的</p>
+<h4 id="定理3.42-aquivalenzproblem">定理3.42 Aquivalenzproblem</h4>
+<p>对于DFA， Aquivalenzproblem 是可以确定的</p>
+<h4 id="定理-3.43-aquivalenzproblem-时间">定理 3.43 Aquivalenzproblem
+时间</h4>
+<p>对于 DFA， Aquivalenzproblem 可以在<span class="math inline">\(O\left(\left|Q_{1}\right|\left|Q_{2}\right||\Sigma|\right)\)</span>
+中确定</p>
+<h4 id="定理-3.44">定理 3.44</h4>
+<p>对于NFA， Aquivalenzproblem 可以在 <span class="math inline">\(O\left(2^{\left|Q_{1}\right|+\left|Q_{2}\right|}\right)\)</span>
+中确定</p>
+<h4 id="定理-3.45">定理 3.45</h4>
+<p>对于正则表达式，Aquivalenzproblem 是可以确定的</p>
+<h4 id="定理3.47-ardens-lemma">定理3.47 Ardens Lemma</h4>
+<p><span class="math display">\[
+X \equiv \alpha X \mid \beta \quad \Longrightarrow \quad X \equiv
+\alpha^{*} \beta
+\]</span></p>
+<p>用于解方程，解出正则表达式</p>
+<h3 id="minimierung-endlicher-automaten">Minimierung endlicher
+Automaten</h3>
+<figure>
+<img src="/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/image-20211012183354987.png" alt="image-20211012183354987">
+<figcaption aria-hidden="true">image-20211012183354987</figcaption>
+</figure>
+<p>首先×掉所有终止状态和非终止状态的对，然后考虑每个对，看它下一个位置是不是一样的。如果有不一样的就x掉.</p>
+<h4 id="definition-3.52-äquivalenz-von-zuständen">Definition 3.52
+(Äquivalenz von Zuständen)</h4>
+<p><span class="math display">\[
+p \equiv{ }_{M} q \quad \Leftrightarrow \quad\left(\forall w \in
+\Sigma^{*} . \hat{\delta}(p, w) \in F \Leftrightarrow \hat{\delta}(q, w)
+\in F\right)
+\]</span></p>
+<h4 id="定理-3.56">定理 3.56</h4>
+<p>若 <span class="math inline">\(M\)</span> 是
+DFA且没有无法到达的状态，那么 <span class="math inline">\(M /
+\equiv\)</span> 是最小的DFA</p>
+<h4 id="satz-3.60-myhill-nerode">Satz 3.60 (Myhill-Nerode)</h4>
+<p>一个语言是正则的，当且仅当它有有限个等价类</p>
+<h2 id="kontextfreie-sprache">Kontextfreie Sprache</h2>
+<h4 id="定义-4.18">定义 4.18</h4>
+<p>一个 CFG <span class="math inline">\(G\)</span> 是mehrdeutig
+的，若有一个 <span class="math inline">\(w\)</span>
+，它的Syntaxbaum有多个</p>
+<h4 id="定理-4.20">定理 4.20</h4>
+<p><span class="math display">\[
+\left\{a^{i} b^{j} c^{k} \mid i=j \vee j=k\right\}
+\]</span></p>
+<p>是mehrdeutig 的</p>
+<h4 id="chomsky-normalform">Chomsky-Normalform</h4>
+<p>只有 <span class="math display">\[
+A \rightarrow a \quad \text { oder } \quad A \rightarrow B C
+\]</span></p>
+<h4 id="epsilon-produktion"><span class="math inline">\(\epsilon\)</span>-Produktion</h4>
+<p><span class="math display">\[
+A \rightarrow \epsilon
+\]</span></p>
+<h4 id="kettenproduktion">Kettenproduktion</h4>
+<p><span class="math display">\[
+A \rightarrow B
+\]</span></p>
+<h4 id="构造chomsky-normalform">构造Chomsky-Normalform</h4>
+<ol type="1">
+<li>对于每个 <span class="math inline">\(a\)</span> 构造 <span class="math inline">\(A \rightarrow a\)</span></li>
+<li><span class="math inline">\(A\rightarrow BCD\)</span> 换成 <span class="math inline">\(A \rightarrow KD ,K \rightarrow BC\)</span></li>
+<li>消除所有 <span class="math inline">\(\epsilon\)</span>-Produktion</li>
+<li>消除所有 Kettenproduktion</li>
+</ol>
+<h4 id="satz-4.29-pumping-lemma">Satz 4.29 (Pumping-Lemma)</h4>
+<p>对于 kontextfreie Sprache <span class="math inline">\(L\)</span>
+存在一个 <span class="math inline">\(n \ge 1\)</span> 使得 <span class="math inline">\(z \in L\)</span> 且 <span class="math inline">\(|z|\ge n\)</span> 分解成 <span class="math display">\[
+z=u v w x y
+\]</span> 使得 <span class="math display">\[
+\begin{aligned}
+&amp;v x \neq \epsilon \\
+&amp;|v w x| \leq n, \text { und } \\
+&amp;\forall i \in \mathbb{N} . u v^{i} w x^{i} y \in L
+\end{aligned}
+\]</span></p>
+<h4 id="abschlusseigenschaften">Abschlusseigenschaften</h4>
+<p>CFG 是对于 <span class="math display">\[
+\begin{aligned}
+&amp;L\left(G_{1}\right) \cup L\left(G_{2}\right) \\
+&amp;L\left(G_{1}\right) L\left(G_{2}\right) \\
+&amp;\left(L\left(G_{1}\right)\right)^{*} \\
+&amp;\left(L\left(G_{1}\right)\right)^{R}
+\end{aligned}
+\]</span> 闭合</p>
+<p>但是对于交集和补集不是</p>
+<p><span class="math inline">\(L_{1}:=\left\{a^{i} b^{i} c^{j} \mid i, j
+\in \mathbb{N}\right\}\)</span> ist kontextfrei</p>
+<p><span class="math inline">\(L_{2}:=\left\{a^{i} b^{j} c^{j} \mid i, j
+\in \mathbb{N}\right\}\)</span> ist kontextfrei</p>
+<p><span class="math inline">\(L_{1} \cap L_{2}=\left\{a^{i} b^{i} c^{i}
+\mid i \in \mathbb{N}\right\}\)</span> ist nicht kontextfrei</p>
+<h4 id="algorithmen-fur-kontextfreie-grammatiken">4.6 Algorithmen fur
+kontextfreie Grammatiken</h4>
+<ul>
+<li>nützlich 存在从 <span class="math inline">\(S\)</span>
+推导出字符，其中 <span class="math inline">\(X\)</span> 出现</li>
+<li>erzeugend 从 <span class="math inline">\(X\)</span> 可以推导出 <span class="math inline">\(w\)</span></li>
+<li>erreichbar 从<span class="math inline">\(S\)</span> 可以到大 <span class="math inline">\(X\)</span></li>
+</ul>
+<p>nützlich 符号是erzeugend 和erreichbar</p>
+<h4 id="satz-4.36-减少-cfg">Satz 4.36 减少 CFG</h4>
+<ol type="1">
+<li>消除 nicht erzeugend 符号</li>
+<li>消除 nicht erreichbar 符号</li>
+</ol>
+<h4 id="定理-4.37">定理 4.37</h4>
+<p>erzeugend 符号的集合， erreichbaren 符号的集合是可计算的</p>
+<h4 id="定理-4.39">定理 4.39</h4>
+<p>CFG <span class="math inline">\(G\)</span> 是否是 <span class="math inline">\(\emptyset\)</span> 是可以决定的</p>
+<h4 id="cyk">CYK</h4>
+<figure>
+<img src="/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/image-20211012185656965.png" alt="image-20211012185656965">
+<figcaption aria-hidden="true">image-20211012185656965</figcaption>
+</figure>
+<h4 id="栈自动机pda">栈自动机PDA</h4>
+<p>可以操控一个栈并且push和pop的自动机</p>
+<h4 id="dpda">DPDA</h4>
+<p><span class="math display">\[
+|\delta(q, a, Z)|+|\delta(q, \epsilon, Z)| \leq 1
+\]</span></p>
+<p>要么每个字符只有一个，要么只有一个<span class="math inline">\(\epsilon\)</span></p>
+<h4 id="dcgf">DCGF</h4>
+<p>被 DPDA接受的CFG</p>
+<p>每个正则语言都是 DCFG</p>
+<h4 id="satz-4.66">Satz 4.66</h4>
+<p>DCFG 对于补集操作闭合</p>
+<h4 id="dcfl不是多意性的">DCFL不是多意性的</h4>
+<h4 id="satz-4.70">Satz 4.70</h4>
+<p>Das Wortproblem fur DCFLs ist in linearer Zeit 可解决</p>
+<figure>
+<img src="/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/image-20211012190351368.png" alt="image-20211012190351368">
+<figcaption aria-hidden="true">image-20211012190351368</figcaption>
+</figure>
+<h2 id="可决定性可计算性">可决定性可计算性</h2>
+<p>对于一个函数 <span class="math inline">\(f:A\rightarrow
+B\)</span></p>
+<ul>
+<li>total 对于所有 <span class="math inline">\(a\in A\)</span>, <span class="math inline">\(f(a)\)</span> 有定义</li>
+<li>partiell <span class="math inline">\(f(a)\)</span> 可以没有定义</li>
+<li>echt partiell 不是total的</li>
+</ul>
+<h4 id="图灵机tm">图灵机TM</h4>
+<p>有状态，可以操控指针左移右移</p>
+<p>如果没有状态了就停止</p>
+<h4 id="satz-5.22-while-tm">Satz 5.22 (WHILE → TM)</h4>
+<p>Jede WHILE-berechenbare Funktion ist auch Turing-berechenbar.</p>
+<h4 id="fakt-5.23-while-goto">Fakt 5.23 (WHILE → GOTO)</h4>
+<h4 id="satz-5.24-goto-while">Satz 5.24 (GOTO → WHILE)</h4>
+<h4 id="satz-5.27-tm-goto">Satz 5.27 (TM → GOTO)</h4>
+<h3 id="unentscheidbarkeit-des-halteproblems">5.2 Unentscheidbarkeit des
+Halteproblems</h3>
+<h4 id="可决定性">可决定性</h4>
+<p>若 <span class="math display">\[
+\chi_{A}(x):= \begin{cases}1 &amp; \text { falls } x \in A \\ 0 &amp;
+\text { falls } x \notin A\end{cases}
+\]</span> 可计算</p>
+<h4 id="定义-5.31">定义 5.31</h4>
+<p><span class="math inline">\(M[w]\)</span> 是 <span class="math inline">\(M\)</span> 输入 <span class="math inline">\(w\)</span></p>
+<p><span class="math inline">\(M[w] \downarrow\)</span> 是 <span class="math inline">\(M\)</span> 输入 <span class="math inline">\(w\)</span> 并且停止了</p>
+<h4 id="definition-5.32-spezielles-halteproblem">Definition 5.32
+(Spezielles Halteproblem)</h4>
+<p>给定 <span class="math display">\[w \in \{0,1\}^{*}\]</span>, <span class="math inline">\(M_{w}[w]\)</span>是否能停止</p>
+<h4 id="satz-5.33">Satz 5.33</h4>
+<p>Das spezielle Halteproblem ist nicht entscheidbar.</p>
+<h4 id="definition-5.34-allgemeines-halteproblem">Definition 5.34
+((Allgemeines) Halteproblem)</h4>
+<p>给定 <span class="math display">\[w,x \in \{0,1\}^{*}\]</span>, <span class="math inline">\(M_w[x]\)</span> 是否能停止</p>
+<p>Das Halteproblem H ist nicht entscheidbar.</p>
+<h4 id="definition-5.36-reduktion">Definition 5.36 (Reduktion)</h4>
+<p>Eine Menge<span class="math inline">\(A \subseteq \Sigma^{*}\)</span>
+ist reduzierbar auf eine Menge<span class="math inline">\(B \subseteq
+\Gamma^{*}\)</span> gdw es eine totale und berechenbare Funktion<span class="math inline">\(f: \Sigma^{*} \rightarrow \Gamma^{*}\)</span> gibt
+mit <span class="math display">\[
+\forall w \in \Sigma^{*} . w \in A \Leftrightarrow f(w) \in B
+\]</span> 写作 <span class="math display">\[
+A\le B
+\]</span> Falls <span class="math inline">\(A \leq B\)</span> und <span class="math inline">\(B\)</span> ist entscheidbar, so ist auch <span class="math inline">\(A\)</span> entscheidbar.</p>
+<h4 id="satz-5.40">Satz 5.40</h4>
+<p>Das Halteproblem auf leerem Band, <span class="math inline">\(H_0\)</span>, ist unentscheidbar <span class="math display">\[
+H_{0}:=\left\{w \in\{0,1\}^{*} \mid M_{w}[\epsilon] \downarrow\right\}
+\]</span></p>
+<h4 id="satz-5.48-rice">Satz 5.48 (Rice)</h4>
+<p><span class="math inline">\(F\)</span> 是可计算函数的集合</p>
+<p>trivial: <span class="math inline">\(F=\emptyset, F=
+alle\)</span></p>
+<p>Alle nicht-triviale semantische Eigenschaften von Programmen sind
+unentscheidbar.</p>
+<h4 id="satz-5.50-rice-shapiro">Satz 5.50 (Rice-Shapiro)</h4>
+<p>Die Menge der terminierenden Programme ist nicht
+semi-entscheidbar.</p>
+<p>Die Menge der nicht-terminierenden Programme ist nicht
+semi-entscheidbar.</p>
+<p>可以一个一个尝试</p>
+<h4 id="definition-5.52-postsche-korrespondenzproblem-posts-correspondence-problem-pcp">Definition
+5.52 (Postsche Korrespondenzproblem, Post’s Correspondence Problem,
+PCP)</h4>
+<p>Das PCP ist semi-entscheidbar.</p>
+<h4 id="satz-5.61">Satz 5.61</h4>
+<p>对于 CFG 下面的问题是不可决定的</p>
+<ol type="1">
+<li>G 多意性</li>
+<li>L(G) 正则</li>
+<li>DCFL</li>
+</ol>
+<h2 id="复杂度理论">复杂度理论</h2>
+<h4 id="p问题">P问题</h4>
+<p>存在DTM在多项式时间内解决</p>
+<h4 id="np问题">NP问题</h4>
+<p>存在NTM在多项式时间内解决</p>
+<h4 id="satz-6.10">Satz 6.10</h4>
+<p>A ∈ NP gdw es gibt polynomiell beschränkten VerifikaSatz 6.10tor für
+A.</p>
+<h3 id="np完全">NP完全</h3>
+<h4 id="polynomiell-reduzierbar">polynomiell reduzierbar</h4>
+<p><span class="math display">\[
+A \leq_{p} B
+\]</span></p>
+<h4 id="np-hart">NP-hart</h4>
+<p><span class="math inline">\(L\)</span> 是NP-hart，当且仅当对于所有
+<span class="math inline">\(A\in NP\)</span>, <span class="math inline">\(A \leq_{p} L\)</span></p>
+<h4 id="np-完全">NP 完全</h4>
+<p><span class="math inline">\(L \in NP\)</span> 是 NP-hart</p>
+<h4 id="sat">SAT</h4>
+<p>一个逻辑式子是否可以被满足</p>
+<h4 id="knf-sat">3KNF-SAT</h4>
+<p><span class="math display">\[
+K_{1} \wedge \cdots \wedge K_{n}
+\]</span></p>
+<p>每个里面只有3个变量</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://fyind.github.io">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://fyind.github.io/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/">http://fyind.github.io/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/">理论计算机学</a></div><div class="post_share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Python%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" title="三行写完高斯消元，这就是Python!!!"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">三行写完高斯消元，这就是Python!!!</div></div></a></div><div class="next-post pull-right"><a href="/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" title="编译原理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">编译原理</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#formale-sprachen"><span class="toc-number">1.</span> <span class="toc-text">Formale Sprachen</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%892.1"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义2.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%892.3-%E8%AF%AD%E8%A8%80%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">定义2.3 语言的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%A7%84%E5%88%99"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">计算规则</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2.7-%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.3.</span> <span class="toc-text">定义 2.7 语法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%BA%A6%E5%AE%9A"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">一些约定</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%892.9"><span class="toc-number">1.1.4.</span> <span class="toc-text">定义2.9</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%892.12-%E6%8E%A8%E5%AF%BC%E7%9A%84%E8%BF%AD%E4%BB%A3"><span class="toc-number">1.1.5.</span> <span class="toc-text">定义2.12 推导的迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%94%E5%A7%86%E6%96%AF%E5%9F%BA%E8%B0%B1%E7%B3%BBchomsky-hierarchie"><span class="toc-number">1.1.6.</span> <span class="toc-text">乔姆斯基谱系(Chomsky-Hierarchie)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%893.1-%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BAdeterministische-endliche-automatendfa"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义3.1
+确定有限自动机Deterministische endliche Automaten（DFA）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%893.2-%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.2.</span> <span class="toc-text">定义3.2 语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%893.8-%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BAnfa"><span class="toc-number">1.2.3.</span> <span class="toc-text">定义3.8
+非确定有限自动机（NFA）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.9-rechtslineare-grammatik%E5%92%8Cnfa"><span class="toc-number">1.2.4.</span> <span class="toc-text">定理 3.9 rechtslineare
+Grammatik和NFA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.10-dfa%E5%92%8Cnfa"><span class="toc-number">1.2.5.</span> <span class="toc-text">定理 3.10 DFA和NFA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.12-dfa-%E7%9A%84%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.6.</span> <span class="toc-text">定理 3.12 DFA 的状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.13-dfa%E5%92%8C-g"><span class="toc-number">1.2.7.</span> <span class="toc-text">定理 3.13 DFA和 G</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3.15-epsilon-nfa"><span class="toc-number">1.2.8.</span> <span class="toc-text">定义 3.15 (\(\epsilon\)-NFA)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%863.16-epsilon-nfa%E5%92%8C-nfa"><span class="toc-number">1.2.9.</span> <span class="toc-text">定理3.16 (\(\epsilon\)-NFA)和 NFA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3.19-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.2.10.</span> <span class="toc-text">定义 3.19 正则表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3.20-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.11.</span> <span class="toc-text">定义 3.20 正则表达式的语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.23-kleene"><span class="toc-number">1.2.12.</span> <span class="toc-text">定理 3.23 Kleene</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.34-%E8%BF%90%E7%AE%97"><span class="toc-number">1.2.13.</span> <span class="toc-text">定理 3.34 运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.25"><span class="toc-number">1.2.14.</span> <span class="toc-text">定理 3.25</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3.26-%E7%AD%89%E4%BB%B7"><span class="toc-number">1.2.15.</span> <span class="toc-text">定义 3.26 等价</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.27-0%E5%92%8C1"><span class="toc-number">1.2.16.</span> <span class="toc-text">定理 3.27 0和1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%863.28-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99"><span class="toc-number">1.2.17.</span> <span class="toc-text">定理3.28 运算法则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.29-%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%992"><span class="toc-number">1.2.18.</span> <span class="toc-text">定理 3.29 运算法则2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.31-redko"><span class="toc-number">1.2.19.</span> <span class="toc-text">定理 3.31 Redko</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.32-pumping-lemma-fur-regul%C3%A4re-sprachen"><span class="toc-number">1.2.20.</span> <span class="toc-text">定理 3.32 Pumping
+Lemma fur reguläre Sprachen</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.33-%E9%9D%9E%E6%AD%A3%E5%88%991"><span class="toc-number">1.2.21.</span> <span class="toc-text">定理 3.33 非正则1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.34-%E9%9D%9E%E6%AD%A3%E5%88%992"><span class="toc-number">1.2.22.</span> <span class="toc-text">定理 3.34 非正则2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.35-%E6%8B%AC%E5%8F%B7%E5%BC%8F%E5%AD%90"><span class="toc-number">1.2.23.</span> <span class="toc-text">定理 3.35 括号式子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%863.36-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="toc-number">1.2.24.</span> <span class="toc-text">定理3.36 数学公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3.37-%E9%97%AE%E9%A2%98%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.25.</span> <span class="toc-text">定义 3.37 问题分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.38-wortproblem"><span class="toc-number">1.2.26.</span> <span class="toc-text">定理 3.38 Wortproblem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.39-wortproblem"><span class="toc-number">1.2.27.</span> <span class="toc-text">定理 3.39 Wortproblem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.40-leerheitsproblem"><span class="toc-number">1.2.28.</span> <span class="toc-text">定理 3.40 Leerheitsproblem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.41-endlichkeitsproblem"><span class="toc-number">1.2.29.</span> <span class="toc-text">定理 3.41
+Endlichkeitsproblem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%863.42-aquivalenzproblem"><span class="toc-number">1.2.30.</span> <span class="toc-text">定理3.42 Aquivalenzproblem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.43-aquivalenzproblem-%E6%97%B6%E9%97%B4"><span class="toc-number">1.2.31.</span> <span class="toc-text">定理 3.43 Aquivalenzproblem
+时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.44"><span class="toc-number">1.2.32.</span> <span class="toc-text">定理 3.44</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.45"><span class="toc-number">1.2.33.</span> <span class="toc-text">定理 3.45</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%863.47-ardens-lemma"><span class="toc-number">1.2.34.</span> <span class="toc-text">定理3.47 Ardens Lemma</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#minimierung-endlicher-automaten"><span class="toc-number">1.3.</span> <span class="toc-text">Minimierung endlicher
+Automaten</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#definition-3.52-%C3%A4quivalenz-von-zust%C3%A4nden"><span class="toc-number">1.3.1.</span> <span class="toc-text">Definition 3.52
+(Äquivalenz von Zuständen)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3.56"><span class="toc-number">1.3.2.</span> <span class="toc-text">定理 3.56</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-3.60-myhill-nerode"><span class="toc-number">1.3.3.</span> <span class="toc-text">Satz 3.60 (Myhill-Nerode)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kontextfreie-sprache"><span class="toc-number">2.</span> <span class="toc-text">Kontextfreie Sprache</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-4.18"><span class="toc-number">2.0.1.</span> <span class="toc-text">定义 4.18</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4.20"><span class="toc-number">2.0.2.</span> <span class="toc-text">定理 4.20</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chomsky-normalform"><span class="toc-number">2.0.3.</span> <span class="toc-text">Chomsky-Normalform</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#epsilon-produktion"><span class="toc-number">2.0.4.</span> <span class="toc-text">\(\epsilon\)-Produktion</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#kettenproduktion"><span class="toc-number">2.0.5.</span> <span class="toc-text">Kettenproduktion</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%84%E9%80%A0chomsky-normalform"><span class="toc-number">2.0.6.</span> <span class="toc-text">构造Chomsky-Normalform</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-4.29-pumping-lemma"><span class="toc-number">2.0.7.</span> <span class="toc-text">Satz 4.29 (Pumping-Lemma)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#abschlusseigenschaften"><span class="toc-number">2.0.8.</span> <span class="toc-text">Abschlusseigenschaften</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#algorithmen-fur-kontextfreie-grammatiken"><span class="toc-number">2.0.9.</span> <span class="toc-text">4.6 Algorithmen fur
+kontextfreie Grammatiken</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-4.36-%E5%87%8F%E5%B0%91-cfg"><span class="toc-number">2.0.10.</span> <span class="toc-text">Satz 4.36 减少 CFG</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4.37"><span class="toc-number">2.0.11.</span> <span class="toc-text">定理 4.37</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-4.39"><span class="toc-number">2.0.12.</span> <span class="toc-text">定理 4.39</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cyk"><span class="toc-number">2.0.13.</span> <span class="toc-text">CYK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%88%E8%87%AA%E5%8A%A8%E6%9C%BApda"><span class="toc-number">2.0.14.</span> <span class="toc-text">栈自动机PDA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dpda"><span class="toc-number">2.0.15.</span> <span class="toc-text">DPDA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dcgf"><span class="toc-number">2.0.16.</span> <span class="toc-text">DCGF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-4.66"><span class="toc-number">2.0.17.</span> <span class="toc-text">Satz 4.66</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dcfl%E4%B8%8D%E6%98%AF%E5%A4%9A%E6%84%8F%E6%80%A7%E7%9A%84"><span class="toc-number">2.0.18.</span> <span class="toc-text">DCFL不是多意性的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-4.70"><span class="toc-number">2.0.19.</span> <span class="toc-text">Satz 4.70</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E5%86%B3%E5%AE%9A%E6%80%A7%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">可决定性可计算性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%81%B5%E6%9C%BAtm"><span class="toc-number">3.0.1.</span> <span class="toc-text">图灵机TM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.22-while-tm"><span class="toc-number">3.0.2.</span> <span class="toc-text">Satz 5.22 (WHILE → TM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fakt-5.23-while-goto"><span class="toc-number">3.0.3.</span> <span class="toc-text">Fakt 5.23 (WHILE → GOTO)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.24-goto-while"><span class="toc-number">3.0.4.</span> <span class="toc-text">Satz 5.24 (GOTO → WHILE)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.27-tm-goto"><span class="toc-number">3.0.5.</span> <span class="toc-text">Satz 5.27 (TM → GOTO)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unentscheidbarkeit-des-halteproblems"><span class="toc-number">3.1.</span> <span class="toc-text">5.2 Unentscheidbarkeit des
+Halteproblems</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%86%B3%E5%AE%9A%E6%80%A7"><span class="toc-number">3.1.1.</span> <span class="toc-text">可决定性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-5.31"><span class="toc-number">3.1.2.</span> <span class="toc-text">定义 5.31</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#definition-5.32-spezielles-halteproblem"><span class="toc-number">3.1.3.</span> <span class="toc-text">Definition 5.32
+(Spezielles Halteproblem)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.33"><span class="toc-number">3.1.4.</span> <span class="toc-text">Satz 5.33</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#definition-5.34-allgemeines-halteproblem"><span class="toc-number">3.1.5.</span> <span class="toc-text">Definition 5.34
+((Allgemeines) Halteproblem)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#definition-5.36-reduktion"><span class="toc-number">3.1.6.</span> <span class="toc-text">Definition 5.36 (Reduktion)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.40"><span class="toc-number">3.1.7.</span> <span class="toc-text">Satz 5.40</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.48-rice"><span class="toc-number">3.1.8.</span> <span class="toc-text">Satz 5.48 (Rice)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.50-rice-shapiro"><span class="toc-number">3.1.9.</span> <span class="toc-text">Satz 5.50 (Rice-Shapiro)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#definition-5.52-postsche-korrespondenzproblem-posts-correspondence-problem-pcp"><span class="toc-number">3.1.10.</span> <span class="toc-text">Definition
+5.52 (Postsche Korrespondenzproblem, Post’s Correspondence Problem,
+PCP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-5.61"><span class="toc-number">3.1.11.</span> <span class="toc-text">Satz 5.61</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">复杂度理论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#p%E9%97%AE%E9%A2%98"><span class="toc-number">4.0.1.</span> <span class="toc-text">P问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#np%E9%97%AE%E9%A2%98"><span class="toc-number">4.0.2.</span> <span class="toc-text">NP问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#satz-6.10"><span class="toc-number">4.0.3.</span> <span class="toc-text">Satz 6.10</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#np%E5%AE%8C%E5%85%A8"><span class="toc-number">4.1.</span> <span class="toc-text">NP完全</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#polynomiell-reduzierbar"><span class="toc-number">4.1.1.</span> <span class="toc-text">polynomiell reduzierbar</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#np-hart"><span class="toc-number">4.1.2.</span> <span class="toc-text">NP-hart</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#np-%E5%AE%8C%E5%85%A8"><span class="toc-number">4.1.3.</span> <span class="toc-text">NP 完全</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sat"><span class="toc-number">4.1.4.</span> <span class="toc-text">SAT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#knf-sat"><span class="toc-number">4.1.5.</span> <span class="toc-text">3KNF-SAT</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/" title="统计学基础">统计学基础</a><time datetime="2021-11-18T15:41:01.000Z" title="Created 2021-11-18 16:41:01">2021-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93DIV1C/" title="刷题总结DIV1C">刷题总结DIV1C</a><time datetime="2021-10-30T20:10:14.000Z" title="Created 2021-10-30 22:10:14">2021-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" title="非线性优化">非线性优化</a><time datetime="2021-10-22T15:26:33.000Z" title="Created 2021-10-22 17:26:33">2021-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" title="线性规划">线性规划</a><time datetime="2021-10-13T12:29:31.000Z" title="Created 2021-10-13 14:29:31">2021-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算">二进制与位运算</a><time datetime="2021-09-23T11:53:43.000Z" title="Created 2021-09-23 13:53:43">2021-09-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fyind</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

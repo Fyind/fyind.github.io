@@ -1,0 +1,1416 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>概率论 | Hexo</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="离散概率空间 基础部分 定义1 离散概率空间 离散概率空间(diskreter Wahrscheinlichkeitsraum)是单位元事件(Elementarereignis)的所有结果集合(Ergebnismenge) \(\Omega &#x3D; \{w_{1},w_{2},\dots\}\) 。 定义2 单位元事件 每个事件元素 \(w_{i}\) 都对应一个可能性 \(\tex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率论">
+<meta property="og:url" content="http://fyind.github.io/%E6%A6%82%E7%8E%87%E8%AE%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="离散概率空间 基础部分 定义1 离散概率空间 离散概率空间(diskreter Wahrscheinlichkeitsraum)是单位元事件(Elementarereignis)的所有结果集合(Ergebnismenge) \(\Omega &#x3D; \{w_{1},w_{2},\dots\}\) 。 定义2 单位元事件 每个事件元素 \(w_{i}\) 都对应一个可能性 \(\tex">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.github.io/img/pic1.PNG">
+<meta property="article:published_time" content="2020-04-02T20:57:22.000Z">
+<meta property="article:modified_time" content="2021-07-28T07:08:24.367Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="概率论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.github.io/img/pic1.PNG"><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.github.io/%E6%A6%82%E7%8E%87%E8%AE%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '概率论',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-28 09:08:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/pic1.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/a3.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">概率论</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-04-02T20:57:22.000Z" title="Created 2020-04-02 22:57:22">2020-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-07-28T07:08:24.367Z" title="Updated 2021-07-28 09:08:24">2021-07-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="概率论"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="离散概率空间">离散概率空间</h2>
+<h3 id="基础部分">基础部分</h3>
+<h4 id="定义1-离散概率空间">定义1 离散概率空间</h4>
+<p>离散概率空间(diskreter
+Wahrscheinlichkeitsraum)是单位元事件(Elementarereignis)的所有结果集合(Ergebnismenge)
+<span class="math inline">\(\Omega = \{w_{1},w_{2},\dots\}\)</span>
+。</p>
+<h4 id="定义2-单位元事件">定义2 单位元事件</h4>
+<p>每个事件元素 <span class="math inline">\(w_{i}\)</span>
+都对应一个可能性 <span class="math inline">\(\text{Pr}[w_{i}]\)</span>
+,其中<span class="math inline">\(0 \leq \text{Pr}[w_{i}] \le 1\)</span>,
+并且 <span class="math display">\[
+\sum_{\omega \in \Omega} \operatorname{Pr}[\omega]=1
+\]</span> #### 定义3 事件</p>
+<p>集合 <span class="math inline">\(E \subseteq \Omega\)</span>
+是事件，该事件的概率是 <span class="math display">\[
+\operatorname{Pr}[E]:=\sum_{\omega \in E} \operatorname{Pr}[\omega]
+\]</span> 事件 <span class="math inline">\(\bar{E}\)</span> 是事件 <span class="math inline">\(E\)</span> 的对立事件(komplementäres
+Ereignis)。两个事件<span class="math inline">\(A,B\)</span>是分离的(disjunkt/unvereinbar)若 <span class="math inline">\(A \cap B=\emptyset\)</span> .</p>
+<h4 id="定义4-相对频繁度relative-häufigkeit">定义4 相对频繁度(relative
+Häufigkeit)</h4>
+<p><span class="math inline">\(\begin{aligned} \text { 事件E相对频繁度}
+&amp;:=\frac{\text {E的绝对频繁度}}{\text { 所有观测次数}} \\
+&amp;=\frac{\text { E的所有出现次数 } }{\text { 所有观测次数 }}
+\end{aligned}\)</span></p>
+<h4 id="定义5-无限概率空间">定义5 无限概率空间</h4>
+<p>概率空间 <span class="math inline">\(\Omega=\left\{\omega_{1},
+\ldots, \omega_{n}\right\}\)</span>
+是有限概率空间。关于无限概率空间，我们只考虑 <span class="math inline">\(\Omega= N _{0}\)</span> ，也就是离散的情况</p>
+<p><strong>例子</strong></p>
+<p>假设我们扔一个硬币，直到正面出现。<span class="math inline">\(p\)</span> 是反面出现的概率，正面出现的概率是
+<span class="math inline">\(q:=1-p\)</span>
+.那么概率空间我们可以表示为丢硬币的次数直到正面出现。 <span class="math display">\[
+\Omega= N =\{1,2,3, \ldots\}
+\]</span> 设 <span class="math inline">\(\omega_{i}\widehat{=}\)</span>
+仍硬币 <span class="math inline">\(i\)</span> 次的事件元素。那么 <span class="math inline">\(\operatorname{Pr}\left[\omega_{i}\right]=p^{i-1}
+q\)</span> . 并且： <span class="math display">\[
+\sum_{\omega \in \Omega} \operatorname{Pr}[\omega]=\sum_{i=1}^{\infty}
+p^{i-1} q=q \cdot \sum_{i=0}^{\infty} p^{i}=\frac{q}{1-p}=1
+\]</span> #### 数学公式补充</p>
+<p><span class="math display">\[
+\sum_{k=0}^{n} \frac{(-1)^{k}}{k !} = \frac{1}{e}
+\]</span></p>
+<p><span class="math display">\[
+\sum_{n=0}^{\infty} \frac{1}{n !} = e
+\]</span></p>
+<h4 id="定理8-性质">定理8 性质</h4>
+<p>对于事件 <span class="math inline">\(A, B, A_{1}, A_{2},
+\dots\)</span> 有：</p>
+<ul>
+<li><p><span class="math inline">\(\operatorname{Pr}[\emptyset]=0,
+\operatorname{Pr}[\Omega]=1\)</span></p></li>
+<li><p><span class="math inline">\(0 \leq \operatorname{Pr}[A] \leq
+1\)</span></p></li>
+<li><p><span class="math inline">\(\operatorname{Pr}[\bar{A}]=1-\operatorname{Pr}[A]\)</span></p></li>
+<li><p>若 <span class="math inline">\(A \subseteq B\)</span> ，那么
+<span class="math inline">\(\operatorname{Pr}[A] \leq
+\operatorname{Pr}[B]\)</span></p></li>
+<li><p>加法原理：若事件 <span class="math inline">\(A_{1}, \ldots,
+A_{n}\)</span> 两两互斥，那么有 <span class="math display">\[
+\operatorname{Pr}\left[\bigcup_{i=1}^{n} A_{i}\right]=\sum_{i=1}^{n}
+\operatorname{Pr}\left[A_{i}\right]
+\]</span></p></li>
+</ul>
+<h4 id="定理9-容斥原理siebformel">定理9 容斥原理(Siebformel)</h4>
+<p>容斥原理：对于事件<span class="math inline">\(A_{1}, \ldots,
+A_{n}\)</span> 有 <span class="math display">\[
+\begin{aligned}
+\operatorname{Pr}\left[\bigcup_{i=1}^{n} A_{i}\right]
+&amp;=\sum_{i=1}^{n} \operatorname{Pr}\left[A_{i}\right]-\sum_{1 \leq
+i_{1}&lt;i_{2} \leq n} \operatorname{Pr}\left[A_{i_{1}} \cap
+A_{i_{2}}\right]+-\ldots \\
+&amp;+(-1)^{l-1} \sum_{1 \leq i_{1}&lt;\ldots&lt;i_{l} \leq n}
+\operatorname{Pr}\left[A_{i_{1}} \cap \ldots \cap
+A_{i_{l}}\right]+-\ldots \\
+&amp;+(-1)^{n-1} \cdot \operatorname{Pr}\left[A_{1} \cap \ldots \cap
+A_{n}\right]
+\end{aligned}
+\]</span> 容斥原理 <span class="math display">\[
+\operatorname{Pr}[A]=\operatorname{Pr}\left[\bigcup_{i=1}^{n}
+A_{i}\right]=\sum_{\emptyset \subset I \subseteq[n]}(-1)^{|I|+1} \cdot
+\operatorname{Pr}\left[\bigcap_{i \in I} A_{i}\right]
+\]</span> <strong>推论</strong> <span class="math display">\[
+\operatorname{Pr}\left[\bigcup_{i=1}^{n} A_{i}\right] \leq
+\sum_{i=1}^{n} \operatorname{Pr}\left[A_{i}\right]
+\]</span> <strong>Prinzip von Laplace:</strong> <span class="math display">\[
+\operatorname{Pr}[E]=\frac{|E|}{|\Omega|}
+\]</span></p>
+<h4 id="条件概率">条件概率</h4>
+<p>对于条件概率 <span class="math inline">\(\operatorname{Pr}[A |
+B]\)</span> 有如下的性质</p>
+<ul>
+<li><span class="math inline">\(\operatorname{Pr}[B | B]=1\)</span></li>
+<li><span class="math inline">\(\operatorname{Pr}[A |
+\Omega]=\operatorname{Pr}[A]\)</span></li>
+<li>对于给定的 <span class="math inline">\(B\)</span> ，<span class="math inline">\(\operatorname{Pr}[A | B]\)</span> 正比于 <span class="math inline">\(\operatorname{Pr}[A \cap B]\)</span></li>
+</ul>
+<h5 id="定义12-条件概率">定义12 条件概率</h5>
+<p><span class="math inline">\(A\)</span> 和 <span class="math inline">\(B\)</span> 是事件且 <span class="math inline">\(Pr[B] &gt; 0\)</span>. 那么条件概率 <span class="math inline">\(Pr[A|B]\)</span> 是如下定义的： <span class="math display">\[
+\operatorname{Pr}[A | B]:=\frac{\operatorname{Pr}[A \cap
+B]}{\operatorname{Pr}[B]}
+\]</span> 在事件 <span class="math inline">\(B\)</span>
+基础下的概率空间： <span class="math display">\[
+\sum_{\omega \in \Omega} \operatorname{Pr}[\omega | B]=\sum_{\omega \in
+\Omega} \frac{\operatorname{Pr}[\omega \cap
+B]}{\operatorname{Pr}[B]}=\sum_{\omega \in B}
+\frac{\operatorname{Pr}[\omega]}{\operatorname{Pr}[B]}=\frac{\operatorname{Pr}[B]}{\operatorname{Pr}[B]}=1
+\\
+\operatorname{Pr}[\emptyset | B]=0 \text { sowie }
+\operatorname{Pr}[\bar{A} | B]=1-\operatorname{Pr}[A | B]
+\]</span></p>
+<h3 id="定理16-乘法原理">定理16 乘法原理</h3>
+<p>若事件 <span class="math inline">\(A_{1}, \cdots, A_{n}\)</span> ，且
+<span class="math inline">\(\operatorname{Pr}\left[A_{1} \cap \ldots
+\cap A_{n}\right]&gt;0\)</span> ,那么 <span class="math display">\[
+\begin{aligned}
+\operatorname{Pr}\left[A_{1} \cap \ldots \cap A_{n}\right]= \\ &amp;
+\operatorname{Pr}\left[A_{1}\right] \cdot \operatorname{Pr}\left[A_{2} |
+A_{1}\right] \cdot \operatorname{Pr}\left[A_{3} | A_{1}
+\cap\right.\left.A_{2}\right] \cdot \ldots \\
+&amp; &amp; \cdots \operatorname{Pr}\left[A_{n} | A_{1} \cap \ldots \cap
+A_{n-1}\right]
+\end{aligned}
+\]</span></p>
+<h3 id="定理18-全概率公式">定理18 全概率公式</h3>
+<p>若事件 <span class="math inline">\(A_{1}, \cdots, A_{n}\)</span>
+，两两互斥，且 <span class="math inline">\(B \subseteq A_{1} \cup \ldots
+\cup A_{n}\)</span> 那么 <span class="math display">\[
+\operatorname{Pr}[B]=\sum_{i=1}^{n} \operatorname{Pr}\left[B |
+A_{i}\right] \cdot \operatorname{Pr}\left[A_{i}\right]
+\]</span> 如果事件有无穷多个，那么： <span class="math display">\[
+\operatorname{Pr}[B]=\sum_{i=1}^{\infty} \operatorname{Pr}\left[B |
+A_{i}\right] \cdot \operatorname{Pr}\left[A_{i}\right]
+\]</span></p>
+<h3 id="定理19-贝叶斯公式">定理19 贝叶斯公式</h3>
+<p>事件 <span class="math inline">\(A_{1}, \cdots, A_{n}\)</span>
+两两分离，且 <span class="math inline">\(Pr[A_{j}]&gt;0\)</span>
+对于所有事件。 <span class="math inline">\(B \subseteq A_{1} \cup \ldots
+\cup A_{n}\)</span> ，且 <span class="math inline">\(Pr[B]&gt;0\)</span>
+，那么 <span class="math display">\[
+\operatorname{Pr}\left[A_{i} |
+B\right]=\frac{\operatorname{Pr}\left[A_{i} \cap
+B\right]}{\operatorname{Pr}[B]}=\frac{\operatorname{Pr}\left[B |
+A_{i}\right] \cdot \operatorname{Pr}\left[A_{i}\right]}{\sum_{j=1}^{n}
+\operatorname{Pr}\left[B | A_{j}\right] \cdot
+\operatorname{Pr}\left[A_{j}\right]}
+\]</span> 若事件有无穷多个，那么 <span class="math display">\[
+\operatorname{Pr}\left[A_{i} |
+B\right]=\frac{\operatorname{Pr}\left[A_{i} \cap
+B\right]}{\operatorname{Pr}[B]}=\frac{\operatorname{Pr}\left[B |
+A_{i}\right] \cdot
+\operatorname{Pr}\left[A_{i}\right]}{\sum_{j=1}^{\infty}
+\operatorname{Pr}\left[B | A_{j}\right] \cdot
+\operatorname{Pr}\left[A_{j}\right]}
+\]</span></p>
+<h3 id="独立性独立性">独立性(独立性)</h3>
+<p>若<span class="math inline">\(\operatorname{Pr}[A \cap
+B]=\operatorname{Pr}[A] \cdot \operatorname{Pr}[B]\)</span> 也就是 若
+<span class="math inline">\(\operatorname{Pr}[A |
+B]=\operatorname{Pr}[A]\)</span>
+那么，这两个事件是独立的(unabhängig)</p>
+<p>对于两两不同的事件 <span class="math inline">\(A_{1}, \ldots,
+A_{n}\)</span> 独立，若对于所有的子集</p>
+<p><span class="math inline">\(I=\left\{i_{1}, \ldots, i_{k}\right\}
+\subseteq\{1, \ldots, n\}\)</span> ，<span class="math inline">\(i_{1}&lt;i_{2}&lt;\ldots&lt;i_{k}\)</span> 有
+<span class="math display">\[
+\operatorname{Pr}\left[A_{i_{1}} \cap \ldots \cap
+A_{i_{k}}\right]=\operatorname{Pr}\left[A_{i_{1}}\right] \cdots \cdot
+\operatorname{Pr}\left[A_{i_{k}}\right]
+\]</span></p>
+<h4 id="定理-23">定理 23</h4>
+<p>对于两两不同的事件 <span class="math inline">\(A_{1}, \ldots,
+A_{n}\)</span> 独立，若对于所有</p>
+<p><span class="math inline">\(\left(s_{1}, \ldots, s_{n}\right)
+\in\{0,1\}^{n}\)</span> 有 <span class="math display">\[
+\operatorname{Pr}\left[A_{1}^{s_{1}} \cap \ldots \cap
+A_{n}^{s_{n}}\right]=\operatorname{Pr}\left[A_{1}^{s_{1}}\right] \cdot
+\ldots \cdot \operatorname{Pr}\left[A_{n}^{s_{n}}\right]
+\]</span> 其中 <span class="math inline">\(A_{i}^{0}=\bar{A}_{i}\)</span> 且 <span class="math inline">\(A_{i}^{1}=A_{i}\)</span></p>
+<h4 id="定理24">定理24</h4>
+<p>若 <span class="math inline">\(A, B, C\)</span> 是独立事件，那么<span class="math inline">\(A \cap B\)</span> 与 <span class="math inline">\(C\)</span> 且 <span class="math inline">\(A \cup
+B\)</span> 与 <span class="math inline">\(C\)</span> 也独立</p>
+<h3 id="随机变量">随机变量</h3>
+<h4 id="定义25-随机变量">定义25 随机变量</h4>
+<p>给定一个离散概率空间 <span class="math inline">\(\Omega\)</span>
+一个映射 <span class="math display">\[
+X: \Omega \rightarrow R
+\]</span> 是随机变量 (Zufallsvariable)</p>
+<p>值域(Wertebereich)是 <span class="math display">\[
+W_{X}:=X(\Omega)=\{x \in R ; \exists \omega \in \Omega
+\operatorname{mit} X(\omega)=x\}
+\]</span></p>
+<blockquote>
+<p>扔硬币3次，结果集合是 <span class="math inline">\(\Omega:=\{H,
+T\}^{3}\)</span> 也就是正反的三元组。随机变量<span class="math inline">\(Y\)</span>描述了出现正面的总数。 比如 <span class="math inline">\(Y(H T H)=2\)</span> 出现正面2次, <span class="math inline">\(Y(H H H)=3\)</span> 出现正面3次,值域 <span class="math inline">\(W_{Y}=\{0,1,2,3\}\)</span></p>
+</blockquote>
+<p><span class="math display">\[
+A_{i}:=\left\{\omega \in \Omega ;
+X(\omega)=x_{i}\right\}=X^{-1}\left(x_{i}\right)
+\]</span></p>
+<p>是逆映射，通常我们把 <span class="math inline">\(\operatorname{Pr}\left[X^{-1}\left(x_{i}\right)\right]\)</span>
+写作 <span class="math inline">\(\operatorname{Pr}\left[X=x_{i}\right]\)</span></p>
+<h4 id="定义27-概率密度函数和分布函数">定义27
+概率密度函数和分布函数</h4>
+<ul>
+<li>函数</li>
+</ul>
+<p><span class="math display">\[
+f_{X}: R \ni x \mapsto \operatorname{Pr}[X=x] \in[0,1]
+\]</span></p>
+<p>称作随机变量 <span class="math inline">\(X\)</span>
+的概率密度函数(Dichte)</p>
+<ul>
+<li>函数</li>
+</ul>
+<p><span class="math display">\[
+F_{X}: R \ni x \mapsto \operatorname{Pr}[X \leq x]=\sum_{x^{\prime} \in
+W_{X}: x^{\prime} \leq x} \operatorname{Pr}\left[X=x^{\prime}\right]
+\in[0,1]
+\]</span></p>
+<p>称作随机变量 <span class="math inline">\(X\)</span> 的分布函数</p>
+<blockquote>
+<p>求密度函数：从值域入手，把每个值都对应写出来。</p>
+<p>求分布函数：先求密度函数，然后把密度函数累加</p>
+</blockquote>
+<h4 id="定义-29-期望">定义 29 期望</h4>
+<p>对于一个随机变量 <span class="math inline">\(X\)</span>
+,我们定义期望值(Erwartungswert) <span class="math inline">\(E
+[X]\)</span> 为： <span class="math display">\[
+E [X]:=\sum_{x \in W_{X}} x \cdot \operatorname{Pr}[X=x]=\sum_{x \in
+W_{X}} x \cdot f_{X}(x)
+\]</span> 若 <span class="math inline">\(\sum_{x \in W_{X}}|x| \cdot
+\operatorname{Pr}[X=x]\)</span> 收敛</p>
+<blockquote>
+<p>计算期望</p>
+<p>判断期望是否存在，要加绝对值算。</p>
+</blockquote>
+<h4 id="定理-32-期望的单调性">定理 32 期望的单调性</h4>
+<p>若 <span class="math inline">\(X, Y\)</span> 是在离散概率空间 <span class="math inline">\(\Omega\)</span> 的随机变量，且满足 <span class="math inline">\(X(\omega) \leq Y(\omega)\)</span> 对于所有<span class="math inline">\(\omega \in \Omega\)</span>， 那么 <span class="math inline">\(E [X] \leq E [Y]\)</span></p>
+<h4 id="定理-33-期望的线性性">定理 33 期望的线性性</h4>
+<p>对于任意随机变量 <span class="math inline">\(X\)</span> , <span class="math inline">\(a,b \in R\)</span> 有 <span class="math display">\[
+E [a \cdot X+b]=a \cdot E [X]+b
+\]</span></p>
+<h4 id="定理-34-期望计算公式">定理 34 期望计算公式</h4>
+<p>若 <span class="math inline">\(X\)</span> 是随机变量且 <span class="math inline">\(W_{X} \subseteq N _{0}\)</span> ,有 <span class="math display">\[
+E [X]=\sum_{i=1}^{\infty} \operatorname{Pr}[X \geq i]
+\]</span></p>
+<h4 id="定义-35-条件期望">定义 35 条件期望</h4>
+<p>若 <span class="math inline">\(X\)</span> 是随机变量，且 <span class="math inline">\(A\)</span> 是事件，且 <span class="math inline">\(Pr[A]&gt;0\)</span> 那么条件随机变量(bedingte
+Zufallsvariable)的密度是 <span class="math display">\[
+f_{X | A}(x):=\operatorname{Pr}[X=x |
+A]=\frac{\operatorname{Pr}\left[“X=x^” \cap
+A\right]}{\operatorname{Pr}[A]}
+\]</span> 期望值是 <span class="math display">\[
+E [X | A]=\sum_{x \in W_{X}} x \cdot f_{X | A}(x)
+\]</span></p>
+<h4 id="定理-36-条件期望计算期望">定理 36 条件期望计算期望</h4>
+<p>若 <span class="math inline">\(X\)</span>
+是随机变量，对于两两独立事件 <span class="math inline">\(A_{1}, \ldots,
+A_{n}\)</span>, 且 <span class="math inline">\(A_{1} \cup \ldots\cup
+A_{n}=\Omega \text { 且 } \operatorname{Pr}\left[A_{1}\right], \ldots,
+\operatorname{Pr}\left[A_{n}\right]&gt;0\)</span> ，有 <span class="math display">\[
+E [X]=\sum_{i=1}^{n} E \left[X | A_{i}\right] \cdot
+\operatorname{Pr}\left[A_{i}\right]
+\]</span></p>
+<h4 id="定义-38-方差和标准差">定义 38 方差和标准差</h4>
+<p>对于随机变量 <span class="math inline">\(X\)</span> 且 <span class="math inline">\(\mu= E [X]\)</span> ，我们定义(Varianz)方差 <span class="math inline">\(\text{Var}[X]\)</span> 为 <span class="math display">\[
+\operatorname{Var}[X]:= E \left[(X-\mu)^{2}\right]=\sum_{x \in
+W_{X}}(x-\mu)^{2} \cdot \operatorname{Pr}[X=x]
+\]</span> 大小(Größe) <span class="math inline">\(\sigma:=\sqrt{\operatorname{Var}[X]}\)</span>
+是<span class="math inline">\(X\)</span> 的标准差</p>
+<h4 id="定理-39-方差和期望">定理 39 方差和期望</h4>
+<p>对于任意随机变量 <span class="math inline">\(X\)</span> 有： <span class="math display">\[
+\operatorname{Var}[X]= E \left[X^{2}\right]- E [X]^{2}
+\]</span></p>
+<h4 id="定理-41-方差公式">定理 41 方差公式</h4>
+<p>对于任意随机变量 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(a,b \in R\)</span> 有 <span class="math display">\[
+\operatorname{Var}[a \cdot X+b]=a^{2} \cdot \operatorname{Var}[X]
+\]</span></p>
+<h4 id="定义-42-矩">定义 42 矩</h4>
+<p>对于一个随机变量<span class="math inline">\(X\)</span> 我们说 <span class="math inline">\(E \left[X^{k}\right]\)</span> 是k-te
+Moment(k阶4矩) 且</p>
+<p><span class="math inline">\(E \left[(X- E [X])^{k}\right]\)</span> 是
+k-te zentrale Moment(k阶中心矩)</p>
+<h3 id="多变量">多变量</h3>
+<p>函数 <span class="math display">\[
+f_{X, Y}(x, y):=\operatorname{Pr}[X=x, Y=y]
+\]</span> 是随机变量 <span class="math inline">\(X, Y\)</span>
+的总密度(gemeinsame Dichte) ，其中 <span class="math display">\[
+f_{X}(x)=\sum_{y \in W_{Y}} f_{X, Y}(x, y) \quad \text { bzw. } \quad
+f_{Y}(y)=\sum_{x \in W_{X}} f_{X, Y}(x, y)
+\]</span> 函数 <span class="math inline">\(f_{X}\)</span> 和 <span class="math inline">\(f_{Y}\)</span> 是Randdichten</p>
+<blockquote>
+<p>把其他变量的所有情况带入式子求和即可</p>
+</blockquote>
+<h4 id="随机变量的独立性">随机变量的独立性</h4>
+<h5 id="定义45-独立性">定义45 独立性</h5>
+<p>对随机变量 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是相互独立的(unabhängig)，若对于所有 <span class="math inline">\(\left(x_{1}, \ldots, x_{n}\right) \in W_{X_{1}}
+\times \ldots \times W_{X_{n}}\)</span> 满足： <span class="math display">\[
+\operatorname{Pr}\left[X_{1}=x_{1}, \ldots,
+X_{n}=x_{n}\right]=\operatorname{Pr}\left[X_{1}=x_{1}\right] \cdot
+\ldots \cdot \operatorname{Pr}\left[X_{n}=x_{n}\right]
+\]</span> 或者 <span class="math display">\[
+f_{X_{1}, \ldots, X_{n}}\left(x_{1}, \ldots,
+x_{n}\right)=f_{X_{1}}\left(x_{1}\right) \cdots \cdot
+f_{X_{n}}\left(x_{n}\right)
+\]</span></p>
+<h5 id="定理46-独立性扩展1">定理46 独立性扩展1</h5>
+<p>若 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是相互独立随机变量，且 <span class="math inline">\(S_{1}, \ldots,
+S_{n}\)</span> 是任意的集合 <span class="math inline">\(S_{i} \subseteq
+W_{X_{i}}\)</span>，那么 ,,<span class="math inline">\(X_{1} ∈
+S_{1}\)</span>“, ...,,<span class="math inline">\(X_{n} ∈
+S_{n}\)</span>“ 都是独立的</p>
+<h5 id="定理47-独立性扩展2">定理47 独立性扩展2</h5>
+<p>若 <span class="math inline">\(f_{1}, \ldots, f_{n}\)</span>
+是实数函数 <span class="math inline">\(\left(f_{i}: R \rightarrow R
+\text { ,} i=1, \ldots, n\right)\)</span> . 当随机变量 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+相互独立，那么对于所有 <span class="math inline">\(f_{1}\left(X_{1}\right), \ldots,
+f_{n}\left(X_{n}\right)\)</span> 也相互独立。</p>
+<h4 id="组合随机变量">组合随机变量</h4>
+<h5 id="定理49-独立的随机变量加和">定理49 独立的随机变量加和</h5>
+<p>对于2个相互独立的随机变量 <span class="math inline">\(X, Y\)</span>
+若 <span class="math inline">\(Z:=X+Y\)</span> ，那么满足 <span class="math display">\[
+f_{Z}(z)=\sum_{x \in W_{X}} f_{X}(x) \cdot f_{Y}(z-x)
+\]</span></p>
+<h4 id="组合随机变量的矩">组合随机变量的矩</h4>
+<h5 id="定理50-期望的线性性">定理50 期望的线性性</h5>
+<p>对于随机变量 <span class="math inline">\(X_{1}, \ldots,
+X_{n}\)</span> 和 <span class="math inline">\(X:=a_{1}
+X_{1}+\cdots+a_{n} X_{n}\)</span> , <span class="math inline">\(a_{1},
+\ldots, a_{n} \in R\)</span> 满足 <span class="math display">\[
+\mathbb{E}[X]=a_{1} \mathbb{E}\left[X_{1}\right]+\cdots+a_{n}
+\mathbb{E}\left[X_{n}\right]
+\]</span></p>
+<blockquote>
+<p>Beispiel 51:</p>
+<p><span class="math inline">\(n\)</span>个人随机到<span class="math inline">\(n\)</span>
+个床位，期望有多少个人在自己的床位上？</p>
+<p>先拆解： <span class="math inline">\(X_{i}:=\left\{\begin{array}{ll}1
+&amp; \text { 若第 } i \text { 个人正确 } \\ 0 &amp; \text { 否则
+}\end{array}\right.\)</span></p>
+<p><span class="math inline">\(X:=X_{1}+\cdots+X_{n}\)</span></p>
+<p>因为 <span class="math inline">\(\mathbb{E}\left[X_{i}\right]=0 \cdot
+\operatorname{Pr}\left[X_{i}=0\right]+1 \cdot
+\operatorname{Pr}\left[X_{i}=1\right]=\frac{1}{n}\)</span></p>
+<p>所以 <span class="math inline">\(\mathbb{E}[X]=\sum_{i=1}^{n}
+\mathbb{E}\left[X_{i}\right]=\sum_{i=1}^{n} \frac{1}{n}=1\)</span></p>
+</blockquote>
+<h5 id="定理52-期望的乘积性">定理52 期望的乘积性</h5>
+<p>对于相互独立的随机变量 <span class="math inline">\(X_{1}, \ldots,
+X_{n}\)</span> ，满足 <span class="math display">\[
+\mathbb{E}\left[X_{1} \cdots \cdots
+X_{n}\right]=\mathbb{E}\left[X_{1}\right] \cdots \cdots
+\mathbb{E}\left[X_{n}\right]
+\]</span></p>
+<h5 id="定义53-指示函数">定义53 指示函数</h5>
+<p>对于一个事件 <span class="math inline">\(A\)</span> ，随机变量 <span class="math display">\[
+I_{A}:=\left\{\begin{array}{ll}1 &amp; \text { falls } A \text {
+eintritt } \\ 0 &amp; \text { sonst }\end{array}\right.
+\]</span> 是事件 <span class="math inline">\(A\)</span> 的指示变量
+Indikatorvariable</p>
+<h5 id="定理54-方差加和">定理54 方差加和</h5>
+<p>对于相互独立的随机变量 <span class="math inline">\(X_{1}, \ldots,
+X_{n}\)</span> 且 <span class="math inline">\(X:=X_{1}+\ldots+X_{n}\)</span> 满足： <span class="math display">\[
+\operatorname{Var}[X]=\operatorname{Var}\left[X_{1}\right]+\ldots+\operatorname{Var}\left[X_{n}\right]
+\]</span></p>
+<h3 id="重要分布">重要分布</h3>
+<h4 id="伯努利分布">伯努利分布</h4>
+<p>一个随机变量 <span class="math inline">\(X\)</span> ， <span class="math inline">\(W_{X}=\{0,1\}\)</span> 并且密度是 <span class="math display">\[
+f_{X}(x)=\left\{\begin{array}{ll}
+p &amp; \text { für } x=1 \\
+1-p &amp; \text { für } x=0
+\end{array}\right.
+\]</span> 是伯努利分布(Bernoulli-Verteilung)。参数 <span class="math inline">\(p\)</span>
+是成功概率(Erfolgswahrscheinlichkeit).</p>
+<blockquote>
+<p>比如扔硬币是只有正或反，满足伯努利分布</p>
+</blockquote>
+<h4 id="二项分布">二项分布</h4>
+<h5 id="定义-55-二项分布">定义 55 二项分布</h5>
+<p>若 <span class="math inline">\(X:=X_{1}+\ldots+X_{n}\)</span> 是
+<span class="math inline">\(n\)</span>
+个独立的伯努利分布随机变量的加和，并且他们有相同的成功概率 <span class="math inline">\(p\)</span>. 那么<span class="math inline">\(X\)</span> 就是二项分布，参数是 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(p\)</span>. 符号是 <span class="math display">\[
+X \sim \operatorname{Bin}(n, p)
+\]</span></p>
+<p><span class="math display">\[
+f_{X}(x):=b(x ; n, p)=\left(\begin{array}{l}
+n \\
+x
+\end{array}\right) p^{x} (1-p)^{n-x}
+\]</span></p>
+<p><span class="math inline">\(\mathbb{E}[X]=n p \quad\)</span> ,<span class="math inline">\(\quad \operatorname{Var}[X]=n p q\)</span></p>
+<blockquote>
+<p>比如连续扔硬币n次，满足二项分布</p>
+</blockquote>
+<h5 id="定理-56-二项分布加和">定理 56 二项分布加和</h5>
+<p>若 <span class="math inline">\(X \sim \operatorname{Bin}\left(n_{x},
+p\right)\)</span> 和 <span class="math inline">\(Y \sim
+\operatorname{Bin}\left(n_{y}, p\right)\)</span> 独立，那么满足 <span class="math inline">\(Z:=X+Y\)</span>, 且 <span class="math inline">\(Z
+\sim \operatorname{Bin}\left(n_{x}+n_{y}, p\right)\)</span>.</p>
+<h4 id="几何分布">几何分布</h4>
+<h5 id="定义57-几何分布">定义57 几何分布</h5>
+<p>一个几何分布的(geometrisch verteilte) 随机变量 <span class="math inline">\(X\)</span> ，参数 <span class="math inline">\(p
+\in (0,1]\)</span> 且 <span class="math inline">\(q:=1-p\)</span>
+有密度函数 <span class="math display">\[
+f_{X}(i)=p q^{i-1} \quad \text { für } i \in \mathbb{N}
+\]</span> 对于它的期望和方差： <span class="math display">\[
+\mathbb{E}[X]=\frac{1}{p} \quad \text { und } \quad
+\operatorname{Var}[X]=\frac{q}{p^{2}}
+\]</span></p>
+<h6 id="一个性质">一个性质</h6>
+<p>成功概率和已经尝试的此数无关： <span class="math display">\[
+\operatorname{Pr}[X&gt;y+x \mid
+X&gt;x]=\operatorname{Pr}\left[X&gt;y]\right.
+\]</span></p>
+<blockquote>
+<p>比如一直扔硬币，知道正面出现。满足几何分布</p>
+</blockquote>
+<p>求大于某个值的概率 <span class="math display">\[
+\begin{aligned}
+\operatorname{Pr}[X&gt;x] &amp;=\sum_{i=x+1}^{\infty}(1-p)^{i-1}
+p=(1-p)^{x} p \cdot \sum_{i=0}^{\infty}(1-p)^{i} \\
+&amp;=(1-p)^{x} p \cdot \frac{1}{1-(1-p)}=(1-p)^{x}
+\end{aligned}
+\]</span></p>
+<h4 id="泊松分布">泊松分布</h4>
+<p>泊松分布(Poisson-Verteilung)
+可以用于建模在给定时间段有固定变化率且独立的固定事件的个数。</p>
+<p>一个泊松分布变量 <span class="math inline">\(X\)</span> ，参数 <span class="math inline">\(\lambda \geq 0\)</span> 有值域 <span class="math inline">\(W_{X}=\mathbb{N}_{0}\)</span> 并且有密度函数：
+<span class="math display">\[
+f_{X}(i)=\frac{e^{-\lambda} \lambda^{i}}{i !} \quad \text { für } i \in
+\mathbb{N}_{0}
+\]</span> 写作 <span class="math display">\[
+X \sim \operatorname{Po}(\lambda)
+\]</span></p>
+<p>而且方差和期望满足 <span class="math display">\[
+\mathbb{E}[X]= \text{Var}[X] = \lambda
+\]</span></p>
+<h5 id="定理59-泊松分布随机变量加和">定理59 泊松分布随机变量加和</h5>
+<p>若 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 是独立的随机变量满足 <span class="math inline">\(X \sim \operatorname{Po}(\lambda)\)</span> 和
+<span class="math inline">\(Y \sim \operatorname{Po}(\mu)\)</span>，
+那么满足 <span class="math display">\[
+Z:=X+Y \sim \operatorname{Po}(\lambda+\mu)
+\]</span></p>
+<blockquote>
+<p>求解泊松分布常用到 <span class="math inline">\(e^{x}\)</span>
+的幂级数展开式 <span class="math display">\[
+e^{x}=\sum_{n=0}^{\infty} \frac{1}{n !} x^{n}=1+x+\frac{1}{2 !}
+x^{2}+\ldots+\frac{1}{n !} x^{n}+\ldots, x \in(-\infty,+\infty)
+\]</span></p>
+</blockquote>
+<h5 id="泊松分布与二项分布">泊松分布与二项分布</h5>
+<p>当 <span class="math inline">\(n \rightarrow \infin\)</span> 时，且
+<span class="math inline">\(n\)</span> 相对于 <span class="math inline">\(\lambda\)</span> 足够大，二项分布与泊松分布近似
+<span class="math display">\[
+Po(\lambda) \sim Bin(n,\lambda / n)
+\]</span></p>
+<h3 id="概率的估计">概率的估计</h3>
+<h4 id="不等式">不等式</h4>
+<h5 id="定理60-马尔可夫不等式">定理60 马尔可夫不等式</h5>
+<p>若 <span class="math inline">\(X\)</span>
+是随机变量，它只有非负值。那么对于所有 <span class="math inline">\(t \in
+\mathbb{R}\)</span> 且 <span class="math inline">\(t&gt;0\)</span> 满足
+<span class="math display">\[
+\operatorname{Pr}[X \geq t] \leq \frac{\mathbb{E}[X]}{t}
+\]</span> 或者： <span class="math display">\[
+\operatorname{Pr}[X \geq t \cdot \mathbb{E}[X]] \leq 1 / t
+\]</span></p>
+<blockquote>
+<p>用于估计概率的上界 (Blatt6 H01)</p>
+</blockquote>
+<h5 id="定理-61-切比雪夫不等式">定理 61 切比雪夫不等式</h5>
+<p>若 <span class="math inline">\(X\)</span> 是随机变量, <span class="math inline">\(t \in \mathbb{R}\)</span> 且 <span class="math inline">\(t&gt;0\)</span> ,满足 <span class="math display">\[
+\operatorname{Pr}[|X-\mathbb{E}[X]| \geq t] \leq
+\frac{\operatorname{Var}[X]}{t^{2}}
+\]</span> 或者： <span class="math display">\[
+\operatorname{Pr}[|X-\mathbb{E}[X]| \geq t \sqrt{\operatorname{Var}[X]}]
+\leq 1 / t^{2}
+\]</span></p>
+<blockquote>
+<p>用的时候可以用绝对值的性质拆开绝对值(Blatt6 H01), <span class="math inline">\(t=n / 2-1\)</span> <span class="math display">\[
+\operatorname{Pr}[X \geq n / 2]=\operatorname{Pr}[X-\mathbb{E}[X] \geq
+t] \leq \operatorname{Pr}[|X-\mathbb{E}[X]| \geq t]
+\]</span></p>
+</blockquote>
+<h4 id="大数定律">大数定律</h4>
+<h5 id="定理-63-大数定律">定理 63 大数定律</h5>
+<p>给定一个随机变量， 若 <span class="math inline">\(\varepsilon,
+\delta&gt;0\)</span> 是任意且固定的。那么对于所有 <span class="math inline">\(n \geq \frac{\operatorname{Var}[X]}{\varepsilon
+\delta^{2}}\)</span> ：</p>
+<p>若 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+独立随机变量且拥有和 <span class="math inline">\(X\)</span>
+相同的分布,且设 <span class="math display">\[
+Z:=\frac{X_{1}+\ldots+X_{n}}{n}
+\]</span> 那么满足 <span class="math display">\[
+\operatorname{Pr}[|Z-\mathbb{E}[X]| \geq \delta] \leq \varepsilon
+\]</span></p>
+<h4 id="切诺夫界">切诺夫界</h4>
+<h5 id="定理-64-切诺夫界-1">定理 64 切诺夫界 1</h5>
+<p>若 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是独立的伯努利分布的随机变量，且<span class="math inline">\(\operatorname{Pr}\left[X_{i}=1\right]=p_{i}\)</span>，<span class="math inline">\(\operatorname{Pr}\left[X_{i}=0\right]=1-p_{i}\)</span>
+. 那么对于 <span class="math inline">\(X:=\sum_{i=1}^{n} X_{i}\)</span>
+und <span class="math inline">\(\mu:=\mathbb{E}[X]=\sum_{i=1}^{n}
+p_{i}\)</span> ，<span class="math inline">\(\delta&gt;0\)</span> 满足
+<span class="math display">\[
+\operatorname{Pr}[X \geq(1+\delta) \mu]
+\leq\left(\frac{e^{\delta}}{(1+\delta)^{1+\delta}}\right)^{\mu}
+\]</span></p>
+<h5 id="定理-66-切诺夫界-2">定理 66 切诺夫界 2</h5>
+<p>若 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是独立的伯努利分布的随机变量，且<span class="math inline">\(\operatorname{Pr}\left[X_{i}=1\right]=p_{i}\)</span>，<span class="math inline">\(\operatorname{Pr}\left[X_{i}=0\right]=1-p_{i}\)</span>
+. 那么对于 <span class="math inline">\(X:=\sum_{i=1}^{n} X_{i}\)</span>
+und <span class="math inline">\(\mu:=\mathbb{E}[X]=\sum_{i=1}^{n}
+p_{i}\)</span> ，<span class="math inline">\(0&lt;\delta&lt;1\)</span>
+满足： <span class="math display">\[
+\operatorname{Pr}[X \leq(1-\delta) \mu]
+\leq\left(\frac{e^{-\delta}}{(1-\delta)^{1-\delta}}\right)^{\mu}
+\]</span></p>
+<h5 id="引理-67-切诺夫界扩展">引理 67 切诺夫界扩展</h5>
+<p>对于 <span class="math inline">\(0&lt;\delta&lt;1\)</span> 满足 <span class="math display">\[
+(1-\delta)^{1-\delta} \geq e^{-\delta+\delta^{2} / 2} \quad \text { und
+} \quad(1+\delta)^{1+\delta} \geq e^{\delta+\delta^{2} / 3}
+\]</span></p>
+<h5 id="推论-68-推论公式">推论 68 推论公式</h5>
+<p>若 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是独立的伯努利分布的随机变量，且<span class="math inline">\(\operatorname{Pr}\left[X_{i}=1\right]=p_{i}\)</span>，<span class="math inline">\(\operatorname{Pr}\left[X_{i}=0\right]=1-p_{i}\)</span>
+. 那么对于 <span class="math inline">\(X:=\sum_{i=1}^{n} X_{i}\)</span>
+und <span class="math inline">\(\mu:=\mathbb{E}[X]=\sum_{i=1}^{n}
+p_{i}\)</span></p>
+<ul>
+<li><span class="math inline">\(\operatorname{Pr}[X \geq(1+\delta) \mu]
+\leq e^{-\mu \delta^{2} / 3 \quad \text { für alle } 0&lt;\delta \leq
+1}\)</span></li>
+<li><span class="math inline">\(\operatorname{Pr}[X \leq(1-\delta) \mu]
+\leq e^{-\mu \delta^{2} / 2} \quad\)</span> für alle <span class="math inline">\(0&lt;\delta \leq 1\)</span></li>
+<li><span class="math inline">\(\operatorname{Pr}[|X-\mu| \geq \delta
+\mu] \leq 2 e^{-\mu \delta^{2} / 3} \quad\)</span> für alle <span class="math inline">\(0&lt;\delta \leq 1\)</span></li>
+<li><span class="math inline">\(\operatorname{Pr}[X \geq(1+\delta) \mu]
+\leq\left(\frac{e}{1+\delta}\right)^{(1+\delta) \mu}\)</span></li>
+<li><span class="math inline">\(\operatorname{Pr}[X \geq t] \leq 2^{-t}
+\quad\)</span> für <span class="math inline">\(t \geq 2 e
+\mu\)</span></li>
+</ul>
+<h3 id="概率生成函数">概率生成函数</h3>
+<h4 id="定义70-概率生成函数">定义70 概率生成函数</h4>
+<p>对于一个随机变量 <span class="math inline">\(X\)</span> , <span class="math inline">\(W_{X} \subseteq \mathbb{N}_{0}\)</span>
+那么概率生产函数 (wahrscheinlichkeits-)erzeugende Funktion为 <span class="math display">\[
+G_{X}(s):=\sum_{k=0}^{\infty} \operatorname{Pr}[X=k] \cdot
+s^{k}=\mathbb{E}\left[s^{X}\right]
+\]</span></p>
+<h4 id="定理71-函数的唯一性">定理71 函数的唯一性</h4>
+<p>一个随机变量$X $ , <span class="math inline">\(W_{X} \subseteq
+\mathbb{N}_{0}\)</span> 的密度和分布是通过它的生产函数唯一确定的.</p>
+<h5 id="伯努利分布-1">伯努利分布</h5>
+<p><span class="math display">\[
+G_{X}(s)=\mathbb{E}\left[s^{X}\right]=(1-p) \cdot s^{0}+p \cdot
+s^{1}=1-p+p s
+\]</span></p>
+<h5 id="均匀分布-0...n">均匀分布 <span class="math inline">\(\{0,...,n\}\)</span></h5>
+<p>若 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(\{0,..,n\}\)</span> 均匀分布，也就是对于 <span class="math inline">\(0 \leq k \leq n\)</span> ，<span class="math inline">\(\operatorname{Pr}[X=k]=1 /(n+1)\)</span> <span class="math display">\[
+G_{X}(s)=\mathbb{E}\left[s^{X}\right]=\sum_{k=0}^{n} \frac{1}{n+1} \cdot
+s^{k}=\frac{s^{n+1}-1}{(n+1)(s-1)}
+\]</span></p>
+<h5 id="二项分布-1">二项分布</h5>
+<p><span class="math display">\[
+G_{X}(s)=\mathbb{E}\left[s^{X}\right]=\sum_{k=0}^{n}\left(\begin{array}{l}
+n \\
+k
+\end{array}\right) p^{k}(1-p)^{n-k} \cdot s^{k}=(1-p+p s)^{n}
+\]</span></p>
+<h5 id="几何分布-1">几何分布</h5>
+<p><span class="math display">\[
+\begin{aligned}
+G_{X}(s)=\mathbb{E}\left[s^{X}\right] &amp;=\sum_{k=1}^{\infty}
+p(1-p)^{k-1} \cdot s^{k} \\
+&amp;=p s \cdot \sum_{k=1}^{\infty}((1-p) s)^{k-1}=\frac{p s}{1-(1-p) s}
+\end{aligned}
+\]</span></p>
+<h5 id="泊松分布-1">泊松分布</h5>
+<p><span class="math display">\[
+G_{X}(s)=\mathbb{E}\left[s^{X}\right]=\sum_{k=0}^{\infty} e^{-\lambda}
+\frac{\lambda^{k}}{k !} \cdot s^{k}=e^{-\lambda+\lambda
+s}=e^{\lambda(s-1)}
+\]</span></p>
+<h5 id="计算期望方差">计算期望方差</h5>
+<p><span class="math display">\[
+G_{X}^{\prime}(1)=\sum_{k=1}^{\infty} k \cdot
+\operatorname{Pr}[X=k]=\mathbb{E}[X]
+\]</span></p>
+<p><span class="math display">\[
+\operatorname{Var}[X]=\mathbb{E}\left[X^{2}\right]-\mathbb{E}[X]^{2}=\mathbb{E}[X
+\cdot(X-1)+X]-\mathbb{E}[X]^{2}=G_{X}^{\prime
+\prime}(1)+G_{X}^{\prime}(1)-\left(G_{X}^{\prime}(1)\right)^{2}
+\]</span></p>
+<h4 id="定义74-秩生成函数">定义74 秩生成函数</h4>
+<p>对于一个随机变量 <span class="math inline">\(X\)</span> ，秩生成函数
+momenterzeugende Funktion 是 <span class="math display">\[
+M_{X}(s):=\mathbb{E}\left[e^{X s}\right]
+\]</span></p>
+<p><span class="math display">\[
+M_{X}(s)=G_{X}\left(e^{s}\right)
+\]</span></p>
+<h4 id="随机变量加和">随机变量加和</h4>
+<h5 id="定理75-和的生成函数">定理75 和的生成函数</h5>
+<p>对于独立随机变量 <span class="math inline">\(X_{1}, \ldots,
+X_{n}\)</span> 且 <span class="math inline">\(Z:=X_{1}+\ldots+X_{n}\)</span>，那么满足 <span class="math display">\[
+G_{Z}(s)=G_{X_{1}}(s) \cdot \ldots \cdot G_{X_{n}}(s)
+\]</span> 而且 <span class="math display">\[
+M_{Z}(s)=M_{X_{1}}(s) \cdot \ldots \cdot M_{X_{n}}(s)
+\]</span></p>
+<h4 id="随机和">随机和</h4>
+<p>我们考虑这样的情况： <span class="math inline">\(Z:=X_{1}+\ldots+X_{N}\)</span>，<span class="math inline">\(N\)</span> 是一个随机变量.</p>
+<h5 id="定理77-和的生成函数">定理77 和的生成函数</h5>
+<p>若 <span class="math inline">\(X_{1}, X_{2}, \ldots\)</span>
+是独立，而且具有相同分布随机变量，生成函数是 <span class="math inline">\(G_{X}(s)\)</span> . <span class="math inline">\(N\)</span> 是一个独立随机变量且有生成函数 <span class="math inline">\(G_{N}(s)\)</span>. 那么随机变量 <span class="math inline">\(Z:=X_{1}+\ldots+X_{N}\)</span>有随机生成函数 <span class="math inline">\(G_{Z}(s)=G_{N}\left(G_{X}(s)\right)\)</span>.</p>
+<h2 id="连续概率空间">连续概率空间</h2>
+<h3 id="连续随机变量">连续随机变量</h3>
+<h4 id="定义79-连续随机变量">定义79 连续随机变量</h4>
+<p>一个连续的随机变量 <span class="math inline">\(X\)</span>
+(kontinuierliche oder auch stetige Zufallsvariable
+)和它在的连续概率空间(kontinuierlicher (reeller)
+Wahrscheinlichkeitsraum)是由一个积分函数定义的 <span class="math inline">\(f_{X}: \mathbb{R} \rightarrow
+\mathbb{R}_{0}^{+}\)</span> : <span class="math display">\[
+\int_{-\infty}^{+\infty} f_{X}(x) \mathrm{d} x=1
+\]</span> 可以通过对可数且分离的区间并集 <span class="math inline">\(A=\bigcup_{k} I_{k}\)</span> 构造出的集合 <span class="math inline">\(A \subseteq \mathbb{R}\)</span> 叫事件(Ereignis).
+<span class="math inline">\(A\)</span> 的概率是这样算的： <span class="math display">\[
+\operatorname{Pr}[A]=\int_{A} f_{X}(x) \mathrm{d} x=\sum_{k}
+\int_{I_{k}} f_{X}(x) \mathrm{d} x
+\]</span></p>
+<blockquote>
+<p>根据性质计算参数 (Blatt7 T02)</p>
+</blockquote>
+<h3 id="kolmogorov-axiome和σ-代数">Kolmogorov-Axiome和σ-代数</h3>
+<h4 id="定义82-σ-代数">定义82 σ-代数</h4>
+<p>若 <span class="math inline">\(\Omega\)</span> 是个集合。<span class="math inline">\(\mathcal{A} \subseteq \mathcal{P}(\Omega)\)</span>
+是在集合<span class="math inline">\(\Omega\)</span> 上的 <span class="math inline">\(\sigma\)</span> -代数(Algebra),
+若下面的性质满足：</p>
+<ul>
+<li><span class="math inline">\(\Omega \in \mathcal{A}\)</span></li>
+<li>若 <span class="math inline">\(A \in \mathcal{A},\)</span> 那么
+<span class="math inline">\(\bar{A} \in \mathcal{A}\)</span></li>
+<li>对于 <span class="math inline">\(n \in \mathbb{N}\)</span> 设 <span class="math inline">\(A_{n} \in \mathcal{A} .\)</span> 那么 <span class="math inline">\(\bigcup_{n=1}^{\infty} A_{n} \in
+\mathcal{A}\)</span></li>
+</ul>
+<p>对于所有 <span class="math inline">\(A \subseteq \mathbb{R}\)</span>
+是一种 Borel集合.</p>
+<blockquote>
+<p>判断集合是否是 σ-代数 (Blatt7 T01)</p>
+</blockquote>
+<h4 id="定义83-柯尔莫哥洛夫公理kolmogorov-axiome">定义83
+柯尔莫哥洛夫公理Kolmogorov-Axiome</h4>
+<p>若 <span class="math inline">\(\Omega\)</span> 是个集合。<span class="math inline">\(\mathcal{A}\)</span> 是是在集合<span class="math inline">\(\Omega\)</span> 上的 <span class="math inline">\(\sigma\)</span> -代数. 映射 <span class="math display">\[
+\operatorname{Pr}[.]: \mathcal{A} \rightarrow[0,1]
+\]</span> 是<span class="math inline">\(\mathcal{A}\)</span>
+上的概率测度(Wahrscheinlichkeitsmaß) ，若满足：</p>
+<ul>
+<li><p><span class="math inline">\(\operatorname{Pr}[\Omega]=1\)</span></p></li>
+<li><p><span class="math inline">\(A_{1}, A_{2}, \ldots\)</span>
+是两两互斥的事件. 那么满足： <span class="math display">\[
+\operatorname{Pr}\left[\bigcup_{i=1}^{\infty}
+A_{i}\right]=\sum_{i=1}^{\infty} \operatorname{Pr}\left[A_{i}\right]
+\]</span></p></li>
+</ul>
+<p>对于一个事件 <span class="math inline">\(A \in \mathcal{A}\)</span>,
+<span class="math inline">\(\operatorname{Pr}[A]\)</span> 是<span class="math inline">\(A\)</span> 的概率(Wahrscheinlichkeit).
+一个概率空间是由元组 <span class="math inline">\((\Omega, \mathcal{A},
+\operatorname{Pr})\)</span> 定义的.</p>
+<h4 id="引理84">引理84</h4>
+<p>若 <span class="math inline">\((\Omega, \mathcal{A},
+\operatorname{Pr})\)</span> 是一个概率空间。对于事件 <span class="math inline">\(A, B, A_{1}, A_{2}, \ldots\)</span> 满足：</p>
+<ul>
+<li><p><span class="math inline">\(\operatorname{Pr}[\emptyset]=0,
+\operatorname{Pr}[\Omega]=1\)</span></p></li>
+<li><p><span class="math inline">\(0 \leq \operatorname{Pr}[A] \leq
+1\)</span></p></li>
+<li><p><span class="math inline">\(\operatorname{Pr}[\bar{A}]=1-\operatorname{Pr}[A]\)</span></p></li>
+<li><p>若 <span class="math inline">\(A \subseteq B,\)</span> 则 <span class="math inline">\(\operatorname{Pr}[A] \leq
+\operatorname{Pr}[B]\)</span></p></li>
+<li><p>(加法原理) 当事件 <span class="math inline">\(A_{1}, \ldots,
+A_{n}\)</span> 两两互斥，那么 <span class="math display">\[
+\operatorname{Pr}\left[\bigcup_{i=1}^{n} A_{i}\right]=\sum_{i=1}^{n}
+\operatorname{Pr}\left[A_{i}\right]
+\]</span></p></li>
+</ul>
+<h4 id="勒贝格积分">勒贝格积分</h4>
+<p>一个函数 <span class="math inline">\(f: \mathbb{R} \rightarrow
+\mathbb{R}\)</span> 是可测量的(messbar).
+若每个Borel波莱尔集合的原像(Urbild)还是一个Borel集合，</p>
+<p>每个可测量的函数都可以积分，叫做勒贝格积分(Lebesgue-Integral).</p>
+<ul>
+<li>连续函数都是Borel波莱尔可测的(Borel-messbar)</li>
+<li>指示函数 <span class="math inline">\(I_{A}: x
+\mapsto\left\{\begin{array}{ll}1 &amp; \text { falls } x \in A \\ 0
+&amp; \text { sonst }\end{array}\right.\)</span> 是Borel可测的</li>
+<li>Borel可测的函数与Borel可测函数的和和积也是Borel可测的</li>
+</ul>
+<blockquote>
+<p>判断一个函数是否是Borel可测 (Blatt7 T02)</p>
+</blockquote>
+<h3 id="计算连续随机变量">计算连续随机变量</h3>
+<h4 id="连续随机变量函数">连续随机变量函数</h4>
+<p>若 <span class="math inline">\(Y:=g(X)\)</span>， <span class="math inline">\(g: \mathbb{R} \rightarrow \mathbb{R}\)</span> .
+那么 <span class="math inline">\(Y\)</span> 的分布是 <span class="math display">\[
+F_{Y}(y)=\operatorname{Pr}[Y \leq y]=\operatorname{Pr}[g(X) \leq
+y]=\int_{C} f_{X}(t) \mathrm{d} t
+\]</span> 这里 <span class="math inline">\(C:=\{t \in \mathbb{R} \mid
+g(t) \leq y\}\)</span> 是所有实数满足 "<span class="math inline">\(Y
+\leq y\)</span>" 的.</p>
+<p>求密度函数：先求分布再求导</p>
+<p>求一个函数是否是分布函数：</p>
+<blockquote>
+<ol type="1">
+<li>非严格单调增</li>
+<li>连续</li>
+<li>在负无穷的极限是0，正无穷的极限是1</li>
+</ol>
+</blockquote>
+<h4 id="连续随机变量极限">连续随机变量极限</h4>
+<p>若 <span class="math inline">\(X\)</span>
+是一个连续随机变量，我们可以从 <span class="math inline">\(X\)</span>
+里构造一个离散的随机变量。设 <span class="math inline">\(\delta&gt;0\)</span> ，那么 <span class="math display">\[
+X_{\delta}=n \delta \Longleftrightarrow X \in[n \delta,(n+1)
+\delta[\text { für } n \in \mathbb{Z}
+\]</span> 对于 $X_{} $ 满足 <span class="math display">\[
+\operatorname{Pr}\left[X_{\delta}=n \delta\right]=F_{X}((n+1)
+\delta)-F_{X}(n \delta)
+\]</span></p>
+<h4 id="期望和方差">期望和方差</h4>
+<h5 id="定义88-期望和方差">定义88 期望和方差</h5>
+<p>对于一个连续随机变量 <span class="math inline">\(X\)</span>
+，方差如下定义： <span class="math display">\[
+\mathbb{E}[X]=\int_{-\infty}^{\infty} t \cdot f_{X}(t) \mathrm{d} t
+\]</span> 只要 <span class="math inline">\(\int_{-\infty}^{\infty}|t|
+\cdot f_{X}(t) \mathrm{d} t\)</span> 是有限的.</p>
+<p>对于方差是 <span class="math display">\[
+\operatorname{Var}[X]=\mathbb{E}\left[(X-\mathbb{E}[X])^{2}\right]=\int_{-\infty}^{\infty}(t-\mathbb{E}[X])^{2}
+\cdot f_{X}(t) \mathrm{d} t
+\]</span> 当 <span class="math inline">\(\mathbb{E}\left[(X-\mathbb{E}[X])^{2}\right]\)</span>
+存在.</p>
+<h5 id="引理89-计算期望">引理89 计算期望</h5>
+<p>若 <span class="math inline">\(X\)</span> 是连续随机变量, 令 <span class="math display">\[
+Y:=g(X)
+\]</span> 那么 <span class="math display">\[
+\mathbb{E}[Y]=\int_{-\infty}^{\infty} g(t) \cdot f_{X}(t) \mathrm{d} t
+\]</span></p>
+<blockquote>
+<p>使用公式计算期望和方差 (Blatt07 T02)</p>
+</blockquote>
+<h3 id="重要连续分布">重要连续分布</h3>
+<h4 id="均匀分布">均匀分布</h4>
+<p><span class="math display">\[
+\begin{array}{l}
+f(x)=\left\{\begin{array}{ll}
+\frac{1}{b-a} &amp; \text { für } x \in[a, b] \\
+0 &amp; \text { sonst. }
+\end{array}\right. \\
+F(x)=\int_{-\infty}^{x} f(t) d t=\left\{\begin{array}{ll}
+0 &amp; \text { für } x&lt;a \\
+\frac{x-a}{b-a} &amp; \text { für } a \leq x \leq b \\
+1 &amp; \text { für } x&gt;b
+\end{array}\right. \\
+\mathbb{E}[X]=\frac{a+b}{2} \text { und }
+\operatorname{Var}[X]=\frac{(a-b)^{2}}{12}
+\end{array}
+\]</span></p>
+<h4 id="正态分布">正态分布</h4>
+<h5 id="定义-91-正态分布">定义 91 正态分布</h5>
+<p><span class="math display">\[
+f(x)=\frac{1}{\sqrt{2 \pi} \sigma} \cdot \exp
+\left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right)=: \varphi(x ; \mu,
+\sigma)
+\]</span></p>
+<p>记为 <span class="math inline">\(X \sim \mathcal{N}\left(\mu,
+\sigma^{2}\right)\)</span></p>
+<p>分布函数 <span class="math display">\[
+F(x)=\frac{1}{\sqrt{2 \pi} \sigma} \cdot \int_{-\infty}^{x} \exp
+\left(-\frac{(t-\mu)^{2}}{2 \sigma^{2}}\right) \mathrm{d} t=: \Phi(x ;
+\mu, \sigma)
+\]</span> 若 <span class="math inline">\(\mu=0,\sigma=1\)</span>
+也叫标准正态分布，标准正态分布的分布函数也叫高斯<span class="math inline">\(\Phi\)</span>-函数。(一般可以查表看值)</p>
+<h5 id="高斯函数的性质">高斯函数的性质</h5>
+<p>对于 <span class="math inline">\(x\in \R\)</span> 满足 <span class="math display">\[
+\Phi(-x)=1-\Phi(x)
+\]</span></p>
+<h5 id="引理-92-定义">引理 92 定义</h5>
+<p><span class="math display">\[
+I:=\int_{-\infty}^{\infty} e^{-x^{2} / 2} d x=\sqrt{2 \pi}
+\]</span></p>
+<h5 id="定理-93-正态分布的线性变换">定理 93 正态分布的线性变换</h5>
+<p>若 <span class="math inline">\(X\)</span>
+是一个正态分布的随机变量<span class="math inline">\(X \sim
+\mathcal{N}\left(\mu, \sigma^{2}\right)\)</span>. 那么对于任意的 <span class="math inline">\(a \in \mathbb{R} \backslash\{0\}\)</span> 和 <span class="math inline">\(b \in \mathbb{R}\)</span>. <span class="math inline">\(Y=a X+b\)</span> 也是正态分布<span class="math inline">\(Y \sim \mathcal{N}\left(a \mu+b, a^{2}
+\sigma^{2}\right)\)</span></p>
+<h5 id="定理-94-n01-期望方差">定理 94 N(0,1) 期望方差</h5>
+<p>若 <span class="math inline">\(X\)</span> 是 <span class="math inline">\(\mathcal{N}(0,1)\)</span> 分布，那么 <span class="math display">\[
+\mathbb{E}[X]=0 \text { und } \operatorname{Var}[X]=1
+\]</span></p>
+<h5 id="定理-95-n-期望方差">定理 95 N 期望方差</h5>
+<p><span class="math inline">\(X\)</span> 满足 <span class="math inline">\(\mathcal{N}\left(\mu, \sigma^{2}\right)\)</span>
+分布, 那么 <span class="math display">\[
+\mathbb{E}[X]=\mu \text { und } \operatorname{Var}[X]=\sigma^{2}
+\]</span></p>
+<h5 id="秩生成函数">秩生成函数</h5>
+<p>若 <span class="math inline">\(Y \sim \mathcal{N}\left(\mu,
+\sigma^{2}\right)\)</span> 是正态分布 <span class="math display">\[
+M_{Y}(t) = e^{t \mu+(t \sigma)^{2} / 2}
+\]</span></p>
+<h4 id="指数分布">指数分布</h4>
+<h5 id="定义-96">定义 96</h5>
+<p>一个随机变量 <span class="math inline">\(X\)</span> 是以 <span class="math inline">\(\lambda &gt; 0\)</span> 的指数分布. 若满足密度函数
+<span class="math display">\[
+f(x)=\left\{\begin{array}{ll}
+\lambda \cdot e^{-\lambda x} &amp; \text { falls } x \geq 0 \\
+0 &amp; \text { sonst }
+\end{array}\right.
+\]</span> 分布函数为 <span class="math display">\[
+F(x)=\int_{0}^{x} \lambda \cdot e^{-\lambda t} \mathrm{d}
+t=\left[-e^{-\lambda t}\right]_{0}^{x}=1-e^{-\lambda x}
+\]</span></p>
+<p>$[X]= $, $ [X]=$</p>
+<h5 id="定理-97-指数随机变量的缩放">定理 97 指数随机变量的缩放</h5>
+<p>一个随机变量 <span class="math inline">\(X\)</span> 是以 <span class="math inline">\(\lambda &gt; 0\)</span> 的指数分布. 对于 <span class="math inline">\(a&gt;0\)</span> 的随机变量 <span class="math inline">\(Y:=a X\)</span> 也是一个指数分布的随机变量, 参数
+<span class="math inline">\(\lambda / a\)</span>.</p>
+<h5 id="定理-98-无思想性">定理 98 无思想性</h5>
+<p>一个连续随机变量 <span class="math inline">\(X\)</span>
+是指数的，当且仅当对于所有 <span class="math inline">\(x,
+y&gt;0\)</span> 满足 <span class="math display">\[
+\operatorname{Pr}[X&gt;x+y \mid X&gt;y]=\operatorname{Pr}[X&gt;x]
+\]</span></p>
+<h4 id="指数分布与几何分布的极限">指数分布与几何分布的极限</h4>
+<p>设一个几何分布的序列 <span class="math inline">\(X_n\)</span> ,
+参数为 <span class="math inline">\(p_n=\lambda / n\)</span> . 当 <span class="math inline">\(n \rightarrow \infin\)</span> 时， 可以用 <span class="math inline">\(Y_n=\frac{1}{n} X_n\)</span> , 是参数为 <span class="math inline">\(\lambda\)</span> 的指数分布来逼近。</p>
+<h3 id="多个连续随机变量">多个连续随机变量</h3>
+<h4 id="多元密度函数">多元密度函数</h4>
+<p>两个连续随机变量 <span class="math inline">\(X, Y\)</span>
+可以这样表示 <span class="math inline">\(f_{X, Y}: \mathbb{R}^{2}
+\rightarrow \mathbb{R}_{0}^{+}\)</span> ： <span class="math display">\[
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f_{X, Y}(x, y) d x d y=1
+\]</span> 对于事件 <span class="math inline">\(A\)</span> : <span class="math display">\[
+\operatorname{Pr}[A]=\int_{A} f_{X, Y}(x, y) \mathrm{d} x \mathrm{d} y
+\]</span></p>
+<h5 id="定义-100-边缘分布randverteilung">定义 100
+边缘分布Randverteilung</h5>
+<p>若 <span class="math inline">\(f_{X, Y}\)</span> 是随机变量<span class="math inline">\(X, Y\)</span> 的密度函数. 那么
+边缘分布Randverteilung 是 <span class="math display">\[
+F_{X}(x)=\operatorname{Pr}[X \leq
+x]=\int_{-\infty}^{x}\left[\int_{-\infty}^{\infty} f_{X, Y}(u, v)
+\mathrm{d} v\right] \mathrm{d} u
+\]</span> 类似的 <span class="math display">\[
+f_{X}(x)=\int_{-\infty}^{\infty} f_{X, Y}(x, v) d v
+\]</span> 是 <span class="math inline">\(X\)</span>
+的边缘密度函数Randdichte</p>
+<h5 id="定义-101-独立性">定义 101 独立性</h5>
+<p>两个连续随机变量 <span class="math inline">\(X, Y\)</span>
+是独立的，若对于所有 <span class="math inline">\(x, y \in
+\mathbb{R}\)</span> 满足 <span class="math display">\[
+\operatorname{Pr}[X \leq x, Y \leq y]=\operatorname{Pr}[X \leq x] \cdot
+\operatorname{Pr}[Y \leq y]
+\]</span> 类似的也有 <span class="math display">\[
+F_{X, Y}(x, y)=F_{X}(x) \cdot F_{Y}(y)
+\]</span></p>
+<p><span class="math display">\[
+f_{X, Y}(x, y)=f_{X}(x) \cdot f_{Y}(y)
+\]</span></p>
+<h4 id="多个事件的等待问题">多个事件的等待问题</h4>
+<h5 id="定理-102-指数分布最小值">定理 102 指数分布最小值</h5>
+<p>随机变量 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是独立的且是以参数 <span class="math inline">\(\lambda_{1}, \ldots,
+\lambda_{n}\)</span> 指数分布. 那么 <span class="math inline">\(X:=\min
+\left\{X_{1}, \ldots, X_{n}\right\}\)</span> 也是指数分布，以参数 <span class="math inline">\(\lambda_{1}+\ldots+\lambda_{n}\)</span>.</p>
+<h4 id="泊松过程">泊松过程</h4>
+<p>对于给定 <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(T_i\)</span>
+是独立的相同的指数分布的随机变量,每个参数为 <span class="math inline">\(\lambda\)</span> <span class="math display">\[
+X(t):=\max \left\{n \in \mathbb{N} \mid T_{1}+\ldots+T_{n} \leq
+t\right\}
+\]</span> <span class="math inline">\(X(t)\)</span>
+是泊松分布的随机变量，参数为 <span class="math inline">\(t\lambda\)</span></p>
+<h5 id="定理-105-随机变量加和">定理 105 随机变量加和</h5>
+<p>若 <span class="math inline">\(X, Y\)</span>
+是独立的连续随机变量，对于 <span class="math inline">\(Z:=X+Y\)</span>
+满足 <span class="math display">\[
+f_{Z}(z)=\int_{-\infty}^{\infty} f_{X}(x) \cdot f_{Y}(z-x) \mathrm{d} x
+\]</span></p>
+<h5 id="定理-106-正太分布的加和">定理 106 正太分布的加和</h5>
+<p>随机变量 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是独立的且是以参数 <span class="math inline">\(\mu_{i}, \sigma_{i}(1
+\leq i \leq n)\)</span> 正态分布. 那么 <span class="math display">\[
+Z:=a_{1} X_{1}+\ldots+a_{n} X_{n}
+\]</span> 也是正态分布，期望值为 <span class="math inline">\(\mu=a_{1}
+\mu_{1}+\ldots+a_{n} \mu_{n}\)</span> 方差为 <span class="math inline">\(\sigma^{2}=a_{1}^{2}
+\sigma_{1}^{2}+\ldots+a_{n}^{2} \sigma_{n}^{2}\)</span></p>
+<h5 id="连续变量秩生成函数">连续变量秩生成函数</h5>
+<p>连续随机变量和离散随机变量有相同的秩生成函数 <span class="math display">\[
+M_{X}(s)=\mathbb{E}\left[e^{X s}\right]
+\]</span></p>
+<h4 id="中心极限定理">中心极限定理</h4>
+<h5 id="定理108-中心极限值定理">定理108 中心极限值定理</h5>
+<p>随机变量 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+有相同的分布且都互独立. 且期望和方差都存在并且记为 <span class="math inline">\(\mu\)</span> 和 <span class="math inline">\(\sigma^{2}\)</span>.</p>
+<p>随机变量 <span class="math inline">\(Y_{n}\)</span> 定义为 <span class="math inline">\(Y_{n}:=X_{1}+\ldots+X_{n}\)</span> . 那么 <span class="math display">\[
+Z_{n}:=\frac{Y_{n}-n \mu}{\sigma \sqrt{n}}
+\]</span> 是渐进的标准正太分布，也即是 <span class="math inline">\(Z_{n}
+\sim \mathcal{N}(0,1)\)</span> 对于 <span class="math inline">\(n
+\rightarrow \infty\)</span></p>
+<h5 id="定理-109-de-moivre-棣莫弗拉普拉斯定理">定理 109 de Moivre
+棣莫弗—拉普拉斯定理</h5>
+<p>随机变量 <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>
+是伯努利分布且都互独立，有相同的成功概率 <span class="math inline">\(p\)</span> .那么 <span class="math display">\[
+H_{n}:=X_{1}+\ldots+X_{n}
+\]</span></p>
+<p>对于 <span class="math inline">\(n \ge 1\)</span> , 分布函数为 <span class="math display">\[
+H_{n}^{*}:=\frac{H_{n}-n p}{\sqrt{n p(1-p)}}
+\]</span></p>
+<p>当 <span class="math inline">\(n \rightarrow \infin\)</span> 时,
+<span class="math inline">\(H_n^*\)</span> 是渐进标准正态分布</p>
+<h5 id="定理-110-正太分布对于二项分布的极值">定理 110
+正太分布对于二项分布的极值</h5>
+<p>若 $H_{n} (n, p) <span class="math inline">\(是一个二项分布的随机变量. 分布\)</span>H_{n} / n$
+趋近于 <span class="math inline">\(\mathcal{N}(p, p(1-p) / n)\)</span>
+对于 <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
+<h2 id="数理统计">数理统计</h2>
+<h4 id="定义-112-估计量">定义 112 估计量</h4>
+<p>给定一个随机变量 <span class="math inline">\(X\)</span> 密度函数
+<span class="math inline">\(f(x ; \theta)\)</span>.
+一个估计量(Schätzvariable,Schätzer)是参数 <span class="math inline">\(\theta\)</span> . 一个估计量<span class="math inline">\(U\)</span> 是一个无偏估计(erwartungstreu)若 <span class="math display">\[
+\mathbb{E}[U]=\theta
+\]</span> <span class="math inline">\(\mathbb{E}[U-\theta]\)</span>
+称作估计变量 <span class="math inline">\(U\)</span> 的偏差(Bias).</p>
+<h4 id="定义-113-均方误差mse">定义 113 均方误差MSE</h4>
+<p>若估计变量 <span class="math inline">\(A\)</span> 比 <span class="math inline">\(B\)</span> 有一个小MSE. 那么 <span class="math inline">\(A\)</span> 就是比<span class="math inline">\(B\)</span> 有效率 effizienter. <span class="math display">\[
+M S E:=\mathbb{E}\left[(U-\theta)^{2}\right]
+\]</span></p>
+<p>一个<strong>估计变量是在平方中部常数的</strong>. 若当<span class="math inline">\(n \rightarrow \infty\)</span> 时 <span class="math inline">\(MSE \rightarrow 0\)</span> . <span class="math display">\[
+\begin{aligned}
+M S E=\operatorname{Var}[\bar{X}]
+&amp;=\operatorname{Var}\left[\frac{1}{n} \sum_{i=1}^{n} X_{i}\right] \\
+&amp;=\frac{1}{n^{2}} \sum_{i=1}^{n}
+\operatorname{Var}\left[X_{i}\right]=\frac{1}{n} \operatorname{Var}[X]
+\end{aligned}
+\]</span></p>
+<h4 id="定义-114-stichprobenmittel-和-stichprobenvarianz">定义 114
+Stichprobenmittel 和 Stichprobenvarianz</h4>
+<p>样本均值和样本方差 <span class="math display">\[
+\bar{X}:=\frac{1}{n} \sum_{i=1}^{n} X_{i} \text { und }
+S^{2}:=\frac{1}{n-1} \sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}
+\]</span></p>
+<h4 id="最大似然估计">最大似然估计</h4>
+<p>似然估计函数 <span class="math display">\[
+L(\vec{x} ; \theta):=\prod_{i=1}^{n} f\left(x_{i} ; \theta\right)
+\]</span></p>
+<h4 id="定义-115-最大似然估计值">定义 115 最大似然估计值</h4>
+<p>估计值 <span class="math inline">\(\widehat{\theta}\)</span>
+是对于分布 <span class="math inline">\(f(x ; \theta)\)</span>
+的参数的最大似然估计值 <span class="math display">\[
+L(\vec{x} ; \theta) \leq L(\vec{x} ; \widehat{\theta})
+\]</span></p>
+<h3 id="置信区间kondenzintervall">置信区间(Kondenzintervall)</h3>
+<p>我们要找2个估计量 <span class="math inline">\(U_{1},U_{2}\)</span>，使得. <span class="math display">\[
+\operatorname{Pr}\left[U_{1} \leq \theta \leq U_{2}\right] \geq 1-\alpha
+\]</span> 其中 <span class="math inline">\(1-\alpha\)</span>
+是Kondenzniveau置信水平.</p>
+<p>由 <span class="math inline">\(\bar{X} \sim \mathcal{N}\left(\mu,
+\frac{\sigma^{2}}{n}\right)\)</span> 得出 <span class="math display">\[
+Z:=\sqrt{n} \cdot \frac{\bar{X}-\mu}{\sigma}
+\]</span> 是标准正态分布. 然后变换成下面的式子 <span class="math display">\[
+\operatorname{Pr}[-c \leq Z \leq c]=\Phi(c)-\Phi(-c) \stackrel{!}{=}
+1-\alpha
+\]</span> 再根据查表和题目条件即可解题</p>
+<h4 id="定义-118-分位数">定义 118 分位数</h4>
+<p><span class="math inline">\(X\)</span> 是随机变量，分布为 <span class="math inline">\(F_{X}\)</span> . 数 <span class="math inline">\(x_{\gamma}\)</span> 使得 <span class="math display">\[
+F_{X}\left(x_{\gamma}\right)=\gamma
+\]</span> 是<span class="math inline">\(X\)</span> 的 <span class="math inline">\(\gamma\)</span> -Quantil</p>
+<h4 id="定义-119-正态分布的分位数">定义 119 正态分布的分位数</h4>
+<p>对于正态分布 <span class="math inline">\(z_{\gamma}\)</span> 是它的
+<span class="math inline">\(\gamma\)</span> -Quantil .
+我们可以用这个来求置信区间 <span class="math display">\[
+K=\left[\bar{X}-\frac{z\left(1-\frac{\alpha}{2}\right)^{\sigma}}{\sqrt{n}},
+\bar{X}+\frac{z_{\left(1-\frac{\alpha}{2}\right)}
+\sigma}{\sqrt{n}}\right]
+\]</span></p>
+<h3 id="假设检验">假设检验</h3>
+<h4 id="检验的定义">检验的定义</h4>
+<p><span class="math display">\[
+K:=\left\{\vec{x} \in \mathbb{R}^{n} ; \vec{x} \text { führt zur
+Ablehnung der Hypothese }\right\}
+\]</span></p>
+<p><span class="math inline">\(K\)</span> 是拒绝域.</p>
+<p><span class="math inline">\(\widetilde{K} \subseteq
+\mathbb{R}\)</span> 是检验集合 <span class="math inline">\(T\)</span>
+中拒绝域中的检验,</p>
+<p><span class="math inline">\(H_{0}\)</span>
+是我们要检验的假设Nullhypothese. <span class="math inline">\(H_{1}\)</span> 是另一个假设 Alternative.</p>
+<h4 id="检验的错误">检验的错误</h4>
+<h5 id="类错误">1类错误</h5>
+<p><span class="math inline">\(H_{0}\)</span> 满足却被拒绝了 <span class="math display">\[
+\begin{aligned}
+\text { Fehlerwahrscheinlichkeit } 1 . \text { Art } &amp;=\max _{p \in
+H_{0}} \operatorname{Pr}_{p}[T \in K] \\
+&amp;=\max _{p \in H_{0}} \operatorname{Pr}_{p}[T \leq k]
+\end{aligned}
+\]</span> 计算是在<span class="math inline">\(H_{0}\)</span>
+的概率里把所有在拒绝域的数量加起来</p>
+<h5 id="类错误-1">2类错误</h5>
+<p><span class="math inline">\(H_{0}\)</span> 不满足却被接受了 <span class="math display">\[
+\begin{aligned}
+\text { Fehlerwahrscheinlichkeit } 2 . \text { Art } &amp;=\sup _{p \in
+H_{1}} \operatorname{Pr}_{p}[T \notin K] \\
+&amp;=\sup _{p \in H_{1}} \operatorname{Pr}_{p}[T&gt;k]
+\end{aligned}
+\]</span> 计算就是把在接受区间里的 <span class="math inline">\(H_{1}\)</span> 的概率加起来</p>
+<p>1类错误的数量用 <span class="math inline">\(\alpha\)</span> 来表示.
+也叫显著性差异Signifikanzniveau.</p>
+<h4 id="二项检验">二项检验</h4>
+<p>若是伯努利分布的随机变量，测试某个概率的大小 <span class="math display">\[
+H_{0}: p \geq p_{0}, \quad H_{1}: p&lt;p_{0}
+\]</span> 然后构造测试量, 用正态分布逼近 <span class="math display">\[
+T:=X_{1}+\ldots+X_{n} , \tilde{T}:=\frac{T-n p}{\sqrt{n p(1-p)}}
+\]</span></p>
+<p><span class="math display">\[
+Z&lt;z_{\alpha} ， Z \ge z_{1-\alpha}
+\]</span></p>
+<p>根据具体情况选择拒绝域的公式</p>
+<h4 id="高斯检验">高斯检验</h4>
+<p>若 <span class="math inline">\(X_i\)</span> 服从正态分布</p>
+<p>假设</p>
+<ol type="a">
+<li><span class="math inline">\(H_{0}: \mu=\mu_{0} \quad\)</span> gegen
+<span class="math inline">\(\quad H_{1}: \mu \neq \mu_{0}\)</span>,</li>
+<li><span class="math inline">\(H_{0}: \mu \geq \mu_{0} \quad\)</span>
+gegen <span class="math inline">\(\quad H_{1}:
+\mu&lt;\mu_{0}\)</span>,</li>
+<li><span class="math inline">\(H_{0}: \mu \leq \mu_{0} \quad\)</span>
+gegen <span class="math inline">\(\quad H_{1}:
+\mu&gt;\mu_{0}\)</span>.</li>
+</ol>
+<p>检验量 <span class="math display">\[
+Z:=\frac{\bar{X}-\mu_{0}}{\sigma} \sqrt{n}
+\]</span> 判断拒绝</p>
+<ol type="a">
+<li><span class="math inline">\(|Z|&gt;z_{1-\alpha / 2}\)</span>,</li>
+<li><span class="math inline">\(\quad Z&lt;z_{\alpha}\)</span></li>
+<li><span class="math inline">\(Z&gt;z_{1-\alpha}\)</span>.</li>
+</ol>
+<h4 id="次t-检验">2次t-检验</h4>
+<p>若 <span class="math inline">\(X_i\)</span> 和 <span class="math inline">\(Y_i\)</span> 是独立且服从正态分布的随机变量</p>
+<p>假设:</p>
+<ol type="a">
+<li><span class="math inline">\(H_{0}: \mu_{X}=\mu_{Y} \quad\)</span>
+，<span class="math inline">\(\quad H_{1}: \mu_{X} \neq
+\mu_{Y}\)</span>,</li>
+<li><span class="math inline">\(H_{0}: \mu_{X} \geq \mu_{Y}
+\quad\)</span> ，<span class="math inline">\(\quad H_{1}:
+\mu_{X}&lt;\mu_{Y}\)</span></li>
+<li><span class="math inline">\(H_{0}: \mu_{X} \leq \mu_{Y}
+\quad\)</span> ，<span class="math inline">\(\quad H_{1}:
+\mu_{X}&gt;\mu_{Y} .\)</span></li>
+</ol>
+<p>检验量 <span class="math display">\[
+T:=\sqrt{\frac{n+m-2}{\frac{1}{m}+\frac{1}{n}}} \cdot
+\frac{\bar{X}-\bar{Y}}{\sqrt{(m-1) \cdot S_{X}^{2}+(n-1) \cdot
+S_{Y}^{2}}}
+\]</span> 判断拒绝</p>
+<ol type="a">
+<li><span class="math inline">\(|T|&gt;t_{m+n-2,1-\alpha /
+2}\)</span>,</li>
+<li><span class="math inline">\(T&lt;t_{m+n-2, \alpha}\)</span>,</li>
+<li><span class="math inline">\(T&gt;t_{m+n-2,1-\alpha}\)</span>.</li>
+</ol>
+<h4 id="卡方检验">卡方检验</h4>
+<p><span class="math inline">\(\chi^2\)</span>
+-Anpassungstest是卡方检验</p>
+<p>若: <span class="math inline">\(X_1,...X_n\)</span>
+是独立且相同的随机变量 <span class="math inline">\(W_{X_i}={1,..,k}\)</span> 时可以使用</p>
+<p>假设： <span class="math display">\[
+\begin{aligned}
+&amp;H_{0}: \operatorname{Pr}[X=i]=p_{i} \quad \text {  } i=1, \ldots,
+k, \\
+&amp;H_{1}: \operatorname{Pr}[X=i] \neq p_{i} \quad \text { 至少存在 } i
+\in\{1, \ldots, k\},
+\end{aligned}
+\]</span> 检验量： <span class="math display">\[
+T=\sum_{i=1}^{k} \frac{\left(h_{i}-n p_{i}\right)^{2}}{n p_{i}}
+\]</span> 判断拒绝 <span class="math display">\[
+T&gt;\chi_{k-1,1-\alpha}^{2}
+\]</span></p>
+<h2 id="随机过程">随机过程</h2>
+<h3 id="离散时间处理">离散时间处理</h3>
+<h4 id="定义-123">定义 123</h4>
+<p>一个在状态集合 <span class="math inline">\(S=\{0, \ldots,
+n-1\}\)</span> 有限的马尔科夫链(Markov-Kette) 由一个无限的随机变量序列
+<span class="math inline">\(\left(X_{t}\right)_{t \in
+\mathbb{N}_{0}}\)</span> 组成. 它的值域是 <span class="math inline">\(S\)</span>, 开始分布Startverteilung 是 <span class="math inline">\(q_{0} \operatorname{mit} q_{0}^{T} \in
+\mathbb{R}^{n}\)</span> . <span class="math inline">\(q_{0}\)</span>
+的元素都是非负的且加和为1. 对于下标集合 <span class="math inline">\(I
+\subseteq\{0, \ldots, t-1\}\)</span> 和任意状态 <span class="math inline">\(i, j, s_{k}(k \in I)\)</span> . 满足： <span class="math display">\[
+\begin{aligned}
+\operatorname{Pr}\left[X_{t+1}=j \mid X_{t}=i, \forall k \in
+I\right.&amp;\left.: X_{k}=s_{k}\right]=\\
+&amp; \operatorname{Pr}\left[X_{t+1}=j \mid X_{t}=i\right]
+\end{aligned}
+\]</span> 并且 <span class="math display">\[
+p_{i j}:=\operatorname{Pr}\left[X_{t+1}=j \mid X_{t}=i\right]
+\]</span></p>
+<p><span class="math inline">\(P=\left(p_{i j}\right)_{0 \leq i,
+j&lt;n}\)</span> 是转移矩阵,例子</p>
+<p><img src="/%E6%A6%82%E7%8E%87%E8%AE%BA/image-20200802214131922.png" alt="image-20200802214131922" style="zoom:50%;"></p>
+<p><span class="math inline">\(p_{i,j}^{(n)}\)</span> 是从<span class="math inline">\(i\)</span> 到 <span class="math inline">\(j\)</span> 走 <span class="math inline">\(n\)</span> 步走到的概率</p>
+<h4 id="定义-126-步数">定义 126 步数</h4>
+<p>随机变量 <span class="math display">\[
+T_{i j}:=\min \left\{n \geq 0 \mid X_{n}=j, \text { wenn }
+X_{0}=i\right\}
+\]</span> 从 <span class="math inline">\(i\)</span> 走到 <span class="math inline">\(j\)</span> 的步数. <span class="math inline">\(h_{i j}:=\mathbb{E}\left[T_{i j}\right]\)</span>
+是期望. <span class="math display">\[
+f_{i j}:=\operatorname{Pr} \left[T_{i j}&lt;\infty \right.]
+\]</span> 是从 <span class="math inline">\(i\)</span> 走到 <span class="math inline">\(j\)</span> 的概率.</p>
+<h4 id="定义-127-到自己的步数">定义 127 到自己的步数</h4>
+<p><span class="math display">\[
+T_{i}:=\min \left\{n \geq 1 \mid X_{n}=i, \text { wenn } X_{0}=i\right\}
+\]</span></p>
+<p>是从 <span class="math inline">\(i\)</span> 开始又走回来的步数. 同理
+<span class="math display">\[
+f_{i}:=\operatorname{Pr}\left[T_{i}&lt;\infty\right]
+\]</span> 是走回来的概率</p>
+<h4 id="定理-129-状态转移方程">定理 129 状态转移方程</h4>
+<p><span class="math display">\[
+\begin{array}{l}
+h_{i j}=1+\sum_{k \neq j} p_{i k} h_{k j} \text { für alle } i, j \in S,
+i \neq j \\
+h_{j}=1+\sum_{k \neq j} p_{j k} h_{k j}
+\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{l}
+f_{i j}=p_{i j}+\sum_{k \neq j} p_{i k} f_{k j} \text { für alle } i, j
+\in S, i \neq j \\
+f_{j}=p_{j j}+\sum_{k \neq j} p_{j k} f_{k j}
+\end{array}
+\]</span></p>
+<h4 id="定义-132-stationäre-verteilung稳定分布">定义 132 stationäre
+Verteilung稳定分布</h4>
+<p>这个分布满足 <span class="math display">\[
+\pi=\pi \cdot P
+\]</span> 同时 <span class="math inline">\(\pi\)</span> 中加和是<span class="math inline">\(1\)</span> .</p>
+<h4 id="定理-134-irreduzibel不可简化的">定理 134
+irreduzibel不可简化的</h4>
+<p>一个马尔科夫链是不可简化的，若对于所有状态对 <span class="math inline">\(i, j \in S\)</span> 存在 <span class="math inline">\(n \in \mathbb{N}\)</span> 使得 <span class="math inline">\(p_{i j}^{(n)}&gt;0\)</span>.</p>
+<p>也就是走几步一定可以到</p>
+<h4 id="定理-136-irreduzibel定理">定理 136 irreduzibel定理</h4>
+<p>一个不可简化的有限马尔科夫链只有1个稳定分布stationäre Verteilung,
+并且满足 <span class="math inline">\(\pi_{j}=1 / h_{j j}\)</span> für
+alle <span class="math inline">\(j \in S\)</span></p>
+<h4 id="定义-137-periode周期">定义 137 Periode周期</h4>
+<p>一个状态 <span class="math inline">\(j\)</span> 的 Periode 是最大的数
+<span class="math inline">\(\xi \in \mathbb{N}\)</span> , 使得 <span class="math display">\[
+\left\{n \in \mathbb{N}_{0} \mid p_{j j}^{(n)}&gt;0\right\}
+\subseteq\left\{i \cdot \xi \mid i \in \mathbb{N}_{0}\right\}
+\]</span> 一个状态的 <span class="math inline">\(\xi = 1\)</span>
+就是非周期性aperiodisch的.
+若所有状态是非周期性的aperiodisch，那么这个马尔科夫链是非周期性aperiodisch的</p>
+<h4 id="定理138-aperiodisch非周期性">定理138 aperiodisch非周期性</h4>
+<p>一个状态 <span class="math inline">\(i \in S\)</span>
+是非周期性的aperiodisch, 当且仅当存在 <span class="math inline">\(n_{0}
+\in \mathbb{N}\)</span> 使得对于所有 <span class="math inline">\(n \in
+\mathbb{N}, n \geq n_{0}\)</span>， <span class="math inline">\(p_{i
+i}^{(n)}&gt;0\)</span> 成立</p>
+<h4 id="定义-140-ergodisch可遍历的">定义 140 ergodisch可遍历的</h4>
+<p>不可简化的Irreduzibel 和非周期性 aperiodisch
+的马尔科夫链是可遍历的ergodisch</p>
+<h4 id="定理-141-fundamentalsatz-für-ergodische-markov-ketten可遍历的马尔可夫链基本定理">定理
+141 Fundamentalsatz für ergodische
+Markov-Ketten可遍历的马尔可夫链基本定理</h4>
+<p>对于所有有限的可遍历的ergodisch的马尔科夫链 <span class="math inline">\(\left(X_{t}\right)_{t \in \mathbb{N}_{0}}\)</span>
+满足 <span class="math display">\[
+\lim _{n \rightarrow \infty} q_{n}=\pi
+\]</span> 其中 <span class="math inline">\(\pi\)</span>
+是唯一的stationäre Verteilung.</p>
+<p>​</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://fyind.github.io">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://fyind.github.io/%E6%A6%82%E7%8E%87%E8%AE%BA/">http://fyind.github.io/%E6%A6%82%E7%8E%87%E8%AE%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a><a class="post-meta__tags" href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">概率论</a></div><div class="post_share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">计算机网络</div></div></a></div><div class="next-post pull-right"><a href="/%E7%BD%91%E7%BB%9C%E6%B5%81%E6%80%9D%E8%B7%AF%E6%B1%87%E6%80%BB/" title="网络流思路汇总"><img class="cover" src="/img/a3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">网络流思路汇总</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/CF680div2/" title="Codeforces Round 680 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-01</div><div class="title">Codeforces Round 680 (Div. 2)</div></div></a></div><div><a href="/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-23</div><div class="title">二进制与位运算</div></div></a></div><div><a href="/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-01</div><div class="title">建模和仿真</div></div></a></div><div><a href="/%E6%95%B0%E5%AD%97%E5%8C%96%E7%BC%96%E7%A8%8B/" title="数字化编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">数字化编程</div></div></a></div><div><a href="/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" title="数学分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-03</div><div class="title">数学分析</div></div></a></div><div><a href="/%E6%95%B0%E8%AE%BA%E6%95%B0%E5%AD%A6/" title="数学"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-14</div><div class="title">数学</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">76</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4"><span class="toc-number">1.</span> <span class="toc-text">离散概率空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86"><span class="toc-number">1.1.</span> <span class="toc-text">基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%891-%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4"><span class="toc-number">1.1.1.</span> <span class="toc-text">定义1 离散概率空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%892-%E5%8D%95%E4%BD%8D%E5%85%83%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.1.2.</span> <span class="toc-text">定义2 单位元事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%894-%E7%9B%B8%E5%AF%B9%E9%A2%91%E7%B9%81%E5%BA%A6relative-h%C3%A4ufigkeit"><span class="toc-number">1.1.3.</span> <span class="toc-text">定义4 相对频繁度(relative
+Häufigkeit)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%895-%E6%97%A0%E9%99%90%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4"><span class="toc-number">1.1.4.</span> <span class="toc-text">定义5 无限概率空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%868-%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.5.</span> <span class="toc-text">定理8 性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%869-%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86siebformel"><span class="toc-number">1.1.6.</span> <span class="toc-text">定理9 容斥原理(Siebformel)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="toc-number">1.1.7.</span> <span class="toc-text">条件概率</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8912-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">定义12 条件概率</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%8616-%E4%B9%98%E6%B3%95%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">定理16 乘法原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%8618-%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">定理18 全概率公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%8619-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">定理19 贝叶斯公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E6%80%A7%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="toc-number">1.5.</span> <span class="toc-text">独立性(独立性)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-23"><span class="toc-number">1.5.1.</span> <span class="toc-text">定理 23</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%8624"><span class="toc-number">1.5.2.</span> <span class="toc-text">定理24</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">1.6.</span> <span class="toc-text">随机变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8925-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">1.6.1.</span> <span class="toc-text">定义25 随机变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8927-%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0%E5%92%8C%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="toc-number">1.6.2.</span> <span class="toc-text">定义27
+概率密度函数和分布函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-29-%E6%9C%9F%E6%9C%9B"><span class="toc-number">1.6.3.</span> <span class="toc-text">定义 29 期望</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-32-%E6%9C%9F%E6%9C%9B%E7%9A%84%E5%8D%95%E8%B0%83%E6%80%A7"><span class="toc-number">1.6.4.</span> <span class="toc-text">定理 32 期望的单调性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-33-%E6%9C%9F%E6%9C%9B%E7%9A%84%E7%BA%BF%E6%80%A7%E6%80%A7"><span class="toc-number">1.6.5.</span> <span class="toc-text">定理 33 期望的线性性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-34-%E6%9C%9F%E6%9C%9B%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="toc-number">1.6.6.</span> <span class="toc-text">定理 34 期望计算公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-35-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B"><span class="toc-number">1.6.7.</span> <span class="toc-text">定义 35 条件期望</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-36-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B%E8%AE%A1%E7%AE%97%E6%9C%9F%E6%9C%9B"><span class="toc-number">1.6.8.</span> <span class="toc-text">定理 36 条件期望计算期望</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-38-%E6%96%B9%E5%B7%AE%E5%92%8C%E6%A0%87%E5%87%86%E5%B7%AE"><span class="toc-number">1.6.9.</span> <span class="toc-text">定义 38 方差和标准差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-39-%E6%96%B9%E5%B7%AE%E5%92%8C%E6%9C%9F%E6%9C%9B"><span class="toc-number">1.6.10.</span> <span class="toc-text">定理 39 方差和期望</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-41-%E6%96%B9%E5%B7%AE%E5%85%AC%E5%BC%8F"><span class="toc-number">1.6.11.</span> <span class="toc-text">定理 41 方差公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-42-%E7%9F%A9"><span class="toc-number">1.6.12.</span> <span class="toc-text">定义 42 矩</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%8F%98%E9%87%8F"><span class="toc-number">1.7.</span> <span class="toc-text">多变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="toc-number">1.7.1.</span> <span class="toc-text">随机变量的独立性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8945-%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="toc-number">1.7.1.1.</span> <span class="toc-text">定义45 独立性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8646-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%89%A9%E5%B1%951"><span class="toc-number">1.7.1.2.</span> <span class="toc-text">定理46 独立性扩展1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8647-%E7%8B%AC%E7%AB%8B%E6%80%A7%E6%89%A9%E5%B1%952"><span class="toc-number">1.7.1.3.</span> <span class="toc-text">定理47 独立性扩展2</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">1.7.2.</span> <span class="toc-text">组合随机变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8649-%E7%8B%AC%E7%AB%8B%E7%9A%84%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8A%A0%E5%92%8C"><span class="toc-number">1.7.2.1.</span> <span class="toc-text">定理49 独立的随机变量加和</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E7%9F%A9"><span class="toc-number">1.7.3.</span> <span class="toc-text">组合随机变量的矩</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8650-%E6%9C%9F%E6%9C%9B%E7%9A%84%E7%BA%BF%E6%80%A7%E6%80%A7"><span class="toc-number">1.7.3.1.</span> <span class="toc-text">定理50 期望的线性性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8652-%E6%9C%9F%E6%9C%9B%E7%9A%84%E4%B9%98%E7%A7%AF%E6%80%A7"><span class="toc-number">1.7.3.2.</span> <span class="toc-text">定理52 期望的乘积性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8953-%E6%8C%87%E7%A4%BA%E5%87%BD%E6%95%B0"><span class="toc-number">1.7.3.3.</span> <span class="toc-text">定义53 指示函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8654-%E6%96%B9%E5%B7%AE%E5%8A%A0%E5%92%8C"><span class="toc-number">1.7.3.4.</span> <span class="toc-text">定理54 方差加和</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%88%86%E5%B8%83"><span class="toc-number">1.8.</span> <span class="toc-text">重要分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83"><span class="toc-number">1.8.1.</span> <span class="toc-text">伯努利分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83"><span class="toc-number">1.8.2.</span> <span class="toc-text">二项分布</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-55-%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">定义 55 二项分布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-56-%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83%E5%8A%A0%E5%92%8C"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">定理 56 二项分布加和</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="toc-number">1.8.3.</span> <span class="toc-text">几何分布</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8957-%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="toc-number">1.8.3.1.</span> <span class="toc-text">定义57 几何分布</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E6%80%A7%E8%B4%A8"><span class="toc-number">1.8.3.1.1.</span> <span class="toc-text">一个性质</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83"><span class="toc-number">1.8.4.</span> <span class="toc-text">泊松分布</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8659-%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8A%A0%E5%92%8C"><span class="toc-number">1.8.4.1.</span> <span class="toc-text">定理59 泊松分布随机变量加和</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83%E4%B8%8E%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83"><span class="toc-number">1.8.4.2.</span> <span class="toc-text">泊松分布与二项分布</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E7%9A%84%E4%BC%B0%E8%AE%A1"><span class="toc-number">1.9.</span> <span class="toc-text">概率的估计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="toc-number">1.9.1.</span> <span class="toc-text">不等式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8660-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="toc-number">1.9.1.1.</span> <span class="toc-text">定理60 马尔可夫不等式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-61-%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="toc-number">1.9.1.2.</span> <span class="toc-text">定理 61 切比雪夫不等式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="toc-number">1.9.2.</span> <span class="toc-text">大数定律</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-63-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">定理 63 大数定律</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E8%AF%BA%E5%A4%AB%E7%95%8C"><span class="toc-number">1.9.3.</span> <span class="toc-text">切诺夫界</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-64-%E5%88%87%E8%AF%BA%E5%A4%AB%E7%95%8C-1"><span class="toc-number">1.9.3.1.</span> <span class="toc-text">定理 64 切诺夫界 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-66-%E5%88%87%E8%AF%BA%E5%A4%AB%E7%95%8C-2"><span class="toc-number">1.9.3.2.</span> <span class="toc-text">定理 66 切诺夫界 2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%90%86-67-%E5%88%87%E8%AF%BA%E5%A4%AB%E7%95%8C%E6%89%A9%E5%B1%95"><span class="toc-number">1.9.3.3.</span> <span class="toc-text">引理 67 切诺夫界扩展</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%AE%BA-68-%E6%8E%A8%E8%AE%BA%E5%85%AC%E5%BC%8F"><span class="toc-number">1.9.3.4.</span> <span class="toc-text">推论 68 推论公式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.</span> <span class="toc-text">概率生成函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8970-%E6%A6%82%E7%8E%87%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.1.</span> <span class="toc-text">定义70 概率生成函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%8671-%E5%87%BD%E6%95%B0%E7%9A%84%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-number">1.10.2.</span> <span class="toc-text">定理71 函数的唯一性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83-1"><span class="toc-number">1.10.2.1.</span> <span class="toc-text">伯努利分布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83-0...n"><span class="toc-number">1.10.2.2.</span> <span class="toc-text">均匀分布 \(\{0,...,n\}\)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83-1"><span class="toc-number">1.10.2.3.</span> <span class="toc-text">二项分布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83-1"><span class="toc-number">1.10.2.4.</span> <span class="toc-text">几何分布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83-1"><span class="toc-number">1.10.2.5.</span> <span class="toc-text">泊松分布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%9F%E6%9C%9B%E6%96%B9%E5%B7%AE"><span class="toc-number">1.10.2.6.</span> <span class="toc-text">计算期望方差</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8974-%E7%A7%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.3.</span> <span class="toc-text">定义74 秩生成函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8A%A0%E5%92%8C"><span class="toc-number">1.10.4.</span> <span class="toc-text">随机变量加和</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8675-%E5%92%8C%E7%9A%84%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.4.1.</span> <span class="toc-text">定理75 和的生成函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%92%8C"><span class="toc-number">1.10.5.</span> <span class="toc-text">随机和</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%8677-%E5%92%8C%E7%9A%84%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.5.1.</span> <span class="toc-text">定理77 和的生成函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4"><span class="toc-number">2.</span> <span class="toc-text">连续概率空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">连续随机变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8979-%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.1.</span> <span class="toc-text">定义79 连续随机变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kolmogorov-axiome%E5%92%8C%CF%83-%E4%BB%A3%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">Kolmogorov-Axiome和σ-代数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8982-%CF%83-%E4%BB%A3%E6%95%B0"><span class="toc-number">2.2.1.</span> <span class="toc-text">定义82 σ-代数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8983-%E6%9F%AF%E5%B0%94%E8%8E%AB%E5%93%A5%E6%B4%9B%E5%A4%AB%E5%85%AC%E7%90%86kolmogorov-axiome"><span class="toc-number">2.2.2.</span> <span class="toc-text">定义83
+柯尔莫哥洛夫公理Kolmogorov-Axiome</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E7%90%8684"><span class="toc-number">2.2.3.</span> <span class="toc-text">引理84</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8B%92%E8%B4%9D%E6%A0%BC%E7%A7%AF%E5%88%86"><span class="toc-number">2.2.4.</span> <span class="toc-text">勒贝格积分</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">2.3.</span> <span class="toc-text">计算连续随机变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.1.</span> <span class="toc-text">连续随机变量函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E6%9E%81%E9%99%90"><span class="toc-number">2.3.2.</span> <span class="toc-text">连续随机变量极限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%9F%E6%9C%9B%E5%92%8C%E6%96%B9%E5%B7%AE"><span class="toc-number">2.3.3.</span> <span class="toc-text">期望和方差</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8988-%E6%9C%9F%E6%9C%9B%E5%92%8C%E6%96%B9%E5%B7%AE"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">定义88 期望和方差</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%90%8689-%E8%AE%A1%E7%AE%97%E6%9C%9F%E6%9C%9B"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">引理89 计算期望</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%BF%9E%E7%BB%AD%E5%88%86%E5%B8%83"><span class="toc-number">2.4.</span> <span class="toc-text">重要连续分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83"><span class="toc-number">2.4.1.</span> <span class="toc-text">均匀分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="toc-number">2.4.2.</span> <span class="toc-text">正态分布</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-91-%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">定义 91 正态分布</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%87%BD%E6%95%B0%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">高斯函数的性质</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E7%90%86-92-%E5%AE%9A%E4%B9%89"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">引理 92 定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-93-%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E7%9A%84%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="toc-number">2.4.2.4.</span> <span class="toc-text">定理 93 正态分布的线性变换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-94-n01-%E6%9C%9F%E6%9C%9B%E6%96%B9%E5%B7%AE"><span class="toc-number">2.4.2.5.</span> <span class="toc-text">定理 94 N(0,1) 期望方差</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-95-n-%E6%9C%9F%E6%9C%9B%E6%96%B9%E5%B7%AE"><span class="toc-number">2.4.2.6.</span> <span class="toc-text">定理 95 N 期望方差</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A7%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.2.7.</span> <span class="toc-text">秩生成函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83"><span class="toc-number">2.4.3.</span> <span class="toc-text">指数分布</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-96"><span class="toc-number">2.4.3.1.</span> <span class="toc-text">定义 96</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-97-%E6%8C%87%E6%95%B0%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E7%BC%A9%E6%94%BE"><span class="toc-number">2.4.3.2.</span> <span class="toc-text">定理 97 指数随机变量的缩放</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-98-%E6%97%A0%E6%80%9D%E6%83%B3%E6%80%A7"><span class="toc-number">2.4.3.3.</span> <span class="toc-text">定理 98 无思想性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E4%B8%8E%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83%E7%9A%84%E6%9E%81%E9%99%90"><span class="toc-number">2.4.4.</span> <span class="toc-text">指数分布与几何分布的极限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="toc-number">2.5.</span> <span class="toc-text">多个连续随机变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%85%83%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0"><span class="toc-number">2.5.1.</span> <span class="toc-text">多元密度函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-100-%E8%BE%B9%E7%BC%98%E5%88%86%E5%B8%83randverteilung"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">定义 100
+边缘分布Randverteilung</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-101-%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="toc-number">2.5.1.2.</span> <span class="toc-text">定义 101 独立性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6%E7%9A%84%E7%AD%89%E5%BE%85%E9%97%AE%E9%A2%98"><span class="toc-number">2.5.2.</span> <span class="toc-text">多个事件的等待问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-102-%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E6%9C%80%E5%B0%8F%E5%80%BC"><span class="toc-number">2.5.2.1.</span> <span class="toc-text">定理 102 指数分布最小值</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E8%BF%87%E7%A8%8B"><span class="toc-number">2.5.3.</span> <span class="toc-text">泊松过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-105-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8A%A0%E5%92%8C"><span class="toc-number">2.5.3.1.</span> <span class="toc-text">定理 105 随机变量加和</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-106-%E6%AD%A3%E5%A4%AA%E5%88%86%E5%B8%83%E7%9A%84%E5%8A%A0%E5%92%8C"><span class="toc-number">2.5.3.2.</span> <span class="toc-text">定理 106 正太分布的加和</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F%E7%A7%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="toc-number">2.5.3.3.</span> <span class="toc-text">连续变量秩生成函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="toc-number">2.5.4.</span> <span class="toc-text">中心极限定理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86108-%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%80%BC%E5%AE%9A%E7%90%86"><span class="toc-number">2.5.4.1.</span> <span class="toc-text">定理108 中心极限值定理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-109-de-moivre-%E6%A3%A3%E8%8E%AB%E5%BC%97%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%AE%9A%E7%90%86"><span class="toc-number">2.5.4.2.</span> <span class="toc-text">定理 109 de Moivre
+棣莫弗—拉普拉斯定理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-110-%E6%AD%A3%E5%A4%AA%E5%88%86%E5%B8%83%E5%AF%B9%E4%BA%8E%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83%E7%9A%84%E6%9E%81%E5%80%BC"><span class="toc-number">2.5.4.3.</span> <span class="toc-text">定理 110
+正太分布对于二项分布的极值</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">数理统计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-112-%E4%BC%B0%E8%AE%A1%E9%87%8F"><span class="toc-number">3.0.1.</span> <span class="toc-text">定义 112 估计量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-113-%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AEmse"><span class="toc-number">3.0.2.</span> <span class="toc-text">定义 113 均方误差MSE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-114-stichprobenmittel-%E5%92%8C-stichprobenvarianz"><span class="toc-number">3.0.3.</span> <span class="toc-text">定义 114
+Stichprobenmittel 和 Stichprobenvarianz</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1"><span class="toc-number">3.0.4.</span> <span class="toc-text">最大似然估计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-115-%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%80%BC"><span class="toc-number">3.0.5.</span> <span class="toc-text">定义 115 最大似然估计值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4kondenzintervall"><span class="toc-number">3.1.</span> <span class="toc-text">置信区间(Kondenzintervall)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-118-%E5%88%86%E4%BD%8D%E6%95%B0"><span class="toc-number">3.1.1.</span> <span class="toc-text">定义 118 分位数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-119-%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E7%9A%84%E5%88%86%E4%BD%8D%E6%95%B0"><span class="toc-number">3.1.2.</span> <span class="toc-text">定义 119 正态分布的分位数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="toc-number">3.2.</span> <span class="toc-text">假设检验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E9%AA%8C%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.2.1.</span> <span class="toc-text">检验的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E9%AA%8C%E7%9A%84%E9%94%99%E8%AF%AF"><span class="toc-number">3.2.2.</span> <span class="toc-text">检验的错误</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B1%BB%E9%94%99%E8%AF%AF"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">1类错误</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B1%BB%E9%94%99%E8%AF%AF-1"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">2类错误</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E6%A3%80%E9%AA%8C"><span class="toc-number">3.2.3.</span> <span class="toc-text">二项检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E6%A3%80%E9%AA%8C"><span class="toc-number">3.2.4.</span> <span class="toc-text">高斯检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AC%A1t-%E6%A3%80%E9%AA%8C"><span class="toc-number">3.2.5.</span> <span class="toc-text">2次t-检验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%A1%E6%96%B9%E6%A3%80%E9%AA%8C"><span class="toc-number">3.2.6.</span> <span class="toc-text">卡方检验</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">随机过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">离散时间处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-123"><span class="toc-number">4.1.1.</span> <span class="toc-text">定义 123</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-126-%E6%AD%A5%E6%95%B0"><span class="toc-number">4.1.2.</span> <span class="toc-text">定义 126 步数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-127-%E5%88%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%AD%A5%E6%95%B0"><span class="toc-number">4.1.3.</span> <span class="toc-text">定义 127 到自己的步数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-129-%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="toc-number">4.1.4.</span> <span class="toc-text">定理 129 状态转移方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-132-station%C3%A4re-verteilung%E7%A8%B3%E5%AE%9A%E5%88%86%E5%B8%83"><span class="toc-number">4.1.5.</span> <span class="toc-text">定义 132 stationäre
+Verteilung稳定分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-134-irreduzibel%E4%B8%8D%E5%8F%AF%E7%AE%80%E5%8C%96%E7%9A%84"><span class="toc-number">4.1.6.</span> <span class="toc-text">定理 134
+irreduzibel不可简化的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-136-irreduzibel%E5%AE%9A%E7%90%86"><span class="toc-number">4.1.7.</span> <span class="toc-text">定理 136 irreduzibel定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-137-periode%E5%91%A8%E6%9C%9F"><span class="toc-number">4.1.8.</span> <span class="toc-text">定义 137 Periode周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86138-aperiodisch%E9%9D%9E%E5%91%A8%E6%9C%9F%E6%80%A7"><span class="toc-number">4.1.9.</span> <span class="toc-text">定理138 aperiodisch非周期性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-140-ergodisch%E5%8F%AF%E9%81%8D%E5%8E%86%E7%9A%84"><span class="toc-number">4.1.10.</span> <span class="toc-text">定义 140 ergodisch可遍历的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-141-fundamentalsatz-f%C3%BCr-ergodische-markov-ketten%E5%8F%AF%E9%81%8D%E5%8E%86%E7%9A%84%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86"><span class="toc-number">4.1.11.</span> <span class="toc-text">定理
+141 Fundamentalsatz für ergodische
+Markov-Ketten可遍历的马尔可夫链基本定理</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/" title="统计学基础">统计学基础</a><time datetime="2021-11-18T15:41:01.000Z" title="Created 2021-11-18 16:41:01">2021-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93DIV1C/" title="刷题总结DIV1C">刷题总结DIV1C</a><time datetime="2021-10-30T20:10:14.000Z" title="Created 2021-10-30 22:10:14">2021-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" title="非线性优化">非线性优化</a><time datetime="2021-10-22T15:26:33.000Z" title="Created 2021-10-22 17:26:33">2021-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" title="线性规划">线性规划</a><time datetime="2021-10-13T12:29:31.000Z" title="Created 2021-10-13 14:29:31">2021-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算">二进制与位运算</a><time datetime="2021-09-23T11:53:43.000Z" title="Created 2021-09-23 13:53:43">2021-09-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fyind</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
