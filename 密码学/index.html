@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>密码学 | Hexo</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="密码学 理论基础 Alice 给 Bob 发消息，保护消息的 confidentiality. 传输途径可以是任意的，Internet, USB stick... 在过程中被动的监听者Eve 有可能会监听或者解释信息. 在过去，军事加密依赖于信息的混乱程度 obfuscation of message contents. 现代密码学依赖于 Kerckhoff&#39;s Principle,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学">
+<meta property="og:url" content="http://fyind.github.io/%E5%AF%86%E7%A0%81%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="密码学 理论基础 Alice 给 Bob 发消息，保护消息的 confidentiality. 传输途径可以是任意的，Internet, USB stick... 在过程中被动的监听者Eve 有可能会监听或者解释信息. 在过去，军事加密依赖于信息的混乱程度 obfuscation of message contents. 现代密码学依赖于 Kerckhoff&#39;s Principle,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.github.io/img/pic1.PNG">
+<meta property="article:published_time" content="2023-04-22T11:58:04.000Z">
+<meta property="article:modified_time" content="2023-04-22T14:34:57.936Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="安全">
+<meta property="article:tag" content="密码学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.github.io/img/pic1.PNG"><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.github.io/%E5%AF%86%E7%A0%81%E5%AD%A6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '密码学',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-22 16:34:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/pic1.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">80</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/yae.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">密码学</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-04-22T11:58:04.000Z" title="Created 2023-04-22 13:58:04">2023-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-04-22T14:34:57.936Z" title="Updated 2023-04-22 16:34:57">2023-04-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="密码学"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="密码学">密码学</h1>
+<h2 id="理论基础">理论基础</h2>
+<p>Alice 给 Bob 发消息，保护消息的 confidentiality.
+传输途径可以是任意的，Internet, USB stick... 在过程中被动的监听者Eve
+有可能会监听或者解释信息.</p>
+<p>在过去，军事加密依赖于信息的混乱程度 obfuscation of message contents.
+现代密码学依赖于 Kerckhoff's Principle, 除了key所有信息都是已知的.</p>
+<blockquote>
+<p>A crypto system should be secure, even if everything about the
+system, except the key, is public knowledge.</p>
+</blockquote>
+<p>信息加密是通过 encryption schemes 使用一个key和lock concept来实现的.
+只有key的持有者可以加密解密信息. Alice会把key <span class="math inline">\(k\)</span> 分享给Bob,
+我们现在还不关系这个怎样实现.</p>
+<ul>
+<li>Alice 加密信息 <span class="math inline">\(m\)</span>, <span class="math inline">\(c := E(k,m)\)</span></li>
+<li>Bob 解密信息 <span class="math inline">\(m:=D(k,c)\)</span></li>
+</ul>
+<h4 id="香农密码-shannon-cipher">香农密码 Shannon Cipher</h4>
+<p>我们定义一个 encryption scheme <span class="math inline">\(\Pi:=(E,
+D)\)</span> 是一对加密解密函数</p>
+<ul>
+<li><p><span class="math inline">\(k \in \mathcal{K}\)</span>
+是加密使用的key</p></li>
+<li><p><span class="math inline">\(m \in \mathcal{M}\)</span> 是信息
+message</p></li>
+<li><p><span class="math inline">\(c \in \mathcal{C}\)</span> 是密文
+ciphertext</p></li>
+<li><p><span class="math inline">\(E: \mathcal{K} \times \mathcal{M}
+\rightarrow \mathcal{C}\)</span> 是加密函数</p></li>
+<li><p><span class="math inline">\(D: \mathcal{K} \times \mathcal{C}
+\rightarrow \mathcal{M}\)</span> 是解密函数</p></li>
+<li><p>正确性: <span class="math inline">\(\forall k \in \mathcal{K}, m
+\in \mathcal{M}: D(k, E(k, m))=m\)</span></p></li>
+</ul>
+<p>这个密码被称为 Shannon cipher.</p>
+<h4 id="one-time-pad-otp">One-time-pad (OTP)</h4>
+<p>OTP 是一个Shannon cipher. OTP 中 <span class="math inline">\(\mathcal{K}=\mathcal{M}=\mathcal{C}:=\{0,1\}^L\)</span>
+其中 <span class="math inline">\(L\ge 1\)</span> 是长度.
+我们可以简单证明它的正确性</p>
+<p>证明 <span class="math display">\[
+D(k, E(k, m))=D(k, k \oplus m)=k \oplus(k \oplus m)=m
+\]</span></p>
+<h4 id="定义-1-完美安全-perfect-security">定义 1 完美安全 Perfect
+security</h4>
+<p>一个Shannon cipher <span class="math inline">\(\Pi=(E, D)\)</span>
+over <span class="math inline">\((\mathcal{K}, \mathcal{M},
+\mathcal{C})\)</span> 是 perfectly secure 若 <span class="math display">\[
+\forall m_0, m_1 \in \mathcal{M}, c \in \mathcal{C}:
+\operatorname{Pr}\left[E\left(\mathbf{k},
+m_0\right)=c\right]=\operatorname{Pr}\left[E\left(\mathbf{k},
+m_1\right)=c\right]
+\]</span> <span class="math inline">\(\mathbf{k}\)</span> 是 random
+variable.</p>
+<p>任取两个信息，密文是 <span class="math inline">\(c\)</span>
+的概率是相同的. 也就是可能是 <span class="math inline">\(m_0\)</span>
+也可能是 <span class="math inline">\(m_1\)</span></p>
+<p>于是不可能从密文中获取任何信息. 我们一直假设 <span class="math inline">\(k\)</span> 是完全随机选取的，每个 <span class="math inline">\(k\)</span> 的概率是 <span class="math inline">\(\frac{1}{|\mathcal{K}|}\)</span> 于是可以推出
+<span class="math display">\[
+\operatorname{Pr}[E(k, m)=c]=\frac{N_{m, c}}{|\mathcal{K}|}
+\]</span> 其中 <span class="math inline">\(N_{m,c}\)</span>
+是有多少个key 可以把 <span class="math inline">\(m\)</span> 加密成 <span class="math inline">\(c\)</span> <span class="math display">\[
+N_{m, c}=|\{k \in \mathcal{K}: E(k, m)=c\}|
+\]</span> 所以有另一个等价的定义： <span class="math display">\[
+\forall m_0, m_1 \in \mathcal{M}, c \in \mathcal{C}: N_{m_0, c}=N_{m_1,
+c}
+\]</span> 对于任意两个信息，能把 <span class="math inline">\(m_0\)</span> 变成 <span class="math inline">\(c\)</span> 和能把 <span class="math inline">\(m_1\)</span> 变成 <span class="math inline">\(c\)</span> 的key个数相同</p>
+<ul>
+<li>即使Perfectly secure
+的密码也可能被破解，如果使用不当，比如OTP只能用1次.</li>
+</ul>
+<h4 id="定理-1-otp-perfectly-secure">定理 1 OTP perfectly secure</h4>
+<p>The one-time pad is perfectly secure.</p>
+<p>因为对于所有 <span class="math inline">\(m \in \mathcal {M}\)</span>
+只有1个 key 使得 <span class="math inline">\(E(k,m)=c\)</span> 也就是
+<span class="math inline">\(N_{m,c}=1\)</span> .</p>
+<p>证明</p>
+<p>假设有两个 key <span class="math inline">\(k_0,k_1\)</span> 使得
+<span class="math inline">\(E(k_0,m)=E(k_1,m)=c\)</span> 那么 <span class="math display">\[
+\begin{aligned}
+E\left(k_0, m\right) &amp; =E\left(k_1, m\right) \\
+k_0 \oplus m &amp; =k_1 \oplus m \\
+k_0 \oplus m \oplus m &amp; =k_1 \oplus m \oplus m \\
+k_0 &amp; =k_1
+\end{aligned}
+\]</span> 所以这两个是一样的,</p>
+<p>但在使用中，如果要通讯 1GB, 那么你需要交换 1GB 的密钥.
+那还不如只交换信息.</p>
+<h4 id="定理-2-shannons-theorem">定理 2 Shannon's Theorem</h4>
+<p>If <span class="math inline">\(\Pi=(E, D)\)</span> 是 perfectly
+secure, then <span class="math inline">\(|\mathcal{K}|
+\geq|\mathcal{M}|\)</span></p>
+<p>证明</p>
+<p>假设 <span class="math inline">\(|\mathcal{K}| &lt;
+|\mathcal{M}|\)</span> 那么选择一个信息和密钥 <span class="math inline">\(\operatorname{Pr}\left[E\left(\mathbf{k},
+m_0\right)=c\right]&gt;0\)</span> 然后设 <span class="math inline">\(S\)</span> 是所有 <span class="math inline">\(c\)</span> 的解密集合. <span class="math inline">\(S=\{D(\hat{k}, c) \in \mathcal{M}: \hat{k} \in
+\mathcal{K}\}\)</span> 有 <span class="math inline">\(|S|
+\leq|\mathcal{K}|&lt;|\mathcal{M}|\)</span> 那么我们选择 <span class="math inline">\(m_1 \in \mathcal{M} \backslash S\)</span>
+所以<span class="math inline">\(m_1\)</span> 不是 <span class="math inline">\(c\)</span> 的解密。那么 <span class="math inline">\(c\)</span> 也不是 <span class="math inline">\(m_1\)</span>
+的加密，因为如果是的话根据正确性一定是解密。所以 <span class="math inline">\(\operatorname{Pr}\left[E\left(\mathbf{k},
+m_1\right)=c\right]=0\)</span>
+所以不能被加密或解密。所以找到了一个不同的概率。</p>
+<p>所以 perfect security 是不可实现的 not practical.
+我们需要一个高效的算法使得我们的密码被高效破译的可能性忽略不计.</p>
+<h4 id="定义-2-ppt-adversary">定义 2 PPT adversary</h4>
+<p>一个对手 adversary <span class="math inline">\(\mathcal{A}\)</span>
+是高效的 efficient, 若它可以在多项式时间内完成计算 polynomially-bounded
+time. 我们称它为 probabilistic polynomial time (PPT)-adversary.</p>
+<h4 id="定义-3-polynomially-bounded">定义 3 polynomially-bounded</h4>
+<p>一个函数 <span class="math inline">\(f: \mathbb{Z}_{+} \rightarrow
+\mathbb{R}\)</span> 是 polynomially-bounded 若存在 <span class="math inline">\(c\in \mathbb{N}\)</span> 使得对于所有整数 <span class="math inline">\(n \geq n_0\)</span>, we have <span class="math inline">\(|f(n)| \leq n^c\left(f(n) \in
+\mathcal{O}\left(n^c\right)\right)\)</span></p>
+<h4 id="定义-4-negligible">定义 4 negligible</h4>
+<p>一个函数 <span class="math inline">\(f: \mathbb{Z}_{+} \rightarrow
+\mathbb{R}\)</span> 是 negligible 若对于所有 <span class="math inline">\(c\in \mathbb{N}\)</span> 存在 <span class="math inline">\(n_0 \in \mathbb{Z}_{+}\)</span> 使得对于所有整数
+<span class="math inline">\(n \geq n_0\)</span> 有 <span class="math inline">\(|f(n)| \leq \frac{1}{n^c}\left(f(n) \in
+\mathcal{O}\left(\frac{1}{n^c}\right)\right)\)</span></p>
+<h4 id="定义-5-super-poly">定义 5 super-poly</h4>
+<p>一个函数 <span class="math inline">\(f: \mathbb{Z}_{+} \rightarrow
+\mathbb{R}\)</span> 是 super-poly 如果 <span class="math inline">\(\frac{1}{f}\)</span> 是negligible.</p>
+<h4 id="计算法则">计算法则</h4>
+<figure>
+<img src="/%E5%AF%86%E7%A0%81%E5%AD%A6/image-20230422154435525.png" alt="image-20230422154435525">
+<figcaption aria-hidden="true">image-20230422154435525</figcaption>
+</figure>
+<h4 id="安全参数-security-parameters">安全参数 Security Parameters</h4>
+<ul>
+<li>Security parameter <span class="math inline">\(\lambda\)</span>
+是一个正整数</li>
+</ul>
+<p>​ 它在密码部署的时候选择，等级越高，安全系数越高.
+越高意味着更长的key和更慢的 <span class="math inline">\(D,E\)</span>
+运行时间</p>
+<ul>
+<li>System parameter <span class="math inline">\(\Lambda\)</span>
+是一个bit string</li>
+</ul>
+<p>​ 是被 <span class="math inline">\(\lambda\)</span> 选择的.
+比如是一个模数用于取模.</p>
+<h4 id="定义-6-efficient-algorithm">定义 6 Efficient Algorithm</h4>
+<p><span class="math inline">\(A\)</span> 是一个算法，输入一个 security
+parameter <span class="math inline">\(\lambda\)</span> 和其他的参数.
+他们被表示为一个bit string <span class="math inline">\(x
+\in\{0,1\}^{\leq p(\lambda)}\)</span> 其中 <span class="math inline">\(p\)</span> 是一个fixed polynomial. 那么我们说
+<span class="math inline">\(A\)</span> 是efficient algorithm 若存在一个
+poly-bounded function <span class="math inline">\(t\)</span>
+和一个可以忽略的参数 negligible function <span class="math inline">\(\epsilon\)</span> 使得对于所有的 <span class="math inline">\(\lambda,x\)</span> 这个运行时间超过 <span class="math inline">\(t(\lambda)\)</span> 的概率最多是 <span class="math inline">\(\epsilon(\lambda)\)</span></p>
+<h4 id="定义-7-computational-cipher">定义 7 Computational Cipher</h4>
+<p>我们定义一个 computational cipher 是一对高效算法 <span class="math inline">\((E, D)\)</span>
+是一对加密解密<strong>算法</strong></p>
+<ul>
+<li><p><span class="math inline">\(k \in \mathcal{K}\)</span>
+是加密使用的key</p></li>
+<li><p><span class="math inline">\(m \in \mathcal{M}\)</span> 是信息
+message</p></li>
+<li><p><span class="math inline">\(c \in \mathcal{C}\)</span> 是密文
+ciphertext</p></li>
+<li><p><span class="math inline">\(E: \mathcal{K} \times \mathcal{M}
+\rightarrow \mathcal{C}\)</span> 是加密算法</p></li>
+<li><p><span class="math inline">\(D: \mathcal{K} \times \mathcal{C}
+\rightarrow \mathcal{M}\)</span> 是解密算法</p></li>
+<li><p><span class="math inline">\(\mathcal{K,M,C}\)</span>
+是有限的空间</p></li>
+</ul>
+<p>我们的加密算法有可能是 prababilistic 的，也就是对于给定的 <span class="math inline">\(k,m,E(k,m)\)</span> 可能会有很多结果. <span class="math display">\[
+c \stackrel{R}{\leftarrow} E(k, m)
+\]</span> 正确性可以这样写： <span class="math display">\[
+\forall c \stackrel{R}{\leftarrow} E(k, m): D(k, c)=m
+\]</span> 所有deterministic cipher都是 Shannon cipher.</p>
+<p>然而 Shannon cipher不一定是 computational cipher (不一定高效算法)</p>
+<p>反过来也不一定 (有可能是prababilistic)</p>
+<h4 id="computaional-cipher-的安全性">computaional cipher 的安全性</h4>
+<p>有可能没有 <span class="math inline">\(m_0\)</span> 加密成 <span class="math inline">\(c\)</span> 所以我们令 <span class="math display">\[
+\left|\operatorname{Pr}\left[\phi\left(E\left(\mathbf{k},
+m_0\right)\right)\right]-\operatorname{Pr}\left[\phi\left(E\left(\mathbf{k},
+m_1\right)\right)\right]\right| \leq \epsilon
+\]</span> 我们可以通过 Attack Game 来定义 <span class="math inline">\(\epsilon\)</span></p>
+<h4 id="attack-game-1">Attack Game 1</h4>
+<p>我们有2个Experiment 0, 1 对于 <span class="math inline">\(b
+\in\{0,1\}\)</span> 我们定义 Experiment <span class="math inline">\(b\)</span></p>
+<ul>
+<li>对手计算 <span class="math inline">\(m_0,m_1\in \mathcal{M}\)</span>
+长度相同，给chanllenger</li>
+<li>challenger 计算 <span class="math inline">\(k
+\stackrel{R}{\leftarrow} \mathcal{K}, c \stackrel{R}{\leftarrow}
+E\left(k, m_b\right)\)</span> 然后把 <span class="math inline">\(c\)</span> 发给对手</li>
+<li>对手猜测 <span class="math inline">\(m_{\hat{b}}=D(k, c)\)</span>
+是哪一个信息.</li>
+</ul>
+<p>我们定义 <span class="math inline">\(\mathcal{A}\)</span> 的 semantic
+security advantage 为 <span class="math display">\[
+S C a d v[\mathcal{A},
+\Pi]:=\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|
+\]</span></p>
+<h4 id="定义-8-semantic-security">定义 8 semantic security</h4>
+<p>一个 cipher 是 semantically secure 若 <span class="math inline">\(Scadv[\mathcal{A},\Pi]\)</span> 对于所有 PPT
+对手是可忽略不计的 negligible.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://fyind.github.io">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://fyind.github.io/%E5%AF%86%E7%A0%81%E5%AD%A6/">http://fyind.github.io/%E5%AF%86%E7%A0%81%E5%AD%A6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AE%89%E5%85%A8/">安全</a><a class="post-meta__tags" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a></div><div class="post_share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E6%A8%A1%E6%8B%9F%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" title="模拟电子技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">模拟电子技术</div></div></a></div><div class="next-post pull-right"><a href="/%E9%AB%98%E6%95%88%E7%AE%97%E6%B3%95II/" title="高效算法II"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">高效算法II</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fyind</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">80</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/fy1234567ok" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="toc-number">1.</span> <span class="toc-text">密码学</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">理论基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A6%99%E5%86%9C%E5%AF%86%E7%A0%81-shannon-cipher"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">香农密码 Shannon Cipher</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#one-time-pad-otp"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">One-time-pad (OTP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1-%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8-perfect-security"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">定义 1 完美安全 Perfect
+security</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-1-otp-perfectly-secure"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">定理 1 OTP perfectly secure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-2-shannons-theorem"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">定理 2 Shannon&#39;s Theorem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2-ppt-adversary"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">定义 2 PPT adversary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3-polynomially-bounded"><span class="toc-number">1.1.0.7.</span> <span class="toc-text">定义 3 polynomially-bounded</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-4-negligible"><span class="toc-number">1.1.0.8.</span> <span class="toc-text">定义 4 negligible</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-5-super-poly"><span class="toc-number">1.1.0.9.</span> <span class="toc-text">定义 5 super-poly</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%B3%95%E5%88%99"><span class="toc-number">1.1.0.10.</span> <span class="toc-text">计算法则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%8F%82%E6%95%B0-security-parameters"><span class="toc-number">1.1.0.11.</span> <span class="toc-text">安全参数 Security Parameters</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-6-efficient-algorithm"><span class="toc-number">1.1.0.12.</span> <span class="toc-text">定义 6 Efficient Algorithm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-7-computational-cipher"><span class="toc-number">1.1.0.13.</span> <span class="toc-text">定义 7 Computational Cipher</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#computaional-cipher-%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">1.1.0.14.</span> <span class="toc-text">computaional cipher 的安全性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-game-1"><span class="toc-number">1.1.0.15.</span> <span class="toc-text">Attack Game 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-8-semantic-security"><span class="toc-number">1.1.0.16.</span> <span class="toc-text">定义 8 semantic security</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF%E9%9B%86%E5%90%88/" title="算法模板集合">算法模板集合</a><time datetime="2023-05-26T06:03:26.000Z" title="Created 2023-05-26 08:03:26">2023-05-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E6%A8%A1%E6%8B%9F%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" title="模拟电子技术">模拟电子技术</a><time datetime="2023-04-27T13:17:02.000Z" title="Created 2023-04-27 15:17:02">2023-04-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%AF%86%E7%A0%81%E5%AD%A6/" title="密码学">密码学</a><time datetime="2023-04-22T11:58:04.000Z" title="Created 2023-04-22 13:58:04">2023-04-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E9%AB%98%E6%95%88%E7%AE%97%E6%B3%95II/" title="高效算法II">高效算法II</a><time datetime="2023-04-19T19:01:51.000Z" title="Created 2023-04-19 21:01:51">2023-04-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E5%AE%A2%E5%88%B6%E5%8C%96%E9%94%AE%E7%9B%98%E8%AE%BE%E8%AE%A1/" title="客制化键盘设计">客制化键盘设计</a><time datetime="2023-04-19T14:35:49.000Z" title="Created 2023-04-19 16:35:49">2023-04-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fyind</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
