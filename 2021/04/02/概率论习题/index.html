@@ -1,0 +1,1134 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>概率论习题 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="概率论 习题1 例1 A,B,C 三匹马比赛跑步，构造一个离散概率空间，使得事件“A比B快”，“B比C快”，“C比A快”出现的概率都大于 \(1&#x2F;2\) 例2 已知带偶数条纹的斑马出现的概率是带奇数条纹斑马的2倍。设事件 \(E_n\) 为随机选取一个斑马，发现它有数量为 \(n\) 的条纹。构造一个离散概率空间，使得 \(E_n\) 所有正整数的概率都大于0，且符合题意。 例3 现在要做 \(m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率论习题">
+<meta property="og:url" content="http://fyind.de/2021/04/02/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B9%A0%E9%A2%98/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="概率论 习题1 例1 A,B,C 三匹马比赛跑步，构造一个离散概率空间，使得事件“A比B快”，“B比C快”，“C比A快”出现的概率都大于 \(1&#x2F;2\) 例2 已知带偶数条纹的斑马出现的概率是带奇数条纹斑马的2倍。设事件 \(E_n\) 为随机选取一个斑马，发现它有数量为 \(n\) 的条纹。构造一个离散概率空间，使得 \(E_n\) 所有正整数的概率都大于0，且符合题意。 例3 现在要做 \(m">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2021-04-02T14:25:48.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.879Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "概率论习题",
+  "url": "http://fyind.de/2021/04/02/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B9%A0%E9%A2%98/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2021-04-02T14:25:48.000Z",
+  "dateModified": "2025-07-18T10:49:53.879Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2021/04/02/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B9%A0%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '概率论习题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">概率论习题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">概率论习题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-04-02T14:25:48.000Z" title="Created 2021-04-02 14:25:48">2021-04-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.879Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="概率论">概率论</h1>
+<h2 id="习题1">习题1</h2>
+<p><strong>例1</strong></p>
+<p>A,B,C
+三匹马比赛跑步，构造一个离散概率空间，使得事件“A比B快”，“B比C快”，“C比A快”出现的概率都大于
+<span class="math inline">\(1/2\)</span></p>
+<p><strong>例2</strong></p>
+<p>已知带偶数条纹的斑马出现的概率是带奇数条纹斑马的2倍。设事件 <span
+class="math inline">\(E_n\)</span> 为随机选取一个斑马，发现它有数量为
+<span class="math inline">\(n\)</span>
+的条纹。构造一个离散概率空间，使得 <span
+class="math inline">\(E_n\)</span>
+所有正整数的概率都大于0，且符合题意。</p>
+<p><strong>例3</strong></p>
+<p>现在要做 <span class="math inline">\(m\)</span> 个蓝莓蛋糕，一共有
+<span class="math inline">\(n\)</span> 个蓝莓。现在把这 <span
+class="math inline">\(n\)</span> 个蓝莓等可能随机放到 <span
+class="math inline">\(m\)</span> 个蛋糕上。</p>
+<ol type="1">
+<li>求第 <span class="math inline">\(i\)</span>
+个蛋糕没有蓝莓的概率</li>
+<li>求所有蛋糕至少有 <span class="math inline">\(1\)</span>
+个蓝莓的概率</li>
+</ol>
+<p><strong>例4</strong></p>
+<p>有一个幸运轮盘，上面写有 <span class="math inline">\(1\)</span> 至
+<span class="math inline">\(125\)</span>
+的数字（包含1和125），每一个数字等可能出现</p>
+<ol type="1">
+<li>求转出的数字是4的倍数或者是平方数的概率</li>
+<li>转出的数，每位上数字的和大于3的概率</li>
+</ol>
+<p><strong>例5</strong></p>
+<p>A，B，C轮流扔硬币（从A开始），硬币是正面的概率是 <span
+class="math inline">\(0&lt;p&lt;1\)</span>
+，第1次扔到反面的人赢。求A，B，C各自赢的概率</p>
+<p><strong>例6</strong></p>
+<p>有 <span class="math inline">\(n\)</span> 份没有名字的作业。把这
+<span class="math inline">\(n\)</span> 份作业随机分发到这 <span
+class="math inline">\(n\)</span>
+个人上（每个人随机发一份），那么没有一个人拿到自己作业的概率是多少。</p>
+<p><strong>例7</strong></p>
+<p>有一个鬼在路上吓人，设事件 <span class="math inline">\(E_n\)</span>
+为这个鬼刚好吓到了 <span class="math inline">\(n\)</span> 个人。对于
+<span class="math inline">\(n&gt;0\)</span> 满足 <span
+class="math display">\[
+Pr[E_n]=\frac{Pr[E_{n-1}]}{n}
+\]</span> 求这个鬼一个人都没有吓到的概率</p>
+<h2 id="习题2">习题2</h2>
+<p><strong>例1</strong></p>
+<p>女生A，B，C和男生D，E，F随机分成3个2人学习小组。每种分配概率相等。</p>
+<ol type="1">
+<li>证明一共有15种分配情况</li>
+<li>求所有小组是一男一女组合的概率</li>
+<li>已知A和D一组，求所有小组是一男一女组合的概率</li>
+<li>证明或证伪：事件<u>”
+’A和D一组’与‘B和C一组’的并集“</u>和<u>“所有小组是一男一女组合的”</u>是不相干事件(unabhängig)</li>
+</ol>
+<p><strong>例2</strong></p>
+<p>A扔硬币 <span class="math inline">\(n\)</span>
+次（扔出正面概率为<span class="math inline">\(1/2\)</span>），(<span
+class="math inline">\(n \ge 2\)</span>) 设 <span
+class="math inline">\(E\)</span>
+是事件：同时出现扔出正面和扔出反面的情况。设 <span
+class="math inline">\(F\)</span> : 正面扔出最多1次。若 <span
+class="math inline">\(E\)</span> ,<span class="math inline">\(F\)</span>
+不相干，求 <span class="math inline">\(n\)</span> 的值</p>
+<p><strong>例3</strong></p>
+<p>给定树 <span class="math inline">\(B_n\)</span> ，其中<span
+class="math inline">\(B_n(n&gt;1)\)</span> 的左边是 <span
+class="math inline">\(B_{n-2}\)</span>, 右边是 <span
+class="math inline">\(B_{n-1}\)</span>，一个蚂蚁从树根开始往叶子走（不能回头，等可能随机走）</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210405164721244.png"
+alt="image-20210405164721244" />
+<figcaption aria-hidden="true">image-20210405164721244</figcaption>
+</figure>
+<p>证明它在白色叶子节点结束的概为 <span class="math display">\[
+Pr[E_n]=\frac{2}{3}(1-(-\frac{1}{2})^n)
+\]</span></p>
+<p><strong>例4</strong></p>
+<p>A买了4个蓝莓蛋糕，已知卖家分别有 <span
+class="math inline">\(1/8,1/16,1/6,1/4\)</span> 的概率在 <span
+class="math inline">\(1,2,3,4\)</span> 个蛋糕里都放蓝莓。</p>
+<ol type="1">
+<li>求超过一半的蛋糕有蓝莓的概率</li>
+<li>已知A随机打开一个蛋糕时，发现里面有蓝莓。求上一问的概率</li>
+</ol>
+<p><strong>例5</strong></p>
+<p>把数字 <span class="math inline">\(1,3,4,4,7,8\)</span>
+填入下面的6个格子里</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210405165214652.png"
+alt="image-20210405165214652" />
+<figcaption aria-hidden="true">image-20210405165214652</figcaption>
+</figure>
+<ol type="1">
+<li>求离散概率空间 <span class="math inline">\(\Omega\)</span>
+的大小</li>
+<li>求2个4填在同一行的概率</li>
+<li>若已知上面的3个格子里有4和8，求上面3个格子的数字和小于下面3个格子数字和的概率</li>
+</ol>
+<p><strong>例6</strong></p>
+<p>现有45个球上分别有 <span class="math inline">\(1...45\)</span>
+的编号，还有4个盒子。</p>
+<ul>
+<li>先在第1个盒子里是数字能被3整除的球</li>
+<li>然后再把剩下偶数的球放到第2个盒子</li>
+<li>然后再把剩下质数的球放到第3个盒子</li>
+<li>然后把剩下的放到第4个盒子</li>
+</ul>
+<p>现在随机选一个盒子，然后从这个盒子随机选一个球。</p>
+<ol type="1">
+<li>设<span class="math inline">\(E\)</span>
+是事件：选出的球编号小于10，求 <span class="math inline">\(E\)</span>
+的概率</li>
+<li>设 <span class="math inline">\(F\)</span>
+是事件：选出的球是质数。证明或证伪：<span
+class="math inline">\(E\)</span> 和<span
+class="math inline">\(F\)</span> 不相干(unabhängig)。</li>
+</ol>
+<p><strong>例7</strong></p>
+<p>考虑离散概率空间 <span class="math inline">\(\Omega\)</span></p>
+<ol type="1">
+<li>设事件 <span class="math inline">\(A,B \subseteq \Omega\)</span>
+，<span class="math inline">\(A \subset B\)</span> . 什么时候 <span
+class="math inline">\(A,B\)</span> 不相干。</li>
+<li>设事件 <span class="math inline">\(C,D \subseteq \Omega\)</span>
+，<span class="math inline">\(Pr[D]&gt;0\)</span> 且 <span
+class="math inline">\(Pr[C|D]&gt;Pr[C]\)</span>. 证明或者证伪：<span
+class="math inline">\(Pr[C|\bar{D}] &lt; Pr[C]\)</span></li>
+<li>对于一个事件族群 <span class="math inline">\((E_i)_{i\in
+\mathbb{N}}\)</span> 是两两不相干的，若对于所有不同的下标 <span
+class="math inline">\(i \ne j\)</span> ，事件 <span
+class="math inline">\(E_i,E_j\)</span>
+不相干。证明或证伪：一个两两不相干的事件族群中的事件是互不相干的。</li>
+</ol>
+<h2 id="习题3">习题3</h2>
+<p><strong>例1</strong></p>
+<p>考虑一个三维的单位立方体。我们随机选取一个顶点。设 <span
+class="math inline">\(X:\{0,1\}^3 \rightarrow \mathbb{R}\)</span>
+是从顶点<span class="math inline">\(a\)</span> 映射到欧几里得模 <span
+class="math inline">\(X(a)=\|a\|_{2}\)</span> 的随机变量。求 <span
+class="math inline">\(X\)</span> 的概率密度函数，分布，期望和方差。</p>
+<p><strong>例2</strong></p>
+<p>A和B交替扔一个均匀的硬币(<span class="math inline">\(1/2\)</span>
+概率正面)，直到第1次出现正面。设 <span class="math inline">\(n\)</span>
+是游戏的回合数，赢的人会获得 <span class="math inline">\(2^n/n\)</span>
+元钱。A 先开始。</p>
+<ol type="1">
+<li>设 <span class="math inline">\(X\)</span>
+是A的收益，如果输的话收益是负数。证明： <span
+class="math inline">\(X\)</span> 的期望不存在</li>
+<li>构造一个赢钱的方式，使得 A的收益的期望存在，但是方差不存在</li>
+</ol>
+<p><strong>例3</strong></p>
+<p>现有 <span class="math inline">\(n\)</span> 张卡片，每一张的两面写着
+<span class="math inline">\(2^{i-1}\)</span> 和 <span
+class="math inline">\(2^i\)</span>.
+现在将卡片重新洗牌，设第1张牌正面是随机变量 <span
+class="math inline">\(X\)</span> 映射的数。</p>
+<ol type="1">
+<li>求 <span class="math inline">\(X\)</span>
+的期望，若卡片等可能随机出现</li>
+<li>如果你可以获得这张牌等额的钱，并且你有一次机会把牌的反面翻过来。证明：你有一种策略使得你期望获得多于
+<span class="math inline">\(\mathbb{E}[X]\)</span> 的钱。</li>
+</ol>
+<p><strong>例4</strong></p>
+<p>天气有3种变化:晴，多云，大风。设 <span
+class="math inline">\(X\)</span> 是在某一天出现天气个数的随机变量。已知
+<span class="math inline">\(\mathbb{E}[X]=3/2\)</span>
+.求3个天气在一天同时出现概率的取值范围。</p>
+<p><strong>例5</strong></p>
+<p>在盒子里有7个球，分别标有O，S，O，R，E，I，N，这几个字母，且每个球都有生产编号。现在从盒子里不放回拿取球，直到抽出2个O。设
+<span class="math inline">\(X\)</span> 是抽取次数的随机变量</p>
+<ol type="1">
+<li>求<span class="math inline">\(X\)</span>的值域，概率密度函数和分布.
+把概率密度函数化简成 <span class="math inline">\(f_X(k)=(k-a)/b, k\in
+W_X\)</span> 的形式</li>
+<li>计算 <span class="math inline">\(X\)</span> 的期望和方差</li>
+</ol>
+<p><strong>例6</strong></p>
+<p>一个图上有 <span class="math inline">\(n=4\)</span>
+个点，现在随机在图中添加无向边。每个节点对的概率是不相干的，且都分别有
+<span class="math inline">\(p=1/2\)</span> 的概率被添加边。设 <span
+class="math inline">\(X:\Omega \rightarrow [4]\)</span>
+是联通分量的个数的随机变量。求 <span class="math inline">\(X\)</span>
+的期望和标准差</p>
+<p><strong>例7</strong></p>
+<p>A和B在比赛跑步。他们扔一个正常的硬币(1/2概率)决定谁往前走1cm，正面A走，反面B走。最先甩开对手
+4cm的获胜。设 <span class="math inline">\(X\)</span>
+是优胜者总共向前移动的厘米数。</p>
+<ol type="1">
+<li>设 <span class="math inline">\(E\)</span>
+是事件，A和B在2轮后在相同位置。设 <span class="math inline">\(F\)</span>
+和 <span class="math inline">\(G\)</span> 分别是事件：
+A在2轮后甩开对手2cm 和 B 在2轮后甩开对手 2cm. 求 <span
+class="math inline">\(\mathbb{E}[X|E],\mathbb{E}[X|F],\mathbb{E}[X|G]\)</span>
+用 <span class="math inline">\(E[X]\)</span> 表示即可。</li>
+<li>根据1的式子求 <span
+class="math inline">\(\mathbb{E}[X]\)</span></li>
+</ol>
+<h2 id="习题4">习题4</h2>
+<p>A给学生布置3道题，每解出一题得1分。若答案错误不得分。已知学生随机拿分。设
+<span class="math inline">\(X_i\)</span> 是第 <span
+class="math inline">\(i\)</span> 道题的得分。且 <span
+class="math display">\[
+f_{X_{1}, X_{2}, X_{3}}\left(x_{1}, x_{2},
+x_{3}\right)=\left\{\begin{array}{ll}
+\left(x_{1}+x_{2}+x_{3}-1\right)^{2} / 8 &amp; \text { für } x_{1},
+x_{2}, x_{3} \in\{0,1\} \\
+0 &amp; \text { sonst }
+\end{array}\right.
+\]</span> 是概率密度函数</p>
+<ol type="1">
+<li>求边缘密度 <span class="math inline">\(f_{X_1},f_{X_2}\)</span> 和
+<span class="math inline">\(f_{X_3}\)</span></li>
+<li>这些变量是<span
+class="math inline">\(X_i\)</span>独立(unabhangig)的吗</li>
+<li>计算总分的期望和方差</li>
+</ol>
+<p>例2</p>
+<p>已知排列 <span class="math inline">\(\pi:[n+2]
+\rightarrow[n+2]\)</span>,。如果排列 <span
+class="math inline">\(\pi\)</span> 是随机的，若<span
+class="math inline">\(i\in[2,n+1]\)</span> 满足 <span
+class="math inline">\(\pi(i-1)&gt;\pi(i)&lt;\pi(i+1)\)</span> ，求 <span
+class="math inline">\(i\)</span> 的个数的期望。</p>
+<p>例3</p>
+<p>写着 <span class="math inline">\(n\)</span>
+个数的幸运轮盘(等概率)，设 <span class="math inline">\(X,Y\)</span>
+是两个相互独立的随机变量(unabhängig) 对应A和B转出来的结果。若 <span
+class="math inline">\(X \ge Y\)</span> 那么 A从B那里得到<span
+class="math inline">\(X-Y\)</span> 的分数，若 <span
+class="math inline">\(Y&gt;X\)</span> 那么B从A那里得到 <span
+class="math inline">\(Y-X\)</span> 的分数。设 <span
+class="math inline">\(Z=X-Y\)</span> 是A的收益/亏损。求 <span
+class="math inline">\(Z\)</span> 的概率密度函数。</p>
+<p>例4</p>
+<p>从一副扑克牌中随机抽取3张，设 <span class="math inline">\(X\)</span>
+是不同花色的随机比哪里，<span
+class="math inline">\(Y\)</span>是不同点数的随机变量。求边缘概率密度
+<span class="math inline">\(f_X,f_Y\)</span> 和总概率密度函数 <span
+class="math inline">\(f_{X,Y}\)</span></p>
+<p>例5</p>
+<p>设 <span class="math inline">\(X_1 ... X_n\)</span> 是随机变量，
+<span class="math inline">\(f_1 ... f_n\)</span>
+是任意实数函数。证明或证伪： <span
+class="math inline">\(X_1,...X_n\)</span>相互独立，当且仅当 <span
+class="math inline">\(f(X_1),...f(X_n)\)</span> 相互独立。</p>
+<p>例6</p>
+<p>从 <span class="math inline">\(n\)</span> 个球(编号<span
+class="math inline">\(1..n\)</span>)的袋子里，不放回抽取球。若当前抽取的球的编号小于之前抽取的球的编号时结束。求抽取次数的期望。</p>
+<p>例7</p>
+<p>设 <span class="math inline">\(X,Y\)</span> 是随机变量 <span
+class="math display">\[
+f_{X}(x)=f_{Y}(x)=\left\{\begin{array}{ll}
+\left(\frac{1}{2}\right)^{x-c} &amp; \text { falls } x \in\{5,6,
+\ldots\} \\
+0 &amp; \text { sonst }
+\end{array}\right.
+\]</span> <span class="math inline">\(c \in \mathbb{N}\)</span></p>
+<ol type="1">
+<li>求 <span class="math inline">\(c\)</span> 的值</li>
+<li>求 <span class="math inline">\(Z=X+Y\)</span> 的概率密度函数</li>
+</ol>
+<h2 id="习题5">习题5</h2>
+<p>例1</p>
+<p>A每天抓 <span class="math inline">\(X\)</span> 个虫子，<span
+class="math inline">\(X\)</span> 是服从参数为<span
+class="math inline">\(\lambda &gt; 0\)</span> 泊松分布的随机变量。A只有
+<span class="math inline">\(0&lt;p\le1\)</span>
+的概率抓住一只虫子。设<span class="math inline">\(Y\)</span>
+是抓住虫子的数量，求<span class="math inline">\(Y\)</span>
+的分布和期望</p>
+<p>例2</p>
+<p>A在等车，车期望会在 <span class="math inline">\(\mu\)</span>
+分钟内来。设 <span class="math inline">\(X\)</span> 是A的等待时间，<span
+class="math inline">\(X\)</span> 服从几何分布。在 <span
+class="math inline">\(i\)</span> 分钟后,A会失去耐心并询问剩余等待时间
+<span class="math inline">\(X-i\)</span> ，证明A的期望的等待时间仍然是
+<span class="math inline">\(\mu\)</span>, 即证明 <span
+class="math inline">\(\mathbb{E}[X-i|X&gt;i]=\mu\)</span></p>
+<p>例3</p>
+<p>森林里一共 <span class="math inline">\(n\)</span> 只虫子,
+A要抓住并且研究 <span class="math inline">\(m\)</span>
+只不同的虫子。已知A每抓1只并研究好后会将它放回森林，且A每天会以独立相同的概率抓这
+<span class="math inline">\(n\)</span> 只虫子。</p>
+<ol type="1">
+<li>设 <span class="math inline">\(X_i\)</span> 是第 <span
+class="math inline">\(i\)</span> 只虫子被研究的次数。求 <span
+class="math inline">\(X_i\)</span> 的期望</li>
+<li>若有些虫子可以藏起来不被研究，使得森林里的虫子总数量为 <span
+class="math inline">\(k\ge m\)</span> 。且在同样 <span
+class="math inline">\(k\)</span>
+的条件下，每个虫子隐藏起来的概率相同。求 <span
+class="math inline">\(k\)</span> , 使得 <span
+class="math inline">\(X_i\)</span> 最小化</li>
+</ol>
+<p>例4</p>
+<p>用放射性光线照射 <span class="math inline">\(10^9\)</span>
+个细菌。每个细菌的变异是相互独立的，概率为 <span
+class="math inline">\(3/10^9\)</span>. 设 <span
+class="math inline">\(X\)</span> 是变异细菌的个数。</p>
+<ol type="1">
+<li>求 <span class="math inline">\(X\)</span>
+的概率密度函数，期望和方差</li>
+<li>用泊松分布近似求 <span class="math inline">\(Pr[X\ge5]\)</span></li>
+</ol>
+<p>例5</p>
+<p>A 从不同的公司叫了 <span class="math inline">\(n\)</span>
+辆车，并搭乘最早来的一辆。第<span class="math inline">\(i\)</span>
+辆车的等待时间是 <span class="math inline">\(X_i\)</span> ，服从参数为
+<span class="math inline">\(p_i\)</span> 的几何分布。<span
+class="math inline">\(X_i\)</span> 是相互独立的，证明 <span
+class="math inline">\(Y=min\{X_1,...,X_n\}\)</span>
+也服从几何分布，并求参数.</p>
+<p>例6</p>
+<p>A队和B队比赛。设 <span class="math inline">\(X\)</span>
+是A的进球数，<span
+class="math inline">\(Y\)</span>是B的进球数。已知<span
+class="math inline">\(X\)</span> 服从参数为 <span
+class="math inline">\(\lambda\)</span> 的泊松分布。且 <span
+class="math inline">\(Y\)</span> 的概率密度函数是 <span
+class="math display">\[
+f_{Y}(y)=\left\{\begin{array}{ll}
+\frac{1}{(y+1)(y+2)} &amp; \text { wenn } y \in \mathbb{N}_{0} \\
+0 &amp; \text { sonst. }
+\end{array}\right.
+\]</span></p>
+<ol type="1">
+<li>求 <span class="math inline">\(B\)</span> 有可能进至少2球的概率</li>
+<li>判断 <span class="math inline">\(Y\)</span> 的期望是否存在</li>
+<li>求比赛平局结束的概率</li>
+</ol>
+<p>例7</p>
+<p>对于离散随机变量 <span class="math inline">\(X\)</span> ，若分布满足
+<span class="math display">\[ f_{X}\left(x^{*}\right)=\max _{x \in
+\mathbb{R}} f_{X}(x)\]</span> ,那么 <span class="math display">\[x^{*}
+\in \mathbb{R}\]</span> 为模态值，求</p>
+<ol type="1">
+<li>参数为 <span class="math inline">\(\lambda&gt;0\)</span>
+泊松分布的模态值</li>
+<li>参数为<span
+class="math inline">\(n\in\mathbb{N},p\in(0,1)\)</span>二项分布的模态值</li>
+</ol>
+<h2 id="习题6">习题6</h2>
+<p>例1</p>
+<p>设 <span class="math inline">\(X\)</span> 是随机变量 <span
+class="math inline">\(W_X \in \mathbb{N}_0\)</span>
+我们考虑马尔可夫不等式 <span class="math display">\[
+\operatorname{Pr}[X \geq t] \leq \frac{\mathbb{E}[X]}{t}, \forall t\in
+\mathbb{R}, t &gt; 0
+\]</span> 我们说它严格，若存在 <span
+class="math inline">\(t&gt;0\)</span> 使得等式成立。证明：</p>
+<ol type="1">
+<li>存在一个分布，使得这个不等式的严格。</li>
+<li>若 <span class="math inline">\(X\)</span> 有2个不同的取值 <span
+class="math inline">\(a,b \in \mathbb{N}\)</span>, 且每个概率都大于0时，
+这个不等式不严格。</li>
+</ol>
+<p>例2</p>
+<p>A扔硬币 <span class="math inline">\(a,b\)</span>
+两个硬币是相同的，除了 <span class="math inline">\(a\)</span>
+正面的概率是 <span class="math inline">\(3/4\)</span>, <span
+class="math inline">\(b\)</span> 正面的概率是 <span
+class="math inline">\(1/4\)</span> 但是 A忘记了哪个是哪个。若 A
+随机选一个硬币并且扔 <span class="math inline">\(99\)</span>
+次。使用切尔诺夫不等式，证明 A 判断正确的概率不小于 <span
+class="math inline">\(99/100\)</span></p>
+<p>已知： <span class="math inline">\(e^{101 / 4}&gt;9 \cdot
+10^{10}\)</span> , <span class="math inline">\((297 / 196)^{196 /
+4}&lt;9 \cdot 10^{8}\)</span>.</p>
+<p>例3</p>
+<p>A在树林里捕捉虫子。在第1个下雨天之后，他的捕猎行动开始。假设每天都是独立的有
+<span class="math inline">\(0&lt;p&lt;1\)</span> 的概率是下雨天。设第
+<span class="math inline">\(i\)</span> 天捉到的虫子是 <span
+class="math inline">\(Y_i\)</span> ，是独立的以 <span
+class="math inline">\(\lambda=-\ln(1-p)\)</span> 泊松分布的随机变量。设
+<span class="math inline">\(X\)</span>
+是A总共捕猎的时间（包含第1个下雨天）。</p>
+<ol type="1">
+<li><p>设 <span class="math inline">\(Z=\sum_{i=1}^{X}Y_i\)</span>
+是总捕捉虫子。求概率生成函数 <span
+class="math inline">\(G_Z\)</span></p></li>
+<li><p>求 <span class="math inline">\(\mathbb{E}[Z]\)</span> . 证明
+<span class="math inline">\(\mathbb{E}[Z]=\mathbb{E}[X] \cdot
+\mathbb{E}[Y]\)</span> , <span class="math inline">\(Y\)</span> 是以
+泊松分布的随机变量。</p></li>
+</ol>
+<p>例4</p>
+<p><span class="math inline">\(n\)</span> 份作业随机发给这 <span
+class="math inline">\(n\)</span> 个学生。估计至少 <span
+class="math inline">\(n/2\)</span> 个学生拿到自己的作业的概率</p>
+<ol type="1">
+<li>使用马尔科夫不等式</li>
+<li>使用切比雪夫不等式</li>
+</ol>
+<p>例5</p>
+<p>聚会中 A 邀请了32 个人， 每个人出现的概率是独立的 <span
+class="math inline">\(3/5\)</span>.
+A要给每个人烤一个蛋糕。使用切尔诺夫界求A应该烤几个蛋糕使得不够的概率最多
+<span class="math inline">\(1/10\)</span></p>
+<p>例6</p>
+<p>已知 <span class="math display">\[
+G_{X}(s)=\exp \left(8 \cdot\left(s^{2}-1\right)\right)
+\]</span></p>
+<ol type="1">
+<li>求<span class="math inline">\(X\)</span> 的期望和方差</li>
+<li>用切比雪夫不等式证明，<span class="math inline">\(X \ge 32\)</span>
+的概率最多 <span class="math inline">\(1/8\)</span></li>
+<li>设<span class="math inline">\(M_X\)</span> 是 <span
+class="math inline">\(X\)</span> 的秩生成函数 , <span
+class="math inline">\(t &gt; 0, s \ge 0\)</span> 证明</li>
+</ol>
+<p><span class="math display">\[
+\operatorname{Pr}[X \geq t] \leq \frac{M_{X}(s)}{\exp (s \cdot t)}
+\]</span></p>
+<p>例7</p>
+<p>设 <span class="math inline">\(X\)</span> 是随机变量， <span
+class="math inline">\(W_{X} \subseteq \mathbb{N}_{0}\)</span> , <span
+class="math inline">\(G_X\)</span> 是对应的概率生成函数。设 <span
+class="math inline">\(E\)</span> 是事件：<span
+class="math inline">\(X\)</span> 是偶数</p>
+<ol type="1">
+<li>证明：<span
+class="math inline">\(\operatorname{Pr}[E]=\frac{1+G_{X}(-1)}{2}\)</span></li>
+<li>设 <span class="math inline">\(X\)</span>
+是二项分布，几何分布或泊松分布时，求使得<span
+class="math inline">\(\operatorname{Pr}[E]&gt;\operatorname{Pr}[\bar{E}]\)</span>
+的条件</li>
+</ol>
+<h2 id="习题7">习题7</h2>
+<p>例1</p>
+<p>A一直扔一个硬币。 设 <span class="math inline">\(\Omega\)</span>
+是所有无穷扔硬币结果序列的集合。</p>
+<ol type="1">
+<li>证明 <span class="math inline">\(\Omega\)</span> 不可数</li>
+<li>设 <span class="math inline">\(\mathcal{A}\)</span> 是 包含所有
+<span class="math inline">\(A\subseteq \Omega\)</span> 的集合，其中<span
+class="math inline">\(A\)</span> 满足：要么 <span
+class="math inline">\(A\)</span> 可数，要么<span
+class="math inline">\(\Omega \setminus A\)</span> 可数。证明 <span
+class="math inline">\(\mathcal{A}\)</span> 是 <span
+class="math inline">\(\sigma\)</span>-代数</li>
+<li>求一个合适的概率测度 <span class="math inline">\(Pr\)</span> 关于
+<span class="math inline">\(\mathcal{A}\)</span> ，使得 <span
+class="math inline">\(Pr\)</span>
+满足柯尔莫哥洛夫公理(Kolmogorov-Axiome)</li>
+</ol>
+<p>例2</p>
+<p>已知 <span class="math inline">\(X\)</span> 是连续的随机变量，<span
+class="math inline">\(c&gt;0\)</span> <span class="math display">\[
+f_{X}(x)=\left\{\begin{array}{ll}
+c \cdot\left(1-x^{4}\right) &amp; \text { 若 } x \in[-1,1] \\
+0 &amp; \text { 其他 }
+\end{array}\right.
+\]</span></p>
+<ol type="1">
+<li>证明 <span class="math inline">\(f_X\)</span>
+波莱尔可测(Borel-messbar)</li>
+<li>求 <span class="math inline">\(c\)</span></li>
+<li>计算 <span class="math inline">\(X\)</span> 的期望和方差</li>
+</ol>
+<p>例3</p>
+<p>设 <span class="math inline">\(X\)</span>
+是连续随机变量并且有分布函数 <span class="math display">\[
+F_{X}(x)=\left\{\begin{array}{ll}
+0 &amp; \text { falls } x \leq 0 \\
+x &amp; \text { falls } 0&lt;x \leq \frac{1}{2} \\
+\frac{1}{2} &amp; \text { falls } \frac{1}{2}&lt;x \leq \ln (2) \\
+1-e^{-x} &amp; \text { falls } x&gt;\ln (2)
+\end{array}\right.
+\]</span></p>
+<ol type="1">
+<li>证明 <span class="math inline">\(F_X\)</span> 是分布函数</li>
+<li>求对应的概率密度函数</li>
+</ol>
+<p>例4</p>
+<p>设 <span class="math inline">\(\Omega\)</span> 是全集，<span
+class="math inline">\(\mathcal{M} \subseteq \mathcal{P}(\Omega)\)</span>
+. 在所有由 <span class="math inline">\(\mathcal{M}\)</span> 产生的 <span
+class="math inline">\(\sigma\)</span> 代数中，<span
+class="math inline">\(\sigma(\mathcal{M})\)</span> 表示最小的<span
+class="math inline">\(\sigma\)</span> 代数。<span
+class="math inline">\(\Omega=\{1,2,3,4\}\)</span>,<span
+class="math inline">\(\mathcal{M}=\{\{1,2\},\{2,4\}\}\)</span> 求<span
+class="math inline">\(\sigma(\mathcal{M})\)</span></p>
+<p>例5</p>
+<p>有一个长为 <span class="math inline">\(l\)</span>
+的巧克力，A把它随机在 <span class="math inline">\(X\)</span>
+处切成2半。设 <span class="math inline">\(Y\)</span>
+是小的那一半的长度，<span class="math inline">\(X\)</span> 是 <span
+class="math inline">\((0,l)\)</span> 的均匀分布。</p>
+<ol type="1">
+<li>求 <span class="math inline">\(Y\)</span> 的分布</li>
+<li>求 <span class="math inline">\(Y\)</span> 的概率密度函数和期望</li>
+</ol>
+<p>例6</p>
+<p>已知连续随机变量 <span class="math inline">\(X\)</span> <span
+class="math display">\[
+F_{X}(x)=1 /\left(1+e^{-x}\right)
+\]</span></p>
+<ol type="1">
+<li><p>求 <span class="math inline">\(f_X\)</span> 并证明 <span
+class="math inline">\(f_X(-x) = f_X(x)\)</span></p></li>
+<li><p>求 <span class="math inline">\(-X\)</span> 的密度函数</p></li>
+<li><p>求 <span class="math inline">\(X\)</span>
+的期望，已知期望存在</p></li>
+</ol>
+<p>例7</p>
+<p>用在 <span class="math inline">\((0,1)\)</span> 上均匀分布的随机变量
+<span class="math inline">\(U\)</span> 模拟随机变量 <span
+class="math inline">\(X\)</span></p>
+<ol type="1">
+<li><span class="math inline">\(X\)</span> 是以 <span
+class="math inline">\(\lambda&gt;0\)</span> 的指数分布</li>
+<li><span class="math inline">\(X\)</span> 在 <span
+class="math inline">\([a,b]\)</span> 上均匀分布</li>
+</ol>
+<h2 id="习题8">习题8</h2>
+<p>例1</p>
+<p>有一个球，设 <span class="math inline">\(|X|\)</span> 是球的半径，
+<span class="math inline">\(X\)</span> 是正态分布随机变量且 期望<span
+class="math inline">\(\mu=0\)</span>, 标准差 <span
+class="math inline">\(\sigma=\sqrt{\pi / 2}\)</span></p>
+<ol type="1">
+<li>求 <span class="math inline">\(|X|\)</span> 的密度函数</li>
+<li>球的期望半径是 <span class="math inline">\(1\)</span>,
+那么半径的方差是多少</li>
+<li>求的半径大于 <span class="math inline">\(\pi / \sqrt{2}\)</span>
+的概率是多少</li>
+</ol>
+<p><span class="math display">\[
+\begin{array}{l|cccccc}
+x &amp; \sqrt{\pi} / 2 &amp; \sqrt{\pi / 2} &amp; \sqrt{\pi} &amp; \pi /
+2 &amp; \pi / \sqrt{2} &amp; \pi \\
+\hline \Phi(x) &amp; 0,812 &amp; 0,895 &amp; 0,962 &amp; 0,942 &amp;
+0,987 &amp; 0,999
+\end{array}
+\]</span></p>
+<p>例2</p>
+<p>设 <span class="math inline">\(X\)</span> 是指数分布的随机变量 <span
+class="math inline">\(\lambda&gt;0\)</span>. 设 <span
+class="math inline">\(Y=e^{\alpha \cdot X}\)</span> 其中 <span
+class="math inline">\(\alpha &gt;0\)</span>.</p>
+<ol type="1">
+<li>求 <span class="math inline">\(Y\)</span> 的密度函数</li>
+<li>对于哪些 <span class="math inline">\(\alpha\)</span> 使得 <span
+class="math inline">\(Y\)</span> 的期望存在</li>
+</ol>
+<p>例3</p>
+<p>已知 <span class="math display">\[
+f_{X, Y}(x, y)=\left\{\begin{array}{ll}
+c &amp; x^{2}+y^{2} \leq 1 \\
+0 &amp; \text { sonst. }
+\end{array}\right.
+\]</span></p>
+<ol type="1">
+<li>求 <span class="math inline">\(c\)</span>， 已知 <span
+class="math inline">\(\frac{1}{2} \cdot\left(\sqrt{1-y^{2}} \cdot
+y+\arcsin y\right)\)</span> 是 <span
+class="math inline">\(\sqrt{1-y^{2}}\)</span> 的原函数</li>
+<li>求总概率密度函数 <span class="math inline">\(f_{X,Y}\)</span>
+的边缘密度函数 <span class="math inline">\(f_X,f_Y\)</span></li>
+<li><span class="math inline">\(X,Y\)</span> 是独立的吗</li>
+</ol>
+<p>例4</p>
+<p><span class="math inline">\(X\)</span> 是正态分布的随机变量, 期望为
+<span class="math inline">\(5\)</span>, 方差为 <span
+class="math inline">\(0.25\)</span></p>
+<ol type="1">
+<li>把 <span class="math inline">\(X\)</span> 转换成标准正态分布 <span
+class="math inline">\(Y\)</span></li>
+</ol>
+<p><span class="math display">\[
+Z=\left\{\begin{array}{ll}
+1 &amp; 4.5 \le X \le 5.5 \\
+2 &amp; X &gt; 5.5 \\
+0 &amp; \text { sonst. }
+\end{array}\right.
+\]</span></p>
+<ol start="2" type="1">
+<li>求 <span class="math inline">\(Z\)</span> 的概率密度函数和期望</li>
+</ol>
+<p>例5</p>
+<p>高为 <span class="math inline">\(X\)</span>, 底为 <span
+class="math inline">\(Y\)</span> 的三角形如图</p>
+<figure>
+<img src="https://i.loli.net/2021/05/26/1WvyaefXnEFZ8tj.png"
+alt="image-20210526052250160" />
+<figcaption aria-hidden="true">image-20210526052250160</figcaption>
+</figure>
+<p>已知 <span class="math inline">\(X-99\)</span> 和 <span
+class="math inline">\(Y-99\)</span> 是两个独立的 <span
+class="math inline">\(\lambda =1\)</span> 的指数分布</p>
+<ol type="1">
+<li>求 <span class="math inline">\(X\)</span> 的概率密度函数</li>
+<li>求 <span class="math inline">\(min\{X,Y\}&gt;100\)</span>
+的概率</li>
+<li>求三角形面积的期望</li>
+</ol>
+<p>例6 <span class="math display">\[
+f_{X, Y}(x, y)=\frac{\exp \left(-2 / 3 \cdot\left(x^{2}-x \cdot
+y+y^{2}\right)\right)}{2 \pi \cdot \sqrt{3 / 4}}
+\]</span></p>
+<ol type="1">
+<li>证明 <span class="math inline">\(X,Y\)</span> 是标准正态分布</li>
+<li><span class="math inline">\(X,Y\)</span> 是独立的吗</li>
+</ol>
+<p>例7</p>
+<p>A每次遇到1只灰色的兔子要等待 <span class="math inline">\(X\)</span>
+分钟，每次遇到 1 只白色的兔子要等待 <span
+class="math inline">\(Y\)</span> 分钟。已知 <span
+class="math inline">\(X\)</span> 是期望为 <span
+class="math inline">\(15\)</span> 的指数分布随机变量，<span
+class="math inline">\(Y\)</span> 是期望为 <span
+class="math inline">\(45\)</span> 的指数分布随机变量，<span
+class="math inline">\(X,Y\)</span> 是独立的</p>
+<ol type="1">
+<li>求等到第1只兔子的期望等待时间</li>
+<li>求需要等待多少时间，使得期望遇到兔子的总数为 <span
+class="math inline">\(20\)</span></li>
+</ol>
+<h2 id="习题9">习题9</h2>
+<p>例1</p>
+<p>已知一共有 <span class="math inline">\(10^6\)</span>
+个斑马。每个斑马独立有 <span class="math inline">\(2/3\)</span>
+的概率有偶数条纹。设 <span class="math inline">\(X\)</span>
+是偶数条纹斑马的数量</p>
+<ol type="1">
+<li>对于标准正态分布，证明 <span
+class="math inline">\(-\Phi(-x)=\Phi(x)-1\)</span></li>
+<li>用中心极限独立估计一个尽可能小的区间，使得$Pr[aXb] $ 约为 <span
+class="math inline">\(9/10\)</span> 的，已知 <span
+class="math inline">\(\Phi(\sqrt{2}) \approx 19 / 20\)</span></li>
+</ol>
+<p>例2</p>
+<p><span class="math inline">\(X\)</span> 和 <span
+class="math inline">\(Y\)</span> 是独立的标准正态分布，已知<span
+class="math inline">\(Z=X^2 + Y^2\)</span> 。求 <span
+class="math inline">\(Z\)</span> 的概率密度函数。已知<span
+class="math inline">\(\int_{0}^{\alpha} 1 /(\sqrt{t \cdot(\alpha-t)}) d
+t=\pi\)</span> 对于 <span class="math inline">\(\alpha&gt;0\)</span></p>
+<p>例3</p>
+<p>已知对数正态分布： <span class="math display">\[
+f_{X}(x)=\left\{\begin{array}{ll}
+\frac{1}{\sqrt{2 \pi} \sigma x} \cdot \exp \left(-\frac{(\ln
+(x)-\mu)^{2}}{2 \sigma^{2}}\right) &amp; \text { für } x&gt;0 \\
+0 &amp; \text { sonst }
+\end{array}\right.
+\]</span></p>
+<ol type="1">
+<li>求 <span class="math inline">\(Y= \ln(X)\)</span> 是以 <span
+class="math inline">\(\mu\)</span> 和 <span
+class="math inline">\(\sigma\)</span> 为参数的正态分布</li>
+<li>通过秩生成函数求 <span class="math inline">\(X\)</span> 的期望</li>
+</ol>
+<p>例4</p>
+<p>已知 <span class="math inline">\(X,Y\)</span> 是在 <span
+class="math inline">\([0,1]\)</span> 上独立均匀分布的随机变量</p>
+<ol type="1">
+<li>已知 <span class="math inline">\(\int_{0}^{1} f_{Y}(x-z) \mathrm{d}
+x=1-|z|\)</span> 对于 <span class="math inline">\(|z| \leq 1\)</span>
+，求 <span class="math inline">\(Z=X-Y\)</span> 的概率密度和分布</li>
+<li>求 <span class="math inline">\(|Z| \le 1/4\)</span> 的概率</li>
+</ol>
+<p>例5</p>
+<p>放射性光线照射 <span class="math inline">\(2000\)</span>
+个细菌，每个细菌有独立 <span class="math inline">\(5\%\)</span>
+的概率变异。求最多 <span class="math inline">\(6\)</span>
+个细菌变异的概率</p>
+<ol type="1">
+<li>精确求</li>
+<li>用泊松分布近似</li>
+<li>用中心极限定理近似</li>
+</ol>
+<p>例6</p>
+<p><span class="math inline">\(X_1, ... X_n\)</span>
+是独立且相同的且值域是正数的随机变量。证明 <span
+class="math inline">\(\prod_{i=1}^{n} X_{i}\)</span> 是对数正态分布(若
+<span class="math inline">\(Y=ln(X)\)</span> 是正态分布，则 <span
+class="math inline">\(X\)</span> 是对数正态分布)</p>
+<p>例7</p>
+<p>设 <span class="math inline">\(X\)</span> 是 <span
+class="math inline">\(\lambda &gt; 0\)</span> 为参数的指数分布</p>
+<ol type="1">
+<li>求秩生成函数 <span class="math inline">\(M_X\)</span></li>
+<li>已知：<span
+class="math inline">\(M_{X}^{(k)}(0)=\mathbb{E}\left[X^{k}\right]\)</span>
+(<span class="math inline">\(a^{(k)}\)</span> 是 <span
+class="math inline">\(a\)</span> 的 <span
+class="math inline">\(k\)</span> 阶导数)， 求<span
+class="math inline">\(X\)</span> 的方差。</li>
+</ol>
+<h2 id="习题10">习题10</h2>
+<p>例1</p>
+<p>A射<span class="math inline">\(n\)</span> 只箭。设 <span
+class="math inline">\(X_i\)</span>
+是独立的相同分布的随机变量。其中期望和标准差未知。<span
+class="math inline">\(Y=\sum_{i=1}^{n}\lambda_i \cdot X_i\)</span>
+是一个凸组合.</p>
+<ol type="1">
+<li>证明 <span class="math inline">\(Y\)</span> 对于期望 <span
+class="math inline">\(\mu\)</span> 是一个无偏估计量</li>
+<li>证明 <span class="math inline">\(1 / n \cdot \sum_{i=1}^{n}
+\lambda_{i}^{2} \geq 1 / n^{2}\)</span></li>
+<li>求 <span class="math inline">\(\lambda _i\)</span> 使得 <span
+class="math inline">\(Y\)</span> 的效率最优</li>
+</ol>
+<p>例2</p>
+<p>设 <span class="math inline">\(X_1,X_2, ... , X_n\)</span>
+是独立的假设检验，其中 <span class="math inline">\(\lambda
+&gt;0\)</span> 是未知指数分布 <span class="math inline">\(X\)</span>
+的参数。求估计量 <span class="math inline">\(Y\)</span> 对于<span
+class="math inline">\(\lambda\)</span> 的最大似然估计</p>
+<p>例3</p>
+<p>独立的随机变量 <span class="math inline">\(X_1,...X_n\)</span> 是在
+<span class="math inline">\([0,m]\)</span> 上的均匀分布。</p>
+<ol type="1">
+<li>求 <span class="math inline">\(c\)</span> 使得带权样本均值 <span
+class="math inline">\(c \cdot\left(\sum_{i=1}^{n} X_{i}\right) /
+n\)</span> 是一个关于 <span class="math inline">\(m\)</span>
+的无偏估计量</li>
+<li>构造一个对最大似然估计的比较，这个估计量是无偏的吗</li>
+</ol>
+<p>例4</p>
+<p>已知： <span class="math display">\[
+f_{X_{n}}(x)=\left\{\begin{array}{ll}
+\left(\begin{array}{c}
+x+n-1 \\
+x
+\end{array}\right) \cdot p^{n} \cdot(1-p)^{x} &amp; \text { für } x \in
+\mathbb{N}_{0} \\
+0 &amp; \text { sonst. }
+\end{array}\right.
+\]</span> 其中 <span class="math inline">\(0&lt;p&lt;1\)</span> ,
+构造一个关于 <span class="math inline">\(1/p\)</span> 的无偏估计量.</p>
+<p>例5</p>
+<p>设 <span class="math inline">\(X_1,...,X_n\)</span>
+是独立的对于随机变量 <span class="math inline">\(X\)</span>
+的样本变量。求关于下面参数的最大似然估计</p>
+<ol type="1">
+<li><span class="math inline">\(X\)</span> 是泊松分布，<span
+class="math inline">\(\lambda&gt;0\)</span></li>
+<li><span class="math inline">\(X\)</span> 几何分布 <span
+class="math inline">\(p\in(0,1)\)</span></li>
+</ol>
+<p>并且指出每一个情况的估计量是否是无偏的</p>
+<p>例6</p>
+<p>设 <span class="math inline">\(X_1, .. X_n\)</span>
+是独立的指数分布的样本变量，<span
+class="math inline">\(\lambda&gt;0\)</span></p>
+<ol type="1">
+<li>求关于 <span class="math inline">\(1/\lambda\)</span>
+的最大似然估计量<span class="math inline">\(Z\)</span></li>
+</ol>
+<p>例7</p>
+<p>有编号 <span class="math inline">\(1...n\)</span>
+的车辆，车辆编号等概率出现。设A在路上观测5辆车，看到最大的车辆编号为<span
+class="math inline">\(X\)</span>.</p>
+<p>估计量 <span class="math inline">\(U_1=X,U_2= \lceil c \cdot
+X\rceil\)</span> 其中 <span class="math inline">\(c&gt;0\)</span>
+是常数。</p>
+<ol type="1">
+<li>求尽可能小的 <span class="math inline">\(c\)</span>, 使得 <span
+class="math inline">\(n\in [U_1,U_2]\)</span> 置信水平是 <span
+class="math inline">\(0.9\)</span></li>
+</ol>
+<h2 id="习题11">习题11</h2>
+<p>例1</p>
+<p>一共有 <span class="math inline">\(n\)</span> 天，A估计平均温度为
+<span class="math inline">\(\bar{X}\)</span> 度。<span
+class="math inline">\(X\)</span> 是正太分布，现在有未知的期望 <span
+class="math inline">\(\mu\)</span> 和标准差 <span
+class="math inline">\(\sigma = 2\)</span>. 每天的温度用随机变量 <span
+class="math inline">\(X_i\)</span> 表示</p>
+<ol type="1">
+<li>求 <span class="math inline">\(n\)</span> 的下界，使得 <span
+class="math inline">\(\bar{X}\)</span> 有置信水平 <span
+class="math inline">\(0.9\)</span> 时 <span
+class="math inline">\(\bar{X}\)</span> 和 <span
+class="math inline">\(\mu\)</span> 相差不超过 <span
+class="math inline">\(1\)</span></li>
+<li>若 <span class="math inline">\(n=100\)</span>,
+求尽可能小的置信区间</li>
+</ol>
+<p>例2</p>
+<p>有一个球，<span class="math inline">\(p\)</span> 的概率是黑色，<span
+class="math inline">\(1-p\)</span> 的概率是白色的。已知 <span
+class="math inline">\(p\)</span> 要么是 <span
+class="math inline">\(H_0:1/4\)</span> 要么是 $ H_1:3/4$.
+为了验证，A生成了 <span class="math inline">\(n\)</span> 个求，其中有
+<span class="math inline">\(X\)</span> 个是白色的</p>
+<ol type="1">
+<li>设 <span class="math inline">\(K \in \{0,...,n\}\)</span> 是<span
+class="math inline">\(H_0\)</span>的拒绝域，该怎么选取 <span
+class="math inline">\(K\)</span> 使得1类错误和2类错误的和最小。</li>
+<li>假设 A 拒绝了 <span class="math inline">\(H_0\)</span> ,
+用切诺夫界求 <span class="math inline">\(n\)</span> ，使得1类错误小于
+<span class="math inline">\(0.05\)</span>. (已知<span
+class="math inline">\((e / 4)^{8}&lt;0,05\)</span>)</li>
+</ol>
+<p>例3</p>
+<p>一个药在 <span class="math inline">\(n=100\)</span>
+个人上使用，已知对每个人的治愈概率为 <span class="math inline">\(p\ge
+0.9\)</span> . 构造一个显著性差异为 <span
+class="math inline">\(\%5\)</span> 的假设验证，使得有最大的拒绝域</p>
+<p>例4</p>
+<p>已知一个盒子里独立有 <span class="math inline">\(p\)</span>
+的概率有巧克力。A选了4个盒子，要验证每两个盒子里会有一个巧克力还是每3个盒子里有一个巧克力。若拒绝域是
+<span class="math inline">\(K\in \{0,1\}\)</span> 求假设出错的概率</p>
+<p>例5</p>
+<p>每个细菌有 <span class="math inline">\(0\le p \le 1\)</span> 的概率。
+A猜测 <span class="math inline">\(p \le 2/100\)</span>
+并且要验证。现在有 <span class="math inline">\(10000\)</span>
+个细菌。已知拒绝域为 <span class="math inline">\(K =
+\{222,...10000\}\)</span> . 求这个假设验证的显著性差异</p>
+<p>例6</p>
+<p>为了验证一个骰子扔出 <span class="math inline">\(6\)</span>
+的概率是不是 <span class="math inline">\(1/3\)</span> 。A扔了 <span
+class="math inline">\(100\)</span> 次， 结果如下： <span
+class="math display">\[
+\begin{array}{r|cccccc}
+\text { 数字 } &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 \\
+\hline \text { 次数 } &amp; 13 &amp; 10 &amp; 14 &amp; 18 &amp; 15 &amp;
+30
+\end{array}
+\]</span> 已知除了点数 <span class="math inline">\(6\)</span>
+扔出其他点数的概率相同。构造一个显著性差异达到 <span
+class="math inline">\(0.01\)</span> 的假设验证</p>
+<p>已知 <span class="math inline">\(\chi_{k, \alpha}^{2} = k
+\cdot\left(1-(2 /(9 k))+z_{\alpha} \cdot \sqrt{2 /(9
+k)}\right)^{3}\)</span></p>
+<p>例7</p>
+<p>A要比较两种瓜，每种选取 <span class="math inline">\(16\)</span>
+个。已知瓜的口味是独立的正态分布的随机变量 <span
+class="math inline">\(X_i\)</span> 和 <span
+class="math inline">\(Y_i\)</span> .
+构造一个合适的假设验证两种瓜的期望，使得显著性差异为 <span
+class="math inline">\(0.01\)</span> <span class="math display">\[
+\begin{array}{c|cccccccccccccccc}
+i &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp;
+9 &amp; 10 &amp; 11 &amp; 12 &amp; 13 &amp; 14 &amp; 15 &amp; 16 \\
+\hline X_{i} &amp; -1 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; -1 &amp; 4
+&amp; 3 &amp; -1 &amp; -2 &amp; 1 &amp; 4 &amp; 2 &amp; -1 &amp; 4 &amp;
+2 \\
+Y_{i} &amp; -4 &amp; -3 &amp; -2 &amp; 0 &amp; -2 &amp; -2 &amp; 3 &amp;
+0 &amp; 0 &amp; -3 &amp; -4 &amp; 0 &amp; -1 &amp; -2 &amp; 0 &amp; 2
+\end{array}
+\]</span> 已知 <span class="math inline">\(t_{k,\alpha}\)</span> 当
+<span class="math inline">\(k \ge 30\)</span> 时可以用 <span
+class="math inline">\(z_{\alpha}\)</span> 渐进</p>
+<h2 id="习题12">习题12</h2>
+<p>例1</p>
+<p>有三个格子,A每天以相同的概率前进1格或者退后1格。若他在第1格后退或在第3格前进则结束。</p>
+<ol type="1">
+<li>用马尔可夫链建模</li>
+<li>若A在中间的格子，求再次返回中间格的概率</li>
+<li>问结束的期望时间</li>
+</ol>
+<p>例2</p>
+<p>有黄蓝红红4朵花，一只蜜蜂在花上飞但是每次不连续呆同一种颜色的花。他在飞之前决定飞往哪朵花且这几花概率相同。</p>
+<ol type="1">
+<li>设 <span class="math inline">\(X_t\)</span> 是飞到的第 <span
+class="math inline">\(t\)</span>-朵花。 求马尔可夫链的 <span
+class="math inline">\((X_t)_{t\ge 0}\)</span> 传递图和开始分布.
+开始随机等概率出现在这4朵花上</li>
+<li>求稳定分布( stationären Verteilung)，并确定唯一性</li>
+</ol>
+<p>例3</p>
+<p>已知马尔可夫链 <span class="math inline">\(0\le r \le 1\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210611025840297.png"
+alt="image-20210611025840297" />
+<figcaption aria-hidden="true">image-20210611025840297</figcaption>
+</figure>
+<ol type="1">
+<li>怎么选取 <span class="math inline">\(r\)</span>
+使得马尔可夫链是非周期(aperiodisch)，不可简化(irreduzibel)，可遍历的(ergodisch)</li>
+<li>对于哪些 <span class="math inline">\(r\)</span> 存在 <span
+class="math inline">\(\pi\)</span> 使得<span class="math inline">\(\lim
+_{t \rightarrow \infty} p_{i, j}^{(t)}=\pi_{j}\)</span> 对于所有 <span
+class="math inline">\(i,j \in \{0,1\}\)</span> 成立</li>
+</ol>
+<p>例4</p>
+<p>一共 <span class="math inline">\(n\)</span>
+只动物，每只动物等概率出现，A要给每个动物拍照片。设 <span
+class="math inline">\(X_t\)</span> 是拍了 <span
+class="math inline">\(t\)</span> 张照片后还要拍的动物数量</p>
+<ol type="1">
+<li><p>用马尔可夫链建模 <span class="math inline">\((X_t)_{t\ge
+0}\)</span></p></li>
+<li><p>判断非周期性(aperiodisch)，不可简化(irreduzibel)和可遍历(ergodisch)</p></li>
+<li><p>设 <span class="math inline">\(n=3\)</span>
+求拍完照片期望次数</p></li>
+</ol>
+<p>例5</p>
+<p>有4个房间，相邻房间等概率进入</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210611051936714.png"
+alt="image-20210611051936714" />
+<figcaption aria-hidden="true">image-20210611051936714</figcaption>
+</figure>
+<ol type="1">
+<li>用马尔可夫链建模，<span class="math inline">\(X_t\)</span> 是 <span
+class="math inline">\(t\)</span> 时刻所在的房间编号</li>
+<li>求 <span class="math inline">\(\lim _{t \rightarrow \infty}
+q_{t}\)</span> 的最小概率的房间号</li>
+</ol>
+<p>例6</p>
+<p>一个关于骰子的游戏，A开始一直扔，如果A扔出了一个偶数那么换B扔，如果A连续扔出3个奇数那么A胜利。B扔1次，如果扔出的是6那么B胜利，否则换A扔。</p>
+<ol type="1">
+<li>用马尔可夫链建模</li>
+<li>求 A 赢的概率</li>
+<li>求游戏结束的期望轮数</li>
+</ol>
+<p>例7</p>
+<p>设 <span class="math inline">\((Y_i)_{i\ge 0}\)</span>
+是一组独立的随机变量，值要么是 <span class="math inline">\(1\)</span>
+要么是 <span class="math inline">\(-1\)</span> 每种值的概率相等，设
+<span class="math inline">\(X_{t}=\left(\sum_{i=0}^{t} Y_{i}\right)
+\bmod 4\)</span> . 考虑马尔可夫链 <span
+class="math inline">\((X_t)\)</span></p>
+<ol type="1">
+<li>求对应的传递图</li>
+<li>判断不可简化性(irreduzibel)和非周期性(aperiodisch)</li>
+<li>求所有的稳定分布( stationären Verteilungen)</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2021/04/02/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B9%A0%E9%A2%98/">http://fyind.de/2021/04/02/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B9%A0%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/07/01/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">建模和仿真</div></div><div class="info-2"><div class="info-item-1">Focus Analysis 基础部分 多变量函数 定义 \[ f: D \rightarrow W, D \subseteq \mathbb{R}^{n}, W \subseteq \mathbb{R}^{m} \] 对于自然数 \(n\) 和 \(m\) 这个函数可以这样表示： \[ f: D \subseteq \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, x=\left(\begin{array}{c} x_{1} \\ \vdots \\ x_{n} \end{array}\right) \mapsto f(x)=\left(\begin{array}{c} f_{1}\left(x_{1}, \ldots, x_{n}\right) \\ \vdots \\ f_{m}\left(x_{1}, \ldots, x_{n}\right) \end{array}\right) \] 高维度拓扑学 定义域Domain \(D\subseteq \mathbb{R} ^n\) 定义补集complement 为 \(D^c=\mathbb...</div></div></div></a><a class="pagination-related" href="/2020/12/03/%E5%9B%BE%E8%AE%BA%E4%B9%A0%E9%A2%98/" title="图论习题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">图论习题</div></div><div class="info-2"><div class="info-item-1">拓扑排序 Directing Edges 此题很巧妙，先用拓扑排序排出来，再利用拓扑序构造解 </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/11/01/CF680div2/" title="Codeforces Round 680 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-01</div><div class="info-item-2">Codeforces Round 680 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">Codeforces Round #680 (Div. 2) 传送门 A. Array Rearrangment  数学  题意 给定 \(A,B\) 数组和一个数 \(x\), 将 \(A\) 数组和 \(B\) 数组匹配，使得 \(A_i + B_i \le x\) 分析 \(A\) 的最大值 \(A_{max}\) 必须要找一个 \(B\) 数组的元素匹配。那么如果最小的 \(B_{min}\) 都无法满足，那么无解。否则存在解。 考虑假如存在一个解，那么它是不是一定也存在 \(A_{max}\) 与 \(B_{min}\) 匹配的解. 如果有一个满足的解 \(A_{max}\) 和 \(B_i\) 匹配，\(B_{min}\) 和 \(A_j\) 匹配. 那么 \(A_{max}+ B_i \le x\) 且 \(B_{min} + A_j \le x\) 其不是最大值与最小值匹配的情况. 那么交换 \(B_{min}\) 与 \(B_{i}\) . 可以证明 \(A_{max} + B_{min} \le A_{max} + B_i \le x\) 并且 \(B_{i}...</div></div></div></a><a class="pagination-related" href="/2021/09/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-23</div><div class="info-item-2">二进制与位运算</div></div><div class="info-2"><div class="info-item-1">二进制与位运算 数的表示有很多种，我们最常用的是 \(10\) 进制。也就是缝 \(10\) 进位。在计算机中，数都是由二进制的形式存储的。而二进制的意思就是缝 \(2\) 进位。因此二进制的数中，只有 \(0\) 和 \(1\) 二进制 下面这个是一个二进制数 \(101011\) , 我们把它转化成 \(10\) 进制 \[ (101011)_2 \] 怎么转化, 我们从右往左看 \[ \begin{aligned} (101011)_2&amp;=  1*2^5 +0*2^{4}+1*2^{3}+0*2^{2}+1*2^{1}+ 1*2^{0}\\ &amp;=1+2+8+32 \\ &amp;=43 \end{aligned} \] 把一个十进制数转化成二进制 \[ \begin{aligned} 43 /2 = 21 ...&amp; 1 \\ 21/2= 10 ... &amp; 1 \\ 10/2=5 ... &amp; 0 \\ 5/2 = 2 ... &amp; 1 \\ 2/2 = 1 ... &amp; 0 \\ 1/2 = 0 ... &amp; 1 \e...</div></div></div></a><a class="pagination-related" href="/2021/07/01/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-01</div><div class="info-item-2">建模和仿真</div></div><div class="info-2"><div class="info-item-1">Focus Analysis 基础部分 多变量函数 定义 \[ f: D \rightarrow W, D \subseteq \mathbb{R}^{n}, W \subseteq \mathbb{R}^{m} \] 对于自然数 \(n\) 和 \(m\) 这个函数可以这样表示： \[ f: D \subseteq \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, x=\left(\begin{array}{c} x_{1} \\ \vdots \\ x_{n} \end{array}\right) \mapsto f(x)=\left(\begin{array}{c} f_{1}\left(x_{1}, \ldots, x_{n}\right) \\ \vdots \\ f_{m}\left(x_{1}, \ldots, x_{n}\right) \end{array}\right) \] 高维度拓扑学 定义域Domain \(D\subseteq \mathbb{R} ^n\) 定义补集complement 为 \(D^c=\mathbb...</div></div></div></a><a class="pagination-related" href="/2021/07/24/%E6%95%B0%E5%AD%97%E5%8C%96%E7%BC%96%E7%A8%8B/" title="数字化编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="info-item-2">数字化编程</div></div><div class="info-2"><div class="info-item-1">第1章 定义2.1 机器数字Maschinenzahlen 有限集合 \(M\) 计算机可以表示的数字 定义2.2 取整Rundung 映射 \(\mathbb{R} \rightarrow M\) 是一个Rundung \[ |x-r d(x)|=\min _{m \in M}|x-m| \] 于是产生absolute Rundungsfehler \[ f_{r d}(x):=x-r d(x) \] 定义2.3 Festkommazahlen \[ \begin{aligned} &amp;n_{1} n_{2} \cdots n_{k}, m_{1} \cdots m_{j} \quad \text { mit } \\ &amp;n_{1}, n_{2}, \ldots, n_{k}, m_{1}, \ldots, m_{j} \in\{0,1, \ldots, 9\}, \quad k, j \in I N \end{aligned} \] 补码  取反后+1 最高位符号为负数  浮点数 \(x\in \mathbb{R}\) 可以如下表示， \(m\) 是Mantis...</div></div></div></a><a class="pagination-related" href="/2020/11/03/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" title="数学分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-03</div><div class="info-item-2">数学分析</div></div><div class="info-2"><div class="info-item-1">Analysis 数学分析 实数 数集 \[ \Z=\{所有整数的集合\} \\ \mathbb{R} = \{所有实数的集合\} \\ \Q = \{所有有理数的集合\} \\ \mathbb{N}=\{x\in Z:x\ge 0\} = \mathbb{N}_0 \\ \mathbb{N}_{&gt;0}=\{1,2,3,4,...\}=\{x\in N:x&gt;0\} \] 定义 1.1 子集 \(B\) 是 \(A\) 的子集， \(B \subseteq A\) ， 若 \(\forall x \in B \mathbb{R}ightarrow x\in A\) 定义1.2 映射 一个函数 \(f: A\rightarrow B\) 是  injektiv 若 \(\forall_{x \neq y \in A} f(x) \neq f(y)\) surjektiv 若 \(\forall_{y \in B} \exists_{x \in A} f(x)=y\) bijektiv 若 \(f\) 同时 injektiv 和 surjektiv  集合的模 Kardin...</div></div></div></a><a class="pagination-related" href="/2020/08/14/%E6%95%B0%E8%AE%BA%E6%95%B0%E5%AD%A6/" title="数学"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-14</div><div class="info-item-2">数学</div></div><div class="info-2"><div class="info-item-1">基础知识 求和符号 \[ \sum_{i=1}^{n}=a_1+a_2+a_3+...+a_n \] 求和符号的性质 结合律 \[ \sum_{i=1}^{n} \sum_{j=1}^{n} a_i b_j = \sum_{j=1}^{n} \sum_{i=1}^{n} a_i b_j \] 分配率 \[ \sum_{i=1}^{n} a_i \cdot k = (\sum_{i=1}^{n}a_i) \cdot k= k\sum_{i=1}^{n}a_i \\ \sum_{i=1}^{n}\sum_{j=1}^{n}a_i b_j = \sum_{i=1}^n (a_i\sum_{j=1}^n b_j)  = (\sum_{j=1}^{n}b_j)\cdot(\sum_{i=1}^{n}a_i) = (\sum_{i=1}^{n}a_i)\cdot(\sum_{j=1}^{n}b_j) \] 改变枚举对象 令 \(z=x+y\) \[ \sum_{x=0}^a\sum_{y=0}^b f(x,y) = \sum_{z=0}^{a+b}\sum_{y=0}^zf(z-y,y) \...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">概率论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%981"><span class="toc-number">1.1.</span> <span class="toc-text">习题1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%982"><span class="toc-number">1.2.</span> <span class="toc-text">习题2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%983"><span class="toc-number">1.3.</span> <span class="toc-text">习题3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%984"><span class="toc-number">1.4.</span> <span class="toc-text">习题4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%985"><span class="toc-number">1.5.</span> <span class="toc-text">习题5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%986"><span class="toc-number">1.6.</span> <span class="toc-text">习题6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%987"><span class="toc-number">1.7.</span> <span class="toc-text">习题7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%988"><span class="toc-number">1.8.</span> <span class="toc-text">习题8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%989"><span class="toc-number">1.9.</span> <span class="toc-text">习题9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%9810"><span class="toc-number">1.10.</span> <span class="toc-text">习题10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%9811"><span class="toc-number">1.11.</span> <span class="toc-text">习题11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E9%A2%9812"><span class="toc-number">1.12.</span> <span class="toc-text">习题12</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

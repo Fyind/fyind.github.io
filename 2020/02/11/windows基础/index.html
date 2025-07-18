@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>windows基础 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Windows 基础 一、一些重要的目录 用户 用户登录后的配置文件。 开机启动目录 C:Menu 在这个目录下存放的文件会开机自启动 MyDrivers 存放驱动 System32 Windows 目录下的SAM文件，存储的是计算机的用户名和密码 Windows 用来解析域名 PerfLogs 用于存放系统日志。计算机管理中的windows日志中的安全可以查看访问情况 Program files">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows基础">
+<meta property="og:url" content="http://fyind.de/2020/02/11/windows%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="Windows 基础 一、一些重要的目录 用户 用户登录后的配置文件。 开机启动目录 C:Menu 在这个目录下存放的文件会开机自启动 MyDrivers 存放驱动 System32 Windows 目录下的SAM文件，存储的是计算机的用户名和密码 Windows 用来解析域名 PerfLogs 用于存放系统日志。计算机管理中的windows日志中的安全可以查看访问情况 Program files">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2020-02-11T23:31:15.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.875Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "windows基础",
+  "url": "http://fyind.de/2020/02/11/windows%E5%9F%BA%E7%A1%80/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2020-02-11T23:31:15.000Z",
+  "dateModified": "2025-07-18T10:49:53.875Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2020/02/11/windows%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'windows基础',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">windows基础</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">windows基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-02-11T23:31:15.000Z" title="Created 2020-02-11 23:31:15">2020-02-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.875Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Windows/">Windows</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="windows-基础">Windows 基础</h1>
+<h2 id="一一些重要的目录">一、一些重要的目录</h2>
+<h3 id="用户">用户</h3>
+<p>用户登录后的配置文件。</p>
+<h4 id="开机启动目录">开机启动目录</h4>
+<p>C:Menu</p>
+<p>在这个目录下存放的文件会开机自启动</p>
+<h3 id="mydrivers">MyDrivers</h3>
+<p>存放驱动</p>
+<h3 id="system32">System32</h3>
+<p>Windows</p>
+<p>目录下的SAM文件，存储的是计算机的用户名和密码</p>
+<p>Windows</p>
+<p>用来解析域名</p>
+<h3 id="perflogs">PerfLogs</h3>
+<p>用于存放系统日志。计算机管理中的windows日志中的安全可以查看访问情况</p>
+<h3 id="program-files">Program files</h3>
+<p>存放安装程序目录，(x86)目录下安装的是32位程序</p>
+<h2 id="二服务">二、服务</h2>
+<h3 id="打开服务">打开服务：</h3>
+<ul>
+<li>运行中输入 services.msc</li>
+</ul>
+<p>或者</p>
+<ul>
+<li>右键计算机管理，点开服务</li>
+</ul>
+<h3 id="常见的服务">常见的服务</h3>
+<p>web, dns, dhcp(自动获取ip), 邮件, telnet, ssh ,ftp, smb</p>
+<h3 id="telnet">telnet</h3>
+<p>打开服务，找到telnet，右键属性</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210222628468.png"
+alt="image-20200210222628468" />
+<figcaption aria-hidden="true">image-20200210222628468</figcaption>
+</figure>
+<p>然后调成自动，然后就可以启动服务了</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210222719035.png"
+alt="image-20200210222719035" />
+<figcaption aria-hidden="true">image-20200210222719035</figcaption>
+</figure>
+<p>然后再另一台计算机上打开telnet的客户端</p>
+<p>找到应用中的程序和功能，打开“启动或关闭Windows功能”</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210222953905.png"
+alt="image-20200210222953905" />
+<figcaption aria-hidden="true">image-20200210222953905</figcaption>
+</figure>
+<p>然后点上Telnet客户端</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210223110608.png"
+alt="image-20200210223110608" />
+<figcaption aria-hidden="true">image-20200210223110608</figcaption>
+</figure>
+<p>​ 然后在终端用telnet连接它</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210223346758.png"
+alt="image-20200210223346758" />
+<figcaption aria-hidden="true">image-20200210223346758</figcaption>
+</figure>
+<p>然后输入用户名和密码就可以登陆进来了</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210223518936.png"
+alt="image-20200210223518936" />
+<figcaption aria-hidden="true">image-20200210223518936</figcaption>
+</figure>
+<h3 id="smb">smb</h3>
+<p>用于共享文件夹</p>
+<p>可以在2003里设置一个共享文件夹，首先新建一个文件夹，然后右键属性。在共享栏目里面共享此文件夹</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210224121803.png"
+alt="image-20200210224121803" />
+<figcaption aria-hidden="true">image-20200210224121803</figcaption>
+</figure>
+<p>然后在安全里面添加Everyone</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210224254596.png"
+alt="image-20200210224254596" />
+<figcaption aria-hidden="true">image-20200210224254596</figcaption>
+</figure>
+<p>并且设置成完全控制</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210224340624.png"
+alt="image-20200210224340624" />
+<figcaption aria-hidden="true">image-20200210224340624</figcaption>
+</figure>
+<p>访问的时候可以通过运行+IP访问（WIN10不行）</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210224441913.png"
+alt="image-20200210224441913" />
+<figcaption aria-hidden="true">image-20200210224441913</figcaption>
+</figure>
+<p>但此时需要输入用户名和密码，可以在文件夹属性共享的权限里设置Everyone的权限为完全控制</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210224842807.png"
+alt="image-20200210224842807" />
+<figcaption aria-hidden="true">image-20200210224842807</figcaption>
+</figure>
+<p>然后可以访问到</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210224939676.png"
+alt="image-20200210224939676" />
+<figcaption aria-hidden="true">image-20200210224939676</figcaption>
+</figure>
+<p>此时就已经开启smb服务了</p>
+<h2 id="三端口">三、端口</h2>
+<h3 id="常见的端口">常见的端口：</h3>
+<ul>
+<li>HTTP：80,8080,3128,8081,9080</li>
+<li>FTP: 21</li>
+<li>Telnet: 23</li>
+<li>SSH: 22</li>
+<li>SMTP: 25</li>
+<li>QQ: 1080</li>
+<li>MS SQL: 1433</li>
+</ul>
+<h2 id="注册表">注册表</h2>
+<p>注册表可以看作是计算机的经络</p>
+<p>打开注册表：</p>
+<ul>
+<li>在运行里输入regedit</li>
+</ul>
+<p>比如HKEY_CURRENT_USER 管理用户信息</p>
+<h2 id="四dos命令">四、DOS命令</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">color a <span class="comment"># 改成绿色 </span></span><br><span class="line">color ? <span class="comment"># color的参数</span></span><br><span class="line">ping -t -l 65500 www.baidu.com <span class="comment"># 死亡ping</span></span><br><span class="line">ipconfig <span class="comment"># 查看ip</span></span><br><span class="line">ipconfig /all <span class="comment"># 查看ip详情</span></span><br><span class="line">ipconfig /release <span class="comment"># 换ip</span></span><br><span class="line">systeminfo <span class="comment"># 列出系统信息</span></span><br><span class="line">arp -a  <span class="comment"># 列出同一个ip下的主机</span></span><br><span class="line">net view <span class="comment"># 查看局域网下所有计算机名</span></span><br><span class="line">shutdown -s -t 180 -c <span class="string">&quot;系统马上关机&quot;</span> <span class="comment"># 关机</span></span><br><span class="line">shutdown -a <span class="comment"># 取消关机</span></span><br><span class="line"><span class="built_in">dir</span> <span class="comment"># 查看目录</span></span><br><span class="line"><span class="built_in">cd</span> <span class="comment"># 切换目录</span></span><br><span class="line">start www.baidu.com <span class="comment"># 打开网页</span></span><br><span class="line">start 123.txt <span class="comment"># 打开文件</span></span><br><span class="line">conpy con c:\123.txt <span class="comment"># 创建文件</span></span><br><span class="line">hello xxx </span><br><span class="line">ctrl+z <span class="comment"># 回车</span></span><br><span class="line">md 目录名 <span class="comment"># 创建目录</span></span><br><span class="line">rd 123 <span class="comment"># 删除文件夹</span></span><br><span class="line">ren 原文件名 新文件名 <span class="comment"># 重命名</span></span><br><span class="line">del 文件名 <span class="comment"># 删除文件</span></span><br><span class="line">copy <span class="comment"># 复制</span></span><br><span class="line">move <span class="comment"># 移动</span></span><br><span class="line">tree <span class="comment"># 数型列出文件结构</span></span><br><span class="line">net use k: \\192.168.171.134\c$ <span class="comment"># 把它的c盘拿过来</span></span><br><span class="line">net use k: \\192.168.171.134\c$ /del <span class="comment"># 删除k盘</span></span><br><span class="line">net stop telnet <span class="comment"># 停止服务</span></span><br><span class="line">net start telnet <span class="comment"># 启动服务</span></span><br><span class="line">net user <span class="comment"># 查看用户</span></span><br><span class="line">net user frank 123 /add <span class="comment"># 创建用户frank，密码123</span></span><br><span class="line">net user frank 456 <span class="comment"># 更改密码</span></span><br><span class="line">net localgroup administrators frank /add <span class="comment"># 添加管理员权限</span></span><br><span class="line">net user frank /del</span><br><span class="line">net user gust /active:<span class="built_in">yes</span> <span class="comment"># </span></span><br><span class="line">netstat -an <span class="comment"># 查看端口情况</span></span><br></pre></td></tr></table></figure>
+<h2 id="五windows快捷键">五、Windows快捷键</h2>
+<ul>
+<li>F1 查看帮助</li>
+<li>F2 重命名</li>
+<li>F3 打开查找</li>
+<li>CTRL+F6 切换到下一个文本（加shift返回上一个）</li>
+<li>F10或Alt 激活菜单栏</li>
+<li>CTRl+Shift+Esc 打开任务管理器</li>
+<li>CTRL+N 新建文件</li>
+<li>CTRL+O 打开“打开文件”</li>
+<li>WIN+L锁屏</li>
+<li>WIN+F 查找</li>
+<li>WIN+M 最小化所有窗口</li>
+</ul>
+<h2 id="六系统优化">六、系统优化</h2>
+<h3 id="修改启动项">修改启动项</h3>
+<p>运行中输入msconfig打开系统配置，找到启动</p>
+<h3 id="加快系统启动速度">加快系统启动速度</h3>
+<p>系统配置中找引导，然后高级选项，可以增加处理器个数</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210235622382.png"
+alt="image-20200210235622382" />
+<figcaption aria-hidden="true">image-20200210235622382</figcaption>
+</figure>
+<h3 id="提高窗口切换速度">提高窗口切换速度</h3>
+<p>右键计算机属性，在右边搜索性能，然后打开性能选项</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210235919601.png"
+alt="image-20200210235919601" />
+<figcaption aria-hidden="true">image-20200210235919601</figcaption>
+</figure>
+<p>然后把最后一个去掉，最大化和最小化时显示窗口动画</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200210235944481.png"
+alt="image-20200210235944481" />
+<figcaption aria-hidden="true">image-20200210235944481</figcaption>
+</figure>
+<h2 id="七登录密码破解">七、登录密码破解</h2>
+<h3 id="使用u盘破解">使用U盘破解</h3>
+<p>进入PE修改密码</p>
+<h3 id="使用工具破解">使用工具破解</h3>
+<p>lc5</p>
+<p>彩虹表</p>
+<h3 id="手动清除木马">手动清除木马</h3>
+<ul>
+<li>查找开机启动项</li>
+<li>查询服务</li>
+<li>查看网络端口</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2020/02/11/windows%E5%9F%BA%E7%A1%80/">http://fyind.de/2020/02/11/windows%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Windows/">Windows</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/03/05/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" title="人工智能"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">人工智能</div></div><div class="info-2"><div class="info-item-1">人工智能 Intelligent Agent  通过传感器(sensors)察觉周围环境 执行器(actuators)根据环境做出反应  Agents interact with environments through actuators and sensors. Percept sequence 感知的序列 Agent function 根据感知的序列映射出一个动作 可以选择列表(Tabular Agent Function)或者写程序(Agent Program)。 表格可以在理论上很好的描述(Expressiveness)一个agent的行为，但是缺乏实践意义(Practicality) Agent program 是agent function的实际实现(practical implementation) Rational Agent 理想的agent， 一直做”正确的”事情  显然的表现评估法则(performance measure)并不总有 设计者需要找到一个可接受的评估法则  对于一个感知序列，一个理想的agent需要选择行动，使得它在给定的知识范围的表现期望最...</div></div></div></a><a class="pagination-related" href="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/" title="虚拟机安装以及网站的搭建"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">虚拟机安装以及网站的搭建</div></div><div class="info-2"><div class="info-item-1">虚拟机安装以及网站的搭建 一、 VMware WorkStation 安装和使用 Unity 模式 在该模式下，可以把虚拟机的窗口拖到真实机上。   image-20200203165854913  快照 在这里添加快照   image-20200203170140749  二、Windows Server 2003 下载安装完成后： 设置虚拟机交换机 设置虚拟机的交换机为VMnet1，下面的xp也一样设置   image-20200204050331629  设置ip地址 运行中输入ncpa.cpl可以打开网络设置/网卡 右键本地连接属性-&gt; tcp/ip协议 ，右键属性 在这里可以更改ip地址，下面的xp也一样设置，注意地址不要改一样的   image-20200204050717616  三、Windows Xp sp3 下载镜像后安装 序列号：MRX3F-47B9T-2487J-KWKMF-RPWBY Windows也和上面一样设置，然后关闭防火墙，它们就可以ping通过了 关闭防火墙 控制面板—&gt;安全中心—&gt;关闭防火墙   image-20200204...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#windows-%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">Windows 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%80%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">一、一些重要的目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.1.</span> <span class="toc-text">用户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%9B%AE%E5%BD%95"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">开机启动目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mydrivers"><span class="toc-number">1.1.2.</span> <span class="toc-text">MyDrivers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#system32"><span class="toc-number">1.1.3.</span> <span class="toc-text">System32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#perflogs"><span class="toc-number">1.1.4.</span> <span class="toc-text">PerfLogs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#program-files"><span class="toc-number">1.1.5.</span> <span class="toc-text">Program files</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.</span> <span class="toc-text">二、服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.1.</span> <span class="toc-text">打开服务：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">常见的服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#telnet"><span class="toc-number">1.2.3.</span> <span class="toc-text">telnet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#smb"><span class="toc-number">1.2.4.</span> <span class="toc-text">smb</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.3.</span> <span class="toc-text">三、端口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.3.1.</span> <span class="toc-text">常见的端口：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="toc-number">1.4.</span> <span class="toc-text">注册表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9Bdos%E5%91%BD%E4%BB%A4"><span class="toc-number">1.5.</span> <span class="toc-text">四、DOS命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94windows%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.6.</span> <span class="toc-text">五、Windows快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96"><span class="toc-number">1.7.</span> <span class="toc-text">六、系统优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="toc-number">1.7.1.</span> <span class="toc-text">修改启动项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%BF%AB%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E9%80%9F%E5%BA%A6"><span class="toc-number">1.7.2.</span> <span class="toc-text">加快系统启动速度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E7%AA%97%E5%8F%A3%E5%88%87%E6%8D%A2%E9%80%9F%E5%BA%A6"><span class="toc-number">1.7.3.</span> <span class="toc-text">提高窗口切换速度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3"><span class="toc-number">1.8.</span> <span class="toc-text">七、登录密码破解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8u%E7%9B%98%E7%A0%B4%E8%A7%A3"><span class="toc-number">1.8.1.</span> <span class="toc-text">使用U盘破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E7%A0%B4%E8%A7%A3"><span class="toc-number">1.8.2.</span> <span class="toc-text">使用工具破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%B8%85%E9%99%A4%E6%9C%A8%E9%A9%AC"><span class="toc-number">1.8.3.</span> <span class="toc-text">手动清除木马</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

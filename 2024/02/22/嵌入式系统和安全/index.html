@@ -1,0 +1,1887 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>嵌入式系统和安全 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="嵌入式系统和安全 Introduction Four requirements for embedded system  Efficiency, function,dependability, security  Relationship between Dependability and security Difference between security and safety Goal o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌入式系统和安全">
+<meta property="og:url" content="http://fyind.de/2024/02/22/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="嵌入式系统和安全 Introduction Four requirements for embedded system  Efficiency, function,dependability, security  Relationship between Dependability and security Difference between security and safety Goal o">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2024-02-22T17:09:28.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.877Z">
+<meta property="article:author" content="Fyind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "嵌入式系统和安全",
+  "url": "http://fyind.de/2024/02/22/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%AE%89%E5%85%A8/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2024-02-22T17:09:28.000Z",
+  "dateModified": "2025-07-18T10:49:53.877Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2024/02/22/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%AE%89%E5%85%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '嵌入式系统和安全',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">嵌入式系统和安全</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">嵌入式系统和安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-22T17:09:28.000Z" title="Created 2024-02-22 17:09:28">2024-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.877Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="嵌入式系统和安全">嵌入式系统和安全</h1>
+<h2 id="introduction">Introduction</h2>
+<h3 id="four-requirements-for-embedded-system">Four requirements for
+embedded system</h3>
+<ul>
+<li>Efficiency, function,dependability, security</li>
+</ul>
+<h3 id="relationship-between-dependability-and-security">Relationship
+between Dependability and security</h3>
+<h3 id="difference-between-security-and-safety">Difference between
+security and safety</h3>
+<p>Goal of lecture</p>
+<blockquote>
+<ul>
+<li>Being able to design secure embedded systems</li>
+<li>Assess and choose appropriate measures to secure an embedded
+system</li>
+<li>Implement given tasks on an embedded system (done)</li>
+<li>Use toolchains for cross-platform development</li>
+<li>Discuss memory organization</li>
+<li>Classify different types of on-chip memory</li>
+<li>Recall the boot process of a uC</li>
+<li>Describe and use memory mapped I/O</li>
+<li>Compare and use methods for embedded debugging</li>
+<li>Explain and use interrupts</li>
+<li>List common peripherals and explain their purpose</li>
+</ul>
+</blockquote>
+<h2 id="microcontroller-basic">Microcontroller Basic</h2>
+<h3 id="components-of-an-embedded-system">Components of an embedded
+system</h3>
+<p>Describe every component in a few words. (What is it? What it used
+for)</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240222172713361.png"
+alt="image-20240222172713361" />
+<figcaption aria-hidden="true">image-20240222172713361</figcaption>
+</figure>
+<h3 id="cpu">CPU</h3>
+<p>piplined processor</p>
+<h4 id="popular-architecture">popular architecture</h4>
+<ul>
+<li>arm cotex-M</li>
+<li>intel x86</li>
+</ul>
+<p>symmetric, asymetric multicore</p>
+<h3 id="cache">Cache</h3>
+<p>Fast memory to increase performance and decrease power</p>
+<p>used for both memory(Instruction and data, I-Cache and D-Cache), or
+unified</p>
+<p>Impact on predictability and real time behavior critical</p>
+<h4 id="scratch-pad-memory">Scratch Pad Memory</h4>
+<ul>
+<li><p>small and fast local memory</p></li>
+<li><p>Usable by user and compiler</p></li>
+</ul>
+<h3 id="interrupt-unit">Interrupt Unit</h3>
+<p>For fast reaction on asynchronous events</p>
+<ul>
+<li><p>Could be a simple register which triggers one interrupt
+handler</p></li>
+<li><p>Can be a sophisticated hardware machine which prioritizes
+different parallel interrupts and injects a jump to an interrupt handler
+into the instruction path of the processor</p></li>
+</ul>
+<h3 id="debug">Debug</h3>
+<ul>
+<li>Interface to an external debugger in order to start and stop the
+program and to read as well as to write memory locations</li>
+<li>External connection usually through a serial interface (JTAG, Uart,
+USB)</li>
+<li>Sometimes trace capability is available to observe internal
+processor states</li>
+</ul>
+<h3 id="bus">Bus</h3>
+<h4 id="high-bandwith-bus">High Bandwith Bus</h4>
+<ul>
+<li>Bus or switch matrix to connect on chip memories, fast IOs, DMA, and
+caches</li>
+<li>32 or 64 bit wide, pipelined, bursts, high throughput reasonable
+latency</li>
+</ul>
+<h4 id="slow-bus">Slow Bus</h4>
+<ul>
+<li><p>Low performance bus to connect configuration registers and slow
+peripherals, e.g. timers and serial IO</p></li>
+<li><p>16 or 32 bit, sometimes multiplexed address and data</p></li>
+</ul>
+<p>Low latency and sometimes special hardware to allow bit or byte
+writes and hardware locks</p>
+<h4 id="bus-bridge">Bus Bridge</h4>
+<p>Connection of different buses</p>
+<p>Load reduction to increase bus speed</p>
+<p>Separation of low and high bandwidth buses</p>
+<h3 id="memory">Memory</h3>
+<ul>
+<li>RAM</li>
+</ul>
+<p>on chip volatile(易失的) memory; erased after power down</p>
+<ul>
+<li>ROM</li>
+</ul>
+<p>non-volatile memory; mask programed; boot code</p>
+<ul>
+<li>Flash,EEPROM, FRAM</li>
+</ul>
+<p>non-volatile memory but erasable</p>
+<h4 id="mmumpu">MMU/MPU</h4>
+<p>MPU: Management of access rights for defined memory regions</p>
+<p>MMU: mapping between virtual and physical addresses</p>
+<h3 id="dmadirect-memory-access">DMA(direct memory access)</h3>
+<p>Bus master for transfer of data from peripherals to memory</p>
+<p>Decreases CPU load, but may cause bus access contention(争夺)</p>
+<blockquote>
+<p>In DMA, we use a separate single-purpose processor, called a DMA
+controller, whose sole purpose is to transfer data between memories and
+peripherals. Briefly, the peripheral requests servicing from the DMA
+controller, which then requests control of the system bus from the
+microprocessor.The microprocessor merely needs to relinquish(放手)
+control of the bus to the DMA controller.</p>
+<p>在DMA中，我们用一个专处理器叫DMA
+controller，它负责转换memory和peripheral的数据，接受peripheral的请求再向处理器申请bus控制.</p>
+</blockquote>
+<h3 id="fast-io">Fast IO</h3>
+<ul>
+<li><p>PCIe, Ethernet , high speed USB</p></li>
+<li><p>External memory interfaces: DDRx, SD, MMC</p></li>
+<li><p>Usually large send and receive buffers</p></li>
+<li><p>Serviced by DMA</p></li>
+</ul>
+<h3 id="slow-io">Slow IO</h3>
+<ul>
+<li>Uart ,²C (IIC), SPI, full speed USB,CAN</li>
+<li>Small buffers usually handled through byte accesses</li>
+<li>May be implemented in software with GPIOs as well</li>
+</ul>
+<h3 id="io-addressing-add">I/O addressing (ADD)</h3>
+<h4 id="parallel-io">parallel I/O</h4>
+<p>Portbased I/O is also called parallel I/O.</p>
+<blockquote>
+<p>A port is a set of pins that can be read and written just like any
+register in the microprocessor, A C-language programmer may write to P0
+using an instruction like: P0 = 255</p>
+</blockquote>
+<p>A microprocessor may use one of two methods for communication over a
+system bus: standard I/O or memory-mapped I/O</p>
+<h4 id="standard-io">standard I/O</h4>
+<p>the bus includes an additional pin, which we label M/IO, to indicate
+whether the access is to memory or to a peripheral. For example, when
+M/IO is 0, the address on the address bus corresponds to a memory
+address. When M/IO is 1, the address corresponds to a peripheral</p>
+<ul>
+<li>advantage is no loss of memory addresses</li>
+</ul>
+<h4 id="memory-mapped-io">memory-mapped I/O</h4>
+<p>peripherals occupy specific addresses in the existing address space.
+For example, consider a bus with a 16-bit address. The lower 32K
+addresses may correspond to memory addresses, while the upper 32K may
+correspond to I/O addresses.</p>
+<ul>
+<li>advantage is that the microprocessor need not include special
+instructions for communicating with peripherals.</li>
+</ul>
+<h3 id="others">others</h3>
+<h4 id="accelerators">Accelerators</h4>
+<p>Special purpose hardware for dedicated tasks e.g</p>
+<ul>
+<li><p>Crypto processors for AES</p></li>
+<li><p>Long number calculation units for asymmetric crypto</p></li>
+</ul>
+<h4 id="adda">AD/DA</h4>
+<p>Analogg-to-Digital, converters in both directions to interface with
+the physical world</p>
+<h4 id="timer">Timer</h4>
+<p>All kinds of timers for time counting and measurement as well as
+pulse width modulation</p>
+<h4 id="control">Control</h4>
+<p>control unit for start-up, power management, clock
+control,configuration management</p>
+<h4 id="mmi">MMI</h4>
+<p>Man Machine Interface, Interface to displays, keyboard</p>
+<h3 id="hsm-hardware-security-module">HSM: Hardware Security Module</h3>
+<ul>
+<li>Special hardware acting as hardware trust anchor</li>
+<li>Independent CPU</li>
+<li>Crypto accelerators</li>
+<li>Secret key storage</li>
+<li>Protecting boot sequence</li>
+<li>Controlling access</li>
+</ul>
+<h3 id="two-memory-architectures">Two Memory Architectures</h3>
+<p>Describe von Neumann and Harvard architecture characteristics and
+difference.</p>
+<p>von Neumann: Fewer memory wires</p>
+<p>Harvard: Simultaneous program and data memory access</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240223121426461.png"
+alt="image-20240223121426461" />
+<figcaption aria-hidden="true">image-20240223121426461</figcaption>
+</figure>
+<h3 id="regeisters-in-cortex-m">Regeisters in Cortex-M</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240223121457208.png"
+alt="image-20240223121457208" />
+<figcaption aria-hidden="true">image-20240223121457208</figcaption>
+</figure>
+<h3 id="instruction-of-microcontroller">Instruction of
+Microcontroller</h3>
+<h4 id="data-processing">Data processing</h4>
+<ul>
+<li>ADD, SUB, MUL, DIV, LSL, AND, OR, …</li>
+</ul>
+<h4 id="data-move">Data Move</h4>
+<ul>
+<li>LDR, STR, LDM, STM</li>
+<li>PUSH, POP</li>
+<li>MRS, MSR</li>
+</ul>
+<h4 id="control-1">Control</h4>
+<ul>
+<li>B, BC, CBZ</li>
+<li>BL, BLX</li>
+</ul>
+<h3 id="format-of-instruction">Format of Instruction</h3>
+<figure>
+<img src="嵌入式系统和安全/image-20240223121704613.png"
+alt="image-20240223121704613" />
+<figcaption aria-hidden="true">image-20240223121704613</figcaption>
+</figure>
+<ul>
+<li><p>opcode: which operation should be executed?</p></li>
+<li><p>operand1: which register is affected?</p></li>
+<li><p>operand2: an immediate value,a register,an immediate shifted
+register,a register shifted register</p></li>
+<li><p>operand3: optional register value</p></li>
+</ul>
+<h3 id="bit-vs-32bit-instructions">16bit vs 32bit instructions</h3>
+<h4 id="bit">32 bit:</h4>
+<ul>
+<li>Larger code size</li>
+<li>Larger operands</li>
+<li>More instructions</li>
+</ul>
+<h4 id="bit-1">16 bit:</h4>
+<ul>
+<li>Small code size</li>
+<li>Small operands</li>
+<li>Limited number of instructions</li>
+</ul>
+<h4 id="mixture">Mixture:</h4>
+<ul>
+<li>Optimized code size and large operands</li>
+<li>Bits in opcode needed to distinguish 16 and 32 bit instructions</li>
+</ul>
+<h3 id="arm-specific-solution-for-mixed-length-instructions">ARM
+specific solution for mixed length instructions</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240223123025365.png"
+alt="image-20240223123025365" />
+<figcaption aria-hidden="true">image-20240223123025365</figcaption>
+</figure>
+<h3 id="addressing-mode">Addressing mode</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240223122152696.png"
+alt="image-20240223122152696" />
+<figcaption aria-hidden="true">image-20240223122152696</figcaption>
+</figure>
+<ul>
+<li>In immediate addressing, the operand field contains the data itself.
+<code>MOV Rn, #immed</code></li>
+<li>In register addressing, the operand field contains the address of a
+datapath register in which the data resides</li>
+<li>In register-indirect addressing, the operand field contains the
+address of a register, which in turn contains the address of a memory
+location in which the data resides</li>
+<li>In direct addressing, the operand field contains the address of a
+memory location in which the data resides. In indirect addressing, the
+operand field contains the address of a memory location, which in turn
+contains the address of a memory location in which the data
+resides.</li>
+<li>In inherent or implicit addressing, the particular register or
+memory location of the data is implicit in the opcode; for example, the
+data may reside in a register called the “accumulator.”</li>
+</ul>
+<h3 id="stack-and-heap">Stack and Heap</h3>
+<h4 id="stack">stack</h4>
+<ul>
+<li>Stack stores all local variables of a function</li>
+<li>If a subroutine is called the current state of the CPU has to be
+stored in the stack as well,</li>
+</ul>
+<h4 id="heap">Heap</h4>
+<ul>
+<li>The heap is a memory area which can be used to store
+<ul>
+<li>Static data</li>
+<li>Dynamically allocated memory</li>
+<li>Global variables</li>
+</ul></li>
+<li>Usually the heap grows upwards</li>
+<li>Memory is not maintained automatically,
+<ul>
+<li>Dynamically allocated space has to be freed</li>
+<li>Access to memory has to be synchronized</li>
+</ul></li>
+</ul>
+<h3 id="arm-usage-of-registers-in-cc-procedure-calls">ARM usage of
+registers in C/C++ procedure calls</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240223123219616.png"
+alt="image-20240223123219616" />
+<figcaption aria-hidden="true">image-20240223123219616</figcaption>
+</figure>
+<h3 id="build-an-executable-in-a-microcontroller">Build an executable in
+a microcontroller</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240223123403463.png"
+alt="image-20240223123403463" />
+<figcaption aria-hidden="true">image-20240223123403463</figcaption>
+</figure>
+<h3 id="elf-executable-and-linkable-format">ELF (Executable and Linkable
+Format)</h3>
+<ul>
+<li>The linker reads it as an input which can be linked with other
+objects</li>
+<li>The loader interprets it as an executable program</li>
+</ul>
+<h4 id="important-elf-sections">Important ELF sections</h4>
+<ul>
+<li><code>.text</code> Program code</li>
+<li><code>.data</code> initialized data larger than 64
+KB已初始化的全局变量和静态变量</li>
+<li><code>.bss</code> uninitialized data larger than 64
+KB未初始化的全局变量和静态变量</li>
+<li><code>.sdata</code> initialized data smaller than 64 KB</li>
+<li><code>.sbss</code> uninitialized data smaller than 64 KB</li>
+<li><code>.rodata</code> non-volatile default initialization parameters
+and
+data<strong>只读数据</strong>，例如<strong>常量字符串</strong>、<strong>默认初始化参数</strong></li>
+</ul>
+<h3 id="main-difference-between-embedded-and-pc">Main difference between
+embedded and PC</h3>
+<h4 id="pc">PC</h4>
+<ul>
+<li>Programs are loaded through an operating system (OS) into the RAM of
+the PC</li>
+<li>Libraries are mostly dynamically linked</li>
+<li>The operating system uses a MMU to translate the virtual addresses
+used in a program into physical addresses of RAM</li>
+</ul>
+<h4 id="embedded">Embedded</h4>
+<ul>
+<li>Programs reside in on-chip ROM/Flash memory and are directly
+executed from there</li>
+<li>Programs are statically linked sometimes including a real time OS
+and different tasks</li>
+</ul>
+<h2 id="debugging">Debugging</h2>
+<h3 id="types-of-bug">Types of bug</h3>
+<ul>
+<li>Bohrbug: Deterministic, easy to find</li>
+<li>Heisenbug: Not deterministic, hard to reproduce, measurement changes
+behavior</li>
+<li>Schroedinbug: Invisible until detected</li>
+<li>Mandelbug: Looks like a Bohrbug but fixes causes a chain of new bugs
+and may be never terminates</li>
+</ul>
+<h3 id="how-to-avoid-debugging">How to avoid debugging</h3>
+<ul>
+<li>Code review</li>
+<li>Static code analysis</li>
+<li>Compiler messages</li>
+<li>Agile SW development</li>
+<li>Test driven design</li>
+</ul>
+<h3 id="debugging-methods">Debugging methods</h3>
+<ul>
+<li>Code Instrument,assertion, printf</li>
+<li>simulation</li>
+<li>emulation</li>
+<li>software debugger</li>
+<li>hardware debugger</li>
+</ul>
+<h3 id="hardware-debugger-architecture">Hardware debugger
+architecture</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240223135202155.png"
+alt="image-20240223135202155" />
+<figcaption aria-hidden="true">image-20240223135202155</figcaption>
+</figure>
+<h3 id="features-characterizing-debuggers">Features characterizing
+debuggers</h3>
+<ul>
+<li>Physical Tool Interface</li>
+<li>Halt after Reset</li>
+<li>Single Stepping</li>
+<li>Breakpoints</li>
+<li>Watchpoints (Data Address + Value Trigger)</li>
+<li>Trace</li>
+<li>Profiling</li>
+</ul>
+<h3 id="physical-tool-interfaces-main-criteria">Physical tool
+interfaces: Main Criteria</h3>
+<ul>
+<li>Tool support/standardization</li>
+<li>Number of pins</li>
+<li>R/W access while running</li>
+<li>Bandwidth</li>
+<li>Robustness</li>
+<li>Security</li>
+</ul>
+<h3 id="implementation-of-break-points">Implementation of break
+points</h3>
+<ul>
+<li>Hardware comparators for Instruction Pointer</li>
+<li>Equality and/or range comparators</li>
+<li>Break before make or break after make</li>
+</ul>
+<blockquote>
+<p><strong>断点前/断点后执行（Break before make or break after
+make）</strong>：断点可以选择在执行指令之前暂停（断点前执行）或在执行指令之后暂停（断点后执行）。断点前执行意味着在执行目标指令之前暂停程序执行，而断点后执行意味着在执行目标指令之后暂停程序执行。</p>
+</blockquote>
+<h3 id="implementation-of-single-stepping">Implementation of single
+stepping</h3>
+<p>Needed HW support</p>
+<ul>
+<li>Built-in single stepping</li>
+<li>PC range trigger with break after make</li>
+</ul>
+<h3 id="implementation-of-watchpoints">Implementation of
+watchpoints</h3>
+<ul>
+<li>Hardware comparators for Data address,Read and/or write,Data
+value</li>
+<li>Equality and/or range comparators</li>
+<li>Usually restrictions like : No break before make , Only unsigned
+values</li>
+</ul>
+<h3 id="implementation-of-tracing-跟踪">Implementation of tracing
+跟踪</h3>
+<h4 id="program-trace">Program trace</h4>
+<p>Start or stop of trace are combined with watchpoints</p>
+<h4 id="data-trace">Data trace</h4>
+<p>Address comparator needed to specify memory location</p>
+<h3 id="instrumentation-using-data-trace-interface">Instrumentation
+using data trace interface</h3>
+<ul>
+<li>Use of debug trace interface</li>
+</ul>
+<blockquote>
+<p>仪器化（Instrumentation）是一种软件工程技术，用于向软件程序中插入特定的代码或标记（称为仪器化点），以便在程序执行时收集数据、监视程序行为或改变程序的执行方式。</p>
+</blockquote>
+<h3 id="issues-to-solve-for-tracing">Issues to solve for tracing</h3>
+<ul>
+<li><p>Program flow with compression</p>
+<blockquote>
+<p>跟踪大型程序的执行路径会产生大量的跟踪数据，因此需要对数据进行压缩以减少存储和传输的成本。通常，需要将每条指令的跟踪信息压缩到几个比特，以便将数据速率降低到可接受的范围</p>
+</blockquote></li>
+<li><p>Trace of task switches needs to be possible</p>
+<blockquote>
+<p>对于多任务操作系统，需要能够跟踪任务之间的切换，以便分析任务的执行顺序和上下文切换的开销</p>
+</blockquote></li>
+<li><p>Multi-core, multi-master comes on top</p></li>
+<li><p>High speed trace interfaces are expensive</p></li>
+</ul>
+<h3 id="debug-under-real-time-conditions">Debug under real time
+conditions</h3>
+<h4 id="invasive-debugging">Invasive debugging</h4>
+<p>Features that need to stop the processor or change the program
+execution flow significantly.</p>
+<ul>
+<li>Problem with peripherals interacting with physical world</li>
+</ul>
+<h4 id="non-invasive-debugging">Non-invasive debugging</h4>
+<p>Features that have no or very little effect on the program flow.</p>
+<ul>
+<li>Less determinism during debugging</li>
+</ul>
+<h3 id="debugging-and-security">Debugging and security</h3>
+<p>The goal of the debugger is</p>
+<ul>
+<li>Give access to all resources</li>
+<li>Enable modifications of memory/register contents</li>
+<li>Change the program flow</li>
+</ul>
+<p>This can be used to hack a system!!!</p>
+<ul>
+<li>The access to the debug port must be protected , At least an
+authentication by password is required</li>
+<li>Debug access should be permanently disabled for chips in the field
+(实际使用的芯片)</li>
+</ul>
+<p>There is an inherent conflict between security and analysis
+capabilities (e.g. in case of field returns处理现场返回的产品)!</p>
+<h2 id="interrupts-and-exception">Interrupts and Exception</h2>
+<h3 id="interrupts-vs-exception">Interrupts vs Exception</h3>
+<p>Both are causing a change in the execution flow</p>
+<ul>
+<li>Interrupt: caused by an external event</li>
+<li>Exception: caused by a condition that occurs within the
+processor.</li>
+</ul>
+<h3 id="components-of-the-interrupt-system">Components of the interrupt
+system</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240224150658850.png"
+alt="image-20240224150658850" />
+<figcaption aria-hidden="true">image-20240224150658850</figcaption>
+</figure>
+<h3 id="interrupt-vector-table">Interrupt Vector Table</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240224151945883.png"
+alt="image-20240224151945883" />
+<figcaption aria-hidden="true">image-20240224151945883</figcaption>
+</figure>
+<blockquote>
+<p>Apart from enabling a given interrupt, the programmer must also have
+the means to tell the controller which particular interrupt service
+routine should be called. The mapping of interrupts to ISRs is achieved
+with the interrupt vector table, The ATmega16 has fixed interrupt
+priorities, which are determined by the vector number: The smaller the
+vector number, the higher the interrupt’s priority</p>
+</blockquote>
+<h3 id="stack-when-entering-an-interrupt-or-exception">Stack when
+entering an interrupt or exception</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240224153148483.png"
+alt="image-20240224153148483" />
+<figcaption aria-hidden="true">image-20240224153148483</figcaption>
+</figure>
+<p><code>xPSR</code>：程序状态寄存器，用于表示当前程序状态的各种标志位和控制位。</p>
+<h3 id="nesting-of-interrupts">Nesting of interrupts</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240224153935522.png"
+alt="image-20240224153935522" />
+<figcaption aria-hidden="true">image-20240224153935522</figcaption>
+</figure>
+<h3 id="what-determines-interrupt-latency">What determines interrupt
+latency?</h3>
+<ul>
+<li><p>Time to push current context on stack</p>
+<p>memory access latency and speed of memory storing the stack</p></li>
+<li><p>Time to fetch new instructions for interrupt service routine</p>
+<p>memory access latency and speed of memory storing the vector
+table</p></li>
+<li><p>Longest run time of any multi-cycle non-interruptable
+instruction</p>
+<blockquote>
+<p>在某些处理器架构中，有些指令在执行过程中是不可中断的，即使发生了中断请求，处理器也必须完成当前正在执行的指令。这些指令可能需要多个时钟周期才能完成。在这种情况下，如果发生了中断，处理器必须等待这个指令完成才能响应中断请求。</p>
+</blockquote></li>
+<li><p>Resource conflicts, e.g. on busses used for pending
+transactions</p></li>
+<li><p>Interrupt handling times for interrupts with higher
+priorities</p></li>
+</ul>
+<h3 id="measures-to-reduce-interrupt-latency">Measures to reduce
+interrupt latency</h3>
+<ul>
+<li><p>Tail chaining</p>
+<ul>
+<li>A 2nd same or lower priority interrupt arrives during execution
+phase of 1st ,The 2nd interrupt will be executed immediately after the
+1st without unstacking</li>
+</ul></li>
+<li><p>Late arrival</p>
+<p>during stacking phase,The 2nd interrupt will be executed first and
+then the 1st (tail chaining)</p></li>
+<li><p>Pop preemption</p></li>
+</ul>
+<p>​ While unstacking, Unstacking will be stopped and 2nd will be
+executed immediately</p>
+<h3 id="types-of-interrupts-in-systems">Types of interrupts in
+systems</h3>
+<ul>
+<li>Level triggered</li>
+</ul>
+<p>The peripheral raises the interrupt signal to the interrupt
+controller – The SW(Software) needs to clear the interrupt bit in the
+peripheral</p>
+<ul>
+<li>Edge triggered</li>
+</ul>
+<p>The peripheral generates a pulse of defined length if an interrupt
+has occurred – The interrupt event has to be stored in the interrupt
+controller – If the interrupt is executed the interrupt controller
+clears the flag</p>
+<h3 id="interrupts-versus-polling">Interrupts versus polling</h3>
+<h4 id="polling">Polling</h4>
+<p>A program waits for a certain event in a peripheral and checks the
+value of an event flag in an endless loop</p>
+<h4 id="advantages-of-polling">Advantages of polling</h4>
+<ul>
+<li>The timing of a polling loop is very deterministic</li>
+<li>The whole system behavior is more deterministic</li>
+<li>The reaction on the event is faster than with an interrupt</li>
+</ul>
+<h4 id="drawbacks-of-polling">Drawbacks of polling</h4>
+<ul>
+<li>Waste of power (if interrupts are used CPU can be in sleep)</li>
+<li>No parallel execution of other tasks possible</li>
+</ul>
+<h3 id="exceptions">Exceptions</h3>
+<p>An exception is a predefined interrupt resulting from</p>
+<ul>
+<li>External event (non maskable interrupt)</li>
+<li>Instruction (software reset, supervisor call, hypervisor call)</li>
+<li>Fault condition occurring during program execution</li>
+<li>Debug events</li>
+<li>System timer interrupts</li>
+</ul>
+<h4 id="usage-of-exceptions">Usage of exceptions</h4>
+<ul>
+<li>Debugging of programming errors</li>
+<li>Scheduling in operating systems</li>
+<li>Switching between processor modes</li>
+<li>Reconfiguring MPU/MMU settings</li>
+</ul>
+<h3 id="exception-types">Exception Types</h3>
+<h4 id="synchronousprecise">Synchronous/Precise</h4>
+<ul>
+<li><p>Fault</p>
+<p>the return address points to the instruction that caused the
+exception. The exception handler may fix the problem and then restart
+the program, making it look like nothing has happened</p></li>
+<li><p>Trap</p>
+<p>the return address points to the instruction after the one that has
+just completed.</p></li>
+</ul>
+<h4 id="asynchronousimprecise">Asynchronous/Imprecise</h4>
+<ul>
+<li><p>Abort</p>
+<p>the return address is not always reliably supplied. A program which
+causes an abort is never meant to be continued.</p></li>
+</ul>
+<blockquote>
+<p>同步异常是由程序执行期间的某些操作引发的，处理器能够精确地确定异常发生的位置，并提供相应的处理机制。而异步异常通常是由于外部因素引起的，处理器可能无法准确地确定异常发生的原因和位置，因此处理方式更多地是终止当前程序的执行。</p>
+</blockquote>
+<h3 id="applications-of-interrupts">Applications of interrupts</h3>
+<ul>
+<li>Wakeup from sleep/power down mode</li>
+<li>Timer Interrupts</li>
+<li>Handling of communication peripherals</li>
+<li>Handling of coprocessors with long runtimes</li>
+<li>Direct Memory Access (DMA)</li>
+</ul>
+<h2 id="boundary-errors-and-control-hijacking-attacks">Boundary Errors
+and Control Hijacking Attacks</h2>
+<h3 id="stack-memory-layout">stack memory layout</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240222173745187.png"
+alt="image-20240222173745187" />
+<figcaption aria-hidden="true">image-20240222173745187</figcaption>
+</figure>
+<h3 id="stack-frame">Stack frame</h3>
+<p>A typical (function calls other functions with few (&lt;=4)
+arguments) Stack Frame looks like this</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240222173851346.png"
+alt="image-20240222173851346" />
+<figcaption aria-hidden="true">image-20240222173851346</figcaption>
+</figure>
+<p>include caller:</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240222174134419.png"
+alt="image-20240222174134419" />
+<figcaption aria-hidden="true">image-20240222174134419</figcaption>
+</figure>
+<h2 id="memory-encryption">Memory Encryption</h2>
+<h4 id="why-memory-encryption">Why memory encryption?</h4>
+<ul>
+<li>Protection against product piracy</li>
+<li>Protection against modifications of critical parameters</li>
+<li>Protection against feature enabling</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240225161618254.png"
+alt="image-20240225161618254" />
+<figcaption aria-hidden="true">image-20240225161618254</figcaption>
+</figure>
+<h2 id="tpm">TPM</h2>
+<h3 id="definition-of-trust-in-computer-science">Definition of Trust in
+Computer Science</h3>
+<ul>
+<li>Trusted: A system that operates as expected, according to design and
+policy.</li>
+<li>Trustworthy: A system is trustworthy if it is trusted and the trust
+can also be guaranteed in some convincing way, such as through a formal
+analysis or a code review.</li>
+<li>Trust level: The extent to which someone who relies on a system can
+be confident that the system meets its specifications, i.e., that the
+system does what it claims to do and does not perform unwanted
+functions</li>
+</ul>
+<h3 id="two-alternatives-for-a-security-core">Two alternatives for a
+security core</h3>
+<ul>
+<li>Hardware protection: TPM as a dedicated Hardware security processor
+using HW separation</li>
+<li>Software protection: DICE as a low cost software security solution
+using temporal separation</li>
+</ul>
+<h3 id="dice-device-identifier-composition-engine">DICE: Device
+Identifier Composition Engine</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240226134721246.png"
+alt="image-20240226134721246" />
+<figcaption aria-hidden="true">image-20240226134721246</figcaption>
+</figure>
+<p>Prerequisite: Unique Device Secret (UDS) established by
+manufacturer</p>
+<p>DICE Boot Code = Root of Trust for Measurement</p>
+<h3 id="trusted-platform-module">Trusted Platform Module</h3>
+<p>TPM is a cryptographic co-processor (basically a SmartCard), with the
+following characteristics</p>
+<ul>
+<li>True random number generation</li>
+<li>Small set of cryptographic functions: Key generation, signing,
+encryption, hashing, MAC</li>
+<li>Secure storage</li>
+<li>Platform integrity measurement and reporting</li>
+</ul>
+<h4 id="trusted-boot-chain-of-trust">Trusted Boot: Chain of Trust</h4>
+<p>Establishment of a chain of trust using transitive trust</p>
+<ul>
+<li>A Core Root of Trust Measurement measures its own integrity and of
+the next entity in the chain before this is executed</li>
+<li>Subsequently, each component measures the next component before
+hand-over control</li>
+<li>All obtained measurements (platform metrics) are written to a
+TPM</li>
+</ul>
+<h3 id="how-to-record-the-platform-state">How to record the platform
+state?</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240226171148966.png"
+alt="image-20240226171148966" />
+<figcaption aria-hidden="true">image-20240226171148966</figcaption>
+</figure>
+<p>组件 <span class="math inline">\(k\)</span> 测量 组件<span
+class="math inline">\(k+1\)</span>，
+把测量的结果记录再SML里面，然后Extend PCR的值，再递交给组件 <span
+class="math inline">\(k+1\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240226171544954.png"
+alt="image-20240226171544954" />
+<figcaption aria-hidden="true">image-20240226171544954</figcaption>
+</figure>
+<p>RTM: Root of Trust for Measurement</p>
+<h4 id="verifying-the-platform-metrics">Verifying the platform
+metrics</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240226171906434.png"
+alt="image-20240226171906434" />
+<figcaption aria-hidden="true">image-20240226171906434</figcaption>
+</figure>
+<h3 id="tpm-credentials-and-keys">TPM Credentials and Keys</h3>
+<h4 id="endorsement-key-ek">Endorsement Key (EK)</h4>
+<p>Issued by the entity that generates the EK as part of the
+manufacturing process.</p>
+<h4 id="platform-credential">Platform Credential</h4>
+<p>Identifies the platform manufacturer</p>
+<h4 id="conformance-credential">Conformance Credential</h4>
+<p>Issued by an evaluation entity</p>
+<h2 id="important-question">Important Question</h2>
+<h3 id="microcontroller-basic-1">Microcontroller basic</h3>
+<details>
+<summary>
+Draw steps from a blank command line until a running program
+</summary>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240226202325275.png"
+alt="image-20240226202325275" />
+<figcaption aria-hidden="true">image-20240226202325275</figcaption>
+</figure>
+</details>
+<details>
+<summary>
+Have a look into the <code>*.o</code>, <code>*.elf</code>,
+<code>*.hex</code>, and <code>*.lst</code> files
+</summary>
+<ul>
+<li><code>*.0</code> : are compiled but unlinked versions of your source
+files, not human readable</li>
+<li><code>*.elf</code>: are compiled and linked programs, ready to
+execute on the architecture they are build for</li>
+<li><code>*.hex</code>: is the pure machine code together with address
+information to which address the machine instructions should be copied
+by the programmer, but no architecture or other meta data as in the
+<code>*.elf</code> file is contained.</li>
+<li><code>*.lst</code>: is a human readable copy of parts of the
+<code>*.elf</code> file. What to put in here is set by options to
+objdump, but usually it’s Section headers, Disassembly of the .text
+section interleaved with the C instructions it was compiled from.</li>
+</ul>
+</details>
+<details>
+<summary>
+How does the workflow for embedded programs differ from the one for
+regular computer programs?
+</summary>
+<ul>
+<li>Cross-compiler instead of compiler</li>
+<li>Device header and device linker file needed</li>
+<li>Often additional libraries and drivers necessary</li>
+<li>Programming onto uC as another, final step</li>
+</ul>
+</details>
+<details>
+<summary>
+Describe and use memory mapped I/O
+</summary>
+<ul>
+<li>Concept: “Everything is a memory after all”</li>
+<li>Peripherals are mapped into regular address space</li>
+<li>The “von Neumann” approach for peripherals</li>
+</ul>
+</details>
+<details>
+<summary>
+How about Port Mapped I/O
+</summary>
+<ul>
+<li>Peripherals have their own address space</li>
+<li>Access via special instructions, e.g. IN, OUT instead of LD, ST</li>
+<li>The “Harvard” approach for peripherals</li>
+</ul>
+</details>
+<details>
+<summary>
+Benifit and donwsides of memory mapped I/O
+</summary>
+<p>Benifits:</p>
+<ul>
+<li>Allows to reuse many of the existing circuitry: Address &amp; data
+busses, bus interfaces, Memory protection features</li>
+<li>No additional instructions required → easier instruction set</li>
+</ul>
+<p>Downsides:</p>
+<ul>
+<li>Memory bus has to connect to each and every peripheral, Longer bus
+reduces max. clock frequency, especially when going off-chip</li>
+</ul>
+</details>
+<details>
+<summary>
+Benifit and donwsides of Port mapped I/O
+</summary>
+<p>Benifits:</p>
+<ul>
+<li>Less performance necessary → easier/smaller bus design possible</li>
+<li>Peripheral bus does not slow down memory access</li>
+</ul>
+<p>Downsides:</p>
+<ul>
+<li>Additional complexity due to 2nd or even 3rd address space</li>
+</ul>
+</details>
+<details>
+<summary>
+List common peripherals(外设) and explain their purpose
+</summary>
+<ul>
+<li>ADC (Analog-to-Digital Converter) and DAC (Digital-to-Analog
+Converter): VADC: Voltage Analog-to-Digital Converter.</li>
+<li>UART (Universal Asynchronous Receiver/Transmitter) : a communication
+protocol and hardware interface used for serial communication.</li>
+<li>USB (Universal Serial Bus)</li>
+<li>CAN (Controller Area Network): communication protocol used in
+vehicles and other industrial applications to allow different electronic
+components to communicate with each other.</li>
+<li>CCU (Clock Control Unit): manages the timing and synchronization of
+different components within a system.</li>
+<li>SCU(System Control Unit): controls power management, system reset,
+clock settings, and other system-level operations.</li>
+<li>ETH (Ethernet): a standard communication protocol used for
+connecting devices in a local area network (LAN)</li>
+</ul>
+</details>
+<details>
+<summary>
+The addresses 0x40000000 through 0x5FFFFFFF are reserved for
+peripherals, how many address locations for 32bit?
+</summary>
+makes up 0.5 GiB, <span class="math inline">\(\frac{2^{29}}{4} =
+134217728\)</span> locations of 32 bit each
+</details>
+<details>
+<summary>
+Describe PWM
+</summary>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240227053728793.png"
+alt="image-20240227053728793" />
+<figcaption aria-hidden="true">image-20240227053728793</figcaption>
+</figure>
+From digital circuits, the easiest way to produce such a signal is to
+let a counter count up to a certain period value, at which the counter
+resets and counts up again. The output of the counter is fed into a
+comparator that compares it against the compare value in every cycle. If
+a match occurs, the output flip-flop is reset respectively set in the
+case of the XMC4500
+</details>
+<details>
+<summary>
+List in which registers function arguments are passed and where the
+return value is placed
+</summary>
+<ul>
+<li>R0: 1st argument, return value</li>
+<li>R1: 2nd argument, return value if 64 bit</li>
+<li>R2: 3rd argument</li>
+<li>R3: 4th argument</li>
+<li>Further arguments are passed on the stack</li>
+</ul>
+</details>
+<details>
+<summary>
+Distinguish caller-saved and callee-saved registers
+</summary>
+Caller save: R0-R3, R12, PC, LR Callee save: R4-R11, SP
+</details>
+<details>
+<summary>
+Understand instructions:
+ADD,ADDS,SUB,MUL,DIV,NEG,NOT,AND,OR,LSL,LSR,ASR,EOR,BIC,CMP,CMN,TST,REV,B,BX,BLX,BL,CBZ,CBNZ,LDR,LDRSH,LDRSB,STR,STRH,STRB,LDM,LDMIA,STM,STMIA
+</summary>
+see: https://developer.arm.com/documentation/qrc0006/e/
+</details>
+<details>
+<summary>
+RISC vs CISC
+</summary>
+<p>RISC:</p>
+<ul>
+<li>Reduced instruction set computer</li>
+<li>Discrete instructions for load / store from memory to register</li>
+<li>More instructions but less complex CPUs → higher clock rates</li>
+<li>Fixed length instructions: 16, 32 bit</li>
+</ul>
+<p>CISC:</p>
+<ul>
+<li>Complex instruction set computer</li>
+<li>Various load / store modes integrated into each instruction</li>
+<li>Less instructions but more complex CPUs → lower clock rates</li>
+<li>Variable length instructions</li>
+</ul>
+</details>
+<details>
+<summary>
+Architecture of ARM Cortex-M
+</summary>
+RSIC. Distinct load and store instructions, lacking memory addressing
+modes for data processing instructions (e.g. ADD), and fixed length
+instructions.
+</details>
+<details>
+<summary>
+ARM’s Thumb Mode?
+</summary>
+<ul>
+<li>If we jump to an even address, we interpret all that follows as ARM
+code</li>
+<li>If we jump to an odd address, instructions are decoded as Thumb</li>
+<li>Cortex-M supports only Thumb code, but indication is still kept</li>
+</ul>
+</details>
+<details>
+<summary>
+List the benefits from having both 16 bit and 32 bit instructions
+</summary>
+<ul>
+<li>Smaller code size, because frequently used instructions are only 16
+bit yet the diversity of instructions equals 32 bit and one can mix them
+directly</li>
+<li>Portability, because code written for small processors, which only
+support 16 bit instructions, can directly run on larger processors that
+support all instructions</li>
+</ul>
+</details>
+<details>
+<summary>
+Show three ways to bring a 32 bit literal into r0
+</summary>
+Using MOV for the lower 16 bit and MOVT for the upper 16 bit
+</details>
+<details>
+<summary>
+Jumps are done using B or BX, name the instructions to call a function
+</summary>
+the LR needs to be updated to the address of the next instruction after
+the call. From quick reference card: BL or BLX do that.
+</details>
+<details>
+<summary>
+Name the three steps of the Cortex-M4 processor pipeline
+</summary>
+Fetch, Decode, Execute
+</details>
+<details>
+<summary>
+Characterization of Debug Methods: LED, Printf, Debugger, Simulation. In
+aspects:Requirements,Amount of Information ,Code change,Delays,Real-Time
+</summary>
+<ul>
+<li>LED: Unused GPIO for LED, Little info, changed code, short delay,
+real-time</li>
+<li>printf: uart, medium info, changed code, delay depends on length of
+info, real-time</li>
+<li>Debugger: Debug port available, Software to control the debugger,
+very much info, no change, delay depends, HW breakpoints are fast</li>
+<li>Simulation: Simulator software, A lot info, Much slower overall,
+real-time<br />
+</li>
+</ul>
+</details>
+<details>
+<summary>
+GDB: Halt execution upon reaching function foo()
+</summary>
+break foo
+</details>
+<details>
+<summary>
+GDB: Execute single line of source / assembler code
+</summary>
+step, stepi
+</details>
+<details>
+<summary>
+Halt execution when variable Bytes is changed
+</summary>
+watch Bytes
+</details>
+<details>
+<summary>
+Continue execution for the time being
+</summary>
+continue
+</details>
+<details>
+<summary>
+Remove the breakpoint number 2
+</summary>
+delete 2
+</details>
+<details>
+<summary>
+Set variable counter to 7
+</summary>
+set counter=7
+</details>
+<details>
+<summary>
+Print the values of variable counter / register r3
+</summary>
+<p><code>print counter</code></p>
+<code>print $r3</code>
+</details>
+<details>
+<summary>
+GDB: Examine the memory at address 0x08000000 as 32 bit value in hex
+</summary>
+<code>x /1wx 0x08000000</code>
+</details>
+<details>
+<summary>
+GDB: show all local variables of the current function
+</summary>
+info locals
+</details>
+<details>
+<summary>
+Name Examples: Exception vs. Interrupt
+</summary>
+Exception: segmentation fault, divide by 0,overflow, page fault
+Interrupt: disk, network, keyboard, clock for timesharing
+</details>
+<details>
+<summary>
+Explain what happens if an ISR updates the original variable in SRAM
+</summary>
+The software will continue to use the old value and not even notice the
+value in SRAM was updated. If it is a wait loop that postpones code
+execution until, e.g. a certain number of bytes are received by the
+UART, the system will hang forever
+</details>
+<details>
+<summary>
+Name the keyword that can be given to a variable to avoid this issue
+</summary>
+<code>volatile size_t bytesReceived;</code>
+</details>
+<details>
+<summary>
+Boot Steps (Understand)
+</summary>
+<ul>
+<li>There is a BootROM containing SSW and its the first piece of code to
+be executed</li>
+<li>SSW takes care of different startup modes, in normal mode – which is
+the only one we consider here – control is then handed over to
+FLASH</li>
+<li>The FLASH starts again with the interrupt vector table (IVT), but
+here the first entry is not the address of the reset routine, but the
+initial value for the main stack pointer MSP. Only the second is the
+reset vector – in little endian, so we need to look at 0x08000201</li>
+<li>The next step calls a function that we can trace as the SystemInit()
+function at address 0x080005cc. This function sets up the wait states
+for the FLASH, tells the NVIC that the IVT is at 0x08000000, and sets up
+the clock tree. We will not dive into this code here.</li>
+<li>What follows is a simple copy loop. It initializes the data section
+with the initialization values stored in the FLASH. To be more flexible,
+the copying is done in two nested loops to allow multiple blocks of data
+at different locations.</li>
+<li>After that, there is another loop which zeroes the BSS section.
+Again, there is a nested loop to support more than one consecutive block
+to clear</li>
+<li>A third loop calls the global constructors in case we code in
+C++</li>
+<li>Finally, we branch to main()</li>
+</ul>
+</details>
+<h2 id="memory-1">Memory</h2>
+<details>
+<summary>
+Indicate in which direction heap and stack grow
+</summary>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240227071935363.png"
+alt="image-20240227071935363" />
+<figcaption aria-hidden="true">image-20240227071935363</figcaption>
+</figure>
+</details>
+<details>
+<summary>
+In which section and in which SRAM is an uninitialized global variable
+placed on the XMC4500? And which SRAM is stack placed?
+</summary>
+Section is device independent the BSS. BSS is located in DSRAM1 on
+XMC4500. Stack on PSRAM
+</details>
+<details>
+<summary>
+Which endianness is XMC4500
+</summary>
+little endian, Least significant byte in lowest address
+</details>
+<details>
+<summary>
+What is Heartbleed vulnerability
+</summary>
+Heartbleed漏洞是OpenSSL中的一个安全漏洞，允许攻击者从服务器中窃取敏感信息，如私钥和用户凭据。该漏洞利用了TLS心跳扩展的缺陷，未正确验证客户端发送的有效载荷长度，导致服务器意外泄露内存中的数据。(Unchecked
+length -&gt; buffer overflow)
+</details>
+<details>
+<summary>
+Discuss which properties the value inside the canaries needs to have
+</summary>
+<ul>
+<li>Unpredictable and not readable for the attacker in any way</li>
+<li>Large enough to avoid trying out all possible values</li>
+<li>Ideally change upon each program invocation (a change upon each
+function call would make the program terribly slow)</li>
+</ul>
+</details>
+<details>
+<summary>
+How to configure MPU using MPUeasy
+</summary>
+<ul>
+<li>MPUeasyPermissions : MPUeasy_None_None , MPUeasy_RW_None,
+MPUeasy_RW_R = 2 , MPUeasy_RW_RW = 3 ,MPUeasy_R_None = 5 , MPUeasy_R_R =
+6</li>
+<li>baseAddress</li>
+<li>size</li>
+<li>priority: low priority on the base, as power of 2 (<span
+class="math inline">\(10 = 2^{10} = 1 KiB\)</span>)</li>
+</ul>
+</details>
+<details>
+<summary>
+Does the MPU of a Cortex-M4 protect actions by DMA peripherals like
+GPDMA0/1?
+</summary>
+No. MPU is located within the CPU and can only check memory accesses
+performed by the CPU.
+</details>
+<details>
+<summary>
+Explain what problem arises from a Use-after-free bug
+</summary>
+The memory locations might already be allocated for a different purpose.
+Reading from them may cause the function to perform unexpected and
+possibly exploitable actions. Writing to it clobbers data of the other
+function that the memory locations are now allocated to and may cause
+this code to malfunction
+</details>
+<details>
+<summary>
+Propose a simple mitigation that protects against damage even if free()
+is called on ptr again
+</summary>
+Several mitigations are possible, but they all have in common that it is
+necessary to track if the pointer is currently pointing to a malloc
+chunk or not (because it either was already freed or the allocation
+failed). The easiest way to do this is to always set the pointer to NULL
+when it is freed, just like malloc and calloc return a NULL pointer when
+the allocation failed. You may even consider to write your own
+implementation of free that sets the pointer to NULL after calling the
+original free. According to the C standard, freeing a NULL pointer does
+no harm. Thus double free cannot cause damage any more.
+</details>
+<details>
+<summary>
+Give two vulnerabilities involving the heap
+</summary>
+Heap based buffer overflow, use-after-free, double free
+</details>
+<details>
+<summary>
+List what can be achieved by controlling the format string of a
+<code>printf()</code> call?
+</summary>
+Read memory, write memory, all a Turing-machine can perform
+</details>
+<details>
+<summary>
+When is there a risk of code injection?
+</summary>
+Whenever code and data is only weakly separated, e.g. in von Neumann
+architectures or scripting languages
+</details>
+<details>
+<summary>
+Which mode should be used in external memory encryption and disk
+encryption
+</summary>
+External memory: ESSIV Disk: CTS
+</details>
+<h2 id="crypto-and-side-channel">Crypto and Side channel</h2>
+<details>
+<summary>
+Security Objective: meaning and contermeasures
+</summary>
+<ul>
+<li>Confidentiality:Protection from non-authorized information
+retrieval. encryption, access control</li>
+<li>Integrity: Protection from non-authorized and un-noticed
+modification of data. Cryptographic signature (messages), write
+protection (stored data)</li>
+<li>Authenticity:proof of the identity of an object/subject. Passwords,
+cryptographic signatures</li>
+<li>Accountability: Protection from disclaiming that a performed
+activity was not carried out. Logging</li>
+<li>Availability: Protection from non-authorized interference with the
+usability or correct function of a system. Redundancy, overload
+protection</li>
+<li>Privacy:Protection of personal data and any data regarding the
+private sphere to ensure the right of self-determination. Data
+minimization, pseudonyms</li>
+</ul>
+</details>
+<details>
+<summary>
+Give example for: Symmetric cryptography(Block and Stream),Asymmetric
+cryptography,Cryptographic hash functions
+</summary>
+<ul>
+<li>Block cipher: AES ( block size 128 bit, key size 128 bit, 192 bit,
+256 bit)</li>
+<li>Stream cipher: ChaCha20 (key size 256 bit)</li>
+<li>Asymmetric Cryptography: RSA</li>
+<li>Cryptographic Hash Functions: SHA-2</li>
+</ul>
+</details>
+<details>
+<summary>
+Apply methods to do: Firmware encryption, Firmware image signing, Disk
+encryption
+</summary>
+Firmware encryption: AES signing: RSA Disk encryption: AES
+</details>
+<details>
+<summary>
+Analyze what happens if an attacker redirects the entire traffic to one
+of his own servers
+</summary>
+<p>According to the problem description, the IoT node uses whatever
+public key the server sent to it. Thus the IoT node will happily accept
+the attacker’s public key and use it to establish a signed and encrypted
+channel, not knowing that this channel ends in a malicious server
+instead of the one the IoT node expects. To avoid such attacks, the IoT
+node could have a factory-programmed list of public keys for the
+servers.</p>
+</details>
+<details>
+<summary>
+Summarize Kerckhoff’s principle
+</summary>
+Keep the key secret, but publish the algorithm.
+</details>
+<details>
+<summary>
+Describe the benefit of certificates over raw public keys
+</summary>
+You can check the signatures to avoid using an attacker’s public key
+instead of the legitimate one.
+</details>
+<details>
+<summary>
+What is a Side-Channel?
+</summary>
+Any physical quantity related to the operation of a cryptosystem but not
+intended to carry information
+</details>
+<details>
+<summary>
+List physical quantities which might pose a side-channel with non-zero
+amount of information
+</summary>
+Time, Power, Electromagnetic emanations, Acoustic emanations,
+Temperature, Light
+</details>
+<details>
+<summary>
+Why is implementing crypto harder than implementing other algorithms?
+</summary>
+Because apart from working correctly, the code must also be fault
+tolerant, not leak via side-channels
+</details>
+<h2 id="communication-and-tpm">Communication and TPM</h2>
+<details>
+<summary>
+Collect a list of common embedded communication standards, their
+topo,length,frequency
+</summary>
+<ul>
+<li>IIC: Bus, 3m, 100kHz</li>
+<li>IIS: P2P, 10m, any</li>
+<li>SPI: Star, 10m, any</li>
+<li>CAN: Bus, 500m, 125kHz</li>
+<li>UART: P2P, 10m, any, 4pin</li>
+<li>RS-232: P2P, 1000m, 9600Hz,</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+</details>
+<details>
+<summary>
+Choose: A microcontroller talks to an SD-Card
+</summary>
+SPI or QuadSPI (SPI with four data lines), because it can run at high
+frequency and thus provides high throughput. There is only one master
+and one slave, so the effort for a dedicated slave select line is not
+relevant.
+</details>
+<details>
+<summary>
+In a data logger, 32 ADCs have to be connected to a microcontroller
+</summary>
+IIC, because the throughput is sufficient for a data logger and it is
+very easy to connect a lot of slaves.
+</details>
+<details>
+<summary>
+100 small fertilizer nodes on a field need to exchange humidity values
+between each other
+</summary>
+CAN, because it allows communication between all nodes and is robust
+enough to be put on a field.
+</details>
+<details>
+<summary>
+An industrial PC needs data from a few temperature sensors located
+several hundred meters away
+</summary>
+RS-232, because it is easy to implement in a small temperature sensor
+node and supports long distances, especially if you choose a low baud
+rate. Maybe CAN if your controller has native support for it and you can
+afford the PHY chip.
+</details>
+<details>
+<summary>
+Choose: A DSP reads data from multiple ADCs and outputs to a DAC
+</summary>
+IIS or SPI, because they provide the necessary throughput and can be
+used in a fully synchronous design that ensures a continuous
+uninterrupted stream of samples from inputs to output.
+</details>
+<details>
+<summary>
+Outline the security risk that arises if a device can have multiple
+interfaces and drivers are loaded automatically
+</summary>
+A malicious device might look like a mouse but contain a mass storage
+device as well or look like a thumb drive but also enumerate as a
+keyboard, which starts typing some predefined key strokes to infect the
+host.
+</details>
+<details>
+<summary>
+Some systems feature autostart on USB devices. Explain the security
+risk.
+</summary>
+Autostart can trigger an infection if the malware is put in the
+autostart path.
+</details>
+<details>
+<summary>
+Explain why there are generic device classes for USB
+</summary>
+Because it allows to write generic drivers for, e.g. keyboards, mice,
+cameras
+</details>
+<details>
+<summary>
+Gather a list of signals that you consider essential to, e.g. an MCU,
+Outline how these can be manipulated
+</summary>
+<ul>
+<li>Power supply: glitch exactly when password is compared so it always
+passes</li>
+<li>Clock: Increase clock frequency, Similar to supply reduction
+introduces random errors in computations or program flow</li>
+</ul>
+</details>
+<details>
+<summary>
+Collect ideas how to attack ICs after opening up their case
+</summary>
+<ul>
+<li>Lasers: This photo-current can set or reset bits in registers</li>
+</ul>
+</details>
+<details>
+<summary>
+List the requirements of DICE regarding storage capabilities, access
+control, mutability of code
+</summary>
+<ul>
+<li>UDS: List the requirements of DICE regarding storage capabilities,
+access control, mutability of code</li>
+<li>DICE boot code: A few KiB that are either one-time programmable or
+only programmable via special updater in DICE boot code itself.</li>
+</ul>
+</details>
+<details>
+<summary>
+Outline why implementing DICE on an XMC4500 is difficult
+</summary>
+Because you do not have a secure storage for UDS and DICE firmware, or
+loose privileged mode if you realize it via MPU.
+</details>
+<details>
+<summary>
+Decide and give reason why or why not the “unique chip ID” of the
+XMC4500 is an appropriate choice for the “unique device secret” of DICE.
+</summary>
+<ul>
+<li>First of all the unique chip ID has only 128 bit, whereas the
+recommended length of the UDS is at least 256 bit.</li>
+<li>the unique chip ID contains not even close to 128 bit of entropy –
+despite its length.</li>
+</ul>
+</details>
+<details>
+<summary>
+Name three sections of the Khattak &amp; Koopman checklist
+</summary>
+3 out of: Function, Style, Architecture, Exception Handling, Timing,
+Validation &amp; Test, Hardware
+</details>
+<h1 id="嵌入式">嵌入式</h1>
+<h2 id="通信协议">通信协议</h2>
+<h3 id="同步和异步">同步和异步</h3>
+<p>同步是收发机器的时钟频率一样</p>
+<p>异步是时钟频率不一样</p>
+<h3 id="并行和串行">并行和串行</h3>
+<p>并行是：总线上是发送01数据（高低电平），并行是可以一次发送多个bit数据</p>
+<p>串行是一个一个发送数据</p>
+<h3 id="单工和双工">单工和双工</h3>
+<p>单工有发送器和接收器区分</p>
+<p>双工是两个都可以发送和接受数据。半双工是发送和接受只能由一个，不能同时进行。全双工是发送和接受可以同时进行。</p>
+<h3 id="bit率">bit率</h3>
+<p>通信速度，每秒传多少个bit: <code>bps</code></p>
+<h3 id="uart">UART</h3>
+<ul>
+<li>异步</li>
+<li>有2跟线，一根发送数据，一根接受数据</li>
+</ul>
+<h4 id="帧格式">帧格式</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/UART-signal.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>空闲的时候是高电平</p>
+<p>起始位是低电平</p>
+<p>先发低位，可以发5-8位，一般是8位</p>
+<p>校验位：可以有无</p>
+<p>停止位：高电平，1，1.5，2 位</p>
+<figure>
+<img src="https://fyindex.work/PicGo/uart2.png" alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>TX是发送，RX是接受</p>
+<h3 id="can">CAN</h3>
+<h4 id="数据帧">数据帧</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20250221144413119.png"
+alt="image-20250221144413119" />
+<figcaption aria-hidden="true">image-20250221144413119</figcaption>
+</figure>
+<p>例子</p>
+<figure>
+<img
+src="https://fyindex.work/PicGo/2880px-CAN-bus-frame-with-stuff-bit-and-correct-CRC.png"
+alt="undefined" />
+<figcaption aria-hidden="true">undefined</figcaption>
+</figure>
+<p>RTR：0是数据帧，1是遥控帧</p>
+<p>仲裁位：ID|RTR越小的优先级越高</p>
+<p>控制段：</p>
+<ul>
+<li>IDE：0是标准帧，1是扩展帧</li>
+<li>r0：保留位，0</li>
+</ul>
+<h4 id="位填充">位填充</h4>
+<p>SOF-CRC如果相同电平持续5位，在第6位要插入一个相反的</p>
+<h2 id="进程之间通信的途径">进程之间通信的途径</h2>
+<h3 id="使用管道">使用管道</h3>
+<p><code>pipe</code> 是系统调用，它接受一个包含两个整数的数组pipefd</p>
+<p>创建成功后，pipefd[0]是管道的读端，pipefd[1]是管道的写端。</p>
+<p>返回值为0表示成功，-1表示失败。</p>
+<p>perror 是打印上一次系统调用的错误信息</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 进程间通信示例 - 使用C++的管道</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> pipefd[<span class="number">2</span>];</span><br><span class="line">    <span class="type">pid_t</span> pid;</span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">128</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">pipe</span>(pipefd) == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;pipe&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pid = fork();</span><br><span class="line">    <span class="keyword">if</span> (pid == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">perror</span>(<span class="string">&quot;fork&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;  <span class="comment">// 子进程</span></span><br><span class="line">        <span class="built_in">close</span>(pipefd[<span class="number">0</span>]);  <span class="comment">// 关闭读端</span></span><br><span class="line">        <span class="type">const</span> <span class="type">char</span>* msg = <span class="string">&quot;Hello from child process!&quot;</span>;</span><br><span class="line">        <span class="built_in">write</span>(pipefd[<span class="number">1</span>], msg, <span class="built_in">strlen</span>(msg) + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">close</span>(pipefd[<span class="number">1</span>]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 父进程</span></span><br><span class="line">        <span class="built_in">close</span>(pipefd[<span class="number">1</span>]);  <span class="comment">// 关闭写端</span></span><br><span class="line">        <span class="built_in">read</span>(pipefd[<span class="number">0</span>], buffer, <span class="built_in">sizeof</span>(buffer));</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Received from child: &quot;</span> &lt;&lt; buffer &lt;&lt; std::endl;</span><br><span class="line">        <span class="built_in">close</span>(pipefd[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">wait</span>(<span class="literal">NULL</span>);  <span class="comment">// 等待子进程结束</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>fork 会创建进程</p>
+<ul>
+<li>父进程会返回子进程的pid</li>
+<li>子进程会返回0</li>
+</ul>
+<h3 id="原子性操作">原子性操作</h3>
+<p>在嵌入式系统中，<strong>原子性操作</strong>是指一组操作在执行过程中不可被中断或分割，要么全部执行完成，要么完全不执行。<strong>保证原子性</strong>对共享资源的并发访问尤为重要，防止竞态条件的发生。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> shared_counter = <span class="number">0</span>;              <span class="comment">// 共享资源</span></span><br><span class="line"><span class="type">pthread_mutex_t</span> lock;                 <span class="comment">// 定义一个互斥锁</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="title">increment</span><span class="params">(<span class="type">void</span>* arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">pthread_mutex_lock</span>(&amp;lock);   <span class="comment">// 获取锁</span></span><br><span class="line">        shared_counter++;            <span class="comment">// 临界区</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Thread %ld: Counter = %d\n&quot;</span>, <span class="built_in">pthread_self</span>(), shared_counter);</span><br><span class="line">        <span class="built_in">pthread_mutex_unlock</span>(&amp;lock); <span class="comment">// 释放锁</span></span><br><span class="line">        <span class="built_in">usleep</span>(<span class="number">100000</span>);              <span class="comment">// 模拟其他操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">pthread_t</span> t1, t2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">pthread_mutex_init</span>(&amp;lock, <span class="literal">NULL</span>);  <span class="comment">// 初始化互斥锁</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">pthread_create</span>(&amp;t1, <span class="literal">NULL</span>, increment, <span class="literal">NULL</span>);  <span class="comment">// 创建线程 t1</span></span><br><span class="line">    <span class="built_in">pthread_create</span>(&amp;t2, <span class="literal">NULL</span>, increment, <span class="literal">NULL</span>);  <span class="comment">// 创建线程 t2</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">pthread_join</span>(t1, <span class="literal">NULL</span>);           <span class="comment">// 等待 t1 结束</span></span><br><span class="line">    <span class="built_in">pthread_join</span>(t2, <span class="literal">NULL</span>);           <span class="comment">// 等待 t2 结束</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">pthread_mutex_destroy</span>(&amp;lock);     <span class="comment">// 销毁互斥锁</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Final Counter Value: %d\n&quot;</span>, shared_counter);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="为什么要保证原子性"><strong>为什么要保证原子性？</strong></h4>
+<ul>
+<li><p>防止竞态条件</p>
+<p>：</p>
+<ul>
+<li>竞态条件发生在多个线程或进程同时访问和修改共享数据时，导致数据不一致或错误的结果。</li>
+</ul></li>
+<li><p>确保数据一致性</p>
+<p>：</p>
+<ul>
+<li>在临界区（访问共享资源的代码段）中，如果操作是原子性的，数据始终保持一致状态。</li>
+</ul></li>
+<li><p>多线程/多进程安全</p>
+<p>：</p>
+<ul>
+<li>原子性是<strong>并发编程</strong>中至关重要的一环，特别是在嵌入式系统、操作系统、数据库等领域。</li>
+</ul></li>
+</ul>
+<h4 id="如何实现原子性操作"><strong>如何实现原子性操作？</strong></h4>
+<ul>
+<li><p>硬件支持</p>
+<p>：</p>
+<ul>
+<li>CPU提供的<strong>原子指令</strong>，如
+<code>test-and-set</code>、<code>compare-and-swap</code>、<code>LDREX/STREX</code>（ARM）。</li>
+</ul></li>
+<li><p>软件层面</p>
+<p>：</p>
+<ul>
+<li>通过<strong>关中断</strong>、<strong>互斥锁</strong>、<strong>信号量</strong>等方式，确保某一段代码在执行期间不会被其他线程或进程干扰。</li>
+</ul></li>
+</ul>
+<h2 id="rtos移植">RTOS移植</h2>
+<p><strong>RTOS（Real-Time Operating
+System）</strong>，即<strong>实时操作系统</strong>，是一种在<strong>实时性要求较高</strong>的嵌入式系统中使用的操作系统，确保在<strong>规定的时间内</strong>完成任务的响应和处理。</p>
+<p><strong>实时性强</strong>，确保任务在<strong>严格的时间期限</strong>内完成，具备<strong>确定性</strong>。</p>
+<p>例如：汽车刹车系统，必须在<strong>毫秒级</strong>时间内响应，否则可能导致事故。</p>
+<p><strong>任务调度</strong>：</p>
+<ul>
+<li><p>RTOS</p>
+<p>：</p>
+<ul>
+<li><strong>基于优先级的抢占式调度</strong>，高优先级任务可以随时中断低优先级任务。</li>
+</ul></li>
+</ul>
+<p>就是将一个<strong>RTOS内核</strong>移植到不同的<strong>硬件平台</strong>上，使其能够在目标平台上运行。</p>
+<p><strong>RTOS</strong>：</p>
+<ul>
+<li>内存管理<strong>简单</strong>，通常没有<strong>虚拟内存</strong>，直接访问物理内存，减少开销，提高效率。</li>
+</ul>
+<p><strong>RTOS</strong>：</p>
+<ul>
+<li><strong>内核极小</strong>，通常为<strong>几十KB到几MB</strong>，适合嵌入式设备。</li>
+</ul>
+<p><strong>RTOS</strong>：</p>
+<ul>
+<li><strong>中断响应时间短</strong>，中断处理函数必须<strong>快速执行</strong>，以保证系统实时性。</li>
+</ul>
+<p>例子：</p>
+<ul>
+<li>FreeRTOS</li>
+<li>RT-Thread</li>
+</ul>
+<h3 id="嵌入式系统基础">.<strong>嵌入式系统基础</strong></h3>
+<ul>
+<li><strong>C/C++编程</strong>：熟练掌握指针、内存管理、位操作等高级特性。</li>
+<li><strong>数据结构与算法</strong>：熟悉链表、队列、栈、树等基本数据结构，以及排序、搜索等算法。</li>
+<li><strong>操作系统概念</strong>：理解进程、线程、内存管理、中断处理等基本概念。</li>
+</ul>
+<h3 id="实时操作系统rtos">2. <strong>实时操作系统（RTOS）</strong></h3>
+<ul>
+<li><strong>RTOS基础</strong>：了解任务调度、同步机制（如信号量、互斥锁）、中断处理等。</li>
+<li><strong>RTOS移植</strong>：掌握将RTOS移植到不同硬件平台的方法，包括启动代码、中断向量表、定时器配置等。</li>
+</ul>
+<h3 id="自动驾驶相关知识">3. <strong>自动驾驶相关知识</strong></h3>
+<ul>
+<li><strong>传感器技术</strong>：熟悉自动驾驶中常用的传感器，如摄像头、激光雷达、毫米波雷达等，以及它们的工作原理和数据处理方法。</li>
+<li><strong>通信协议</strong>：了解车载网络中的通信协议，如CAN总线、LIN总线等，掌握其基本原理和应用。</li>
+<li><strong>控制算法</strong>：理解自动驾驶中的控制算法，如PID控制、模型预测控制（MPC）等。</li>
+</ul>
+<h3 id="多媒体框架">4. <strong>多媒体框架</strong></h3>
+<ul>
+<li><strong>V4L2（Video for Linux
+2）</strong>：了解Linux下的视频设备框架，熟悉视频采集、处理的基本流程。</li>
+</ul>
+<h3 id="项目经验">5. <strong>项目经验</strong></h3>
+<ul>
+<li><strong>实际项目经历</strong>：准备好详细介绍你参与的嵌入式系统或自动驾驶相关项目，突出你的贡献、遇到的挑战以及解决方案。</li>
+</ul>
+<h3 id="面试技巧">6. <strong>面试技巧</strong></h3>
+<ul>
+<li><strong>自我介绍</strong>：简洁明了地介绍自己的背景、技能和项目经验。</li>
+<li><strong>问题回答</strong>：对于技术问题，条理清晰地阐述思路；对于不熟悉的问题，坦诚说明，并展示你的学习能力和解决问题的思路。</li>
+<li><strong>提问环节</strong>：准备一些关于Momenta公司、团队或项目的问题，展示你的兴趣和热情</li>
+</ul>
+<h2 id="can-1">CAN</h2>
+<p><strong>CAN</strong>：</p>
+<ul>
+<li>CAN
+协议具有<strong>强大的错误检测和纠正机制</strong>，包括位错误、CRC
+校验错误、帧错误等，能够保证数据的高可靠性。</li>
+<li>支持<strong>自动重传</strong>，并且在出现错误时，其他节点可以继续工作，保证系统的容错性</li>
+<li><strong>CAN</strong>：
+<ul>
+<li><strong>传输速率较高</strong>，最大速率为 1 Mbps（在 40
+米的传输距离下），适用于实时性要求较高的应用。</li>
+</ul></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2024/02/22/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%AE%89%E5%85%A8/">http://fyind.de/2024/02/22/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%AE%89%E5%85%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/02/29/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5/" title="线性代数重要概念"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">线性代数重要概念</div></div><div class="info-2"><div class="info-item-1">Matrix Algebra 列表示 \[ A=\left[\begin{array}{llll} \mathbf{a}_1 &amp; \mathbf{a}_2 &amp; \cdots &amp; \mathbf{a}_n \end{array}\right] \] 定理 基本运算 Let \(A,B,C\) be matrices of the same size, and \(r,s\) be scalars  \(A+B=B+A\) \((A+B)+C=A+(B+C)\) \(A+0=A\) \(r(A+B)=rA+rB\) \((r+s)A = rA + sA\) \(r(sA)=(rs)A\)  scalar 可以交换位置 \[ \lambda(\boldsymbol{B} \boldsymbol{C})=(\lambda \boldsymbol{B}) \boldsymbol{C}=\boldsymbol{B}(\lambda \boldsymbol{C})=(\boldsymbol{B} \boldsymbol{C}) \lambda, \quad \bolds...</div></div></div></a><a class="pagination-related" href="/2023/10/19/%E7%8E%B0%E4%BB%A3C/" title="现代C++"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">现代C++</div></div><div class="info-2"><div class="info-item-1">现代c++编程 12345#include &lt;print&gt;int main() &#123;	std::println(&quot;Hello world!&quot;);&#125; 编译 1c++ -std=c++23 -Wall -Werror first.cpp -o first 运行 1./first 编译和运行   image-20231019093714449  首先被编译成object code 然后linker会link一些库最后编程可执行文件  translation unit: input of compiler object code is the output of compiler #include is done vis the preprocessor (literally included = long compilation time) compiler uses the declaration to know the signature of object, not resolve external thing linker ch...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%AE%89%E5%85%A8"><span class="toc-number">1.</span> <span class="toc-text">嵌入式系统和安全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-number">1.1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#four-requirements-for-embedded-system"><span class="toc-number">1.1.1.</span> <span class="toc-text">Four requirements for
+embedded system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#relationship-between-dependability-and-security"><span class="toc-number">1.1.2.</span> <span class="toc-text">Relationship
+between Dependability and security</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#difference-between-security-and-safety"><span class="toc-number">1.1.3.</span> <span class="toc-text">Difference between
+security and safety</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#microcontroller-basic"><span class="toc-number">1.2.</span> <span class="toc-text">Microcontroller Basic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#components-of-an-embedded-system"><span class="toc-number">1.2.1.</span> <span class="toc-text">Components of an embedded
+system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cpu"><span class="toc-number">1.2.2.</span> <span class="toc-text">CPU</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#popular-architecture"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">popular architecture</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache"><span class="toc-number">1.2.3.</span> <span class="toc-text">Cache</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#scratch-pad-memory"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Scratch Pad Memory</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupt-unit"><span class="toc-number">1.2.4.</span> <span class="toc-text">Interrupt Unit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debug"><span class="toc-number">1.2.5.</span> <span class="toc-text">Debug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bus"><span class="toc-number">1.2.6.</span> <span class="toc-text">Bus</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#high-bandwith-bus"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">High Bandwith Bus</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#slow-bus"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">Slow Bus</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bus-bridge"><span class="toc-number">1.2.6.3.</span> <span class="toc-text">Bus Bridge</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#memory"><span class="toc-number">1.2.7.</span> <span class="toc-text">Memory</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mmumpu"><span class="toc-number">1.2.7.1.</span> <span class="toc-text">MMU&#x2F;MPU</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dmadirect-memory-access"><span class="toc-number">1.2.8.</span> <span class="toc-text">DMA(direct memory access)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fast-io"><span class="toc-number">1.2.9.</span> <span class="toc-text">Fast IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#slow-io"><span class="toc-number">1.2.10.</span> <span class="toc-text">Slow IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#io-addressing-add"><span class="toc-number">1.2.11.</span> <span class="toc-text">I&#x2F;O addressing (ADD)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#parallel-io"><span class="toc-number">1.2.11.1.</span> <span class="toc-text">parallel I&#x2F;O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#standard-io"><span class="toc-number">1.2.11.2.</span> <span class="toc-text">standard I&#x2F;O</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#memory-mapped-io"><span class="toc-number">1.2.11.3.</span> <span class="toc-text">memory-mapped I&#x2F;O</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#others"><span class="toc-number">1.2.12.</span> <span class="toc-text">others</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#accelerators"><span class="toc-number">1.2.12.1.</span> <span class="toc-text">Accelerators</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#adda"><span class="toc-number">1.2.12.2.</span> <span class="toc-text">AD&#x2F;DA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#timer"><span class="toc-number">1.2.12.3.</span> <span class="toc-text">Timer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#control"><span class="toc-number">1.2.12.4.</span> <span class="toc-text">Control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mmi"><span class="toc-number">1.2.12.5.</span> <span class="toc-text">MMI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hsm-hardware-security-module"><span class="toc-number">1.2.13.</span> <span class="toc-text">HSM: Hardware Security Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#two-memory-architectures"><span class="toc-number">1.2.14.</span> <span class="toc-text">Two Memory Architectures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#regeisters-in-cortex-m"><span class="toc-number">1.2.15.</span> <span class="toc-text">Regeisters in Cortex-M</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instruction-of-microcontroller"><span class="toc-number">1.2.16.</span> <span class="toc-text">Instruction of
+Microcontroller</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#data-processing"><span class="toc-number">1.2.16.1.</span> <span class="toc-text">Data processing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#data-move"><span class="toc-number">1.2.16.2.</span> <span class="toc-text">Data Move</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#control-1"><span class="toc-number">1.2.16.3.</span> <span class="toc-text">Control</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#format-of-instruction"><span class="toc-number">1.2.17.</span> <span class="toc-text">Format of Instruction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bit-vs-32bit-instructions"><span class="toc-number">1.2.18.</span> <span class="toc-text">16bit vs 32bit instructions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bit"><span class="toc-number">1.2.18.1.</span> <span class="toc-text">32 bit:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bit-1"><span class="toc-number">1.2.18.2.</span> <span class="toc-text">16 bit:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mixture"><span class="toc-number">1.2.18.3.</span> <span class="toc-text">Mixture:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arm-specific-solution-for-mixed-length-instructions"><span class="toc-number">1.2.19.</span> <span class="toc-text">ARM
+specific solution for mixed length instructions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#addressing-mode"><span class="toc-number">1.2.20.</span> <span class="toc-text">Addressing mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stack-and-heap"><span class="toc-number">1.2.21.</span> <span class="toc-text">Stack and Heap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#stack"><span class="toc-number">1.2.21.1.</span> <span class="toc-text">stack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#heap"><span class="toc-number">1.2.21.2.</span> <span class="toc-text">Heap</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#arm-usage-of-registers-in-cc-procedure-calls"><span class="toc-number">1.2.22.</span> <span class="toc-text">ARM usage of
+registers in C&#x2F;C++ procedure calls</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#build-an-executable-in-a-microcontroller"><span class="toc-number">1.2.23.</span> <span class="toc-text">Build an executable in
+a microcontroller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elf-executable-and-linkable-format"><span class="toc-number">1.2.24.</span> <span class="toc-text">ELF (Executable and Linkable
+Format)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#important-elf-sections"><span class="toc-number">1.2.24.1.</span> <span class="toc-text">Important ELF sections</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-difference-between-embedded-and-pc"><span class="toc-number">1.2.25.</span> <span class="toc-text">Main difference between
+embedded and PC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pc"><span class="toc-number">1.2.25.1.</span> <span class="toc-text">PC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#embedded"><span class="toc-number">1.2.25.2.</span> <span class="toc-text">Embedded</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#debugging"><span class="toc-number">1.3.</span> <span class="toc-text">Debugging</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#types-of-bug"><span class="toc-number">1.3.1.</span> <span class="toc-text">Types of bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#how-to-avoid-debugging"><span class="toc-number">1.3.2.</span> <span class="toc-text">How to avoid debugging</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debugging-methods"><span class="toc-number">1.3.3.</span> <span class="toc-text">Debugging methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hardware-debugger-architecture"><span class="toc-number">1.3.4.</span> <span class="toc-text">Hardware debugger
+architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#features-characterizing-debuggers"><span class="toc-number">1.3.5.</span> <span class="toc-text">Features characterizing
+debuggers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#physical-tool-interfaces-main-criteria"><span class="toc-number">1.3.6.</span> <span class="toc-text">Physical tool
+interfaces: Main Criteria</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#implementation-of-break-points"><span class="toc-number">1.3.7.</span> <span class="toc-text">Implementation of break
+points</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#implementation-of-single-stepping"><span class="toc-number">1.3.8.</span> <span class="toc-text">Implementation of single
+stepping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#implementation-of-watchpoints"><span class="toc-number">1.3.9.</span> <span class="toc-text">Implementation of
+watchpoints</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#implementation-of-tracing-%E8%B7%9F%E8%B8%AA"><span class="toc-number">1.3.10.</span> <span class="toc-text">Implementation of tracing
+跟踪</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#program-trace"><span class="toc-number">1.3.10.1.</span> <span class="toc-text">Program trace</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#data-trace"><span class="toc-number">1.3.10.2.</span> <span class="toc-text">Data trace</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instrumentation-using-data-trace-interface"><span class="toc-number">1.3.11.</span> <span class="toc-text">Instrumentation
+using data trace interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#issues-to-solve-for-tracing"><span class="toc-number">1.3.12.</span> <span class="toc-text">Issues to solve for tracing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debug-under-real-time-conditions"><span class="toc-number">1.3.13.</span> <span class="toc-text">Debug under real time
+conditions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#invasive-debugging"><span class="toc-number">1.3.13.1.</span> <span class="toc-text">Invasive debugging</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#non-invasive-debugging"><span class="toc-number">1.3.13.2.</span> <span class="toc-text">Non-invasive debugging</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#debugging-and-security"><span class="toc-number">1.3.14.</span> <span class="toc-text">Debugging and security</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interrupts-and-exception"><span class="toc-number">1.4.</span> <span class="toc-text">Interrupts and Exception</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupts-vs-exception"><span class="toc-number">1.4.1.</span> <span class="toc-text">Interrupts vs Exception</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#components-of-the-interrupt-system"><span class="toc-number">1.4.2.</span> <span class="toc-text">Components of the interrupt
+system</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupt-vector-table"><span class="toc-number">1.4.3.</span> <span class="toc-text">Interrupt Vector Table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stack-when-entering-an-interrupt-or-exception"><span class="toc-number">1.4.4.</span> <span class="toc-text">Stack when
+entering an interrupt or exception</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nesting-of-interrupts"><span class="toc-number">1.4.5.</span> <span class="toc-text">Nesting of interrupts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#what-determines-interrupt-latency"><span class="toc-number">1.4.6.</span> <span class="toc-text">What determines interrupt
+latency?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#measures-to-reduce-interrupt-latency"><span class="toc-number">1.4.7.</span> <span class="toc-text">Measures to reduce
+interrupt latency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#types-of-interrupts-in-systems"><span class="toc-number">1.4.8.</span> <span class="toc-text">Types of interrupts in
+systems</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupts-versus-polling"><span class="toc-number">1.4.9.</span> <span class="toc-text">Interrupts versus polling</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#polling"><span class="toc-number">1.4.9.1.</span> <span class="toc-text">Polling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#advantages-of-polling"><span class="toc-number">1.4.9.2.</span> <span class="toc-text">Advantages of polling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#drawbacks-of-polling"><span class="toc-number">1.4.9.3.</span> <span class="toc-text">Drawbacks of polling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exceptions"><span class="toc-number">1.4.10.</span> <span class="toc-text">Exceptions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#usage-of-exceptions"><span class="toc-number">1.4.10.1.</span> <span class="toc-text">Usage of exceptions</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exception-types"><span class="toc-number">1.4.11.</span> <span class="toc-text">Exception Types</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#synchronousprecise"><span class="toc-number">1.4.11.1.</span> <span class="toc-text">Synchronous&#x2F;Precise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#asynchronousimprecise"><span class="toc-number">1.4.11.2.</span> <span class="toc-text">Asynchronous&#x2F;Imprecise</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#applications-of-interrupts"><span class="toc-number">1.4.12.</span> <span class="toc-text">Applications of interrupts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#boundary-errors-and-control-hijacking-attacks"><span class="toc-number">1.5.</span> <span class="toc-text">Boundary Errors
+and Control Hijacking Attacks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stack-memory-layout"><span class="toc-number">1.5.1.</span> <span class="toc-text">stack memory layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stack-frame"><span class="toc-number">1.5.2.</span> <span class="toc-text">Stack frame</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#memory-encryption"><span class="toc-number">1.6.</span> <span class="toc-text">Memory Encryption</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#why-memory-encryption"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">Why memory encryption?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tpm"><span class="toc-number">1.7.</span> <span class="toc-text">TPM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#definition-of-trust-in-computer-science"><span class="toc-number">1.7.1.</span> <span class="toc-text">Definition of Trust in
+Computer Science</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#two-alternatives-for-a-security-core"><span class="toc-number">1.7.2.</span> <span class="toc-text">Two alternatives for a
+security core</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dice-device-identifier-composition-engine"><span class="toc-number">1.7.3.</span> <span class="toc-text">DICE: Device
+Identifier Composition Engine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trusted-platform-module"><span class="toc-number">1.7.4.</span> <span class="toc-text">Trusted Platform Module</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#trusted-boot-chain-of-trust"><span class="toc-number">1.7.4.1.</span> <span class="toc-text">Trusted Boot: Chain of Trust</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#how-to-record-the-platform-state"><span class="toc-number">1.7.5.</span> <span class="toc-text">How to record the platform
+state?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#verifying-the-platform-metrics"><span class="toc-number">1.7.5.1.</span> <span class="toc-text">Verifying the platform
+metrics</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tpm-credentials-and-keys"><span class="toc-number">1.7.6.</span> <span class="toc-text">TPM Credentials and Keys</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#endorsement-key-ek"><span class="toc-number">1.7.6.1.</span> <span class="toc-text">Endorsement Key (EK)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#platform-credential"><span class="toc-number">1.7.6.2.</span> <span class="toc-text">Platform Credential</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#conformance-credential"><span class="toc-number">1.7.6.3.</span> <span class="toc-text">Conformance Credential</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#important-question"><span class="toc-number">1.8.</span> <span class="toc-text">Important Question</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#microcontroller-basic-1"><span class="toc-number">1.8.1.</span> <span class="toc-text">Microcontroller basic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#memory-1"><span class="toc-number">1.9.</span> <span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crypto-and-side-channel"><span class="toc-number">1.10.</span> <span class="toc-text">Crypto and Side channel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#communication-and-tpm"><span class="toc-number">1.11.</span> <span class="toc-text">Communication and TPM</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">嵌入式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.1.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="toc-number">2.1.1.</span> <span class="toc-text">同步和异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%E5%92%8C%E4%B8%B2%E8%A1%8C"><span class="toc-number">2.1.2.</span> <span class="toc-text">并行和串行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%B7%A5%E5%92%8C%E5%8F%8C%E5%B7%A5"><span class="toc-number">2.1.3.</span> <span class="toc-text">单工和双工</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bit%E7%8E%87"><span class="toc-number">2.1.4.</span> <span class="toc-text">bit率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uart"><span class="toc-number">2.1.5.</span> <span class="toc-text">UART</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A7%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">帧格式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#can"><span class="toc-number">2.1.6.</span> <span class="toc-text">CAN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B8%A7"><span class="toc-number">2.1.6.1.</span> <span class="toc-text">数据帧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8D%E5%A1%AB%E5%85%85"><span class="toc-number">2.1.6.2.</span> <span class="toc-text">位填充</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E9%80%94%E5%BE%84"><span class="toc-number">2.2.</span> <span class="toc-text">进程之间通信的途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%AE%A1%E9%81%93"><span class="toc-number">2.2.1.</span> <span class="toc-text">使用管道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.2.</span> <span class="toc-text">原子性操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BF%9D%E8%AF%81%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">为什么要保证原子性？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8E%9F%E5%AD%90%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">如何实现原子性操作？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rtos%E7%A7%BB%E6%A4%8D"><span class="toc-number">2.3.</span> <span class="toc-text">RTOS移植</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="toc-number">2.3.1.</span> <span class="toc-text">.嵌入式系统基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Frtos"><span class="toc-number">2.3.2.</span> <span class="toc-text">2. 实时操作系统（RTOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-number">2.3.3.</span> <span class="toc-text">3. 自动驾驶相关知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%AA%92%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="toc-number">2.3.4.</span> <span class="toc-text">4. 多媒体框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C"><span class="toc-number">2.3.5.</span> <span class="toc-text">5. 项目经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="toc-number">2.3.6.</span> <span class="toc-text">6. 面试技巧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#can-1"><span class="toc-number">2.4.</span> <span class="toc-text">CAN</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

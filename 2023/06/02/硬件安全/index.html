@@ -1,0 +1,1450 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>硬件安全 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="硬件安全 安全的定义  Create, maintain and attest a secure state for an embedded device Ensure confidentiality, integrity and availability of the data processed on the device Ensure the safety of the people and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="硬件安全">
+<meta property="og:url" content="http://fyind.de/2023/06/02/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="硬件安全 安全的定义  Create, maintain and attest a secure state for an embedded device Ensure confidentiality, integrity and availability of the data processed on the device Ensure the safety of the people and">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2023-06-02T14:31:01.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.880Z">
+<meta property="article:author" content="Fyind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "硬件安全",
+  "url": "http://fyind.de/2023/06/02/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2023-06-02T14:31:01.000Z",
+  "dateModified": "2025-07-18T10:49:53.880Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2023/06/02/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '硬件安全',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">硬件安全</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">硬件安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-06-02T14:31:01.000Z" title="Created 2023-06-02 14:31:01">2023-06-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.880Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="硬件安全">硬件安全</h1>
+<h3 id="安全的定义">安全的定义</h3>
+<ul>
+<li>Create, maintain and attest a secure state for an embedded device
+Ensure confidentiality, integrity and availability of the data processed
+on the device</li>
+<li>Ensure the safety of the people and the environment interacting with
+the device</li>
+<li>Protect the device itself, its environment and other data from
+processed malicious data</li>
+</ul>
+<h2 id="abstraction-layers-and-attack-vectors">Abstraction Layers and
+Attack Vectors</h2>
+<p>skipped</p>
+<h2 id="secure-embedded-system-design">Secure Embedded System
+Design</h2>
+<h3 id="typical-criteria">Typical Criteria</h3>
+<ul>
+<li>Time to market</li>
+<li>Design + manufacturing setup cost</li>
+<li>Component + manufacturing cost</li>
+<li>Security</li>
+<li>Maintainability</li>
+<li>Energy</li>
+<li>Performance</li>
+<li>Features</li>
+</ul>
+<h3 id="system-architecture">System architecture</h3>
+<p>Attack surface is lower if critical data and functions are integrated
+into few ICs</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726190820501.png"
+alt="image-20240726190820501" />
+<figcaption aria-hidden="true">image-20240726190820501</figcaption>
+</figure>
+<h4 id="secure-processor-architecture">Secure processor
+architecture</h4>
+<ul>
+<li><p>Tight integration of cryptographic and security functionality in
+the processor</p></li>
+<li><p>HW support for SW separation</p></li>
+</ul>
+<h4 id="secure-co-processor-hsm">Secure co-processor / HSM</h4>
+<ul>
+<li>Separation of application processor and security functionality</li>
+<li>Dedicated interface: High latency, low throughput</li>
+</ul>
+<h4 id="secure-accelerator">Secure accelerator</h4>
+<ul>
+<li>Encapsuled cryptographic functionalit</li>
+</ul>
+<h4 id="security-monitor">Security monitor</h4>
+<ul>
+<li>Lightweight module outside the main data-path</li>
+<li>Provide HW dedicated security functionality</li>
+</ul>
+<h3 id="security-focused-component">Security-focused component</h3>
+<ul>
+<li>Implementation of cryptographic algorithms</li>
+<li>Root of trust</li>
+<li>Randomness</li>
+<li>Clock</li>
+<li>Protected debug interface</li>
+</ul>
+<h3 id="cryptographic-algorithms-and-parameters">Cryptographic
+algorithms and parameters</h3>
+<ul>
+<li><p>Never use proprietary ciphers!</p></li>
+<li><p>Use good sources of randomness!</p></li>
+</ul>
+<h3 id="asymmetric-vs.-symmetric-cryptography">Asymmetric vs. symmetric
+cryptography</h3>
+<ul>
+<li>Symmetric ciphers are fast, Key management more difficult</li>
+<li>Implementation and computation complexity significant, Only makes
+sense with Public Key Infrastructure (PKI)</li>
+</ul>
+<p>TODO: add rest slides</p>
+<h2 id="cryptography-implementation">Cryptography Implementation</h2>
+<h3 id="aes">AES</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">KeyExpansion</span>(CipherKey,ExpandedKey);</span><br><span class="line"><span class="built_in">AddRoundKey</span>(State,ExpandedKey[<span class="number">0</span>]);</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; Nrb; i++) </span><br><span class="line">    <span class="built_in">Round</span>(State,ExpandedKey[i]);</span><br><span class="line"><span class="built_in">FinalRound</span>(State,ExpandedKey[Nrb]);</span><br></pre></td></tr></table></figure>
+<h4 id="round-function">Round function</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Round</span>(State,ExpandedKey[i]) &#123;</span><br><span class="line">    <span class="built_in">SubBytes</span>(State);</span><br><span class="line">    <span class="built_in">ShiftRows</span>(State);</span><br><span class="line">    <span class="built_in">MixColumns</span>(State);</span><br><span class="line">    <span class="built_in">AddRoundKey</span>(State,ExpandedKey[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>final round (no mix columns)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">FinalRound</span>(State,ExpandedKey[Nrb]) &#123;</span><br><span class="line">    <span class="built_in">SubBytes</span>(State);</span><br><span class="line">    <span class="built_in">ShiftRows</span>(State);</span><br><span class="line">    <span class="built_in">AddRoundKey</span>(State,ExpandedKey[Nr]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="state">State</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726192546348.png"
+alt="image-20240726192546348" />
+<figcaption aria-hidden="true">image-20240726192546348</figcaption>
+</figure>
+<h4 id="subbytes">SubBytes</h4>
+<p>每个byte 通过 <span class="math inline">\(S_{RD}\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726192724286.png"
+alt="image-20240726192724286" />
+<figcaption aria-hidden="true">image-20240726192724286</figcaption>
+</figure>
+<h4 id="shiftrows">ShiftRows</h4>
+<p>第 <span class="math inline">\(i\)</span> 行向左shift <span
+class="math inline">\(i-1\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726192744204.png"
+alt="image-20240726192744204" />
+<figcaption aria-hidden="true">image-20240726192744204</figcaption>
+</figure>
+<h4 id="mix-column">Mix column</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726192834725.png"
+alt="image-20240726192834725" />
+<figcaption aria-hidden="true">image-20240726192834725</figcaption>
+</figure>
+<h4 id="add-round-key">Add round key</h4>
+<p>把key xor 上去</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726192911882.png"
+alt="image-20240726192911882" />
+<figcaption aria-hidden="true">image-20240726192911882</figcaption>
+</figure>
+<h4 id="implementation">Implementation</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726193413560.png"
+alt="image-20240726193413560" />
+<figcaption aria-hidden="true">image-20240726193413560</figcaption>
+</figure>
+<h2 id="elliptic-curve">Elliptic curve</h2>
+<p><span class="math inline">\(a, b \in \mathbb{F}_p\)</span> satisfy
+<span class="math inline">\(4 a^3+27 b^2 \neq 0(\bmod p)\)</span> <span
+class="math display">\[
+y^2=x^3+a x+b
+\]</span></p>
+<h3 id="addition">Addition</h3>
+<h4 id="pq">P+Q</h4>
+<p>Let <span class="math inline">\(P \neq \mathcal{O}\)</span>, and
+<span class="math inline">\(Q \neq \mathcal{O}\)</span> such that <span
+class="math inline">\(P \neq \pm Q\)</span>.</p>
+<p><span class="math inline">\(P+Q=\left(x_R, y_R\right)\)</span> , Let
+<span class="math inline">\(\lambda=\left(y_Q-y_P\right)
+/\left(x_Q-x_P\right)\)</span> , <span
+class="math inline">\(P+Q=-R\)</span>. <span class="math display">\[
+x_R=\lambda^2-x_P-x_Q, \quad y_R=\lambda\left(x_P-x_R\right)-y_P \text
+{. }
+\]</span></p>
+<h4 id="pp">P+P</h4>
+<p><span class="math inline">\(P \neq \mathcal{O}, P \neq-P\)</span> ,
+<span class="math inline">\(\lambda=\left(3 x_P^2+a\right) /\left(2
+y_P\right)\)</span> , <span class="math inline">\([2] P=-R\)</span>
+<span class="math display">\[
+x_R=\lambda^2-2 x_P, \quad y_R=\lambda\left(x_P-x_R\right)-y_P \text {.
+}
+\]</span></p>
+<h4 id="neutral-element">Neutral element</h4>
+<p>The point at infinity is the neutral element.</p>
+<p><span class="math inline">\(P+(-P)=0\)</span></p>
+<h3 id="discrete-elliptic-curves">Discrete elliptic curves</h3>
+<p><span class="math display">\[
+P+Q: \lambda=\left(y_2-y_1\right)\left(x_2-x_1\right)^{-1} \bmod p
+\]</span></p>
+<p><span class="math display">\[
+P+P: \lambda=\left(3 x_1{ }^2+a\right)\left(2 y_1\right)^{-1} \bmod p
+\]</span></p>
+<p>curve symmetrical at p/2</p>
+<h3 id="elliptic-curves-for-cryptography">Elliptic curves for
+cryptography</h3>
+<ul>
+<li>parameter <span class="math inline">\(a,b\)</span>, modulus <span
+class="math inline">\(p\)</span></li>
+<li><span class="math inline">\(ord(E)\)</span> large enough</li>
+<li><span class="math inline">\(g\)</span> generator</li>
+</ul>
+<h3 id="key-generation">key generation</h3>
+<ul>
+<li>private key: <span class="math inline">\(d\)</span> selected
+uniformly at random from <span class="math inline">\([1, n −
+1]\)</span></li>
+<li>public key is <span class="math inline">\(Q = d P\)</span></li>
+</ul>
+<h4 id="elliptic-curve-discrete-logarithm-problem">elliptic curve
+discrete logarithm problem</h4>
+<p>Given <span class="math inline">\(Q\)</span> , determine <span
+class="math inline">\(d\)</span></p>
+<h3 id="encryption">Encryption</h3>
+<p>plaintext <span class="math inline">\(m\)</span> is represented by
+point <span class="math inline">\(M\)</span> <span
+class="math display">\[
+E(k,M)=(kP, M + kQ)
+\]</span></p>
+<p><span class="math display">\[
+D(k,c_1,c_2)= c_2-d(c_1)=c_2-d(kP)=c_2-k(dP)=c_2-kQ
+\]</span></p>
+<h3 id="point-addition-and-point-doubling">Point addition and point
+doubling</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240726215219188.png"
+alt="image-20240726215219188" />
+<figcaption aria-hidden="true">image-20240726215219188</figcaption>
+</figure>
+<h3 id="montgomery-reduction">Montgomery reduction</h3>
+<p>Given two numbers <span class="math inline">\(X\)</span> and <span
+class="math inline">\(Y\)</span> in <span class="math inline">\([0,
+N-1]\)</span>. Let <span class="math inline">\(Z=MonPro(X,Y)\)</span> ,
+<span class="math inline">\(R\)</span> is a power of <span
+class="math inline">\(2\)</span></p>
+<p><span class="math inline">\(Z=(XY)R^{-1} \bmod N\)</span></p>
+<p>so, <span class="math inline">\((XR^{-1})(YR^{-1})=Z R^{-1} \bmod
+N\)</span></p>
+<h2 id="side-channel-attack">Side Channel Attack</h2>
+<ul>
+<li>Side channel: any source of information on some secret besides
+actual communication channel</li>
+<li>Side-channel analysis / attacks: making use of side information to
+recover the secret</li>
+</ul>
+<h3 id="side-channels">Side-channels</h3>
+<ul>
+<li>Memory accesses, Bus accesses</li>
+<li>Time, Light, Sound</li>
+<li>Behaviour of other computers</li>
+<li>Power comsumption</li>
+<li>Radiation,EM,</li>
+</ul>
+<h4 id="microarchitectural-attacks">Microarchitectural attacks</h4>
+<ul>
+<li>Attacks purely in software</li>
+</ul>
+<h3 id="cache-attacks">Cache attacks</h3>
+<p>Cache hits 和 Cache misses 需要的 CPU cycles 不一样</p>
+<h4 id="primeprobe-attack">Prime+Probe Attack</h4>
+<ul>
+<li>attacker fill the cache</li>
+<li>victim evicts cache</li>
+<li>attacker probe data to determine if accessed</li>
+</ul>
+<h3 id="cmos-dynamic-static-power">CMOS Dynamic + Static power</h3>
+<p><span class="math display">\[
+P=P_{\text {static }}+P_{\text {dynamic }}+P_{\text {noise }}
+\]</span></p>
+<ul>
+<li>动态功耗 是由CMOS电路中开关变动引起的</li>
+</ul>
+<h3 id="power">Power</h3>
+<p>Global measurement of the entire system’s power consumption: High
+noise</p>
+<h3 id="electromagnetic-em-side-channel-attacks">Electromagnetic (EM)
+side channel attacks</h3>
+<ul>
+<li><p>Allows low signal to noise ratio (SNR)</p></li>
+<li><p>High resolution in location and time</p></li>
+</ul>
+<h3 id="mosfet-basics">MOSFET basics</h3>
+<ul>
+<li><p>Low input voltage: no current from Source to Drain</p></li>
+<li><p>High input voltage: current from Source to Drain</p></li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240727085454398.png"
+alt="image-20240727085454398" />
+<figcaption aria-hidden="true">image-20240727085454398</figcaption>
+</figure>
+<h3 id="photonic-emission">Photonic Emission</h3>
+<ul>
+<li>Switching of transistors causes emission of photons</li>
+</ul>
+<h3 id="decapsulation">Decapsulation</h3>
+<p>Necessary e.g. for local EM, photonic emission, and later laser fault
+attacks</p>
+<p><strong>蚀刻 (Etching)</strong>：</p>
+<ul>
+<li>使用化学溶液（如强酸）溶解芯片封装材料，暴露出内部电路。</li>
+<li>常用于去除塑料封装。</li>
+</ul>
+<p><strong>研磨 (Grinding)</strong>：</p>
+<ul>
+<li>使用机械方法逐层研磨掉封装材料。</li>
+<li>适用于硬质封装材料。</li>
+</ul>
+<p><strong>芯片薄化 (Thinning)</strong>：</p>
+<ul>
+<li>通过研磨或化学蚀刻将芯片背面变薄，以便进行背面攻击。</li>
+<li>这种方法通常用于需要从芯片背面进行攻击的场景。</li>
+</ul>
+<h3 id="热激光刺激thermal-laser-stimulation">热激光刺激Thermal laser
+stimulation</h3>
+<ul>
+<li><p>If a transistor is heated locally, a voltage is
+generated</p></li>
+<li><p>No effect on high-ohmic transistors as ends are drains are
+floating.</p></li>
+<li><p>Low-ohmic channel: increase in drain voltage effects source of
+the connected
+transistor当低电阻通道的漏极电压增加时，会影响连接的晶体管的源极。</p>
+<p>这种电压变化会导致连接晶体管的电阻降低</p></li>
+<li><p>Leads to decrease in resistance that is observable at the power
+supply pins of
+device.在设备的电源引脚上可以观察到电阻的减少。这种变化可以用来检测和分析SRAM单元的状态和工作原理。</p></li>
+</ul>
+<h3 id="simple-power-analysis">Simple Power Analysis</h3>
+<ul>
+<li><p>Record single measurement for the attac</p></li>
+<li><p>Leaked information is detectable in single trace</p></li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240727090422379.png"
+alt="image-20240727090422379" />
+<figcaption aria-hidden="true">image-20240727090422379</figcaption>
+</figure>
+<h3 id="some-criteria-affecting-the-measurements">Some criteria
+affecting the measurements</h3>
+<ul>
+<li>Target complexity: (Noise of other activities / components)
+<ul>
+<li>Bare metal SW, small HW architecture.</li>
+<li>Large SoC</li>
+</ul></li>
+<li>SW / HW implementation (Number of involved logic gates and
+registers)
+<ul>
+<li>SW implementation</li>
+<li>HW implementation</li>
+</ul></li>
+<li>Manufacturing technology (Lower voltages and currents)
+<ul>
+<li>Older / larger technologies</li>
+<li>Newer / smaller technologies</li>
+</ul></li>
+</ul>
+<h3 id="comparison">comparison</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240727090614002.png"
+alt="image-20240727090614002" />
+<figcaption aria-hidden="true">image-20240727090614002</figcaption>
+</figure>
+<h2 id="differential-power-analysis">Differential Power Analysis</h2>
+<h3 id="ecdsa椭圆曲线数字签名算法">ECDSA椭圆曲线数字签名算法</h3>
+<p>For Alice to sign a message m</p>
+<ul>
+<li><p><span class="math inline">\(e=H A S H(m)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(z\)</span> be the <span
+class="math inline">\(L\)</span> leftmost bits of e, where <span
+class="math inline">\(L\)</span> is the bit length of the group order $
+n$</p></li>
+<li><p><span class="math inline">\(k\)</span> randomly from <span
+class="math inline">\([1,n−1]\)</span></p></li>
+<li><p>Calculate the curve point <span class="math inline">\((x_1 ,y_1 )
+= k × G\)</span></p></li>
+<li><p><span class="math inline">\(r=x_1 \bmod n\)</span>.</p></li>
+<li><p><span class="math inline">\(s=k^{-1}(z+r d) \bmod
+n\)</span></p></li>
+</ul>
+<p>return <span class="math inline">\((r, s)\)</span></p>
+<h3 id="differential-power-analysis-1">Differential Power Analysis</h3>
+<ul>
+<li><p>Record many traces, of device using same secret (This is mostly
+impossible for asymmetric cryptography)</p></li>
+<li><p>Statistical analysis to distinguish correct key</p></li>
+<li><p>Concentrate on differences between traces -&gt; differential
+analysis</p></li>
+</ul>
+<h3 id="hypothesis-test">Hypothesis test</h3>
+<p>对于每一个 key guess</p>
+<p>找一个bit 分为 0 和 1 两组</p>
+<p>如果猜测正确, 那么根据CMOS理论，这两者的trace会由显著差距</p>
+<h3 id="hypothesis-testing-t-test">Hypothesis testing: T test</h3>
+<p>T test computes the difference of the means of two distributions</p>
+<h3 id="correlation-based-dpa">Correlation-based DPA</h3>
+<ul>
+<li>Correlation-based DPA uses multiple bits and power model</li>
+</ul>
+<ol type="1">
+<li>Derive abstract values using ’power model’ and statistically compare
+relation to measurement</li>
+<li>(Hamming weight power model to derive values )Assumes that 1-s
+require more electrical current</li>
+<li>Pearson correlation coefficient for finding linear relations,If
+relation is statistically significant,key guess correc</li>
+</ol>
+<h3 id="dpa-properties">DPA Properties</h3>
+<ul>
+<li><p>Robust against noise because many measurements can be used to
+’average’ noise</p></li>
+<li><p>Attack effort is given in number of measurements required for
+success</p></li>
+</ul>
+<h4 id="practical-problems">Practical problems</h4>
+<ul>
+<li>Find out which algorithm is used</li>
+<li>Find out when it is used</li>
+<li>Synchronization of trace recordings</li>
+<li>With EM measurements (often required because of low SNR): Unknown
+time and unknown measurement position</li>
+</ul>
+<h3 id="countermeasures">Countermeasures</h3>
+<ul>
+<li>Constant execution time of cryptographic operations</li>
+<li>Protocol-level countermeasures: Change key frequently</li>
+<li>Use algebraic structure for countermeasure</li>
+</ul>
+<p>Most countermeasures come with performance penalty</p>
+<p>Usually, countermeasures are combined (e.g. masking and hiding</p>
+<h4 id="boolean-masking">Boolean masking</h4>
+<p>Split all binary variables a into two parts Choose masks <span
+class="math inline">\(m_a\)</span> randomly such that <span
+class="math display">\[
+a_m=a+m_a
+\]</span> If the attacker cannot or does not exploit the Pexp (vm) and
+Pexp (mv ) simultaneously, the implementation is secure against DPA</p>
+<h4 id="masking">Masking</h4>
+<p>Use random value and XOR value onto processed data</p>
+<p>Attacker cannot compute intermediate values needed for DPA</p>
+<h4 id="hiding">Hiding</h4>
+<p>Reduce SNR</p>
+<h3 id="template-attack">Template attack</h3>
+<h4 id="characterization-phase">Characterization phase</h4>
+<ul>
+<li>Attacker builds templates including mean and covariance matrix (m,
+C) v,k for different keys k and inputs v (intermediate values)</li>
+<li>Probability density function of the traces is estimated</li>
+</ul>
+<h4 id="attack-phase">attack phase</h4>
+<ul>
+<li>Attacker measures a power trace and calculates p(t|(v, k))</li>
+<li>Key that leads to the highest probability is considered the correct
+key</li>
+</ul>
+<h3 id="key-rank-estimation-security-level">Key rank estimation /
+security level</h3>
+<p>After an attack, how to determine the security level</p>
+<h3 id="power-models-for-dpa">Power models for DPA</h3>
+<ul>
+<li>Bit: The bit value 假设处理 0 和 1
+时的功率消耗不同。这个模型关注单个位的值。</li>
+<li>Hamming weight对于内存访问来说是一个有效的模型</li>
+<li>Hamming distance适合攻击寄存器中的过渡</li>
+<li>Zero
+value:零值的功率消耗与所有其他值不同。这个模型关注零值与非零值之间的功率差异。</li>
+<li>Profiled model:
+使用实际测量的功率轨迹来计算均值和标准差，从而构建模型。这是最接近实际功率消耗的模型</li>
+</ul>
+<h3 id="classification-of-scas">Classification of SCAs</h3>
+<ul>
+<li>Characterization of attacked device: Profiled, non-profiled with
+HD,HW</li>
+<li>Nr. of observations</li>
+<li>Nr. of variables in statistic analysis: Univariate,
+Multivariate</li>
+<li>Distribution of power value: Power consumption is assumed as
+Gaussian distribution, no assumption</li>
+</ul>
+<h2 id="microcontroller-security">Microcontroller Security</h2>
+<h4 id="what-sensitive-data-could-be-stored-in-a-microcontroller">What
+sensitive data could be stored in a microcontroller?</h4>
+<ul>
+<li>Intellectual property</li>
+<li>Personal data</li>
+<li>Credentials</li>
+<li>Licenses</li>
+</ul>
+<h4 id="what-are-threats-for-microcontrollers">What are threats for
+microcontrollers</h4>
+<ul>
+<li>Product Piracy</li>
+<li>Cloning</li>
+<li>Tampering</li>
+</ul>
+<h4 id="what-are-attack-vectors-for-microcontrollers">What are attack
+vectors for microcontrollers</h4>
+<ul>
+<li>Side-channels</li>
+<li>Fault injection</li>
+<li>Probing</li>
+<li>Logic attacks</li>
+</ul>
+<h3 id="exceptional-failure">Exception(al) Failure</h3>
+<p>“异常失败”一词指的是在系统或应用程序中遇到的特定类型的故障或漏洞，这些故障或漏洞通常涉及异常处理机制的失效或误用。这种失败可能导致系统行为异常，甚至可能被攻击者利用来进行攻击</p>
+<p>利用异常的错误信息来攻击</p>
+<p>TODO</p>
+<h2 id="fault-attacks">Fault Attacks</h2>
+<p>Induce fault</p>
+<p>Exploit reaction of device</p>
+<h3 id="faults-in-circuit-behavior">Faults in circuit behavior</h3>
+<p>Digital circuits require certain operating conditions to work
+properly: temperature range,supply voltage</p>
+<p>By changing the operating conditions, an attacker can change the
+state of the circuit</p>
+<h3 id="effects-of-a-fault">Effects of a fault</h3>
+<ul>
+<li>The control flow: instructions are changed, skipped, …</li>
+<li>Data integrity: data values changed</li>
+</ul>
+<p>Leading</p>
+<ul>
+<li>Arbitrary changes of the instruction pointer.</li>
+<li>Arbitrary changes of data in registers or memory</li>
+</ul>
+<h3 id="temperature">Temperature</h3>
+<p>Manufacturers define upper and lower temperature bounds, wherein the
+device operates correctly</p>
+<h3 id="glitching">Glitching</h3>
+<h4 id="clock-glitching">Clock Glitching</h4>
+<ul>
+<li><p>Digital circuits require a reliable clock source</p></li>
+<li><p>If the clock period is too short, not all signals can propagate
+through the circuit in time</p></li>
+</ul>
+<h4 id="voltage-glitching">Voltage glitching</h4>
+<ul>
+<li>Short interruptions of the power supply may cause misinterpretation
+or skipping of instructions</li>
+</ul>
+<h3 id="electromagnetic-fault-injection">Electromagnetic fault
+injection</h3>
+<p>Inject faults by inducting currents via electromagnetic impulses</p>
+<h4 id="advantages">Advantages</h4>
+<p>Good timing control,No decapsulation necessary</p>
+<h4 id="disadvantages">Disadvantages</h4>
+<p>Less precise than lasers</p>
+<p>Pulse duration longer than laser pulses</p>
+<h3 id="body-bias-injection">Body bias injection</h3>
+<p>通过在集成电路（IC）的衬底（substrate）上施加电压，以引发故障或影响电路的行为。这种方法利用了半导体器件的物理特性，尤其是二极管效应，来操控电路的工作状态。</p>
+<ol type="1">
+<li>Open the
+package打开封装是为了能够直接对IC的衬底（substrate）进行操作</li>
+<li>Attach a coil and a pulse generator连接线圈和脉冲发生器</li>
+<li>Induce a pulse into the substrate of an IC</li>
+</ol>
+<h3 id="laser-fault-injection">Laser fault injection</h3>
+<p>光电效应</p>
+<ul>
+<li>Photons transformed to energy when they hit an object (E = h *
+frequency)</li>
+</ul>
+<p>光子携带的能量能够激发物体内的电子，导致物体的电荷状态发生变化。</p>
+<ul>
+<li><p>Charges in semiconductor create electric field</p></li>
+<li><p>Small current is induced</p></li>
+</ul>
+<h4 id="assumption">Assumption</h4>
+<p>Laser fault creates a an additional current</p>
+<p>Missing charges compensated by load on <span
+class="math inline">\(C_{load}\)</span></p>
+<p>If enough charge is missing output goes from 1 to 0</p>
+<h4 id="properties-of-lfi">Properties of LFI</h4>
+<ul>
+<li>Requires depackaging of the IC</li>
+<li>Can be carried out from the frontside or the backside</li>
+</ul>
+<h5 id="front-side">front side</h5>
+<p>allow use of shorter wavelengths -&gt; increased precision</p>
+<p><strong>But</strong>: Metal layers reflect laser light</p>
+<h5 id="backside-attacks">Backside attacks</h5>
+<p>offer open access to all parts of the circuit</p>
+<p><strong>But</strong>: Requires use of infrared light to pass through
+silicon
+substrat需要使用红外光来穿透硅基板，这可能需要额外的设备和技术支持。</p>
+<h3 id="rowhammer-attack-on-dram">Rowhammer attack on DRAM</h3>
+<p>When a wordline in DRAM is repeatedly toggled, nearby rows leak
+charge through electromagnetic coupling</p>
+<p><strong>基本机制</strong>：当
+DRAM（动态随机存取内存）中的一个字线（wordline）被重复地切换（切换表示读取或写入操作）时，附近的行会通过电磁耦合泄漏电荷。</p>
+<p><strong>重复访问</strong>：如果对一个地址进行足够多的访问（例如，约
+10,000 次），这些附近的行在行刷新（通常是每 64
+毫秒）之前，可能会发生值的变化</p>
+<ul>
+<li>Allows to circumvent memory protection</li>
+<li>Can be executed remotely</li>
+</ul>
+<h3 id="fault-models">Fault models</h3>
+<ul>
+<li>Characterize assumptions for attack / abilities of adversary
+故障模型用于描述攻击者的假设和攻击能力。它定义了攻击需要哪些特性来成功实施故障攻击</li>
+<li>Attacks require certain fault model properties
+<ul>
+<li>Affected bits specific or random, local or global, single or
+multibit</li>
+<li>Effect - bit flip (toggle), fixed state (always 1 or 0) or
+inconsistent</li>
+<li>Permanence permanent alteration or transient effect</li>
+<li>Timing precision random, loose or precise timing</li>
+</ul></li>
+</ul>
+<h3 id="comparison-of-attack-techniques">Comparison of attack
+techniques</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240727110123332.png"
+alt="image-20240727110123332" />
+<figcaption aria-hidden="true">image-20240727110123332</figcaption>
+</figure>
+<h2 id="fault-attacks-on-cryptographic-algorithms">Fault attacks on
+cryptographic algorithms</h2>
+<h3 id="classification">Classification</h3>
+<ul>
+<li>Differential fault attacks</li>
+<li>Safe error fault attacks</li>
+<li>Algebraic attacks</li>
+</ul>
+<h3 id="simple-example-dfa">Simple example DFA</h3>
+<p>Induce fault 把key的某一bit变成0</p>
+<p>然后比较结果，如果改变了，那么这一位是 1</p>
+<h3 id="fault-attacks-on-ecc">Fault Attacks on ECC</h3>
+<p>改变 <span class="math inline">\(Q_{ki}\)</span> 如果结果变量,
+那么就知道 <span class="math inline">\(k_i\)</span> 的值了</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240727164910132.png"
+alt="image-20240727164910132" />
+<figcaption aria-hidden="true">image-20240727164910132</figcaption>
+</figure>
+<h4 id="montgomery-ladder">Montgomery Ladder</h4>
+<p>Introduce fault in <span class="math inline">\(Q_1\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240727165114130.png"
+alt="image-20240727165114130" />
+<figcaption aria-hidden="true">image-20240727165114130</figcaption>
+</figure>
+<p><strong>故障影响分析：</strong></p>
+<ul>
+<li><p>当</p>
+<p><span class="math inline">\(k_i=0\)</span></p>
+<p>时：</p>
+<ul>
+<li>计算 <span class="math inline">\(Q_1←Q_0+Q_1\)</span></li>
+<li>计算 <span class="math inline">\(Q_0←2⋅Q_0\)</span></li>
+<li>由于 <span class="math inline">\(Q_1\)</span>
+被正确的结果覆盖，因此故障不会影响最终结果。</li>
+</ul></li>
+<li><p>当</p>
+<p><span class="math inline">\(k_i=1\)</span></p>
+<p>时：</p>
+<ul>
+<li>计算 <span class="math inline">\(Q_0←Q_0+Q_1\)</span></li>
+<li>计算 <span class="math inline">\(Q_1←2⋅Q_1\)</span></li>
+<li><span class="math inline">\(Q_1\)</span>
+保持故障状态并输出错误，因为它没有被正确的结果覆盖</li>
+</ul></li>
+</ul>
+<h3 id="weak-curve-fault-attacks">Weak-curve fault attacks</h3>
+<h4 id="invalid-point-attack">Invalid point attack</h4>
+<p>Modify input base point P to P’ through fault</p>
+<p>P’ has low point order on a weak curve</p>
+<p><strong>Countermeasure</strong>: Point validity check:</p>
+<h4 id="invalid-curve-attack">Invalid curve attack</h4>
+<p>Modify curve parameters</p>
+<p>ECDLP can be solved computationally</p>
+<p><strong>Countermeasure</strong>: Curve integrity check:</p>
+<h3 id="differential-fault-attack-on-aes">Differential fault attack on
+AES</h3>
+<h4 id="fault-models-1">Fault Models</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240727173551909.png"
+alt="image-20240727173551909" />
+<figcaption aria-hidden="true">image-20240727173551909</figcaption>
+</figure>
+<p>Model i: <span class="math inline">\(Mi\)</span>, A random non-zero
+fault occurs at most across <span class="math inline">\(i\)</span>
+diagonals.</p>
+<h4 id="key-equations">Key equations</h4>
+<p><img src="https://fyindex.work/PicGo/image-20240727201445219.png"
+alt="image-20240727201445219" /> <span class="math display">\[
+\begin{aligned}
+I S B\left(x_1+K_{00}\right)+I S B\left(x_1+A_1+K_{00}\right) &amp;
+=2\left[\operatorname{ISB}\left(x_8+K_{13}\right)+I S
+B\left(x_8+A_5+K_{13}\right)\right] \\
+I S B\left(x_8+K_{13}\right)+I S B\left(x_8+A_5+K_{13}\right) &amp; =I S
+B\left(x_{11}+K_{22}\right)+I S B\left(x_{11}+A_9+K_{22}\right) \\
+I S B\left(x_{14}+K_{31}\right)+I S B\left(x_{14}+A_{13}+K_{31}\right)
+&amp; =3\left[\operatorname{ISB}\left(x_8+K_{13}\right)+I S
+B\left(x_8+A_5+K_{13}\right)\right]
+\end{aligned}
+\]</span></p>
+<blockquote>
+<p>ISB 是 inverse Sub Bytes</p>
+<p><span
+class="math inline">\(ISB(x_1+K_{00})+K&#39;_{00}+ISB(x_1+A_1+K_{00})+K&#39;_{00}
+= ISB(x_1+K_{00})+ISB(x_1+A_1+K_{00})\)</span></p>
+<p>因为 xor 就是 +, 所以 Addroundkey 第九轮没有了</p>
+</blockquote>
+<p>Remaining key space using all the equations above: <span
+class="math inline">\(2^{32}\)</span></p>
+<h3 id="fault-sensor">Fault sensor</h3>
+<ul>
+<li>光检测器（Light Detectors）</li>
+</ul>
+<p>光检测器用于检测光的梯度变化。当有光照变化时，传感器会感知到这种变化，从而触发相应的安全措施。这类传感器主要用于防止激光注入攻击，因为激光注入会改变光的梯度。</p>
+<ul>
+<li>电源电压检测器（Supply Voltage Detectors）</li>
+</ul>
+<p>电源电压检测器对电路中电压的突然变化作出反应，确保电压始终在电路的容忍阈值内。如果检测到电压超出容忍范围，系统将采取措施，如重启或进入安全模式，以防止故障攻击。</p>
+<ul>
+<li>频率检测器（Frequency Detectors）</li>
+</ul>
+<p>频率检测器强制电路在特定的操作频率范围内工作。如果电路的操作频率超出预设范围，电路将自动重置。这类传感器主要用于防止时序攻击，通过确保电路运行在安全的频率范围内，避免由于时序变化引发的故障。</p>
+<ul>
+<li>主动屏蔽（Active Shields）</li>
+</ul>
+<p>主动屏蔽是一种覆盖整个芯片的金属网格，网格中持续传递数据。如果网格发生断开或修改，芯片将停止运行。主动屏蔽主要用于防止探测攻击，但同时也有助于保护芯片免受故障注入攻击，因为它使得定位电路中的特定模块变得更加困难。</p>
+<h3 id="selected-hw-countermeasures">Selected HW countermeasures</h3>
+<ul>
+<li>Duplication / multiplication with comparison</li>
+<li>Time redundancy with
+comparison在不同时间段执行相同的计算操作，并对比结果。例如，在一次计算完成后，稍作延迟，再进行相同的计算，然后比较两次结果是否一致</li>
+<li>Recomputing with swapped operands</li>
+</ul>
+<h3 id="sw-countermeasures">SW countermeasures</h3>
+<p>Complement hardware countermeasures ,Protection against future attack
+techniques,Do not increase the hardware block size</p>
+<ul>
+<li>Checksums, Randomization</li>
+<li>Variable,Execution redundancy</li>
+<li>Ratification counters and
+baits通过插入小的代码片段进行验证操作。例如：验证计数器：在关键操作前后使用计数器，确保操作次数正确。</li>
+<li>Dummy
+Operations在关键操作之间插入一些虚操作，这些操作不会改变实际结果，但会增加攻击者推断实际操作的难度。</li>
+<li>Calculate the Result and Then Compute Back
+通过计算结果并进行逆运算来验证输入的正确性</li>
+</ul>
+<h3
+id="control-flow-integrity-through-sponge-based-control-flow-protection">Control
+flow integrity through sponge-based control-flow protection</h3>
+<p>Detection: random instruction after decrypt
+stage在程序的解密阶段（或关键计算阶段）之后插入随机指令，可以用来检测是否发生了控制流篡改。具体来说，当程序执行到这些随机指令时，它们应当不会改变程序的实际逻辑，但如果攻击者尝试通过篡改指令流来绕过保护，这些随机指令的执行结果将会出现异常。</p>
+<p>Address:</p>
+<ul>
+<li>Corrupted communication in memory and instruction fetch</li>
+<li>Tampering with the processor core</li>
+</ul>
+<h3 id="sponge-based-control-flow-protection">Sponge-based control-flow
+protection</h3>
+<p>是一种通过使用基于状态的哈希函数来确保程序控制流完整性的方法。这种保护机制主要用于防止攻击者通过操控程序的控制流来执行恶意代码。</p>
+<p>在控制流程加入patch, 用这个patch更新哈希函数,
+最后检验指令的流程的哈希值是否是预期的</p>
+<ul>
+<li>Additional patches introduced for indirect calls</li>
+<li>Four patches vs one to avoid undesired collisions into SCFP
+state</li>
+</ul>
+<p>为了避免碰撞，可以使用四个不同的补丁，分别处理不同类型的控制流转移</p>
+<h2 id="secure-processor-architectures-fpgas">Secure Processor
+Architectures / FPGAs</h2>
+<h3 id="authentication-token">Authentication Token</h3>
+<ul>
+<li>Passwords are frequently exploited</li>
+<li>Second authentication factor helps</li>
+</ul>
+<h3 id="architecture-of-opentitan">Architecture of OpenTitan</h3>
+<ul>
+<li>Open source project for a secure element</li>
+<li>Mixture of open digital an proprietary analog components</li>
+</ul>
+<h4 id="examples-for-customizing-opentitan">Examples for Customizing
+OpenTitan</h4>
+<ul>
+<li>Removal of internal NVM („flashless“)</li>
+<li>Post-quantum secure boot</li>
+<li>Cryptographic key isolation</li>
+<li>Authenticated debug</li>
+</ul>
+<h4 id="post-quantum-secure-boot">Post-quantum secure boot</h4>
+<ul>
+<li>Leighton-Micali Signatures (LMS) : Hash-based signature
+<ul>
+<li>LMS Rust implementation</li>
+<li>LMS hardware accelerator</li>
+</ul></li>
+<li>Dilithium Support for OpenTitan</li>
+</ul>
+<h3 id="field-programmable-gate-arrays-fpgas">Field programmable gate
+arrays (FPGAs)</h3>
+<p>Devices with configurable digital logic</p>
+<h3 id="secure-boot">Secure Boot</h3>
+<p>Two software authorities</p>
+<p>Monotonic incrementing serial numbers to implement certificate
+revocation</p>
+<h3 id="key-management">Key Management</h3>
+<p>Strong cryptographic keying material required to protect sensitive
+information</p>
+<p>Unique device secret stored in one-time programmable memory</p>
+<p>Used to implement TCG’s Device Identifier Composition Engine
+(DICE)</p>
+<h3 id="secure-update">Secure Update</h3>
+<p>Software vulnerabilities are difficult to avoid, a secure update
+mechanism is important</p>
+<p>Software update mechanism alone is not sufficient</p>
+<p>Additional control of device with the authenticated watchdog
+timer</p>
+<h3 id="authenticated-watchdog-timer">Authenticated Watchdog Timer</h3>
+<p>The typical watchdog timer</p>
+<p>The authenticated watchdog timer is similar, but with important
+differences</p>
+<h2 id="memory-encryption-and-enclaves">Memory Encryption and
+Enclaves</h2>
+<h3 id="memory-encryption">Memory encryption</h3>
+<ul>
+<li>CPU: data and addresses in plaintext only</li>
+<li>Plaintext + ciphertext buses with encryption modules in between</li>
+</ul>
+<h3 id="disk-encryption">Disk encryption</h3>
+<p>XEX-based tweaked-codebook mode with ciphertext stealing (XTS)</p>
+<h3 id="enclaves安全区">Enclaves安全区</h3>
+<p>安全区（enclave）是现代计算系统中的一种安全机制，它提供了一个隔离的执行环境，用于保护敏感数据和代码免受外部攻击或未经授权访问。</p>
+<h4 id="protected-mode-rings">Protected mode (rings)</h4>
+<p><img src="https://fyindex.work/PicGo/image-20240728102058334.png" alt="image-20240728102058334" style="zoom: 50%;" /></p>
+<p>Trusted Execution Environment (TEE)</p>
+<h4 id="goal-of-implementing-enclaves">Goal of implementing
+enclaves</h4>
+<ul>
+<li>Authenticate itself (device)</li>
+<li>Authenticate software</li>
+<li>Guarantee the integrity and privacy of remote execution</li>
+</ul>
+<h4 id="different-enclaves">different enclaves</h4>
+<p>深色是trusted componet</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728102448999.png"
+alt="image-20240728102448999" />
+<figcaption aria-hidden="true">image-20240728102448999</figcaption>
+</figure>
+<h4 id="other-tee">Other TEE</h4>
+<ul>
+<li>AMD SEV</li>
+<li>ARM TrustZone</li>
+</ul>
+<h4 id="why-do-we-need-an-open-source-enclave">Why do we need an
+open-source enclave?</h4>
+<ul>
+<li><p>Existing enclave systems are proprietary and difficult to
+experiment with</p></li>
+<li><p>A lot of challenges for enclaves</p></li>
+<li><p>Open source design</p>
+<ul>
+<li>Provides transparency &amp; enables high assurance</li>
+</ul></li>
+</ul>
+<h4 id="keystone-open-framework-for-secure-enclaves">Keystone: Open
+framework for secure enclaves</h4>
+<ul>
+<li>The first full-stack open-source enclave for minimal
+requirements</li>
+<li>Open framework: built modular &amp; portable for easy extension</li>
+</ul>
+<h4 id="minimum-set-of-hardware">Minimum set of hardware</h4>
+<ul>
+<li>RISC-V Physical Memory Protection (PMP)</li>
+<li>RISC-V U(ser)-, S(upervisor)-, and M(achine)-mode</li>
+<li>Entropy source available at boot time</li>
+<li>Root of trust (preferably a crypto engine)</li>
+<li>If untrusted/external DRAM –memory encryption/integrity engine</li>
+</ul>
+<p>Demonstrated in unmodified
+processors为了在未经修改的处理器上实现安全区和其他关键安全功能，上述硬件组件是必不可少的。</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728103028601.png"
+alt="image-20240728103028601" />
+<figcaption aria-hidden="true">image-20240728103028601</figcaption>
+</figure>
+<h4 id="memory-isolation-with-the-risc-v-pmp">Memory isolation with the
+RISC-V PMP</h4>
+<ul>
+<li>Special registers to control permissions of U-and S-mode accesses to
+a specified memory region</li>
+<li>Whitelist-based</li>
+<li>Dynamically configurable by M-mode</li>
+</ul>
+<p>为了支持多个并发运行的安全区，每个“活动”的安全区都对应一个 PMP
+条目。</p>
+<h4 id="s-mode-enclave-runtime">S-Mode enclave runtime</h4>
+<ul>
+<li><p>Provides kernel-like functionality: Syscall, traps,Thread and
+page table management</p></li>
+<li><p>Useful layer of abstraction</p>
+<p>S-模式运行时提供了一个抽象层，使得用户模式（U-mode）代码只需要最低的权限来执行。这种设计方式极大地减少了代码执行的权限，降低了潜在的安全风险</p>
+<p>通过在S-模式提供额外的功能，运行时避免了直接在安全监控（SM）中添加复杂性。</p></li>
+</ul>
+<h4 id="remote-attestation">Remote attestation</h4>
+<p>远程认证是一种确保远程系统可信性的技术，特别是在创建安全区（enclave）时，RISC-V的安全监控（SM）执行特定步骤来实现这一目标</p>
+<ul>
+<li>measure the enclave
+在创建安全区时，安全监控（SM）会测量该安全区。这一测量过程通常涉及计算安全区代码和数据的哈希值，以生成一个唯一的标识</li>
+<li>Enclave may bind a key to the enclave report</li>
+<li>SM signs the enclave report and hands it (+ SM report) to the
+user</li>
+</ul>
+<p>比如
+在用户发起交易时，安全区可以生成一个经过签名的报告，证明交易数据和身份验证的真实性，远程银行服务器可以验证该报告以确认交易的合法性。</p>
+<h4 id="secure-enclaves-in-a-speculative-out-of-order-processor">Secure
+enclaves in a speculative out-of-order processor</h4>
+<ul>
+<li>Forbid resource sharing between enclaves禁止资源共享</li>
+</ul>
+<p>为了防止不同安全区之间的资源共享，从而避免潜在的安全漏洞，例如缓存集合在不同安全区之间共享带来的数据泄露风险，MI6的设计禁止了这种资源共享。这类似于操作系统中不同特权级别之间的隔离机制。</p>
+<ul>
+<li>Slowdown by not using speculation in the entire
+program禁用投机执行</li>
+</ul>
+<p>在现代处理器中，投机执行是一种常见的性能优化技术，通过提前执行可能会用到的指令来提高性能。然而，这也带来了安全风险，例如Spectre和Meltdown攻击。MI6通过完全禁用投机执行来提高安全性，但这会导致约3倍的性能下降。</p>
+<ul>
+<li>All modules with private state are flushed on enclave entry and
+exit.私有状态刷新</li>
+</ul>
+<p>在进入或退出安全区时，所有具有私有状态的模块（例如缓存、寄存器）都会被刷新，以防止信息泄露。这种操作会带来大约5%的性能开销，但显著提高了安全性。</p>
+<ul>
+<li>Last Level Cache is spatially partitioned.末级缓存空间划分</li>
+</ul>
+<p>为了进一步提高安全性，末级缓存（LLC）被空间划分，这意味着不同安全区之间不会共享同一个缓存区块，从而减少了缓存侧信道攻击的可能性。这种划分带来的性能开销大约为7%。</p>
+<ul>
+<li>Area overhead for hardware modifications硬件修改的面积开销</li>
+</ul>
+<p>为了实现这些安全特性，需要对处理器进行一些硬件修改。除了一级缓存、浮点单元和末级缓存切片之外，这些修改带来的面积开销大约为2%。</p>
+<h4 id="summary">Summary</h4>
+<ul>
+<li><p>Open source enclaves reduce the TCB to hardware, security monitor
+and
+app通过开源安全区，可以将信任计算基（TCB）缩减到硬件、安全监视器和应用程序。</p></li>
+<li><p>Limited required hw security features
+开源安全区所需的硬件安全特性较为有限，这意味着它们可以在各种硬件平台上实现</p></li>
+<li><p>Provide a larger flexibility than fixed
+TEEs相对于固定的可信执行环境（TEEs），开源安全区提供了更大的灵活性</p></li>
+</ul>
+<h3 id="random-number-generation">Random Number Generation</h3>
+<h4 id="data-processing-inequality">Data processing inequality</h4>
+<p>The entropy of a random variable cannot be increased by any
+deterministic operation</p>
+<h4 id="true-random-number-generators-trngs">True Random Number
+Generators (TRNGs)</h4>
+<ul>
+<li><p>Noise source: Root of security for the entropy source and for the
+RBG as a whole.</p></li>
+<li><p>Conditioning: removes bias in raw data去除原始数据中的偏差。</p>
+<p>常用方法包括块密码和哈希函数</p></li>
+<li><p>Health test during startup and operation</p></li>
+</ul>
+<h4 id="pseudo-random-number-generators-prng">Pseudo Random Number
+Generators (PRNG)</h4>
+<ul>
+<li>Entropy input, seed, and later internal state, need to be kept
+secret</li>
+<li>Process state (‘generate’) with hash function or block cipher</li>
+<li>Reseeding重新播种的目的是限制已泄露种子的影响，克服生成函数的局限性，增强PRNG的安全性。</li>
+<li>Enables high throughput!</li>
+</ul>
+<p>suppose that an adversary knows <span
+class="math inline">\(State_x\)</span> .</p>
+<ul>
+<li>Backtracking resistance:Use a one-way function</li>
+<li>Prediction resistance: Can only be addressed by reseeding</li>
+</ul>
+<h4
+id="环形振荡器真实随机数生成器ro-trng">环形振荡器真实随机数生成器（RO
+TRNG）</h4>
+<p>Ring Oscillator</p>
+<ul>
+<li><p>Noise leads to jitter(抖动) in the oscillation (振荡)</p></li>
+<li><p>XOR creates merges multiple inputs to one random response</p>
+<p>RO TRNG通常使用多个环形振荡器的输出信号。</p>
+<p>这些信号通过异或（XOR）操作合并到一起，生成单一的随机输出</p></li>
+</ul>
+<h2 id="secure-key-storage-and-pufs">Secure key storage and PUFs</h2>
+<h3 id="secure-key-storage">Secure key storage</h3>
+<h4 id="read-only-memory-rom">Read-only memory (ROM)</h4>
+<p>里面的值是出场决定的, 不适合作为key存储，因为可以读取</p>
+<h4 id="fuses熔丝">Fuses熔丝</h4>
+<ul>
+<li>Metal eFuse blown by high-density current</li>
+<li>Bone-type layout -&gt; area in the middle is
+blown电子熔丝通常采用骨型布局设计，即中间区域较窄，方便在编程时通过高密度电流将其吹断。</li>
+<li>Can be programmed bit by bit</li>
+<li>Programming creates an open
+circuit编程时，通过施加高密度电流，使特定位置的熔丝吹断，形成永久性开路</li>
+</ul>
+<h4 id="anti-fuses">Anti fuses</h4>
+<ul>
+<li>State not visible externally 状态不会被外界看见</li>
+<li>Programming establishes a
+connection反熔丝通过编程过程建立电连接。与电子熔丝（eFuse）通过高密度电流吹断金属形成开路不同，反熔丝是通过高电压或高电流使绝缘材料击穿，形成永久性导电路径</li>
+</ul>
+<h3 id="physical-unclonable-functions">Physical Unclonable
+Functions</h3>
+<h4 id="example-arbiter-puf">Example: Arbiter PUF</h4>
+<p>Based on different latency of signals, Arbiter will output 0 or 1.
+Due to phisical unclonability, arbitor PUF provided property of
+unforgerability.</p>
+<p>信号在两个延迟链中传播，由于制造过程中微小的工艺差异，每个链路的总延迟会略有不同。</p>
+<p><strong>仲裁器决策</strong>：仲裁器根据两个链路的延迟差异决定输出值，通常输出为
+0 或 1。</p>
+<p><strong>唯一性</strong>：仲裁器 PUF
+可以生成唯一且不可克隆的响应，用于芯片认证，确保每个芯片都是唯一的。</p>
+<p><strong>防伪造</strong>：由于物理差异难以克隆，仲裁器 PUF
+提供了防伪造的机制</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728111106535.png"
+alt="image-20240728111106535" />
+<figcaption aria-hidden="true">image-20240728111106535</figcaption>
+</figure>
+<h4 id="basic-puf-authentication">Basic PUF authentication</h4>
+<p>设备 A（验证者）生成一个随机的挑战，并将其发送给设备
+B（被验证者）</p>
+<p>设备 B 使用其 PUF 计算出对应于挑战的响应</p>
+<p>设备 B 将计算出的响应发送回设备 A。</p>
+<p>设备 A 比较收到的响应和预期的响应。如果两者匹配，设备 B
+的身份就被验证。</p>
+<ul>
+<li>Machine learning attacks if too many challenge-response pairs were
+exposed</li>
+</ul>
+<h4 id="锁定协议-lockdown-protocol">锁定协议 (Lockdown Protocol)</h4>
+<p>防止ML Attack，每次给<span class="math inline">\(c||r_1\)</span> ,
+如果不对的话就不回复了，Attacker就拿不到CR pair</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728125927312.png"
+alt="image-20240728125927312" />
+<figcaption aria-hidden="true">image-20240728125927312</figcaption>
+</figure>
+<h4 id="low-cost-authentication">Low-cost authentication</h4>
+<ul>
+<li>No crypto algorithm needed</li>
+<li>Implementation e.g. in stand-alone RFID
+tags通过在每个产品上附加低成本RFID标签</li>
+<li>Possible Applications: Supply chain tracking,Counterfeit伪造品
+detection for consumer goods</li>
+</ul>
+<h4 id="pufs-used-for-key-generation">PUFs used for key generation</h4>
+<p>是一种基于SRAM存储单元的物理不可克隆函数。它利用了SRAM在上电初始化时的随机行为，当SRAM单元上电时，每个单元会随机地稳定在0或1状态，具体取决于晶体管的物理差异生成独特的硬件指纹</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728204352154.png"
+alt="image-20240728204352154" />
+<figcaption aria-hidden="true">image-20240728204352154</figcaption>
+</figure>
+<p>有 <span class="math inline">\(n\)</span> 个 oscillators,
+他们产生frequency通过multiplexer变成2个counter, 然后比较哪个大.
+Challenge 来选择哪个oscillator通过 multiplexer</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728134722870.png"
+alt="image-20240728134722870" />
+<figcaption aria-hidden="true">image-20240728134722870</figcaption>
+</figure>
+<h4 id="puf-keys-crypto-algorithm">PUF keys + crypto algorithm</h4>
+<ul>
+<li>Read out unique PUF reponse</li>
+<li>Replaces permanent key storage</li>
+<li>Apply standard cryptographic algorithm</li>
+</ul>
+<h4 id="pufs-for-key-storage-idea">PUFs for key storage – Idea</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728112246948.png"
+alt="image-20240728112246948" />
+<figcaption aria-hidden="true">image-20240728112246948</figcaption>
+</figure>
+<ul>
+<li>No secured Non-Volatile Memory (NVM) → lower
+cost安全的非易失性存储器（NVM）</li>
+<li>Secret (Key) only available at runtime → harder to attack</li>
+<li>Can be realized if no secured NVM is available</li>
+</ul>
+<h4 id="measuring-ro-frequencies">Measuring RO Frequencies</h4>
+<ul>
+<li>std shows: not i.i.d (often
+assumed)标准差表明这些频率数据并不是独立同分布</li>
+<li>Mean shows: not every pair is
+balanced这种不平衡可能导致偏差，进而降低熵（entropy）</li>
+</ul>
+<p>在使用环形振荡器（RO）实现的物理不可克隆函数（PUF）时，频率测量是关键的一步</p>
+<ul>
+<li><p>Temperature coefficients</p></li>
+<li><p>Not the same everywhere -&gt; variations in PUF response over
+temperature</p></li>
+<li><p>Insights into specific device (where to place
+ROs)，RO的位置选择对于PUF的性能和稳定性有重要影响</p></li>
+<li><p>Modeling: use measured properties to model PUF performance before
+actually measuring it</p></li>
+<li><p>Bit-Alias评估需要大量的PUF实例，这在实际设备中实现是不可行的。通过建模和仿真，可以生成大量虚拟PUF实例，进行Bit-Alias评估</p></li>
+<li><p>use model to simulate required sample size</p></li>
+</ul>
+<h3 id="puf-based-tamper-protection">PUF-based tamper protection</h3>
+<ul>
+<li>goal: detect and counteract physical access</li>
+<li>篡改检测（Tamper-Detection）</li>
+<li>篡改响应（Tamper-Response）</li>
+<li>零化（Zeroization）在检测到篡改事件后，系统会立即清除敏感数据，以防止攻击者获取</li>
+</ul>
+<p>确保即使在设备断电的情况下，篡改检测系统仍能工作</p>
+<h4 id="our-approach-a-puf-based-envelope-no-battery-required">Our
+approach: a PUF-based envelope – no battery required!</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728113634910.png"
+alt="image-20240728113634910" />
+<figcaption aria-hidden="true">image-20240728113634910</figcaption>
+</figure>
+<h4 id="postprocessing">Postprocessing</h4>
+<p>用于从PUF生产cryptographic key</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728113838537.png"
+alt="image-20240728113838537" />
+<figcaption aria-hidden="true">image-20240728113838537</figcaption>
+</figure>
+<h2 id="trusted-electronics可信电子产品">Trusted
+Electronics可信电子产品</h2>
+<ul>
+<li><p>fulfill requirements on quality and reliability
+设备在整个使用寿命期间都能可靠运行。</p>
+<p>确保在各种环境和条件下保持稳定和可靠的性能。</p></li>
+<li><p>implement a known and complete
+specification设备严格按照规定的规格进行操作。</p>
+<p>设备仅执行规格中定义的功能，不包含可以用作后门的功能。</p>
+<p>规格中的功能在供应链中不会被后续修改</p></li>
+<li><p>must be sufficiently hardened against attacks that change the
+functionality without the consent of the
+user防止未经用户同意的功能修改</p>
+<p>设备需要在规格中包含安全机制。</p>
+<p>当面对恶劣环境时，不会暴露规格外的弱点。</p>
+<p>实现攻击通常利用规格外的属性进行攻击，因此设备必须防范此类攻击</p></li>
+</ul>
+<h3 id="threats-to-electronics-devices">Threats to electronics
+devices</h3>
+<ul>
+<li>Weaknesses弱点是由于设计或制造过程中产生的错误或缺陷。这些弱点在设备的整个生命周期中可能被恶意攻击者利用</li>
+<li>Backdoors后门是恶意行为者故意植入设备中的隐蔽功能或漏洞，目的是在特定情况下进行利用。</li>
+<li>Gray-market
+hardware灰色市场硬件包括假冒、低质量或标签错误的设备或组件。这些非正品硬件进入供应链会导致一系列问题，包括设备性能不稳定、故障率高、甚至存在安全隐患。</li>
+</ul>
+<h3 id="electronics-value-chain">Electronics value chain</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240728130624403.png"
+alt="image-20240728130624403" />
+<figcaption aria-hidden="true">image-20240728130624403</figcaption>
+</figure>
+<h3 id="threats-along-the-value-chain">Threats along the value
+chain</h3>
+<h4 id="concept-and-specification">Concept and specification，</h4>
+<ul>
+<li>Incomplete or incorrect specification</li>
+<li>Intentional weaknesses in specifications and standards</li>
+</ul>
+<h4 id="chip-design">Chip design</h4>
+<ul>
+<li>Implemetation mistakes</li>
+<li>Ambiguous functionality<br />
+</li>
+<li>Implementation attacks outside threat model during design time</li>
+<li>Design tool optimizations that remove security functionality</li>
+</ul>
+<p>backdoor</p>
+<ul>
+<li>Intentionally introduced implementation errors or backdoors in
+in-house developments or 3rd party IP</li>
+<li>Design tool modifications for vulnerabilites or backdoors</li>
+</ul>
+<h4 id="pcb-and-electronics-design">PCB and electronics design</h4>
+<ul>
+<li>Exposed external interfaces</li>
+<li>Unintentional side channels</li>
+</ul>
+<p>backdoors</p>
+<ul>
+<li>Intentional side channels</li>
+<li>Trojan ICs and interfaces for trojan ICs</li>
+</ul>
+<h4 id="chip-manufacturing">Chip manufacturing</h4>
+<ul>
+<li>Undetected errors in design and mask data</li>
+<li>Process deviation from the specification</li>
+</ul>
+<p>backdoors</p>
+<ul>
+<li>Tampering with design and mask data</li>
+<li>Process deviation from the specification</li>
+</ul>
+<p>Gray-market hardware</p>
+<ul>
+<li>Overproduction</li>
+<li>Source for relabeled chips</li>
+</ul>
+<h4 id="ic-logistics-and-supply-chain">IC logistics and supply
+chain</h4>
+<p>Gray-market hardware</p>
+<ul>
+<li>Reentry of discarded chips</li>
+<li>Source for relabeled chips</li>
+</ul>
+<h4 id="end-of-life">End of Life</h4>
+<p>Reverse engineering instead of recycling / destruction</p>
+<p>Source for recycled chips</p>
+<h1 id="exercise">Exercise</h1>
+<ul>
+<li>drow secure system architecture</li>
+</ul>
+<p>SCA</p>
+<ul>
+<li>Method to Decapsulation, why need decapsulation</li>
+</ul>
+<p>PUF</p>
+<ul>
+<li>why ROM not good for key storage</li>
+<li>describe fuse, anti fuse</li>
+<li>describe Arbiter PUF</li>
+<li>what is good for low cost authentication</li>
+<li>usage of low cost authentication</li>
+<li>why use PUF for key storage</li>
+</ul>
+<p>Enclaves</p>
+<ul>
+<li>requests to implement enclaves</li>
+<li>goal of enclaves</li>
+<li>ways to realize Backtracking resistance and Prediction
+resistance</li>
+</ul>
+<p>Secure prosessor</p>
+<ul>
+<li>root of trust</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2023/06/02/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/">http://fyind.de/2023/06/02/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/06/23/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94/" title="二项式反演"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">二项式反演</div></div><div class="info-2"><div class="info-item-1">二项式反演 对于某些问题，比较容易计算  钦定 \(k\) 个位置的可能性  而比较难计算  有 \(k\) 个位置的可能性  这个时候可以用二项式反演对问题进行转化 形式2 一共有 \(n\) 个元素，设 \(f(k)\) 是钦定 \(k\) 个元素的方法数，\(g(k)\) 是恰好选 \(k\) 个元素的方法数，那么有如下关系 \[ f(k) =\sum_{i=k}^n\left(\begin{array}{l}i \\k\end{array}\right) g(i) \Leftrightarrow g(k) = \sum_{i=k}^n (-1)^{i-k}\left(\begin{array}{l}i \\k\end{array}\right) f(i) \] 每个 \(g(i)\) 有 \(\left(\begin{array}{l}i \\k\end{array}\right)\) 种钦定方法 例子 \((a,b,c,d)\) 中求 \(f(2)\) 和 \(g(2)\) 钦定 \((a,b)\) , \((a,c)\), \((a,d)\) , \((b,c)\) ...</div></div></div></a><a class="pagination-related" href="/2023/05/26/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF%E9%9B%86%E5%90%88/" title="算法模板集合"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">算法模板集合</div></div><div class="info-2"><div class="info-item-1">算法模板集合 [toc] 编译 1g++ name.cpp -Wall -Wextra --std=c++17 -o name; .\name.out 对拍 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980import osfrom random import *my = &#x27;m.exe&#x27;std = &#x27;std.exe&#x27;class DSU:    def __init__(self,n=0) -&gt; None:        self.fa = [-1]*(n+1)    def find(self, x: int)-&gt;int:        if self.fa[x] == -1:            return x        else:            self.fa...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8"><span class="toc-number">1.</span> <span class="toc-text">硬件安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">安全的定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#abstraction-layers-and-attack-vectors"><span class="toc-number">1.1.</span> <span class="toc-text">Abstraction Layers and
+Attack Vectors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secure-embedded-system-design"><span class="toc-number">1.2.</span> <span class="toc-text">Secure Embedded System
+Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typical-criteria"><span class="toc-number">1.2.1.</span> <span class="toc-text">Typical Criteria</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#system-architecture"><span class="toc-number">1.2.2.</span> <span class="toc-text">System architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#secure-processor-architecture"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">Secure processor
+architecture</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#secure-co-processor-hsm"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Secure co-processor &#x2F; HSM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#secure-accelerator"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">Secure accelerator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#security-monitor"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">Security monitor</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#security-focused-component"><span class="toc-number">1.2.3.</span> <span class="toc-text">Security-focused component</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cryptographic-algorithms-and-parameters"><span class="toc-number">1.2.4.</span> <span class="toc-text">Cryptographic
+algorithms and parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#asymmetric-vs.-symmetric-cryptography"><span class="toc-number">1.2.5.</span> <span class="toc-text">Asymmetric vs. symmetric
+cryptography</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cryptography-implementation"><span class="toc-number">1.3.</span> <span class="toc-text">Cryptography Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#aes"><span class="toc-number">1.3.1.</span> <span class="toc-text">AES</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#round-function"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Round function</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#state"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">State</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#subbytes"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">SubBytes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shiftrows"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">ShiftRows</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mix-column"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">Mix column</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#add-round-key"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">Add round key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#implementation"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">Implementation</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#elliptic-curve"><span class="toc-number">1.4.</span> <span class="toc-text">Elliptic curve</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#addition"><span class="toc-number">1.4.1.</span> <span class="toc-text">Addition</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pq"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">P+Q</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pp"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">P+P</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#neutral-element"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">Neutral element</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#discrete-elliptic-curves"><span class="toc-number">1.4.2.</span> <span class="toc-text">Discrete elliptic curves</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elliptic-curves-for-cryptography"><span class="toc-number">1.4.3.</span> <span class="toc-text">Elliptic curves for
+cryptography</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key-generation"><span class="toc-number">1.4.4.</span> <span class="toc-text">key generation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#elliptic-curve-discrete-logarithm-problem"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">elliptic curve
+discrete logarithm problem</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#encryption"><span class="toc-number">1.4.5.</span> <span class="toc-text">Encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#point-addition-and-point-doubling"><span class="toc-number">1.4.6.</span> <span class="toc-text">Point addition and point
+doubling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#montgomery-reduction"><span class="toc-number">1.4.7.</span> <span class="toc-text">Montgomery reduction</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#side-channel-attack"><span class="toc-number">1.5.</span> <span class="toc-text">Side Channel Attack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#side-channels"><span class="toc-number">1.5.1.</span> <span class="toc-text">Side-channels</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#microarchitectural-attacks"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">Microarchitectural attacks</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cache-attacks"><span class="toc-number">1.5.2.</span> <span class="toc-text">Cache attacks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#primeprobe-attack"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Prime+Probe Attack</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmos-dynamic-static-power"><span class="toc-number">1.5.3.</span> <span class="toc-text">CMOS Dynamic + Static power</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#power"><span class="toc-number">1.5.4.</span> <span class="toc-text">Power</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#electromagnetic-em-side-channel-attacks"><span class="toc-number">1.5.5.</span> <span class="toc-text">Electromagnetic (EM)
+side channel attacks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mosfet-basics"><span class="toc-number">1.5.6.</span> <span class="toc-text">MOSFET basics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#photonic-emission"><span class="toc-number">1.5.7.</span> <span class="toc-text">Photonic Emission</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decapsulation"><span class="toc-number">1.5.8.</span> <span class="toc-text">Decapsulation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E6%BF%80%E5%85%89%E5%88%BA%E6%BF%80thermal-laser-stimulation"><span class="toc-number">1.5.9.</span> <span class="toc-text">热激光刺激Thermal laser
+stimulation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#simple-power-analysis"><span class="toc-number">1.5.10.</span> <span class="toc-text">Simple Power Analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#some-criteria-affecting-the-measurements"><span class="toc-number">1.5.11.</span> <span class="toc-text">Some criteria
+affecting the measurements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#comparison"><span class="toc-number">1.5.12.</span> <span class="toc-text">comparison</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#differential-power-analysis"><span class="toc-number">1.6.</span> <span class="toc-text">Differential Power Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ecdsa%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E7%AE%97%E6%B3%95"><span class="toc-number">1.6.1.</span> <span class="toc-text">ECDSA椭圆曲线数字签名算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#differential-power-analysis-1"><span class="toc-number">1.6.2.</span> <span class="toc-text">Differential Power Analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hypothesis-test"><span class="toc-number">1.6.3.</span> <span class="toc-text">Hypothesis test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hypothesis-testing-t-test"><span class="toc-number">1.6.4.</span> <span class="toc-text">Hypothesis testing: T test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#correlation-based-dpa"><span class="toc-number">1.6.5.</span> <span class="toc-text">Correlation-based DPA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dpa-properties"><span class="toc-number">1.6.6.</span> <span class="toc-text">DPA Properties</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#practical-problems"><span class="toc-number">1.6.6.1.</span> <span class="toc-text">Practical problems</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#countermeasures"><span class="toc-number">1.6.7.</span> <span class="toc-text">Countermeasures</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#boolean-masking"><span class="toc-number">1.6.7.1.</span> <span class="toc-text">Boolean masking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#masking"><span class="toc-number">1.6.7.2.</span> <span class="toc-text">Masking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hiding"><span class="toc-number">1.6.7.3.</span> <span class="toc-text">Hiding</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#template-attack"><span class="toc-number">1.6.8.</span> <span class="toc-text">Template attack</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#characterization-phase"><span class="toc-number">1.6.8.1.</span> <span class="toc-text">Characterization phase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-phase"><span class="toc-number">1.6.8.2.</span> <span class="toc-text">attack phase</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key-rank-estimation-security-level"><span class="toc-number">1.6.9.</span> <span class="toc-text">Key rank estimation &#x2F;
+security level</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#power-models-for-dpa"><span class="toc-number">1.6.10.</span> <span class="toc-text">Power models for DPA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#classification-of-scas"><span class="toc-number">1.6.11.</span> <span class="toc-text">Classification of SCAs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#microcontroller-security"><span class="toc-number">1.7.</span> <span class="toc-text">Microcontroller Security</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#what-sensitive-data-could-be-stored-in-a-microcontroller"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">What
+sensitive data could be stored in a microcontroller?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#what-are-threats-for-microcontrollers"><span class="toc-number">1.7.0.2.</span> <span class="toc-text">What are threats for
+microcontrollers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#what-are-attack-vectors-for-microcontrollers"><span class="toc-number">1.7.0.3.</span> <span class="toc-text">What are attack
+vectors for microcontrollers</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exceptional-failure"><span class="toc-number">1.7.1.</span> <span class="toc-text">Exception(al) Failure</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fault-attacks"><span class="toc-number">1.8.</span> <span class="toc-text">Fault Attacks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#faults-in-circuit-behavior"><span class="toc-number">1.8.1.</span> <span class="toc-text">Faults in circuit behavior</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#effects-of-a-fault"><span class="toc-number">1.8.2.</span> <span class="toc-text">Effects of a fault</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#temperature"><span class="toc-number">1.8.3.</span> <span class="toc-text">Temperature</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glitching"><span class="toc-number">1.8.4.</span> <span class="toc-text">Glitching</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#clock-glitching"><span class="toc-number">1.8.4.1.</span> <span class="toc-text">Clock Glitching</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#voltage-glitching"><span class="toc-number">1.8.4.2.</span> <span class="toc-text">Voltage glitching</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#electromagnetic-fault-injection"><span class="toc-number">1.8.5.</span> <span class="toc-text">Electromagnetic fault
+injection</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#advantages"><span class="toc-number">1.8.5.1.</span> <span class="toc-text">Advantages</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#disadvantages"><span class="toc-number">1.8.5.2.</span> <span class="toc-text">Disadvantages</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#body-bias-injection"><span class="toc-number">1.8.6.</span> <span class="toc-text">Body bias injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#laser-fault-injection"><span class="toc-number">1.8.7.</span> <span class="toc-text">Laser fault injection</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#assumption"><span class="toc-number">1.8.7.1.</span> <span class="toc-text">Assumption</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#properties-of-lfi"><span class="toc-number">1.8.7.2.</span> <span class="toc-text">Properties of LFI</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#front-side"><span class="toc-number">1.8.7.2.1.</span> <span class="toc-text">front side</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#backside-attacks"><span class="toc-number">1.8.7.2.2.</span> <span class="toc-text">Backside attacks</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rowhammer-attack-on-dram"><span class="toc-number">1.8.8.</span> <span class="toc-text">Rowhammer attack on DRAM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fault-models"><span class="toc-number">1.8.9.</span> <span class="toc-text">Fault models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#comparison-of-attack-techniques"><span class="toc-number">1.8.10.</span> <span class="toc-text">Comparison of attack
+techniques</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fault-attacks-on-cryptographic-algorithms"><span class="toc-number">1.9.</span> <span class="toc-text">Fault attacks on
+cryptographic algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#classification"><span class="toc-number">1.9.1.</span> <span class="toc-text">Classification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#simple-example-dfa"><span class="toc-number">1.9.2.</span> <span class="toc-text">Simple example DFA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fault-attacks-on-ecc"><span class="toc-number">1.9.3.</span> <span class="toc-text">Fault Attacks on ECC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#montgomery-ladder"><span class="toc-number">1.9.3.1.</span> <span class="toc-text">Montgomery Ladder</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weak-curve-fault-attacks"><span class="toc-number">1.9.4.</span> <span class="toc-text">Weak-curve fault attacks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#invalid-point-attack"><span class="toc-number">1.9.4.1.</span> <span class="toc-text">Invalid point attack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#invalid-curve-attack"><span class="toc-number">1.9.4.2.</span> <span class="toc-text">Invalid curve attack</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#differential-fault-attack-on-aes"><span class="toc-number">1.9.5.</span> <span class="toc-text">Differential fault attack on
+AES</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fault-models-1"><span class="toc-number">1.9.5.1.</span> <span class="toc-text">Fault Models</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#key-equations"><span class="toc-number">1.9.5.2.</span> <span class="toc-text">Key equations</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fault-sensor"><span class="toc-number">1.9.6.</span> <span class="toc-text">Fault sensor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selected-hw-countermeasures"><span class="toc-number">1.9.7.</span> <span class="toc-text">Selected HW countermeasures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sw-countermeasures"><span class="toc-number">1.9.8.</span> <span class="toc-text">SW countermeasures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#control-flow-integrity-through-sponge-based-control-flow-protection"><span class="toc-number">1.9.9.</span> <span class="toc-text">Control
+flow integrity through sponge-based control-flow protection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sponge-based-control-flow-protection"><span class="toc-number">1.9.10.</span> <span class="toc-text">Sponge-based control-flow
+protection</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secure-processor-architectures-fpgas"><span class="toc-number">1.10.</span> <span class="toc-text">Secure Processor
+Architectures &#x2F; FPGAs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#authentication-token"><span class="toc-number">1.10.1.</span> <span class="toc-text">Authentication Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#architecture-of-opentitan"><span class="toc-number">1.10.2.</span> <span class="toc-text">Architecture of OpenTitan</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#examples-for-customizing-opentitan"><span class="toc-number">1.10.2.1.</span> <span class="toc-text">Examples for Customizing
+OpenTitan</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#post-quantum-secure-boot"><span class="toc-number">1.10.2.2.</span> <span class="toc-text">Post-quantum secure boot</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#field-programmable-gate-arrays-fpgas"><span class="toc-number">1.10.3.</span> <span class="toc-text">Field programmable gate
+arrays (FPGAs)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secure-boot"><span class="toc-number">1.10.4.</span> <span class="toc-text">Secure Boot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key-management"><span class="toc-number">1.10.5.</span> <span class="toc-text">Key Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secure-update"><span class="toc-number">1.10.6.</span> <span class="toc-text">Secure Update</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#authenticated-watchdog-timer"><span class="toc-number">1.10.7.</span> <span class="toc-text">Authenticated Watchdog Timer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#memory-encryption-and-enclaves"><span class="toc-number">1.11.</span> <span class="toc-text">Memory Encryption and
+Enclaves</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#memory-encryption"><span class="toc-number">1.11.1.</span> <span class="toc-text">Memory encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#disk-encryption"><span class="toc-number">1.11.2.</span> <span class="toc-text">Disk encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#enclaves%E5%AE%89%E5%85%A8%E5%8C%BA"><span class="toc-number">1.11.3.</span> <span class="toc-text">Enclaves安全区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#protected-mode-rings"><span class="toc-number">1.11.3.1.</span> <span class="toc-text">Protected mode (rings)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#goal-of-implementing-enclaves"><span class="toc-number">1.11.3.2.</span> <span class="toc-text">Goal of implementing
+enclaves</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#different-enclaves"><span class="toc-number">1.11.3.3.</span> <span class="toc-text">different enclaves</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#other-tee"><span class="toc-number">1.11.3.4.</span> <span class="toc-text">Other TEE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#why-do-we-need-an-open-source-enclave"><span class="toc-number">1.11.3.5.</span> <span class="toc-text">Why do we need an
+open-source enclave?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#keystone-open-framework-for-secure-enclaves"><span class="toc-number">1.11.3.6.</span> <span class="toc-text">Keystone: Open
+framework for secure enclaves</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#minimum-set-of-hardware"><span class="toc-number">1.11.3.7.</span> <span class="toc-text">Minimum set of hardware</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#memory-isolation-with-the-risc-v-pmp"><span class="toc-number">1.11.3.8.</span> <span class="toc-text">Memory isolation with the
+RISC-V PMP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#s-mode-enclave-runtime"><span class="toc-number">1.11.3.9.</span> <span class="toc-text">S-Mode enclave runtime</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#remote-attestation"><span class="toc-number">1.11.3.10.</span> <span class="toc-text">Remote attestation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#secure-enclaves-in-a-speculative-out-of-order-processor"><span class="toc-number">1.11.3.11.</span> <span class="toc-text">Secure
+enclaves in a speculative out-of-order processor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#summary"><span class="toc-number">1.11.3.12.</span> <span class="toc-text">Summary</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#random-number-generation"><span class="toc-number">1.11.4.</span> <span class="toc-text">Random Number Generation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#data-processing-inequality"><span class="toc-number">1.11.4.1.</span> <span class="toc-text">Data processing inequality</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#true-random-number-generators-trngs"><span class="toc-number">1.11.4.2.</span> <span class="toc-text">True Random Number
+Generators (TRNGs)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pseudo-random-number-generators-prng"><span class="toc-number">1.11.4.3.</span> <span class="toc-text">Pseudo Random Number
+Generators (PRNG)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%BD%A2%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%9C%9F%E5%AE%9E%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90%E5%99%A8ro-trng"><span class="toc-number">1.11.4.4.</span> <span class="toc-text">环形振荡器真实随机数生成器（RO
+TRNG）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secure-key-storage-and-pufs"><span class="toc-number">1.12.</span> <span class="toc-text">Secure key storage and PUFs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#secure-key-storage"><span class="toc-number">1.12.1.</span> <span class="toc-text">Secure key storage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#read-only-memory-rom"><span class="toc-number">1.12.1.1.</span> <span class="toc-text">Read-only memory (ROM)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fuses%E7%86%94%E4%B8%9D"><span class="toc-number">1.12.1.2.</span> <span class="toc-text">Fuses熔丝</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#anti-fuses"><span class="toc-number">1.12.1.3.</span> <span class="toc-text">Anti fuses</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#physical-unclonable-functions"><span class="toc-number">1.12.2.</span> <span class="toc-text">Physical Unclonable
+Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#example-arbiter-puf"><span class="toc-number">1.12.2.1.</span> <span class="toc-text">Example: Arbiter PUF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#basic-puf-authentication"><span class="toc-number">1.12.2.2.</span> <span class="toc-text">Basic PUF authentication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%81%E5%AE%9A%E5%8D%8F%E8%AE%AE-lockdown-protocol"><span class="toc-number">1.12.2.3.</span> <span class="toc-text">锁定协议 (Lockdown Protocol)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#low-cost-authentication"><span class="toc-number">1.12.2.4.</span> <span class="toc-text">Low-cost authentication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pufs-used-for-key-generation"><span class="toc-number">1.12.2.5.</span> <span class="toc-text">PUFs used for key generation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#puf-keys-crypto-algorithm"><span class="toc-number">1.12.2.6.</span> <span class="toc-text">PUF keys + crypto algorithm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pufs-for-key-storage-idea"><span class="toc-number">1.12.2.7.</span> <span class="toc-text">PUFs for key storage – Idea</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#measuring-ro-frequencies"><span class="toc-number">1.12.2.8.</span> <span class="toc-text">Measuring RO Frequencies</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#puf-based-tamper-protection"><span class="toc-number">1.12.3.</span> <span class="toc-text">PUF-based tamper protection</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#our-approach-a-puf-based-envelope-no-battery-required"><span class="toc-number">1.12.3.1.</span> <span class="toc-text">Our
+approach: a PUF-based envelope – no battery required!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#postprocessing"><span class="toc-number">1.12.3.2.</span> <span class="toc-text">Postprocessing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#trusted-electronics%E5%8F%AF%E4%BF%A1%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81"><span class="toc-number">1.13.</span> <span class="toc-text">Trusted
+Electronics可信电子产品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#threats-to-electronics-devices"><span class="toc-number">1.13.1.</span> <span class="toc-text">Threats to electronics
+devices</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#electronics-value-chain"><span class="toc-number">1.13.2.</span> <span class="toc-text">Electronics value chain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#threats-along-the-value-chain"><span class="toc-number">1.13.3.</span> <span class="toc-text">Threats along the value
+chain</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#concept-and-specification"><span class="toc-number">1.13.3.1.</span> <span class="toc-text">Concept and specification，</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chip-design"><span class="toc-number">1.13.3.2.</span> <span class="toc-text">Chip design</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pcb-and-electronics-design"><span class="toc-number">1.13.3.3.</span> <span class="toc-text">PCB and electronics design</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chip-manufacturing"><span class="toc-number">1.13.3.4.</span> <span class="toc-text">Chip manufacturing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ic-logistics-and-supply-chain"><span class="toc-number">1.13.3.5.</span> <span class="toc-text">IC logistics and supply
+chain</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#end-of-life"><span class="toc-number">1.13.3.6.</span> <span class="toc-text">End of Life</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exercise"><span class="toc-number">2.</span> <span class="toc-text">Exercise</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

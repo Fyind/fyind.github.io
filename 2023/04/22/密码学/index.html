@@ -1,0 +1,1822 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>密码学 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="密码学 理论基础 Alice 给 Bob 发消息，保护消息的 confidentiality. 传输途径可以是任意的，Internet, USB stick… 在过程中被动的监听者Eve 有可能会监听或者解释信息. 在过去，军事加密依赖于信息的混乱程度 obfuscation of message contents. 现代密码学依赖于 Kerckhoff’s Principle, 除了key所有信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学">
+<meta property="og:url" content="http://fyind.de/2023/04/22/%E5%AF%86%E7%A0%81%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="密码学 理论基础 Alice 给 Bob 发消息，保护消息的 confidentiality. 传输途径可以是任意的，Internet, USB stick… 在过程中被动的监听者Eve 有可能会监听或者解释信息. 在过去，军事加密依赖于信息的混乱程度 obfuscation of message contents. 现代密码学依赖于 Kerckhoff’s Principle, 除了key所有信">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2023-04-22T13:58:04.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.877Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="安全">
+<meta property="article:tag" content="密码学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "密码学",
+  "url": "http://fyind.de/2023/04/22/%E5%AF%86%E7%A0%81%E5%AD%A6/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2023-04-22T13:58:04.000Z",
+  "dateModified": "2025-07-18T10:49:53.877Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2023/04/22/%E5%AF%86%E7%A0%81%E5%AD%A6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '密码学',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">密码学</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">密码学</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-04-22T13:58:04.000Z" title="Created 2023-04-22 13:58:04">2023-04-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.877Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="密码学">密码学</h1>
+<h1 id="理论基础">理论基础</h1>
+<p>Alice 给 Bob 发消息，保护消息的 confidentiality.
+传输途径可以是任意的，Internet, USB stick… 在过程中被动的监听者Eve
+有可能会监听或者解释信息.</p>
+<p>在过去，军事加密依赖于信息的混乱程度 obfuscation of message contents.
+现代密码学依赖于 Kerckhoff’s Principle, 除了key所有信息都是已知的.</p>
+<blockquote>
+<p>A crypto system should be secure, even if everything about the
+system, except the key, is public knowledge.</p>
+</blockquote>
+<p>信息加密是通过 encryption schemes 使用一个key和lock concept来实现的.
+只有key的持有者可以加密解密信息. Alice会把key <span
+class="math inline">\(k\)</span> 分享给Bob,
+我们现在还不关系这个怎样实现.</p>
+<ul>
+<li>Alice 加密信息 <span class="math inline">\(m\)</span>, <span
+class="math inline">\(c := E(k,m)\)</span></li>
+<li>Bob 解密信息 <span class="math inline">\(m:=D(k,c)\)</span></li>
+</ul>
+<h3 id="香农密码-shannon-cipher">香农密码 Shannon Cipher</h3>
+<p>我们定义一个 encryption scheme <span class="math inline">\(\Pi:=(E,
+D)\)</span> 是一对加密解密函数</p>
+<ul>
+<li><p><span class="math inline">\(k \in \mathcal{K}\)</span>
+是加密使用的key</p></li>
+<li><p><span class="math inline">\(m \in \mathcal{M}\)</span> 是信息
+message</p></li>
+<li><p><span class="math inline">\(c \in \mathcal{C}\)</span> 是密文
+ciphertext</p></li>
+<li><p><span class="math inline">\(E: \mathcal{K} \times \mathcal{M}
+\rightarrow \mathcal{C}\)</span> 是加密函数</p></li>
+<li><p><span class="math inline">\(D: \mathcal{K} \times \mathcal{C}
+\rightarrow \mathcal{M}\)</span> 是解密函数</p></li>
+<li><p>正确性: <span class="math inline">\(\forall k \in \mathcal{K}, m
+\in \mathcal{M}: D(k, E(k, m))=m\)</span></p></li>
+</ul>
+<p>这个密码被称为 Shannon cipher.</p>
+<h4 id="one-time-pad-otp">One-time-pad (OTP)</h4>
+<p>OTP 是一个Shannon cipher. OTP 中 <span
+class="math inline">\(\mathcal{K}=\mathcal{M}=\mathcal{C}:=\{0,1\}^L\)</span>
+其中 <span class="math inline">\(L\ge 1\)</span> 是长度.
+我们可以简单证明它的正确性</p>
+<p>证明 <span class="math display">\[
+D(k, E(k, m))=D(k, k \oplus m)=k \oplus(k \oplus m)=m
+\]</span></p>
+<h3 id="定义-1-完美安全-perfect-security">定义 1 完美安全 Perfect
+security</h3>
+<p>一个Shannon cipher <span class="math inline">\(\Pi=(E, D)\)</span>
+over <span class="math inline">\((\mathcal{K}, \mathcal{M},
+\mathcal{C})\)</span> 是 perfectly secure 若 <span
+class="math display">\[
+\forall m_0, m_1 \in \mathcal{M}, c \in \mathcal{C}:
+\operatorname{Pr}\left[E\left(\mathbf{k},
+m_0\right)=c\right]=\operatorname{Pr}\left[E\left(\mathbf{k},
+m_1\right)=c\right]
+\]</span> <span class="math inline">\(\mathbf{k}\)</span> 是 random
+variable.</p>
+<p>任取两个信息，用任意个key得出密文是 <span
+class="math inline">\(c\)</span> 的概率是相同的. 也就是可能是 <span
+class="math inline">\(m_0\)</span> 也可能是 <span
+class="math inline">\(m_1\)</span></p>
+<p>于是不可能从密文中获取任何信息. 我们一直假设 <span
+class="math inline">\(k\)</span> 是完全随机选取的，每个 <span
+class="math inline">\(k\)</span> 的概率是 <span
+class="math inline">\(\frac{1}{|\mathcal{K}|}\)</span> 于是可以推出
+<span class="math display">\[
+\operatorname{Pr}[E(k, m)=c]=\frac{N_{m, c}}{|\mathcal{K}|}
+\]</span> 其中 <span class="math inline">\(N_{m,c}\)</span>
+是有多少个key 可以把 <span class="math inline">\(m\)</span> 加密成 <span
+class="math inline">\(c\)</span> <span class="math display">\[
+N_{m, c}=|\{k \in \mathcal{K}: E(k, m)=c\}|
+\]</span> 所以有另一个等价的定义： <span class="math display">\[
+\forall m_0, m_1 \in \mathcal{M}, c \in \mathcal{C}: N_{m_0, c}=N_{m_1,
+c}
+\]</span> 对于任意两个信息，能把 <span
+class="math inline">\(m_0\)</span> 变成 <span
+class="math inline">\(c\)</span> 和能把 <span
+class="math inline">\(m_1\)</span> 变成 <span
+class="math inline">\(c\)</span> 的key个数相同</p>
+<ul>
+<li>即使Perfectly secure
+的密码也可能被破解，如果使用不当，比如OTP只能用1次.</li>
+</ul>
+<h4 id="定理-1-otp-perfectly-secure">定理 1 OTP perfectly secure</h4>
+<p>The one-time pad is perfectly secure.</p>
+<p>因为对于所有 <span class="math inline">\(m \in \mathcal {M}\)</span>
+只有1个 key 使得 <span class="math inline">\(E(k,m)=c\)</span> 也就是
+<span class="math inline">\(N_{m,c}=1\)</span> .</p>
+<p>证明</p>
+<p>假设有两个 key <span class="math inline">\(k_0,k_1\)</span> 使得
+<span class="math inline">\(E(k_0,m)=E(k_1,m)=c\)</span> 那么 <span
+class="math display">\[
+\begin{aligned}
+E\left(k_0, m\right) &amp; =E\left(k_1, m\right) \\
+k_0 \oplus m &amp; =k_1 \oplus m \\
+k_0 \oplus m \oplus m &amp; =k_1 \oplus m \oplus m \\
+k_0 &amp; =k_1
+\end{aligned}
+\]</span> 所以这两个是一样的,</p>
+<p>但在使用中，如果要通讯 1GB, 那么你需要交换 1GB 的密钥.
+那还不如只交换信息.</p>
+<h3 id="定理-2-shannons-theorem">定理 2 Shannon’s Theorem</h3>
+<p>If <span class="math inline">\(\Pi=(E, D)\)</span> 是 perfectly
+secure, then <span class="math inline">\(|\mathcal{K}|
+\geq|\mathcal{M}|\)</span></p>
+<p>证明</p>
+<p>假设 <span class="math inline">\(|\mathcal{K}| &lt;
+|\mathcal{M}|\)</span> 那么选择一个信息和密钥 <span
+class="math inline">\(\operatorname{Pr}\left[E\left(\mathbf{k},
+m_0\right)=c\right]&gt;0\)</span> 然后设 <span
+class="math inline">\(S\)</span> 是所有 <span
+class="math inline">\(c\)</span> 的解密集合. <span
+class="math inline">\(S=\{D(\hat{k}, c) \in \mathcal{M}: \hat{k} \in
+\mathcal{K}\}\)</span> 有 <span class="math inline">\(|S|
+\leq|\mathcal{K}|&lt;|\mathcal{M}|\)</span> 那么我们选择 <span
+class="math inline">\(m_1 \in \mathcal{M} \backslash S\)</span>
+所以<span class="math inline">\(m_1\)</span> 不是 <span
+class="math inline">\(c\)</span> 的解密。那么 <span
+class="math inline">\(c\)</span> 也不是 <span
+class="math inline">\(m_1\)</span>
+的加密，因为如果是的话根据正确性一定是解密。所以 <span
+class="math inline">\(\operatorname{Pr}\left[E\left(\mathbf{k},
+m_1\right)=c\right]=0\)</span>
+所以不能被加密或解密。所以找到了一个不同的概率。</p>
+<p>所以 perfect security 是不可实现的 not practical.
+我们需要一个高效的算法使得我们的密码被高效破译的可能性忽略不计.</p>
+<h3 id="定义-2-ppt-adversary">定义 2 PPT adversary</h3>
+<p>一个对手 adversary <span class="math inline">\(\mathcal{A}\)</span>
+是高效的 efficient, 若它可以在多项式时间内完成计算 polynomially-bounded
+time. 我们称它为 probabilistic polynomial time (PPT)-adversary.</p>
+<h4 id="定义-3-polynomially-bounded">定义 3 polynomially-bounded</h4>
+<p>一个函数 <span class="math inline">\(f: \mathbb{Z}_{+} \rightarrow
+\mathbb{R}\)</span> 是 polynomially-bounded 若存在 <span
+class="math inline">\(c\in \mathbb{N}\)</span> 使得对于所有整数 <span
+class="math inline">\(n \geq n_0\)</span>, we have <span
+class="math inline">\(|f(n)| \leq n^c\left(f(n) \in
+\mathcal{O}\left(n^c\right)\right)\)</span></p>
+<h4 id="定义-4-negligible">定义 4 negligible</h4>
+<p>一个函数 <span class="math inline">\(f: \mathbb{Z}_{+} \rightarrow
+\mathbb{R}\)</span> 是 negligible 若对于所有 <span
+class="math inline">\(c\in \mathbb{N}\)</span> 存在 <span
+class="math inline">\(n_0 \in \mathbb{Z}_{+}\)</span> 使得对于所有整数
+<span class="math inline">\(n \geq n_0\)</span> 有 <span
+class="math inline">\(|f(n)| \leq \frac{1}{n^c}\left(f(n) \in
+\mathcal{O}\left(\frac{1}{n^c}\right)\right)\)</span></p>
+<h4 id="定义-5-super-poly">定义 5 super-poly</h4>
+<p>一个函数 <span class="math inline">\(f: \mathbb{Z}_{+} \rightarrow
+\mathbb{R}\)</span> 是 super-poly 如果 <span
+class="math inline">\(\frac{1}{f}\)</span> 是negligible.</p>
+<h4 id="计算法则">计算法则</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20230422154435525.png"
+alt="image-20230422154435525" />
+<figcaption aria-hidden="true">image-20230422154435525</figcaption>
+</figure>
+<h4 id="安全参数-security-parameters">安全参数 Security Parameters</h4>
+<ul>
+<li>Security parameter <span class="math inline">\(\lambda\)</span>
+是一个正整数</li>
+</ul>
+<p>​ 它在密码部署的时候选择，等级越高，安全系数越高.
+越高意味着更长的key和更慢的 <span class="math inline">\(D,E\)</span>
+运行时间</p>
+<ul>
+<li>System parameter <span class="math inline">\(\Lambda\)</span>
+是一个bit string</li>
+</ul>
+<p>​ 是被 <span class="math inline">\(\lambda\)</span> 选择的.
+比如是一个模数用于取模.</p>
+<h4 id="定义-6-efficient-algorithm">定义 6 Efficient Algorithm</h4>
+<p><span class="math inline">\(A\)</span> 是一个算法，输入一个 security
+parameter <span class="math inline">\(\lambda\)</span> 和其他的参数.
+他们被表示为一个bit string <span class="math inline">\(x
+\in\{0,1\}^{\leq p(\lambda)}\)</span> 其中 <span
+class="math inline">\(p\)</span> 是一个fixed polynomial. 那么我们说
+<span class="math inline">\(A\)</span> 是efficient algorithm 若存在一个
+poly-bounded function <span class="math inline">\(t\)</span>
+和一个可以忽略的参数 negligible function <span
+class="math inline">\(\epsilon\)</span> 使得对于所有的 <span
+class="math inline">\(\lambda,x\)</span> 这个运行时间超过 <span
+class="math inline">\(t(\lambda)\)</span> 的概率最多是 <span
+class="math inline">\(\epsilon(\lambda)\)</span></p>
+<h3 id="定义-7-computational-cipher">定义 7 Computational Cipher</h3>
+<p>我们定义一个 computational cipher 是一对高效算法 <span
+class="math inline">\((E, D)\)</span>
+是一对加密解密<strong>算法</strong></p>
+<ul>
+<li><p><span class="math inline">\(k \in \mathcal{K}\)</span>
+是加密使用的key</p></li>
+<li><p><span class="math inline">\(m \in \mathcal{M}\)</span> 是信息
+message</p></li>
+<li><p><span class="math inline">\(c \in \mathcal{C}\)</span> 是密文
+ciphertext</p></li>
+<li><p><span class="math inline">\(E: \mathcal{K} \times \mathcal{M}
+\rightarrow \mathcal{C}\)</span> 是加密算法</p></li>
+<li><p><span class="math inline">\(D: \mathcal{K} \times \mathcal{C}
+\rightarrow \mathcal{M}\)</span> 是解密算法</p></li>
+<li><p><span class="math inline">\(\mathcal{K,M,C}\)</span>
+是有限的空间</p></li>
+</ul>
+<p>我们的加密算法有可能是 prababilistic 的，也就是对于给定的 <span
+class="math inline">\(k,m,E(k,m)\)</span> 可能会有很多结果. <span
+class="math display">\[
+c \stackrel{R}{\leftarrow} E(k, m)
+\]</span> 正确性可以这样写： <span class="math display">\[
+\forall c \stackrel{R}{\leftarrow} E(k, m): D(k, c)=m
+\]</span> 所有deterministic cipher都是 Shannon cipher.</p>
+<p>然而 Shannon cipher不一定是 computational cipher (不一定高效算法)</p>
+<p>反过来也不一定 (有可能是prababilistic)</p>
+<h4 id="computaional-cipher-的安全性">computaional cipher 的安全性</h4>
+<p>有可能没有 <span class="math inline">\(m_0\)</span> 加密成 <span
+class="math inline">\(c\)</span> 所以我们令 <span
+class="math display">\[
+\left|\operatorname{Pr}\left[\phi\left(E\left(\mathbf{k},
+m_0\right)\right)\right]-\operatorname{Pr}\left[\phi\left(E\left(\mathbf{k},
+m_1\right)\right)\right]\right| \leq \epsilon
+\]</span> 我们可以通过 Attack Game 来定义 <span
+class="math inline">\(\epsilon\)</span></p>
+<h3 id="attack-game-1">Attack Game 1</h3>
+<p>我们有2个Experiment 0, 1 对于 <span class="math inline">\(b
+\in\{0,1\}\)</span> 我们定义 Experiment <span
+class="math inline">\(b\)</span></p>
+<ul>
+<li>对手计算 <span class="math inline">\(m_0,m_1\in \mathcal{M}\)</span>
+长度相同，给chanllenger</li>
+<li>challenger 计算 <span class="math inline">\(k
+\stackrel{R}{\leftarrow} \mathcal{K}, c \stackrel{R}{\leftarrow}
+E\left(k, m_b\right)\)</span> 然后把 <span
+class="math inline">\(c\)</span> 发给对手</li>
+<li>对手猜测 <span class="math inline">\(m_{\hat{b}}=D(k, c)\)</span>
+是哪一个信息.</li>
+</ul>
+<p>我们定义 <span class="math inline">\(\mathcal{A}\)</span> 的 semantic
+security advantage 为 <span class="math display">\[
+S C a d v[\mathcal{A},
+\Pi]:=\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|
+\]</span></p>
+<blockquote>
+<p>目的是A 不能区分实验0和1, 如果 A
+可以区分，那么A的输出b分布肯定不一样。因为是0，1两个变量，所以分布就用1的概率来表示，所以作差</p>
+</blockquote>
+<h4 id="定义-8-semantic-security">定义 8 semantic security</h4>
+<p>一个 cipher 是 semantically secure 若 <span
+class="math inline">\(Scadv[\mathcal{A},\Pi]\)</span> 对于所有 PPT
+对手是可忽略不计的 negligible.</p>
+<h4 id="bit-guessing">Bit Guessing</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240512195906404.png"
+alt="image-20240512195906404" />
+<figcaption aria-hidden="true">image-20240512195906404</figcaption>
+</figure>
+<ul>
+<li><span class="math inline">\(\mathcal{A}\)</span> 计算 <span
+class="math inline">\(m_0,m_1 \in \mathcal{M}\)</span>
+，给chanllenger</li>
+<li>challenger 计算 <span class="math inline">\(b
+\stackrel{R}{\leftarrow}\{0,1\}, k \stackrel{R}{\leftarrow} \mathcal{K},
+c \stackrel{R}{\leftarrow} E\left(k, m_b\right)\)</span></li>
+<li><span class="math inline">\(\mathcal{A}\)</span> 猜测 <span
+class="math inline">\(m_{\hat{b}}=D(k, c)\)</span> 发送 <span
+class="math inline">\(\hat{b}\)</span></li>
+</ul>
+<p><span class="math inline">\(\mathcal{A}\)</span> 获胜的事件是 <span
+class="math inline">\(W\)</span></p>
+<p>We define <span class="math inline">\(\mathcal{A}\)</span> 的
+bit-guessing advantage as <span class="math display">\[
+S C a d v^*[\mathcal{A},
+\Pi]:=\left|\operatorname{Pr}[W]-\frac{1}{2}\right|
+\]</span></p>
+<blockquote>
+<p>他比guessing好多少</p>
+</blockquote>
+<p>两者关系 <span class="math display">\[
+\begin{aligned}
+S C a d v^*[\mathcal{A}, \Pi]
+&amp; =\frac{1}{2} * S C a d v[\mathcal{A}, \Pi]
+\end{aligned}
+\]</span></p>
+<h1 id="secret-key-cryptography">Secret key cryptography</h1>
+<h3 id="定义-10-pseudo-random-generator">定义 10 Pseudo-random
+generator</h3>
+<p>我们定义一个 pseudo-random generator (PRG) 是 <span
+class="math display">\[
+G: \mathcal{S} \rightarrow \mathcal{R}
+\]</span> 其中</p>
+<ul>
+<li><span class="math inline">\(\mathcal{S}:=\{0,1\}^l\)</span> is
+called the seed space.</li>
+<li><span class="math inline">\(\mathcal{R}:=\{0,1\}^L\)</span> is
+called the output space.</li>
+<li><span class="math inline">\(l &lt; L\)</span></li>
+<li>对于随机选择的 <span class="math inline">\(s
+\stackrel{R}{\leftarrow} \mathcal{S}\)</span> 和 <span
+class="math inline">\(r \stackrel{R}{\leftarrow} \mathcal{R},
+G(s)\)</span> and <span class="math inline">\(r\)</span> 是
+computationally indistinguishable 的</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240512195932397.png"
+alt="image-20240512195932397" />
+<figcaption aria-hidden="true">image-20240512195932397</figcaption>
+</figure>
+<h4 id="attack-game-3-prg-advantage">Attack Game 3 PRG advantage</h4>
+<p>对于一个 PRG <span class="math inline">\(G\)</span> ,
+定义实验0，1</p>
+<ul>
+<li>b=0, challenger 计算 <span class="math inline">\(s
+\stackrel{R}{\leftarrow} \mathcal{S}, r \leftarrow G(s)\)</span></li>
+<li>b=1, <span class="math inline">\(r \stackrel{R}{\leftarrow}
+\mathcal{R}\)</span></li>
+</ul>
+<p>对手回答0，1 <span class="math display">\[
+\operatorname{PRGadv}[\mathcal{A},
+G]:=\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|
+\]</span></p>
+<h4 id="定义11-secure-prg">定义11 Secure PRG</h4>
+<p>PRG 是 secure的，若 <span class="math inline">\(P R G a d
+v[\mathcal{A}, G]\)</span> 是 negligible for all PPT <span
+class="math inline">\(\mathcal{A}\)</span></p>
+<h3 id="stream-ciphers">Stream ciphers</h3>
+<p>使用 PRG 我们可以定义 stream cipher</p>
+<ul>
+<li>A seed <span class="math inline">\(s \in
+\mathcal{S}:=\{0,1\}^l\)</span></li>
+<li>A message <span class="math inline">\(m \in
+\mathcal{M}:=\{0,1\}^L\)</span></li>
+<li>An output <span class="math inline">\(r \in
+\mathcal{R}:=\{0,1\}^L\)</span></li>
+<li>A ciphertext <span class="math inline">\(c \in
+\mathcal{C}:=\{0,1\}^L\)</span></li>
+<li>An encryption function <span class="math inline">\(E: \mathcal{S}
+\times \mathcal{M} \rightarrow \mathcal{C}\)</span></li>
+<li>A decryption function: <span class="math inline">\(D: \mathcal{S}
+\times \mathcal{C} \rightarrow \mathcal{M}\)</span></li>
+<li><span class="math inline">\(l &lt; L\)</span></li>
+</ul>
+<p><span class="math inline">\(E(s, m):=G(s) \oplus m=r \oplus
+m\)</span></p>
+<p><span class="math inline">\(D(s, c):=G(s) \oplus c=r \oplus
+c\)</span>.</p>
+<h3 id="定理-3-使用prg-构造-semantic-secure-的cipher">定理 3 使用PRG
+构造 Semantic Secure 的Cipher</h3>
+<p><span class="math display">\[
+S C a d v[\mathcal{A}, \Pi]=2 \cdot S C a d v v^*[\mathcal{A}, \Pi]=2
+\cdot \operatorname{PRGadv}[\mathcal{B}, G]
+\]</span></p>
+<blockquote>
+<p>构造 A 对B 是 Bit guessing, B 攻击 PRG, 如果 A
+赢了，那么对PRG输出0定理 4</p>
+</blockquote>
+<h3 id="定理4-parallel-construction-prg">定理4 parallel construction
+PRG</h3>
+<p>取 <span class="math inline">\(n\)</span> 次 <span
+class="math inline">\(s\)</span> , 输出 <span
+class="math inline">\(n\)</span> 次 <span
+class="math inline">\(G(s)\)</span>， <span
+class="math inline">\(G^{\prime}\left(s_0, \ldots,
+s_{n-1}\right)=\left(G\left(s_0\right), \ldots,
+G\left(s_{n-1}\right)\right)\)</span> <span class="math display">\[
+P R G a d v\left[\mathcal{A}, G^{\prime}\right]=n * P R G a d
+v[\mathcal{B}, G]
+\]</span></p>
+<blockquote>
+<p>建立hybrid game, A对B是 A取前 <span class="math inline">\(w\)</span>
+个随机数, 第 <span class="math inline">\(w\)</span> 个从 PRG 取</p>
+</blockquote>
+<h3 id="bm-sequential-construction">BM Sequential construction</h3>
+<p>有一个 <span class="math inline">\(G\)</span>
+可以生产一个新的种子和一个随机数, 通过迭代 <span
+class="math inline">\(n\)</span> 次生产<span
+class="math inline">\(n\)</span> 个随机数 <span class="math display">\[
+P R G a d v\left[\mathcal{A}, G_{B M}\right]=n * P R G a d
+v[\mathcal{B}, G]
+\]</span></p>
+<h3 id="one-way-function">One Way Function</h3>
+<p>给 A 一个 <span class="math inline">\(y\)</span> , 让A求出 <span
+class="math inline">\(x\)</span> <span class="math display">\[
+O W F a d v[\mathcal{A}, f]=\operatorname{Pr}[y=f(\hat{x})]
+\]</span></p>
+<h4 id="hard-core-bit">hard-core bit</h4>
+<p>给 A 一个 <span class="math inline">\(y\)</span>, 让 A 求 <span
+class="math inline">\(hc(x)\)</span> <span class="math display">\[
+H C a d v[\mathcal{A}, f]=\left|\operatorname{Pr}[\hat{b}=h
+c(x)]-\frac{1}{2}\right|
+\]</span></p>
+<h4 id="构造owp-prg">构造OWP PRG</h4>
+<p><span class="math inline">\(f\)</span> 是 one way permutation, <span
+class="math inline">\(hc\)</span> 是 hard core bit, PRG <span
+class="math inline">\(G(x):=(f(x), h c(x))\)</span> is secure.</p>
+<blockquote>
+<ul>
+<li>one way permutation <span class="math inline">\(f(x)\)</span>
+doesn’t change distribution of <span
+class="math inline">\(x\)</span></li>
+<li>假设A可以计算 <span class="math inline">\(hc(x)\)</span> ,
+我们可以猜一个 <span class="math inline">\(b\)</span> 如果 A
+说这是0，那么就是猜对的，否则就是猜错的 （有点复杂）</li>
+</ul>
+</blockquote>
+<h2 id="cpa-security">CPA Security</h2>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240711145130097.png"
+alt="image-20240711145130097" />
+<figcaption aria-hidden="true">image-20240711145130097</figcaption>
+</figure>
+<h3 id="theorem-8">Theorem 8</h3>
+<p><span class="math inline">\(\Pi_{r C T R}\)</span> using a secure PRF
+is CPA secure <span class="math display">\[
+C P \operatorname{Aadv}\left[\mathcal{A}, \Pi_{r C T R}\right] \leq 2
+\cdot \frac{Q 2 l}{|\mathcal{X}|}+2 \cdot
+\operatorname{PRFadv}[\mathcal{B}, F]
+\]</span></p>
+<blockquote>
+<p>构造bit guessing game，把 PRF 换成 <span
+class="math inline">\(f\)</span> , 最后再换成<span
+class="math inline">\(f\)</span>, 但是最后一步随机数. 用Difference
+lemma计算冲突概率</p>
+</blockquote>
+<h3 id="prf">PRF</h3>
+<p>pseudo-random function, 用一个 <span class="math inline">\(k\)</span>
+, <span class="math inline">\(F(k,x)\)</span> 和 random function
+没有区别</p>
+<h4 id="attack-game">attack game</h4>
+<p>A可以询问 C 任意次，区分PRF 和 random function <span
+class="math display">\[
+\operatorname{PRFadv}[\mathcal{A},
+F]=\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|
+\]</span></p>
+<h4 id="tree-construction">tree construction</h4>
+<p>用一个 01Trie, 返回对应叶子的值，父亲节点生产子节点的值，根是随机数
+<span class="math display">\[
+P R F a d v[\mathcal{A}, F]=Q l \cdot P R G a d v[\mathcal{B}, G]
+\]</span></p>
+<blockquote>
+<p>hybrid game, 第k层的所有叶子用一个 parallel construction 的 PRG
+代替</p>
+</blockquote>
+<h2 id="cca-security">CCA Security</h2>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240711145019609.png"
+alt="image-20240711145019609" />
+<figcaption aria-hidden="true">image-20240711145019609</figcaption>
+</figure>
+<h3 id="prp">PRP</h3>
+<p>是permutation</p>
+<h4 id="attack-game-2">attack game</h4>
+<p>A可以询问 <span class="math inline">\(x\)</span> 给出 <span
+class="math inline">\(y\)</span>, 询问 <span
+class="math inline">\(y\)</span> 给出 <span
+class="math inline">\(x\)</span>, 使得它和随机permutation无法区分</p>
+<h4 id="weak-prp">weak PRP</h4>
+<p>A 不能问 <span class="math inline">\(y\)</span></p>
+<h3 id="构造-cca-secure-cipher">构造 CCA secure Cipher</h3>
+<p><span class="math inline">\(E(k,m) = P(k, m||r)\)</span>, 把一个
+<span class="math inline">\(r\)</span> 随机树加在后面，然后P映射一下</p>
+<p><span class="math inline">\(D(k,m)=P^{-1}(k,c)\)</span> 取前几位
+<span class="math display">\[
+C C A a d v^*[\mathcal{A}, \Pi] \leq P R P a d v[\mathcal{B},
+P]+\frac{Q_D}{2^{2 n}}+\frac{Q_E}{2^n}
+\]</span></p>
+<blockquote>
+<p>用bit Guessing game, reduce to PRP, 然后difference lemma</p>
+</blockquote>
+<p>permutation</p>
+<h3 id="luby-rackoff-construction">Luby-Rackoff construction</h3>
+<h4 id="feistel-permutation">Feistel permutation</h4>
+<p><span class="math inline">\(x \oplus f(y)\)</span> 然后交换位置</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240720234229312.png"
+alt="image-20240720234229312" />
+<figcaption aria-hidden="true">image-20240720234229312</figcaption>
+</figure>
+<h4 id="luby-rackoff">Luby-Rackoff</h4>
+<p>4 round Feistel network <span class="math display">\[
+P R P a d v[\mathcal{A}, E] \leq 4 \cdot P R F a d v[\mathcal{B},
+F]+\frac{Q^2}{|\mathcal{X}|}
+\]</span></p>
+<blockquote>
+<p>证明有点难</p>
+</blockquote>
+<p>DES 是 16 round Feistel network</p>
+<h3 id="prf-switching-lemma">PRF Switching Lemma</h3>
+<p>weak PRP 和 PRF 的区别很小 <span class="math display">\[
+|w P R P a d v[\mathcal{A}, P]-P R F a d v[\mathcal{A}, P]| \leq
+\frac{Q^2}{2|\mathcal{X}|}
+\]</span></p>
+<blockquote>
+<p>这两者Experiment 0
+相同，区别在于真随机函数和真随机排列的区别，所以取<span
+class="math inline">\((i,j)\)</span> <span
+class="math inline">\(f(i)=f(j)\)</span> 相等的概率来区分</p>
+</blockquote>
+<h3 id="ci">CI</h3>
+<p>A cipher provides ciphertext integrity, if CIadv is negligible for
+all PPT adversaries A.</p>
+<h4 id="attack-game-ci">Attack Game CI</h4>
+<p>A 询问 <span class="math inline">\(m_i\)</span>, C 回答 <span
+class="math inline">\(c_i = E(k,m_i)\)</span></p>
+<p>A 发送一个 <span class="math inline">\(c\)</span>, 如果 C
+可以解密，那A赢</p>
+<h3 id="ae">AE</h3>
+<p>A cipher provides authenticated encryption, if it is CPA-secure and
+provides ciphertext integrity under all PPT adversaries A.</p>
+<h3 id="theorem-15-ae-implies-cca">Theorem 15 AE implies CCA</h3>
+<p>If a cipher Π is AE-secure, then it is CCA-secure. <span
+class="math display">\[
+C C A a d v[\mathcal{A}, \Pi] \leq 2 Q_d \cdot C
+\operatorname{Iadv}\left[\mathcal{B}_{C I}, \Pi\right]+C P
+\operatorname{Aadv}\left[\mathcal{B}_{C P A}, \Pi\right]
+\]</span></p>
+<blockquote>
+<p>用0-&gt;1的思路构造，Game0是CCA的Exp0, Game1是如果解密不在 <span
+class="math inline">\(m_i\)</span> 里那么reject. <span
+class="math inline">\(|p_0 - p_1|\le p_{Z}\)</span> . <span
+class="math inline">\(Z\)</span> 就是A成功解密的时候</p>
+</blockquote>
+<h3 id="mac">MAC</h3>
+<p>S : 计算加密的算法</p>
+<p>V: 验证tag的算法，<span class="math inline">\(V(k,m,t)\)</span> 验证
+<span class="math inline">\(S(k,m)==t\)</span> 是否成立</p>
+<h4 id="attack-game-mac">Attack Game MAC</h4>
+<p>A 询问 tag的计算</p>
+<p>A 给出一个 tag的仿制品, 如果验证成功则 A 胜利</p>
+<h4 id="suf-cma">SUF-CMA</h4>
+<p>如果是MAC secure 那么 strong existential unforgeability under a
+chosen message attack</p>
+<h4 id="euf-cma">EUF-CMA</h4>
+<p>existential unforgeability under chosen message attack</p>
+<p>只要A可以生成伪造 <span class="math inline">\((m,t)\)</span> 且 <span
+class="math inline">\(m\)</span> 不在询问中</p>
+<h3 id="定理-16">定理 16</h3>
+<p><span class="math inline">\(F\)</span> 是 secure PRF, <span
+class="math inline">\(\mathcal{T}\)</span> superpoly, 那么 MAC
+是secure的 <span class="math display">\[
+\begin{aligned}
+S(k, m) &amp; :=F(k, m) \\
+V(k, m, t) &amp; := \begin{cases}\text { accept } &amp; \text { if }
+F(k, m)=t \\
+\text { reject } &amp; \text { otherwise. }\end{cases}
+\end{aligned}
+\]</span></p>
+<blockquote>
+<p>Game0 用 F(k,m), Game1 用 f(m), Game1只能猜, 所以<span
+class="math inline">\(M A C a d v[\mathcal{A},
+\mathcal{I}]=\operatorname{Pr}\left[W_0\right]
+\leq\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|+\operatorname{Pr}\left[W_1\right]
+\leq \operatorname{PRFadv}[\mathcal{B},
+F]+\frac{1}{|\mathcal{T}|}\)</span></p>
+</blockquote>
+<h3 id="cbc">CBC</h3>
+<p><span class="math inline">\(c_i\)</span> 作为下一个 <span
+class="math inline">\(IV\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240721111112018.png"
+alt="image-20240721111112018" />
+<figcaption aria-hidden="true">image-20240721111112018</figcaption>
+</figure>
+<h3 id="cascade">Cascade</h3>
+<p><span class="math inline">\(c_i\)</span> 作为下次的 <span
+class="math inline">\(k\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240721113300686.png"
+alt="image-20240721113300686" />
+<figcaption aria-hidden="true">image-20240721113300686</figcaption>
+</figure>
+<h3 id="prefix-free">Prefix-Free</h3>
+<p>A 的每个询问可以是一个String 插入到 Trie 上</p>
+<p>生产这样一个树，每个节点都是 randvalue, 需要检查consistency，因为
+<span class="math inline">\(f( \gamma_{p^{\prime}} \oplus
+a^{\prime}=\gamma_p \oplus a )\)</span>
+这里可能会有重复的，相同的x肯定要映射到相同的 <span
+class="math inline">\(f(x)\)</span> 上， 所以要检查</p>
+<h3 id="theorem-17">Theorem 17</h3>
+<p>secure PRF <span class="math inline">\(F\)</span> , <span
+class="math inline">\(F_{CBC}\)</span>对于prefix free A安全 <span
+class="math display">\[
+P R F^{p f}\left[\mathcal{A}, F_{C B C}\right] \leq \frac{(Q
+l)^2}{2|\mathcal{X}|}+P R F a d v[\mathcal{B}, F]
+\]</span></p>
+<blockquote>
+<p>Game0是用Trie实现CBC, Game1是把 F换成 f. Game2
+是把所有节点都变成随机，不检查冲突</p>
+</blockquote>
+<h3 id="定理-18">定理 18</h3>
+<p>secure PRF <span class="math inline">\(F\)</span> , <span
+class="math inline">\(F^{*}\)</span>对于prefix free A安全 <span
+class="math display">\[
+P R F^{p f}\left[\mathcal{A}, F^*\right] \leq Q l \cdot P R F a d
+v[\mathcal{B}, F]
+\]</span></p>
+<h3 id="定理-19">定理 19</h3>
+<p><span class="math inline">\(F_{CBC},F^{*}\)</span> 都不是安全的MAC
+(也不是secure PRF)</p>
+<blockquote>
+<p>构造 <span class="math inline">\(m_p\)</span>, <span
+class="math inline">\(m_1\)</span> 其中 <span
+class="math inline">\(m_p\)</span> 是 <span
+class="math inline">\(m_1\)</span> 的prefix, 那么 <span
+class="math inline">\(f_p \oplus f_1\)</span> 可以构造出 <span
+class="math inline">\(m_2\)</span> 是 <span
+class="math inline">\(m_1\)</span> 的后缀</p>
+</blockquote>
+<h4 id="prefix-free-encoding">Prefix-free encoding</h4>
+<p>把 <span class="math inline">\(m = (len(m),m_0,...m_k)\)</span>
+先用长度占第一个，就是prefix free了</p>
+<ul>
+<li>not nicely support variable size messages</li>
+</ul>
+<h4 id="cmac">CMAC</h4>
+<p><span class="math inline">\(r p f(k, m):=\left(x_0, \ldots,
+x_{n-2},\left(x_{n-1} \oplus k\right)\right)\)</span>
+把最后一个块异或上<span class="math inline">\(k\)</span> ,
+这样prefix的概率是 <span
+class="math inline">\(\frac{1}{|\mathcal{X}|}\)</span></p>
+<h4 id="encrypted-prf">Encrypted PRF</h4>
+<p>用另一个PRF <span class="math inline">\(F\)</span> 加密 <span
+class="math inline">\(E F\left(\left(k_0, k_1\right),
+m\right):=F\left(k_1, P F\left(k_0, m\right)\right)\)</span></p>
+<p>用CBC是ECBC，用cascade是NMAC</p>
+<ul>
+<li>feed one block at a time to the MAC and at some point in the future
+decided that the message is now complete</li>
+</ul>
+<h3 id="定理-20">定理 20</h3>
+<p><span class="math inline">\(EF\)</span> 是 secure 的PRF <span
+class="math display">\[
+P R F a d v[\mathcal{A}, E F] \leq P R F a d v\left[\mathcal{B}_1,
+F\right]+\frac{Q^2}{2}\left(P R F^{p f} a d v\left[\mathcal{B}_2, P
+F\right]+\frac{1}{|\mathcal{Y}|}\right)
+\]</span></p>
+<h3 id="keyed-hash-function">Keyed Hash Function</h3>
+<p>就是有 <span class="math inline">\(k\)</span> 作为参数的 Hash
+Function</p>
+<h3 id="collision-resistance">Collision resistance</h3>
+<p>A 给 <span class="math inline">\(m_0,m_1\)</span> 使得 <span
+class="math inline">\(H(k,m_0)=H(k,m_1)\)</span> , A赢的概率是 <span
+class="math inline">\(U H F a d v[\mathcal{A}, H]\)</span></p>
+<p>collision resistant keyed hash functions <strong>universal hash
+function</strong>s (UHFs)</p>
+<h3 id="computational-uhf">Computational UHF</h3>
+<p>UHFadv是 negligible的</p>
+<h3 id="定理-21">定理 21</h3>
+<p><span class="math inline">\(PF\)</span> 是extendable, prefix free
+PRF, 那么 <span class="math inline">\(PF\)</span> 也是 computational UHF
+<span class="math display">\[
+U H F a d v[\mathcal{A}, P F] \leq P R F^{p f} a d v[\mathcal{B}, P
+F]+\frac{1}{|\mathcal{Y}|}
+\]</span></p>
+<blockquote>
+<p>Game0 PF 的 UHF game, Game 1 把 PF 换成 f, 如果是 f
+的话,因为是extendable，所以如果是prefix可以构造不是prefix，A只能猜，所以是1/|y|</p>
+</blockquote>
+<h3 id="second-preimage-resistance">Second-preimage resistance</h3>
+<p>C给定一个 <span class="math inline">\(m_0\)</span>, A 找出一个 <span
+class="math inline">\(m_1\)</span> 使得 <span
+class="math inline">\(H(m_0)=H(m_1)\)</span></p>
+<h3 id="定理-22-mac-from-uhf">定理 22 MAC from UHF</h3>
+<p><span class="math inline">\(H\)</span> 是 UHF, <span
+class="math inline">\(F\)</span> 是 secure PRF, 那么 <span
+class="math inline">\(F^{\prime}\left(\left(k_0, k_1\right),
+m\right):=F\left(k_1, H\left(k_0, m\right)\right)\)</span> 是 secure PRF
+<span class="math display">\[
+P R F a d v\left[\mathcal{A}, F^{\prime}\right] \leq P R F a d
+v\left[\mathcal{B}_F, F\right]+\frac{Q^2}{2} \cdot U H F a d
+v\left[\mathcal{B}_H, H\right]
+\]</span></p>
+<blockquote>
+<p>Game0是F’ 的PRF, Game1是换成f, Game2是直接返回随机数,
+Game1和2的区别是找<span class="math inline">\(Q\)</span> 中的pair <span
+class="math inline">\((i,j)\)</span> 是相等的，而找相等的概率是
+UHFadv</p>
+</blockquote>
+<h3 id="hash-function">Hash function</h3>
+<p><span class="math inline">\(H(x)\)</span> 和 keyed hash function
+类似，但是没有key</p>
+<h3 id="collision-resistance-1">Collision resistance</h3>
+<p>A 找两个 <span class="math inline">\(m_0,m_1\)</span> 使得 <span
+class="math inline">\(H(m_0)=H(m_1)\)</span> 的概率, <span
+class="math inline">\(C Radv[\mathcal{A}, H]\)</span></p>
+<h3 id="second-preimage-resistance-1">Second-preimage resistance</h3>
+<p>C 随机一个 <span class="math inline">\(m_0\)</span> 发给 A,
+A找出与之对应的collision的概率 <span
+class="math inline">\(\operatorname{SPRadv}[\mathcal{A}, H]\)</span></p>
+<p>H is collision resistant <span
+class="math inline">\(\mathbb{R}ightarrow\)</span> H is 2nd-preimage
+resistant <span class="math inline">\(\mathbb{R}ightarrow\)</span>H is
+one-way</p>
+<h3 id="dm-davies-meyer">DM (Davies-Meyer)</h3>
+<p>Hash for short message</p>
+<p>把 <span class="math inline">\(m\)</span> 分成2半，一个是 <span
+class="math inline">\(x\)</span>, 一个是 <span
+class="math inline">\(k\)</span> 然后 <span class="math display">\[
+h_{D M}(x, k)=E(k, x) \oplus x
+\]</span></p>
+<h3 id="md-merkle-damgård">MD (Merkle-Damgård)</h3>
+<p>用一个小的hash函数 <span class="math inline">\(h\)</span>
+来构造一个大的</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240715161432596.png"
+alt="image-20240715161432596" />
+<figcaption aria-hidden="true">image-20240715161432596</figcaption>
+</figure>
+<h3 id="定理-23">定理 23</h3>
+<p><span class="math inline">\(h\)</span> 是 collision-resistant , <span
+class="math inline">\(H_{MD}\)</span> 也是 collision-resistant <span
+class="math display">\[
+C \operatorname{Radv}\left[\mathcal{A}, H_{M
+D}\right]=\operatorname{CRadv}[\mathcal{B}, h]
+\]</span></p>
+<blockquote>
+<p>有一<span class="math inline">\(H_{MD}\)</span> 的collision, 如果
+<span class="math inline">\(t\)</span> 或者 <span
+class="math inline">\(m\)</span> 不一样，那么已经有一个 <span
+class="math inline">\(h\)</span> 的collision,
+否则可以往前推，一定可以找到</p>
+</blockquote>
+<h3 id="定理-24-mac-from-hash">定理 24 Mac from Hash</h3>
+<p><span class="math inline">\(\mathcal{I}:=(S, V)\)</span> 是 secure
+MAC, <span class="math inline">\(H\)</span> 是 collision resistant
+那么下面这个MAC 是 secure 的 <span class="math display">\[
+S^{\prime}(k, m):=S(k, H(m)) \quad \text { and } \quad V^{\prime}(k, m,
+t):=V(k, H(m), t)
+\]</span></p>
+<p><span class="math display">\[
+M A C a d v\left[\mathcal{A}_{\mathcal{I}^{\prime}},
+\mathcal{I}^{\prime}\right] \leq M A C a d
+v\left[\mathcal{B}_{\mathcal{I}}, \mathcal{I}\right]+C
+\operatorname{Radv}\left[\mathcal{B}_H, H\right]
+\]</span></p>
+<blockquote>
+<p>分两种情况，1.
+A在query的时候，有2个m是collision，那么可以用来攻击CRadv,
+否则可以用来攻击MACadv</p>
+</blockquote>
+<h3 id="sponge-construction">Sponge construction</h3>
+<p>是用permutation <span class="math inline">\(\pi\)</span> 来构造的
+Hash , 先进行absorption</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240715162038326.png"
+alt="image-20240715162038326" />
+<figcaption aria-hidden="true">image-20240715162038326</figcaption>
+</figure>
+<p>然后进行sqeeze</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240715162059011.png"
+alt="image-20240715162059011" />
+<figcaption aria-hidden="true">image-20240715162059011</figcaption>
+</figure>
+<h3 id="theorem-25">Theorem 25</h3>
+<p>若 <span class="math inline">\(\pi\)</span> 是 random permutation,
+<span class="math inline">\(H\)</span> 是 collision resistant</p>
+<h2 id="ae-secure-construction">AE-secure construction</h2>
+<h3 id="encryption-then-mac">Encryption then MAC</h3>
+<p>secure</p>
+<h3 id="定理-26">定理 26</h3>
+<p><span class="math inline">\(\Pi=(E, D)\)</span> 是 CPA secure, <span
+class="math inline">\(\mathcal{I}=(S, V)\)</span> 是 secure MAC, 那么
+encrypt then mac is secure <span class="math display">\[
+\operatorname{CIadv}\left[\mathcal{A}_{C I}, \Pi_{E t M}\right]=M A C a
+d v\left[\mathcal{B}_{M A C}, \mathcal{I}\right]
+\]</span></p>
+<p><span class="math display">\[
+C P \operatorname{Aadv}\left[\mathcal{A}_{C P A}, \Pi_{E t M}\right]=C P
+\operatorname{Aadv}\left[\mathcal{B}_{C P A}, \Pi\right]
+\]</span></p>
+<blockquote>
+<p>直接构造就行了</p>
+</blockquote>
+<h3 id="aead">AEAD</h3>
+<p>把associated data 和 c 一起 MAC</p>
+<h1 id="public-key-cryptography">Public-key cryptography</h1>
+<h2 id="kem">KEM</h2>
+<p>是 <span class="math inline">\(G\)</span> 生成 <span
+class="math inline">\((pk, sk)\)</span> , 用 <span
+class="math inline">\((k,c) \leftarrow E_{kem}(pk)\)</span> 生产 <span
+class="math inline">\(k\)</span>，<span
+class="math inline">\(D_{kem}(sk, c) = k\)</span> 解密</p>
+<h4 id="attack-game-3">Attack game</h4>
+<p>C 发送 <span class="math inline">\(pk\)</span>, <span
+class="math inline">\((k_b,c_{kem})\)</span> 给 A, A能否区分 <span
+class="math inline">\(k_b\)</span> 和随机生成的 <span
+class="math inline">\(k\)</span></p>
+<h3 id="trapdoor-function">Trapdoor Function</h3>
+<p>是 <span class="math inline">\((G, F, I)\)</span> , <span
+class="math inline">\(G\)</span> 是 KEM <span class="math display">\[
+\forall(p k, s k) \stackrel{R}{\leftarrow}: \forall x \in \mathcal{X}:
+I(s k, F(p k, x))=x
+\]</span></p>
+<h4 id="one-way-tf-attack-game">One way TF, Attack Game</h4>
+<p>C 发送 <span class="math inline">\(pk,y\)</span> 给 A, A 能否计算
+<span class="math inline">\(x\)</span> 是的 <span
+class="math inline">\(F(pk,x)=y\)</span> , <span class="math inline">\(O
+W T F a d v[\mathcal{A}, \mathcal{T}]=\operatorname{Pr}[y=F(p k,
+\hat{x})]\)</span></p>
+<h4 id="用-bm-construction-来构造-kem">用 BM construction 来构造
+KEM</h4>
+<p><img src="https://fyindex.work/PicGo/image-20240723103105672.png"
+alt="image-20240723103105672" /> <span class="math display">\[
+K E M C P A a d v\left[\mathcal{A}, \mathcal{E}_{B M}\right] \leq 2
+\cdot P R G a d v\left[\mathcal{B}, G_{B M}^{p k}\right]
+\]</span></p>
+<blockquote>
+<p>A对KEM的bit guessing, B的k0从 PRG game 里面取，那么 <span
+class="math inline">\(KEMCPAadv* = PRGadv\)</span></p>
+</blockquote>
+<h3 id="rom">ROM</h3>
+<p>有一个 random oracle <span class="math inline">\(\mathcal{O}:
+\mathcal{M} \rightarrow \mathcal{T}\)</span> 类似真随机函数.
+在询问里，A可以做 <span class="math inline">\(\mathcal{O}\)</span>
+询问</p>
+<h4 id="prf-in-rom">PRF in ROM</h4>
+<p>把 PRF 的 attack game 加入一个 random oracle 的query, Experiment 0
+的时候从 RO 取</p>
+<p><span class="math inline">\(F_{\text {pre }}(k, x):=\mathcal{O}(k \|
+x)\)</span> <span class="math display">\[
+P R F^{r o} a d v\left[\mathcal{A}, F_{p r e}\right] \leq \frac{Q_{r
+o}}{|\mathcal{K}|}
+\]</span></p>
+<blockquote>
+<p>Game0里面, 用 dic 记录 ro的值，在 Game1里面舍弃dic, 只有A在 ro
+里面猜到 <span class="math inline">\(k\)</span>
+才能使得这两个game不一样</p>
+</blockquote>
+<h4 id="theorem-29">Theorem 29</h4>
+<p>存在cryptographic schemes使得在ROM里secure，但是不能被securly
+instantiated using PPT algo</p>
+<p>如果 <span class="math inline">\(F_{\text {pre }}(k, x):=H_{M D}(k \|
+x)\)</span> 那么有attack, 对于 <span class="math inline">\(t \leftarrow
+F_{\text {pre }}(k, M)\)</span></p>
+<p>你可以计算 <span class="math inline">\(F_{\text {pre }}\left(k, M\|p
+a d\| M^{\prime}\right)\)</span> <span class="math display">\[
+h\left(M^{\prime} \| \text { pad }, t\right)=F_{\text {pre }}\left(k,
+M\|p a d\| M^{\prime}\right)
+\]</span> 因为有prefix性质，所以A可以预先计算 <span
+class="math inline">\(h\)</span> , 然后询问 <span
+class="math inline">\(F(M||pad||M&#39;)\)</span> 看看是不是 <span
+class="math inline">\(h\)</span></p>
+<h3 id="hmac">HMAC</h3>
+<p>继承 NMAC, 但是加了 <span class="math inline">\(ipad,
+opad\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240723105722169.png"
+alt="image-20240723105722169" />
+<figcaption aria-hidden="true">image-20240723105722169</figcaption>
+</figure>
+<h3 id="定理-30-kem-from-ro">定理 30 KEM from RO</h3>
+<p>pk,sk, <span class="math inline">\(c_{k e m} \leftarrow F(p k,
+s)\)</span> 然后 <span class="math inline">\(k \leftarrow
+\mathcal{O}(s)\)</span> 都从 <span class="math inline">\(s\)</span>
+里生成出来 <span class="math display">\[
+K E M C P A^{r o} a d v[\mathcal{A}, \mathcal{E}] \leq O W T F a d
+v[\mathcal{B}, \mathcal{T}]
+\]</span></p>
+<blockquote>
+<p>Game0 用一个dic记录RO, Game1
+在生产k的时候，不记录在RO里，Game0,1的区别是，A能否猜中 <span
+class="math inline">\(s\)</span> 然后向RO问 <span
+class="math inline">\(\mathcal{O}(s)\)</span> ,
+如果这个发生，那么就可以攻击 OWTF的 attack game</p>
+</blockquote>
+<h2 id="rsa-assumption">RSA assumption</h2>
+<p>已知 <span class="math inline">\((l,e)\)</span> 生成 <span
+class="math inline">\(l\)</span> bit 的质数 <span
+class="math inline">\(p,q\)</span> 使得 <span
+class="math inline">\(gcd(e,p-1)=1.gcd(e,q-1)=1\)</span></p>
+<p>Let <span class="math inline">\(n=pq\)</span> , <span
+class="math inline">\(d = e^{-1} \bmod lcm(p-1,q-1)\)</span></p>
+<p><span class="math inline">\(pk=(n,e),sk=(n,d)\)</span> <span
+class="math display">\[
+F(p k, x):=x^e \bmod n \in \mathbb{Z}_n \text { and } I(s k, y):=y^d \in
+\mathbb{Z}_n
+\]</span></p>
+<h3 id="correctness">correctness</h3>
+<p><span class="math inline">\(ed=1\)</span> 因为逆元, 所以 <span
+class="math inline">\(ed=1+ (p-1)*k_1\)</span> 因为 lcm一定是p-1的倍数
+<span class="math display">\[
+x^{e d} \equiv x^{1+k_p(p-1)} \equiv x \cdot\left(x^{(p-1)}\right)^{k_p}
+\equiv x \cdot 1^{k_p} \equiv x \quad(\bmod p)
+\]</span> 同理 <span class="math inline">\(x^{e d} \equiv x(\bmod
+q)\)</span> 所以 <span class="math inline">\(x^{e d}-x\)</span>
+同时被p,q 整除，所以 <span class="math inline">\(x^{e d} \equiv x
+\quad(\bmod n)\)</span></p>
+<h3 id="rsa-assumption-1">RSA assumption</h3>
+<p>RSA assumption hold if <span class="math inline">\(O W T F
+\operatorname{adv}\left[\mathcal{A}, \mathcal{T}_{R S
+A}]\right.\)</span> is negligible</p>
+<h2 id="diffie-hellman">Diffie-Hellman</h2>
+<p><span class="math display">\[
+E(\alpha)^\beta=\left(g^\alpha\right)^\beta=F(\alpha,
+\beta)=\left(g^\beta\right)^\alpha=E(\beta)^\alpha
+\]</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240723112942018.png"
+alt="image-20240723112942018" />
+<figcaption aria-hidden="true">image-20240723112942018</figcaption>
+</figure>
+<h3 id="discrete-logarithm-dlog">Discrete logarithm (DLOG)</h3>
+<p><span class="math inline">\(\mathbb{G}\)</span> 是 cyclic group,
+<span class="math inline">\(g\)</span> 是generator, A 计算 <span
+class="math inline">\(A=g^{\alpha}\)</span> 计算 <span
+class="math inline">\(\alpha\)</span> , 定义 <span
+class="math inline">\(\operatorname{DLadv}[\mathcal{A},
+\mathbb{G}]=\operatorname{Pr}[\hat{\alpha}=\alpha]\)</span></p>
+<h3 id="computational-diffie-hellman-assumption-cdh">computational
+Diffie-Hellman assumption (CDH)</h3>
+<p>A 根据 <span class="math inline">\(\mathrm{A} \leftarrow g^\alpha,
+\mathrm{B} \leftarrow g^\beta\)</span> 计算 <span
+class="math inline">\(w=g^{\alpha \beta}\)</span> , <span
+class="math inline">\(C D H a d v[\mathcal{A},
+\mathbb{G}]=\operatorname{Pr}[\hat{w}=w]\)</span></p>
+<h3 id="diffie-hellman-kem">Diffie-Hellman KEM</h3>
+<p><span class="math inline">\(E(pk)=(k=H(w=pk^{\beta}),
+g^{\beta})\)</span> , <span
+class="math inline">\(D(\alpha,B)=H(B^{\alpha})\)</span></p>
+<p>计算好 <span class="math inline">\(w\)</span> 后, <span
+class="math inline">\(k \leftarrow H(w)\)</span></p>
+<h3 id="定理-33-dh-kem-in-rom">定理 33 DH-KEM in ROM</h3>
+<p>如果 <span class="math inline">\(H\)</span> 是 ROM, CDH holds, 那么
+<span class="math display">\[
+K E M C P A^{r o} a d v\left[\mathcal{A}, \mathcal{E}_{D H}\right] \leq
+Q \cdot C D H a d v\left[\mathcal{B}_{c d h}, \mathbb{G}\right]
+\]</span></p>
+<blockquote>
+<p>和 OWTF 类似, 因为没办法验证哪一个 RO query 是 <span
+class="math inline">\(\hat{w}\)</span>, 那么就随机一个给CDH Attack
+game</p>
+</blockquote>
+<h3 id="decisional-diffie-hellman-ddh">decisional Diffie-Hellman
+(DDH)</h3>
+<p>C 计算 <span class="math inline">\(A,B,w_b\)</span> 给 A, <span
+class="math inline">\(w_0=g^{\alpha \beta},w_1 = g^{\gamma}\)</span> ,
+<span class="math inline">\(\gamma\)</span> 是随机数, 也是random value,
+看A能否区分 <span class="math inline">\(D D H a d v[\mathcal{A},
+\mathbb{G}]=\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|\)</span></p>
+<h3 id="kdf">KDF</h3>
+<p>Key derivation functions (KDFs) are used to derive cryptographically
+strong keys from existing keys.</p>
+<h4 id="attackgame">AttackGame</h4>
+<p><span class="math inline">\(x\)</span> 是pk,
+看KDF的生成key能否区分随机值</p>
+<p>C 计算 <span class="math inline">\(x \stackrel{R}{\leftarrow}
+\mathcal{X}, y \stackrel{R}{\leftarrow} \mathcal{Y}, z_0 \leftarrow F(x,
+y), z_1 \stackrel{R}{\leftarrow} \mathcal{Z}\)</span> ，发送 <span
+class="math inline">\(x,z_b\)</span> 看是否能区分 <span
+class="math display">\[
+K D F a d v[\mathcal{A},
+F]=\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|
+\]</span></p>
+<h4 id="hkdf">HKDF</h4>
+<p>HKDF is built using the HMAC</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240723135637434.png"
+alt="image-20240723135637434" />
+<figcaption aria-hidden="true">image-20240723135637434</figcaption>
+</figure>
+<h3 id="定理-35-dh-kem-是-secure">定理 35 DH KEM 是 secure</h3>
+<p><span class="math inline">\(F\)</span> 是 secure KDF, DDH holds,
+<span class="math inline">\(\mathcal{E}_{D H}\)</span> 是 secure KEM
+<span class="math display">\[
+K E M C P A a d v\left[\mathcal{A}, \mathcal{E}_{D H}\right] \leq D D H
+a d v\left[\mathcal{B}_{d d h}, \mathbb{G}\right]+K D F a d
+v\left[\mathcal{B}_{k d f}, F\right]
+\]</span></p>
+<blockquote>
+<p>直接构造就行, 先把 <span class="math inline">\(w\)</span>
+换成随机值，再把 <span class="math inline">\(k\)</span> 换成随机值</p>
+</blockquote>
+<h3 id="elliptic-curves">Elliptic curves</h3>
+<p>skipped</p>
+<h2 id="public-encryption-scheme">Public Encryption Scheme</h2>
+<h3 id="hybrid-encryption">Hybrid encryption</h3>
+<p>先用 KEM 生成一个 <span class="math inline">\(k\)</span>,
+然后用这个加密</p>
+<h3 id="public-key-encryption">Public-key encryption</h3>
+<p><span class="math inline">\(\Pi:=(G, E, D)\)</span> , <span
+class="math inline">\(G\)</span> 生产 pk,sk, <span
+class="math inline">\(E,D\)</span> 是加密解密算法，都是probabilistic
+的</p>
+<p>就是把KEM的k换成messange</p>
+<h3 id="pkcca-security">PKCCA Security</h3>
+<p>C 计算 <span class="math inline">\(pk,sk\)</span> , A 发送解密query
+<span class="math inline">\(c_i\)</span>, C 解密 <span
+class="math inline">\(m_i=D(sk,c_i)\)</span> , 最后 A
+发送2个加密，看能不能区分 <span
+class="math inline">\(c_0,c_1\)</span></p>
+<h3 id="定理-36">定理 36</h3>
+<p><span class="math inline">\(\Pi_s\)</span> 是 semantically
+secure的，那么 <span class="math inline">\(\mathcal{E}\)</span> 是CPA
+secure KEM, 那么 hybrid encryption 是 secantically secure 的 <span
+class="math display">\[
+P K C P A a d v[\mathcal{A}, \Pi] \leq 2 \cdot K E M C P A a d
+v\left[\mathcal{B}_{\text {kem }}, \mathcal{E}\right]+S C a d
+v\left[\mathcal{B}_s, \Pi_s\right]
+\]</span></p>
+<blockquote>
+<p>Game0 用 KEM 生产 k, 发送 c0, Game 1随机生产k,发送c0, Game2 发送c1,
+Game3 KEM, 发送c1</p>
+</blockquote>
+<h3 id="elgamal">ElGamal</h3>
+<p><span class="math inline">\(s k:=\alpha \stackrel{R}{\leftarrow}
+\mathbb{Z}_q\)</span> and <span class="math inline">\(p
+k:=g^\alpha\)</span>. <span class="math inline">\(k \leftarrow p
+k^\beta=g^{\alpha \beta}\)</span> , <span class="math inline">\(c
+\leftarrow k \circ m\)</span></p>
+<p>这个圆圈, G-based OTP, 就是把xor换成圆圈</p>
+<h3 id="cca-security-1">CCA Security</h3>
+<p>A 可以加密，解密，最后A发送2个m, C加密其中一个，看A能否区分</p>
+<h3 id="kem-cca-secutiry">KEM CCA secutiry</h3>
+<p>A可以询问 <span class="math inline">\(c_i \ne c_{kem}\)</span> 用
+<span class="math inline">\(D(sk, c_i)\)</span> 的解密， 看A是否能区分
+<span class="math inline">\(k,c_{kem}=E(pk)\)</span> 的 <span
+class="math inline">\(k\)</span> 和随机数</p>
+<h4 id="the-cca-secure-owtf-kem">The CCA-secure OWTF KEM</h4>
+<p><span class="math display">\[
+\begin{aligned}
+E(p k):= &amp; x \stackrel{R}{\leftarrow} \mathcal{X}, c \leftarrow F(p
+k, x) \\
+&amp; k \leftarrow H(x)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+D(s k, c):= &amp; x \leftarrow I(s k, c), \\
+&amp; \text { if } F(p k, x) \neq c \text { return } \perp \\
+&amp; k \leftarrow H(x), \text { return } k
+\end{aligned}
+\]</span></p>
+<h3 id="image-oracles">Image oracles</h3>
+<p>对于 <span class="math inline">\(x\)</span> 可以询问 <span
+class="math inline">\(F(k,x)\)</span> 是否等于 <span
+class="math inline">\(y\)</span></p>
+<h3 id="owtf-with-io">OWTF with IO</h3>
+<p>C 计算 <span class="math inline">\((p k, s k)
+\stackrel{R}{\leftarrow} G(), x \stackrel{R}{\leftarrow} \mathcal{X}, y
+\leftarrow F(p k, x)\)</span> , A 可以询问 <span
+class="math inline">\(y_i\)</span> 是否合法 <span
+class="math inline">\(\hat{y}=F\left(p k, I\left(s k,
+y_i\right)\right)\)</span>, IOWadv 是 A 可以得出 <span
+class="math inline">\(x\)</span> 的概率</p>
+<h3 id="定理-37-kemcca">定理 37 KEMCCA</h3>
+<p><span class="math inline">\(\mathcal{T}\)</span> 是OWTF, <span
+class="math inline">\(H\)</span> 是 ROM <span class="math display">\[
+K E M C C A^{r o} a d v\left[\mathcal{A}, \mathcal{E}_{T D F}\right]
+\leq I O W a d v\left[\mathcal{B}_{\text {iow }}, \mathcal{T}\right]
+\]</span></p>
+<blockquote>
+<p>Game0是CCA game, Game1 是不存储k在map里,
+Game0,1的区别是A会在ROquery里猜出x, 对于解密询问,
+B可以先问IO合不合法，如果合法就随机给一个.
+如果A猜出来了，那么B可以赢IOW</p>
+</blockquote>
+<h3 id="定理-38-ccasecure-hybrid">定理 38 CCAsecure Hybrid</h3>
+<p><span class="math inline">\(\mathcal{E}\)</span> 是 CCAsecure KEM,
+<span class="math inline">\(\Pi_S\)</span> 是 CCA secure cipher, 那么
+hybrid 是CCA secure的 <span class="math display">\[
+P K C C \operatorname{Aadv}[\mathcal{A}, \Pi] \leq 2 \cdot
+\operatorname{KEMCCAadv}\left[\mathcal{B}_{\text {kem }},
+\mathcal{E}\right]+\operatorname{CCAadv}\left[\mathcal{B}_S,
+\Pi_S\right]
+\]</span></p>
+<p><span class="math display">\[
+P K C C A^{r o} a d v\left[\mathcal{A}, \Pi_{T D F}\right] \leq 2 \cdot
+\operatorname{IOWadv}\left[\mathcal{B}_{\text {iow }},
+\mathcal{T}\right]+\operatorname{CCAadv}\left[\mathcal{B}_S,
+\Pi_S\right]
+\]</span></p>
+<blockquote>
+<p>证明与之前类似</p>
+</blockquote>
+<h3 id="fujisaki-okamoto-trapdoor-function">Fujisaki-Okamoto trapdoor
+function</h3>
+<p><span class="math inline">\(U\)</span> 是一个hash function, 定义
+<span class="math inline">\(E_a(p k, x ; r)\)</span> 是随机加密函数,
+<span class="math inline">\(r\)</span> 由C选择 <span
+class="math display">\[
+F(p k, x)=E_a(p k, x ; U(x))
+\]</span> 使得 <span class="math inline">\(\mathcal{T}_{F O}=\left(G_a,
+F, D_a\right)\)</span> 安全的条件是 <span
+class="math inline">\(\Pi_a=\left(G_a, E_a, D_a\right)\)</span></p>
+<ul>
+<li>one way</li>
+<li>unpredictable</li>
+</ul>
+<h4 id="unpredictable-encryption">Unpredictable encryption</h4>
+<p>对于 <span class="math inline">\(\Pi_a=\left(G_a, E_a,
+D_a\right)\)</span> 来说 对于所以 <span
+class="math inline">\(y\)</span>, 如果 <span
+class="math inline">\(r\)</span> 随机，那么 <span
+class="math display">\[
+\operatorname{Pr}\left[E_a\left(p k, D_a(s k, y) ; r\right)=y\right]
+\leq \epsilon
+\]</span></p>
+<h3 id="定理-39">定理 39</h3>
+<p><span class="math inline">\(U\)</span> 是ROM, 若 <span
+class="math inline">\(\Pi_a\)</span> 是 CPA-secure 的, <span
+class="math inline">\(\epsilon\)</span>- unpredictable, 那么 <span
+class="math inline">\(\mathcal{T}_{F O}\)</span> 是 one-way, given an IO
+<span class="math display">\[
+I O W^{r o} a d v\left[\mathcal{A}, \mathcal{T}_{F O}\right] \leq Q_{i
+o} \cdot \epsilon+2 \cdot P K C P A a d v\left[\mathcal{B}_{c p a},
+\Pi_a\right]+\frac{2 Q_{r o}+1}{|\mathcal{X}|}
+\]</span></p>
+<blockquote>
+<p>证明难</p>
+</blockquote>
+<h2 id="digital-signature">Digital Signature</h2>
+<p>A signature scheme <span class="math inline">\(\mathcal{S}\)</span>
+is</p>
+<ul>
+<li><span class="math inline">\((s k, p k) \stackrel{R}{\leftarrow}
+G()\)</span></li>
+<li>用sk签名 <span class="math inline">\(\sigma \stackrel{R}{\leftarrow}
+S(s k, m)\)</span></li>
+<li>用pk验证 <span class="math inline">\(V(p k, m, \sigma)\)</span>
+deterministic</li>
+</ul>
+<h3 id="existentially-unforgable-euf">Existentially unforgable
+(EUF)</h3>
+<p>C 计算 pk,sk, A可以向C要<span class="math inline">\(m_i\)</span>
+的签名, A伪造一个签名 <span
+class="math inline">\((m,\sigma)\)</span>,不可以是询问的 <span
+class="math inline">\(m_i\)</span> , 使得C验证成功 <span
+class="math inline">\(S I G a d v[\mathcal{A}, \mathcal{S}]\)</span></p>
+<h3 id="signature-security-suf">Signature security (SUF)</h3>
+<p>和上面类似, 但是伪造的签名不可以是任何一个询问的 <span
+class="math inline">\((m, \sigma) \notin\left\{\left(m_0,
+\sigma_0\right),\left(m_1, \sigma_1\right), \ldots\right\}\)</span> ,
+<span class="math inline">\(\operatorname{stSIGadv}[\mathcal{A},
+\mathcal{S}]\)</span></p>
+<h3 id="full-domain-hash-fdh">Full domain Hash (FDH)</h3>
+<p>用 <span class="math inline">\(H\)</span> 先 hash message, 然后签名
+<span class="math inline">\(S(s k, m):=\sigma \leftarrow I(s k,
+H(m))\)</span>. <span class="math display">\[
+V(p k, m, \sigma):= \begin{cases}\text { accept, } &amp; \text { if }
+F(p k, \sigma)=H(m) \\ \text { reject, } &amp; \text { otherwise
+}\end{cases}
+\]</span></p>
+<h3 id="定理-41">定理 41</h3>
+<p><span class="math inline">\((F,G,I)\)</span> 是 OWTF, <span
+class="math inline">\(H\)</span> 是 ROM, 那么 <span
+class="math display">\[
+S I G^{r o} a d v\left[\mathcal{A}, \mathcal{S}_{F D H}\right]
+\leq\left(Q_{r o}+1\right) \cdot O W T F a d v[\mathcal{B}, \mathcal{T}]
+\]</span></p>
+<blockquote>
+<p>不妨假设A会询问 <span
+class="math inline">\((\hat{m},\hat{\sigma})\)</span> 的 RO query.
+那么我们把 OWTF 给的 <span class="math inline">\(y\)</span>
+在其中的一个RO query里面回复. 那么就有概率, A给出的伪造是我们需要的</p>
+</blockquote>
+<h4 id="strongly-q-time-signature">(strongly )q-time signature</h4>
+<p>A最多询问 <span class="math inline">\(q\)</span> 次</p>
+<h3 id="lamport-signature">Lamport signature</h3>
+<p>首先有pk和 sk <span class="math display">\[
+s k:=\binom{x_{0,0}, \ldots, x_{v-1,0}}{x_{0,1}, \ldots, x_{v-1,1}}
+\stackrel{R}{\leftarrow} \mathcal{X}^{2 v} \text { and } p
+k:=\binom{y_{0,0}, \ldots, y_{v-1,0}}{y_{0,1}, \ldots, y_{v-1,1}} \in
+\mathcal{Y}^{2 v}
+\]</span></p>
+<p><span class="math display">\[
+S\left(s k, m=\left(m_0, \ldots, m_{v-1}\right)\right):=\left(x_{0,
+m_0}, \ldots, x_{v-1, m_{v-1}}\right)=\sigma \in \mathcal{Y}^v
+\]</span></p>
+<p>更广义 <span class="math display">\[
+\begin{aligned}
+s k &amp; \stackrel{R}{\leftarrow} \mathcal{K} \\
+\left(x_0, \ldots, x_{n-1}\right) &amp; :=(F(s k, 0), \ldots, F(s k,
+n-1)) \\
+p k &amp; :=\left(y_0, \ldots, y_{n-1}\right)=\left(f\left(x_0\right),
+\ldots, f\left(x_{n-1}\right)\right) .
+\end{aligned}
+\]</span> <span class="math inline">\(p(m)\)</span> 可以把一个 <span
+class="math inline">\(m\)</span> 映射到 <span class="math inline">\(\{0,
+\ldots, n-1\}\)</span> 的子集上 <span class="math display">\[
+V\left(p k, m,\left(\sigma_0, \ldots, \sigma_u\right)\right)=
+\begin{cases}\text { accept } &amp; \text { if } l=u \text { and }
+\forall i \in\{0, \ldots, l-1\}: f\left(\sigma_i\right)=y_{s_i} \\ \text
+{ reject } &amp; \text { otherwise. }\end{cases}
+\]</span></p>
+<h3 id="containment-free">containment free</h3>
+<p>对于所有 <span class="math inline">\(m,m&#39;\)</span>, <span
+class="math inline">\(P(m)\)</span> 不被 <span
+class="math inline">\(P(m&#39;)\)</span> 包含</p>
+<h3 id="定理-42">定理 42</h3>
+<p><span class="math inline">\(F\)</span> 是 PRF, <span
+class="math inline">\(f\)</span> 是 one-way fuction, <span
+class="math inline">\(P\)</span> 是 containment free function,
+那么这个是 secure one-time signature <span class="math display">\[
+\operatorname{SIGadv}\left[\mathcal{A}, \mathcal{S}_P\right] \leq n
+\cdot O W F a d v\left[\mathcal{B}_f, f\right]+P R F a d
+v\left[\mathcal{B}_F, F\right]
+\]</span></p>
+<blockquote>
+<p>先把 <span class="math inline">\(F\)</span> 换成 <span
+class="math inline">\(f\)</span>, 然后对于 OWF 的询问，替换掉一个随机的
+<span class="math inline">\(y_i\)</span>,不妨假设被替换的没有被发现,
+然后对于伪造有 <span class="math inline">\(1/n\)</span>
+的概率宣导我们替换的</p>
+</blockquote>
+<p>对于 SPR 的 <span class="math inline">\(f\)</span> <span
+class="math display">\[
+\begin{aligned}
+\operatorname{stSIGadv}\left[\mathcal{A}, \mathcal{S}_P\right] &amp;
+\leq n \cdot\left(O W F a d v\left[\mathcal{B}_{O W},
+f\right]+\operatorname{SPRadv}\left[\mathcal{B}_{S P R},
+f\right]\right)+P R F a d v\left[\mathcal{B}_F, F\right] \\
+&amp; \leq S I G a d v\left[\mathcal{B}_{S I G}, \mathcal{S}_P\right]+n
+\cdot S P R a d v\left[\mathcal{B}_{S P R}, f\right] .
+\end{aligned}
+\]</span></p>
+<blockquote>
+<p>证明在上面的最后一步，如果A给的 <span
+class="math inline">\(m\)</span> 和query一样, 那么存在second preimage,
+有<span class="math inline">\(1/n\)</span>
+的概率宣导我们替换的，否则就可能赢OWF</p>
+</blockquote>
+<h3 id="strongly-secure-hybrid-signatures">Strongly secure hybrid
+signatures</h3>
+<p><span class="math inline">\(\mathcal{S}_{\infty}=\left(G_{\infty},
+S_{\infty}, V_{\infty}\right)\)</span> 是可以多次签名的, <span
+class="math inline">\(\mathcal{S}_1=\left(G_1, S_1, V_1\right)\)</span>
+是只能签1次的</p>
+<p>先前 public key, 然后用 S1 签名 <span class="math display">\[
+\begin{aligned}
+S\left(s k_{\infty}, m\right):= &amp; \left(p k_1, s k_1\right)
+\stackrel{R}{\leftarrow} G_1() \\
+&amp; \sigma_{\infty} \stackrel{R}{\leftarrow} S_{\infty}\left(s
+k_{\infty}, p k_1\right) \\
+&amp; \sigma_1 \stackrel{R}{\leftarrow} S_1\left(s k_1,\left(m,
+\sigma_{\infty}\right)\right) \\
+&amp; \text { output } \sigma:=\left(p k_1, \sigma_{\infty},
+\sigma_1\right)
+\end{aligned}
+\]</span> 验证的时候先验证pk1, 然后再验证 <span class="math display">\[
+\begin{aligned}
+V\left(p k_{\infty}, m, \sigma\right):= &amp; \text { output reject if
+accept } \neq V_{\infty}\left(p k_{\infty}, p k_1,
+\sigma_{\infty}\right) \\
+&amp; \text { output reject if accept } \neq V_1\left(p k_1,\left(m,
+\sigma_{\infty}\right), \sigma_1\right) \\
+&amp; \text { output accept }
+\end{aligned}
+\]</span></p>
+<h3 id="定理-43">定理 43</h3>
+<p>若 <span class="math inline">\(S_{\infty}\)</span> many time secure
+和 <span class="math inline">\(S_1\)</span> 是 one-time strongly secure,
+那么 hybrid 是 strongly secure的 <span class="math display">\[
+\operatorname{stSIGadv}[\mathcal{A}, \mathcal{S}] \leq Q_s \cdot
+\operatorname{stSIGadv}\left[\mathcal{B}_1,
+\mathcal{S}_1\right]+\operatorname{SIGadv}\left[\mathcal{B}_{\infty},
+\mathcal{S}_{\infty}\right]
+\]</span></p>
+<blockquote>
+<p><span class="math inline">\(\left(\hat{m},\left(\hat{p k}_1,
+\hat{\sigma}_{\infty}, \hat{\sigma}_1\right)\right)\)</span>
+是伪造的签名, 如果 <span class="math inline">\(\hat{pk_1}\)</span>
+出现过, 那么我们可以把一个query替换成 one-time给的, 然后 <span
+class="math inline">\(1/Q\)</span> 的概率选到. 如果 <span
+class="math inline">\(\hat{pk_1}\)</span> 没有出现过, 那么是一个 many
+time 的一个伪造</p>
+</blockquote>
+<h2 id="authenticated-key-exchange">Authenticated Key Exchange</h2>
+<p>证书由第三方签名 <span class="math display">\[
+\operatorname{Cert}_{i d}:=\left(\left(i d, p k_{i d}\right), \sigma_{i
+d, p k_{i d}}\right)
+\]</span></p>
+<h3 id="attack-game-4">attack game</h3>
+<p>C 有所有 honest instances 的信息</p>
+<p>A 有所有 vulnerable 的信息</p>
+<p>A 可以选择场景, 可以询问一个某一个到达的信息,
+C要返回这个回答和status</p>
+<p><span class="math inline">\(status=\)</span></p>
+<ul>
+<li><span class="math inline">\(running\)</span></li>
+<li><span class="math inline">\(abort\)</span></li>
+<li><span class="math inline">\((finish, pid, k)\)</span> k
+是使用的session key</li>
+</ul>
+<p>Experiment 0 里面, C 在status里回答session key</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240724233703957.png"
+alt="image-20240724233703957" />
+<figcaption aria-hidden="true">image-20240724233703957</figcaption>
+</figure>
+<p>Experiment 1</p>
+<p>我们有一个 partner function 来定义发送信息的对方的类型</p>
+<ul>
+<li><span class="math inline">\(fresh\)</span>
+新的连接，返回随机k，如果对方是honest</li>
+<li><span class="math inline">\(connected \ to \ J\)</span>
+回答对应的key 如果 <span class="math inline">\(J\)</span> 是对应的</li>
+<li><span class="math inline">\(vulnerable\)</span> 回复对应的key ( 因为
+A control 所有 vulnerable)</li>
+</ul>
+<h3 id="statically-secure-ake">Statically Secure AKE</h3>
+<p>使得 A 无法区分这两个实验 <span class="math display">\[
+s A K E a d v[\mathcal{A}, \mathcal{P}, p
+f]=\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|
+\]</span></p>
+<h3 id="定理-44">定理 44</h3>
+<p><span class="math inline">\(\mathcal{S}=\left(G_{\mathcal{S}}, S,
+V\right)\)</span> 是secure signature scheme<span
+class="math inline">\(\mathcal{E}=\left(G_{\mathcal{E}}, E,
+D\right)\)</span> 是 CCA secure KEM, <span
+class="math inline">\(F\)</span> 是secure PRF 下面的是static
+secure的</p>
+<p><img src="https://fyindex.work/PicGo/image-20240724234443288.png"
+alt="image-20240724234443288" /> <span class="math display">\[
+\begin{aligned}
+s A K E a d v^*[\mathcal{A}, \mathcal{P}, p f] &amp;\leq N_{h u} \cdot
+\operatorname{SIGadv}[B, \mathcal{S}] \\
+&amp; +\frac{N_{l i}^2}{2|\mathcal{R}|}+\frac{N_{r i}^2}{2|\mathcal{K}|}
+\\
+&amp; +N_{r i} \cdot(K E M C C A a d v[C, \mathcal{E}]+P R F a d v[D,
+F]) \\
+&amp;
+\end{aligned}
+\]</span> 证明</p>
+<p>Game0: 对应sAKE的bit guessing game</p>
+<p>Game1: 在left Verify signature的时候，除了检查Verify Algorithm,
+还检查对应的honest instance 有没有签名 <span class="math display">\[
+\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|
+\leq N_{h u} \cdot S I G a d v[B, \mathcal{S}]
+\]</span> Game2: <span class="math inline">\(r\)</span> 不能重复, <span
+class="math inline">\(\left|\operatorname{Pr}\left[W_1\right]-\operatorname{Pr}\left[W_2\right]\right|
+\leq \frac{N_{l i}^2}{2|\mathcal{R}|}\)</span></p>
+<p>Game3 <span class="math inline">\(c\)</span> 不能重复 <span
+class="math inline">\(\left|\operatorname{Pr}\left[W_2\right]-\operatorname{Pr}\left[W_3\right]\right|
+\leq \frac{N_{r i}^2}{2|\mathcal{K}|}\)</span></p>
+<p>Game4, 在 <span class="math inline">\(c\)</span> 传输的过程中,
+改成另一个 <span class="math inline">\(k*\)</span> , 到了之后再改回来
+(因为C控制所有honest) <span class="math display">\[
+\left|\operatorname{Pr}\left[W_3\right]-\operatorname{Pr}\left[W_4\right]\right|
+\leq N_{r i} \cdot K E M C C A a d v[C, \mathcal{E}]
+\]</span> Game5, 把 <span class="math inline">\(F\)</span> 改成 <span
+class="math inline">\(f\)</span> <span class="math display">\[
+\left|\operatorname{Pr}\left[W_4\right]-\operatorname{Pr}\left[W_5\right]\right|
+\leq N_{r i} \cdot \operatorname{PRFadv}[D, F]
+\]</span> 这样在 fresh中随机输出的时候，就和随机没区别了, A只能猜</p>
+<h3 id="pfs">PFS</h3>
+<p>perfect forward secrecy: 就是在被得知 <span
+class="math inline">\(sk\)</span> 后, 之前传输的信息还能保持安全.</p>
+<p>我们每次用一个新的pk来传输</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240725091227027.png"
+alt="image-20240725091227027" />
+<figcaption aria-hidden="true">image-20240725091227027</figcaption>
+</figure>
+<h3 id="hsm-secure-ake">HSM Secure AKE</h3>
+<p>Hardware secure module 可以被 attacker 使用</p>
+<p>这样 Attacker 可以预先生产很多keypair来用作以后的impersonation</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240725092346986.png"
+alt="image-20240725092346986" />
+<figcaption aria-hidden="true">image-20240725092346986</figcaption>
+</figure>
+<p>解决方法是不预先签名，只有产生交互了再签名</p>
+<h3 id="baby-tls">Baby-TLS</h3>
+<p>额外有 identity protection的性质, Certificate 也进行加密</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240725092800128.png"
+alt="image-20240725092800128" />
+<figcaption aria-hidden="true">image-20240725092800128</figcaption>
+</figure>
+<h1 id="exercise">Exercise</h1>
+<h3 id="computational-indistinguishable">2.1 Computational
+indistinguishable</h3>
+<p><span class="math inline">\(S_n\)</span> 是集合的数列, <span
+class="math inline">\(D_n^{1}\)</span> ,<span
+class="math inline">\(D_{n}^2\)</span> 是2个在 <span
+class="math inline">\(S_n\)</span> 上概率分布的数列, 定义等关系 <span
+class="math inline">\(\stackrel{c}{\equiv}\)</span> 这两个
+computationally indistinguishable, <span
+class="math inline">\(\epsilon(n)\)</span> 是 negligible 函数. <span
+class="math inline">\(S=\{0,1\}\)</span> <span class="math display">\[
+\left|\operatorname{Pr}\left[A\left(D_n^1\right)=1\right]-\operatorname{Pr}\left[A\left(D_n^2\right)=1\right]\right|
+\leq \epsilon(n)
+\]</span></p>
+<h4 id="定义的解释">定义的解释</h4>
+<ul>
+<li><p><span class="math inline">\(n\)</span> 是长度的函数, 比如 <span
+class="math inline">\(S_n = \{0,1\}^{l(n)}\)</span> ,<span
+class="math inline">\(\ell(n)=n^{O(1)}\)</span></p>
+<p><span class="math inline">\(S_5=\{0,1\}^5\)</span> 是所有长度为 <span
+class="math inline">\(5\)</span> 的 01 串的集合, <span
+class="math inline">\(D_5\)</span> 就是在 <span
+class="math inline">\(S_5\)</span> 上的概率分布,
+描述每个字符串出现的概率</p></li>
+<li><p>这样的数列就包含了所有长度的01串</p></li>
+</ul>
+<h3 id="cca2">4.2 CCA2</h3>
+<p><span class="math inline">\(\Pi=(E, D)\)</span> 是 CCA2的, <span
+class="math inline">\(\mathcal{I}=(S, V)\)</span> 是 EUF-CMA 的 MAC,
+证明下面的是 AE <span class="math display">\[
+E^{\prime}\left(\left(k_1, k_2\right), m\right):=t
+\stackrel{R}{\leftarrow} S\left(k_1, m\right) \text {; return }
+E\left(k_2,(m, t)\right)
+\]</span></p>
+<p><span class="math display">\[
+D^{\prime}\left(\left(k_1, k_2\right), c\right):=(m, t) \leftarrow
+D\left(k_2, c\right) \text {; if accept }=V\left(k_1, m, t\right) \text
+{ then return } m \text { else return } \perp
+\]</span></p>
+<h4 id="证明">证明：</h4>
+<p>不能直接构造，因为 A 返回的<span class="math inline">\(c\)</span>
+有可能是 <span class="math inline">\(m=m_i\)</span> 就不符合 EUF
+的定义</p>
+<p>要证明AE，可以先证明CPA secure，再证明CI secure</p>
+<p>CPA secure: 可以用 A 直接构造一个B攻击<span
+class="math inline">\(\Pi\)</span> 的 CPA <span class="math display">\[
+C P \operatorname{Aadv}\left[A, \Pi^{\prime}\right] \leq C C
+\operatorname{Aad} v\left[A, \Pi^{\prime}\right] \leq
+\operatorname{CCAadv}[B, \Pi]
+\]</span> CI secure：</p>
+<ul>
+<li>Game 0: <span class="math inline">\(\Pi &#39;\)</span> 的 CI
+game</li>
+<li>Game i: 前 <span class="math inline">\(i\)</span> 个 <span
+class="math inline">\(m_i\)</span> 正常加 tag, 后面的 <span
+class="math inline">\(m_i\)</span> 用随机数加tag</li>
+</ul>
+<p>可以转移到 <span class="math inline">\(\Pi\)</span> 的 CCA game
+上，把第 <span class="math inline">\(i\)</span>
+个game的tag，和一个随机生产的tag，扔给 <span
+class="math inline">\(\Pi\)</span> 的 <span
+class="math inline">\(m_0,m_1\)</span></p>
+<p>如果 A win CI Game，那么 B 对 <span
+class="math inline">\(\Pi\)</span> 发送 1</p>
+<p>这样 <span class="math inline">\(\Pi\)</span> 的 Exp0 对应 Game i,
+Exp 1 对应 Game i-1</p>
+<p>所以 <span
+class="math inline">\(\left|\operatorname{Pr}\left[W_i\right]-\operatorname{Pr}\left[W_{i+1}\right]\right|
+\leq CCAadv[B,\Pi]\)</span></p>
+<ul>
+<li>Game Q: 所有tag 是随机的, <span
+class="math inline">\(\text{Pr}[W_Q]\)</span> 的概率A给出一个 <span
+class="math inline">\(c\)</span>, 那么就有了一个伪造, 可以直接赢
+EUFMACadv</li>
+</ul>
+<p><span class="math display">\[
+Pr[W_0]-Pr[W_Q] \le |Pr[W_0] - Pr[W_Q]| \le
+\sum_{i=0}^{Q-1}|Pr[W_i]-Pr[W_{i+1}]| \\
+CIadv[A,\Pi&#39;] \leq Q \cdot C C A a d v[B, \Pi]+E U F M A C a d v[C,
+\mathcal{I}]
+\]</span></p>
+<h3 id="section">4.3</h3>
+<p><span class="math inline">\(S_{\text {det }}\left(k,\left(m_0,
+\ldots, m_{d-1}\right), r\right):=\)</span> for <span
+class="math inline">\(i\)</span> in <span
+class="math inline">\([d]\)</span> do <span class="math inline">\(t_i
+\leftarrow F_k\left(\left(r, i, d, m_i\right)\right)\)</span> done;
+return <span class="math inline">\(\left(t_0, \cdots,
+t_{d-1}\right)\)</span> <span class="math display">\[
+S(k, m):=r \stackrel{R}{\leftarrow}\{0,1\}^n ;
+\operatorname{return}\left(r, S_{\text {det }}(k, m, r)\right)
+\]</span> <span class="math inline">\(V(k, m,(r, t)):=\)</span> if <span
+class="math inline">\(t=S_{\mathrm{det}}(k, m, r)\)</span> then return
+accept else return reject</p>
+<p>证明 这个MAC 安全</p>
+<p>首先可以把 <span class="math inline">\(F\)</span> 换成 <span
+class="math inline">\(f\)</span></p>
+<p>剩下有两种情况</p>
+<ul>
+<li><span class="math inline">\(r\)</span>
+有出现过2次，那么可以直接构造forgery, 组合他们的一部分</li>
+<li><span class="math inline">\(r\)</span> 都不同, 那么改动最后一个,
+猜测最后一个 <span class="math inline">\(f\)</span> 的output即可
+(讨论A必须猜)</li>
+</ul>
+<p><span class="math display">\[
+\operatorname{MACadv}[A, \mathcal{I}]:=\operatorname{Pr}\left[W_0\right]
+\leq\left|\operatorname{Pr}\left[W_0\right]-\operatorname{Pr}\left[W_1\right]\right|+\operatorname{Pr}\left[W_1\right]
+\leq \text { PRFadv }[B, F]+\frac{Q^2}{2 \cdot 2^n}+\frac{1}{2^n}
+\]</span></p>
+<h3 id="zyklische-gruppe">Zyklische Gruppe</h3>
+<h3 id="group">Group</h3>
+<p>集合 <span class="math inline">\(G\)</span> ,一个映射 <span
+class="math inline">\(G \times G \rightarrow G\)</span> ,<span
+class="math inline">\((\sigma, \tau) \mapsto \sigma \cdot \tau\)</span>
+满足</p>
+<ul>
+<li>交换律 <span class="math inline">\(\forall \sigma, \tau, \rho \in G:
+\quad(\sigma \cdot \tau) \cdot \rho=\sigma \cdot(\tau \cdot
+\rho)\)</span></li>
+<li>存在左单位元 <span class="math inline">\(\exists \iota \in G: \quad
+\forall \sigma \in G: \quad \iota \cdot \sigma=\sigma\)</span></li>
+<li>存在左逆元 <span class="math inline">\(\forall \sigma \in G: \quad
+\exists \sigma^{\prime} \in G: \quad \sigma^{\prime} \cdot
+\sigma=\iota\)</span></li>
+</ul>
+<h4 id="commutative-group-abelsch">commutative group (abelsch)</h4>
+<p>若额外满足交换律</p>
+<p><span class="math inline">\(\forall \sigma, \tau \in G: \quad \sigma
+\cdot \tau=\tau \cdot \sigma\)</span>.</p>
+<h3 id="整数集合">整数集合</h3>
+<p><span class="math inline">\(\mathbb{Z}_N:=\{0,1,2, \ldots,
+N-1\}\)</span></p>
+<h4 id="和-n-互质系">和 <span class="math inline">\(N\)</span>
+互质系</h4>
+<p><span class="math display">\[
+\mathbb{Z}_N^*:=\left\{k \in \mathbb{Z}_N \mid \operatorname{ggT}(k,
+N)=1\right\}
+\]</span></p>
+<p><span
+class="math inline">\(\mathbb{Z}_{15}^*=\{1,2,4,7,8,11,13,14\}\)</span></p>
+<h4 id="素数">素数</h4>
+<p><span class="math inline">\(\mathbb{P}=\{p \in \mathbb{N}|p&gt;1
+\wedge \forall n \in \mathbb{N}: n| p \rightarrow(n=1 \vee
+n=p)\}=\{2,3,5,7,11,13, \ldots\}\)</span></p>
+<h3 id="欧拉函数">欧拉函数</h3>
+<p><span class="math display">\[
+\varphi(N):=\left|\mathbb{Z}_N^*\right|
+\]</span></p>
+<p>求欧拉函数 <span class="math display">\[
+\varphi(N)=\left|\mathbb{Z}_N^*\right|=N \prod_{p \in \mathbb{P}: p \mid
+N}\left(1-p^{-1}\right)
+\]</span> <span
+class="math inline">\(\varphi(15)=15\left(1-\frac{1}{5}\right)\left(1-\frac{1}{3}\right)=(5-1)(3-1)=8\)</span>.</p>
+<p>枚举所有质因子</p>
+<h3 id="generator">Generator</h3>
+<p><span class="math display">\[
+\langle a\rangle:=\left\{a^k \mid k \in
+\mathbb{Z}\right\}=\left\{\ldots,\left(a^{-1}\right)^3,\left(a^{-1}\right)^2,
+a^{-1}, 1, a, a^2, a^3, \ldots\right\}
+\]</span></p>
+<h3 id="ordnung">Ordnung</h3>
+<p><span class="math display">\[
+\operatorname{ord}(a):=\min \left\{k \in \mathbb{N} \mid a^k=1\right\}
+\]</span></p>
+<h3 id="定理">定理</h3>
+<ul>
+<li><span class="math inline">\(a^k=a^{k \bmod \text { ord(a)
+}}\)</span></li>
+<li><span class="math inline">\(\langle a\rangle=\left\{1, a, a^2,
+\ldots, a^{\text {ord }(a)-1}\right\}\)</span></li>
+<li><span class="math inline">\(|\langle
+a\rangle|=\operatorname{ord}(a)\)</span></li>
+</ul>
+<h3 id="cyclic-group">cyclic group</h3>
+<p>if exists a generator <span class="math inline">\(\langle
+a\rangle=\mathbb{G}\)</span></p>
+<ul>
+<li>Jede zyklische Gruppe ist kommutativ</li>
+</ul>
+<h4 id="generators">generators</h4>
+<p><span class="math inline">\(N:=|\mathbb{G}|\)</span> ,<span
+class="math inline">\(\langle a\rangle=\mathbb{G}\)</span> 当且仅当
+<span class="math inline">\(\forall p \in\{p \in \mathbb{P}: p \mid N\}:
+a^{N / p} \neq 1\)</span></p>
+<p><span class="math inline">\(Z_n\)</span> 有 <span
+class="math inline">\(\phi(n)\)</span> 个 generator.</p>
+<h2 id="additional">Additional</h2>
+<h3 id="理解构造">理解构造</h3>
+<p>说一说secret key crypto 和 public key
+crypto都有哪些组件，分别可以用什么实现</p>
+<h2 id="questions">Questions</h2>
+<p>CCA为啥要PRP，</p>
+<blockquote>
+<p>PRP好证明性质</p>
+</blockquote>
+<p>为啥这个就CCAsecure了，之前就不行</p>
+<blockquote>
+<p>之前的不一定不行</p>
+</blockquote>
+<p>为啥要考虑 r 相同的事情:</p>
+<blockquote>
+<p>因为，可以用 Encryption来得到C，看看这个c和c_hat 是不是一样来区分</p>
+</blockquote>
+<p>Luby-Rackoff Proof 有collision会怎么样</p>
+<p>Sn eine Folge von Mengen 为啥 是 Mengen 的 Folgen</p>
+<p>S.211 PRP and PRF implementation equal?</p>
+<blockquote>
+<p>只说了 Experiment 0 是相同的，都是一个函数 <span
+class="math inline">\(F(k,\cdot)\)</span></p>
+</blockquote>
+<p>S. 225 证明错误？应该是在 <span class="math inline">\(Z\)</span>
+的情况下</p>
+<blockquote>
+<p><span class="math inline">\(Z\)</span> 是reject,
+和不在map里不一样，是因为CI，decryption自带的reject</p>
+</blockquote>
+<p>为啥要Prefix-free, 证明里似乎没用到</p>
+<blockquote>
+<p>证明里用到了，否则A可以像那样预测一个新的值，就不是随机的了</p>
+</blockquote>
+<p>为什么 H is cr =&gt; H is 2nd preimage resistant =&gt; H is
+oneway</p>
+<blockquote>
+<p>因为如果不SPR，那么可以构造一个collision</p>
+</blockquote>
+<p>为啥 constructing a PRF from MD hash functions is problematic.</p>
+<p>为啥RSA： ed ≡ 1 + kp(p − 1) for some integer kp. （356）</p>
+<p>为啥 a deterministic encryption scheme cannot be CPA secure.</p>
+<p>为啥 KDFadv=0 403</p>
+<blockquote>
+<p>因为 F(x,y)=y 了之后，y就是一个随机数，随机数和随机数无法区分</p>
+</blockquote>
+<p>Typo 403k-1c, 384ro, 393下标</p>
+<p>为啥PKCCA的定义里没有PIs</p>
+<p>Sig adv 和 stSIG adv 区别</p>
+<blockquote>
+<p>一个是strong</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2023/04/22/%E5%AF%86%E7%A0%81%E5%AD%A6/">http://fyind.de/2023/04/22/%E5%AF%86%E7%A0%81%E5%AD%A6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AE%89%E5%85%A8/">安全</a><a class="post-meta__tags" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2023/04/27/%E6%A8%A1%E6%8B%9F%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" title="模拟电子技术"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">模拟电子技术</div></div><div class="info-2"><div class="info-item-1">模拟电子技术 本征半导体 本征半导体是纯净的具有晶体结构的半导体。  载流子：运载电荷的粒子称为载流子。导体导电只有一种载流子, 即自由电子导电; 空穴：当电子挣脱共价键的束缚变成为自由电子后，在共价键中留下一个空位置，称为空穴  </div></div></div></a><a class="pagination-related" href="/2023/04/19/%E9%AB%98%E6%95%88%E7%AE%97%E6%B3%95II/" title="高效算法II"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">高效算法II</div></div><div class="info-2"><div class="info-item-1">高效算法II 线性规划(LP) Standard Form input: number \(a_{ij},c_j,b_j\) output: numbers \(x_j\) \(n = \#decision variables, m=\#conatrains\) \(\begin{aligned} &amp; \max \sum_{j=1}^n c_j x_j \\ &amp; \text { s.t. } \sum_{j=1}^n a_{i j} x_j=b_i \quad 1 \leq i \leq m \\ &amp; x_j \geq 0 \quad 1 \leq j \leq n \\ &amp; \end{aligned}\) 也可以用矩阵的写法 \(\begin{array}{rr}\max &amp; c^T x \\ \text { s.t. } \quad A x=b \\ &amp; x \geq 0\end{array}\) 转换成Standard Form  小于等于 \(a-3b+5c\le 12\) 变成 \(a-3b+5c+s=12,s \ge 0...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="toc-number">1.</span> <span class="toc-text">密码学</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">理论基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%99%E5%86%9C%E5%AF%86%E7%A0%81-shannon-cipher"><span class="toc-number">2.0.1.</span> <span class="toc-text">香农密码 Shannon Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#one-time-pad-otp"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">One-time-pad (OTP)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1-%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8-perfect-security"><span class="toc-number">2.0.2.</span> <span class="toc-text">定义 1 完美安全 Perfect
+security</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-1-otp-perfectly-secure"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">定理 1 OTP perfectly secure</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-2-shannons-theorem"><span class="toc-number">2.0.3.</span> <span class="toc-text">定理 2 Shannon’s Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2-ppt-adversary"><span class="toc-number">2.0.4.</span> <span class="toc-text">定义 2 PPT adversary</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3-polynomially-bounded"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">定义 3 polynomially-bounded</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-4-negligible"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">定义 4 negligible</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-5-super-poly"><span class="toc-number">2.0.4.3.</span> <span class="toc-text">定义 5 super-poly</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%B3%95%E5%88%99"><span class="toc-number">2.0.4.4.</span> <span class="toc-text">计算法则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%8F%82%E6%95%B0-security-parameters"><span class="toc-number">2.0.4.5.</span> <span class="toc-text">安全参数 Security Parameters</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-6-efficient-algorithm"><span class="toc-number">2.0.4.6.</span> <span class="toc-text">定义 6 Efficient Algorithm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-7-computational-cipher"><span class="toc-number">2.0.5.</span> <span class="toc-text">定义 7 Computational Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#computaional-cipher-%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">2.0.5.1.</span> <span class="toc-text">computaional cipher 的安全性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attack-game-1"><span class="toc-number">2.0.6.</span> <span class="toc-text">Attack Game 1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-8-semantic-security"><span class="toc-number">2.0.6.1.</span> <span class="toc-text">定义 8 semantic security</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bit-guessing"><span class="toc-number">2.0.6.2.</span> <span class="toc-text">Bit Guessing</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#secret-key-cryptography"><span class="toc-number">3.</span> <span class="toc-text">Secret key cryptography</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-10-pseudo-random-generator"><span class="toc-number">3.0.1.</span> <span class="toc-text">定义 10 Pseudo-random
+generator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-game-3-prg-advantage"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">Attack Game 3 PRG advantage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%8911-secure-prg"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">定义11 Secure PRG</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stream-ciphers"><span class="toc-number">3.0.2.</span> <span class="toc-text">Stream ciphers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-3-%E4%BD%BF%E7%94%A8prg-%E6%9E%84%E9%80%A0-semantic-secure-%E7%9A%84cipher"><span class="toc-number">3.0.3.</span> <span class="toc-text">定理 3 使用PRG
+构造 Semantic Secure 的Cipher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%864-parallel-construction-prg"><span class="toc-number">3.0.4.</span> <span class="toc-text">定理4 parallel construction
+PRG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bm-sequential-construction"><span class="toc-number">3.0.5.</span> <span class="toc-text">BM Sequential construction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#one-way-function"><span class="toc-number">3.0.6.</span> <span class="toc-text">One Way Function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hard-core-bit"><span class="toc-number">3.0.6.1.</span> <span class="toc-text">hard-core bit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%84%E9%80%A0owp-prg"><span class="toc-number">3.0.6.2.</span> <span class="toc-text">构造OWP PRG</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cpa-security"><span class="toc-number">3.1.</span> <span class="toc-text">CPA Security</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#theorem-8"><span class="toc-number">3.1.1.</span> <span class="toc-text">Theorem 8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prf"><span class="toc-number">3.1.2.</span> <span class="toc-text">PRF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-game"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">attack game</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-construction"><span class="toc-number">3.1.2.2.</span> <span class="toc-text">tree construction</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cca-security"><span class="toc-number">3.2.</span> <span class="toc-text">CCA Security</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#prp"><span class="toc-number">3.2.1.</span> <span class="toc-text">PRP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-game-2"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">attack game</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#weak-prp"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">weak PRP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0-cca-secure-cipher"><span class="toc-number">3.2.2.</span> <span class="toc-text">构造 CCA secure Cipher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#luby-rackoff-construction"><span class="toc-number">3.2.3.</span> <span class="toc-text">Luby-Rackoff construction</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#feistel-permutation"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">Feistel permutation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#luby-rackoff"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">Luby-Rackoff</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prf-switching-lemma"><span class="toc-number">3.2.4.</span> <span class="toc-text">PRF Switching Lemma</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ci"><span class="toc-number">3.2.5.</span> <span class="toc-text">CI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-game-ci"><span class="toc-number">3.2.5.1.</span> <span class="toc-text">Attack Game CI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ae"><span class="toc-number">3.2.6.</span> <span class="toc-text">AE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#theorem-15-ae-implies-cca"><span class="toc-number">3.2.7.</span> <span class="toc-text">Theorem 15 AE implies CCA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac"><span class="toc-number">3.2.8.</span> <span class="toc-text">MAC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-game-mac"><span class="toc-number">3.2.8.1.</span> <span class="toc-text">Attack Game MAC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#suf-cma"><span class="toc-number">3.2.8.2.</span> <span class="toc-text">SUF-CMA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#euf-cma"><span class="toc-number">3.2.8.3.</span> <span class="toc-text">EUF-CMA</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-16"><span class="toc-number">3.2.9.</span> <span class="toc-text">定理 16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cbc"><span class="toc-number">3.2.10.</span> <span class="toc-text">CBC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cascade"><span class="toc-number">3.2.11.</span> <span class="toc-text">Cascade</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prefix-free"><span class="toc-number">3.2.12.</span> <span class="toc-text">Prefix-Free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#theorem-17"><span class="toc-number">3.2.13.</span> <span class="toc-text">Theorem 17</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-18"><span class="toc-number">3.2.14.</span> <span class="toc-text">定理 18</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-19"><span class="toc-number">3.2.15.</span> <span class="toc-text">定理 19</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prefix-free-encoding"><span class="toc-number">3.2.15.1.</span> <span class="toc-text">Prefix-free encoding</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cmac"><span class="toc-number">3.2.15.2.</span> <span class="toc-text">CMAC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#encrypted-prf"><span class="toc-number">3.2.15.3.</span> <span class="toc-text">Encrypted PRF</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-20"><span class="toc-number">3.2.16.</span> <span class="toc-text">定理 20</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keyed-hash-function"><span class="toc-number">3.2.17.</span> <span class="toc-text">Keyed Hash Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collision-resistance"><span class="toc-number">3.2.18.</span> <span class="toc-text">Collision resistance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#computational-uhf"><span class="toc-number">3.2.19.</span> <span class="toc-text">Computational UHF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-21"><span class="toc-number">3.2.20.</span> <span class="toc-text">定理 21</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#second-preimage-resistance"><span class="toc-number">3.2.21.</span> <span class="toc-text">Second-preimage resistance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-22-mac-from-uhf"><span class="toc-number">3.2.22.</span> <span class="toc-text">定理 22 MAC from UHF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hash-function"><span class="toc-number">3.2.23.</span> <span class="toc-text">Hash function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collision-resistance-1"><span class="toc-number">3.2.24.</span> <span class="toc-text">Collision resistance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#second-preimage-resistance-1"><span class="toc-number">3.2.25.</span> <span class="toc-text">Second-preimage resistance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dm-davies-meyer"><span class="toc-number">3.2.26.</span> <span class="toc-text">DM (Davies-Meyer)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#md-merkle-damg%C3%A5rd"><span class="toc-number">3.2.27.</span> <span class="toc-text">MD (Merkle-Damgård)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-23"><span class="toc-number">3.2.28.</span> <span class="toc-text">定理 23</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-24-mac-from-hash"><span class="toc-number">3.2.29.</span> <span class="toc-text">定理 24 Mac from Hash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sponge-construction"><span class="toc-number">3.2.30.</span> <span class="toc-text">Sponge construction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#theorem-25"><span class="toc-number">3.2.31.</span> <span class="toc-text">Theorem 25</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ae-secure-construction"><span class="toc-number">3.3.</span> <span class="toc-text">AE-secure construction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encryption-then-mac"><span class="toc-number">3.3.1.</span> <span class="toc-text">Encryption then MAC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-26"><span class="toc-number">3.3.2.</span> <span class="toc-text">定理 26</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aead"><span class="toc-number">3.3.3.</span> <span class="toc-text">AEAD</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#public-key-cryptography"><span class="toc-number">4.</span> <span class="toc-text">Public-key cryptography</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#kem"><span class="toc-number">4.1.</span> <span class="toc-text">KEM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attack-game-3"><span class="toc-number">4.1.0.1.</span> <span class="toc-text">Attack game</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trapdoor-function"><span class="toc-number">4.1.1.</span> <span class="toc-text">Trapdoor Function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#one-way-tf-attack-game"><span class="toc-number">4.1.1.1.</span> <span class="toc-text">One way TF, Attack Game</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8-bm-construction-%E6%9D%A5%E6%9E%84%E9%80%A0-kem"><span class="toc-number">4.1.1.2.</span> <span class="toc-text">用 BM construction 来构造
+KEM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rom"><span class="toc-number">4.1.2.</span> <span class="toc-text">ROM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prf-in-rom"><span class="toc-number">4.1.2.1.</span> <span class="toc-text">PRF in ROM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#theorem-29"><span class="toc-number">4.1.2.2.</span> <span class="toc-text">Theorem 29</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hmac"><span class="toc-number">4.1.3.</span> <span class="toc-text">HMAC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-30-kem-from-ro"><span class="toc-number">4.1.4.</span> <span class="toc-text">定理 30 KEM from RO</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rsa-assumption"><span class="toc-number">4.2.</span> <span class="toc-text">RSA assumption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#correctness"><span class="toc-number">4.2.1.</span> <span class="toc-text">correctness</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rsa-assumption-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">RSA assumption</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#diffie-hellman"><span class="toc-number">4.3.</span> <span class="toc-text">Diffie-Hellman</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#discrete-logarithm-dlog"><span class="toc-number">4.3.1.</span> <span class="toc-text">Discrete logarithm (DLOG)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#computational-diffie-hellman-assumption-cdh"><span class="toc-number">4.3.2.</span> <span class="toc-text">computational
+Diffie-Hellman assumption (CDH)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diffie-hellman-kem"><span class="toc-number">4.3.3.</span> <span class="toc-text">Diffie-Hellman KEM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-33-dh-kem-in-rom"><span class="toc-number">4.3.4.</span> <span class="toc-text">定理 33 DH-KEM in ROM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decisional-diffie-hellman-ddh"><span class="toc-number">4.3.5.</span> <span class="toc-text">decisional Diffie-Hellman
+(DDH)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kdf"><span class="toc-number">4.3.6.</span> <span class="toc-text">KDF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attackgame"><span class="toc-number">4.3.6.1.</span> <span class="toc-text">AttackGame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hkdf"><span class="toc-number">4.3.6.2.</span> <span class="toc-text">HKDF</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-35-dh-kem-%E6%98%AF-secure"><span class="toc-number">4.3.7.</span> <span class="toc-text">定理 35 DH KEM 是 secure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elliptic-curves"><span class="toc-number">4.3.8.</span> <span class="toc-text">Elliptic curves</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#public-encryption-scheme"><span class="toc-number">4.4.</span> <span class="toc-text">Public Encryption Scheme</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hybrid-encryption"><span class="toc-number">4.4.1.</span> <span class="toc-text">Hybrid encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public-key-encryption"><span class="toc-number">4.4.2.</span> <span class="toc-text">Public-key encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pkcca-security"><span class="toc-number">4.4.3.</span> <span class="toc-text">PKCCA Security</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-36"><span class="toc-number">4.4.4.</span> <span class="toc-text">定理 36</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elgamal"><span class="toc-number">4.4.5.</span> <span class="toc-text">ElGamal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cca-security-1"><span class="toc-number">4.4.6.</span> <span class="toc-text">CCA Security</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kem-cca-secutiry"><span class="toc-number">4.4.7.</span> <span class="toc-text">KEM CCA secutiry</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#the-cca-secure-owtf-kem"><span class="toc-number">4.4.7.1.</span> <span class="toc-text">The CCA-secure OWTF KEM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#image-oracles"><span class="toc-number">4.4.8.</span> <span class="toc-text">Image oracles</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#owtf-with-io"><span class="toc-number">4.4.9.</span> <span class="toc-text">OWTF with IO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-37-kemcca"><span class="toc-number">4.4.10.</span> <span class="toc-text">定理 37 KEMCCA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-38-ccasecure-hybrid"><span class="toc-number">4.4.11.</span> <span class="toc-text">定理 38 CCAsecure Hybrid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fujisaki-okamoto-trapdoor-function"><span class="toc-number">4.4.12.</span> <span class="toc-text">Fujisaki-Okamoto trapdoor
+function</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#unpredictable-encryption"><span class="toc-number">4.4.12.1.</span> <span class="toc-text">Unpredictable encryption</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-39"><span class="toc-number">4.4.13.</span> <span class="toc-text">定理 39</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#digital-signature"><span class="toc-number">4.5.</span> <span class="toc-text">Digital Signature</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#existentially-unforgable-euf"><span class="toc-number">4.5.1.</span> <span class="toc-text">Existentially unforgable
+(EUF)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#signature-security-suf"><span class="toc-number">4.5.2.</span> <span class="toc-text">Signature security (SUF)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#full-domain-hash-fdh"><span class="toc-number">4.5.3.</span> <span class="toc-text">Full domain Hash (FDH)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-41"><span class="toc-number">4.5.4.</span> <span class="toc-text">定理 41</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#strongly-q-time-signature"><span class="toc-number">4.5.4.1.</span> <span class="toc-text">(strongly )q-time signature</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lamport-signature"><span class="toc-number">4.5.5.</span> <span class="toc-text">Lamport signature</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#containment-free"><span class="toc-number">4.5.6.</span> <span class="toc-text">containment free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-42"><span class="toc-number">4.5.7.</span> <span class="toc-text">定理 42</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#strongly-secure-hybrid-signatures"><span class="toc-number">4.5.8.</span> <span class="toc-text">Strongly secure hybrid
+signatures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-43"><span class="toc-number">4.5.9.</span> <span class="toc-text">定理 43</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#authenticated-key-exchange"><span class="toc-number">4.6.</span> <span class="toc-text">Authenticated Key Exchange</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#attack-game-4"><span class="toc-number">4.6.1.</span> <span class="toc-text">attack game</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#statically-secure-ake"><span class="toc-number">4.6.2.</span> <span class="toc-text">Statically Secure AKE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86-44"><span class="toc-number">4.6.3.</span> <span class="toc-text">定理 44</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pfs"><span class="toc-number">4.6.4.</span> <span class="toc-text">PFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hsm-secure-ake"><span class="toc-number">4.6.5.</span> <span class="toc-text">HSM Secure AKE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baby-tls"><span class="toc-number">4.6.6.</span> <span class="toc-text">Baby-TLS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exercise"><span class="toc-number">5.</span> <span class="toc-text">Exercise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#computational-indistinguishable"><span class="toc-number">5.0.1.</span> <span class="toc-text">2.1 Computational
+indistinguishable</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="toc-number">5.0.1.1.</span> <span class="toc-text">定义的解释</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cca2"><span class="toc-number">5.0.2.</span> <span class="toc-text">4.2 CCA2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%81%E6%98%8E"><span class="toc-number">5.0.2.1.</span> <span class="toc-text">证明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#section"><span class="toc-number">5.0.3.</span> <span class="toc-text">4.3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zyklische-gruppe"><span class="toc-number">5.0.4.</span> <span class="toc-text">Zyklische Gruppe</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#group"><span class="toc-number">5.0.5.</span> <span class="toc-text">Group</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#commutative-group-abelsch"><span class="toc-number">5.0.5.1.</span> <span class="toc-text">commutative group (abelsch)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E9%9B%86%E5%90%88"><span class="toc-number">5.0.6.</span> <span class="toc-text">整数集合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%92%8C-n-%E4%BA%92%E8%B4%A8%E7%B3%BB"><span class="toc-number">5.0.6.1.</span> <span class="toc-text">和 \(N\)
+互质系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A0%E6%95%B0"><span class="toc-number">5.0.6.2.</span> <span class="toc-text">素数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="toc-number">5.0.7.</span> <span class="toc-text">欧拉函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#generator"><span class="toc-number">5.0.8.</span> <span class="toc-text">Generator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ordnung"><span class="toc-number">5.0.9.</span> <span class="toc-text">Ordnung</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86"><span class="toc-number">5.0.10.</span> <span class="toc-text">定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cyclic-group"><span class="toc-number">5.0.11.</span> <span class="toc-text">cyclic group</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#generators"><span class="toc-number">5.0.11.1.</span> <span class="toc-text">generators</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#additional"><span class="toc-number">5.1.</span> <span class="toc-text">Additional</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E6%9E%84%E9%80%A0"><span class="toc-number">5.1.1.</span> <span class="toc-text">理解构造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#questions"><span class="toc-number">5.2.</span> <span class="toc-text">Questions</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,943 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>统计学 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="统计学 概述 什么是统计学 研究量化数据的方法的科学 Statisticsis the study of methods for dealing with quantitative information (data). 从数据中获得信息和知识 分为  Descriptive Statistics  制作图表 Explorative Data Analysis 分析数据得出结论  Inductiv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="统计学">
+<meta property="og:url" content="http://fyind.de/2021/07/17/%E7%BB%9F%E8%AE%A1%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="统计学 概述 什么是统计学 研究量化数据的方法的科学 Statisticsis the study of methods for dealing with quantitative information (data). 从数据中获得信息和知识 分为  Descriptive Statistics  制作图表 Explorative Data Analysis 分析数据得出结论  Inductiv">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2021-07-17T08:17:39.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.882Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "统计学",
+  "url": "http://fyind.de/2021/07/17/%E7%BB%9F%E8%AE%A1%E5%AD%A6/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2021-07-17T08:17:39.000Z",
+  "dateModified": "2025-07-18T10:49:53.882Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2021/07/17/%E7%BB%9F%E8%AE%A1%E5%AD%A6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '统计学',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">统计学</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">统计学</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-07-17T08:17:39.000Z" title="Created 2021-07-17 08:17:39">2021-07-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.882Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="统计学">统计学</h1>
+<h2 id="概述">概述</h2>
+<h3 id="什么是统计学">什么是统计学</h3>
+<p>研究量化数据的方法的科学</p>
+<p>Statisticsis the study of methods for dealing with quantitative
+information (data).</p>
+<p>从数据中获得信息和知识</p>
+<p>分为</p>
+<ul>
+<li>Descriptive Statistics
+<ul>
+<li>制作图表</li>
+<li>Explorative Data Analysis 分析数据得出结论</li>
+</ul></li>
+<li>Inductive Statistics(inferential statistics)
+<ul>
+<li>研究数据间的关系</li>
+<li>预测未来趋势</li>
+</ul></li>
+</ul>
+<h3 id="统计学基本概念">统计学基本概念</h3>
+<h4 id="statistical-units统计单元">Statistical units统计单元</h4>
+<p>Objects on which data is observed 被研究数据的对象</p>
+<h4 id="population">Population</h4>
+<p>所有需要的统计单元的集合</p>
+<ul>
+<li>可以有限(finite)，无限(infinite)，假设的(hypothetical)</li>
+</ul>
+<h4 id="subpopulations">Subpopulations</h4>
+<p>sub set of the population</p>
+<h4 id="sample">Sample</h4>
+<p>Actual subset of the population surveyed</p>
+<h4
+id="characteristicvariablefeatures">Characteristic/variable/features</h4>
+<p>Quantity of interest observed on a statistical
+unit与统计有关系的量</p>
+<p>如 Rent index: living space, building age</p>
+<h4 id="characteristic-value">Characteristic value</h4>
+<p>上面一个概念具体的值</p>
+<h3 id="feature-types-and-scales">Feature Types and Scales</h3>
+<h4 id="根据大小分类feature">根据大小分类feature</h4>
+<ul>
+<li><p>Nominal scale</p>
+<pre><code>if its expressions are names or categories that cannot be put into a meaningful order</code></pre></li>
+<li><p>Ordinal scale</p>
+<p>if its expressions can be ordered, but no meaningfully</p>
+<p>例如feature “Do you need statistics in your current job?”
+(constantly, frequently, occasionally, never)</p></li>
+<li><p>Cardinal scale(metrical)</p>
+<p>if its expressions are numbers and their distances can be interpreted
+meaningfully</p></li>
+</ul>
+<p>sale level 决定一个量是如何被测量的</p>
+<h4 id="根据量化的分类">根据量化的分类</h4>
+<ul>
+<li>Qualitative feature
+<ul>
+<li>indicates a quality or a membership of a class</li>
+<li>has a finite number of expressions</li>
+<li>is at most ordinally scaled</li>
+</ul></li>
+<li>Quantitative feature
+<ul>
+<li>Reflects an intensity or extent</li>
+<li>Can be measured by numbers</li>
+</ul></li>
+</ul>
+<h4 id="其他分类">其他分类</h4>
+<p>离散，连续</p>
+<h3 id="如何收集数据">如何收集数据</h3>
+<ul>
+<li><p>实验 Experiment</p>
+<p>methodically designed investigation for the empirical acquisition of
+data</p></li>
+<li><p>调查 Survey</p>
+<p>collecting data that in <strong>principle already
+exists</strong></p></li>
+</ul>
+<h4 id="调查的类型">调查的类型</h4>
+<ul>
+<li><p>Primary statistical survey</p>
+<p>Collection of data <strong>specifically for</strong> <strong>current
+issues</strong></p></li>
+<li><p>Secondary statistical survey</p>
+<p>Use of <strong>existing original data</strong> for new
+questions</p></li>
+<li><p>Tertiary statistical survey</p>
+<p>Use of already <strong>existing,</strong> <strong>compressed</strong>
+data (e.g. mean values) for new questions</p></li>
+</ul>
+<p>##统计学基本概念</p>
+<h3 id="频率frequencies">频率Frequencies</h3>
+<p>考虑一个变量 <span class="math inline">\(X\)</span>,
+它由统计单元,统计值为 <span class="math inline">\(x_1, ...,
+x_n\)</span></p>
+<p>其中 <span class="math inline">\(x_1,..,x_n\)</span>
+叫<strong>源数据</strong>(raw data/original list)</p>
+<h4 id="绝对频率-absolute-frequencies">绝对频率 Absolute
+frequencies</h4>
+<p>统计每个值出现的次数</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210622213510801.png"
+alt="image-20210622213510801" />
+<figcaption aria-hidden="true">image-20210622213510801</figcaption>
+</figure>
+<p>用</p>
+<p>设 <span class="math inline">\(a_1, .. a_k\)</span>
+是不同的值，我们用 <span class="math inline">\(h_j = h(a_j)\)</span>
+表示绝对频率</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210622213724679.png"
+alt="image-20210622213724679" />
+<figcaption aria-hidden="true">image-20210622213724679</figcaption>
+</figure>
+<h4 id="相对频率-relative-frequencies">相对频率 Relative
+frequencies</h4>
+<p>统计这个值出现的次数占总次数的比例</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210622213847691.png"
+alt="image-20210622213847691" />
+<figcaption aria-hidden="true">image-20210622213847691</figcaption>
+</figure>
+<p>用 <span class="math inline">\(f_j=f(a_j)=h_j/n\)</span> 来表示</p>
+<p>其中 <span class="math inline">\(f_1,f_2,...f_k\)</span>
+成为相对频率分布relative frequency distribution， 有 <span
+class="math inline">\(\sum _{j=1} ^{k} f_j= 1\)</span></p>
+<h4 id="分类">分类</h4>
+<p>可以把频率列一个表来分析</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623111520968.png"
+alt="image-20210623111520968" />
+<figcaption aria-hidden="true">image-20210623111520968</figcaption>
+</figure>
+<h3 id="图表">图表</h3>
+<h4 id="bar-diagrams-条状表">Bar diagrams 条状表</h4>
+<p>If the number <span class="math inline">\(k\)</span> of the different
+realizations is small, the absolute / relative frequency distribution
+can be well represented by means of a bar diagram</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623113332125.png"
+alt="image-20210623113332125" />
+<figcaption aria-hidden="true">image-20210623113332125</figcaption>
+</figure>
+<h4 id="column-charts-柱状图">Column charts 柱状图</h4>
+<p>An often even clearer variant (also for small <span
+class="math inline">\(k\)</span> ) are column charts</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623113537013.png"
+alt="image-20210623113537013" />
+<figcaption aria-hidden="true">image-20210623113537013</figcaption>
+</figure>
+<h4 id="bar-chart-条状表">Bar chart 条状表</h4>
+<p>水平的柱状图 column chart</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623113706497.png"
+alt="image-20210623113706497" />
+<figcaption aria-hidden="true">image-20210623113706497</figcaption>
+</figure>
+<h4 id="pie-charts-饼图">Pie charts 饼图</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623113735438.png"
+alt="image-20210623113735438" />
+<figcaption aria-hidden="true">image-20210623113735438</figcaption>
+</figure>
+<h4 id="histograms">Histograms</h4>
+<p>For metric characteristics with a large number <span
+class="math inline">\(k\)</span> of different expressions</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623113859363.png"
+alt="image-20210623113859363" />
+<figcaption aria-hidden="true">image-20210623113859363</figcaption>
+</figure>
+<h3 id="累计频率分布">累计频率分布</h3>
+<h4 id="绝对累计频率分布">绝对累计频率分布</h4>
+<p>Absolute cumulative frequency distribution</p>
+<p><span class="math display">\[
+H(x)= \sum_{j:a_j \le x} h_j
+\]</span></p>
+<h4 id="相对累计频率分布">相对累计频率分布</h4>
+<p>Relative cumulative frequency distribution</p>
+<p><span class="math display">\[
+F(x)=\sum_{j:a_j \le x} f_j
+\]</span></p>
+<h4 id="这两者的性质">这两者的性质</h4>
+<ul>
+<li>单调递增</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623114720189.png"
+alt="image-20210623114720189" />
+<figcaption aria-hidden="true">image-20210623114720189</figcaption>
+</figure>
+<h3 id="中心趋势测量">中心趋势测量</h3>
+<h4 id="中心趋势">中心趋势</h4>
+<p>Central tendency(parameter) 是一个分布的中心值</p>
+<h4 id="mode">Mode</h4>
+<p>一个简单的可以适用于所有 scale levels 的中心趋势</p>
+<p>如果一个频率分布有唯一的最大值，那么mode 就是唯一的那个最大值，用
+<span class="math inline">\(x_{mod}\)</span> 来表示</p>
+<h3 id="中心趋势平均值">中心趋势–平均值</h3>
+<h4 id="arithmetic-mean算数平均值">arithmetic mean算数平均值</h4>
+<p>平均值</p>
+<p><span class="math display">\[
+\bar{x}=\frac{1}{n}\left(x_{1}+\cdots+x_{n}\right)=\frac{1}{n}
+\sum_{i=1}^{n} x_{i}
+\]</span></p>
+<p>它也可以通过相对频率计算</p>
+<p><span class="math display">\[
+\bar{x}=a_{1} f_{1}+\cdots+a_{k} f_{k}=\sum_{j=1}^{k} a_{j} f_{j}
+\]</span></p>
+<p>如果只有若干组的数据，也可以计算</p>
+<p>若组为区间 <span class="math inline">\(\left[c_{0},
+c_{1}\right),\left[c_{1}, c_{2}\right), \ldots,\left[c_{l-1},
+c_{l}\right)\)</span></p>
+<p>设 <span class="math inline">\(m_j=\frac{c_j+c_{j-1}}{2}\)</span> ,
+<span class="math inline">\(f_j\)</span> 是每组的频率， 那么</p>
+<p><span class="math display">\[
+\bar{x}_{\text {group }}=\sum_{j=1}^{l} m_{j} f_{j}
+\]</span></p>
+<h4 id="truncated-mean">Truncated mean</h4>
+<p>去掉最大值和最小值再求平均值</p>
+<p>用 <span class="math inline">\(\bar{x}_{g}\)</span> 表示</p>
+<h4 id="winsorised-means">Winsorised means</h4>
+<p>把最小值改成次小值，最大值改成次大值，然后求平均值</p>
+<p>用 <span class="math inline">\(\bar{x}_w\)</span> 表示</p>
+<h3 id="中心趋势中位数">中心趋势–中位数</h3>
+<p>设排序的列表 <span class="math inline">\(x_{(1)} \leq x_{(2)} \leq
+\cdots \leq x_{(n)}\)</span> 中位数为</p>
+<p><span class="math display">\[
+x_{m e d}=x_\left(\frac{n+1}{2}\right)
+\]</span></p>
+<p>如果是偶数，那么中位数不是唯一的</p>
+<h3 id="中线趋势-分位点">中线趋势-分位点</h3>
+<p>对于 <span class="math inline">\(0&lt;p&lt;1\)</span>， <span
+class="math inline">\(p\)</span>-quantile 可以把 <span
+class="math inline">\(p\)</span> 的数据和 <span
+class="math inline">\(1-p\)</span> 的数据划分开来。</p>
+<p><span class="math inline">\(\tilde{\mathcal{X}}_{p}\)</span>
+表示那个分位点的值</p>
+<h4 id="重要的分位点">重要的分位点</h4>
+<ul>
+<li>中位数 <span class="math inline">\(x_{med}=
+\tilde{x}_{0.5}=50\%\)</span>-quantile</li>
+<li>下四分位 Lower quartile <span
+class="math inline">\(\tilde{x}_{0.25}\)</span></li>
+<li>上四分位 Upper quartile <span
+class="math inline">\(\tilde{x}_{0.75}\)</span></li>
+<li>十分位 Deciles = <span
+class="math inline">\(10\%,20\%,..,90\%\)</span>-quantile,</li>
+</ul>
+<p>对于metric 变量</p>
+<p><span class="math display">\[
+d_Q= \tilde{x}_{0.75}-\tilde{x}_{0.25}
+\]</span></p>
+<p>是 interquantile range</p>
+<h4 id="五点总结">五点总结</h4>
+<p>加入最大值和最小值</p>
+<p><span class="math display">\[
+x_{\min }, \tilde{x}_{0.25}, x_{m e d}, \tilde{x}_{0.75}, x_{\max }
+\]</span></p>
+<p>可视化：</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623135815388.png"
+alt="image-20210623135815388" />
+<figcaption aria-hidden="true">image-20210623135815388</figcaption>
+</figure>
+<h3 id="分散性测度">分散性测度</h3>
+<p>Measures or parameters of dispersion(分散性) describe how far the
+values of a distribution spread around their centre</p>
+<h4 id="方差variance">方差Variance</h4>
+<p><span class="math display">\[
+\tilde{s}^{2}=\frac{1}{n}\left[\left(x_{1}-\bar{x}\right)^{2}+\cdots+\left(x_{n}-\bar{x}\right)^{2}\right]=\frac{1}{n}
+\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}
+\]</span></p>
+<p>如果用频率计算</p>
+<p><span class="math display">\[
+\tilde{s}^{2}=\left(a_{1}-\bar{x}\right)^{2}
+f_{1}+\cdots+\left(a_{k}-\bar{x}\right)^{2}
+f_{k}=\sum_{j=1}^{k}\left(a_{j}-\bar{x}\right)^{2} f_{j}
+\]</span></p>
+<h4 id="标准差-standard-deviation">标准差 Standard Deviation</h4>
+<p><span class="math display">\[
+\tilde{s}=+\sqrt{\tilde{S}^{2}}=+\sqrt{\frac{1}{n}
+\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}
+\]</span></p>
+<h4 id="样本方差-sample-variance">样本方差 sample Variance</h4>
+<p><span class="math display">\[
+s^{2}=\frac{1}{n-1}\left[\left(x_{1}-\bar{x}\right)^{2}+\cdots+\left(x_{n}-\bar{x}\right)^{2}\right]=\frac{1}{n-1}
+\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}
+\]</span></p>
+<h4 id="coefficient-of-variation">Coefficient of Variation</h4>
+<p>对于一个值非负的数据集且算数平均数<span
+class="math inline">\(\bar{x}&gt;0\)</span>, coefficient of variation
+是</p>
+<p><span class="math display">\[
+v=\frac{\tilde{S}}{\bar{x}}
+\]</span></p>
+<h3 id="unimodal-和-multimodal分布">Unimodal 和 Multimodal分布</h3>
+<h4 id="unimodal">Unimodal</h4>
+<p>分布只有一个唯一的峰值的分布是 Unimodal 分布</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623140844272.png"
+alt="image-20210623140844272" />
+<figcaption aria-hidden="true">image-20210623140844272</figcaption>
+</figure>
+<h4 id="multimodal">Multimodal</h4>
+<p>有多个不同的峰值</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623141014704.png"
+alt="image-20210623141014704" />
+<figcaption aria-hidden="true">image-20210623141014704</figcaption>
+</figure>
+<p>它进程出现在多个Subpopulation 的聚合</p>
+<p>如果正好只有2个不同峰值，也叫 bimodal</p>
+<h3 id="对称和歪斜">对称和歪斜</h3>
+<h4 id="对称-symmetry">对称 Symmetry</h4>
+<p>一个 unimodal 分布是对称的若存在一个对称轴</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623141434730.png"
+alt="image-20210623141434730" />
+<figcaption aria-hidden="true">image-20210623141434730</figcaption>
+</figure>
+<p><span class="math inline">\(\bar{x} \approx x_{m e d} \approx
+x_{\bmod }\)</span> 成立</p>
+<h4 id="明显歪斜-clearly-asymmetric">明显歪斜 Clearly asymmetric</h4>
+<p>数据集中在左边： left-steep or right-skewed</p>
+<p>数据集中在右边：right-steep or left-skewed</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623141609734.png"
+alt="image-20210623141609734" />
+<figcaption aria-hidden="true">image-20210623141609734</figcaption>
+</figure>
+<h4 id="确定规则">确定规则</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623141725856.png"
+alt="image-20210623141725856" />
+<figcaption aria-hidden="true">image-20210623141725856</figcaption>
+</figure>
+<h3 id="多变量描述">多变量描述</h3>
+<p>Multivariate Description</p>
+<p>对于一个统计单元有不同的变量描述，我们这里只研究2个变量的情况</p>
+<h3 id="joint-frequencies">Joint frequencies</h3>
+<p>联合频率</p>
+<p><span class="math display">\[
+h_{ij}=h(a_i, b_j)
+\]</span></p>
+<p>可以用表格描述</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623142459654.png"
+alt="image-20210623142459654" />
+<figcaption aria-hidden="true">image-20210623142459654</figcaption>
+</figure>
+<p>联合相对频率也类似</p>
+<p><span class="math display">\[
+f_{i,j}=f(a_i,b_j)
+\]</span></p>
+<h3 id="条件频率conditional-frequencies">条件频率(Conditional
+Frequencies)</h3>
+<p><span class="math display">\[
+f_{Y}(b_j | a_i)
+\]</span></p>
+<p>是在 <span class="math inline">\(X=a_i\)</span> 的条件下, <span
+class="math inline">\(b_j\)</span> 是 <span
+class="math inline">\(Y\)</span> 的频率</p>
+<p>对于 <span class="math inline">\(f_X\)</span> 也是类似定义的</p>
+<h3 id="二维图表">二维图表</h3>
+<h4 id="二维条状图">二维条状图</h4>
+<p>two-dimensional bar chart</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623143012375.png"
+alt="image-20210623143012375" />
+<figcaption aria-hidden="true">image-20210623143012375</figcaption>
+</figure>
+<h4 id="二维scatter-plots">二维Scatter Plots</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623143215712.png"
+alt="image-20210623143215712" />
+<figcaption aria-hidden="true">image-20210623143215712</figcaption>
+</figure>
+<h4 id="二维-histograms">二维 Histograms</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623143237248.png"
+alt="image-20210623143237248" />
+<figcaption aria-hidden="true">image-20210623143237248</figcaption>
+</figure>
+<h3 id="correlation-相互关系测量">Correlation 相互关系测量</h3>
+<h4 id="monotonic-correlation">Monotonic correlation</h4>
+<ul>
+<li>same-sence relation: 如果 <span class="math inline">\(X\)</span>
+变大，那么 <span class="math inline">\(Y\)</span> 也变大</li>
+<li>opposite-sense relation: 如果 <span class="math inline">\(X\)</span>
+变小，那么 <span class="math inline">\(Y\)</span> 变小</li>
+</ul>
+<p>Metric， Ordinal 变量</p>
+<h4 id="functional-correlation">Functional correlation</h4>
+<ul>
+<li>linear relation</li>
+<li>quadratic relationships</li>
+</ul>
+<p>Metric 变量</p>
+<h3 id="连续性和-chi2-系数">连续性和 <span
+class="math inline">\(\chi^2\)</span> 系数</h3>
+<h4 id="chi2-系数"><span class="math inline">\(\chi^2\)</span> 系数</h4>
+<p><span class="math display">\[
+\chi^{2}=\sum_{i=1}^{k} \sum_{j=1}^{m} \frac{\left(h_{i j}-\frac{h_{i}
+\cdot h_{\cdot j}}{n}\right)^{2}}{\frac{h_{i} \cdot h_{\cdot j}}{n}}
+\in[0, \infty)
+\]</span></p>
+<p>如果 <span class="math inline">\(\chi^2\)</span>
+小，那么这两个变量没有关系，如果大那么这两个变量有关系</p>
+<h4 id="连续系数">连续系数</h4>
+<p><span class="math display">\[
+\begin{aligned}
+K &amp;=\sqrt{\frac{\chi^{2}}{n+\chi^{2}}} \in\left[0, K_{\max }\right]
+\\
+\text { where } K_{\max } &amp;=\sqrt{\frac{M-1}{M}} \text { with }
+M=\min \{k, m\}
+\end{aligned}
+\]</span></p>
+<p>纠正的连续系数 corrected Contingency Coefficient</p>
+<p><span class="math display">\[
+K^{*}=\frac{K}{K_{\max }} \in[0,1]
+\]</span></p>
+<p>如果</p>
+<p><span class="math display">\[
+K^* =0
+\]</span></p>
+<p>那么</p>
+<p><span class="math inline">\(X,Y\)</span></p>
+<p>无关</p>
+<p>若</p>
+<p><span class="math display">\[
+K^*=1
+\]</span></p>
+<p>那么</p>
+<p><span class="math inline">\(X,Y\)</span></p>
+<p>有关</p>
+<h3 id="经验协方差empirical-covariance">经验协方差Empirical
+Covariance</h3>
+<p><span class="math display">\[
+\tilde{s}_{X Y}=\frac{1}{n} \sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)
+\cdot\left(y_{i}-\bar{y}\right)
+\]</span></p>
+<h3 id="bravais-pearson-correlation-coefficient">Bravais-Pearson
+Correlation Coefficient</h3>
+<p><span class="math display">\[
+r=r_{X Y}=\frac{\tilde{S}_{X Y}}{\tilde{s}_{X} \cdot
+\tilde{S}_{Y}}=\frac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)
+\cdot\left(y_{i}-\bar{y}\right)}{\sqrt{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}
+\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}}}
+\]</span></p>
+<p>更加快捷的计算公式：</p>
+<p><span class="math display">\[
+r=r_{X Y}=\frac{\sum_{i=1}^{n} x_{i} y_{i}-n \bar{x}
+\bar{y}}{\sqrt{\left(\sum_{i=1}^{n} x_{i}^{2}-n
+\bar{x}^{2}\right)\left(\sum_{i=1}^{n} y_{i}^{2}-n \bar{y}^{2}\right)}}
+\]</span></p>
+<p>这个系数可以测量线性关系的强度</p>
+<h3 id="spearmansrank-correlation-coefficient">Spearman‘s(Rank)
+Correlation Coefficient</h3>
+<h4 id="排名ranks">排名Ranks</h4>
+<p><span class="math display">\[
+\begin{array}{|l|c|c|c|c|c|}
+\hline \text { Person } i &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+\hline \text { Element } x_{i} &amp; 1.57 \mathrm{~m} &amp; 1.70
+\mathrm{~m} &amp; 1.83 \mathrm{~m} &amp; 1.65 \mathrm{~m} &amp; 1.75
+\mathrm{~m} \\
+\hline \text { Rank } \operatorname{rk}\left(x_{i}\right) &amp; 1 &amp;
+3 &amp; 5 &amp; 2 &amp; 4 \\
+\hline
+\end{array}
+\]</span></p>
+<h4 id="spearmansrank-correlationcoefficient">Spearman‘s(Rank)
+CorrelationCoefficient</h4>
+<p><span class="math display">\[
+r_{S
+P}=\frac{\sum_{i=1}^{n}\left(\operatorname{rk}\left(x_{i}\right)-\overline{\mathrm{rk}}_{X}\right)
+\cdot\left(\operatorname{rk}\left(y_{i}\right)-\overline{\mathrm{rk}}_{Y}\right)}{\sqrt{\sum_{i=1}^{n}\left(\operatorname{rk}\left(x_{i}\right)-\overline{\mathrm{rk}}_{X}\right)^{2}
+\sum_{i=1}^{n}\left(\operatorname{rk}\left(y_{i}\right)-\overline{\mathrm{rk}}_{Y}\right)^{2}}}
+\]</span></p>
+<p>更快速的计算方式：</p>
+<p>若 <span class="math inline">\(x_i \ne x_j,y_i \ne y_j\)</span> , 设
+<span
+class="math inline">\(d_{i}=\operatorname{rk}\left(x_{i}\right)-\operatorname{rk}\left(y_{i}\right)\)</span></p>
+<p><span class="math display">\[
+r_{S P}=1-\frac{6 \sum_{i=1}^{n} d_{i}^{2}}{\left(n^{2}-1\right) n}
+\]</span></p>
+<p>这个系数可以测量递增关系的强度 strength of the monotonic
+relationship</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623163203393.png"
+alt="image-20210623163203393" />
+<figcaption aria-hidden="true">image-20210623163203393</figcaption>
+</figure>
+<h3 id="线性回归">线性回归</h3>
+<p>用线性函数描述 <span class="math inline">\(X,Y\)</span> 关系</p>
+<p><span class="math display">\[
+Y=f(X)=\alpha + \beta X, \alpha, \beta \in \mathbb{R}
+\]</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623163626922.png"
+alt="image-20210623163626922" />
+<figcaption aria-hidden="true">image-20210623163626922</figcaption>
+</figure>
+<p>允许误差 <span class="math inline">\(\epsilon _i\)</span></p>
+<p><span class="math display">\[
+y_{i}=f\left(x_{i}\right)+\epsilon_{i}=\alpha+\beta
+x_{i}+\varepsilon_{i}, \quad i=1, \ldots, n
+\]</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210623163756677.png"
+alt="image-20210623163756677" />
+<figcaption aria-hidden="true">image-20210623163756677</figcaption>
+</figure>
+<h3 id="method-of-least-squares">Method of Least Squares</h3>
+<p>设 <span
+class="math inline">\(\varepsilon_{i}=y_{i}-\hat{y}_{i}\)</span> 最小化
+<span
+class="math inline">\(\varepsilon_{i}^{2}=\left(y_{i}-\hat{y}_{i}\right)^{2}
+\geq 0\)</span></p>
+<p><span class="math display">\[
+\min Q(\alpha, \beta)=\frac{1}{n}
+\sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}=\frac{1}{n}
+\sum_{i=1}^{n}\left[y_{i}-\left(\alpha+\beta x_{i}\right)\right]^{2}
+\]</span></p>
+<p>我们可以令偏导数为 <span class="math inline">\(0\)</span>
+来最小化</p>
+<p><span class="math display">\[
+\begin{gathered}
+\frac{\partial Q(\alpha, \beta)}{\partial \alpha}=-\frac{2}{n}
+\sum_{i=1}^{n}\left[y_{i}-\left(\alpha+\beta x_{i}\right)\right]=0 \\
+\frac{\partial Q(\alpha, \beta)}{\partial \beta}=-\frac{2}{n}
+\sum_{i=1}^{n}\left[y_{i}-\left(\alpha+\beta x_{i}\right)\right] \cdot
+x_{i}=0
+\end{gathered}
+\]</span></p>
+<p>于是得出</p>
+<p><span class="math display">\[
+\begin{gathered}
+\hat{\alpha}=\bar{y}-\hat{\beta} \bar{x} \\
+\hat{\beta}=\frac{\sum_{i=1}^{n} y_{i} x_{i}-n \bar{y}
+\bar{x}}{\sum_{i=1}^{n} x_{i}^{2}-n
+\bar{x}^{2}}=\frac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)\left(y_{i}-\bar{y}\right)}{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}}=\frac{\tilde{s}_{X
+Y}}{\tilde{s}_{X}^{2}}
+\end{gathered}
+\]</span></p>
+<h3 id="coefficient-of-determination-and-residual-analysis">Coefficient
+of Determination and Residual Analysis</h3>
+<h4 id="total-dispersionsum-of-square-total">total dispersion(Sum of
+Square Total)</h4>
+<p><span class="math display">\[
+S Q T=\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}\left(=n \cdot
+\tilde{S}_{Y}^{2}\right)
+\]</span></p>
+<h4 id="分解分散性-dispersion-decomposition">分解分散性 Dispersion
+Decomposition</h4>
+<p><span class="math display">\[
+\begin{gathered}
+S Q T=S Q E+S Q R \\
+\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}=\sum_{i=1}^{n}\left(\hat{y}_{i}-\bar{y}\right)^{2}+\sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}
+\end{gathered}
+\]</span></p>
+<h4 id="coefficient-of-determination">Coefficient of Determination</h4>
+<p>描述一个模型的质量</p>
+<p><span class="math display">\[
+R^{2}=\frac{\text { explained dispersion }}{\text { total dispersion
+}}=\frac{S Q E}{S Q
+T}=\frac{\sum_{i=1}^{n}\left(\hat{y}_{i}-\bar{y}\right)^{2}}{\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}}
+\]</span></p>
+<p>另一个公式：</p>
+<p><span class="math display">\[
+R^{2}=1-\frac{S Q R}{S Q
+T}=1-\frac{\sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}}{\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}}
+\]</span></p>
+<p><span class="math inline">\(0 \le R^2 \le 1\)</span> , 若 <span
+class="math inline">\(R^2=0\)</span> 说明坏，<span
+class="math inline">\(R^2=1\)</span> 说明好</p>
+<h2 id="概率演算probability-calculus">概率演算Probability Calculus</h2>
+<p>略</p>
+<h2 id="statistical-inference">Statistical inference</h2>
+<h3 id="点估计">点估计</h3>
+<p>我们需要估计一个分布的未知参数 <span
+class="math inline">\(\theta\)</span></p>
+<p>为了实现，我们设 <span class="math inline">\(X_1,...X_n\)</span>
+是独立的且相同的分布</p>
+<h4 id="估计函数">估计函数</h4>
+<p>对于一个参数的估计函数是：</p>
+<p><span class="math display">\[
+T=g\left(X_{1}, \ldots, X_{n}\right)
+\]</span></p>
+<p>下面是数理统计的知识，略</p>
+<h1 id="r语言">R语言</h1>
+<h2 id="安装">安装</h2>
+<p>下载安装:https://cran.r-project.org/</p>
+<p>下载 RStudio https://www.rstudio.com/</p>
+<h3 id="下载额外包裹">下载额外包裹</h3>
+<p>在 R Console 里面</p>
+<ul>
+<li><p>先选择一个比较快的源</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chooseCRANmirror<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></li>
+<li><p>然后安装包</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&quot;name&quot;</span><span class="punctuation">,</span> dependencies <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>这个学期需要用到的包</p>
+<ul>
+<li><code>ggplot2</code></li>
+<li><code>lattice</code></li>
+<li><code>robustHD</code></li>
+<li><code>epade</code></li>
+<li><code>vcd</code></li>
+<li><code>gplots</code></li>
+<li><code>TeachingDemos</code></li>
+</ul>
+<h2 id="基础语法">基础语法</h2>
+<h3 id="运算符">运算符</h3>
+<p><code>+,-,*,/,^</code> : 加减乘除(浮点数除法)次幂</p>
+<h3 id="变量赋值">变量赋值</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x <span class="operator">&lt;-</span> 13</span><br><span class="line">x <span class="operator">=</span> <span class="number">13</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除变量">删除变量</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm<span class="punctuation">(</span>x<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数">函数</h3>
+<h4 id="库函数">库函数</h4>
+<ul>
+<li><code>sqrt(2)</code> 开平方根</li>
+<li><code>sum(1,3,4)</code> 求和</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210624104139436.png"
+alt="image-20210624104139436" />
+<figcaption aria-hidden="true">image-20210624104139436</figcaption>
+</figure>
+<h3 id="数据类型">数据类型</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210624104324326.png"
+alt="image-20210624104324326" />
+<figcaption aria-hidden="true">image-20210624104324326</figcaption>
+</figure>
+<h3 id="vector">vector</h3>
+<h4 id="按类型长度生成">按类型长度生成</h4>
+<p>生成长度为 <code>10</code> 类型为 <code>numeric</code> 的列表</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x <span class="operator">&lt;-</span> vector<span class="punctuation">(</span>mode<span class="operator">=</span><span class="string">&quot;numeric&quot;</span><span class="punctuation">,</span> <span class="built_in">length</span><span class="operator">=</span><span class="number">10</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用-c-生成">使用 <code>c()</code> 生成</h4>
+<p>直接赋值</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span><span class="number">0</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="取index">取index</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x<span class="punctuation">[</span><span class="number">10</span><span class="punctuation">]</span> <span class="comment"># index 1 .. 10</span></span><br></pre></td></tr></table></figure>
+<p>数组越界会报错：NA</p>
+<h4 id="给每个值取名字">给每个值取名字</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x <span class="operator">&lt;-</span> <span class="built_in">c</span><span class="punctuation">(</span>Monday<span class="operator">=</span><span class="number">1</span><span class="punctuation">,</span>Tuesday<span class="operator">=</span><span class="number">2</span><span class="punctuation">)</span></span><br><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="comment"># 显示名字</span></span><br><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="operator">&lt;-</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;M&quot;</span><span class="punctuation">,</span> <span class="string">&quot;T&quot;</span><span class="punctuation">)</span> <span class="comment"># 该名字</span></span><br></pre></td></tr></table></figure>
+<h3 id="matrices">Matrices</h3>
+<p>生产 3行 2列数据从10到15按行递增的矩阵</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a <span class="operator">=</span> matrix<span class="punctuation">(</span>nrow<span class="operator">=</span><span class="number">3</span><span class="punctuation">,</span> ncol<span class="operator">=</span><span class="number">2</span><span class="punctuation">,</span> data<span class="operator">=</span><span class="number">10</span><span class="operator">:</span><span class="number">15</span><span class="punctuation">,</span> byrow<span class="operator">=</span><span class="built_in">T</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="取元素">取元素</h4>
+<p>取出第3行第2列的元素</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p>取出第3行</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据集data-set">数据集Data Set</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Age <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">21</span><span class="punctuation">,</span> <span class="number">22</span><span class="punctuation">,</span> <span class="number">23</span><span class="punctuation">)</span>Gender <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;m&quot;</span><span class="punctuation">,</span> <span class="string">&quot;w&quot;</span><span class="punctuation">,</span> <span class="string">&quot;m&quot;</span><span class="punctuation">)</span>x <span class="operator">=</span> data.frame<span class="punctuation">(</span>Age<span class="punctuation">,</span> Gender<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>也可加入名字</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">names</span> <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;Tom&quot;</span><span class="punctuation">,</span> <span class="string">&quot;Kite&quot;</span><span class="punctuation">,</span> <span class="string">&quot;Lisa&quot;</span><span class="punctuation">)</span>x <span class="operator">=</span> data.frame<span class="punctuation">(</span>Age<span class="punctuation">,</span> Gender<span class="punctuation">,</span> row.names <span class="operator">=</span> <span class="built_in">names</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="提取部分数据">提取部分数据</h4>
+<p>subset</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">women <span class="operator">=</span> subset<span class="punctuation">(</span>x<span class="punctuation">,</span> x<span class="operator">$</span>Gender <span class="operator">==</span> <span class="string">&quot;w&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>split</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a <span class="operator">=</span> split<span class="punctuation">(</span>x<span class="punctuation">,</span> x<span class="operator">$</span>Gender<span class="punctuation">)</span>a<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span>a<span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据集">数据集</h2>
+<h4 id="更改目录">更改目录</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getwd<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 显示当前目录setwd(&quot;D:/Fyind&quot;) # 设置目录 </span></span><br></pre></td></tr></table></figure>
+<h3 id="读取数据">读取数据</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t <span class="operator">=</span> read.table<span class="punctuation">(</span><span class="string">&quot;.../a.csv&quot;</span><span class="punctuation">,</span>sep<span class="operator">=</span><span class="string">&quot;;&quot;</span><span class="punctuation">,</span>header <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span>t <span class="operator">=</span> read.table<span class="punctuation">(</span><span class="string">&quot;.../a.csv&quot;</span><span class="punctuation">,</span>sep<span class="operator">=</span><span class="string">&quot;;&quot;</span><span class="punctuation">,</span>header <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">,</span> row.names<span class="operator">=</span><span class="number">1</span><span class="punctuation">)</span> <span class="comment"># 第1列作为行的名字</span></span><br></pre></td></tr></table></figure>
+<p>用read_csv读取数据表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install.packages(&quot;tidyverse&quot;)</span><br><span class="line">library(tidyverse)</span><br><span class="line"></span><br><span class="line">LAozone = read_csv(&quot;LAozone.csv&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="写入数据">写入数据</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write.table<span class="punctuation">(</span>x<span class="punctuation">,</span> <span class="string">&quot;x.csv&quot;</span><span class="punctuation">,</span> sep<span class="operator">=</span><span class="string">&quot;;&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数-1">函数</h3>
+<h4 id="查看维度">查看维度</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dim</span><span class="punctuation">(</span>x<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="查看数据表">查看数据表</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">View<span class="punctuation">(</span>x<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="选择数据">选择数据</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Age <span class="operator">&lt;-</span> 0<span class="operator">:</span><span class="number">120</span>Age <span class="operator">&lt;-</span> seq<span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">120</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span> <span class="comment"># 从 0 到 120 步长 1 的数组AgeGrouped &lt;- cut(Age, breaks = c(0,13,19,65,120)) # 分割出区间 (0,13], (13,19] ... AgeGrouped &lt;- cut(Age, breaks = c(0,13,19,65,120), include.lowest = TRUE) # 包含第1个元素AgeGrouped &lt;- cut(Age, breaks = c(0,13,19,65,Inf), right = FALSE) # 左闭右开AgeGrouped &lt;- cut(Age, breaks = c(0,13,19,65,65, Inf), right = FALSE, labels = c(&quot;Children&quot;,&quot;Teenagers&quot;,&quot;Adults&quot;,&quot;seniors&quot;)) # 添加标签</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>选择某几列</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LAozone_small = LAozone[, c(&quot;ozone&quot;, &quot;temp&quot;)] # 选择了ozone 和 temp 列</span><br></pre></td></tr></table></figure>
+<h4 id="生成频率列表">生成频率列表</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">table<span class="punctuation">(</span>x<span class="punctuation">)</span> <span class="comment"># 单个变量table(MunichGraduate$Finanzierungsquelle,MunichGraduate$Studiendauer) # 双变量</span></span><br></pre></td></tr></table></figure>
+<h4 id="生成相对频率列表">生成相对频率列表</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prop.table<span class="punctuation">(</span>table<span class="punctuation">(</span>x<span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用拓展包">使用拓展包</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>lattice<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="求统计值">求统计值</h3>
+<h4 id="求最大值的行">求最大值的行</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which.max<span class="punctuation">(</span>CoronaBavaria<span class="operator">$</span>Infektionen<span class="punctuation">)</span>CoronaBavaria<span class="punctuation">[</span><span class="number">59</span><span class="punctuation">,</span> <span class="punctuation">]</span> <span class="comment"># 取出第59行</span></span><br></pre></td></tr></table></figure>
+<h4 id="求平均数">求平均数</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MeanCoronaCounty <span class="operator">&lt;-</span> mean<span class="punctuation">(</span>CoronaCounty<span class="operator">$</span>Infektionen.pro.100.000.Einwohner<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="求中位数">求中位数</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MedianCoronaBavaria <span class="operator">&lt;-</span> median<span class="punctuation">(</span>CoronaBavaria<span class="operator">$</span>Infektionen.pro.100.000.Einwohner<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="求五点总结">求五点总结</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary<span class="punctuation">(</span>CoronaCounty<span class="operator">$</span>Infektionen.pro.100.000.Einwohner<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="求边界加和">求边界加和</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addmargins<span class="punctuation">(</span>table<span class="punctuation">(</span>MunichGraduate<span class="operator">$</span>Finanzierungsquelle<span class="punctuation">,</span>MunichGraduate<span class="operator">$</span>Studiendauer<span class="punctuation">)</span><span class="punctuation">)</span> <span class="comment"># 生成加和</span></span><br></pre></td></tr></table></figure>
+<h4 id="加入列根据10-quantile来统计">加入列：根据10 quantile来统计</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>mltools<span class="punctuation">)</span>CoronaCounty<span class="punctuation">[</span><span class="punctuation">,</span><span class="string">&quot;InfectionsPer100000_grouped&quot;</span><span class="punctuation">]</span><span class="operator">&lt;-</span> bin_data<span class="punctuation">(</span>CoronaCounty<span class="operator">$</span>Infektionen.pro.100.000.Einwohner<span class="punctuation">,</span>                                                         bins<span class="operator">=</span><span class="number">10</span><span class="punctuation">,</span> binType<span class="operator">=</span><span class="string">&quot;quantile&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="求-chi2-参数contingency-coefficient">求 <span
+class="math inline">\(\chi^2\)</span> 参数,contingency coefficient</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>vcd<span class="punctuation">)</span>assocstats<span class="punctuation">(</span>table<span class="punctuation">(</span>CoronaCounty<span class="operator">$</span>Bundesland<span class="punctuation">,</span> CoronaCounty<span class="operator">$</span>InfectionsPer100000_grouped<span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h4 id="求-bravais-pearson-correlation-coefficient">求 Bravais-Pearson
+correlation coefficient</h4>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">storksPerHectare <span class="operator">&lt;-</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">20</span><span class="punctuation">,</span> <span class="number">30</span><span class="punctuation">,</span> <span class="number">40</span><span class="punctuation">,</span> <span class="number">50</span><span class="punctuation">,</span> <span class="number">60</span><span class="punctuation">,</span> <span class="number">70</span><span class="punctuation">)</span> <span class="comment"># x 轴birthsPerThousand &lt;- c(13, 24, 43, 51, 57, 77)  # y 轴cor(storksPerHectare, birthsPerThousand, method = &quot;pearson&quot;)</span></span><br></pre></td></tr></table></figure>
+<h2 id="画表格">画表格</h2>
+<h3 id="生成-histogram">生成 histogram</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>lattice<span class="punctuation">)</span>histogram<span class="punctuation">(</span>NewerFlats<span class="operator">$</span>wfl<span class="punctuation">,</span> breaks <span class="operator">=</span> seq<span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span><span class="number">320</span><span class="punctuation">,</span><span class="number">10</span><span class="punctuation">)</span><span class="punctuation">,</span>           xlab <span class="operator">=</span> <span class="string">&quot;Living space in sqm (class width = 10 sqm)&quot;</span><span class="punctuation">,</span>           ylab <span class="operator">=</span> <span class="string">&quot;Proportion in percentage&quot;</span><span class="punctuation">,</span> right <span class="operator">=</span> <span class="literal">FALSE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="盒子五点总结">盒子五点总结</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boxplot<span class="punctuation">(</span>CoronaCounty<span class="operator">$</span>Infektionen.pro.100.000.Einwohner<span class="punctuation">,</span> horizontal <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">,</span>        xlab <span class="operator">=</span> <span class="string">&quot;Infections per 100 000 inhabitants&quot;</span><span class="punctuation">,</span>         main <span class="operator">=</span> <span class="string">&quot;Data set Corona County&quot;</span><span class="punctuation">,</span> <span class="built_in">range</span> <span class="operator">=</span> <span class="number">0</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="画图像">画图像</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">storksPerHectare <span class="operator">&lt;-</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">20</span><span class="punctuation">,</span> <span class="number">30</span><span class="punctuation">,</span> <span class="number">40</span><span class="punctuation">,</span> <span class="number">50</span><span class="punctuation">,</span> <span class="number">60</span><span class="punctuation">,</span> <span class="number">70</span><span class="punctuation">)</span> <span class="comment"># x 轴birthsPerThousand &lt;- c(13, 24, 43, 51, 57, 77)  # y 轴plot(storksPerHectare,birthsPerThousand,      main = &quot;Scatter plot Number of storks per hectare vs. Number of births per thousand inhabitants&quot;,      xlab = &quot;Number of storks per hectare&quot;,      ylab = &quot;Number of births per thousand inhabitants&quot;,      pch = 19)</span></span><br></pre></td></tr></table></figure>
+<h3 id="画正态分布">画正态分布</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curve<span class="punctuation">(</span>dnorm<span class="punctuation">(</span>x<span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span><span class="punctuation">,</span> from<span class="operator">=</span><span class="operator">-</span><span class="number">5</span><span class="punctuation">,</span> to<span class="operator">=</span><span class="number">5</span><span class="punctuation">,</span> ylab <span class="operator">=</span> <span class="built_in">expression</span><span class="punctuation">(</span>varphi<span class="punctuation">(</span>x<span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span>par<span class="punctuation">(</span>mfrow<span class="operator">=</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="comment"># 画4张图(2*2)curve(dnorm(x, 0, sqrt(0.25)), from=-5, to=5, ylab = expression(varphi(x)), main = expression(sigma^2==0.25))curve(dnorm(x, 0, sqrt(1)), from=-5, to=5, ylab = expression(varphi(x)), main = expression(sigma^2==1.0))curve(dnorm(x, 0, sqrt(2)), from=-5, to=5, ylab = expression(varphi(x)), main = expression(sigma^2==2.0))curve(dnorm(x, 0, sqrt(5)), from=-5, to=5, ylab = expression(varphi(x)), main = expression(sigma^2==5.0))</span></span><br></pre></td></tr></table></figure>
+<h3 id="画条状图">画条状图</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ShoeSize <span class="operator">&lt;-</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">40</span><span class="punctuation">,</span> <span class="number">44</span><span class="punctuation">,</span> <span class="number">42</span><span class="punctuation">,</span> <span class="number">41</span><span class="punctuation">,</span> <span class="number">44</span><span class="punctuation">,</span> <span class="number">41</span><span class="punctuation">,</span> <span class="number">43</span><span class="punctuation">,</span> <span class="number">42</span><span class="punctuation">,</span> <span class="number">43</span><span class="punctuation">,</span> <span class="number">43</span><span class="punctuation">,</span> <span class="number">43</span><span class="punctuation">,</span> <span class="number">42</span><span class="punctuation">,</span> <span class="number">42</span><span class="punctuation">,</span> <span class="number">42</span><span class="punctuation">,</span> <span class="number">41</span><span class="punctuation">,</span> <span class="number">40</span><span class="punctuation">,</span> <span class="number">41</span><span class="punctuation">,</span> <span class="number">44</span><span class="punctuation">,</span> <span class="number">39</span><span class="punctuation">,</span> <span class="number">45</span><span class="punctuation">)</span>barplot<span class="punctuation">(</span>table<span class="punctuation">(</span>ShoeSize<span class="punctuation">)</span><span class="punctuation">,</span> col <span class="operator">=</span> blues9<span class="punctuation">,</span> xlab <span class="operator">=</span> <span class="string">&quot;ShoeSize&quot;</span><span class="punctuation">,</span> ylab <span class="operator">=</span> <span class="string">&quot;Quantities (abs. Frequencies)&quot;</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h2 id="假设检验">假设检验</h2>
+<h3 id="t-test">T-Test</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.test<span class="punctuation">(</span>ShoeSize<span class="punctuation">,</span> conf.level <span class="operator">=</span> <span class="number">0.95</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<h3 id="sigma-test">Sigma-Test</h3>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>TeachingDemos<span class="punctuation">)</span>sigma.test<span class="punctuation">(</span>ShoeSize<span class="punctuation">,</span> conf.level <span class="operator">=</span> <span class="number">0.95</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2021/07/17/%E7%BB%9F%E8%AE%A1%E5%AD%A6/">http://fyind.de/2021/07/17/%E7%BB%9F%E8%AE%A1%E5%AD%A6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2021/07/24/%E6%95%B0%E5%AD%97%E5%8C%96%E7%BC%96%E7%A8%8B/" title="数字化编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">数字化编程</div></div><div class="info-2"><div class="info-item-1">第1章 定义2.1 机器数字Maschinenzahlen 有限集合 \(M\) 计算机可以表示的数字 定义2.2 取整Rundung 映射 \(\mathbb{R} \rightarrow M\) 是一个Rundung \[ |x-r d(x)|=\min _{m \in M}|x-m| \] 于是产生absolute Rundungsfehler \[ f_{r d}(x):=x-r d(x) \] 定义2.3 Festkommazahlen \[ \begin{aligned} &amp;n_{1} n_{2} \cdots n_{k}, m_{1} \cdots m_{j} \quad \text { mit } \\ &amp;n_{1}, n_{2}, \ldots, n_{k}, m_{1}, \ldots, m_{j} \in\{0,1, \ldots, 9\}, \quad k, j \in I N \end{aligned} \] 补码  取反后+1 最高位符号为负数  浮点数 \(x\in \mathbb{R}\) 可以如下表示， \(m\) 是Mantis...</div></div></div></a><a class="pagination-related" href="/2021/07/01/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">建模和仿真</div></div><div class="info-2"><div class="info-item-1">Focus Analysis 基础部分 多变量函数 定义 \[ f: D \rightarrow W, D \subseteq \mathbb{R}^{n}, W \subseteq \mathbb{R}^{m} \] 对于自然数 \(n\) 和 \(m\) 这个函数可以这样表示： \[ f: D \subseteq \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, x=\left(\begin{array}{c} x_{1} \\ \vdots \\ x_{n} \end{array}\right) \mapsto f(x)=\left(\begin{array}{c} f_{1}\left(x_{1}, \ldots, x_{n}\right) \\ \vdots \\ f_{m}\left(x_{1}, \ldots, x_{n}\right) \end{array}\right) \] 高维度拓扑学 定义域Domain \(D\subseteq \mathbb{R} ^n\) 定义补集complement 为 \(D^c=\mathbb...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/11/01/CF680div2/" title="Codeforces Round 680 (Div. 2)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-01</div><div class="info-item-2">Codeforces Round 680 (Div. 2)</div></div><div class="info-2"><div class="info-item-1">Codeforces Round #680 (Div. 2) 传送门 A. Array Rearrangment  数学  题意 给定 \(A,B\) 数组和一个数 \(x\), 将 \(A\) 数组和 \(B\) 数组匹配，使得 \(A_i + B_i \le x\) 分析 \(A\) 的最大值 \(A_{max}\) 必须要找一个 \(B\) 数组的元素匹配。那么如果最小的 \(B_{min}\) 都无法满足，那么无解。否则存在解。 考虑假如存在一个解，那么它是不是一定也存在 \(A_{max}\) 与 \(B_{min}\) 匹配的解. 如果有一个满足的解 \(A_{max}\) 和 \(B_i\) 匹配，\(B_{min}\) 和 \(A_j\) 匹配. 那么 \(A_{max}+ B_i \le x\) 且 \(B_{min} + A_j \le x\) 其不是最大值与最小值匹配的情况. 那么交换 \(B_{min}\) 与 \(B_{i}\) . 可以证明 \(A_{max} + B_{min} \le A_{max} + B_i \le x\) 并且 \(B_{i}...</div></div></div></a><a class="pagination-related" href="/2021/09/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-23</div><div class="info-item-2">二进制与位运算</div></div><div class="info-2"><div class="info-item-1">二进制与位运算 数的表示有很多种，我们最常用的是 \(10\) 进制。也就是缝 \(10\) 进位。在计算机中，数都是由二进制的形式存储的。而二进制的意思就是缝 \(2\) 进位。因此二进制的数中，只有 \(0\) 和 \(1\) 二进制 下面这个是一个二进制数 \(101011\) , 我们把它转化成 \(10\) 进制 \[ (101011)_2 \] 怎么转化, 我们从右往左看 \[ \begin{aligned} (101011)_2&amp;=  1*2^5 +0*2^{4}+1*2^{3}+0*2^{2}+1*2^{1}+ 1*2^{0}\\ &amp;=1+2+8+32 \\ &amp;=43 \end{aligned} \] 把一个十进制数转化成二进制 \[ \begin{aligned} 43 /2 = 21 ...&amp; 1 \\ 21/2= 10 ... &amp; 1 \\ 10/2=5 ... &amp; 0 \\ 5/2 = 2 ... &amp; 1 \\ 2/2 = 1 ... &amp; 0 \\ 1/2 = 0 ... &amp; 1 \e...</div></div></div></a><a class="pagination-related" href="/2021/07/01/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-01</div><div class="info-item-2">建模和仿真</div></div><div class="info-2"><div class="info-item-1">Focus Analysis 基础部分 多变量函数 定义 \[ f: D \rightarrow W, D \subseteq \mathbb{R}^{n}, W \subseteq \mathbb{R}^{m} \] 对于自然数 \(n\) 和 \(m\) 这个函数可以这样表示： \[ f: D \subseteq \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, x=\left(\begin{array}{c} x_{1} \\ \vdots \\ x_{n} \end{array}\right) \mapsto f(x)=\left(\begin{array}{c} f_{1}\left(x_{1}, \ldots, x_{n}\right) \\ \vdots \\ f_{m}\left(x_{1}, \ldots, x_{n}\right) \end{array}\right) \] 高维度拓扑学 定义域Domain \(D\subseteq \mathbb{R} ^n\) 定义补集complement 为 \(D^c=\mathbb...</div></div></div></a><a class="pagination-related" href="/2021/07/24/%E6%95%B0%E5%AD%97%E5%8C%96%E7%BC%96%E7%A8%8B/" title="数字化编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="info-item-2">数字化编程</div></div><div class="info-2"><div class="info-item-1">第1章 定义2.1 机器数字Maschinenzahlen 有限集合 \(M\) 计算机可以表示的数字 定义2.2 取整Rundung 映射 \(\mathbb{R} \rightarrow M\) 是一个Rundung \[ |x-r d(x)|=\min _{m \in M}|x-m| \] 于是产生absolute Rundungsfehler \[ f_{r d}(x):=x-r d(x) \] 定义2.3 Festkommazahlen \[ \begin{aligned} &amp;n_{1} n_{2} \cdots n_{k}, m_{1} \cdots m_{j} \quad \text { mit } \\ &amp;n_{1}, n_{2}, \ldots, n_{k}, m_{1}, \ldots, m_{j} \in\{0,1, \ldots, 9\}, \quad k, j \in I N \end{aligned} \] 补码  取反后+1 最高位符号为负数  浮点数 \(x\in \mathbb{R}\) 可以如下表示， \(m\) 是Mantis...</div></div></div></a><a class="pagination-related" href="/2020/11/03/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" title="数学分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-03</div><div class="info-item-2">数学分析</div></div><div class="info-2"><div class="info-item-1">Analysis 数学分析 实数 数集 \[ \Z=\{所有整数的集合\} \\ \mathbb{R} = \{所有实数的集合\} \\ \Q = \{所有有理数的集合\} \\ \mathbb{N}=\{x\in Z:x\ge 0\} = \mathbb{N}_0 \\ \mathbb{N}_{&gt;0}=\{1,2,3,4,...\}=\{x\in N:x&gt;0\} \] 定义 1.1 子集 \(B\) 是 \(A\) 的子集， \(B \subseteq A\) ， 若 \(\forall x \in B \mathbb{R}ightarrow x\in A\) 定义1.2 映射 一个函数 \(f: A\rightarrow B\) 是  injektiv 若 \(\forall_{x \neq y \in A} f(x) \neq f(y)\) surjektiv 若 \(\forall_{y \in B} \exists_{x \in A} f(x)=y\) bijektiv 若 \(f\) 同时 injektiv 和 surjektiv  集合的模 Kardin...</div></div></div></a><a class="pagination-related" href="/2020/08/14/%E6%95%B0%E8%AE%BA%E6%95%B0%E5%AD%A6/" title="数学"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-14</div><div class="info-item-2">数学</div></div><div class="info-2"><div class="info-item-1">基础知识 求和符号 \[ \sum_{i=1}^{n}=a_1+a_2+a_3+...+a_n \] 求和符号的性质 结合律 \[ \sum_{i=1}^{n} \sum_{j=1}^{n} a_i b_j = \sum_{j=1}^{n} \sum_{i=1}^{n} a_i b_j \] 分配率 \[ \sum_{i=1}^{n} a_i \cdot k = (\sum_{i=1}^{n}a_i) \cdot k= k\sum_{i=1}^{n}a_i \\ \sum_{i=1}^{n}\sum_{j=1}^{n}a_i b_j = \sum_{i=1}^n (a_i\sum_{j=1}^n b_j)  = (\sum_{j=1}^{n}b_j)\cdot(\sum_{i=1}^{n}a_i) = (\sum_{i=1}^{n}a_i)\cdot(\sum_{j=1}^{n}b_j) \] 改变枚举对象 令 \(z=x+y\) \[ \sum_{x=0}^a\sum_{y=0}^b f(x,y) = \sum_{z=0}^{a+b}\sum_{y=0}^zf(z-y,y) \...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E5%AD%A6"><span class="toc-number">1.</span> <span class="toc-text">统计学</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%9F%E8%AE%A1%E5%AD%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是统计学</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E5%AD%A6%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.2.</span> <span class="toc-text">统计学基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#statistical-units%E7%BB%9F%E8%AE%A1%E5%8D%95%E5%85%83"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Statistical units统计单元</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#population"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Population</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#subpopulations"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">Subpopulations</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sample"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">Sample</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#characteristicvariablefeatures"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">Characteristic&#x2F;variable&#x2F;features</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#characteristic-value"><span class="toc-number">1.1.2.6.</span> <span class="toc-text">Characteristic value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#feature-types-and-scales"><span class="toc-number">1.1.3.</span> <span class="toc-text">Feature Types and Scales</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%A4%A7%E5%B0%8F%E5%88%86%E7%B1%BBfeature"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">根据大小分类feature</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E9%87%8F%E5%8C%96%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">根据量化的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">其他分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%94%B6%E9%9B%86%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.4.</span> <span class="toc-text">如何收集数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E6%9F%A5%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">调查的类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%91%E7%8E%87frequencies"><span class="toc-number">1.1.5.</span> <span class="toc-text">频率Frequencies</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E9%A2%91%E7%8E%87-absolute-frequencies"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">绝对频率 Absolute
+frequencies</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E9%A2%91%E7%8E%87-relative-frequencies"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">相对频率 Relative
+frequencies</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E8%A1%A8"><span class="toc-number">1.1.6.</span> <span class="toc-text">图表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bar-diagrams-%E6%9D%A1%E7%8A%B6%E8%A1%A8"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">Bar diagrams 条状表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#column-charts-%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="toc-number">1.1.6.2.</span> <span class="toc-text">Column charts 柱状图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bar-chart-%E6%9D%A1%E7%8A%B6%E8%A1%A8"><span class="toc-number">1.1.6.3.</span> <span class="toc-text">Bar chart 条状表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pie-charts-%E9%A5%BC%E5%9B%BE"><span class="toc-number">1.1.6.4.</span> <span class="toc-text">Pie charts 饼图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#histograms"><span class="toc-number">1.1.6.5.</span> <span class="toc-text">Histograms</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%AF%E8%AE%A1%E9%A2%91%E7%8E%87%E5%88%86%E5%B8%83"><span class="toc-number">1.1.7.</span> <span class="toc-text">累计频率分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E7%B4%AF%E8%AE%A1%E9%A2%91%E7%8E%87%E5%88%86%E5%B8%83"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">绝对累计频率分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E7%B4%AF%E8%AE%A1%E9%A2%91%E7%8E%87%E5%88%86%E5%B8%83"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">相对累计频率分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%99%E4%B8%A4%E8%80%85%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.7.3.</span> <span class="toc-text">这两者的性质</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E8%B6%8B%E5%8A%BF%E6%B5%8B%E9%87%8F"><span class="toc-number">1.1.8.</span> <span class="toc-text">中心趋势测量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E8%B6%8B%E5%8A%BF"><span class="toc-number">1.1.8.1.</span> <span class="toc-text">中心趋势</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mode"><span class="toc-number">1.1.8.2.</span> <span class="toc-text">Mode</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E8%B6%8B%E5%8A%BF%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="toc-number">1.1.9.</span> <span class="toc-text">中心趋势–平均值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#arithmetic-mean%E7%AE%97%E6%95%B0%E5%B9%B3%E5%9D%87%E5%80%BC"><span class="toc-number">1.1.9.1.</span> <span class="toc-text">arithmetic mean算数平均值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#truncated-mean"><span class="toc-number">1.1.9.2.</span> <span class="toc-text">Truncated mean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#winsorised-means"><span class="toc-number">1.1.9.3.</span> <span class="toc-text">Winsorised means</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E8%B6%8B%E5%8A%BF%E4%B8%AD%E4%BD%8D%E6%95%B0"><span class="toc-number">1.1.10.</span> <span class="toc-text">中心趋势–中位数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E7%BA%BF%E8%B6%8B%E5%8A%BF-%E5%88%86%E4%BD%8D%E7%82%B9"><span class="toc-number">1.1.11.</span> <span class="toc-text">中线趋势-分位点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E7%9A%84%E5%88%86%E4%BD%8D%E7%82%B9"><span class="toc-number">1.1.11.1.</span> <span class="toc-text">重要的分位点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.11.2.</span> <span class="toc-text">五点总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%95%A3%E6%80%A7%E6%B5%8B%E5%BA%A6"><span class="toc-number">1.1.12.</span> <span class="toc-text">分散性测度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%B7%AEvariance"><span class="toc-number">1.1.12.1.</span> <span class="toc-text">方差Variance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%B7%AE-standard-deviation"><span class="toc-number">1.1.12.2.</span> <span class="toc-text">标准差 Standard Deviation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B7%E6%9C%AC%E6%96%B9%E5%B7%AE-sample-variance"><span class="toc-number">1.1.12.3.</span> <span class="toc-text">样本方差 sample Variance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#coefficient-of-variation"><span class="toc-number">1.1.12.4.</span> <span class="toc-text">Coefficient of Variation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unimodal-%E5%92%8C-multimodal%E5%88%86%E5%B8%83"><span class="toc-number">1.1.13.</span> <span class="toc-text">Unimodal 和 Multimodal分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#unimodal"><span class="toc-number">1.1.13.1.</span> <span class="toc-text">Unimodal</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#multimodal"><span class="toc-number">1.1.13.2.</span> <span class="toc-text">Multimodal</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E5%92%8C%E6%AD%AA%E6%96%9C"><span class="toc-number">1.1.14.</span> <span class="toc-text">对称和歪斜</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0-symmetry"><span class="toc-number">1.1.14.1.</span> <span class="toc-text">对称 Symmetry</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%8E%E6%98%BE%E6%AD%AA%E6%96%9C-clearly-asymmetric"><span class="toc-number">1.1.14.2.</span> <span class="toc-text">明显歪斜 Clearly asymmetric</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E8%A7%84%E5%88%99"><span class="toc-number">1.1.14.3.</span> <span class="toc-text">确定规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%8F%98%E9%87%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.15.</span> <span class="toc-text">多变量描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#joint-frequencies"><span class="toc-number">1.1.16.</span> <span class="toc-text">Joint frequencies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%A2%91%E7%8E%87conditional-frequencies"><span class="toc-number">1.1.17.</span> <span class="toc-text">条件频率(Conditional
+Frequencies)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E5%9B%BE%E8%A1%A8"><span class="toc-number">1.1.18.</span> <span class="toc-text">二维图表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E6%9D%A1%E7%8A%B6%E5%9B%BE"><span class="toc-number">1.1.18.1.</span> <span class="toc-text">二维条状图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4scatter-plots"><span class="toc-number">1.1.18.2.</span> <span class="toc-text">二维Scatter Plots</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4-histograms"><span class="toc-number">1.1.18.3.</span> <span class="toc-text">二维 Histograms</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#correlation-%E7%9B%B8%E4%BA%92%E5%85%B3%E7%B3%BB%E6%B5%8B%E9%87%8F"><span class="toc-number">1.1.19.</span> <span class="toc-text">Correlation 相互关系测量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#monotonic-correlation"><span class="toc-number">1.1.19.1.</span> <span class="toc-text">Monotonic correlation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#functional-correlation"><span class="toc-number">1.1.19.2.</span> <span class="toc-text">Functional correlation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%92%8C-chi2-%E7%B3%BB%E6%95%B0"><span class="toc-number">1.1.20.</span> <span class="toc-text">连续性和 \(\chi^2\) 系数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#chi2-%E7%B3%BB%E6%95%B0"><span class="toc-number">1.1.20.1.</span> <span class="toc-text">\(\chi^2\) 系数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E7%B3%BB%E6%95%B0"><span class="toc-number">1.1.20.2.</span> <span class="toc-text">连续系数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E5%8D%8F%E6%96%B9%E5%B7%AEempirical-covariance"><span class="toc-number">1.1.21.</span> <span class="toc-text">经验协方差Empirical
+Covariance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bravais-pearson-correlation-coefficient"><span class="toc-number">1.1.22.</span> <span class="toc-text">Bravais-Pearson
+Correlation Coefficient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spearmansrank-correlation-coefficient"><span class="toc-number">1.1.23.</span> <span class="toc-text">Spearman‘s(Rank)
+Correlation Coefficient</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%92%E5%90%8Dranks"><span class="toc-number">1.1.23.1.</span> <span class="toc-text">排名Ranks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#spearmansrank-correlationcoefficient"><span class="toc-number">1.1.23.2.</span> <span class="toc-text">Spearman‘s(Rank)
+CorrelationCoefficient</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="toc-number">1.1.24.</span> <span class="toc-text">线性回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#method-of-least-squares"><span class="toc-number">1.1.25.</span> <span class="toc-text">Method of Least Squares</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#coefficient-of-determination-and-residual-analysis"><span class="toc-number">1.1.26.</span> <span class="toc-text">Coefficient
+of Determination and Residual Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#total-dispersionsum-of-square-total"><span class="toc-number">1.1.26.1.</span> <span class="toc-text">total dispersion(Sum of
+Square Total)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E8%A7%A3%E5%88%86%E6%95%A3%E6%80%A7-dispersion-decomposition"><span class="toc-number">1.1.26.2.</span> <span class="toc-text">分解分散性 Dispersion
+Decomposition</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#coefficient-of-determination"><span class="toc-number">1.1.26.3.</span> <span class="toc-text">Coefficient of Determination</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E6%BC%94%E7%AE%97probability-calculus"><span class="toc-number">1.2.</span> <span class="toc-text">概率演算Probability Calculus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#statistical-inference"><span class="toc-number">1.3.</span> <span class="toc-text">Statistical inference</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E4%BC%B0%E8%AE%A1"><span class="toc-number">1.3.1.</span> <span class="toc-text">点估计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%B0%E8%AE%A1%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">估计函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#r%E8%AF%AD%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">R语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E9%A2%9D%E5%A4%96%E5%8C%85%E8%A3%B9"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载额外包裹</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.2.1.</span> <span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="toc-number">2.2.2.</span> <span class="toc-text">变量赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">删除变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%93%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">库函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.4.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector"><span class="toc-number">2.2.5.</span> <span class="toc-text">vector</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E7%B1%BB%E5%9E%8B%E9%95%BF%E5%BA%A6%E7%94%9F%E6%88%90"><span class="toc-number">2.2.5.1.</span> <span class="toc-text">按类型长度生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-c-%E7%94%9F%E6%88%90"><span class="toc-number">2.2.5.2.</span> <span class="toc-text">使用 c() 生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96index"><span class="toc-number">2.2.5.3.</span> <span class="toc-text">取index</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99%E6%AF%8F%E4%B8%AA%E5%80%BC%E5%8F%96%E5%90%8D%E5%AD%97"><span class="toc-number">2.2.5.4.</span> <span class="toc-text">给每个值取名字</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matrices"><span class="toc-number">2.2.6.</span> <span class="toc-text">Matrices</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-number">2.2.6.1.</span> <span class="toc-text">取元素</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86data-set"><span class="toc-number">2.2.7.</span> <span class="toc-text">数据集Data Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E5%8F%96%E9%83%A8%E5%88%86%E6%95%B0%E6%8D%AE"><span class="toc-number">2.2.7.1.</span> <span class="toc-text">提取部分数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">2.3.</span> <span class="toc-text">数据集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E7%9B%AE%E5%BD%95"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">更改目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-number">2.3.1.</span> <span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-number">2.3.2.</span> <span class="toc-text">写入数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0-1"><span class="toc-number">2.3.3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%BB%B4%E5%BA%A6"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">查看维度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">查看数据表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE"><span class="toc-number">2.3.3.3.</span> <span class="toc-text">选择数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%A2%91%E7%8E%87%E5%88%97%E8%A1%A8"><span class="toc-number">2.3.3.4.</span> <span class="toc-text">生成频率列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%9B%B8%E5%AF%B9%E9%A2%91%E7%8E%87%E5%88%97%E8%A1%A8"><span class="toc-number">2.3.3.5.</span> <span class="toc-text">生成相对频率列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8B%93%E5%B1%95%E5%8C%85"><span class="toc-number">2.3.3.6.</span> <span class="toc-text">使用拓展包</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%82%E7%BB%9F%E8%AE%A1%E5%80%BC"><span class="toc-number">2.3.4.</span> <span class="toc-text">求统计值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E6%9C%80%E5%A4%A7%E5%80%BC%E7%9A%84%E8%A1%8C"><span class="toc-number">2.3.4.1.</span> <span class="toc-text">求最大值的行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E5%B9%B3%E5%9D%87%E6%95%B0"><span class="toc-number">2.3.4.2.</span> <span class="toc-text">求平均数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E4%B8%AD%E4%BD%8D%E6%95%B0"><span class="toc-number">2.3.4.3.</span> <span class="toc-text">求中位数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E4%BA%94%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">2.3.4.4.</span> <span class="toc-text">求五点总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E8%BE%B9%E7%95%8C%E5%8A%A0%E5%92%8C"><span class="toc-number">2.3.4.5.</span> <span class="toc-text">求边界加和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E5%88%97%E6%A0%B9%E6%8D%AE10-quantile%E6%9D%A5%E7%BB%9F%E8%AE%A1"><span class="toc-number">2.3.4.6.</span> <span class="toc-text">加入列：根据10 quantile来统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82-chi2-%E5%8F%82%E6%95%B0contingency-coefficient"><span class="toc-number">2.3.4.7.</span> <span class="toc-text">求 \(\chi^2\) 参数,contingency coefficient</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82-bravais-pearson-correlation-coefficient"><span class="toc-number">2.3.4.8.</span> <span class="toc-text">求 Bravais-Pearson
+correlation coefficient</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%BB%E8%A1%A8%E6%A0%BC"><span class="toc-number">2.4.</span> <span class="toc-text">画表格</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90-histogram"><span class="toc-number">2.4.1.</span> <span class="toc-text">生成 histogram</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%92%E5%AD%90%E4%BA%94%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">2.4.2.</span> <span class="toc-text">盒子五点总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%BB%E5%9B%BE%E5%83%8F"><span class="toc-number">2.4.3.</span> <span class="toc-text">画图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%BB%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="toc-number">2.4.4.</span> <span class="toc-text">画正态分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%BB%E6%9D%A1%E7%8A%B6%E5%9B%BE"><span class="toc-number">2.4.5.</span> <span class="toc-text">画条状图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="toc-number">2.5.</span> <span class="toc-text">假设检验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#t-test"><span class="toc-number">2.5.1.</span> <span class="toc-text">T-Test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sigma-test"><span class="toc-number">2.5.2.</span> <span class="toc-text">Sigma-Test</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Codeforces Round 680 (Div. 2) | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Codeforces Round #680 (Div. 2) 传送门 A. Array Rearrangment  数学  题意 给定 \(A,B\) 数组和一个数 \(x\), 将 \(A\) 数组和 \(B\) 数组匹配，使得 \(A_i + B_i \le x\) 分析 \(A\) 的最大值 \(A_{max}\) 必须要找一个 \(B\) 数组的元素匹配。那么如果最小的 \(B_{min}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 680 (Div. 2)">
+<meta property="og:url" content="http://fyind.de/2020/11/01/CF680div2/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="Codeforces Round #680 (Div. 2) 传送门 A. Array Rearrangment  数学  题意 给定 \(A,B\) 数组和一个数 \(x\), 将 \(A\) 数组和 \(B\) 数组匹配，使得 \(A_i + B_i \le x\) 分析 \(A\) 的最大值 \(A_{max}\) 必须要找一个 \(B\) 数组的元素匹配。那么如果最小的 \(B_{min}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2020-11-01T18:39:33.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.873Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="Codeforces">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="组合数学">
+<meta property="article:tag" content="数论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Codeforces Round 680 (Div. 2)",
+  "url": "http://fyind.de/2020/11/01/CF680div2/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2020-11-01T18:39:33.000Z",
+  "dateModified": "2025-07-18T10:49:53.873Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2020/11/01/CF680div2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Codeforces Round 680 (Div. 2)',
+  isHighlightShrink: true,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Codeforces Round 680 (Div. 2)</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Codeforces Round 680 (Div. 2)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-11-01T18:39:33.000Z" title="Created 2020-11-01 18:39:33">2020-11-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.873Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/Codeforces/">Codeforces</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="codeforces-round-680-div.-2">Codeforces Round #680 (Div. 2)</h1>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1445">传送门</a></p>
+<h2 id="a.-array-rearrangment">A. Array Rearrangment</h2>
+<blockquote>
+<p>数学</p>
+</blockquote>
+<h3 id="题意">题意</h3>
+<p>给定 <span class="math inline">\(A,B\)</span> 数组和一个数 <span
+class="math inline">\(x\)</span>, 将 <span
+class="math inline">\(A\)</span> 数组和 <span
+class="math inline">\(B\)</span> 数组匹配，使得 <span
+class="math inline">\(A_i + B_i \le x\)</span></p>
+<h3 id="分析">分析</h3>
+<p><span class="math inline">\(A\)</span> 的最大值 <span
+class="math inline">\(A_{max}\)</span> 必须要找一个 <span
+class="math inline">\(B\)</span> 数组的元素匹配。那么如果最小的 <span
+class="math inline">\(B_{min}\)</span>
+都无法满足，那么无解。否则存在解。</p>
+<p>考虑假如存在一个解，那么它是不是一定也存在 <span
+class="math inline">\(A_{max}\)</span> 与 <span
+class="math inline">\(B_{min}\)</span> 匹配的解. 如果有一个满足的解
+<span class="math inline">\(A_{max}\)</span> 和 <span
+class="math inline">\(B_i\)</span> 匹配，<span
+class="math inline">\(B_{min}\)</span> 和 <span
+class="math inline">\(A_j\)</span> 匹配.</p>
+<p>那么 <span class="math inline">\(A_{max}+ B_i \le x\)</span> 且 <span
+class="math inline">\(B_{min} + A_j \le x\)</span>
+其不是最大值与最小值匹配的情况. 那么交换 <span
+class="math inline">\(B_{min}\)</span> 与 <span
+class="math inline">\(B_{i}\)</span> . 可以证明 <span
+class="math inline">\(A_{max} + B_{min} \le A_{max} + B_i \le x\)</span>
+并且 <span class="math inline">\(B_{i} + A_{j} \le B_{i} + A_{max} \le
+x\)</span> 然后发现交换后还满足.
+那么把数组排序后，最大值与最小值匹配即可.</p>
+<h3 id="代码">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> sz(x) ((int) (x).size())</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(T &amp; x)</span></span>&#123; cout &lt;&lt; x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T,<span class="keyword">class</span> U&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(pair&lt;T,U&gt; &amp; p)</span></span>&#123;cout &lt;&lt; <span class="string">&quot;(&quot;</span>; <span class="built_in">print</span>(p.first); cout &lt;&lt; <span class="string">&quot;, &quot;</span>; <span class="built_in">print</span>(p.second); cout &lt;&lt; <span class="string">&quot;)&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;T&gt; &amp; v)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#123;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sz</span>(v)) <span class="built_in">print</span>(v[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">sz</span>(v); i++) cout &lt;&lt; <span class="string">&quot;, &quot;</span>, <span class="built_in">print</span>(v[i]);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#125;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, T;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="type">int</span> x;</span><br><span class="line">        cin &gt;&gt; n &gt;&gt; x;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">A</span><span class="params">(n<span class="number">+1</span>)</span></span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">B</span><span class="params">(n<span class="number">+1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n; ++i) &#123;</span><br><span class="line">            cin &gt;&gt; A[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n; ++i) &#123;</span><br><span class="line">            cin &gt;&gt; B[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(A.<span class="built_in">begin</span>()<span class="number">+1</span>, A.<span class="built_in">end</span>(), greater&lt;&gt;());</span><br><span class="line">        <span class="type">int</span> ok = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] + B[i] &gt; x) &#123; ok = <span class="number">0</span>; <span class="keyword">break</span>; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ok) cout &lt;&lt; <span class="string">&quot;YES&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;NO&quot;</span> &lt;&lt; endl;     </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="b.-elimination">B. Elimination</h2>
+<blockquote>
+<p>数学</p>
+</blockquote>
+<h3 id="题意-1">题意</h3>
+<p>第一场比赛的排行榜中, 第 <span class="math inline">\(100\)</span>
+名分数为 <span class="math inline">\(a\)</span> , 前 <span
+class="math inline">\(100\)</span> 名选手在第二场比赛分数至少为 <span
+class="math inline">\(b\)</span>. 第二场比赛排行榜中，第 <span
+class="math inline">\(100\)</span> 名选手分数为 <span
+class="math inline">\(c\)</span> 前 <span
+class="math inline">\(100\)</span> 名在第一场比赛的分数至少为 <span
+class="math inline">\(d\)</span> .
+每个选手总分为两场比赛分数之和，排行榜分数均降序排列，问总分排行榜第
+<span class="math inline">\(100\)</span>
+名选手分数的最小可能值是多少.</p>
+<h3 id="分析-1">分析</h3>
+<p>因为排行榜降序排列，所以第一场比赛所有选手总分 <span
+class="math inline">\(s_i \ge a + b\)</span> ，第二场比赛前 <span
+class="math inline">\(100\)</span> 名选手的总分 <span
+class="math inline">\(s_i \ge c + d\)</span> . 所以总分前 <span
+class="math inline">\(100\)</span> 名的总分最小可能值为 <span
+class="math inline">\(max(a+b,c+d)\)</span> . 所以我们可以把最大值的那前
+<span class="math inline">\(100\)</span> 名就作为总分的前 <span
+class="math inline">\(100\)</span> 名，符合题意.</p>
+<h3 id="代码-1">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> sz(x) ((int) (x).size())</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(T &amp; x)</span></span>&#123; cout &lt;&lt; x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T,<span class="keyword">class</span> U&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(pair&lt;T,U&gt; &amp; p)</span></span>&#123;cout &lt;&lt; <span class="string">&quot;(&quot;</span>; <span class="built_in">print</span>(p.first); cout &lt;&lt; <span class="string">&quot;, &quot;</span>; <span class="built_in">print</span>(p.second); cout &lt;&lt; <span class="string">&quot;)&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;T&gt; &amp; v)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#123;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sz</span>(v)) <span class="built_in">print</span>(v[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">sz</span>(v); i++) cout &lt;&lt; <span class="string">&quot;, &quot;</span>, <span class="built_in">print</span>(v[i]);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#125;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, T;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="type">int</span> a, b, c, d;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;</span><br><span class="line">        cout &lt;&lt; <span class="built_in">max</span>(a+b, c+d) &lt;&lt; endl;       </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="c.-division">C. Division</h2>
+<blockquote>
+<p>数学， 数论</p>
+</blockquote>
+<h3 id="题意-2">题意</h3>
+<p>给定两个数 <span class="math inline">\(p, q\)</span> ,求最大的 <span
+class="math inline">\(x\)</span> 使得 <span
+class="math inline">\(p\)</span> 是 <span
+class="math inline">\(x\)</span> 的倍数，同时 <span
+class="math inline">\(x\)</span> 是 <span
+class="math inline">\(q\)</span> 的倍数.</p>
+<h3 id="分析-2">分析</h3>
+<p>首先 <span class="math inline">\(x\)</span> 最大不可能超过 <span
+class="math inline">\(p\)</span> .假如令 <span
+class="math inline">\(x=p\)</span> 如果 <span
+class="math inline">\(p\)</span> 不是 <span
+class="math inline">\(q\)</span> 的倍数，那么符合题意，输出 <span
+class="math inline">\(p\)</span>. 否则根据 <a
+target="_blank" rel="noopener" href="https://fyind.github.io/2020/08/14/%E6%95%B0%E8%AE%BA%E6%95%B0%E5%AD%A6/">唯一分解定理</a>，<span
+class="math inline">\(q\)</span> 有的因子 <span
+class="math inline">\(p\)</span> 一定也有。我们枚举 <span
+class="math inline">\(q\)</span> 的所有因子，用这个因子去约分 <span
+class="math inline">\(p\)</span> 使得 <span
+class="math inline">\(p\)</span> 不在是 <span
+class="math inline">\(q\)</span>
+的倍数。那么这些枚举的情况中，再取个最大值。</p>
+<p>值得注意的是：用 <span class="math inline">\(\sqrt{q}\)</span>
+来枚举因子的时候和判断素数略有不同，别忘了 <span
+class="math inline">\(q\)</span>
+自己本身也是一个因子，而且每枚举一个数，可以产生两个因子：</p>
+<p>如果 <span class="math inline">\(a\)</span> 是 <span
+class="math inline">\(q\)</span> 的一个因子，那么 <span
+class="math inline">\(a/q\)</span> 也是 <span
+class="math inline">\(q\)</span> 的一个因子.</p>
+<h3 id="代码-2">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> sz(x) ((int) (x).size())</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(T &amp; x)</span></span>&#123; cout &lt;&lt; x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T,<span class="keyword">class</span> U&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(pair&lt;T,U&gt; &amp; p)</span></span>&#123;cout &lt;&lt; <span class="string">&quot;(&quot;</span>; <span class="built_in">print</span>(p.first); cout &lt;&lt; <span class="string">&quot;, &quot;</span>; <span class="built_in">print</span>(p.second); cout &lt;&lt; <span class="string">&quot;)&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;T&gt; &amp; v)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#123;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sz</span>(v)) <span class="built_in">print</span>(v[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">sz</span>(v); i++) cout &lt;&lt; <span class="string">&quot;, &quot;</span>, <span class="built_in">print</span>(v[i]);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#125;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, T;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        ll p, q;</span><br><span class="line">        cin &gt;&gt; p &gt;&gt; q;</span><br><span class="line">        <span class="keyword">if</span> (p % q != <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; p &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ll ans = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>;i &lt;= <span class="built_in">sqrt</span>(q); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (q % i == <span class="number">0</span>) &#123;</span><br><span class="line">                ll tp = p;</span><br><span class="line">                <span class="keyword">while</span> (tp % q == <span class="number">0</span>) tp /= i;</span><br><span class="line">                ans = <span class="built_in">max</span>(ans, tp);</span><br><span class="line">                tp = p;</span><br><span class="line">                <span class="keyword">while</span> (tp % q == <span class="number">0</span>) tp /= (q/i);</span><br><span class="line">                ans = <span class="built_in">max</span>(ans, tp);</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (p % q == <span class="number">0</span>) p /= q;</span><br><span class="line">        ans = <span class="built_in">max</span>(ans, p);</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="d.-divide-and-sum">D. Divide and Sum</h2>
+<blockquote>
+<p>组合数学，数学</p>
+</blockquote>
+<h3 id="题意-3">题意</h3>
+<p>把一个长度为 <span class="math inline">\(2n\)</span> 的序列分为 <span
+class="math inline">\(n\)</span> 和 <span
+class="math inline">\(n\)</span>
+长度的两部分。其中一个部分从小到大排序，记为 <span
+class="math inline">\(a_i\)</span> . 另一个从大到小排序记为 <span
+class="math inline">\(b_i\)</span> . 把这个分割的价值定义为 <span
+class="math display">\[
+f(a,b) = \sum_{i=1}^{n}|a_i-b_i|
+\]</span>
+问所有分割数组的可能性中，把所有可能的价值加起来的和是多少，答案对 <span
+class="math inline">\(998244353\)</span> 取模</p>
+<h3 id="分析-3">分析</h3>
+<p>对于两个数组中的位置 <span class="math inline">\(i\)</span> 有 <span
+class="math inline">\(a_i\)</span> 和 <span
+class="math inline">\(b_i\)</span>. 那么这个位置的价值就是 <span
+class="math inline">\(max(a_i,b_i) - min(a_i,b_i)\)</span> .
+那么对于数组中最大的那个数，不论它放到哪里，它都是大的那个。我们把原数组从小到大排序后，较大的那一半作为另一个数组
+<span class="math inline">\(b\)</span>，发现 <span
+class="math inline">\(b\)</span> 都是在 <span
+class="math inline">\(b\)</span> 中取最大值。加入把 <span
+class="math inline">\(b\)</span> 中的某个元素和 <span
+class="math inline">\(a\)</span> 中的交换，排序后小的那个数会排序到
+<span class="math inline">\(b\)</span>
+数组的最后一位。而大的那个数也会排序到 <span
+class="math inline">\(a\)</span>
+数组的最后一位。发现交换后还是大的那个数取最大值。所以在分析一下，发现不论怎么交换，总价值不会改变。所以我们只需要计算一下从小到大排序的那种情况，然后乘以所有分割的可能性
+<span class="math inline">\(C_{2n}^{n}\)</span> 就是总的答案了</p>
+<h3 id="代码-3">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> sz(x) ((int) (x).size())</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(T &amp; x)</span></span>&#123; cout &lt;&lt; x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T,<span class="keyword">class</span> U&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(pair&lt;T,U&gt; &amp; p)</span></span>&#123;cout &lt;&lt; <span class="string">&quot;(&quot;</span>; <span class="built_in">print</span>(p.first); cout &lt;&lt; <span class="string">&quot;, &quot;</span>; <span class="built_in">print</span>(p.second); cout &lt;&lt; <span class="string">&quot;)&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="type">void</span> <span class="title">print</span><span class="params">(vector&lt;T&gt; &amp; v)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#123;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sz</span>(v)) <span class="built_in">print</span>(v[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; <span class="built_in">sz</span>(v); i++) cout &lt;&lt; <span class="string">&quot;, &quot;</span>, <span class="built_in">print</span>(v[i]);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;&#125;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MOD = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line">ll A[maxn], inv[maxn], f[maxn], rf[maxn];</span><br><span class="line">ll n, m;</span><br><span class="line"><span class="comment">// 需要逆元数组，费马尔小定理求逆元</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">mul</span><span class="params">(ll a, ll b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a * b) % MOD;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">add</span><span class="params">(ll a, ll b)</span> </span>&#123; <span class="comment">// 带减法</span></span><br><span class="line">    <span class="keyword">return</span> ((a + b) % MOD + MOD) % MOD;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">c</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (k &lt; <span class="number">0</span> || k &gt; n) ? <span class="number">0</span> : <span class="built_in">mul</span>(f[n], <span class="built_in">mul</span>(rf[n-k], rf[k]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    n *= <span class="number">2</span>;</span><br><span class="line">    inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">        inv[i]=(ll)(MOD-MOD/i)*inv[MOD%i]%MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    f[<span class="number">0</span>] = rf[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n; ++i) &#123;</span><br><span class="line">        f[i] = <span class="built_in">mul</span>(f[i<span class="number">-1</span>], i);</span><br><span class="line">        rf[i] = <span class="built_in">mul</span>(rf[i<span class="number">-1</span>], inv[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; A[i];   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(A<span class="number">+1</span>, A+n<span class="number">+1</span>);</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n/<span class="number">2</span>; ++i) &#123;</span><br><span class="line">        ans = <span class="built_in">add</span>(ans, <span class="built_in">abs</span>(A[i] - A[n-i<span class="number">+1</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">mul</span>(<span class="built_in">c</span>(n, n/<span class="number">2</span>), ans) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2020/11/01/CF680div2/">http://fyind.de/2020/11/01/CF680div2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a><a class="post-meta__tags" href="/tags/Codeforces/">Codeforces</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a><a class="post-meta__tags" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/">组合数学</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E8%AE%BA/">数论</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/11/03/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" title="数学分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">数学分析</div></div><div class="info-2"><div class="info-item-1">Analysis 数学分析 实数 数集 \[ \Z=\{所有整数的集合\} \\ \mathbb{R} = \{所有实数的集合\} \\ \Q = \{所有有理数的集合\} \\ \mathbb{N}=\{x\in Z:x\ge 0\} = \mathbb{N}_0 \\ \mathbb{N}_{&gt;0}=\{1,2,3,4,...\}=\{x\in N:x&gt;0\} \] 定义 1.1 子集 \(B\) 是 \(A\) 的子集， \(B \subseteq A\) ， 若 \(\forall x \in B \mathbb{R}ightarrow x\in A\) 定义1.2 映射 一个函数 \(f: A\rightarrow B\) 是  injektiv 若 \(\forall_{x \neq y \in A} f(x) \neq f(y)\) surjektiv 若 \(\forall_{y \in B} \exists_{x \in A} f(x)=y\) bijektiv 若 \(f\) 同时 injektiv 和 surjektiv  集合的模 Kardin...</div></div></div></a><a class="pagination-related" href="/2020/10/16/LaTeX%E7%AC%94%E8%AE%B0/" title="LaTeX笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">LaTeX笔记</div></div><div class="info-2"><div class="info-item-1">LaTeX 安装 打开这个网页   image-20201016171058010  安装这个即可 然后安装个 TexMaker 1winget install texmaker 然后可以配置一下，在选项里面配置，可以把编译器改一下来支持中文   image-20201016171147980  LaTeX文档 12345678910111213141516171819202122232425\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;graphicx&#125;\usepackage&#123;booktabs&#125;\usepackage&#123;multirow&#125;\title&#123;Use \LaTeX to make presentation&#125;\author&#123;Fyind&#125;\date&#123;\today&#125;\begin&#123;document&#125;	\maketitle	\tableofcont...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/07/29/CodeForces%E9%A2%98%E8%A7%A3/" title="CodeForces题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-29</div><div class="info-item-2">CodeForces题解</div></div><div class="info-2"><div class="info-item-1">Educational Codeforces Round 92 (Rated for Div. 2) link A. LCM Problem  构造  给定区间 \([l,r]\) 求 \(2\) 个在里面的数，使得它们的最小公倍数也在区间内，否则输出-1 -1 . 可以知道 \(l, l*2\) 是2个最小的可能组合，只要判断 \(l*2 &gt; r\) 即可. B. Array Walk  贪心  由于可以折返的步数比较少。我们可以枚举折返的步数。当折返的步数固定为 \(j\) 的时候。有2种情况，  \(j\) 步都是折返后又回来。这种情况最远走到了 \([1,k-2j]\) \(j-1\) 步是折返后又回来，最后一步是折返后不回来。这种情况的区间是 \([1,k-2(j-1)-1]\)  可以证明：若折返，则必定是在当前区间的最大两个相邻元素间折返。 那么我们用前缀和的方式求出 \([1,i]\) 的和还有最大相邻元素的位置。那么分情况讨论这两种情况的最大值。最后取个更优的解即可 \(O(n)\) 123456789101112131415161718192021222...</div></div></div></a><a class="pagination-related" href="/2020/08/14/%E6%95%B0%E8%AE%BA%E6%95%B0%E5%AD%A6/" title="数学"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-14</div><div class="info-item-2">数学</div></div><div class="info-2"><div class="info-item-1">基础知识 求和符号 \[ \sum_{i=1}^{n}=a_1+a_2+a_3+...+a_n \] 求和符号的性质 结合律 \[ \sum_{i=1}^{n} \sum_{j=1}^{n} a_i b_j = \sum_{j=1}^{n} \sum_{i=1}^{n} a_i b_j \] 分配率 \[ \sum_{i=1}^{n} a_i \cdot k = (\sum_{i=1}^{n}a_i) \cdot k= k\sum_{i=1}^{n}a_i \\ \sum_{i=1}^{n}\sum_{j=1}^{n}a_i b_j = \sum_{i=1}^n (a_i\sum_{j=1}^n b_j)  = (\sum_{j=1}^{n}b_j)\cdot(\sum_{i=1}^{n}a_i) = (\sum_{i=1}^{n}a_i)\cdot(\sum_{j=1}^{n}b_j) \] 改变枚举对象 令 \(z=x+y\) \[ \sum_{x=0}^a\sum_{y=0}^b f(x,y) = \sum_{z=0}^{a+b}\sum_{y=0}^zf(z-y,y) \...</div></div></div></a><a class="pagination-related" href="/2020/08/10/AtCoder%E9%A2%98%E8%A7%A3/" title="AtCoder题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-10</div><div class="info-item-2">AtCoder题解</div></div><div class="info-2"><div class="info-item-1">AtCoder Grand Contest 047 AtCoder Grand Contest 047 A. Integer Product 给定 \(n\) 个浮点数，计算有多少个 \((i, j)\) 使得 \(A_{i} \cdot A_{j}\) 是整数 \(2\leq N \leq 200 \  000\) , $ 0 &lt; A_{i} ^{4}$ , \(A_{i}\) 最多 \(9\) 为小数. 思路  通过题设条件缩小范围， 枚举  由于数据比较大，不能直接暴力做。判断是整数这个条件不太好集体维护。所以要找出题目中的特性，看看有没有机会让范围缩小。最好是可以 先考虑 \(A_{i} \cdot A_{j}\) 什么情况下是整数。发现，对于任意有限小数 \(x\), 可以在乘上 \(10^{n}\) 后肯定会变成整数。所以每个数必然是 \(k\cdot 2^{m}\cdot 5^{n}\) 的形式, 通过乘 \(10^{n}\) 把分母上的 \(2^{m}\cdot 5^{n}\) 约去. 而之前的 \(k\) 不影响答案。所以我们只要考虑 \(2^{m}\cd...</div></div></div></a><a class="pagination-related" href="/2021/09/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-23</div><div class="info-item-2">二进制与位运算</div></div><div class="info-2"><div class="info-item-1">二进制与位运算 数的表示有很多种，我们最常用的是 \(10\) 进制。也就是缝 \(10\) 进位。在计算机中，数都是由二进制的形式存储的。而二进制的意思就是缝 \(2\) 进位。因此二进制的数中，只有 \(0\) 和 \(1\) 二进制 下面这个是一个二进制数 \(101011\) , 我们把它转化成 \(10\) 进制 \[ (101011)_2 \] 怎么转化, 我们从右往左看 \[ \begin{aligned} (101011)_2&amp;=  1*2^5 +0*2^{4}+1*2^{3}+0*2^{2}+1*2^{1}+ 1*2^{0}\\ &amp;=1+2+8+32 \\ &amp;=43 \end{aligned} \] 把一个十进制数转化成二进制 \[ \begin{aligned} 43 /2 = 21 ...&amp; 1 \\ 21/2= 10 ... &amp; 1 \\ 10/2=5 ... &amp; 0 \\ 5/2 = 2 ... &amp; 1 \\ 2/2 = 1 ... &amp; 0 \\ 1/2 = 0 ... &amp; 1 \e...</div></div></div></a><a class="pagination-related" href="/2021/07/01/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-01</div><div class="info-item-2">建模和仿真</div></div><div class="info-2"><div class="info-item-1">Focus Analysis 基础部分 多变量函数 定义 \[ f: D \rightarrow W, D \subseteq \mathbb{R}^{n}, W \subseteq \mathbb{R}^{m} \] 对于自然数 \(n\) 和 \(m\) 这个函数可以这样表示： \[ f: D \subseteq \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, x=\left(\begin{array}{c} x_{1} \\ \vdots \\ x_{n} \end{array}\right) \mapsto f(x)=\left(\begin{array}{c} f_{1}\left(x_{1}, \ldots, x_{n}\right) \\ \vdots \\ f_{m}\left(x_{1}, \ldots, x_{n}\right) \end{array}\right) \] 高维度拓扑学 定义域Domain \(D\subseteq \mathbb{R} ^n\) 定义补集complement 为 \(D^c=\mathbb...</div></div></div></a><a class="pagination-related" href="/2021/07/24/%E6%95%B0%E5%AD%97%E5%8C%96%E7%BC%96%E7%A8%8B/" title="数字化编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="info-item-2">数字化编程</div></div><div class="info-2"><div class="info-item-1">第1章 定义2.1 机器数字Maschinenzahlen 有限集合 \(M\) 计算机可以表示的数字 定义2.2 取整Rundung 映射 \(\mathbb{R} \rightarrow M\) 是一个Rundung \[ |x-r d(x)|=\min _{m \in M}|x-m| \] 于是产生absolute Rundungsfehler \[ f_{r d}(x):=x-r d(x) \] 定义2.3 Festkommazahlen \[ \begin{aligned} &amp;n_{1} n_{2} \cdots n_{k}, m_{1} \cdots m_{j} \quad \text { mit } \\ &amp;n_{1}, n_{2}, \ldots, n_{k}, m_{1}, \ldots, m_{j} \in\{0,1, \ldots, 9\}, \quad k, j \in I N \end{aligned} \] 补码  取反后+1 最高位符号为负数  浮点数 \(x\in \mathbb{R}\) 可以如下表示， \(m\) 是Mantis...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#codeforces-round-680-div.-2"><span class="toc-number">1.</span> <span class="toc-text">Codeforces Round #680 (Div. 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a.-array-rearrangment"><span class="toc-number">1.1.</span> <span class="toc-text">A. Array Rearrangment</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-number">1.1.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#b.-elimination"><span class="toc-number">1.2.</span> <span class="toc-text">B. Elimination</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c.-division"><span class="toc-number">1.3.</span> <span class="toc-text">C. Division</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d.-divide-and-sum"><span class="toc-number">1.4.</span> <span class="toc-text">D. Divide and Sum</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90-3"><span class="toc-number">1.4.2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="toc-number">1.4.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

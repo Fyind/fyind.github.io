@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>c++基本概念 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="新建C++的工程   1  新建项目，控制台应用程序 勾选空项目， 勾去安全周期检查   2  源文件 –&gt; 新建项   3  添加main.cpp   4  选择性编译 123456789#if 0#include &lt;stdio.h&gt;int main() &#123;	printf(&quot;Hello World&quot;);		return 0;&#125;#endif">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++基本概念">
+<meta property="og:url" content="http://fyind.de/2019/07/18/%E4%BB%8Ec%E5%88%B0c/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="新建C++的工程   1  新建项目，控制台应用程序 勾选空项目， 勾去安全周期检查   2  源文件 –&gt; 新建项   3  添加main.cpp   4  选择性编译 123456789#if 0#include &lt;stdio.h&gt;int main() &#123;	printf(&quot;Hello World&quot;);		return 0;&#125;#endif">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2019-07-18T10:09:28.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.875Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Visual-Studio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "c++基本概念",
+  "url": "http://fyind.de/2019/07/18/%E4%BB%8Ec%E5%88%B0c/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2019-07-18T10:09:28.000Z",
+  "dateModified": "2025-07-18T10:49:53.875Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2019/07/18/%E4%BB%8Ec%E5%88%B0c/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'c++基本概念',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">c++基本概念</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">c++基本概念</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-07-18T10:09:28.000Z" title="Created 2019-07-18 10:09:28">2019-07-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.875Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/">C++</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="新建c的工程">新建C++的工程</h2>
+<figure>
+<img src="https://fyindex.work/PicGo/1.PNG" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p>新建项目，控制台应用程序</p>
+<p>勾选空项目， 勾去安全周期检查</p>
+<figure>
+<img src="https://fyindex.work/PicGo/2.PNG" alt="2" />
+<figcaption aria-hidden="true">2</figcaption>
+</figure>
+<p>源文件 –&gt; 新建项</p>
+<figure>
+<img src="https://fyindex.work/PicGo/3.png" alt="3" />
+<figcaption aria-hidden="true">3</figcaption>
+</figure>
+<p>添加main.cpp</p>
+<figure>
+<img src="https://fyindex.work/PicGo/4.png" alt="4" />
+<figcaption aria-hidden="true">4</figcaption>
+</figure>
+<h2 id="选择性编译">选择性编译</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="命名空间-namespace">命名空间 (namespace)</h2>
+<p>在同样的作用域下不能定义多个同名变量或者函数</p>
+<p>所以可以使用命名空间来解决这个问题</p>
+<p>命名空间可以嵌套</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> yf &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">12</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> fy &#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">namespace</span> ffy&#123;</span><br><span class="line">		<span class="type">int</span> a = <span class="number">11</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; fy::a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; yf::a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; fy::ffy::a &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">using</span> fy::ffy::a;</span><br><span class="line">	cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure>
+<img src="https://fyindex.work/PicGo/5.png" alt="1563440056471" />
+<figcaption aria-hidden="true">1563440056471</figcaption>
+</figure>
+<h4 id="使用namespace的三种方式">使用namespace的三种方式</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">fy::ffy::a</span><br><span class="line"><span class="keyword">using</span> fy::ffy::a;</span><br></pre></td></tr></table></figure>
+<h2 id="匿名联合">匿名联合</h2>
+<p>联合： 几个变量公用一块内存</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> &#123;</span><br><span class="line">	<span class="type">char</span> ch;</span><br><span class="line">	<span class="type">int</span> tt;</span><br><span class="line">&#125;;</span><br><span class="line">tt = <span class="number">65</span>;</span><br><span class="line">cout &lt;&lt; ch &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure>
+<img src="https://fyindex.work/PicGo/6.png" alt="1563440146027" />
+<figcaption aria-hidden="true">1563440146027</figcaption>
+</figure>
+<h2 id="枚举">枚举</h2>
+<p>可以一次性生成一系列的递增的值，如果没有复制的话，后面一个总是比前面一个多1</p>
+<ul>
+<li>枚举变量不能赋值</li>
+<li>不同类型的枚举变量不能复制</li>
+</ul>
+<h4 id="用处">用处</h4>
+<p>可以在for循环里面枚举</p>
+<p>可以表示多个同一个类型的数据</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Color</span> &#123; Red, Yellow, Blue, White, Black &#125;;</span><br><span class="line">	</span><br><span class="line">Color ball1;</span><br><span class="line">ball1 = Yellow;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = Red; i &lt;= Black; i++) &#123;</span><br><span class="line">	<span class="keyword">if</span> (i == ball1) cout &lt;&lt; i &lt;&lt; endl;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="内联">内联</h2>
+<p>函数前面加 inline.</p>
+<p>可以加快简单函数的执行速度</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">Max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="重载">重载</h2>
+<p>同一作用域，函数名相同，参数表不同的函数构成重载</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> a)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="默认参数哑元">默认参数，哑元</h2>
+<p>定义默认参数，必须从右边开始设置</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c = <span class="number">3</span>, <span class="type">int</span> d = <span class="number">4</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>哑元用于兼容老版本的函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>, <span class="type">int</span> b, <span class="type">int</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>调用的时候都是可以些3个参数</p>
+<h2 id="引用">引用</h2>
+<p>引用是变量的别名</p>
+<p>加在函数前面就可以写左值了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span>&amp; <span class="title">func</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span>&amp; b)</span> </span>&#123;</span><br><span class="line">	a++;</span><br><span class="line">	b++;</span><br><span class="line">	<span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> fy = <span class="number">2</span>, yf = <span class="number">22</span>;</span><br><span class="line">	<span class="built_in">func</span>(yf,fy) = <span class="number">4</span>;</span><br><span class="line">	cout &lt;&lt; fy &lt;&lt; endl &lt;&lt; yf; <span class="comment">// 4 22</span></span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="动态分配内存">动态分配内存</h2>
+<p>记得写删除内存的语句</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//use malloc and free</span></span><br><span class="line"><span class="type">int</span>* p = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">*p = <span class="number">4</span>;</span><br><span class="line">cout &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br><span class="line">p = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//use new and delete</span></span><br><span class="line"><span class="type">int</span>* p2 = <span class="keyword">new</span> <span class="type">int</span>;</span><br><span class="line"><span class="type">int</span>* p3 = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">300</span>);</span><br><span class="line">*p2 = <span class="number">123</span>;</span><br><span class="line">cout &lt;&lt; *p2 &lt;&lt; endl;</span><br><span class="line">cout &lt;&lt; *p3 &lt;&lt; endl;</span><br><span class="line"><span class="keyword">delete</span> p2;</span><br><span class="line"><span class="keyword">delete</span> p3;</span><br><span class="line">p3 = <span class="literal">NULL</span>;</span><br><span class="line">p2 = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//use new in array</span></span><br><span class="line"><span class="type">int</span>* p4 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">4</span>]&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">	<span class="comment">//p4[i] = i;</span></span><br><span class="line">	cout &lt;&lt; p4[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">delete</span>[] p4;</span><br><span class="line">p4 = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2019/07/18/%E4%BB%8Ec%E5%88%B0c/">http://fyind.de/2019/07/18/%E4%BB%8Ec%E5%88%B0c/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/Visual-Studio/">Visual-Studio</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/07/24/CPP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" title="C++面向对象基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">C++面向对象基础</div></div><div class="info-2"><div class="info-item-1">访问控制限定符  public: 谁都可以访问 protected(默认): 只有自己和派生类可以访问 private: 只有自己可以访问  类和结构体的区别 类有访问限定符，结构体没有 创建类，对象 1234567891011121314151617181920class Dog &#123;	string name;public:	void eat();&#125;;// 栈区对象Dog dog1;Dog dog1[4];// 堆区对象Dog* dg1 = new Dog;dg1-&gt;eat();delete dg1;dg1 = NULL;Dog* dg2 = new Dog[3];dg2[0].eat();delete[] dg2;dg2 = NULL; string 类  查找 s1.find(查找的字符串，开始位置); 替换 s1.replace(开始替换位置,替换的位数,替换字符串);  12s1 = &quot;1234567&quot;;s1.replace(s1.find(&quot;456&quot;), 2, &quot;abc&quot;); // 1...</div></div></div></a><a class="pagination-related" href="/2019/07/17/My-First-Blog/" title="在win10环境下配置Hexo博客"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">在win10环境下配置Hexo博客</div></div><div class="info-2"><div class="info-item-1">首先贴上几个链接 官方文档：https://hexo.io/zh-cn/docs/ 推荐的视频： https://www.bilibili.com/video/av44544186 https://www.bilibili.com/video/av24897960 接下来我们开始安装 安装 Node.js Hexo博客是基于node.js 框架的，所以首先要安装nodejs。下面给出链接 https://nodejs.org/en/   1563369322945  可以用下面的命令查看是否安装成功 1node -v  安装 git https://git-scm.com/downloads 传送门如上  安装一直点下一步就可以了， 安装hexo 创建一个放博客的文件夹 启动管理员权限的cmd，输入下面指令安装hexo 1npm install -g hexo-cli 在blog所在的文件夹里输入 1hexo init 然后一个 Hello World的博客就初始化完成了 使用博客 下面的命令很常用 12345hexo clean                   #清除缓存 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-07-17</div><div class="info-item-2">C++高性能编程</div></div><div class="info-2"><div class="info-item-1">CMake g++14 支持C++23需要g++14版本，可以安装 1sudo apt install gcc-14 g++-14 Cmake 新建 CMakeLists.txt 里面写 123456789cmake_minimum_required(VERSION 3.28)set(CMAKE_CXX_COMPILER g++-14)set(CMAKE_CXX_STANDARD 23)project(exampleproject LANGUAGES CXX)add_executable(exampleproject main.cpp) 构建 优点： - 明确指定源代码和构建目录 - 避免在源代码目录中生成构建文件 - 支持out-of-source构建（推荐做法） 1cmake -S /mnt/d/Fyind/Master_Semester7/cpp -B /mnt/d/Fyind/Master_Semester7/cpp/build C++23 print 12345678#include &lt;print&gt;int main() &#123;    std::prin...</div></div></div></a><a class="pagination-related" href="/2019/07/24/CPP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" title="C++面向对象基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-24</div><div class="info-item-2">C++面向对象基础</div></div><div class="info-2"><div class="info-item-1">访问控制限定符  public: 谁都可以访问 protected(默认): 只有自己和派生类可以访问 private: 只有自己可以访问  类和结构体的区别 类有访问限定符，结构体没有 创建类，对象 1234567891011121314151617181920class Dog &#123;	string name;public:	void eat();&#125;;// 栈区对象Dog dog1;Dog dog1[4];// 堆区对象Dog* dg1 = new Dog;dg1-&gt;eat();delete dg1;dg1 = NULL;Dog* dg2 = new Dog[3];dg2[0].eat();delete[] dg2;dg2 = NULL; string 类  查找 s1.find(查找的字符串，开始位置); 替换 s1.replace(开始替换位置,替换的位数,替换字符串);  12s1 = &quot;1234567&quot;;s1.replace(s1.find(&quot;456&quot;), 2, &quot;abc&quot;); // 1...</div></div></div></a><a class="pagination-related" href="/2020/09/23/QT%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/" title="QT项目学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-23</div><div class="info-item-2">QT项目学习</div></div><div class="info-2"><div class="info-item-1">QT编程 下载QT http://download.qt.io/official_releases/qt/5.12/5.12.0/   image-20200913175437819  下载那个exe，然后安装好.   image-20200913180336560    image-20200913180400705  新建项目 左上角文件-&gt; 新建项目   image-20200913181029681  然后这里用Dialog   image-20200913181212608  配置链接 点那个配置链接的图标，然后从slidebar 拖拽到dial组件，就可以生成一个信号   image-20200913181812844  文档 在开始搜索assist，打开assistant MinGW 就可以打开Qt的文档   image-20200913183304138  程序发布 首先设置成release版本   image-20200913183934227  然后构建，打开构建的目录   image-20200913184027503  然后再release文件夹下面...</div></div></div></a><a class="pagination-related" href="/2019/09/04/Win32%E5%9F%BA%E7%A1%80/" title="Win32基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-04</div><div class="info-item-2">Win32基础</div></div><div class="info-2"><div class="info-item-1">Win32概述 一、Win32概述 新建Win32项目 新建项目，Win32项目，空项目，不勾选安全开发周期 右键解决方案名称，新建项，C++文件 Windows四大模块程序 控制台程序，窗口程序，动态库(dll), 静态库(lib) Win32入口函数 windows是基于C，C++，又想有自己的数据类型，所以重定义，来区别C语言，或者达到顾名思义的效果 （HINSTANCE,LPSTR） 特性：  如果不认识，先转到定义看这个类型 大写H开头的叫句柄，（HINSTANCE） 大写P，LP开头，表示指针 封装信息：HINSTANCE 就是void*，看不到具体类型  1234567891011#include &lt;windows.h&gt;int WinMain(	 HINSTANCE hInstance, //应用程序实例句柄	 HINSTANCE hPrevInstance, //父应用程序实例句柄（没什么用）	 LPSTR lpCmdLine, // 命令行参数     int nCmdShow   //窗口显示方式	) &#123;	MessageBox(0, &q...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BAc%E7%9A%84%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">新建C++的工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%80%A7%E7%BC%96%E8%AF%91"><span class="toc-number">2.</span> <span class="toc-text">选择性编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4-namespace"><span class="toc-number">3.</span> <span class="toc-text">命名空间 (namespace)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8namespace%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">3.0.1.</span> <span class="toc-text">使用namespace的三种方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E8%81%94%E5%90%88"><span class="toc-number">4.</span> <span class="toc-text">匿名联合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-number">5.</span> <span class="toc-text">枚举</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E5%A4%84"><span class="toc-number">5.0.1.</span> <span class="toc-text">用处</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E8%81%94"><span class="toc-number">6.</span> <span class="toc-text">内联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD"><span class="toc-number">7.</span> <span class="toc-text">重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%93%91%E5%85%83"><span class="toc-number">8.</span> <span class="toc-text">默认参数，哑元</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">9.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="toc-number">10.</span> <span class="toc-text">动态分配内存</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

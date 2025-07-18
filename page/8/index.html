@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Fyind&#39;s Blog">
+<meta property="og:url" content="http://fyind.de/page/8/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:author" content="Fyind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/page/8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Fyind\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Fyind's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/03/07/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" title="离散数学">离散数学</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-07T10:24:49.000Z" title="Created 2020-03-07 10:24:49">2020-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">离散数学 基础概念 集合的概念 包含 : 每一个的元素都属于 不包含于 $ M_{1} M_{2}：有一个M_{1}的元素不属于M_{2}$ 差集 : 里去除 的元素 真包含于 : 满足，且 不是空集 对称差集 (symmetrische Diﬀerenz) ： 在不在和在不在的元素 集合的容量(Mächtigkeit/Kardinalität) : 集合中(不同)元素的个数 有限集：  全集(Universum)： 补集(Komplement)： 交集和并集(Schnitt und Vereinigung ) 交集：  如果 ，那么和是分离的(disjunkt)   是集合的集合。交集表示所有M取交集，并集表示苏哟M取并集 若  ,那么可以写成  幂集(Potenzmenge)  幂集包含所有子集，比如  划分(Partition) 划分是幂集的子集，它们之间都是分离的，而且并起来刚好是M全集  比如的划分可以是：  韦恩图和卡诺图  4个变量：  5个变量：   image-20200303111311065  集合的关系公式 交换律，结合律  德摩根定律，和其他性质  带全...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/03/05/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" title="人工智能">人工智能</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-05T11:20:56.000Z" title="Created 2020-03-05 11:20:56">2020-03-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span></div><div class="content">人工智能 Intelligent Agent  通过传感器(sensors)察觉周围环境 执行器(actuators)根据环境做出反应  Agents interact with environments through actuators and sensors. Percept sequence 感知的序列 Agent function 根据感知的序列映射出一个动作 可以选择列表(Tabular Agent Function)或者写程序(Agent Program)。 表格可以在理论上很好的描述(Expressiveness)一个agent的行为，但是缺乏实践意义(Practicality) Agent program 是agent function的实际实现(practical implementation) Rational Agent 理想的agent， 一直做”正确的”事情  显然的表现评估法则(performance measure)并不总有 设计者需要找到一个可接受的评估法则  对于一个感知序列，一个理想的agent需要选择行动，使得它在给定的知识范围的表现期望最...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/02/11/windows%E5%9F%BA%E7%A1%80/" title="windows基础">windows基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-11T23:31:15.000Z" title="Created 2020-02-11 23:31:15">2020-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Windows/">Windows</a></span></div><div class="content">Windows 基础 一、一些重要的目录 用户 用户登录后的配置文件。 开机启动目录 C:Menu 在这个目录下存放的文件会开机自启动 MyDrivers 存放驱动 System32 Windows 目录下的SAM文件，存储的是计算机的用户名和密码 Windows 用来解析域名 PerfLogs 用于存放系统日志。计算机管理中的windows日志中的安全可以查看访问情况 Program files 存放安装程序目录，(x86)目录下安装的是32位程序 二、服务 打开服务：  运行中输入 services.msc  或者  右键计算机管理，点开服务  常见的服务 web, dns, dhcp(自动获取ip), 邮件, telnet, ssh ,ftp, smb telnet 打开服务，找到telnet，右键属性   image-20200210222628468  然后调成自动，然后就可以启动服务了   image-20200210222719035  然后再另一台计算机上打开telnet的客户端 找到应用中的程序和功能，打开“启动或关闭Windows功能”   image-202...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/" title="虚拟机安装以及网站的搭建">虚拟机安装以及网站的搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-11T23:30:51.000Z" title="Created 2020-02-11 23:30:51">2020-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%99%9A%E6%8B%9F%E6%9C%BA/">虚拟机</a></span></div><div class="content">虚拟机安装以及网站的搭建 一、 VMware WorkStation 安装和使用 Unity 模式 在该模式下，可以把虚拟机的窗口拖到真实机上。   image-20200203165854913  快照 在这里添加快照   image-20200203170140749  二、Windows Server 2003 下载安装完成后： 设置虚拟机交换机 设置虚拟机的交换机为VMnet1，下面的xp也一样设置   image-20200204050331629  设置ip地址 运行中输入ncpa.cpl可以打开网络设置/网卡 右键本地连接属性-&gt; tcp/ip协议 ，右键属性 在这里可以更改ip地址，下面的xp也一样设置，注意地址不要改一样的   image-20200204050717616  三、Windows Xp sp3 下载镜像后安装 序列号：MRX3F-47B9T-2487J-KWKMF-RPWBY Windows也和上面一样设置，然后关闭防火墙，它们就可以ping通过了 关闭防火墙 控制面板—&gt;安全中心—&gt;关闭防火墙   image-20200204...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/01/19/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" title="Java编程思想">Java编程思想</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-19T21:23:27.000Z" title="Created 2020-01-19 21:23:27">2020-01-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">Java 编程思想 安装编程环境 jdk下载链接 Eclipse下载链接 一、对象导论 1、 抽象机制 1.1 抽象过程 所有编程语言都提供抽象机制。汇编语言是对机器指令的抽象，高级语言是对汇编语言的一种抽象。但它们抽象出来的东西还是基于计算机的一下东西，和问题没有直接关联。而面向对象是直接对问题的抽象。 对象：问题空间中的元素及其在空间中的表示。 面向对象的实质：程序可以通过添加新类型的对象使自身适应问题。OOP允许根据问题描述问题，而不是根据计算机描述问题。 Java语言五个基本特性：  万物皆对象 程序是对象的几何，通过发送消息告诉彼此要做的 每个对象都有自己的由其他对象构成的存储 每个对象都有其类型 某一特定类型的所有对象都可以接受相同的信息  1.2 每个对象都有接口 接口对应了某一特定对象所能发出的请求。但是，在程序中，不许有实现这些请求的代码，于是就有了实现。每一个请求都有方法与之关联。 1.3 每个对象都提供服务 当试图开发或者理解一个程序设计时，最好的办法时把对象想象成“服务提供者”。 1.4 被隐藏的具体实现 将程序开发人员按角色分为类创建者和客户端程序员是大...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/01/16/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" title="计算几何">计算几何</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-16T15:48:18.000Z" title="Created 2020-01-16 15:48:18">2020-01-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/%E5%87%A0%E4%BD%95/">几何</a></span></div><div class="content">计算几何 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192const double ZERO = 1e-1...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/01/16/%E5%B0%84%E5%BD%B1%E5%87%A0%E4%BD%95/" title="射影几何">射影几何</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-16T11:37:36.000Z" title="Created 2020-01-16 11:37:36">2020-01-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/%E5%87%A0%E4%BD%95/">几何</a></span></div><div class="content">射影几何(Projective Geometry) 1. 点 点二维坐标表示为  若 那么，它表示在到的直线上的最远端的无穷点 2. 直线 一个三位向量可以表示一条直线，我们通常使用法向量。其中，  代表无穷远处的直线。 2.1 点在直线上 直线：点：在直线上 2.2 过两点的直线  2.3 两条直线的交点  如果两条平行线相交，那么结果是一个无穷远的点。 3. 射影变换 通过一个矩阵可以实现任意射影变换, 是点变换后的点，那么有以下关系。   3.1 求变换矩阵M 我们需要4个点以及射影后的坐标，。其中,a,b,c,d坐标自己定，一般可以定成下面的  以上都是已知数，可以列出下面4个关系式，因为是1，所以要加这个参数  以a点举例，展开这个式子  把以上的式子全部展开，可以得到一个12个未知数的线性方程组（矩阵9个+变量3个）。使用高斯消元法即可解出M。 3.2 还原射影图像的坐标 我们可以通过变换矩阵的逆矩阵，来反向变换，实现点的还原。  所以先求M，再求M的逆矩阵，然后相乘得到原来的点。 4. 代码实现（C++） 123456789101112131415161718192...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/01/01/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="计算机架构笔记">计算机架构笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-01T17:06:33.000Z" title="Created 2020-01-01 17:06:33">2020-01-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">一、冯诺依曼结构 Von-Neumann 概念  计算机的结构与处理的问题无关 计算机由4个单元构成 主存储器里的格子是相同大小的，每个都有个地址 程序和数据放在相同的存储器里 使用二进制 程序由一系列命令构成 顺序可以通过跳转指令改变    image-20200215163311067  Von-Neumann Architektur   image-20200215163344965  RISC &amp; CISC CISC: Complex Instruction Set Computer  通过微程序实现 优点：易编程，少的存储需求 缺点：复杂的解码  RISC: Reduced Instruction Set Computer  通过固定接线(feste Verdrahtung)实现 优点：简单，高效的实施 缺点：难编程    image-20200215164015342  Befehlsformat Einadressform   image-20200217191456458  Zweiadressform（IA-32）  计算结果覆盖第一个操作数 只有一个操...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/11/18/Python-basic/" title="Python基础">Python基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2019-11-18T16:41:01.000Z" title="Created 2019-11-18 16:41:01">2019-11-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content">python包管理器pip 安装 12python -m ensurepippython -m pip install --upgrade pip  安装对应版本的python 123sudo add-apt-repository ppa:deadsnakes/ppasudo apt updatesudo apt install python3.8 虚拟环境 123python3 -m venv myenvsource myenv/bin/activatedeactivate # 退出 Python 基础语法 注释 123456789# 单行注释print(&quot;helldo world&quot;)  # 行尾注释&quot;&quot;&quot;这是一个多行注释.....结束注释&quot;&quot;&quot; 运算符操作 12345620 // 6  #整除20 / 6   #除法10 % 3   #取余数2 ** 5	 #乘方1&lt;&lt;30  #位运算1 if x=2 else 2 # 三目运算符 字符串  双引号 中间可以加转义字符 单引号 纯字符输...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2019/10/26/Linux%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/" title="Linux安装和使用">Linux安装和使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2019-10-26T19:41:06.000Z" title="Created 2019-10-26 19:41:06">2019-10-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">Linux 安装 一、Deepin 无需配置， 真机安装： 下载好iso镜像，用rufus制作启动盘，然后直接安装即可 装i3 1sudo apt-get install i3 在i3下装alacritty 装依赖包 1sudo apt-get install curl git cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 libegl1-mesa-dev 装rustup.rs 1curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://sh.rustup.rs | sh 然后根据提示安装默认选项 1source $HOME/.cargo/env # 刷新配置 然后 1234567git clone https://github.com/jwilm/alacritty.gitcd alacrittyrustup override set stablerustup update stablecargo build --...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/7/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/9/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/TUM%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">TUM笔记</span><span class="card-category-list-count">22</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/"><span class="card-category-list-name">Talk</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows/"><span class="card-category-list-name">Windows</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E6%95%B0%E5%AD%A6-R%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">数学 - R语言</a> <a href="/tags/Operating-System/" style="font-size: 1.1em; color: #999">Operating System</a> <a href="/tags/%E7%AB%9E%E8%B5%9B/" style="font-size: 1.1em; color: #999">竞赛</a> <a href="/tags/Archlinux/" style="font-size: 1.2em; color: #999da3">Archlinux</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.2em; color: #999da3">动态规划</a> <a href="/tags/%E6%9E%84%E9%80%A0/" style="font-size: 1.1em; color: #999">构造</a> <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/" style="font-size: 1.1em; color: #999">概率论</a> <a href="/tags/Trie/" style="font-size: 1.1em; color: #999">Trie</a> <a href="/tags/Linux/" style="font-size: 1.3em; color: #99a1ac">Linux</a> <a href="/tags/%E7%94%B5%E5%AD%90%E4%BF%A1%E6%81%AF/" style="font-size: 1.1em; color: #999">电子信息</a> <a href="/tags/AtCoder/" style="font-size: 1.1em; color: #999">AtCoder</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.1em; color: #999">随笔</a> <a href="/tags/%E5%89%AA%E8%BE%91%E8%BD%AF%E4%BB%B6/" style="font-size: 1.1em; color: #999">剪辑软件</a> <a href="/tags/%E4%B9%A0%E9%A2%98%E9%A2%98%E8%A7%A3/" style="font-size: 1.3em; color: #99a1ac">习题题解</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 1.2em; color: #999da3">数论</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 1.1em; color: #999">总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">离散数学</a> <a href="/tags/LaTeX/" style="font-size: 1.1em; color: #999">LaTeX</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.5em; color: #99a9bf">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.1em; color: #999">线性代数</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.2em; color: #999da3">数据库</a> <a href="/tags/%E5%87%A0%E4%BD%95/" style="font-size: 1.1em; color: #999">几何</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 1.1em; color: #999">安全</a> <a href="/tags/atcoder/" style="font-size: 1.2em; color: #999da3">atcoder</a> <a href="/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" style="font-size: 1.1em; color: #999">数学分析</a> <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" style="font-size: 1.2em; color: #999da3">安装教程</a> <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">汇编语言</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9E%B6%E6%9E%84/" style="font-size: 1.1em; color: #999">计算机架构</a> <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">组合数学</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 1.1em; color: #999">模拟</a> <a href="/tags/%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">配置博客</a> <a href="/tags/%E7%94%B5%E5%AD%90/" style="font-size: 1.1em; color: #999">电子</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/Win32/" style="font-size: 1.1em; color: #999">Win32</a> <a href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/" style="font-size: 1.1em; color: #999">理论计算机学</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">操作系统</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 1.4em; color: #99a5b6">数学</a> <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" style="font-size: 1.1em; color: #999">逆向工程</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              March 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/05/">
+            <span class="card-archive-list-date">
+              May 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/03/">
+            <span class="card-archive-list-date">
+              March 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/02/">
+            <span class="card-archive-list-date">
+              February 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/10/">
+            <span class="card-archive-list-date">
+              October 2023
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">85</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-07-18T10:51:27.555Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

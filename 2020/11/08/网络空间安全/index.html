@@ -1,0 +1,2399 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>网络空间安全 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Netzsicherheit 作业 Hack 进入作业的服务器 1nc netsec.net.in.tum.de 20001 Exercise 1 首先安装一下 netcat 1sudo pacman -S netcat base64加密解密 123import base64data_enc &#x3D; base64.b64encode(data)data_dec &#x3D; base64.b64decode(d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络空间安全">
+<meta property="og:url" content="http://fyind.de/2020/11/08/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="Netzsicherheit 作业 Hack 进入作业的服务器 1nc netsec.net.in.tum.de 20001 Exercise 1 首先安装一下 netcat 1sudo pacman -S netcat base64加密解密 123import base64data_enc &#x3D; base64.b64encode(data)data_dec &#x3D; base64.b64decode(d">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2020-11-08T18:24:15.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.883Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="网络安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "网络空间安全",
+  "url": "http://fyind.de/2020/11/08/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2020-11-08T18:24:15.000Z",
+  "dateModified": "2025-07-18T10:49:53.883Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2020/11/08/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '网络空间安全',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">网络空间安全</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">网络空间安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-11-08T18:24:15.000Z" title="Created 2020-11-08 18:24:15">2020-11-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.883Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="netzsicherheit">Netzsicherheit</h1>
+<h2 id="作业">作业</h2>
+<p>Hack 进入作业的服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc netsec.net.in.tum.de 20001</span><br></pre></td></tr></table></figure>
+<h3 id="exercise-1">Exercise 1</h3>
+<p>首先安装一下 <code>netcat</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S netcat</span><br></pre></td></tr></table></figure>
+<h3 id="base64加密解密">base64加密解密</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">data_enc = base64.b64encode(data)</span><br><span class="line">data_dec = base64.b64decode(data_enc)</span><br></pre></td></tr></table></figure>
+<h2 id="networt-insecure">Networt Insecure</h2>
+<h3 id="do-not-trust-a-network-connection">Do not Trust a Network
+Connection</h3>
+<p>网络是不安全的</p>
+<h3 id="capabilities-of-attackers">Capabilities of Attackers</h3>
+<ul>
+<li>Passive attacks (observation)
+<ul>
+<li>Eavesdropping of messages</li>
+<li>Traffic Analysis</li>
+</ul></li>
+<li>active attacks (observation + manipulation)
+<ul>
+<li>All passive attacks</li>
+<li>Delay</li>
+<li>Replay</li>
+<li>Deletion</li>
+<li>Modificatioin</li>
+<li>Insertion</li>
+</ul></li>
+</ul>
+<h4 id="attacker-model">Attacker Model</h4>
+<ul>
+<li>Attacker Model = definition what an attacker can do and cannot
+do</li>
+<li>Dolev-Yao attacker model: (以后都以这个模型为基准)
+<ul>
+<li>The attacker owns the entire the network</li>
+<li>can perform any active and passive attack</li>
+<li>has no control over end systems</li>
+<li>cannot break cryptographic primitives</li>
+</ul></li>
+</ul>
+<h4 id="the-attackers-positon">The Attacker’s Positon</h4>
+<p>determines her Capabilities</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201103165645840.png"
+alt="image-20201103165645840" />
+<figcaption aria-hidden="true">image-20201103165645840</figcaption>
+</figure>
+<p>比如处在这个位置的攻击手是一个 WiFi 热点.</p>
+<ul>
+<li><p>如果攻击收是在 Internet 中间位置</p>
+<ul>
+<li>End-user/attacker has no control on how packets are routed</li>
+<li>NSA/GCHQ black boxes can be basically everywhere</li>
+</ul></li>
+<li><p>如果攻击手在end system(Responder)</p>
+<ul>
+<li><p>Attacker rented a VM on the same host machine where your virtual
+server is running</p>
+<p>攻击手和服务器在同一个位置</p></li>
+</ul></li>
+</ul>
+<h3 id="security-goals-technically-defined">Security Goals Technically
+Defined</h3>
+<h4 id="confidentiality">Confidentiality</h4>
+<ul>
+<li>Vertraulichkeit</li>
+<li>Informatino must be concealed -&gt; Attacker cannot read/understand
+information</li>
+<li>Can be achieved with : Encrypt information</li>
+</ul>
+<h4 id="data-integrity">Data Integrity</h4>
+<ul>
+<li>Datenintegritaet</li>
+<li>changes to data must be noticeabe</li>
+<li>Can be achieved : Hash value of a file</li>
+</ul>
+<h4 id="authenticity">Authenticity</h4>
+<ul>
+<li><p>Echtheit</p></li>
+<li><p>We must know who the originator of data our communication partner
+is</p></li>
+<li><p>Can be achieved: A digital signature over the hash of
+file</p></li>
+</ul>
+<h4 id="controlled-access">Controlled Access</h4>
+<ul>
+<li>Zugriffskontrolle</li>
+<li>Only authorized entities can access services</li>
+<li>Empoly an access control system, firewall</li>
+</ul>
+<h4 id="accountability">Accountability</h4>
+<ul>
+<li>Zurechenbarkeit</li>
+<li>Identify the entity responsibile for an event</li>
+<li>Employ a logging system</li>
+</ul>
+<h4 id="availability">Availability</h4>
+<ul>
+<li>Verfuegbarkeit</li>
+<li>Service must be avaliable and function correctly</li>
+<li>Important servives shall be replicated redundandly</li>
+</ul>
+<p>区别 Authentication 和 Authorization</p>
+<ul>
+<li>Authentication
+<ul>
+<li>Prove who you are</li>
+<li>associated security goal: Authenticity</li>
+<li>e.g: checking one’s identity using a passport</li>
+</ul></li>
+<li>Authorization
+<ul>
+<li>Defines what you are allowed to do</li>
+<li>Associated security goal: Controlled Access</li>
+<li>e.g: Is the person on the passenger list?</li>
+</ul></li>
+</ul>
+<h3 id="threats">Threats</h3>
+<p>Def: system might exploit a vulnerability.</p>
+<p>The actual realization of a threat is called an attack</p>
+<h4 id="impersonation">Impersonation</h4>
+<p>An entity claims to be another entity</p>
+<h4 id="forgery-of-information">Forgery of information</h4>
+<p>An entity creates new information in the name of another entity</p>
+<h4 id="modification-or-loss-of-information">Modification or loss of
+information</h4>
+<p>Data is being altered or destroyed</p>
+<h4 id="repudiation">Repudiation</h4>
+<p>An eneity falsely denies its participation in a communication act</p>
+<h4 id="eavesdropping">Eavesdropping</h4>
+<p>An entity reads information it is not intended to read</p>
+<h4 id="authorization-violation">Authorization Violation</h4>
+<p>An entity uses a service or resources it is not intended to use</p>
+<h4 id="denial-of-service">Denial of Service</h4>
+<p>Any action that aims to reduce the avaliability</p>
+<ul>
+<li>Authorization Violation + Eavesdroppinng
+<ul>
+<li>Alice obtains root rights on a router and monitors all traffic for
+passwords</li>
+</ul></li>
+<li>Impersonation + Forgery of Information
+<ul>
+<li>Alice pings Carl and pretends to be Bob</li>
+</ul></li>
+</ul>
+<h2 id="langsec">LangSec</h2>
+<h3 id="通信协议">通信协议</h3>
+<p>定义了交换信息的过程和格式</p>
+<p>比如: IP, TCP, UDP, HTTP, HTTPS</p>
+<h4 id="null-character-问题">NULL Character 问题</h4>
+<p>发送的是 <code>www.payal.com\0www.tomaten.info</code></p>
+<p>收到的是 <code>www.paypal.com</code> 因为 <code>\0</code>
+表示字符串结束</p>
+<h5 id="解决">解决</h5>
+<p>完整检查输入的格式</p>
+<h4 id="werid-machine">Werid Machine</h4>
+<p>一个werid 的机器是可以被攻击者编程的</p>
+<h2 id="tcp">TCP</h2>
+<h4 id="tcp的头格式">TCP的头格式</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201117124022482.png"
+alt="image-20201117124022482" />
+<figcaption aria-hidden="true">image-20201117124022482</figcaption>
+</figure>
+<h4 id="三次握手-3-way-handshake">三次握手 3 way handshake</h4>
+<p>TCP 建立连接的过程通过三次握手实现：</p>
+<ol type="1">
+<li>客户端4发散一个 SYN 段指明要连接的服务器端口，以及初始序号ISN</li>
+<li>服务器发挥包含服务器初始序号的 SYN
+报文段作为应答，同时将确认序号设置为客户端的ISN+1 进行确认</li>
+<li>客户端必须把确认序号设置为服务器发送的ISN+1来确认</li>
+</ol>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201117125644268.png"
+alt="image-20201117125644268" />
+<figcaption aria-hidden="true">image-20201117125644268</figcaption>
+</figure>
+<h3 id="tcp-syn-flood-attack">TCP SYN Flood Attack</h3>
+<p>SYN
+Flood是当前最流行的DoS（拒绝服务攻击）与DDoS（分布式拒绝服务攻击）的方式之一，这是一种利用TCP协议缺陷，发送大量伪造的TCP连接请求，常用假冒的IP或IP号段发来海量的请求连接的第一个握手包（SYN包），被攻击服务器回应第二个握手包（SYN+ACK包），因为对方是假冒IP，对方永远收不到包且不会回应第三个握手包。导致被攻击服务器保持大量SYN_RECV状态的“半连接”，并且会重试默认5次回应第二个握手包，塞满TCP等待连接队列，资源耗尽（CPU满负荷或内存不足），让正常的业务请求连接不进来。</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/daodan988/article/details/51455007">source</a></p>
+<h4 id="防御tcp-syn-cookies">防御：TCP SYN Cookies</h4>
+<p>我们在发送序号的时候，计算一个 <span
+class="math inline">\(\alpha\)</span> 发送过去</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201117154112426.png"
+alt="image-20201117154112426" />
+<figcaption aria-hidden="true">image-20201117154112426</figcaption>
+</figure>
+<p><strong>Syn Cache技术：
+</strong>这种技术是在收到SYN数据报文时不急于去分配TCB，而是先回应一个SYN
+ACK报文，并在一个专用HASH表（Cache）中保存这种半开连接信息，直到收到正确的回应ACK报文再分配TCB。在FreeBSD系统中这种Cache每个半开连接只需使用160字节，远小于TCB所需的736个字节。在发送的SYN
+ACK中需要使用一个己方的Sequence
+Number，这个数字不能被对方猜到，否则对于某些稍微智能一点的Syn
+Flood攻击软件来说，它们在发送Syn报文后会发送一个ACK报文，如果己方的Sequence
+Number被对方猜测到，则会被其建立起真正的连接。因此一般采用一些加密<a
+target="_blank" rel="noopener" href="http://lib.csdn.net/base/datastructure">算法</a>生成难于预测的Sequence
+Number。 <strong>Syn Cookie技术： </strong>对于SYN攻击，Syn
+Cache虽然不分配TCB，但是为了判断后续对方发来的ACK报文中的Sequence
+Number的正确性，还是需要使用一些空间去保存己方生成的Sequence
+Number等信息，也造成了一些资源的浪费。 Syn
+Cookie技术则完全不使用任何存储资源，这种方法比较巧妙，它使用一种特殊的算法生成Sequence
+Number，这种算法考虑到了对方的IP、端口、己方IP、端口的固定信息，以及对方无法知道而己方比较固定的一些信息，如MSS、时间等，在收到对方的ACK报文后，重新计算一遍，看其是否与对方回应报文中的（Sequence
+Number-1）相同，从而决定是否分配TCB资源。</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32449467/article/details/53365408">source</a></p>
+<h3 id="intrusion-detection-system-入侵检测系统">Intrusion Detection
+System 入侵检测系统</h3>
+<ol type="1">
+<li>为什么入侵检测很难？</li>
+</ol>
+<p>False Negative: 本来不是入侵的行为却报了入侵,
+即使概率很低。但数据量大了系统就会因此瘫痪</p>
+<ol start="2" type="1">
+<li>为什么我们需要入侵检测系统？</li>
+</ol>
+<p>大多数系统有漏洞(Vulnerabilities),
+一些攻击可以通过检测异常操作被探测.</p>
+<ol start="3" type="1">
+<li>我们需要检测什么？</li>
+</ol>
+<p>入侵前奏（探测）（Intrusion
+preambles）：入侵检测系统可以检测到入侵者尝试侦查系统或网络的行为，例如端口扫描或探测。
+外部入侵访问 Intrusion accesses from the
+outside：系统可能受到外部黑客或恶意用户的入侵尝试，入侵检测系统可以帮助识别并应对这些尝试。
+内部滥用行为 Abusive behaviors from the
+inside：有时候，系统内部的用户或员工可能会滥用其权限，例如越权访问敏感数据或滥用系统资源，入侵检测系统可以帮助监视和防止这种行为。</p>
+<h4 id="定义-入侵intrusion">定义 入侵Intrusion：</h4>
+<p>侵犯已定义的安全要求 Compromise of a defined Security Requirement
+入侵检测系统（Intrusion Detection
+System，IDS）：是一种软件，具有检测和识别入侵的功能。有些会采取行动，有些不会。IDPS
+(Intrusion Detection and Prevention System) 会采取行动</p>
+<p>蜜罐（Honeypot）：它看起来像一个真实的计算机系统、网络或应用程序，但实际上是特意设置的，用来吸引攻击者。会对已执行的攻击进行深入检查。可以提供关于新攻击趋势的预警。
+分散对手的注意力，使其转移目标的攻击。
+可用作进一步攻击的来源:攻击者通过分析蜜罐的设置和针对它的攻击，可能会获得有价值的信息，如组织的网络架构、安全措施或漏洞。然后，他们可以利用这些信息来计划和执行针对组织真实基础设施的定向攻击。操纵蜜罐环境：技术娴熟的攻击者可能会操纵蜜罐环境，对其他目标发动攻击。用作重定向点：攻击者可能会利用被入侵的蜜罐来重定向和混淆他们的恶意活动。</p>
+<h4 id="分类">分类</h4>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Detection Method</th>
+<th style="text-align: left;">Misuse detection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Anomaly Detection</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Data Source</td>
+<td style="text-align: left;">Network-based</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Host-based</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Detection Delay</td>
+<td style="text-align: left;">Real-time</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">A posteriori</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Reaction</td>
+<td style="text-align: left;">Passive</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Active</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Analysis</td>
+<td style="text-align: left;">Individual</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cooperative</td>
+</tr>
+</tbody>
+</table>
+<h5 id="misuse-detection-滥用检测">Misuse Detection 滥用检测</h5>
+<p>在数据库中存攻击代码的签名signature，检测流量的签名，频繁更新数据库。找到其中在数据库的哈希值，就说明这个数据traffic
+是有害的</p>
+<p>Advantage: * efficient detection * less false positives</p>
+<p>Disadvantages: * only detect known attacks * more false negatives</p>
+<h5 id="anomaly-detection-异常检测">Anomaly Detection 异常检测</h5>
+<p>Model a state of system.
+一个系统的某些值会有一个状态，如果超过一个阈值，就可以发出警报.</p>
+<p>Difficulty: * Heuristics threshold definition is complex: * Diurnal
+patterns(日常模式), 晚上，周末，假期，随机事件的用户会减少。 * Long-term
+patterns, 随着时间推移，用户增加。长期趋势会影响，</p>
+<p>Advantage: * Can detect new attacks</p>
+<h5 id="network-based">Network-based</h5>
+<p>检测网络中的数据包</p>
+<p>可以检测 * Unauthorized network access * Reconnaissance 侦察 * Abuse
+of bandwidth resources (DoS) * Network protocol violations</p>
+<p>但是</p>
+<ul>
+<li>Can not analyse encrypted data</li>
+</ul>
+<h5 id="host-based">Host-based</h5>
+<p>Analyses data from individual system</p>
+<p>可以检测： * Privilege Abuse 权限滥用 * Accidentally assigned
+privileges 不小心的授权 * Account compromise * Access and modification
+of critical data * Information leakage</p>
+<p>Advantage: * Able to function in environments with encrypted data:
+Plaintext会在host被处理，可以读取内存</p>
+<h4 id="real-time-detection">Real-time detection</h4>
+<p>实时检测：</p>
+<p>拦截数据和控制流 在目标系统运行时进行信息处理 检测时间较短
+影响系统性能</p>
+<h4 id="a-posteriori">A posteriori</h4>
+<p>事后处理：</p>
+<p>信息被记录 处理和分析稍后进行 检测时间较长 可以容易地并行化</p>
+<h2 id="symmetric-encryption">Symmetric Encryption</h2>
+<h3 id="mode-of-encryption">Mode of Encryption</h3>
+<details>
+<summary>
+Name four Mode of Encryption
+</summary>
+<ul>
+<li>Electronic Code Block Mode (ECB)</li>
+<li>Cipher Block Chaining Mode (CBC)</li>
+<li>Output Feedback Mode (OFB)</li>
+<li>Counter Mode (CTR)</li>
+</ul>
+</details>
+<details>
+<summary>
+Why is len(c) &gt; len(m)?
+</summary>
+m is padded with extra data to have a full block of 16 Byte
+</details>
+<details>
+<summary>
+Why can’t we achive Integrity and Authenticity
+</summary>
+<p>Integrity: The attacker could modify c. Reciver can only assume that
+the message was modified but not prove it.</p>
+Authenticity: The attacker could just send random c and spoof Alice’s IP
+address
+</details>
+<h3 id="one-time-padotp">One-Time-Pad(OTP)</h3>
+<details>
+<summary>
+Type of cipher?
+</summary>
+stream cipher
+</details>
+<details>
+<summary>
+Three Requirements
+</summary>
+<ul>
+<li>Key otp must have same size as message.</li>
+<li>Key otp must only be used once.</li>
+<li>Key otp must be a perfectly random bit stream</li>
+</ul>
+</details>
+<h3 id="security-of-ciphers">Security of Ciphers</h3>
+<details>
+<summary>
+Kerckhoffs’s principle
+</summary>
+The cipher method must not be required to be secret.
+</details>
+<details>
+<summary>
+Consequence and Benefits of Kerckhoff’s Principle
+</summary>
+<p>Consequence: * The cipher can be publicc * The security depends on
+the secret key</p>
+Benefits: * Otherwise if the cipher leaks, we have to build a new one. *
+For each communication partner, selecting a new key is sufficient * We
+can perform review procedures that increase confidence in the cipher
+</details>
+<details>
+<summary>
+Name 2 block cipher and 2 stream cipher
+</summary>
+<p>Block: * AES * 3DES</p>
+Stream: * ChaCha20 * One-Time-Pad
+</details>
+<h3 id="attaccking-symmetric-ciphers">Attaccking Symmetric Ciphers</h3>
+<details>
+<summary>
+Attack Scenarios
+</summary>
+<ul>
+<li>Ciphertext-only-attack</li>
+<li>Known-plaintext attack</li>
+<li>Chosen-plaintext or chosen-cyphertext attack</li>
+</ul>
+</details>
+<details>
+<summary>
+What is a secure cipher
+</summary>
+If the best known attack is brute-forcing all keys.
+</details>
+<details>
+<summary>
+Why OTP secure
+</summary>
+<ul>
+<li>only outputs reveals the right m</li>
+<li>OTP won’t be reused</li>
+<li>ciphertext is perfectly random</li>
+</ul>
+</details>
+<details>
+<summary>
+Drawback for OTP
+</summary>
+<ul>
+<li>necesary key length in bits: length(otp) = length(m)</li>
+<li>otp must not be reused key generation is difficult</li>
+</ul>
+</details>
+<h3 id="modes-of-encryption">Modes of Encryption</h3>
+<p>一个信息 <span class="math inline">\(m\)</span> 分层若干块 <span
+class="math inline">\(m_1,m_2,...\)</span> 每一块分别加密</p>
+<h4 id="ecb">ECB</h4>
+<p>最朴素的, <span class="math inline">\(Enc(m_i,k)=c_i\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133031979.png"
+alt="image-20240208133031979" />
+<figcaption aria-hidden="true">image-20240208133031979</figcaption>
+</figure>
+<p>Drawback:</p>
+<ul>
+<li>Ciphertext do not have any connection with each other -&gt; No
+integrity</li>
+</ul>
+<h4 id="cbc">CBC</h4>
+<p><span class="math inline">\(Enc_k(m_i \oplus c_{i-1})\)</span>
+一开始有个 <span class="math inline">\(IV\)</span> (fresh
+不是固定的)</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133045404.png"
+alt="image-20240208133045404" />
+<figcaption aria-hidden="true">image-20240208133045404</figcaption>
+</figure>
+<ul>
+<li><p>Identical plaintext -&gt; non-identical ciphertext</p></li>
+<li><p>No integrity protection</p></li>
+</ul>
+<h4 id="ofb">OFB</h4>
+<p>把 block cipher 变成 stream cipher</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133107044.png"
+alt="image-20240208133107044" />
+<figcaption aria-hidden="true">image-20240208133107044</figcaption>
+</figure>
+<ul>
+<li>Decryption do not depend on previous blocks (Transmissino error only
+affects this block)</li>
+</ul>
+<h4 id="ctr">CTR</h4>
+<p>把 block cipher 变成 stream cipher</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133752206.png"
+alt="image-20240208133752206" />
+<figcaption aria-hidden="true">image-20240208133752206</figcaption>
+</figure>
+<ul>
+<li>Decryption does not depend on previous blocks.</li>
+</ul>
+<h2 id="hash-mac">HASH MAC</h2>
+<h3 id="hash-function">Hash function</h3>
+<p><span class="math inline">\(h\)</span> maps an input <span
+class="math inline">\(x\)</span> to fixed length <span
+class="math inline">\(n\)</span> of <span
+class="math inline">\(h(x)\)</span></p>
+<ul>
+<li>one-way: hash function, computationally infeasible to find <span
+class="math inline">\(x\)</span> with <span
+class="math inline">\(h(x)=y\)</span></li>
+</ul>
+<h3 id="cryptographic-hash-function">cryptographic hash function</h3>
+<ul>
+<li><p>one-way function (1st pre-image resistance)</p></li>
+<li><p>Given <span class="math inline">\(x\)</span> , computaionally
+infeasible to find <span class="math inline">\(x&#39;\)</span> with
+<span class="math inline">\(h(x)=h(x&#39;)\)</span> (2nd pre-image
+resistance)</p>
+<p>Important for digital signature</p></li>
+<li><p>Collision resistance</p>
+<p>computationally infeasible to find pair <span
+class="math inline">\((x,x&#39;)\)</span> with <span
+class="math inline">\(h(x)=h(x&#39;)\)</span></p></li>
+<li><p>Random Oracle property</p></li>
+</ul>
+<p>​ computaitionally infeasible to distinguish <span
+class="math inline">\(h(x)\)</span> from random n-bit value</p>
+<h3 id="crc">CRC</h3>
+<p>Cyclic redundancy Check (CRC) , Why not use as cryptographic hash
+function?</p>
+<ul>
+<li>no 2nd pre-image resistance, no collision resistance</li>
+</ul>
+<h3 id="integrity">Integrity</h3>
+<p>No: a hash function is not sufficient to secure a message against
+intentional manipualtion</p>
+<h3 id="mac">MAC</h3>
+<p>Include a secret key <span class="math inline">\(K\)</span> shared
+with Alice and Bob.</p>
+<p>Computes <span class="math inline">\(MAC_K(m)\)</span> Send <span
+class="math inline">\(&lt;m,MAC_K(m)&gt;\)</span> to Bob. Bob verify it
+using his key.</p>
+<ul>
+<li>prove integrity, detect tampering, can be replayed</li>
+</ul>
+<p>Do Mac prove authenticity? Depends on senario</p>
+<ul>
+<li><p><span class="math inline">\(sMAC_k(m)=Enc_k(h(m))\)</span> is not
+secure using stream cipher, using AES is secure</p></li>
+<li><p><span class="math inline">\(sMAC_k(m)=Enc_k(\Delta(m))\)</span> ,
+<span class="math inline">\(\triangle(m):=x_1 \oplus x_2 \oplus \ldots
+\oplus x_n\)</span> is insecure</p></li>
+</ul>
+<h4 id="construction">Construction</h4>
+<ul>
+<li><p>Based on Hash function: HMAC</p>
+<p>HMAC: <span class="math inline">\(H(K \oplus opad | H(K \oplus i p a
+d | m))\)</span></p>
+<p>faster than block cipher</p></li>
+<li><p>Based on Block cipher: CBC-MAC, CMAC</p>
+<p>CBC-MAC: not use same key for encryption</p></li>
+</ul>
+<h2 id="randomness">Randomness</h2>
+<h3 id="entropy">Entropy</h3>
+<p>Measure of unpredictability</p>
+<h2 id="public-key-cryptography">Public Key Cryptography</h2>
+<h2 id="secure-channels">Secure Channels</h2>
+<p>Security channel provide</p>
+<ul>
+<li>Confidentiality, Integrity, Authenticity</li>
+<li>Messages received in correct order</li>
+<li>No duplicates/replayed messages</li>
+</ul>
+<p>Usecase: VPN,TLS,Secure messenger applications(Signal)</p>
+<p>s require a long term (symmetric or asymmetric) key to
+work,Exchanging/agreeing on long term keys is often done out of
+band交换/协商长期密钥通常是在带外进行的，即在通信通道之外的安全通道上进行</p>
+<h4 id="ways">Ways</h4>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 13%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Construction Nr.</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\#
+1\)</span></td>
+<td style="text-align: left;">MAC-then-Enc</td>
+<td style="text-align: left;"><span
+class="math inline">\(\operatorname{Enc}_{k \text {-enc }}\left(m,
+\operatorname{MAC}_{k \text {-int }}(m)\right)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\#
+2\)</span></td>
+<td style="text-align: left;">MAC &amp; Enc</td>
+<td style="text-align: left;"><span
+class="math inline">\(\operatorname{Enc}_{k \text {-enc }}(m),
+\operatorname{MAC}_{k \text {-int }}(m)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\#
+3\)</span></td>
+<td style="text-align: left;">Enc-then-MAC</td>
+<td style="text-align: left;"><span
+class="math inline">\(\operatorname{Enc}_{k \text {-enc }}(m),
+\operatorname{MAC}_{k \text {-int }}\left(\operatorname{Enc}_{k \text
+{-enc }}(m)\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>MAC-then-Enc:</p>
+<p>Encryption does not provide any message
+authenticity/integrity!</p></li>
+<li><p>Mac &amp; Enc</p>
+<p>Can be attacked when MAC is weak</p></li>
+<li><p>Enc-then-MAC</p>
+<p>Considered secure</p></li>
+</ul>
+<h3 id="secure-channel-implementation">Secure Channel
+Implementation</h3>
+<ul>
+<li><p>Message numbering</p>
+<p>编号 $ n
+N$，记录上一个的编号，只有递增才接受。溢出的时候重新生成密钥</p></li>
+</ul>
+<h3
+id="authenticated-encryption-with-associated-data-aead">Authenticated
+Encryption With Associated Data (AEAD)</h3>
+<p>传递Encryption 和 MAC 包含 Associated Data</p>
+<p>Associated data (AD): Additional non-encrypted but authenticated
+(header) data,</p>
+<ul>
+<li>IV, Seq number, routing informtion</li>
+</ul>
+<p>Benifit:</p>
+<ul>
+<li>standarized, only need one pass</li>
+</ul>
+<p>Example: GCM, OCB</p>
+<h3 id="galois-fields-and-galois-field-multiplication">Galois Fields and
+Galois Field Multiplication</h3>
+<p>Galois Field: 把二进制转换成多项式</p>
+<p>Galois Field Multiplication is based on polynomial multiplication
+modulus a specific irreducible polynomial g(x)</p>
+<p>乘法：乘一个多项式，Mod一个不能被分解的g(x) （类似素数）</p>
+<h4 id="galoiscounter-mode-gcm">Galois/Counter Mode (GCM)</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240211170855935.png"
+alt="image-20240211170855935" />
+<figcaption aria-hidden="true">image-20240211170855935</figcaption>
+</figure>
+<h3 id="offset-codebook-mode-ocb">Offset Codebook Mode (OCB)</h3>
+<p>Offset0 is computed by a specific function depending on the key and a
+nonce</p>
+<p>It is crucial that, as one encrypts, one does not repeat a nonce</p>
+<h3 id="attack-against-stream-cipher">ATTACK against Stream Cipher</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240211171808081.png"
+alt="image-20240211171808081" />
+<figcaption aria-hidden="true">image-20240211171808081</figcaption>
+</figure>
+<p>C1 + C2 = P1+P2</p>
+<ul>
+<li>Known Plaintext (e.g. P1) → attacker can compute other plainte</li>
+<li>Statistical properties of plaintext can be used if plaintext is not
+random-looking. That means if entropy of P1+P2 is low.</li>
+</ul>
+<h3 id="padding-oracle-attack-against-cbc">Padding Oracle Attack against
+CBC</h3>
+<p>一位位猜密文，用Padding Eror来看。如果没有Padding Error，可以用Side
+Channel来推断</p>
+<h2 id="pki">PKI</h2>
+<p>非对称加密的优势在于公钥不需要保密。</p>
+<p>这使得用户可以通过任意渠道分发公钥，例如：</p>
+<ul>
+<li>Alice 从 Bob 发送的邮件中获取 Bob 的公钥。</li>
+<li>Bob 从 Alice 的网站上下载 Alice 的公钥。</li>
+</ul>
+<p>但问题在于，任何使用其他实体的公钥的人都必须确保这个公钥确实属于该实体，即该公钥是真实的，可信的。</p>
+<p>想象一下：中间人 Eve 已经用她控制的密钥替换了公钥。</p>
+<p>既不是 Alice 也不是 Bob 可以发现他们收到的密钥不是真实的。</p>
+<p>由于 Eve 拥有私钥，她可以：</p>
+<ul>
+<li>以 Alice 和 Bob 的名义计算签名。</li>
+<li>解密 / 重新加密 Alice 和 Bob 之间交换的机密消息。</li>
+</ul>
+<p>Manual trust establishment = high effort</p>
+<h3 id="definition-of-a-certificate">Definition of a certificate</h3>
+<p>A certificate is a digitally signed binding of an identifier of an
+entity and the public key of an asymmetric key pair owned by that
+entity</p>
+<p>Always necessary: Verification that identifier and corresponding key
+belong together.</p>
+<h4 id="creation">creation</h4>
+<p>issuer <span class="math inline">\(I\)</span> has a public key,
+KI-pub , and private key, KI-priv, X is an identifier to be bound to a
+public key, KX-pub .</p>
+<p><span class="math inline">\(\left(X, K_{X-\text { pub }},
+\operatorname{Sig}_{K_{I-p r i v}}\left(X \mid K_{X-\text { pub
+}}\right)\right)\)</span></p>
+<h3 id="common-forms">Common Forms</h3>
+<p>in hierarchical PKIs: “Certification Authority” (CA)</p>
+<p>In non-hierarchical PKIs sometimes: “Endorser”</p>
+<h3 id="hierarchical-pki">hierarchical PKI</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240211183144066.png"
+alt="image-20240211183144066" />
+<figcaption aria-hidden="true">image-20240211183144066</figcaption>
+</figure>
+<p>infeasible</p>
+<p>eg. Web PKI</p>
+<h3 id="non-hireachical-pki">non-hireachical PKI</h3>
+<p>Web of trust</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240212131220104.png"
+alt="image-20240212131220104" />
+<figcaption aria-hidden="true">image-20240212131220104</figcaption>
+</figure>
+<p>eg. OpenPGP</p>
+<h3 id="x.509">X.509</h3>
+<p>SSL/TLS include certificate-based authentication</p>
+<p>Goal: protect sensitive information like cookies, user input</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240212135052172.png"
+alt="image-20240212135052172" />
+<figcaption aria-hidden="true">image-20240212135052172</figcaption>
+</figure>
+<ul>
+<li><p>certificate includes only one domain name, called common name
+(CN),</p></li>
+<li><p>it is possible to create certificates that are valid for multiple
+(sub-)domains:</p>
+<p>listeed in subject alternative name (SAN), wildcard possible</p></li>
+</ul>
+<p>CA:</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240212135008222.png"
+alt="image-20240212135008222" />
+<figcaption aria-hidden="true">image-20240212135008222</figcaption>
+</figure>
+<ul>
+<li>root stores:certificates of trusted CAs, self signed</li>
+<li>Every application that uses X.509 has to have a root store(OS,
+Browser)</li>
+</ul>
+<h4 id="intermediate-certificates">Intermediate certificates</h4>
+<p>part of a certificate chain, but neither a root certificate nor an
+end-entity certificate</p>
+<p>reason, they are CAs, have the same signing authority as root
+certs</p>
+<ul>
+<li>Protect your main root certificate, private key offline</li>
+<li>To delegate signing authority to another organization: sub-CA</li>
+</ul>
+<h4 id="hazard">Hazard:</h4>
+<ul>
+<li>SSL proxies allow the transparent rewriting of certificate
+chains</li>
+</ul>
+<h4 id="corss-signing">Corss-signing</h4>
+<p>A CA signs a root or signing certificate of another CA</p>
+<ul>
+<li>For the WWW, it completely breaks the root store model</li>
+</ul>
+<p>Fact:</p>
+<ul>
+<li><p>Your browser or your OS chooses the ‘trusted CAs’. Not
+you.</p></li>
+<li><p>All CAs have equal signing authority</p></li>
+<li><p>Any CA may issue a certificate for any domain.</p></li>
+<li><p>The weakest CA determines the strength of the whole PKI</p></li>
+</ul>
+<h3 id="certificate-issuance">Certificate Issuance</h3>
+<p>How is a certificate issued in practice?</p>
+<ul>
+<li><p>Domain Validation(DV): proves ownership of the domain</p></li>
+<li><p>Extended Validation (EV): Additionally requires (strong) legal
+documentation of the claimed identity</p>
+<p>eg. url belongs to amazon</p></li>
+<li><p>Organizational Validation (rare), Between DV and EV; less
+documentation</p></li>
+</ul>
+<h3 id="acme-automated-certificate-management-environment">ACME:
+Automated Certificate Management Environment</h3>
+<p>Step 0: ACME Client creates an “account key” (asymmetric cryptography
+key pair)</p>
+<p>Step 1:</p>
+<h4 id="http-01-challenge-request">HTTP-01 Challenge Request</h4>
+<p>request challenge</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240212144130153.png"
+alt="image-20240212144130153" />
+<figcaption aria-hidden="true">image-20240212144130153</figcaption>
+</figure>
+<p>Client signs and publishes challenge. The CA can now check the
+published file content:</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240212144152224.png"
+alt="image-20240212144152224" />
+<figcaption aria-hidden="true">image-20240212144152224</figcaption>
+</figure>
+<h4 id="dns-01-challenge-verification">DNS-01 Challenge
+Verification</h4>
+<p>Client constructs key authorization from token offered by server
+challenge and the client’s account key</p>
+<p>Generate SHA-256 digest in base64 • Store as DNS TXT record under
+_acme-challenge for domain to verify</p>
+<p>Challenge ok ⇒ Account key pair is then “authorized”</p>
+<h3 id="certificate-revocation">Certificate Revocation</h3>
+<h4 id="certificate-revocation-lists-crls">Certificate Revocation Lists
+(CRLs)</h4>
+<p>Intermediate certs should be checked, too</p>
+<p>CRLs can grow large</p>
+<p>Downloads of CRLs can be blocked by a Man-in-the-middle</p>
+<h4 id="online-certificate-status-protocol-ocsp">Online Certificate
+Status Protocol (OCSP)</h4>
+<p>Lookups go over the network – induces latency</p>
+<p>OCSP servers must have high availability</p>
+<p>Privacy! OCSP servers know which sites users access</p>
+<h4 id="ocsp-stapling">OCSP Stapling</h4>
+<p>The idea is thus that servers request fresh OCSP ‘proof’ from CA:
+‘this certificate is still considered valid’</p>
+<p>Reduces load on CA, reduces overall web page loading time, solves
+privacy problem</p>
+<h3 id="certificate-pinning">Certificate Pinning</h3>
+<p>Aim: defend against malicious certs</p>
+<p>Idea: browser “pins” the certificate a Web server presented on first
+contact</p>
+<h4 id="shortcomming">shortcomming</h4>
+<ul>
+<li>TOFU problem</li>
+<li>Life-cycle problem,Servers may (legitimately) update/upgrade their
+keys</li>
+<li>Scalability problem:Browsers cannot come pre-loaded with pins of all
+sites, and keep them up to date</li>
+</ul>
+<h2 id="cryptography-protocol">Cryptography Protocol</h2>
+<p>Tool to draw protocol: https://plantuml.com/zh/</p>
+<p>Alice = initiator 发送第一个消息的</p>
+<p>Bob = Responder 不是第一个发消息的</p>
+<p>AS = Authentication Server</p>
+<p>Cryptographic protocols typically include</p>
+<ul>
+<li>entity authentication</li>
+<li>key establishment</li>
+</ul>
+<h3 id="notation">Notation</h3>
+<p>Alice <span class="math inline">\(\rightarrow\)</span> Bob: <span
+class="math inline">\(\{n\}_{K_{A, B}}\)</span></p>
+<blockquote>
+<p>Alice 发送给 Bob， <span class="math inline">\(K_{A,B}\)</span> 是
+shared key, <span class="math inline">\(\{\}\)</span> 表示encrypted and
+integrity-protected</p>
+</blockquote>
+<h3 id="entity-authentication">entity authentication</h3>
+<ul>
+<li>Authenticity of one entity is shown</li>
+<li>Authenticity of both entities is shown: mutual authentication</li>
+</ul>
+<h3 id="key-establishment">key establishment</h3>
+<ul>
+<li>A key is established between some protocol participants</li>
+<li>Type1 : Key Transport: Some entity creates the key and sends it to
+other entities.</li>
+<li>Type2 : Key Agreement: Multiple entities contribute to the
+generation of the key</li>
+</ul>
+<h3 id="boyd">Boyd</h3>
+<p>if no pre-exchanged keys exist, cryptographic protocols cannot
+operate securely.</p>
+<h3 id="goal">Goal</h3>
+<h4 id="forward-secrecy">Forward Secrecy</h4>
+<p>key相互独立</p>
+<ul>
+<li>If long-term key is compromised, attacker cannot find out session
+keys for older sessions.</li>
+<li>If session key is compromised, other session and long-term keys are
+not affected.</li>
+</ul>
+<p>Goals:</p>
+<ul>
+<li>Alice and Bob have a shared session key for a secure channel</li>
+<li>Alice and Bob have agreed on the cryptographic algorithms to be used
+for the secure channel</li>
+<li>Mutual authentication and freshness: Alice (Bob) must be able to
+verify that Bob (Alice) participated in the protocol run and that he
+(she) is “alive”</li>
+<li>Alice and Bob must know that KA,B is newly generated</li>
+</ul>
+<h3 id="attack">Attack</h3>
+<h4 id="relay-attack-转发攻击">Relay attack 转发攻击</h4>
+<p>A 用 Service，Service 用Challenge Response方法验证</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213154144253.png"
+alt="image-20240213154144253" />
+<figcaption aria-hidden="true">image-20240213154144253</figcaption>
+</figure>
+<p>Attacker 可以 impersonate the service</p>
+<h4 id="replay-attack">Replay attack</h4>
+<p>Attacker eavesdrops or receives messages， Can later-on send message
+or part of message to same or other principals</p>
+<h4 id="oracle-attack">Oracle Attack</h4>
+<p>Oracle=entities can do sth. a normal entity can not</p>
+<h4 id="protocol-interaction-attack">Protocol Interaction attack</h4>
+<p>Replace message field in protocol A with message field in protocol B.
+• Example: Trick user to sign a message in protocol 1; reuse signature
+in protocol 2</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213155140682.png"
+alt="image-20240213155140682" />
+<figcaption aria-hidden="true">image-20240213155140682</figcaption>
+</figure>
+<h3 id="protocol">Protocol</h3>
+<h4 id="try-12-dh-with-password">Try 1,2 DH (with password)</h4>
+<p>本来可以用DH来交换建立共同的key，但是会被MitM Attack</p>
+<h4 id="try-3-shared-key-with-as">Try 3 Shared Key with AS</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213153626960.png"
+alt="image-20240213153626960" />
+<figcaption aria-hidden="true">image-20240213153626960</figcaption>
+</figure>
+<p>会被 Replay Attack, 因为可以记录下来 <span
+class="math inline">\(\{B,K_{A,B}\}\)</span></p>
+<p>DoS Attack: Attacker replays Alice’s first message and causes a heavy
+work load in the entire network and all entities!</p>
+<h4 id="try-4-add-nonce">Try 4 Add nonce</h4>
+<p>Nonces <span class="math inline">\(N_A\)</span> ,$ N_B$ → Principals
+need to keep book of “used” nonces and only accept unknown nonces.</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213154624089.png"
+alt="image-20240213154624089" />
+<figcaption aria-hidden="true">image-20240213154624089</figcaption>
+</figure>
+<p>有一种会被 replay and oracle attack</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213154912101.png"
+alt="image-20240213154912101" />
+<figcaption aria-hidden="true">image-20240213154912101</figcaption>
+</figure>
+<h4 id="try-5-add-forward-secrecy">Try 5 Add forward secrecy</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213155407751.png"
+alt="image-20240213155407751" />
+<figcaption aria-hidden="true">image-20240213155407751</figcaption>
+</figure>
+<ul>
+<li>If <span class="math inline">\(DH_B\)</span> would be changed, Alice
+could not compute the same <span class="math inline">\(K_{A,B}\)</span>
+.</li>
+</ul>
+<h4 id="try-6-remove-as">Try 6 Remove AS</h4>
+<p>Long-term key between A and B was exchanged via AS and is cached for
+a while</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213155706609.png"
+alt="image-20240213155706609" />
+<figcaption aria-hidden="true">image-20240213155706609</figcaption>
+</figure>
+<h4 id="try-7-selection-of-algorithm">Try 7 Selection of Algorithm</h4>
+<p>cryptographic protocols should be flexible and configurable</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213155834566.png"
+alt="image-20240213155834566" />
+<figcaption aria-hidden="true">image-20240213155834566</figcaption>
+</figure>
+<p>Problem: Algo are not authentiated = downgrade attack, replay
+attack</p>
+<h4 id="try-8-auth-payload">Try 8 AUTH Payload</h4>
+<p>AUTH payloads are different and contain information provided by both
+principals.</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213160054746.png"
+alt="image-20240213160054746" />
+<figcaption aria-hidden="true">image-20240213160054746</figcaption>
+</figure>
+<h3 id="final-protocol">Final Protocol</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213160228779.png"
+alt="image-20240213160228779" />
+<figcaption aria-hidden="true">image-20240213160228779</figcaption>
+</figure>
+<h3 id="needham-schroeder-protocol">Needham Schroeder Protocol</h3>
+<h4 id="symmetric">Symmetric</h4>
+<p>do not provide any forward secrecy</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213160330840.png"
+alt="image-20240213160330840" />
+<figcaption aria-hidden="true">image-20240213160330840</figcaption>
+</figure>
+<h4 id="asymmetric">Asymmetric</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213160450011.png"
+alt="image-20240213160450011" />
+<figcaption aria-hidden="true">image-20240213160450011</figcaption>
+</figure>
+<p>Oracle attack:</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213160523899.png"
+alt="image-20240213160523899" />
+<figcaption aria-hidden="true">image-20240213160523899</figcaption>
+</figure>
+<h2 id="web-security">Web Security</h2>
+<p>TLS is a popular cryptography protocol (HTTPS)</p>
+<h3 id="client-certificate-authentication-cca">Client Certificate
+Authentication (CCA)</h3>
+<h4 id="push-service-architecture">Push Service Architecture</h4>
+<p>软件更新推送</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214173629424.png"
+alt="image-20240214173629424" />
+<figcaption aria-hidden="true">image-20240214173629424</figcaption>
+</figure>
+<p>problem</p>
+<ul>
+<li>Apple Push Notification Service (APNs) is always on, service connect
+to push server.individulal device information leakage</li>
+</ul>
+<h3 id="certificate-transparency">Certificate Transparency</h3>
+<p>Validate CA adhere to guidelines = Public Logs</p>
+<p>CT is Public logs for X.509</p>
+<h4 id="advantage">Advantage</h4>
+<ul>
+<li>Adds transparency to X.509 in the hope of detecting malicious CA
+behavior early</li>
+<li>All issued certificates for a domain can be observed</li>
+</ul>
+<h4 id="potential-issues">Potential issues</h4>
+<ul>
+<li>Needs changes on the side of CAs</li>
+<li>Information leak by public logs</li>
+</ul>
+<p>The problem CT does not solve: Certificate Revocation</p>
+<h3 id="certification-authority-authorization-caa">Certification
+Authority Authorization (CAA)</h3>
+<p>Domain name holder may restrict certificate issuance to a certain
+Certification Authority (CA), Realized via DNS source records</p>
+<h4 id="realization">Realization</h4>
+<ul>
+<li>Use newly defined DNS record type ’CAA’</li>
+<li>Domain owner can specify a list of CA’s permitted to issue
+certificates for the domain</li>
+</ul>
+<h2 id="ipsec">IPSEC</h2>
+<p>用来让IP协议更安全</p>
+<ul>
+<li>data origin authentication</li>
+<li>data integrity</li>
+<li>confidentiality</li>
+<li>security policies</li>
+</ul>
+<h3 id="how-it-works">How it works</h3>
+<ol type="1">
+<li>Authentication, key exchange</li>
+<li>set keys and crypt algo</li>
+<li>secure channel</li>
+</ol>
+<h3 id="ipsec-replay-protection">IPSEC Replay Protection</h3>
+<p>Use a sliding window</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214140319365.png"
+alt="image-20240214140319365" />
+<figcaption aria-hidden="true">image-20240214140319365</figcaption>
+</figure>
+<ul>
+<li>If a received packet has a sequence number which</li>
+<li>is left of the current window ⇒ the receiver rejects the packet</li>
+<li>is inside the current window ⇒ the receiver accepts the packet and
+advances the window</li>
+<li>is right of the current window ⇒ the receiver accepts the packet and
+advances the window</li>
+</ul>
+<h3 id="ipsec-security-protocol-modes">IPSEC Security Protocol
+Modes</h3>
+<h4 id="transport-mode">Transport Mode</h4>
+<ul>
+<li>Only usable between communication endpoints</li>
+<li>Adds a security specific header (+ trailer if ESP is employed)</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214140603005.png"
+alt="image-20240214140603005" />
+<figcaption aria-hidden="true">image-20240214140603005</figcaption>
+</figure>
+<h4 id="tunnel-mode">Tunnel Mode</h4>
+<ul>
+<li>Usable with arbitrary peers</li>
+<li>Encapsulates IP packets</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214140610879.png"
+alt="image-20240214140610879" />
+<figcaption aria-hidden="true">image-20240214140610879</figcaption>
+</figure>
+<h3 id="traffic-selector">Traffic Selector</h3>
+<p>a set of properties used to characterize IP packets.</p>
+<ul>
+<li>used to define security policies</li>
+</ul>
+<h3 id="security-policies">Security Policies</h3>
+<p>specifies which and how security services should be provided to IP
+packets.</p>
+<ul>
+<li>stored in Security Policy Database (SPD)</li>
+</ul>
+<h3 id="security-associations">Security Associations</h3>
+<p>a simplex channel that describes the way how packets need to be
+processed</p>
+<p>单向的通道</p>
+<p>eg. encyption algorithm</p>
+<ul>
+<li>stored in Security Association Database (SAD)</li>
+</ul>
+<p>在SAD中由 Security Parameter Index (SPI) 唯一标识</p>
+<p>根据SPI在发送的时候加入AH/ESP头，在接受的时候映射到SA上</p>
+<h3 id="encapsulation-security-payload">Encapsulation Security
+Payload</h3>
+<p>ESP is a generic security protocol that provides replay protection
+and one or both of</p>
+<ul>
+<li>Confidentiality • Encryption of encapsulated packets • Encryption of
+packet payloads</li>
+<li>Data origin authentication Creating and adding MAC to packets</li>
+</ul>
+<h3 id="authentication-header">Authentication Header</h3>
+<p>AH is a generic security protocol that provides</p>
+<ul>
+<li>Replay protection</li>
+<li>Data origin authentication • Creating and adding MAC to packets</li>
+</ul>
+<h3 id="ikev2">IKEv2</h3>
+<ul>
+<li>runs on UDP ports (500, 4500)</li>
+<li>mutual authentication</li>
+<li>DoS mitigation</li>
+<li>Integrated support for requesting an IP address (useful for
+VPNs)</li>
+</ul>
+<h4 id="basic-structure">Basic Structure</h4>
+<ul>
+<li>IKEv2 communication consists of message pairs (request,
+response)</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214153019804.png"
+alt="image-20240214153019804" />
+<figcaption aria-hidden="true">image-20240214153019804</figcaption>
+</figure>
+<p><code>IKE_SA_INIT</code> :</p>
+<ul>
+<li>Negotiates security parameters for a security association
+(<code>IKE_SA</code>)</li>
+<li>Send nonces of DH values</li>
+<li><code>IKE_SA</code> is a set of security associations for protection
+of remaining IKE exchanges</li>
+</ul>
+<p><code>IKE_AUTH</code>:</p>
+<ul>
+<li>Authenticates the previous messages</li>
+<li>Creates first <code>CHILD_SA</code>, set of Security Associations
+used to protect IP traffic with the AH/ESP protocol</li>
+</ul>
+<h4 id="ike_sa_init-exchange"><code>IKE_SA_INIT</code> Exchange</h4>
+<p><span class="math inline">\(HDR(A,B)\)</span> 是IKEv2 Message Header
+with SPI A and SPI B</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214160757296.png"
+alt="image-20240214160757296" />
+<figcaption aria-hidden="true">image-20240214160757296</figcaption>
+</figure>
+<p><span class="math inline">\(SA_{I1}\)</span> 发送者支持的加密算法</p>
+<p><span class="math inline">\(SA_{R1}\)</span> 接收者从 <span
+class="math inline">\(SA_{I1}\)</span> 里选择的</p>
+<p>KE: DH values</p>
+<p>N: Nonces</p>
+<h4 id="key-generation">Key Generation</h4>
+<p>prf is used iteratively <span class="math display">\[
+S K E Y S E E D:=\operatorname{prf}\left(N_l \mid N_R, g_{I R}\right)
+\]</span></p>
+<p><span class="math display">\[
+S K_D\left|S K_{A l}\right| S K_{A R}\left|S K_{E l}\right| S K_{E
+R}\left|S K_{P I}\right| S K_{P R}=\widetilde{p r f}\left(S K E Y S E E
+D, N_l\left|N_R\right| S P I_l \mid S P I_R\right)
+\]</span></p>
+<h4 id="ike_auth-exchange">IKE_AUTH Exchange</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214161311495.png"
+alt="image-20240214161311495" />
+<figcaption aria-hidden="true">image-20240214161311495</figcaption>
+</figure>
+<p>ID 用来验证身份</p>
+<p>The remaining payloads <code>&#123;SAI2, SAR2, TSI, TSR &#125;</code> are used
+to establish the first CHILD_SA</p>
+<h4 id="authentication">Authentication</h4>
+<p>Initiator signs:</p>
+<p>(IKE_SA_INIT request payload <span
+class="math inline">\(\left.\left|N_R\right|
+\operatorname{prf}\left(S_{P I}, \overline{I
+D}_I\right)\right)\)</span></p>
+<p>Responder signs:</p>
+<p>(IKE_SA_INIT response payload <span
+class="math inline">\(\left.\left|N_l\right| \operatorname{prf}\left(S
+K_{P R}, \overline{I D}_R\right)\right)\)</span></p>
+<h4 id="protection-against-flooding-attacks">Protection against flooding
+attacks</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214162252910.png"
+alt="image-20240214162252910" />
+<figcaption aria-hidden="true">image-20240214162252910</figcaption>
+</figure>
+<h4 id="advanced-feature">Advanced Feature</h4>
+<ul>
+<li>Traffic Selector Negotiation (TSN)</li>
+<li>INFORMATIONAL Exchange</li>
+</ul>
+<h3 id="wireguarrd">WireGuarrd</h3>
+<h2 id="privacy">Privacy</h2>
+<h4 id="understanding-of-privacy">Understanding of privacy</h4>
+<p>Privacy is mainly constituted by confidentiality of information and a
+mechanism of selective access control. Furthermore, privacy is often
+considered equal with anonymity, i.e. keeping the identity
+confidential.</p>
+<h4 id="privacy-protection-goal">Privacy protection Goal</h4>
+<ul>
+<li>Unlinkability: The inability to connect and combine initially
+separate information</li>
+<li>Transparency: The ability to observe the data handling and
+processing of a system</li>
+<li>Intervenability: The ability (by data and system owners) to
+influence all planned or ongoing processing of personal data</li>
+</ul>
+<h3 id="general-data-protection-regulation">General Data Protection
+Regulation</h3>
+<p>Fundamental Goals: Protection of personal data and individuals stay
+in control of their data. Harmonize legislation over whole EU, enable
+easy lawful data flow.</p>
+<h4 id="scope">Scope</h4>
+<p>This Regulation applies to the <strong>processing of personal
+data</strong> wholly or partly by automated means and to the processing
+other than by automated means of personal data which form part of a
+filing system or are intended to form part of a filing system.</p>
+<h3 id="secure-multiparty-computation-smc">Secure Multiparty Computation
+(SMC)</h3>
+<p>The parties, or players, that participate are called <span
+class="math inline">\(P_1, \ldots, P_n\)</span> Each player <span
+class="math inline">\(P_i\)</span> holds <span
+class="math inline">\(x_i\)</span> , players agree on some function
+<span class="math inline">\(f\)</span>, Their goals is to compute <span
+class="math inline">\(y=f\left(x_1, \ldots, x_n\right)\)</span> while
+making sure that the following two conditions are satisfied</p>
+<ul>
+<li>Correctness: the correct value of y is computed; and</li>
+<li>Privacy: y is the only new information that is released</li>
+</ul>
+<h4 id="modelling-adversaries">Modelling Adversaries</h4>
+<p>Adversarial Behaviour:</p>
+<ul>
+<li>Semi-honest: Follows the protocol specification. Tries to learn more
+than allowed by inspecting the transcript</li>
+<li>Malicious: Follows any arbitrary strategy</li>
+<li>Covert: Follows any arbitrary strategy, but is averse to being
+caught</li>
+</ul>
+<p>Adversary threshold structure:</p>
+<ul>
+<li>Honest Majority Setting: The adversary controls a minority of all
+computing parties</li>
+<li>Dishonest Majority setting: The adversary controls up to n-1 of n
+computing parties</li>
+</ul>
+<h4 id="oblivious-transferot">Oblivious Transfer(OT)</h4>
+<p>Input: Alice holds two strings (M0, M1), Bob holds a choice bit c</p>
+<p>Output: Bob receives Mc but learns nothing about M1−c ,Alice learns
+nothing about c</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240214210311260.png"
+alt="image-20240214210311260" />
+<figcaption aria-hidden="true">image-20240214210311260</figcaption>
+</figure>
+<h4 id="yaos-garbled-circuit-protocol">Yao’s Garbled Circuit
+Protocol</h4>
+<p>Inputs are protected by the cryptographic security assumptions of
+Symmetric Encryption and Oblivious Transfer.</p>
+<h4 id="bgw">BGW</h4>
+<p>BGW: Inputs are protected by a polynomial (Sharmir’s) secret
+sharing.</p>
+<h4 id="gmw">GMW</h4>
+<p>Inputs are protected by an XOR-secret sharing and the security
+assumption of Oblivious Transfer.</p>
+<h4 id="sharemind">Sharemind</h4>
+<p>Inputs are protected by an additive/replicated secret sharing and the
+cryptographic security assumptions of Shared Random Number
+Generators.</p>
+<h4 id="additive-secret-sharing-with-beaver-triples">Additive Secret
+Sharing with Beaver Triples</h4>
+<p>Inputs are protected by an additive secret sharing and the security
+assumptions of the utilized method to construct Beaver Triples.</p>
+<h1 id="exercise">Exercise</h1>
+<h2 id="exercise-1-1">Exercise 1</h2>
+<details>
+<summary>
+Six Security Goals
+</summary>
+Confidentiality, Authenticity, Data Integrity, Availability,
+Accountability, Controlled Access
+</details>
+<details>
+<summary>
+Relationship between integrity and authenticity
+</summary>
+authenticity implies integrity
+</details>
+<details>
+<summary>
+For each of the six security goals, find an example of what the security
+goal can do to increase security.
+</summary>
+<p>Confidentiality: Control messages should be encrypted to prevent some
+third party from gaining inside knowledge</p>
+<p>Authenticity: Devices inside our CPS should only accept control
+messages created by known/authentic and authorized entities.</p>
+<p>Data Integrity: We need to make sure that modifications to the
+control messages can be spotted before the command is executed and
+causes harm</p>
+<p>Availabiblity: The log server that logs the control messages must be
+able to perform its duty constantly.</p>
+<p>Accountability: We log control messages to prevent disgruntled
+employees who intentionally damage the plant from getting away with
+it.</p>
+Controlled Access: All interfaces of the CPS to the outside world can
+only be used by authorized, known entities.
+</details>
+<details>
+<summary>
+What are the two types of network-level attackers?, What can each
+attacker do?
+</summary>
+<p>passive</p>
+<ul>
+<li>eavesdrop</li>
+<li>traffic analysis</li>
+</ul>
+<p>active attacker</p>
+<ul>
+<li>all passive attack</li>
+<li>modify, replay, delay, delete, forge messages</li>
+</ul>
+</details>
+<details>
+<summary>
+Are there some attacks which are never detectable? Are there some
+attacks where it may not be decidable whether it is caused by an
+attacker or just a random error?
+</summary>
+Eavesdropping and traffic analysis are entirely passive and can thus not
+be detected. Delaying, dropping messages may be detectable to a certain
+degree. However, the delay may also be induced due to unreliable
+transfer over the Internet If no additional security services are used,
+like digital signatures, it may be hard to differentiate between random
+transmission errors and random-looking malicious message modifications.
+</details>
+<h3 id="exercise-2">Exercise 2</h3>
+<details>
+<summary>
+To understand: TCP SYN Cookies
+</summary>
+<p>Bob use hash function <span class="math inline">\(h(key,
+src_{ip})\)</span> as SEQ</p>
+<p>Verify: calc ACK, check if ACK = hashvalue + 1</p>
+</details>
+<details>
+<summary>
+draw TCP 3-way handshake
+</summary>
+<p>ACK = Sent_SEQ + 1 SEQ = Last_SEQ + 1</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240212160248005.png"
+alt="image-20240212160248005" />
+<figcaption aria-hidden="true">image-20240212160248005</figcaption>
+</figure>
+</details>
+<details>
+<summary>
+Name Advantage of TCP SYN Cookies
+</summary>
+<ul>
+<li>Server does not need to allocate resources after the first SYN
+packet.</li>
+<li>Client does not need to be aware that the server is using SYN
+cookies.</li>
+<li>SYN cookies don’t requires changes in the specification of the TCP
+protocol.</li>
+</ul>
+</details>
+<details>
+<summary>
+Discuss the relationship between Integrity and Authenticity.
+</summary>
+<ul>
+<li><p>If we can guarantee integrity of, for example, a data item, we
+achieve that this data item cannot be changed without us noticing.
+However, we do not know that, for instance, Alice is the origin of the
+data item. Outlook: Integrity is often achieved by hashing data which
+creates a checksum (hash).</p></li>
+<li><p>If we can guarantee authenticity of a data item, we know that,
+for instance, Alice has created it. However, if Bob changes the data
+item, its origin has changed, and its authenticity is voided. Outlook:
+In practice, authenticity is often achieved by combining hashing and
+signing</p></li>
+</ul>
+To sum up: authenticity includes integrity. Integrity does not include
+authenticity
+</details>
+<details>
+<summary>
+Think about a scenario where Authorization and Authentication are both
+needed.
+</summary>
+Access Control system, Alice can modify and read, Bob can only read.
+First check authority, then determine user’s access rights.
+</details>
+<details>
+<summary>
+Can you think about a scenario where some actions/events/… are
+authorized, but no authentication is needed?
+</summary>
+Network firewall, usually does not (need to) authenticate communicating
+parties. However, it authorizes some communication events based on a
+rule list and discards others
+</details>
+<h3 id="exercise-3">Exercise 3</h3>
+<details>
+<summary>
+Three security components as defined in the chapter ‘Firewalls and
+Security Policies’
+</summary>
+<ul>
+<li>Security Goal</li>
+<li>Security Policy</li>
+<li>Security Mechanisms</li>
+</ul>
+</details>
+<details>
+<summary>
+Important port 22,53,80,443,25
+</summary>
+<p>SSH: 22 DNS: 53 HTTP: 80 HTTPS: 433 Clients : &gt; 1023 SMTP: 25</p>
+</details>
+<details>
+<summary>
+Consequence: The source address is not specified
+</summary>
+clients might spoof arbitrary IPs
+</details>
+<details>
+<summary>
+Consequence: The interface is not specified
+</summary>
+The Internet can send arbitrary spoofed packets to your Zone 1.
+</details>
+<details>
+<summary>
+Configure Stateless
+</summary>
+ACK: ANY or YES
+</details>
+<details>
+<summary>
+what are architectures of firewl
+</summary>
+<ul>
+<li><p>Simple Packet Filter Architecture</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213180044916.png"
+alt="image-20240213180044916" />
+<figcaption aria-hidden="true">image-20240213180044916</figcaption>
+</figure></li>
+<li><p>Dual-Homed Host Architecture</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213180056803.png"
+alt="image-20240213180056803" />
+<figcaption aria-hidden="true">image-20240213180056803</figcaption>
+</figure></li>
+<li><p>Screened Host Architecture Server in host area</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213180109039.png"
+alt="image-20240213180109039" />
+<figcaption aria-hidden="true">image-20240213180109039</figcaption>
+</figure></li>
+<li><p>Screened Subnet Architecture 3 NICs</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240213180120067.png"
+alt="image-20240213180120067" />
+<figcaption aria-hidden="true">image-20240213180120067</figcaption>
+</figure></li>
+</ul>
+</details>
+<details>
+<summary>
+*What is a Bastion Host
+</summary>
+<ul>
+<li>a host that is more exposed to the hosts of an external network than
+the other hosts of the network it protects.</li>
+</ul>
+</details>
+<details>
+<summary>
+What is Intrusion and IDS
+</summary>
+<ul>
+<li>Intrusion: Compromise of a defined Security Requirement</li>
+<li>Intrusion Detection System: Software that has the function to detect
+and identify intrusions</li>
+</ul>
+</details>
+<details>
+<summary>
+Classification of IDS
+</summary>
+<p>Detection Method:</p>
+<ul>
+<li>Misuse detection</li>
+</ul>
+<p>Store signatures of attacks in a database Monitor traffic for
+signatures Frequently update signature database</p>
+<ul>
+<li>Anomaly Detection</li>
+</ul>
+<p>Model a normal or expected state of a system,Raise alarm if the
+current state differs more than a certain threshold</p>
+<p>Data Source:</p>
+<ul>
+<li><p>Network-based</p></li>
+<li><p>Host-based</p></li>
+</ul>
+<p>Detection Delay</p>
+<ul>
+<li><p>Real-time</p></li>
+<li><p>A posteriori</p></li>
+</ul>
+<p>Reaction:</p>
+<ul>
+<li><p>Passive</p></li>
+<li><p>Active</p></li>
+</ul>
+<p>Analysis</p>
+<ul>
+<li><p>Individual</p></li>
+<li><p>Cooperative</p></li>
+</ul>
+</details>
+<details>
+<summary>
+Compare Misuse Detection and Anomaly Detection
+</summary>
+<p>Misuse:</p>
+<ul>
+<li>Only known attack</li>
+<li>Very efficient detection</li>
+<li>Less false positives</li>
+<li>More false negatives</li>
+</ul>
+<p>Anomaly:</p>
+<ul>
+<li>Able to detect new attacks</li>
+<li>Heuristics threshold definition is complex</li>
+<li>More false positives</li>
+</ul>
+</details>
+<details>
+<summary>
+What can IDS detect (HIDS, NIDS)
+</summary>
+<p>HIDS:</p>
+<ul>
+<li>Privilege Abuse</li>
+<li>Accidentally assigned privileges</li>
+<li>Access and modification of critical data</li>
+</ul>
+<p>NIDS:</p>
+<ul>
+<li>Unauthorized network access</li>
+<li>network scans</li>
+<li>Abuse of bandwidth resources</li>
+</ul>
+</details>
+<details>
+<summary>
+Trade off for HIDS
+</summary>
+<p>running a HIDS would add performance drawbacks by real-time
+monitoring of the host activity.</p>
+</details>
+<h3 id="exercise-4">Exercise 4</h3>
+<details>
+<summary>
+What is a measure for unpredictability?
+</summary>
+<p>Shannon Information Entropy</p>
+<p><span class="math display">\[
+H(X)=-\sum_x P(X=x) \cdot \log _2 P(X=x)
+\]</span></p>
+Shannon Information Entropy can be interpreted as the expected amount of
+bits, needed to encode the output of X
+</details>
+<details>
+<summary>
+what is cryptographic hash function
+</summary>
+<ul>
+<li><p>Collision resist</p></li>
+<li><p>One way</p></li>
+<li><p>Random Oracle property</p></li>
+</ul>
+</details>
+<details>
+<summary>
+Modes of Encryption, name and draw
+</summary>
+<p>Electronic Code Book</p>
+<p>最朴素的, <span class="math inline">\(Enc(m_i,k)=c_i\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133031979.png"
+alt="image-20240208133031979" />
+<figcaption aria-hidden="true">image-20240208133031979</figcaption>
+</figure>
+<p>Cipher Block chaining</p>
+<p><span class="math inline">\(Enc_k(m_i \oplus c_{i-1})\)</span>
+一开始有个 <span class="math inline">\(IV\)</span> (fresh
+不是固定的)</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133045404.png"
+alt="image-20240208133045404" />
+<figcaption aria-hidden="true">image-20240208133045404</figcaption>
+</figure>
+<ul>
+<li><p>Identical plaintext -&gt; non-identical ciphertext</p></li>
+<li><p>No integrity protection</p></li>
+</ul>
+<p>Output FeedBack</p>
+<p>把 block cipher 变成 stream cipher</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133107044.png"
+alt="image-20240208133107044" />
+<figcaption aria-hidden="true">image-20240208133107044</figcaption>
+</figure>
+<ul>
+<li>Decryption do not depend on previous blocks (Transmissino error only
+affects this block)</li>
+</ul>
+<p>CounTeR</p>
+<p>把 block cipher 变成 stream cipher</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20240208133752206.png"
+alt="image-20240208133752206" />
+<figcaption aria-hidden="true">image-20240208133752206</figcaption>
+</figure>
+<ul>
+<li>Decryption does not depend on previous blocks.</li>
+</ul>
+</details>
+<details>
+<summary>
+Explain how a block cipher works, stream cipher
+</summary>
+<ul>
+<li>A block cipher operates on input data of a fixed length, called
+block. Input block and key produce an output block of the same length as
+the input block.</li>
+<li>Stream ciphers make use of the ⊕ (XOR) operation and a key
+stream</li>
+</ul>
+</details>
+<details>
+<summary>
+How to compute HMAC
+</summary>
+HMAC: <span class="math inline">\(H(K \oplus opad | H(K \oplus i p a d |
+m))\)</span>
+</details>
+<h3 id="exercise-5">Exercise 5</h3>
+<details>
+<summary>
+the random oracle property is requested for hash functions. Why can a
+construction of a hash function with random() or true randomness not
+work?
+</summary>
+Hash function must be deterministic. For example, we could not decrypt
+RSA-OAEP if G and H were not deterministic.
+</details>
+<details>
+<summary>
+Salting
+</summary>
+<ul>
+<li>If two users use the same password, the random r will guarantee that
+the hashes are not the same.</li>
+<li>It protects users with weak passwords against pre-computation.</li>
+<li>An attacker would need to compute a dictionary attack for each
+r</li>
+</ul>
+</details>
+<details>
+<summary>
+Why is it not a problem if r is known to an attacker?
+</summary>
+No attacker will pre-compute rainbow tables for all combinations
+</details>
+<details>
+<summary>
+Actually, one should not use a “general-purpose” hash function like
+SHA256 at all to store passwords.Why are they needed and how do they
+compare to hash functions?
+</summary>
+<ul>
+<li>General-purpose hash functions are designed to be computed
+efficiently</li>
+<li>Users are choosing weak passwords. Those functions are carefully
+designed that they also do not parallelize well, even with special
+hardware. They – of course – also use salting!</li>
+</ul>
+</details>
+<h3 id="exercise-6">Exercise 6</h3>
+<details>
+<summary>
+Describe RSA
+</summary>
+<p><span class="math inline">\(n = p \cdot q\)</span> choose <span
+class="math inline">\(e \cdot d \equiv 1 \bmod \phi (n)\)</span></p>
+<p>public key: <span class="math inline">\((n,e)\)</span> secret key:
+<span class="math inline">\((n,d)\)</span></p>
+<p>Enc: <span class="math inline">\(c \equiv m ^ e \bmod n\)</span></p>
+Dec: <span class="math inline">\(m = c^d \bmod n\)</span>
+</details>
+<details>
+<summary>
+Describe OAEP
+</summary>
+enhanced RSA
+</details>
+<details>
+<summary>
+What is threshold cryptography
+</summary>
+<ul>
+<li>The private key does not exist in a central form but is split into n
+fragments or partial keys. A threshold signature can only be computed if
+at least t partial keys are involved.</li>
+</ul>
+</details>
+<details>
+<summary>
+Advantage of threshold cryptography
+</summary>
+<ul>
+<li>The private key is more difficult to compromise, as the attacker
+needs at least t partial key in order to successfully compute a
+signature</li>
+<li>As the key resides on n different nodes, a
+threshold-cryptography-based signing system can still work if at least t
+nodes remain online</li>
+<li>For the same reason, it is less likely that the private key gets
+lost</li>
+</ul>
+</details>
+<details>
+<summary>
+Why use DKG involving a dealer
+</summary>
+<ul>
+<li>With distributed key generation (DKG), the key never exists in its
+combined/centralized form.</li>
+<li>The dealer might keep a copy of the key split into fragments and use
+it for adversarial purposes</li>
+</ul>
+</details>
+<details>
+<summary>
+differences between verifying a threshold signature and a signature
+created with traditional asymmetric cryptography
+</summary>
+No difference: In both worlds, the signature can be verified using the
+public key that corresponds to the centralized or distributed private
+key
+</details>
+<h3 id="exercise-7">Exercise 7</h3>
+<details>
+<summary>
+What is the general purpose of a X.509 certificate?
+</summary>
+Without any help, we do not know who owns which public key. A
+certificate solves this issue by creating a verifiable/authentifiable
+binding between an entity’s identity (name, email address, URL, etc.)
+(person, server, service, etc.) and a public key owned by that entity
+</details>
+<details>
+<summary>
+Explain why Root Certificates are self-signed and why the self-signed
+Root Certificates need to be included in a Root Store.
+</summary>
+<ul>
+<li>Root CAs are the trust anchors of a PKI. Hence, Root Certificates
+need to be deployed via Root Stores</li>
+</ul>
+</details>
+<details>
+<summary>
+why private Root CA keys should not be used to perform “every day tasks”
+</summary>
+A Root CA’s private Root Key skroot is one of the most valuable keys in
+a PKI. This is because countless sub-CAs and even more entities’
+certificates depend directly or indirectly on it. The best practice for
+a Root CA is to create a new sub-CA and delegate signing power to it.
+</details>
+<details>
+<summary>
+what certificate revocation is and when we need to do it
+</summary>
+<p>Certificate revocation means a certificate is marked as being invalid
+before it expires.</p>
+<ul>
+<li>the private key skx that belongs to the certified public key pkx is
+lost or compromised</li>
+<li>A certificate can also be revoked if the ownership of the certified
+identity changes</li>
+</ul>
+</details>
+<details>
+<summary>
+Explain how CRL and OCSP works, what the problems of both are.
+</summary>
+<p>CRL</p>
+<ul>
+<li>CRL means that a CA periodically publishes a list of revoked
+certificates. The browser downloads this list and checks that the
+certificate it received from the server is not revoked.</li>
+<li>Downloading and checking the CRL is a time-consuming task.</li>
+<li>the CRL needs to be fresh, and the browser needs to be able to
+download it</li>
+</ul>
+<p>OCSP</p>
+<ul>
+<li>a challenge/response protocol where the browser asks the OCSP server
+if a certificate is still valid</li>
+<li>OCSP has the same freshness problem as CRLs.</li>
+<li>an attacker can block requests, and browsers will most likely
+soft-fail.</li>
+<li>the OCSP server learns what sites the browser (= user) visits, which
+is a privacy issue.</li>
+</ul>
+</details>
+<details>
+<summary>
+What does certificate pinning mean
+</summary>
+a computer has a list of “expected” certificates/public keys of
+websites. If the website presents an unexpected certificate, the browser
+can stop the connection attempt and warn the user.
+</details>
+<details>
+<summary>
+What problems does certificate pinning have
+</summary>
+<ul>
+<li>the “trust on first use” problem: e browser does not know if the
+certificate it pins is authentic.</li>
+<li>Pinning is also problematic, as certificates can change for
+legitimate reasons like renewal.</li>
+</ul>
+</details>
+<h3 id="exercise-8">Exercise 8</h3>
+<p>Attack on Cryptographic Protocols</p>
+<h3 id="exercise-9">Exercise 9</h3>
+<details>
+<summary>
+Problems of combining TLS-CCA with APNs
+</summary>
+APNs is always-on, One of the first things your phone does in a new
+network, is logging into the APNs service. * ⇒ Possible user monitoring,
+tracking and censorship
+</details>
+<details>
+<summary>
+What is CT
+</summary>
+<p>Public logs for X.509</p>
+</details>
+<details>
+<summary>
+What Advantages and problems does CT have
+</summary>
+<ul>
+<li><p>Adds transparency to X.509 in the hope of detecting malicious CA
+behavior early</p></li>
+<li><p>All issued certificates for a domain can be observed</p></li>
+<li><p>Needs changes on the side of CAs</p></li>
+<li><p>Information leak by public logs</p></li>
+</ul>
+</details>
+<details>
+<summary>
+CAA record meaning (<code>;</code>, <code>norecord</code>,
+<code>issue xxx.com</code>)
+</summary>
+<p>; means no CA can issue</p>
+<p>no record : all can issue</p>
+issue xxx : xx can issue
+</details>
+<details>
+<summary>
+What CA checks for CSR
+</summary>
+obtain CAA records for every DNS domain name in the Cert’s SANs. For
+wildcard domain names, you need to obtain the base domain.
+</details>
+<details>
+<summary>
+What DNSSEC try to solve
+</summary>
+<p>However, the original design of DNS did not include any security
+features. In order to prevent MitM and spoofing attacks, DNSSEC adds
+authenticity and integrity protection to DNS replies.</p>
+</details>
+<details>
+<summary>
+How DNSSEC is realized
+</summary>
+<p>DNS resource records (RRs) are grouped into RRsets based upon their
+type.The resulting RRset is digitally signed, using public key
+cryptography. The signatures are stored in a new record type (RRSIG)
+alongside the existing records for a zone.</p>
+</details>
+<details>
+<summary>
+How many keys does every Zone have? Why?
+</summary>
+<p>4 keys in two keypairs:</p>
+<ul>
+<li>Zone-Signing-Keypair (ZSK). Private key only signs resource
+records.</li>
+<li>Key-Signing-Keypair (KSK). Private key only signs ZSK pubkeys.</li>
+</ul>
+</details>
+<details>
+<summary>
+Which improvement does the NSEC3 resource record provide?
+</summary>
+<p>While providing authenticated denial of existence, use of the
+original NSEC record type enables an attacker to enumerate all domains
+in the respective zone.</p>
+<p>The NSEC3 record type impedes this practice by saving the
+cryptographic hash of the next secure domain name, instead of its
+plaintext.</p>
+In order to enumerate zone names with NSEC3 records, an attacker thus
+would need to find a reasonable preimage for the next-owner-name hash in
+every NSEC3 resource record.
+</details>
+<details>
+<summary>
+Why Mode of encryption
+</summary>
+<ul>
+<li>need when length of msg &gt; length of block size</li>
+<li>reuse the same key, avoid identical ciphertexts for identical
+messages.</li>
+</ul>
+</details>
+<details>
+<summary>
+Are modes of encryption necessary for stream cipher
+</summary>
+NO. A stream cipher generates a key stream and XORs the plaintext with
+it. You can request a key stream of arbitrary size and directly encrypt
+(⊕) messages of arbitrary length with it. However, the key stream
+generation must not depend on the secret key alone. Otherwise, the same
+keystream would be generated and identical messages would be encrypted
+to same ciphertexts. Hence, it is necessary to add randomness (IV) when
+initializing the key stream generator.
+</details>
+<h3 id="exercise-10">Exercise 10</h3>
+<details>
+<summary>
+secure the communication between their servers. However, some of their
+services require connection via plain IP and don’t support communication
+over secure channel implementations on higher OSI layers (e.g., TLS).
+Which solution do you recommend?
+</summary>
+Use a secure channel implementation such as IPSec
+</details>
+<details>
+<summary>
+What can IPSEC Provide
+</summary>
+The secure channel transparently protects IP traffic and allows the
+legacy services to run. IPSec provides data origin authentication,
+connectionless data integrity, confidentiality, all configured through
+security policies.
+</details>
+<details>
+<summary>
+only require authenticity, but not confidentiality of exchanged
+messages. Which secure channel protocol would you employ in that case?
+</summary>
+<ul>
+<li>AH and ESP offer authentication protection. However, besides the
+payload,</li>
+<li>AH additionally protects the preceding IP header</li>
+<li>AH offers more protection in this case. If both ESP and AH are
+applied, ESP should be applied first (as the inner layer), s.t. AH
+protect the outer IP header.</li>
+</ul>
+</details>
+<details>
+<summary>
+What is communication endpoints and cryptographic endpoints
+</summary>
+<ul>
+<li>Cryptographic Endpoints: Entities that process IPSec headers</li>
+<li>Communication Endpoints: Source and destination of an IP packet</li>
+</ul>
+</details>
+<details>
+<summary>
+Two Mode of IPSEC and when to use
+</summary>
+<ul>
+<li>Transport Mode: cryptographic endpoints are also the communication
+endpoints</li>
+<li>Tunnel Mode: at least one cryptographic endpoint is not a
+communication endpoint.</li>
+</ul>
+</details>
+<details>
+<summary>
+Draw structrue of Packet of two modes
+</summary>
+<ul>
+<li><p>transport mode:<img
+src="https://fyindex.work/PicGo/image-20240215115216038.png"
+alt="image-20240215115216038" /></p></li>
+<li><p>tunel mode <img
+src="https://fyindex.work/PicGo/image-20240215115148684.png"
+alt="image-20240215115148684" /></p></li>
+</ul>
+</details>
+<details>
+<summary>
+Definition of an IPSec Security Policy (SP) and a Security Association
+(SA)
+</summary>
+<ul>
+<li>SP: Description of how security services should be provided to
+(categories of) packets</li>
+<li>SA: Explicit packet transformations for simplex channel between to
+communication parties</li>
+</ul>
+</details>
+<details>
+<summary>
+a bidirectional IPSec secure channel with both AH and ESP protection for
+their traffic. How many SAs are instantiated on every peer at the end of
+the process?
+</summary>
+A SA represents a simplex channel for exactly one type of transformation
+(e.g., AH). Bidirectional communication requires two SAs for each
+transform, resulting in four SAs for two transformations in duplex mode.
+</details>
+<details>
+<summary>
+Is it a good idea to manually configure SAs? Why?
+</summary>
+<p>Bad:</p>
+<ul>
+<li>The chosen keys/algorithms might be insecure and/or not provide
+PFS</li>
+<li>Manual configuration is error prone</li>
+<li>Manual configuration doesn’t scale</li>
+</ul>
+Use a key management / negotiation daemon, such as IKE, instead.
+</details>
+<details>
+<summary>
+(Understand IKEv2) An IKEv2 protocol run between Initiator and Responder
+begins with two (Request, Response) exchanges. After the exchanges are
+done, which data has been negotiated? What has been established?
+</summary>
+<p>Two exchanges:</p>
+<ul>
+<li>IKE_SA_INIT: IKE SA parameters, nonces, DH values</li>
+<li>IKE_AUTH: Initiator/Responder identities, Auth previous messages,
+prove knowledge of secrets, first CHILD_SA parameters After the two
+exchanges, an IKE security association, as well as an IPSec child
+security assocation have been established. All messages and the
+identities of Initiator/Responder have been authenticated.</li>
+</ul>
+</details>
+<h3 id="exercise-11">Exercise 11</h3>
+<details>
+<summary>
+Adversary Model
+</summary>
+<p>Adversarial Behaviour:</p>
+<ul>
+<li>Semi-honest adversaries: Adversary follows the protocol
+specifications but tries to learn private inputs (also called honest but
+curious)</li>
+<li>Malicious adversaries: Adversary can follow an arbitrary
+protocol</li>
+</ul>
+<p>Adversary threshold structure:</p>
+<ul>
+<li>Honest Majority Setting: The adversary controls a minority of all
+computing parties</li>
+<li>Dishonest Majority setting: The adversary controls up to n-1 of n
+computing parties</li>
+</ul>
+</details>
+<details>
+<summary>
+computation protocol be secure
+</summary>
+<ul>
+<li>Input Privacy: Inputs of each party need to remain private under the
+assumptions of the chosen adversary model</li>
+<li>Correctness: Output of the computation needs to be correct under the
+assumptions of the chosen adversary model</li>
+</ul>
+</details>
+<details>
+<summary>
+Summerize: GMW, Yao’s Garbled Circuit protocol, BGW, Sharemind, Additive
+Secret Sharing using Beaver Triples
+</summary>
+<ul>
+<li>GMW: Inputs are protected by an XOR-secret sharing and the security
+assumption of Oblivious Transfer.</li>
+<li>Yao’s Garbled Circuit Protocol: Inputs are protected by the
+cryptographic security assumptions of Symmetric Encryption and Oblivious
+Transfer.</li>
+<li>BGW: Inputs are protected by a polynomial (Sharmir’s) secret
+sharing.</li>
+<li>Sharemind: Inputs are protected by an additive/replicated secret
+sharing and the cryptographic security assumptions of Shared Random
+Number Generators.</li>
+<li>Additive Secret Sharing with Beaver Triples: Inputs are protected by
+an additive secret sharing and the security assumptions of the utilized
+method to construct Beaver Triples.</li>
+</ul>
+</details>
+<details>
+<summary>
+Construct Shamir’s secret shar
+</summary>
+(n,k) constructs a random polynomial of degree k-1, ree 4. Each
+computation party’s share corresponds to one point of the polyomial. At
+least five parties are needed to solve an equation of degree 4, thus
+reconstructing the
+</details>
+<details>
+<summary>
+Caluculate number of encryptions
+</summary>
+number of gate * 4(entries per gate) * 2 (encryptions per entry)
+</details>
+<details>
+<summary>
+How to calc a*b secretly
+</summary>
+By resharing s1, s2, s3 before exchanging them
+</details>
+<h1 id="more-exercise">More Exercise</h1>
+<details>
+<summary>
+what is Kerberos
+</summary>
+<p>Kerberos is an authentication and access control service for
+workstation clusters</p>
+</details>
+<details>
+<summary>
+Design goals of Kerberos
+</summary>
+<ul>
+<li>Security</li>
+<li>Reliability</li>
+<li>Transparency</li>
+<li>Scaleability</li>
+</ul>
+</details>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2020/11/08/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/">http://fyind.de/2020/11/08/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/11/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" title="信息安全"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">信息安全</div></div><div class="info-2"><div class="info-item-1">BufferOverflow 去这个网站https://exploit-exercises.lains.space/download/ 可以下载镜像。然后再VMware安装上。 进入后使用 user 用户名登录，密码也是 user 进去之后字非常小，我们可以用ssh登录，不过我们首先要查看一下ip地址，使用命令 1ip addr 可以查看   image-20201112200703182  然后我们用ssh连接 1ssh user@192.168.230.132 登录上去后，可以输入 bash 更换shell 然后使用命令 1uname -a 可以查看系统信息 网站上面说练习在 /opt/protostar/bin 这个目录下面 第0个挑战 更改一个变量 123456789101112131415161718#include &lt;stdlib.h&gt;#include &lt;unistd.h&gt;#include &lt;stdio.h&gt;int main(int argc, char **argv)&#123;  volatile int modified;  ...</div></div></div></a><a class="pagination-related" href="/2020/11/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="操作系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">操作系统</div></div><div class="info-2"><div class="info-item-1">C语言 指针 指针的读取规则： 教程：http://unixwiz.net/techtips/reading-cdecl.html [] 数组和 ()函数从左向右读取，* 和 &amp; 从右向左读取  go right when you can, go left when you must  123456789101112long **foo[7];// 是一个二级指针的数组,表示7个二级指针   **foo -&gt; *foo -&gt; longunsigned long int **x();// 表示函数， 函数返回值是 unsiged long int**char *(*(**foo [][8])())[];// foo is ... char//   *foo[] =&gt; go rihgt =&gt; foo is a array ... char//   *foo[8] =&gt; go right =&gt; foo is a array of array of 8//   **foo  =&gt; go left =&gt; foo is a array ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/11/08/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" title="信息安全"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-08</div><div class="info-item-2">信息安全</div></div><div class="info-2"><div class="info-item-1">BufferOverflow 去这个网站https://exploit-exercises.lains.space/download/ 可以下载镜像。然后再VMware安装上。 进入后使用 user 用户名登录，密码也是 user 进去之后字非常小，我们可以用ssh登录，不过我们首先要查看一下ip地址，使用命令 1ip addr 可以查看   image-20201112200703182  然后我们用ssh连接 1ssh user@192.168.230.132 登录上去后，可以输入 bash 更换shell 然后使用命令 1uname -a 可以查看系统信息 网站上面说练习在 /opt/protostar/bin 这个目录下面 第0个挑战 更改一个变量 123456789101112131415161718#include &lt;stdlib.h&gt;#include &lt;unistd.h&gt;#include &lt;stdio.h&gt;int main(int argc, char **argv)&#123;  volatile int modified;  ...</div></div></div></a><a class="pagination-related" href="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/" title="虚拟机安装以及网站的搭建"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-11</div><div class="info-item-2">虚拟机安装以及网站的搭建</div></div><div class="info-2"><div class="info-item-1">虚拟机安装以及网站的搭建 一、 VMware WorkStation 安装和使用 Unity 模式 在该模式下，可以把虚拟机的窗口拖到真实机上。   image-20200203165854913  快照 在这里添加快照   image-20200203170140749  二、Windows Server 2003 下载安装完成后： 设置虚拟机交换机 设置虚拟机的交换机为VMnet1，下面的xp也一样设置   image-20200204050331629  设置ip地址 运行中输入ncpa.cpl可以打开网络设置/网卡 右键本地连接属性-&gt; tcp/ip协议 ，右键属性 在这里可以更改ip地址，下面的xp也一样设置，注意地址不要改一样的   image-20200204050717616  三、Windows Xp sp3 下载镜像后安装 序列号：MRX3F-47B9T-2487J-KWKMF-RPWBY Windows也和上面一样设置，然后关闭防火墙，它们就可以ping通过了 关闭防火墙 控制面板—&gt;安全中心—&gt;关闭防火墙   image-20200204...</div></div></div></a><a class="pagination-related" href="/2020/09/16/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" title="网络安全"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-16</div><div class="info-item-2">网络安全</div></div><div class="info-2"><div class="info-item-1">网络安全 Vmware Workstation 桥接网络配置   image-20200919203643934  打开虚拟网络编辑器，发现没有桥接网络，点设置   image-20200919203722602  让桥接模式解上正确的网卡   image-20200919203838977  然后主机和虚拟机就可以互相ping通了   image-20200919204116816  环境搭建 Kali Linux 镜像下载 https://www.kali.org/downloads/ 安装完虚拟机后，更新一下源 123apt updateapt upgradeapt dist-upgrade 源列表位置 /etc/apt/source.list 设置开机启动软件 12update-rc.d ssh enableupdate-rc.d postgresql enable 重启网络服务 1service networking restart 开启网卡 12ifconfig eth0 upifup eth0 Windows Server 2003 桥接网络的时候，要把自己的网络设...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#netzsicherheit"><span class="toc-number">1.</span> <span class="toc-text">Netzsicherheit</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-number">1.1.</span> <span class="toc-text">作业</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-1"><span class="toc-number">1.1.1.</span> <span class="toc-text">Exercise 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#base64%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86"><span class="toc-number">1.1.2.</span> <span class="toc-text">base64加密解密</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#networt-insecure"><span class="toc-number">1.2.</span> <span class="toc-text">Networt Insecure</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#do-not-trust-a-network-connection"><span class="toc-number">1.2.1.</span> <span class="toc-text">Do not Trust a Network
+Connection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#capabilities-of-attackers"><span class="toc-number">1.2.2.</span> <span class="toc-text">Capabilities of Attackers</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#attacker-model"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">Attacker Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#the-attackers-positon"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">The Attacker’s Positon</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#security-goals-technically-defined"><span class="toc-number">1.2.3.</span> <span class="toc-text">Security Goals Technically
+Defined</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#confidentiality"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Confidentiality</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#data-integrity"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Data Integrity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#authenticity"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">Authenticity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#controlled-access"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">Controlled Access</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#accountability"><span class="toc-number">1.2.3.5.</span> <span class="toc-text">Accountability</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#availability"><span class="toc-number">1.2.3.6.</span> <span class="toc-text">Availability</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#threats"><span class="toc-number">1.2.4.</span> <span class="toc-text">Threats</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#impersonation"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">Impersonation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#forgery-of-information"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">Forgery of information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#modification-or-loss-of-information"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">Modification or loss of
+information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#repudiation"><span class="toc-number">1.2.4.4.</span> <span class="toc-text">Repudiation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#eavesdropping"><span class="toc-number">1.2.4.5.</span> <span class="toc-text">Eavesdropping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#authorization-violation"><span class="toc-number">1.2.4.6.</span> <span class="toc-text">Authorization Violation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#denial-of-service"><span class="toc-number">1.2.4.7.</span> <span class="toc-text">Denial of Service</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#langsec"><span class="toc-number">1.3.</span> <span class="toc-text">LangSec</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null-character-%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">NULL Character 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">1.3.1.1.1.</span> <span class="toc-text">解决</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#werid-machine"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Werid Machine</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tcp%E7%9A%84%E5%A4%B4%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">TCP的头格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B-3-way-handshake"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">三次握手 3 way handshake</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp-syn-flood-attack"><span class="toc-number">1.4.1.</span> <span class="toc-text">TCP SYN Flood Attack</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1tcp-syn-cookies"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">防御：TCP SYN Cookies</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#intrusion-detection-system-%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.2.</span> <span class="toc-text">Intrusion Detection
+System 入侵检测系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-%E5%85%A5%E4%BE%B5intrusion"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">定义 入侵Intrusion：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#misuse-detection-%E6%BB%A5%E7%94%A8%E6%A3%80%E6%B5%8B"><span class="toc-number">1.4.2.2.1.</span> <span class="toc-text">Misuse Detection 滥用检测</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#anomaly-detection-%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B"><span class="toc-number">1.4.2.2.2.</span> <span class="toc-text">Anomaly Detection 异常检测</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#network-based"><span class="toc-number">1.4.2.2.3.</span> <span class="toc-text">Network-based</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#host-based"><span class="toc-number">1.4.2.2.4.</span> <span class="toc-text">Host-based</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#real-time-detection"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">Real-time detection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#a-posteriori"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">A posteriori</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#symmetric-encryption"><span class="toc-number">1.5.</span> <span class="toc-text">Symmetric Encryption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mode-of-encryption"><span class="toc-number">1.5.1.</span> <span class="toc-text">Mode of Encryption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#one-time-padotp"><span class="toc-number">1.5.2.</span> <span class="toc-text">One-Time-Pad(OTP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#security-of-ciphers"><span class="toc-number">1.5.3.</span> <span class="toc-text">Security of Ciphers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attaccking-symmetric-ciphers"><span class="toc-number">1.5.4.</span> <span class="toc-text">Attaccking Symmetric Ciphers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#modes-of-encryption"><span class="toc-number">1.5.5.</span> <span class="toc-text">Modes of Encryption</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ecb"><span class="toc-number">1.5.5.1.</span> <span class="toc-text">ECB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cbc"><span class="toc-number">1.5.5.2.</span> <span class="toc-text">CBC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ofb"><span class="toc-number">1.5.5.3.</span> <span class="toc-text">OFB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ctr"><span class="toc-number">1.5.5.4.</span> <span class="toc-text">CTR</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hash-mac"><span class="toc-number">1.6.</span> <span class="toc-text">HASH MAC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hash-function"><span class="toc-number">1.6.1.</span> <span class="toc-text">Hash function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cryptographic-hash-function"><span class="toc-number">1.6.2.</span> <span class="toc-text">cryptographic hash function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crc"><span class="toc-number">1.6.3.</span> <span class="toc-text">CRC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#integrity"><span class="toc-number">1.6.4.</span> <span class="toc-text">Integrity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac"><span class="toc-number">1.6.5.</span> <span class="toc-text">MAC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#construction"><span class="toc-number">1.6.5.1.</span> <span class="toc-text">Construction</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#randomness"><span class="toc-number">1.7.</span> <span class="toc-text">Randomness</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#entropy"><span class="toc-number">1.7.1.</span> <span class="toc-text">Entropy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#public-key-cryptography"><span class="toc-number">1.8.</span> <span class="toc-text">Public Key Cryptography</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#secure-channels"><span class="toc-number">1.9.</span> <span class="toc-text">Secure Channels</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ways"><span class="toc-number">1.9.0.1.</span> <span class="toc-text">Ways</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secure-channel-implementation"><span class="toc-number">1.9.1.</span> <span class="toc-text">Secure Channel
+Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#authenticated-encryption-with-associated-data-aead"><span class="toc-number">1.9.2.</span> <span class="toc-text">Authenticated
+Encryption With Associated Data (AEAD)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#galois-fields-and-galois-field-multiplication"><span class="toc-number">1.9.3.</span> <span class="toc-text">Galois Fields and
+Galois Field Multiplication</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#galoiscounter-mode-gcm"><span class="toc-number">1.9.3.1.</span> <span class="toc-text">Galois&#x2F;Counter Mode (GCM)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#offset-codebook-mode-ocb"><span class="toc-number">1.9.4.</span> <span class="toc-text">Offset Codebook Mode (OCB)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attack-against-stream-cipher"><span class="toc-number">1.9.5.</span> <span class="toc-text">ATTACK against Stream Cipher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#padding-oracle-attack-against-cbc"><span class="toc-number">1.9.6.</span> <span class="toc-text">Padding Oracle Attack against
+CBC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pki"><span class="toc-number">1.10.</span> <span class="toc-text">PKI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#definition-of-a-certificate"><span class="toc-number">1.10.1.</span> <span class="toc-text">Definition of a certificate</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#creation"><span class="toc-number">1.10.1.1.</span> <span class="toc-text">creation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#common-forms"><span class="toc-number">1.10.2.</span> <span class="toc-text">Common Forms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hierarchical-pki"><span class="toc-number">1.10.3.</span> <span class="toc-text">hierarchical PKI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#non-hireachical-pki"><span class="toc-number">1.10.4.</span> <span class="toc-text">non-hireachical PKI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#x.509"><span class="toc-number">1.10.5.</span> <span class="toc-text">X.509</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#intermediate-certificates"><span class="toc-number">1.10.5.1.</span> <span class="toc-text">Intermediate certificates</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hazard"><span class="toc-number">1.10.5.2.</span> <span class="toc-text">Hazard:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#corss-signing"><span class="toc-number">1.10.5.3.</span> <span class="toc-text">Corss-signing</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#certificate-issuance"><span class="toc-number">1.10.6.</span> <span class="toc-text">Certificate Issuance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#acme-automated-certificate-management-environment"><span class="toc-number">1.10.7.</span> <span class="toc-text">ACME:
+Automated Certificate Management Environment</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#http-01-challenge-request"><span class="toc-number">1.10.7.1.</span> <span class="toc-text">HTTP-01 Challenge Request</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dns-01-challenge-verification"><span class="toc-number">1.10.7.2.</span> <span class="toc-text">DNS-01 Challenge
+Verification</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#certificate-revocation"><span class="toc-number">1.10.8.</span> <span class="toc-text">Certificate Revocation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#certificate-revocation-lists-crls"><span class="toc-number">1.10.8.1.</span> <span class="toc-text">Certificate Revocation Lists
+(CRLs)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#online-certificate-status-protocol-ocsp"><span class="toc-number">1.10.8.2.</span> <span class="toc-text">Online Certificate
+Status Protocol (OCSP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ocsp-stapling"><span class="toc-number">1.10.8.3.</span> <span class="toc-text">OCSP Stapling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#certificate-pinning"><span class="toc-number">1.10.9.</span> <span class="toc-text">Certificate Pinning</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#shortcomming"><span class="toc-number">1.10.9.1.</span> <span class="toc-text">shortcomming</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cryptography-protocol"><span class="toc-number">1.11.</span> <span class="toc-text">Cryptography Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#notation"><span class="toc-number">1.11.1.</span> <span class="toc-text">Notation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#entity-authentication"><span class="toc-number">1.11.2.</span> <span class="toc-text">entity authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key-establishment"><span class="toc-number">1.11.3.</span> <span class="toc-text">key establishment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boyd"><span class="toc-number">1.11.4.</span> <span class="toc-text">Boyd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goal"><span class="toc-number">1.11.5.</span> <span class="toc-text">Goal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#forward-secrecy"><span class="toc-number">1.11.5.1.</span> <span class="toc-text">Forward Secrecy</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attack"><span class="toc-number">1.11.6.</span> <span class="toc-text">Attack</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#relay-attack-%E8%BD%AC%E5%8F%91%E6%94%BB%E5%87%BB"><span class="toc-number">1.11.6.1.</span> <span class="toc-text">Relay attack 转发攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#replay-attack"><span class="toc-number">1.11.6.2.</span> <span class="toc-text">Replay attack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#oracle-attack"><span class="toc-number">1.11.6.3.</span> <span class="toc-text">Oracle Attack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#protocol-interaction-attack"><span class="toc-number">1.11.6.4.</span> <span class="toc-text">Protocol Interaction attack</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#protocol"><span class="toc-number">1.11.7.</span> <span class="toc-text">Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#try-12-dh-with-password"><span class="toc-number">1.11.7.1.</span> <span class="toc-text">Try 1,2 DH (with password)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try-3-shared-key-with-as"><span class="toc-number">1.11.7.2.</span> <span class="toc-text">Try 3 Shared Key with AS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try-4-add-nonce"><span class="toc-number">1.11.7.3.</span> <span class="toc-text">Try 4 Add nonce</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try-5-add-forward-secrecy"><span class="toc-number">1.11.7.4.</span> <span class="toc-text">Try 5 Add forward secrecy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try-6-remove-as"><span class="toc-number">1.11.7.5.</span> <span class="toc-text">Try 6 Remove AS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try-7-selection-of-algorithm"><span class="toc-number">1.11.7.6.</span> <span class="toc-text">Try 7 Selection of Algorithm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try-8-auth-payload"><span class="toc-number">1.11.7.7.</span> <span class="toc-text">Try 8 AUTH Payload</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#final-protocol"><span class="toc-number">1.11.8.</span> <span class="toc-text">Final Protocol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#needham-schroeder-protocol"><span class="toc-number">1.11.9.</span> <span class="toc-text">Needham Schroeder Protocol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#symmetric"><span class="toc-number">1.11.9.1.</span> <span class="toc-text">Symmetric</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#asymmetric"><span class="toc-number">1.11.9.2.</span> <span class="toc-text">Asymmetric</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-security"><span class="toc-number">1.12.</span> <span class="toc-text">Web Security</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#client-certificate-authentication-cca"><span class="toc-number">1.12.1.</span> <span class="toc-text">Client Certificate
+Authentication (CCA)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#push-service-architecture"><span class="toc-number">1.12.1.1.</span> <span class="toc-text">Push Service Architecture</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#certificate-transparency"><span class="toc-number">1.12.2.</span> <span class="toc-text">Certificate Transparency</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#advantage"><span class="toc-number">1.12.2.1.</span> <span class="toc-text">Advantage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#potential-issues"><span class="toc-number">1.12.2.2.</span> <span class="toc-text">Potential issues</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#certification-authority-authorization-caa"><span class="toc-number">1.12.3.</span> <span class="toc-text">Certification
+Authority Authorization (CAA)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#realization"><span class="toc-number">1.12.3.1.</span> <span class="toc-text">Realization</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ipsec"><span class="toc-number">1.13.</span> <span class="toc-text">IPSEC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#how-it-works"><span class="toc-number">1.13.1.</span> <span class="toc-text">How it works</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ipsec-replay-protection"><span class="toc-number">1.13.2.</span> <span class="toc-text">IPSEC Replay Protection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ipsec-security-protocol-modes"><span class="toc-number">1.13.3.</span> <span class="toc-text">IPSEC Security Protocol
+Modes</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#transport-mode"><span class="toc-number">1.13.3.1.</span> <span class="toc-text">Transport Mode</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tunnel-mode"><span class="toc-number">1.13.3.2.</span> <span class="toc-text">Tunnel Mode</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#traffic-selector"><span class="toc-number">1.13.4.</span> <span class="toc-text">Traffic Selector</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#security-policies"><span class="toc-number">1.13.5.</span> <span class="toc-text">Security Policies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#security-associations"><span class="toc-number">1.13.6.</span> <span class="toc-text">Security Associations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#encapsulation-security-payload"><span class="toc-number">1.13.7.</span> <span class="toc-text">Encapsulation Security
+Payload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#authentication-header"><span class="toc-number">1.13.8.</span> <span class="toc-text">Authentication Header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ikev2"><span class="toc-number">1.13.9.</span> <span class="toc-text">IKEv2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#basic-structure"><span class="toc-number">1.13.9.1.</span> <span class="toc-text">Basic Structure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ike_sa_init-exchange"><span class="toc-number">1.13.9.2.</span> <span class="toc-text">IKE_SA_INIT Exchange</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#key-generation"><span class="toc-number">1.13.9.3.</span> <span class="toc-text">Key Generation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ike_auth-exchange"><span class="toc-number">1.13.9.4.</span> <span class="toc-text">IKE_AUTH Exchange</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#authentication"><span class="toc-number">1.13.9.5.</span> <span class="toc-text">Authentication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#protection-against-flooding-attacks"><span class="toc-number">1.13.9.6.</span> <span class="toc-text">Protection against flooding
+attacks</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#advanced-feature"><span class="toc-number">1.13.9.7.</span> <span class="toc-text">Advanced Feature</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wireguarrd"><span class="toc-number">1.13.10.</span> <span class="toc-text">WireGuarrd</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#privacy"><span class="toc-number">1.14.</span> <span class="toc-text">Privacy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#understanding-of-privacy"><span class="toc-number">1.14.0.1.</span> <span class="toc-text">Understanding of privacy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#privacy-protection-goal"><span class="toc-number">1.14.0.2.</span> <span class="toc-text">Privacy protection Goal</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#general-data-protection-regulation"><span class="toc-number">1.14.1.</span> <span class="toc-text">General Data Protection
+Regulation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#scope"><span class="toc-number">1.14.1.1.</span> <span class="toc-text">Scope</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secure-multiparty-computation-smc"><span class="toc-number">1.14.2.</span> <span class="toc-text">Secure Multiparty Computation
+(SMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#modelling-adversaries"><span class="toc-number">1.14.2.1.</span> <span class="toc-text">Modelling Adversaries</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#oblivious-transferot"><span class="toc-number">1.14.2.2.</span> <span class="toc-text">Oblivious Transfer(OT)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#yaos-garbled-circuit-protocol"><span class="toc-number">1.14.2.3.</span> <span class="toc-text">Yao’s Garbled Circuit
+Protocol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bgw"><span class="toc-number">1.14.2.4.</span> <span class="toc-text">BGW</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gmw"><span class="toc-number">1.14.2.5.</span> <span class="toc-text">GMW</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sharemind"><span class="toc-number">1.14.2.6.</span> <span class="toc-text">Sharemind</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#additive-secret-sharing-with-beaver-triples"><span class="toc-number">1.14.2.7.</span> <span class="toc-text">Additive Secret
+Sharing with Beaver Triples</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exercise"><span class="toc-number">2.</span> <span class="toc-text">Exercise</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#exercise-1-1"><span class="toc-number">2.1.</span> <span class="toc-text">Exercise 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-2"><span class="toc-number">2.1.1.</span> <span class="toc-text">Exercise 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-3"><span class="toc-number">2.1.2.</span> <span class="toc-text">Exercise 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-4"><span class="toc-number">2.1.3.</span> <span class="toc-text">Exercise 4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-5"><span class="toc-number">2.1.4.</span> <span class="toc-text">Exercise 5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-6"><span class="toc-number">2.1.5.</span> <span class="toc-text">Exercise 6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-7"><span class="toc-number">2.1.6.</span> <span class="toc-text">Exercise 7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-8"><span class="toc-number">2.1.7.</span> <span class="toc-text">Exercise 8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-9"><span class="toc-number">2.1.8.</span> <span class="toc-text">Exercise 9</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-10"><span class="toc-number">2.1.9.</span> <span class="toc-text">Exercise 10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exercise-11"><span class="toc-number">2.1.10.</span> <span class="toc-text">Exercise 11</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#more-exercise"><span class="toc-number">3.</span> <span class="toc-text">More Exercise</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

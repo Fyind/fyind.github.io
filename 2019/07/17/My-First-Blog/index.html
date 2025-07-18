@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>在win10环境下配置Hexo博客 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="首先贴上几个链接 官方文档：https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;docs&#x2F; 推荐的视频： https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;av44544186 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;av24897960 接下来我们开始安装 安装 Node.js Hexo博客是基于node.js 框架的，所以首先要安装nodejs。下面给出链接 http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在win10环境下配置Hexo博客">
+<meta property="og:url" content="http://fyind.de/2019/07/17/My-First-Blog/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="首先贴上几个链接 官方文档：https:&#x2F;&#x2F;hexo.io&#x2F;zh-cn&#x2F;docs&#x2F; 推荐的视频： https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;av44544186 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;av24897960 接下来我们开始安装 安装 Node.js Hexo博客是基于node.js 框架的，所以首先要安装nodejs。下面给出链接 http">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2019-07-17T14:01:02.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.874Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="配置博客">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "在win10环境下配置Hexo博客",
+  "url": "http://fyind.de/2019/07/17/My-First-Blog/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2019-07-17T14:01:02.000Z",
+  "dateModified": "2025-07-18T10:49:53.874Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2019/07/17/My-First-Blog/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '在win10环境下配置Hexo博客',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">在win10环境下配置Hexo博客</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">在win10环境下配置Hexo博客</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2019-07-17T14:01:02.000Z" title="Created 2019-07-17 14:01:02">2019-07-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.874Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Hexo/">Hexo</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>首先贴上几个链接</p>
+<p>官方文档：https://hexo.io/zh-cn/docs/</p>
+<p>推荐的视频：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av44544186"
+class="uri">https://www.bilibili.com/video/av44544186</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av24897960"
+class="uri">https://www.bilibili.com/video/av24897960</a></p>
+<p>接下来我们开始安装</p>
+<h2 id="安装-node.js">安装 Node.js</h2>
+<p>Hexo博客是基于node.js 框架的，所以首先要安装nodejs。下面给出链接</p>
+<p><a target="_blank" rel="noopener" href="https://nodejs.org/en/"
+class="uri">https://nodejs.org/en/</a></p>
+<figure>
+<img src="https://fyindex.work/PicGo/1563369322945.png"
+alt="1563369322945" />
+<figcaption aria-hidden="true">1563369322945</figcaption>
+</figure>
+<p>可以用下面的命令查看是否安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<p><img src="https://fyindex.work/PicGo/1563370796431.png"></p>
+<h2 id="安装-git">安装 git</h2>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/downloads"
+class="uri">https://git-scm.com/downloads</a></p>
+<p>传送门如上</p>
+<p><img src="https://fyindex.work/PicGo/1563370363375.png"></p>
+<p>安装一直点下一步就可以了，</p>
+<h2 id="安装hexo">安装hexo</h2>
+<p>创建一个放博客的文件夹</p>
+<p>启动管理员权限的cmd，输入下面指令安装hexo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>在blog所在的文件夹里输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p>然后一个 Hello World的博客就初始化完成了</p>
+<h2 id="使用博客">使用博客</h2>
+<p>下面的命令很常用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean                   <span class="comment">#清除缓存 </span></span><br><span class="line">hexo g                       <span class="comment">#生产文件</span></span><br><span class="line">hexo s						 <span class="comment">#再本地服务器查看</span></span><br><span class="line">hexo d						 <span class="comment">#推送</span></span><br><span class="line">hexo new post <span class="string">&quot;articles&quot;</span>     <span class="comment">#新文章articles</span></span><br></pre></td></tr></table></figure>
+<p>在浏览器里输入</p>
+<p><localhost:4000></p>
+<p>就可以看见博客了</p>
+<h3 id="把博客推送到github上不推荐">把博客推送到github上（不推荐）</h3>
+<p>在 Github 上注册一个账号，然后开启一个仓库</p>
+<p>首先安装一下插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>然后进入 <code>_config.yml</code>
+修改一下仓库地址为你之前创建仓库的地址(在最后一行)</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:Fyind/fyind.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>然后推送的时候用 <code>hexo d</code> 即可</p>
+<h3 id="添加标签">添加标签</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>进入新生成的文件把 <code>type</code> 改成 <code>tags</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: 标签</span><br><span class="line">date: 2019-12-03 20:53:27</span><br><span class="line">type: &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="添加分类">添加分类</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>进入新生产的文件，如下编辑</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2019-07-18 13:30:05</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="配置语言">配置语言</h2>
+<p>在根目录里的 <code>_config.yml</code> 里面修改</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></figure>
+<h2 id="支持图片不推荐">支持图片（不推荐）</h2>
+<p>安装插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+<p>然后进入 <code>/node_modules/hexo-asset-image/index.js</code>
+打开这个文件, 把代码更换成下面的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">&#x27;cheerio&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getPosition</span>(<span class="params">str, m, i</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> str.<span class="title function_">split</span>(m, i).<span class="title function_">join</span>(m).<span class="property">length</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> version = <span class="title class_">String</span>(hexo.<span class="property">version</span>).<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">filter</span>.<span class="title function_">register</span>(<span class="string">&#x27;after_post_render&#x27;</span>, <span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> config = hexo.<span class="property">config</span>;</span><br><span class="line">  <span class="keyword">if</span>(config.<span class="property">post_asset_folder</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> link = data.<span class="property">permalink</span>;</span><br><span class="line">    <span class="keyword">if</span>(version.<span class="property">length</span> &gt; <span class="number">0</span> &amp;&amp; <span class="title class_">Number</span>(version[<span class="number">0</span>]) == <span class="number">3</span>)</span><br><span class="line">       <span class="keyword">var</span> beginPos = <span class="title function_">getPosition</span>(link, <span class="string">&#x27;/&#x27;</span>, <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">       <span class="keyword">var</span> beginPos = <span class="title function_">getPosition</span>(link, <span class="string">&#x27;/&#x27;</span>, <span class="number">3</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;.../about/index.html&quot;.</span></span><br><span class="line">    <span class="keyword">var</span> endPos = link.<span class="title function_">lastIndexOf</span>(<span class="string">&#x27;/&#x27;</span>) + <span class="number">1</span>;</span><br><span class="line">    link = link.<span class="title function_">substring</span>(beginPos, endPos);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> toprocess = [<span class="string">&#x27;excerpt&#x27;</span>, <span class="string">&#x27;more&#x27;</span>, <span class="string">&#x27;content&#x27;</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; toprocess.<span class="property">length</span>; i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> key = toprocess[i];</span><br><span class="line"> </span><br><span class="line">      <span class="keyword">var</span> $ = cheerio.<span class="title function_">load</span>(data[key], &#123;</span><br><span class="line">        <span class="attr">ignoreWhitespace</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">xmlMode</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">lowerCaseTags</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">decodeEntities</span>: <span class="literal">false</span></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      $(<span class="string">&#x27;img&#x27;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> ($(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&#x27;src&#x27;</span>))&#123;</span><br><span class="line">            <span class="comment">// For windows style path, we replace &#x27;\&#x27; to &#x27;/&#x27;.</span></span><br><span class="line">            <span class="keyword">var</span> src = $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&#x27;src&#x27;</span>).<span class="title function_">replace</span>(<span class="string">&#x27;\\&#x27;</span>, <span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">            <span class="keyword">if</span>(!<span class="regexp">/http[s]*.*|\/\/.*/</span>.<span class="title function_">test</span>(src) &amp;&amp;</span><br><span class="line">               !<span class="regexp">/^\s*\//</span>.<span class="title function_">test</span>(src)) &#123;</span><br><span class="line">              <span class="comment">// For &quot;about&quot; page, the first part of &quot;src&quot; can&#x27;t be removed.</span></span><br><span class="line">              <span class="comment">// In addition, to support multi-level local directory.</span></span><br><span class="line">              <span class="keyword">var</span> linkArray = link.<span class="title function_">split</span>(<span class="string">&#x27;/&#x27;</span>).<span class="title function_">filter</span>(<span class="keyword">function</span>(<span class="params">elem</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> elem != <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">              &#125;);</span><br><span class="line">              <span class="keyword">var</span> srcArray = src.<span class="title function_">split</span>(<span class="string">&#x27;/&#x27;</span>).<span class="title function_">filter</span>(<span class="keyword">function</span>(<span class="params">elem</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> elem != <span class="string">&#x27;&#x27;</span> &amp;&amp; elem != <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">              &#125;);</span><br><span class="line">              <span class="keyword">if</span>(srcArray.<span class="property">length</span> &gt; <span class="number">1</span>)</span><br><span class="line">                srcArray.<span class="title function_">shift</span>();</span><br><span class="line">              src = srcArray.<span class="title function_">join</span>(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">              $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&#x27;src&#x27;</span>, config.<span class="property">root</span> + link + src);</span><br><span class="line">              <span class="variable language_">console</span>.<span class="property">info</span>&amp;&amp;<span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;update link as:--&gt;&quot;</span>+config.<span class="property">root</span> + link + src);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="property">info</span>&amp;&amp;<span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;no src attr, skipped...&quot;</span>);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="property">info</span>&amp;&amp;<span class="variable language_">console</span>.<span class="title function_">info</span>($(<span class="variable language_">this</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      data[key] = $.<span class="title function_">html</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在 <code>_config.yml</code> 里设置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>然后更改生成的连接</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:title/</span></span><br></pre></td></tr></table></figure>
+<h2 id="图床支持图片">图床支持图片</h2>
+<p>参考<a
+target="_blank" rel="noopener" href="https://cr4zyp1x3l.netlify.app/cloudflare%E5%9B%BE%E5%BA%8A%E6%9C%8D%E5%8A%A1/">这个博客</a></p>
+<h2 id="支持数学公式不推荐">支持数学公式(不推荐)</h2>
+<p>用 <code>ketex</code> 比较好, 首先要禁用 <code>mathjax</code></p>
+<p>参见 <a
+target="_blank" rel="noopener" href="https://demo.jerryc.me/posts/ceeb73f/#Math-%E6%95%B8%E5%AD%B8">这个文章</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">替換 `hexo-renderer-kramed` 或者 `hexo-renderer-marked` 等hexo的markdown渲染器</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">你可以在你的package.json裏找到hexo的markdwon渲染器，並將其卸載</span></span><br><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">or</span></span><br><span class="line">npm un hexo-renderer-kramed --save</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然後安裝 `hexo-renderer-markdown-it-plus`</span></span><br><span class="line">npm i @upupming/hexo-renderer-markdown-it-plus --save</span><br></pre></td></tr></table></figure>
+<h3 id="使用过mathjax的方法">使用过MathJax的方法</h3>
+<p>用pandoc代替默认渲染器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-pandoc --save</span><br><span class="line">npm uninstall hexo-math --save</span><br><span class="line">npm install hexo-renderer-mathjax --save</span><br></pre></td></tr></table></figure>
+<p>就ok了</p>
+<p>参加 <a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/405554589">这个文章</a></p>
+<h2 id="支持数学公式-pandoc">支持数学公式: pandoc</h2>
+<p>用pandoc代替默认渲染</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-pandoc --save</span><br><span class="line">npm install hexo-filter-mathjax --save</span><br></pre></td></tr></table></figure>
+<p>在 <code>_config.yml</code> 加入</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pandoc:</span></span><br><span class="line">  <span class="attr">args:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">--mathjax</span></span><br></pre></td></tr></table></figure>
+<p>在butterfly的设置里修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">math:</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">Choose: mathjax, katex</span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">Leave it empty <span class="keyword">if</span> you don<span class="string">&#x27;t need math</span></span></span><br><span class="line">  use: mathjax</span><br><span class="line">  per_page: true</span><br><span class="line">  hide_scrollbar: false</span><br><span class="line"></span><br><span class="line">  mathjax:</span><br><span class="line">    # Enable the contextual menu</span><br><span class="line">    enableMenu: true</span><br><span class="line">    # Choose: all / ams / none, This controls whether equations are numbered and how</span><br><span class="line">    tags: all</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果渲染有 <code>\N</code> <code>\R</code> 的问题，可以修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">replace_symbols_in_formula</span>(<span class="params">file_path</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        content = f.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">replacer</span>(<span class="params"><span class="keyword">match</span></span>):</span><br><span class="line">        formula = <span class="keyword">match</span>.group(<span class="number">0</span>)</span><br><span class="line">        formula = formula.replace(<span class="string">r&#x27;\R&#x27;</span>, <span class="string">r&#x27;\mathbb&#123;R&#125;&#x27;</span>)</span><br><span class="line">        formula = formula.replace(<span class="string">r&#x27;\N&#x27;</span>, <span class="string">r&#x27;\mathbb&#123;N&#125;&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> formula</span><br><span class="line"></span><br><span class="line">    pattern = re.<span class="built_in">compile</span>(<span class="string">r&#x27;(\$\$.*?\$\$|\$.*?\$)&#x27;</span>, re.DOTALL)</span><br><span class="line">    new_content = pattern.sub(replacer, content)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> new_content != content:</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(new_content)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Updated: <span class="subst">&#123;file_path&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">scan_and_replace</span>(<span class="params">dir_path</span>):</span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(dir_path):</span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">            <span class="keyword">if</span> file.endswith(<span class="string">&#x27;.md&#x27;</span>):</span><br><span class="line">                file_path = os.path.join(root, file)</span><br><span class="line">                replace_symbols_in_formula(file_path)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    hexo_source_dir = <span class="string">&#x27;./source/_posts&#x27;</span>  <span class="comment"># 修改成你的文章目录</span></span><br><span class="line">    scan_and_replace(hexo_source_dir)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="折叠块">折叠块</h2>
+<p>使用折叠块需要用 pandoc 渲染器渲染</p>
+<p>效果如下：</p>
+<details>
+<summary>
+点此处展开
+</summary>
+<ul>
+<li>重点1 <span class="math display">\[
+\sum_{i=3}^4 a_i = b
+\]</span></li>
+<li>重点2 <span class="math inline">\(a + b = c^3\)</span></li>
+<li>下面是一段代码 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+<li>重点4 &gt; 定义4: &gt; &gt; abcd <span
+class="math inline">\(a+b\)</span> a definition</li>
+</ul>
+</details>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">details</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">summary</span>&gt;</span> 点此处展开 <span class="tag">&lt;/<span class="name">summary</span>&gt;</span></span><br><span class="line"></span><br><span class="line">- 重点1</span><br><span class="line">$$</span><br><span class="line"> \sum_&#123;i=3&#125;^4 a_i = b </span><br><span class="line">$$</span><br><span class="line">- 重点2 $a + b = c^3$</span><br><span class="line">- 下面是一段代码</span><br><span class="line">  </span><br><span class="line">- 重点4</span><br><span class="line">  &gt; 定义4:</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; abcd $a+b$ a definition</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">details</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="github自动推送">Github自动推送</h2>
+<p>参考<a target="_blank" rel="noopener" href="https://isedu.top/index.php/archives/144/">博客</a></p>
+<p>先创建一个存放博客的repo，把hexo博客源文件放里面</p>
+<p>然后</p>
+<h3 id="创建github-action">创建Github Action</h3>
+<h4 id="获取-github-token">获取 Github token</h4>
+<p><strong>打开<a
+target="_blank" rel="noopener" href="https://isedu.top/index.php/goto?url=aHR0cHM6Ly9naXRodWIuY29tL3NldHRpbmdzL3Rva2Vucw==&amp;cid=144">https://github.com/settings/tokens</a></strong>
+<strong>点击 Generate new token 新建个 token</strong></p>
+<figure>
+<img src="https://t.663618.xyz/i/2023/08/11/64d621749f0ce.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure>
+<img src="https://t.663618.xyz/i/2023/08/11/64d62197a24cd.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>复制token</p>
+<figure>
+<img src="https://t.663618.xyz/i/2023/08/11/64d621a94ed08.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h4 id="添加secret">添加Secret</h4>
+<figure>
+<img src="https://t.663618.xyz/i/2023/08/11/64d621c8d8f29.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>创建
+<code>GITHUBTOKEN</code>,<code>GITHUBUSERNAME</code>,<code>GITHUBEMAIL</code></p>
+<h4 id="添加workflow">添加workflow</h4>
+<figure>
+<img src="https://t.663618.xyz/i/2023/08/11/64d62210d2f08.png"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">自动部署</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span>  <span class="comment"># 如果你用的是 master 分支，请改为 master</span></span><br><span class="line">  <span class="attr">release:</span></span><br><span class="line">    <span class="attr">types:</span> [<span class="string">published</span>]</span><br><span class="line">  <span class="attr">workflow_dispatch:</span>  <span class="comment"># ✅ 允许手动触发</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">检查分支</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">actions/checkout@v3</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">ref:</span> <span class="string">main</span>  <span class="comment"># 和上面保持一致</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Node.js</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">actions/setup-node@v3</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">node-version:</span> <span class="string">&#x27;16&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Pandoc</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">update</span> <span class="string">&amp;&amp;</span> <span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="string">-y</span> <span class="string">pandoc</span></span><br><span class="line">    </span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">clone</span> <span class="string">butterfly</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">git</span> <span class="string">clone</span> <span class="string">-b</span> <span class="string">master</span> <span class="string">https://github.com/jerryc127/hexo-theme-butterfly.git</span> <span class="string">themes/butterfly</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">copy</span> <span class="string">image</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">cp</span> <span class="string">img/*</span> <span class="string">themes/butterfly/source/img/</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">copy</span> <span class="string">costomized</span> <span class="string">layout</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">cp</span> <span class="string">index.styl</span> <span class="string">themes/butterfly/source/css/_global/index.styl</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Hexo</span> <span class="string">CLI</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">hexo-cli</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">缓存依赖</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">actions/cache@v4</span>  <span class="comment"># ✅ 使用最新版本</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">node_modules</span></span><br><span class="line">        <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-npm-$&#123;&#123;</span> <span class="string">hashFiles(&#x27;**/package-lock.json&#x27;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          $&#123;&#123; runner.os &#125;&#125;-npm-</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装依赖</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">生成静态文件</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        hexo clean</span></span><br><span class="line"><span class="string">        hexo generate</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">部署到</span> <span class="string">GitHub</span> <span class="string">Pages</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        cd ./public</span></span><br><span class="line"><span class="string">        git init</span></span><br><span class="line"><span class="string">        git config user.name &quot;$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;&quot;</span></span><br><span class="line"><span class="string">        git config user.email &quot;$&#123;&#123; secrets.GITHUBEMAIL &#125;&#125;&quot;</span></span><br><span class="line"><span class="string">        git add .</span></span><br><span class="line"><span class="string">        git commit -m &quot;Deploy: $&#123;&#123; github.event.head_commit.message &#125;&#125; ($(date -u +&#x27;%Y-%m-%d %H:%M:%S&#x27;))&quot;</span></span><br><span class="line"><span class="string">        git push --force --quiet &quot;https://$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;:$&#123;&#123; secrets.GITHUBTOKEN &#125;&#125;@github.com/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;.github.io.git&quot; master:master</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<h2 id="butterfly主题配置">Butterfly主题配置</h2>
+<p>官方文档：https://butterfly.js.org/</p>
+<p>需要 <code>hexo 5.0.0</code> 以上，更新方法
+https://www.jianshu.com/p/98ac1e253e6e</p>
+<p>进入 <code>blog</code> 根目录，首先把主题克隆进来</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b master https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly</span><br></pre></td></tr></table></figure>
+<p>然后安装一下插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-pug hexo-renderer-stylus --save</span><br></pre></td></tr></table></figure>
+<p>然后进入 <code>_config.yml</code>更改一下主题</p>
+<p>然后把主题文件夹的 <code>themes/butterfly/_config.yml</code>
+复制到博客根目录，并且命名为 <code>_config.butterfly.yml</code></p>
+<h3 id="透明">透明</h3>
+<p>打开 <code>themes/butterfly/source/css/_global/index.styl</code>
+修改下面的参数(第16行)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">--card-bg</span>: <span class="built_in">rgba</span>(<span class="number">240</span>,<span class="number">248</span>,<span class="number">255</span>,<span class="number">0.8</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="置顶">置顶</h3>
+<p>在对应文章开始的地方加入</p>
+<p><code>sticky: 1</code> 这个值设置越大，优先级越高</p>
+<h3 id="其他设置">其他设置</h3>
+<p>其余的设置可以去参考Butterfly官方文档，那里写的比较详细</p>
+<h2 id="sokax主题配置">SokaX主题配置</h2>
+<p>安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">hexo init</span></span><br><span class="line">npm install shokax-cli --location=global</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">cd</span> your_blog</span></span><br><span class="line">SXC install shokaX</span><br></pre></td></tr></table></figure>
+<p>https://docs.kaitaku.xyz/</p>
+<h3 id="图片">图片：</h3>
+<p>此外还要再</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node_modules\hexo-theme-shokax\scripts\filters\post.js</span><br></pre></td></tr></table></figure>
+<p>里面修改代码</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2019/07/17/My-First-Blog/">http://fyind.de/2019/07/17/My-First-Blog/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2/">配置博客</a><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2019/07/18/%E4%BB%8Ec%E5%88%B0c/" title="c++基本概念"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">c++基本概念</div></div><div class="info-2"><div class="info-item-1">新建C++的工程   1  新建项目，控制台应用程序 勾选空项目， 勾去安全周期检查   2  源文件 –&gt; 新建项   3  添加main.cpp   4  选择性编译 123456789#if 0#include &lt;stdio.h&gt;int main() &#123;	printf(&quot;Hello World&quot;);		return 0;&#125;#endif 命名空间 (namespace) 在同样的作用域下不能定义多个同名变量或者函数 所以可以使用命名空间来解决这个问题 命名空间可以嵌套 12345678910111213141516171819202122#include &lt;iostream&gt;using namespace std;namespace yf &#123;	int a = 12;&#125;namespace fy &#123;	int a = 1;	namespace ffy&#123;		int a = 11;	&#125;&#125;int main() &#123;	cout &lt;&lt; fy::...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-node.js"><span class="toc-number">1.</span> <span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-git"><span class="toc-number">2.</span> <span class="toc-text">安装 git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85hexo"><span class="toc-number">3.</span> <span class="toc-text">安装hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8D%9A%E5%AE%A2"><span class="toc-number">4.</span> <span class="toc-text">使用博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8A%E5%8D%9A%E5%AE%A2%E6%8E%A8%E9%80%81%E5%88%B0github%E4%B8%8A%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="toc-number">4.1.</span> <span class="toc-text">把博客推送到github上（不推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE"><span class="toc-number">4.2.</span> <span class="toc-text">添加标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB"><span class="toc-number">4.3.</span> <span class="toc-text">添加分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%AD%E8%A8%80"><span class="toc-number">5.</span> <span class="toc-text">配置语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E5%9B%BE%E7%89%87%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="toc-number">6.</span> <span class="toc-text">支持图片（不推荐）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%BA%8A%E6%94%AF%E6%8C%81%E5%9B%BE%E7%89%87"><span class="toc-number">7.</span> <span class="toc-text">图床支持图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="toc-number">8.</span> <span class="toc-text">支持数学公式(不推荐)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%87mathjax%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">8.1.</span> <span class="toc-text">使用过MathJax的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F-pandoc"><span class="toc-number">9.</span> <span class="toc-text">支持数学公式: pandoc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%98%E5%8F%A0%E5%9D%97"><span class="toc-number">10.</span> <span class="toc-text">折叠块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#github%E8%87%AA%E5%8A%A8%E6%8E%A8%E9%80%81"><span class="toc-number">11.</span> <span class="toc-text">Github自动推送</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAgithub-action"><span class="toc-number">11.1.</span> <span class="toc-text">创建Github Action</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96-github-token"><span class="toc-number">11.1.1.</span> <span class="toc-text">获取 Github token</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0secret"><span class="toc-number">11.1.2.</span> <span class="toc-text">添加Secret</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0workflow"><span class="toc-number">11.1.3.</span> <span class="toc-text">添加workflow</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-number">12.</span> <span class="toc-text">Butterfly主题配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E"><span class="toc-number">12.1.</span> <span class="toc-text">透明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%AE%E9%A1%B6"><span class="toc-number">12.2.</span> <span class="toc-text">置顶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE"><span class="toc-number">12.3.</span> <span class="toc-text">其他设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sokax%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-number">13.</span> <span class="toc-text">SokaX主题配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">13.1.</span> <span class="toc-text">图片：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

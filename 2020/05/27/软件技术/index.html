@@ -1,0 +1,927 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>软件技术 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="软件技术 编译环境设置 下载Maven 到这个链接 里下载maven的包   image-20200507114645077  然后解压到某个目录下， 配置环境变量 把maven目录下的bin目录添加到path里面   image-20200507114852666  然后可以用 mvn -v 检查配置情况   image-20200507115027756  Lecture 2 Software">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件技术">
+<meta property="og:url" content="http://fyind.de/2020/05/27/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="软件技术 编译环境设置 下载Maven 到这个链接 里下载maven的包   image-20200507114645077  然后解压到某个目录下， 配置环境变量 把maven目录下的bin目录添加到path里面   image-20200507114852666  然后可以用 mvn -v 检查配置情况   image-20200507115027756  Lecture 2 Software">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2020-05-27T09:16:01.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.884Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="软件技术">
+<meta property="article:tag" content="Maven">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "软件技术",
+  "url": "http://fyind.de/2020/05/27/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2020-05-27T09:16:01.000Z",
+  "dateModified": "2025-07-18T10:49:53.884Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2020/05/27/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '软件技术',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">软件技术</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">软件技术</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-05-27T09:16:01.000Z" title="Created 2020-05-27 09:16:01">2020-05-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.884Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="软件技术">软件技术</h1>
+<h2 id="编译环境设置">编译环境设置</h2>
+<h4 id="下载maven">下载Maven</h4>
+<p>到这个<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">链接</a>
+里下载maven的包</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200507114645077.png"
+alt="image-20200507114645077" />
+<figcaption aria-hidden="true">image-20200507114645077</figcaption>
+</figure>
+<p>然后解压到某个目录下，</p>
+<h4 id="配置环境变量">配置环境变量</h4>
+<p>把maven目录下的bin目录添加到path里面</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200507114852666.png"
+alt="image-20200507114852666" />
+<figcaption aria-hidden="true">image-20200507114852666</figcaption>
+</figure>
+<p>然后可以用 mvn -v 检查配置情况</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200507115027756.png"
+alt="image-20200507115027756" />
+<figcaption aria-hidden="true">image-20200507115027756</figcaption>
+</figure>
+<h2 id="lecture-2">Lecture 2</h2>
+<h3 id="software-lifecycle">Software lifecycle</h3>
+<h3 id="分析问题">分析问题</h3>
+<p>要从问题中提取功能，然后记录在backlog上：</p>
+<p>比如说：</p>
+<p>Bumpers is a game where <strong>cars drive on a game board</strong>
+and <strong>can crash each other.</strong>   In each collision, there
+<strong>is a winning car.</strong>   <strong>The car that wins all
+collisions is the winner of the game.</strong>   <strong>The player can
+start and stop the game.</strong> <strong>When the game is started,
+music is played.</strong> <strong>A car can be either fast or
+slow.</strong> There is one car controlled by the player.   <strong>The
+player can steer the direction of the car with the mouse</strong> and
+<strong>change its speed.</strong> The game should be <strong>platform
+independent.</strong>   It should <strong>visualize different parameters
+of the car</strong>, e.g. the speed, consumption and location of the
+car. When cars crash, t<strong>here has to be a sound effect.</strong>  
+The game should <strong>support different collisions.</strong>  
+<strong>The determination of the collision winner should be changeable
+during gameplay.</strong></p>
+<p>所以我们可以依次列出一个清单</p>
+<ol type="1">
+<li>Cars drive on the game board</li>
+<li>Cars collide with each other and each collision has a winning
+car</li>
+<li>The winner of the game is the car that wins all the collisions</li>
+<li>The player starts and stops the game</li>
+<li>Music plays when the game begins and stops to play when the game
+ends</li>
+<li>The game supports different car types</li>
+<li>The player steers the car with the mouse</li>
+<li>The player can change their car’s speed</li>
+<li>The game should be compatible with multiple platforms</li>
+<li>The speed, consumption, and location of the player’s car is
+visualized in an instrument panel</li>
+<li>Collisions follow the “right before left” rule, and thus right-most
+cars win the collisions</li>
+<li>A crash sound and/or animation plays when two cars collide</li>
+<li>The game supports different collisions, the determination of the
+winner is changeable during game play.</li>
+</ol>
+<h3 id="uml-图">UML 图</h3>
+<p>Scenario格式</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200726200629385.png"
+alt="image-20200726200629385" />
+<figcaption aria-hidden="true">image-20200726200629385</figcaption>
+</figure>
+<h4 id="use-case-diagram">Use Case Diagram</h4>
+<p>他是可以从用户的角度展示一个系统功能的图，比如</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509133954223.png"
+alt="image-20200509133954223" />
+<figcaption aria-hidden="true">image-20200509133954223</figcaption>
+</figure>
+<p>Actor 是使用这个系统的人</p>
+<ul>
+<li>用户</li>
+<li>外部系统</li>
+<li>物理环境(天气)</li>
+</ul>
+<h5 id="association">Association</h5>
+<ul>
+<li><p>«includes»</p>
+<p>重复使用一个功能</p></li>
+<li><p>«extends»</p>
+<p>不是总是发生的情况</p></li>
+</ul>
+<p>比如：</p>
+<p>Collect money可能会被其他东西使用。Out of
+order是一个例外情况，不是总是发生</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509134454165.png"
+alt="image-20200509134454165" />
+<figcaption aria-hidden="true">image-20200509134454165</figcaption>
+</figure>
+<h5 id="bumper的use-case-图">Bumper的Use Case 图</h5>
+<p>(1)Cars <strong>drive</strong> on the game board</p>
+<p>(4)The player <strong>starts</strong> and <strong>stops</strong> the
+game</p>
+<ol start="5" type="1">
+<li><strong>Music plays</strong> when the game begins and
+<strong>stops</strong> to play when the game ends</li>
+</ol>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509134901978.png"
+alt="image-20200509134901978" />
+<figcaption aria-hidden="true">image-20200509134901978</figcaption>
+</figure>
+<h4 id="class-diagram">Class Diagram</h4>
+<p>比如说这样一个描述类的图，有方法，属性还有关系</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509141903626.png"
+alt="image-20200509141903626" />
+<figcaption aria-hidden="true">image-20200509141903626</figcaption>
+</figure>
+<h5 id="类的属性">类的属性</h5>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509144207152.png"
+alt="image-20200509144207152" />
+<figcaption aria-hidden="true">image-20200509144207152</figcaption>
+</figure>
+<ul>
+<li>类名斜线，表示是个abstract类</li>
+<li>Attribute 中
+<ul>
+<li>- 表示private</li>
+<li>+ 表示public</li>
+<li>~ 表示在包中可见(不加修饰符)</li>
+</ul></li>
+</ul>
+<h5 id="association-1">Association</h5>
+<p>Inheritance: 继承 Realization: 接口实现 Dependency: 依赖 Aggregation
+拥有关系 Compositon 构成关系</p>
+<ul>
+<li>Compositon
+和Aggregation类似，但是类不能独立存在，必须依附于其中一个类</li>
+</ul>
+<p><img src="https://fyindex.work/PicGo/image-20200509143405160.png" alt="image-20200509143405160" style="zoom: 50%;" /></p>
+<ul>
+<li><p>Dependency 中，一个类中的方法会用到另一个类，比如</p>
+<figure>
+<img src="https://fyindex.work/PicGo/15-dependency-example.png"
+alt="Dependency" />
+<figcaption aria-hidden="true">Dependency</figcaption>
+</figure></li>
+</ul>
+<h5 id="cardinality">Cardinality</h5>
+<p>这个是在关系上的数字。比如1个或者多个拥有关系</p>
+<p><img src="https://fyindex.work/PicGo/11-associations-with-different-multiplicies.png" alt="Cardinality"  /></p>
+<p>为了画出这样一个图首先我们要<strong>找出主要的对象</strong></p>
+<h5 id="abbots-technique">Abbot’s Technique</h5>
+<p>我们可以找出关键词汇，来帮我们建图</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509142131334.png"
+alt="image-20200509142131334" />
+<figcaption aria-hidden="true">image-20200509142131334</figcaption>
+</figure>
+<h5 id="bumper的类图">Bumper的类图</h5>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509142659653.png"
+alt="image-20200509142659653" />
+<figcaption aria-hidden="true">image-20200509142659653</figcaption>
+</figure>
+<p>我们提取出其中的关键文字：</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200509142725717.png"
+alt="image-20200509142725717" />
+<figcaption aria-hidden="true">image-20200509142725717</figcaption>
+</figure>
+<h3
+id="analysis-design-implementation-and-delivery-of-bumpers">Analysis,
+design, implementation and delivery of Bumpers</h3>
+<h2 id="lecture-3-需求分析">Lecture 3 需求分析</h2>
+<p>需求的种类</p>
+<ul>
+<li><p><strong>Functionality requirements</strong></p>
+<p>actors,</p></li>
+<li><p><strong>Nonfunctional requirements</strong></p>
+<ul>
+<li>Quality requirements:
+<ul>
+<li>Usability</li>
+<li>Realiability</li>
+<li>Performance</li>
+<li>Supportability</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="functionality">Functionality</h3>
+<p>它指的是系统与外部的交互</p>
+<ul>
+<li>Relationship of outputs to inputs</li>
+<li>Response to abnormal situations</li>
+<li>Exact sequence of operations</li>
+<li>Validity checks on the inputs</li>
+</ul>
+<p>它需要写出一个动作的形式，比如</p>
+<ul>
+<li>Withdraw money</li>
+<li>Deposit mony</li>
+<li>Transfer money</li>
+<li>Loas cash card</li>
+</ul>
+<h2 id="leture-4-系统设计-i">Leture 4 系统设计 I</h2>
+<h3 id="系统设计的8大问题">系统设计的8大问题</h3>
+<ol type="1">
+<li><p>设计目标 Design goals</p></li>
+<li><p>子系统分解 Subsystem decomposition</p></li>
+<li><p>并发 Concurrency</p></li>
+<li><p>硬件软件映射 Hardware/software mapping</p></li>
+<li><p>管理现有数据 Persistent data management</p></li>
+<li><p>全局资源处理 Global resource handling</p></li>
+<li><p>软件控制 Software control</p></li>
+<li><p>边界条件 Bondary conditions</p></li>
+</ol>
+<h4 id="它和需求分析的关系">它和需求分析的关系</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200527090243368.png"
+alt="image-20200527090243368" />
+<figcaption aria-hidden="true">image-20200527090243368</figcaption>
+</figure>
+<h3 id="设计目标-design-goal">设计目标 Design Goal</h3>
+<p>任何一个Nonfunctional requirment是一个设计目标。</p>
+<h4 id="取舍-trade-offs">取舍 trade-offs</h4>
+<p>设计目标经常会互相冲突</p>
+<ul>
+<li><p>Functionality vs. usability</p>
+<p>有100个功能的系统未必好用</p></li>
+<li><p>Cost vs. robustness</p>
+<p>低造价的系统往往不会检查错误</p></li>
+<li><p>Efﬁciency vs. portability</p></li>
+<li><p>Rapid development vs. functionality</p></li>
+<li><p>Cost vs. reusability</p></li>
+<li><p>Backward compatibility vs. readability</p>
+<p>使得系统兼容会是代码可读性下降</p></li>
+</ul>
+<h3 id="子系统分解">子系统分解</h3>
+<p>子系统：类，关系，事件的集合</p>
+<p>服务：子系统提供的外部可见的操作</p>
+<h4
+id="子系统的内聚与耦合-coupling-and-cohesion-of-subsystems">子系统的内聚与耦合
+Coupling and cohesion of subsystems</h4>
+<p>目标是在容许变换下减少系统复杂性</p>
+<p>内聚Cohesion：在一个系统间类之间的依赖</p>
+<p>耦合Coupling: 子系统间的依赖</p>
+<p>系统分化模块要做到<strong>高内聚、低耦合</strong>。</p>
+<h5 id="实现高内聚">实现高内聚</h5>
+<p>交互都是这个系统间的，不跨越系统</p>
+<ul>
+<li>操作都是在相同的属性上</li>
+<li>操作实现了相同的功能或服务</li>
+</ul>
+<h5 id="实现低耦合">实现低耦合</h5>
+<p>调用一个类不需要知道这个类内部的东西</p>
+<ul>
+<li>小的接口</li>
+<li>信息隐藏</li>
+<li>无全局数据</li>
+<li>交互都是在子系统内部</li>
+</ul>
+<h3 id="架构风格">架构风格</h3>
+<p>它是子系统分解的模式</p>
+<h3 id="uml-组件图-component-diagram">UML 组件图 component diagram</h3>
+<p>它可以用组件和依赖关系的形式给出最高层次的系统设计的模型</p>
+<ul>
+<li>提供的接口和使用某个接口</li>
+<li>依赖 dependency</li>
+<li>端口 port</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200527094624898.png"
+alt="image-20200527094624898" />
+<figcaption aria-hidden="true">image-20200527094624898</figcaption>
+</figure>
+<h2 id="lecture-5-系统设计ii">Lecture 5 系统设计II</h2>
+<h3 id="架构风格-1">架构风格</h3>
+<h4 id="mvc-架构风格">MVC 架构风格</h4>
+<p>它可以用于解决高耦合(high coupling)的系统问题。</p>
+<ul>
+<li>Model: 处理和存储应用的主要数据 (entity objects)</li>
+<li>View: 把信息展示给用户 (boundary objects)</li>
+<li>Controller: 与用户交互且更新model</li>
+</ul>
+<p>View和Controller共同构成用户接口</p>
+<h4 id="repository架构风格">Repository架构风格</h4>
+<p>几个独立的程序在一起工作并且组成一个repository.
+子系统只从repository里访问/修改数据</p>
+<p>比如编译器的架构</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528103756370.png"
+alt="image-20200528103756370" />
+<figcaption aria-hidden="true">image-20200528103756370</figcaption>
+</figure>
+<h4 id="用图像表示架构风格">用图像表示架构风格</h4>
+<ul>
+<li>组件Component 代表subsystem</li>
+<li>连接 Connectors 代表 communication</li>
+</ul>
+<h5 id="层次架构-layered-architectural-style">层次架构 Layered
+architectural style</h5>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528104226593.png"
+alt="image-20200528104226593" />
+<figcaption aria-hidden="true">image-20200528104226593</figcaption>
+</figure>
+<h5 id="客户端服务架构-client-server-architectural-style">客户端服务架构
+Client server architectural style</h5>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528104214045.png"
+alt="image-20200528104214045" />
+<figcaption aria-hidden="true">image-20200528104214045</figcaption>
+</figure>
+<h3 id="并发">并发</h3>
+<p>它被用来解决非功能性需求中的：性能，响应时间，延时，可用性。</p>
+<p>使用多线程的时候要注意同步</p>
+<h3 id="硬件软件映射">硬件软件映射</h3>
+<p>怎样把类模型映射到硬件/软件上。如何实现子系统</p>
+<ul>
+<li>Control objects -&gt; processor</li>
+<li>Entity objects -&gt; memory</li>
+<li>Boundary objects -&gt; input/output device</li>
+</ul>
+<h4 id="部署图-deployment-diagram">部署图 deployment diagram</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528114606418.png"
+alt="image-20200528114606418" />
+<figcaption aria-hidden="true">image-20200528114606418</figcaption>
+</figure>
+<h3 id="稳固的数据管理">稳固的数据管理</h3>
+<ul>
+<li>File system</li>
+<li>Database system</li>
+</ul>
+<h3 id="全局资源处理">全局资源处理</h3>
+<p>在多用户系统中，不同用户对资源的权限不同。</p>
+<p>我们可以使用 access matrix来做</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528115312760.png"
+alt="image-20200528115312760" />
+<figcaption aria-hidden="true">image-20200528115312760</figcaption>
+</figure>
+<h3 id="软件控制">软件控制</h3>
+<p>我们可以选择中心化的和去中心化的软件控制. 在communication
+diagram中，我们可以看到软件的中心化程序</p>
+<ul>
+<li>Fork diagram</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528115933561.png"
+alt="image-20200528115933561" />
+<figcaption aria-hidden="true">image-20200528115933561</figcaption>
+</figure>
+<ul>
+<li>Stair diagram</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528115950678.png"
+alt="image-20200528115950678" />
+<figcaption aria-hidden="true">image-20200528115950678</figcaption>
+</figure>
+<h3 id="边界条件">边界条件</h3>
+<ul>
+<li>初始化 Initialization: 从开始到准备状态</li>
+<li>停止 Termination: 清理资源</li>
+<li>错误 Failure: 错误，bugs</li>
+</ul>
+<p>我们可以用 use case 来建模</p>
+<ul>
+<li>Actor: often the system administrator</li>
+<li>Interesting use cases:
+<ul>
+<li>Start up of a subsystem</li>
+<li>Start up of the full system</li>
+<li>Termination of a subsystem</li>
+<li>Error in a subsystem or component, failure of a subsystem or
+component</li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200528120520736.png"
+alt="image-20200528120520736" />
+<figcaption aria-hidden="true">image-20200528120520736</figcaption>
+</figure>
+<h2 id="object-design">Object Design</h2>
+<h3 id="代码重用的类型">代码重用的类型</h3>
+<ul>
+<li><p>黑盒重用 (aggregation and composition)</p></li>
+<li><p>白盒重用 (inheritance)</p></li>
+</ul>
+<h3 id="设计模式">设计模式</h3>
+<h4 id="bridge">Bridge</h4>
+<h4 id="composite">Composite</h4>
+<h4 id="proxy">Proxy</h4>
+<h4 id="adapter">Adapter</h4>
+<h4 id="facade">Facade</h4>
+<h2 id="testing">Testing</h2>
+<h3 id="unit-testing">Unit testing</h3>
+<h3 id="integration-testing">Integration testing</h3>
+<p>Test all interfaces between subsystems and the interaction of
+subsystems</p>
+<h5 id="stub">Stub</h5>
+<p>用来替代某个被调用的组件</p>
+<h5 id="driver">Driver</h5>
+<p>用来调用其他组件</p>
+<h4 id="bottm-up">Bottm up</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200726114706362.png"
+alt="image-20200726114706362" />
+<figcaption aria-hidden="true">image-20200726114706362</figcaption>
+</figure>
+<h4 id="top-down">Top down</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200726114754782.png"
+alt="image-20200726114754782" />
+<figcaption aria-hidden="true">image-20200726114754782</figcaption>
+</figure>
+<h3 id="system-testing">System testing</h3>
+<h3 id="dynamic-analysis">Dynamic analysis</h3>
+<h3 id="model-based-testing">Model based testing</h3>
+<h3 id="object-oriented-testing">Object oriented testing</h3>
+<h4 id="correct">Correct</h4>
+<ul>
+<li>In object oriented testing, the test model can contain dummy
+objects.
+<ul>
+<li>SUT means system under test</li>
+<li>In object oriented testing doubles replace the SUT’s collaborators
+during testing</li>
+<li>Typically, a factory or the test case initailizes mock objects. Mock
+objects are not part of the system model! There must not be a dependency
+from the system model to mock objects.</li>
+</ul></li>
+<li>In integration testing,
+<ul>
+<li><strong>bottom up integration testing is useful for testing real
+time systems.</strong> Because we have heavily rely on performance in
+real time systems. Bottom up integration testing makes sure to test the
+underlying funcitonality first. No doubles are needed to verify the
+expected behaviour.</li>
+<li>top down integration testing can result in a lot of doubles if the
+lowest level of the system contains many methods. No drivers are
+needed.</li>
+<li>vertical integration testing allows to always have an executable
+version of the system. We can test how the layers work togethor for
+specific functionality and have a working the system.</li>
+<li>They only cover one layer in the beginning. only at the end they
+cover all layers.(not always cover all layers).</li>
+</ul></li>
+<li>Unit Test
+<ul>
+<li>Unit tests can be executed with JUnit</li>
+<li>Unit tests are typically used in development environments</li>
+<li>Unit tests can test whether a method’s observed output is the same
+as the expected output</li>
+<li>An assertion verifies that a condition is met when the code is
+executed</li>
+</ul></li>
+</ul>
+<h4 id="wrong">Wrong</h4>
+<ul>
+<li></li>
+</ul>
+<h2 id="lecture-11">Lecture 11</h2>
+<h3 id="git">Git</h3>
+<h4 id="correct-1">Correct</h4>
+<ul>
+<li>Git
+<ul>
+<li>To promote local changes, a developer needs to <code>add</code>,
+<code>commit</code> and <code>push</code>.</li>
+<li>Pull is a compound command to fetch and merge changes from the
+remote into the local repository</li>
+<li>Push will upload the commits from the local repository to the
+remote</li>
+<li>Merge conflicts should be resolved in the local repository</li>
+<li>To fetch changes from the remote repository, you need to be
+connected to the remote repository(online)</li>
+<li>The repository can be restored from a programmer’s computer if the
+server crashes</li>
+<li>Distributed version control systems have a higher learning curve
+because their users need to understand multiple commands and
+actions,which is a disadvantage.</li>
+<li>Branches are lightweight</li>
+<li>Programmers could exchange commits directly without the need to
+store the version on the remote repository</li>
+<li>A change policy can, e.g., guarantee that each promotion
+conforms(遵从) to commonly accepted criteria(标准)</li>
+<li>In certain cases, a change request from the customer can also be
+rejected</li>
+</ul></li>
+<li>Software Quality
+<ul>
+<li>Different people have a different understanding of software
+quality</li>
+<li>Quality aspects can change over time</li>
+<li>Quality is difficult to measure</li>
+<li>Quality can be very subjective</li>
+</ul></li>
+<li>Advantages of code reviews
+<ul>
+<li>There are more developers who understand the code</li>
+<li>Developers communicate more with each other</li>
+</ul></li>
+<li>Disadvantages of code reviews
+<ul>
+<li>Reviewing code cost times. Code reviews slow down the initial
+development</li>
+</ul></li>
+<li>Static code analysis can find certain issues,but there are many
+issue types that can be found with a manual code review(not
+automated)</li>
+<li>activitys in Quality management
+<ul>
+<li>Quality assurance</li>
+<li>Quality control</li>
+</ul></li>
+<li>prevent code duplication
+<ul>
+<li>Refactoring</li>
+<li>Delegation</li>
+<li>Inheritance</li>
+</ul></li>
+<li>Scrum
+<ul>
+<li>in scrum changes can occur all the time and can be integrated into
+the Product Backlog, as Scrum relies on an empirical process model.</li>
+<li>The Scrum Master is not a traditional project leader. The developers
+have much more control.</li>
+<li>Scrum Master should make sure that the team follows the Scrum
+process</li>
+<li>Trying out the software and providing feedback are responsibilities
+of the Product Owner. However, the product owner is not necessarily also
+an end user of the software.</li>
+</ul></li>
+<li>The Waterfall Model relies on a defined process model and therefore
+does not take changes into account.</li>
+</ul>
+<h4 id="wrong-1">Wrong</h4>
+<ul>
+<li>Merge conflicts are resolved on the remote repository.</li>
+<li><code>pull</code> is a compound command, composed of
+<code>fetch</code> and <code>clone</code>.</li>
+<li>Fetching changes can be done offline.</li>
+<li>Code reviews can be completely automated</li>
+</ul>
+<h3 id="software-architecture">Software Architecture</h3>
+<h4 id="correct-2">Correct</h4>
+<ul>
+<li>Process Control
+<ul>
+<li>A software architecture is an instance of an architectural style.
+The architecture style then serves as a pattern for a subsystem
+decomposition</li>
+<li>As empirical processes see changes as opportunities, they deal
+better with them then defined processes, which see them as errors.</li>
+</ul></li>
+</ul>
+<h4 id="wrong-2">Wrong</h4>
+<h4 id="process-control">Process Control</h4>
+<h4 id="correct-3">Correct</h4>
+<ul>
+<li></li>
+</ul>
+<h4 id="wrong-3">Wrong</h4>
+<h2 id="项目-space-invader">项目: Space Invader</h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<ul>
+<li><p>They have a high fun factor, no learning curve and short startup
+times.</p></li>
+<li><p>As the duration of these games is short</p></li>
+<li><p>TUM wants to have a simple and easy single player game</p></li>
+<li><p>offer it for students to play during boring lectures</p></li>
+<li><p><del>The data about when and how successfully the game is played
+shall be used to assess the quality of TUM’s educational
+program.</del></p></li>
+<li><p>The game shall be derived from the classic game Space
+Invaders</p></li>
+<li><p><strong>adjust the gameplay or the graphics</strong> for the
+purpose of being played during lectures.</p></li>
+<li><p>The game should <strong>collect data about when the game is being
+played and how well the player is doing</strong></p></li>
+<li><p>it is possible to <strong>derive some assertions about how
+captivating the lecture was</strong>, that the player was supposed to
+pay attention to.</p></li>
+</ul>
+<h3 id="需求分析">需求分析</h3>
+<h4 id="functional-requirements">Functional Requirements</h4>
+<ul>
+<li><p>Show scores (Evaluate how success the game is played)</p></li>
+<li><p>Get Time data</p></li>
+<li><p>Get Lecture Information</p></li>
+<li><p>derive some assertions about how captivating the lecture
+was</p></li>
+<li><p>start game</p></li>
+<li><p><del>adjust pictures</del></p></li>
+</ul>
+<h5 id="space-invader"><del>Space Invader</del></h5>
+<ul>
+<li><p>move the spacecraft</p></li>
+<li><p>shoot bullet</p></li>
+<li><p>evaluate collision</p></li>
+</ul>
+<h4 id="nonfunctional-requirements">Nonfunctional Requirements</h4>
+<ul>
+<li>Usability:
+<ul>
+<li>The player need at most 3 clicks to start a game.</li>
+<li>The player need at most 3 buttons to control the spacecraft</li>
+</ul></li>
+<li>Performace: The startup should finish in 1 second.</li>
+</ul>
+<p>FR1: Show scores (Evaluate how success the game is played) FR2: Get
+Time data FR3: Get Lecture Information FR4: derive some assertions about
+how captivating the lecture was FR5: start game FR6: shoot bullet</p>
+<p>NFR1 [Usability]: The player need at most 3 clicks to start a game.
+NFR2 [Usability]: The player need at most 3 buttons to control the
+spacecraft NFR3 [Performace]: The startup should finish in 1 second.</p>
+<h2 id="javafx">JavaFX</h2>
+<h3 id="创建项目">创建项目</h3>
+<p>https://openjfx.io/openjfx-docs/#maven</p>
+<h3 id="项目结构">项目结构</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> de.tum.in.ase.eist.tumspaceinvaders;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> de.tum.in.ase.eist.view.GameBoardUI;</span><br><span class="line"><span class="keyword">import</span> javafx.application.Application;</span><br><span class="line"><span class="keyword">import</span> javafx.scene.Scene;</span><br><span class="line"><span class="keyword">import</span> javafx.scene.control.Label;</span><br><span class="line"><span class="keyword">import</span> javafx.scene.layout.BorderPane;</span><br><span class="line"><span class="keyword">import</span> javafx.scene.layout.StackPane;</span><br><span class="line"><span class="keyword">import</span> javafx.stage.Stage;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * JavaFX App</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TumSpaceInvadersApplication</span> <span class="keyword">extends</span> <span class="title class_">Application</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> GameBoardUI gameBoardUI;</span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">(Stage stage)</span> &#123;</span><br><span class="line">        <span class="type">BorderPane</span> <span class="variable">rootBorderPane</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BorderPane</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 控件写在这里</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 根场景</span></span><br><span class="line">        <span class="type">Scene</span> <span class="variable">scene</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scene</span>(rootBorderPane, <span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 读取样式表</span></span><br><span class="line">        scene.getStylesheets().add(getClass().getResource(<span class="string">&quot;application.css&quot;</span>).toExternalForm());</span><br><span class="line">        </span><br><span class="line">        stage.setScene(scene);</span><br><span class="line">        stage.show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        launch();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两个文件的包目录是一样的</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200617183908900.png"
+alt="image-20200617183908900" />
+<figcaption aria-hidden="true">image-20200617183908900</figcaption>
+</figure>
+<p>javaFX里面的控件是树状排列的</p>
+<p>stage -&gt; scene -&gt; rootBorderPane</p>
+<p>​ |</p>
+<p>​ -&gt; label</p>
+<h3 id="控件">控件</h3>
+<h4 id="label">Label</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BorderPane</span> <span class="variable">rootBorderPane</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BorderPane</span>();</span><br><span class="line">        </span><br><span class="line"><span class="type">Label</span> <span class="variable">label1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Label</span>(<span class="string">&quot;Hello World&quot;</span>);  <span class="comment">// 创建控件</span></span><br><span class="line">rootBorderPane.setCenter(label1);	<span class="comment">// 显示在中间</span></span><br><span class="line"></span><br><span class="line"><span class="type">Scene</span> <span class="variable">scene</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scene</span>(rootBorderPane, <span class="number">400</span>, <span class="number">400</span>);</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200617184219271.png"
+alt="image-20200617184219271" />
+<figcaption aria-hidden="true">image-20200617184219271</figcaption>
+</figure>
+<h4 id="button">Button</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Button</span> <span class="variable">btn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Button</span>(<span class="string">&quot;Click Me&quot;</span>);</span><br><span class="line">rootBorderPane.setCenter(btn);</span><br><span class="line"><span class="type">MyEventHandler</span> <span class="variable">myEventHandler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyEventHandler</span>();</span><br><span class="line">btn.setOnAction(myEventHandler);</span><br></pre></td></tr></table></figure>
+<h5 id="事件处理器">事件处理器</h5>
+<p>内部类写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">MyEventHandler</span> <span class="keyword">implements</span> <span class="title class_">EventHandler</span>&lt;ActionEvent&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(ActionEvent event)</span> &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>匿名类写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">btn.setOnAction(<span class="keyword">new</span> <span class="title class_">EventHandler</span>&lt;ActionEvent&gt;() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(ActionEvent event)</span> &#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>lambda表达式写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.setOnAction(e -&gt; System.out.println(<span class="string">&quot;hello&quot;</span>));</span><br></pre></td></tr></table></figure>
+<h4 id="image">Image</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span> <span class="variable">image</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Image</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;resources/bgimg1.jpg&quot;</span>).toURI().toString());</span><br><span class="line"><span class="type">ImageView</span> <span class="variable">imageView</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ImageView</span>();</span><br><span class="line">imageView.setImage(image);</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="variable">width</span> <span class="operator">=</span> image.getWidth();</span><br><span class="line"><span class="type">double</span> <span class="variable">height</span> <span class="operator">=</span> image.getHeight();</span><br><span class="line"></span><br><span class="line"><span class="type">Scene</span> <span class="variable">scene</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scene</span>(rootBorderPane, width, height);       </span><br><span class="line">rootBorderPane.setCenter(imageView);</span><br></pre></td></tr></table></figure>
+<h3 id="添加其他窗口">添加其他窗口</h3>
+<p>可以用 SceneBuilder 来可视化定制界面：
+https://gluonhq.com/products/scene-builder/</p>
+<p>打开就可以用图形界面来编辑窗口。</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200724093035896.png"
+alt="image-20200724093035896" />
+<figcaption aria-hidden="true">image-20200724093035896</figcaption>
+</figure>
+<p>编辑完成了之后，可以得到一个 <code>.fxml</code> 文件，</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?import javafx.scene.Scene?&gt;</span></span><br><span class="line"><span class="meta">&lt;?import javafx.scene.control.Button?&gt;</span></span><br><span class="line"><span class="meta">&lt;?import javafx.scene.control.Label?&gt;</span></span><br><span class="line"><span class="meta">&lt;?import javafx.scene.control.ToolBar?&gt;</span></span><br><span class="line"><span class="meta">&lt;?import javafx.scene.image.ImageView?&gt;</span></span><br><span class="line"><span class="meta">&lt;?import javafx.scene.layout.AnchorPane?&gt;</span></span><br><span class="line"><span class="meta">&lt;?import javafx.stage.Stage?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">Stage</span> <span class="attr">fx:id</span>=<span class="string">&quot;stage&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Shop&quot;</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://javafx.com/javafx/11.0.1&quot;</span> <span class="attr">xmlns:fx</span>=<span class="string">&quot;http://javafx.com/fxml/1&quot;</span> <span class="attr">fx:controller</span>=<span class="string">&quot;de.tum.in.ase.eist.view.ShopUI&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scene</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Scene</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AnchorPane</span> <span class="attr">prefHeight</span>=<span class="string">&quot;485.0&quot;</span> <span class="attr">prefWidth</span>=<span class="string">&quot;586.0&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">children</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">Button</span> <span class="attr">fx:id</span>=<span class="string">&quot;buyDestroyerBtn&quot;</span> <span class="attr">layoutX</span>=<span class="string">&quot;39.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;212.0&quot;</span> <span class="attr">mnemonicParsing</span>=<span class="string">&quot;false&quot;</span> <span class="attr">onAction</span>=<span class="string">&quot;#buyDestroyer&quot;</span> <span class="attr">text</span>=<span class="string">&quot;BUY&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">ImageView</span> <span class="attr">fx:id</span>=<span class="string">&quot;imgDestroyer&quot;</span> <span class="attr">fitHeight</span>=<span class="string">&quot;100.0&quot;</span> <span class="attr">fitWidth</span>=<span class="string">&quot;180.0&quot;</span> <span class="attr">layoutX</span>=<span class="string">&quot;39.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;59.0&quot;</span> <span class="attr">pickOnBounds</span>=<span class="string">&quot;true&quot;</span> <span class="attr">preserveRatio</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">Label</span> <span class="attr">layoutX</span>=<span class="string">&quot;39.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;166.0&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Destroyer  200$&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">Button</span> <span class="attr">fx:id</span>=<span class="string">&quot;buySuperCraftBtn&quot;</span> <span class="attr">layoutX</span>=<span class="string">&quot;293.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;212.0&quot;</span> <span class="attr">mnemonicParsing</span>=<span class="string">&quot;false&quot;</span> <span class="attr">onAction</span>=<span class="string">&quot;#buySuperCraft&quot;</span> <span class="attr">text</span>=<span class="string">&quot;BUY&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">ImageView</span> <span class="attr">fx:id</span>=<span class="string">&quot;imgSuperCraft&quot;</span> <span class="attr">fitHeight</span>=<span class="string">&quot;100.0&quot;</span> <span class="attr">fitWidth</span>=<span class="string">&quot;180.0&quot;</span> <span class="attr">layoutX</span>=<span class="string">&quot;293.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;52.0&quot;</span> <span class="attr">pickOnBounds</span>=<span class="string">&quot;true&quot;</span> <span class="attr">preserveRatio</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">Label</span> <span class="attr">layoutX</span>=<span class="string">&quot;293.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;166.0&quot;</span> <span class="attr">text</span>=<span class="string">&quot;SuperCraft  500$&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">Button</span> <span class="attr">fx:id</span>=<span class="string">&quot;buySuperBulletBtn&quot;</span> <span class="attr">layoutX</span>=<span class="string">&quot;39.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;439.0&quot;</span> <span class="attr">mnemonicParsing</span>=<span class="string">&quot;false&quot;</span> <span class="attr">onAction</span>=<span class="string">&quot;#buySuperBullet&quot;</span> <span class="attr">text</span>=<span class="string">&quot;BUY&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">ImageView</span> <span class="attr">fx:id</span>=<span class="string">&quot;imgSuperBullet&quot;</span> <span class="attr">fitHeight</span>=<span class="string">&quot;100.0&quot;</span> <span class="attr">fitWidth</span>=<span class="string">&quot;180.0&quot;</span> <span class="attr">layoutX</span>=<span class="string">&quot;39.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;264.0&quot;</span> <span class="attr">pickOnBounds</span>=<span class="string">&quot;true&quot;</span> <span class="attr">preserveRatio</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">Label</span> <span class="attr">layoutX</span>=<span class="string">&quot;39.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;393.0&quot;</span> <span class="attr">text</span>=<span class="string">&quot;SuperBullet  100$&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">ToolBar</span> <span class="attr">layoutY</span>=<span class="string">&quot;7.0&quot;</span> <span class="attr">prefHeight</span>=<span class="string">&quot;17.0&quot;</span> <span class="attr">prefWidth</span>=<span class="string">&quot;587.0&quot;</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">items</span>&gt;</span></span><br><span class="line">                     <span class="tag">&lt;<span class="name">Label</span> <span class="attr">text</span>=<span class="string">&quot;Your Money: &quot;</span> /&gt;</span></span><br><span class="line">                     <span class="tag">&lt;<span class="name">Label</span> <span class="attr">id</span>=<span class="string">&quot;moneyLbl&quot;</span> <span class="attr">fx:id</span>=<span class="string">&quot;moneyLabel&quot;</span> <span class="attr">text</span>=<span class="string">&quot;Label&quot;</span> /&gt;</span></span><br><span class="line">                 <span class="tag">&lt;/<span class="name">items</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">ToolBar</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">Button</span> <span class="attr">fx:id</span>=<span class="string">&quot;continueBtn&quot;</span> <span class="attr">layoutX</span>=<span class="string">&quot;475.0&quot;</span> <span class="attr">layoutY</span>=<span class="string">&quot;427.0&quot;</span> <span class="attr">mnemonicParsing</span>=<span class="string">&quot;false&quot;</span> <span class="attr">onAction</span>=<span class="string">&quot;#continuefunc&quot;</span> <span class="attr">text</span>=<span class="string">&quot;continue&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">children</span>&gt;</span><span class="tag">&lt;/<span class="name">AnchorPane</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Scene</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">scene</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Stage</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>首先我们要绑定对应的类：也就是设置 <code>fx:controller</code>
+属性为对应的类， 我这里是
+<code>de.tum.in.ase.eist.view.ShopUI</code>.</p>
+<p>然后再 <code>ShopUI</code> 类里，可以用Show Sample Controller
+Skeleton来生成对应的代码</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200724093621722.png"
+alt="image-20200724093621722" />
+<figcaption aria-hidden="true">image-20200724093621722</figcaption>
+</figure>
+<p>再copy到<code>ShopUI</code> 类里面</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20200724093820085.png"
+alt="image-20200724093820085" />
+<figcaption aria-hidden="true">image-20200724093820085</figcaption>
+</figure>
+<p>并且在<code>module.info</code>里面要写
+<code>exports [package] to javafx.xml</code> 其中 <code>[package]</code>
+是<code>ShopUI</code> 所在的包. 然后并且还要写一行
+<code>opens ...</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> de.tum.in.ase.eist.tumspaceinvaders &#123;</span><br><span class="line">    <span class="keyword">requires</span> javafx.controls;</span><br><span class="line">	<span class="keyword">requires</span> javafx.media;</span><br><span class="line">	<span class="keyword">requires</span> javafx.base;</span><br><span class="line">	<span class="keyword">requires</span> javafx.graphics;</span><br><span class="line">	<span class="keyword">requires</span> javafx.fxml;</span><br><span class="line">	<span class="keyword">exports</span> de.tum.in.ase.eist.tumspaceinvaders;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">exports</span> de.tum.in.ase.eist.view to javafx.fxml;</span><br><span class="line">	opens de.tum.in.ase.eist.view to javafx.fxml;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后可以从代码中导入预设</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">openShop</span><span class="params">()</span> &#123;</span><br><span class="line">    Platform.runLater(() -&gt; &#123; <span class="comment">// 与图像界面交互，要用runLater</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">FXMLLoader</span> <span class="variable">loader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FXMLLoader</span>();</span><br><span class="line">            <span class="type">Stage</span> <span class="variable">stage</span> <span class="operator">=</span> loader.load(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;resources/layout/ShopUI.fxml&quot;</span>));</span><br><span class="line">            <span class="type">ShopUI</span> <span class="variable">shopUI</span> <span class="operator">=</span> (ShopUI)loader.getController();</span><br><span class="line"></span><br><span class="line">            <span class="built_in">this</span>.shop.setShopUI(shopUI);  <span class="comment">// 设置一下参数</span></span><br><span class="line">            <span class="built_in">this</span>.shop.getShopUI().setStage(stage);</span><br><span class="line">            <span class="built_in">this</span>.shop.getShopUI().setShop(<span class="built_in">this</span>.shop);</span><br><span class="line">            <span class="built_in">this</span>.shop.setPlayer(<span class="built_in">this</span>.gameBoard.getPlayer());</span><br><span class="line">            <span class="built_in">this</span>.shop.setGameBoard(<span class="built_in">this</span>.gameBoard);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">this</span>.shop.getShopUI().refresh();</span><br><span class="line">            <span class="built_in">this</span>.shop.getShopUI().start(<span class="keyword">new</span> <span class="title class_">Stage</span>());  <span class="comment">// 打开</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="添加junit测试">添加Junit测试</h3>
+<p>在<code>pom.xml</code> 中添加下面的依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.easymock<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>easymock<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后创建test文件夹</p>
+<p>一般就可以出现junit的依赖了，如果没有的话检查一下
+<code>.classpath</code> 文件， 可以手动添加这个</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">&quot;src&quot;</span> <span class="attr">output</span>=<span class="string">&quot;target/test-classes&quot;</span> <span class="attr">path</span>=<span class="string">&quot;src/test/java&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attributes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attribute</span> <span class="attr">name</span>=<span class="string">&quot;optional&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attribute</span> <span class="attr">name</span>=<span class="string">&quot;maven.pomderived&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attribute</span> <span class="attr">name</span>=<span class="string">&quot;test&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span>  <span class="comment">&lt;!-- 这个要有 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">classpathentry</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="pom.xml配置文件">pom.xml配置文件</h3>
+<h3 id="打包项目">打包项目</h3>
+<p>打包的时候，主程序不要<code>extend Application</code>
+不然会出现找不到Javafx 的错误。 可以改成下面的方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TumSpaceInvaders</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Application.launch(TumSpaceInvadersApplication.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TumSpaceInvadersApplication</span> <span class="keyword">extends</span> <span class="title class_">Application</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> GameBoardUI gameBoardUI;</span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">(Stage stage)</span> &#123;</span><br><span class="line">   </span><br><span class="line">    	<span class="built_in">this</span>.gameBoardUI = <span class="keyword">new</span> <span class="title class_">GameBoardUI</span>(Thread.currentThread());</span><br><span class="line">        <span class="type">Scene</span> <span class="variable">scene</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scene</span>(gameBoardUI.getRootBorderPane()); </span><br><span class="line">       <span class="comment">// scene.getStylesheets().add(getClass().getResource(&quot;application.css&quot;).toExternalForm());</span></span><br><span class="line"></span><br><span class="line">        stage.setTitle(<span class="string">&quot;Tum Space Invaders&quot;</span>);</span><br><span class="line">        stage.setScene(scene);</span><br><span class="line">        stage.show();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="添加plugin">添加plugin</h4>
+<p>在<code>pom.xml</code>
+的<code>build</code>中加入下面的插件，记得修改<code>mainClass</code>
+等参数.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-resources-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">id</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">phase</span>&gt;</span>validate<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">goal</span>&gt;</span>copy-resources<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>$&#123;basedir&#125;/target<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                     <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                         <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;basedir&#125;/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                         <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">                         <span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>$&#123;basedir&#125;/target/resources<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></span><br><span class="line">                     <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-assembly-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- mvn clean compile assembly:single --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>de.tum.in.ase.eist.tumspaceinvaders.TumSpaceInvaders<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">descriptorRef</span>&gt;</span>jar-with-dependencies<span class="tag">&lt;/<span class="name">descriptorRef</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="执行命令">执行命令</h4>
+<p>在终端执行这个命令来打包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean compile assembly:single</span><br></pre></td></tr></table></figure>
+<p>或者在eclipse中选择 <code>Run As</code> -&gt;
+<code>Maven build ...</code> 然后再<code>goal</code> 中输入
+<code>clean compile assembly:single</code></p>
+<p>执行完成后，会出现一个<code>jar</code>文件,
+可以这样来执行jar程序.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xxx.jar</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2020/05/27/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/">http://fyind.de/2020/05/27/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/">软件技术</a><a class="post-meta__tags" href="/tags/Maven/">Maven</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/06/02/ArchLinux%E5%AE%8C%E6%95%B4%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" title="ArchLinux完整安装过程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">ArchLinux完整安装过程</div></div><div class="info-2"><div class="info-item-1">ArchLinux完整安装 首先贴几个有用的链接 https://www.viseator.com/2017/05/17/arch_install/ https://wiki.archlinux.org/ Vmware Workstation虚拟机安装 下载iso镜像 https://www.archlinux.org/download/ 这个链接里面找一个网站的版本下载，这里选择了163。然后下载里面的archlinux-日期-x86_64.iso 这个文件   image-20200602094003121  创建虚拟机 点击创建新的虚拟机   image-20200602094126559  然后选择镜像   image-20200602094239435  操作系统选择Linux 5.x 64位。VirtualBox可以直接Archlinux 64位 然后给虚拟机命名，然后选择cpu和内存大小。这个根据系统配置自行选择。我选择了2个2核处理器，4g内存。后面默认过去，到磁盘大小，我给了20g。然后后面的一直默认即可。 开启此虚拟机，进入安装界面   image-20200...</div></div></div></a><a class="pagination-related" href="/2020/05/26/Python%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" title="三行写完高斯消元，这就是Python!!!"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">三行写完高斯消元，这就是Python!!!</div></div><div class="info-2"><div class="info-item-1">三行写完高斯消元，这就是Python!!! 洛谷评测链接 先给大家看一眼核心代码 核心代码 123for i in range(len(a)):    row = [j for j in range(len(a)) if a[j][i] != 0 and sum(a[j][:i]) &lt; 1e-8][0]    a[:] = [r + a[row]*(-r[i]/a[row][i]) if j != row else r/a[row][i] for (j,r) in enumerate(a)] 没错，就只有三行，完成了高斯消元最核心的操作，把矩阵消元成主对角线为1，其余除了常数项全是0的形式。我只用了Python中的切片操作，列表解析式，还有numpy中array的性质。 为了方便大家理解，我先来介绍一些这些python中的语法 python语法介绍 切片 语法格式是 [开始:结束] 可以取出列表中的一段区间,如果不填写就是默认开始位置是0，结束位置是列表最后一个元素位置。注意这里的区间是左闭右开区间。并且支持倒着数，也就是使用负号 比如： 12345l = [0,2,3,4...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2020/09/16/Javaweb/" title="Javaweb"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-16</div><div class="info-item-2">Javaweb</div></div><div class="info-2"><div class="info-item-1">Javaweb 安装 IDEA, 可以先用 -Ss 搜索intellij 来确定后面的版本号 1sudo pacman -S intellij-idea-ultimate-edition-2020.2.1-1 IDEA 使用技巧  别打开老项目 settings 里面 system settings了里面别勾选 Reopen   image-20200906194355077  Ctrl + 鼠标左键可以查看源代码 Alt + Shift + v 新建局部变量  Tomcat 安装 1sudo pacman -S tomcat9 最好要去官网下载, 这样用户有执行权限，pacman 下载的运行要家sudo, 在idea里会报错 启动 可以在zshrc里面加入 12alias tomcat=&quot;sudo zsh /usr/share/tomcat9/bin/startup.sh&quot;alias ctomcat=&quot;sudo zsh /usr/share/tomcat9/bin/shutdown.sh&quot; 然后可以 sudo tomcat 和 sudo ...</div></div></div></a><a class="pagination-related" href="/2020/01/19/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" title="Java编程思想"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-19</div><div class="info-item-2">Java编程思想</div></div><div class="info-2"><div class="info-item-1">Java 编程思想 安装编程环境 jdk下载链接 Eclipse下载链接 一、对象导论 1、 抽象机制 1.1 抽象过程 所有编程语言都提供抽象机制。汇编语言是对机器指令的抽象，高级语言是对汇编语言的一种抽象。但它们抽象出来的东西还是基于计算机的一下东西，和问题没有直接关联。而面向对象是直接对问题的抽象。 对象：问题空间中的元素及其在空间中的表示。 面向对象的实质：程序可以通过添加新类型的对象使自身适应问题。OOP允许根据问题描述问题，而不是根据计算机描述问题。 Java语言五个基本特性：  万物皆对象 程序是对象的几何，通过发送消息告诉彼此要做的 每个对象都有自己的由其他对象构成的存储 每个对象都有其类型 某一特定类型的所有对象都可以接受相同的信息  1.2 每个对象都有接口 接口对应了某一特定对象所能发出的请求。但是，在程序中，不许有实现这些请求的代码，于是就有了实现。每一个请求都有方法与之关联。 1.3 每个对象都提供服务 当试图开发或者理解一个程序设计时，最好的办法时把对象想象成“服务提供者”。 1.4 被隐藏的具体实现 将程序开发人员按角色分为类创建者和客户端程序员是大...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">软件技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">编译环境设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDmaven"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">下载Maven</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">配置环境变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lecture-2"><span class="toc-number">1.2.</span> <span class="toc-text">Lecture 2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#software-lifecycle"><span class="toc-number">1.2.1.</span> <span class="toc-text">Software lifecycle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.2.</span> <span class="toc-text">分析问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uml-%E5%9B%BE"><span class="toc-number">1.2.3.</span> <span class="toc-text">UML 图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#use-case-diagram"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Use Case Diagram</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#association"><span class="toc-number">1.2.3.1.1.</span> <span class="toc-text">Association</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#bumper%E7%9A%84use-case-%E5%9B%BE"><span class="toc-number">1.2.3.1.2.</span> <span class="toc-text">Bumper的Use Case 图</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#class-diagram"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Class Diagram</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.2.3.2.1.</span> <span class="toc-text">类的属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#association-1"><span class="toc-number">1.2.3.2.2.</span> <span class="toc-text">Association</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#cardinality"><span class="toc-number">1.2.3.2.3.</span> <span class="toc-text">Cardinality</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#abbots-technique"><span class="toc-number">1.2.3.2.4.</span> <span class="toc-text">Abbot’s Technique</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#bumper%E7%9A%84%E7%B1%BB%E5%9B%BE"><span class="toc-number">1.2.3.2.5.</span> <span class="toc-text">Bumper的类图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#analysis-design-implementation-and-delivery-of-bumpers"><span class="toc-number">1.2.4.</span> <span class="toc-text">Analysis,
+design, implementation and delivery of Bumpers</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lecture-3-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">Lecture 3 需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#functionality"><span class="toc-number">1.3.1.</span> <span class="toc-text">Functionality</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#leture-4-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-i"><span class="toc-number">1.4.</span> <span class="toc-text">Leture 4 系统设计 I</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%9A%848%E5%A4%A7%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.1.</span> <span class="toc-text">系统设计的8大问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%83%E5%92%8C%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">它和需求分析的关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87-design-goal"><span class="toc-number">1.4.2.</span> <span class="toc-text">设计目标 Design Goal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E8%88%8D-trade-offs"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">取舍 trade-offs</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%88%86%E8%A7%A3"><span class="toc-number">1.4.3.</span> <span class="toc-text">子系统分解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E8%81%9A%E4%B8%8E%E8%80%A6%E5%90%88-coupling-and-cohesion-of-subsystems"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">子系统的内聚与耦合
+Coupling and cohesion of subsystems</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%86%85%E8%81%9A"><span class="toc-number">1.4.3.1.1.</span> <span class="toc-text">实现高内聚</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BD%8E%E8%80%A6%E5%90%88"><span class="toc-number">1.4.3.1.2.</span> <span class="toc-text">实现低耦合</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.4.4.</span> <span class="toc-text">架构风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#uml-%E7%BB%84%E4%BB%B6%E5%9B%BE-component-diagram"><span class="toc-number">1.4.5.</span> <span class="toc-text">UML 组件图 component diagram</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lecture-5-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1ii"><span class="toc-number">1.5.</span> <span class="toc-text">Lecture 5 系统设计II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC-1"><span class="toc-number">1.5.1.</span> <span class="toc-text">架构风格</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mvc-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">MVC 架构风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#repository%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">Repository架构风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E5%9B%BE%E5%83%8F%E8%A1%A8%E7%A4%BA%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">用图像表示架构风格</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E6%9E%B6%E6%9E%84-layered-architectural-style"><span class="toc-number">1.5.1.3.1.</span> <span class="toc-text">层次架构 Layered
+architectural style</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-client-server-architectural-style"><span class="toc-number">1.5.1.3.2.</span> <span class="toc-text">客户端服务架构
+Client server architectural style</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91"><span class="toc-number">1.5.2.</span> <span class="toc-text">并发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%BD%AF%E4%BB%B6%E6%98%A0%E5%B0%84"><span class="toc-number">1.5.3.</span> <span class="toc-text">硬件软件映射</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%9B%BE-deployment-diagram"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">部署图 deployment diagram</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%B3%E5%9B%BA%E7%9A%84%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="toc-number">1.5.4.</span> <span class="toc-text">稳固的数据管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86"><span class="toc-number">1.5.5.</span> <span class="toc-text">全局资源处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%8E%A7%E5%88%B6"><span class="toc-number">1.5.6.</span> <span class="toc-text">软件控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.5.7.</span> <span class="toc-text">边界条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#object-design"><span class="toc-number">1.6.</span> <span class="toc-text">Object Design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%87%8D%E7%94%A8%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.6.1.</span> <span class="toc-text">代码重用的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text">设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bridge"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">Bridge</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#composite"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">Composite</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#proxy"><span class="toc-number">1.6.2.3.</span> <span class="toc-text">Proxy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#adapter"><span class="toc-number">1.6.2.4.</span> <span class="toc-text">Adapter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#facade"><span class="toc-number">1.6.2.5.</span> <span class="toc-text">Facade</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#testing"><span class="toc-number">1.7.</span> <span class="toc-text">Testing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#unit-testing"><span class="toc-number">1.7.1.</span> <span class="toc-text">Unit testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#integration-testing"><span class="toc-number">1.7.2.</span> <span class="toc-text">Integration testing</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#stub"><span class="toc-number">1.7.2.0.1.</span> <span class="toc-text">Stub</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#driver"><span class="toc-number">1.7.2.0.2.</span> <span class="toc-text">Driver</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bottm-up"><span class="toc-number">1.7.2.1.</span> <span class="toc-text">Bottm up</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#top-down"><span class="toc-number">1.7.2.2.</span> <span class="toc-text">Top down</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#system-testing"><span class="toc-number">1.7.3.</span> <span class="toc-text">System testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dynamic-analysis"><span class="toc-number">1.7.4.</span> <span class="toc-text">Dynamic analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#model-based-testing"><span class="toc-number">1.7.5.</span> <span class="toc-text">Model based testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#object-oriented-testing"><span class="toc-number">1.7.6.</span> <span class="toc-text">Object oriented testing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#correct"><span class="toc-number">1.7.6.1.</span> <span class="toc-text">Correct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wrong"><span class="toc-number">1.7.6.2.</span> <span class="toc-text">Wrong</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lecture-11"><span class="toc-number">1.8.</span> <span class="toc-text">Lecture 11</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git"><span class="toc-number">1.8.1.</span> <span class="toc-text">Git</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#correct-1"><span class="toc-number">1.8.1.1.</span> <span class="toc-text">Correct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wrong-1"><span class="toc-number">1.8.1.2.</span> <span class="toc-text">Wrong</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#software-architecture"><span class="toc-number">1.8.2.</span> <span class="toc-text">Software Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#correct-2"><span class="toc-number">1.8.2.1.</span> <span class="toc-text">Correct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wrong-2"><span class="toc-number">1.8.2.2.</span> <span class="toc-text">Wrong</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#process-control"><span class="toc-number">1.8.2.3.</span> <span class="toc-text">Process Control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#correct-3"><span class="toc-number">1.8.2.4.</span> <span class="toc-text">Correct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wrong-3"><span class="toc-number">1.8.2.5.</span> <span class="toc-text">Wrong</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE-space-invader"><span class="toc-number">1.9.</span> <span class="toc-text">项目: Space Invader</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#problem-statement"><span class="toc-number">1.9.1.</span> <span class="toc-text">Problem Statement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="toc-number">1.9.2.</span> <span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#functional-requirements"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">Functional Requirements</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#space-invader"><span class="toc-number">1.9.2.1.1.</span> <span class="toc-text">Space Invader</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nonfunctional-requirements"><span class="toc-number">1.9.2.2.</span> <span class="toc-text">Nonfunctional Requirements</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#javafx"><span class="toc-number">1.10.</span> <span class="toc-text">JavaFX</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.10.1.</span> <span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.10.2.</span> <span class="toc-text">项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E4%BB%B6"><span class="toc-number">1.10.3.</span> <span class="toc-text">控件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#label"><span class="toc-number">1.10.3.1.</span> <span class="toc-text">Label</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#button"><span class="toc-number">1.10.3.2.</span> <span class="toc-text">Button</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">1.10.3.2.1.</span> <span class="toc-text">事件处理器</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#image"><span class="toc-number">1.10.3.3.</span> <span class="toc-text">Image</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%B6%E4%BB%96%E7%AA%97%E5%8F%A3"><span class="toc-number">1.10.4.</span> <span class="toc-text">添加其他窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0junit%E6%B5%8B%E8%AF%95"><span class="toc-number">1.10.5.</span> <span class="toc-text">添加Junit测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pom.xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.10.6.</span> <span class="toc-text">pom.xml配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.10.7.</span> <span class="toc-text">打包项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0plugin"><span class="toc-number">1.10.7.1.</span> <span class="toc-text">添加plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.10.7.2.</span> <span class="toc-text">执行命令</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,1909 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>操作系统 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C语言 指针 指针的读取规则： 教程：http:&#x2F;&#x2F;unixwiz.net&#x2F;techtips&#x2F;reading-cdecl.html [] 数组和 ()函数从左向右读取，* 和 &amp; 从右向左读取  go right when you can, go left when you must  123456789101112long **foo[7];&#x2F;&#x2F; 是一个二级指针的数组,表示7个二级指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统">
+<meta property="og:url" content="http://fyind.de/2020/11/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="C语言 指针 指针的读取规则： 教程：http:&#x2F;&#x2F;unixwiz.net&#x2F;techtips&#x2F;reading-cdecl.html [] 数组和 ()函数从左向右读取，* 和 &amp; 从右向左读取  go right when you can, go left when you must  123456789101112long **foo[7];&#x2F;&#x2F; 是一个二级指针的数组,表示7个二级指针">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2020-11-08T17:06:51.000Z">
+<meta property="article:modified_time" content="2025-07-18T10:49:53.878Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "操作系统",
+  "url": "http://fyind.de/2020/11/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2020-11-08T17:06:51.000Z",
+  "dateModified": "2025-07-18T10:49:53.878Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2020/11/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '操作系统',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">操作系统</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">操作系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-11-08T17:06:51.000Z" title="Created 2020-11-08 17:06:51">2020-11-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-18T10:49:53.878Z" title="Updated 2025-07-18 10:49:53">2025-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="c语言">C语言</h1>
+<h3 id="指针">指针</h3>
+<p>指针的读取规则：</p>
+<p>教程：http://unixwiz.net/techtips/reading-cdecl.html</p>
+<p><code>[]</code> 数组和
+<code>()</code>函数从左向右读取，<code>*</code> 和 <code>&amp;</code>
+从右向左读取</p>
+<ul>
+<li>go right when you can, go left when you must</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> **foo[<span class="number">7</span>];</span><br><span class="line"><span class="comment">// 是一个二级指针的数组,表示7个二级指针   **foo -&gt; *foo -&gt; long</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> <span class="type">int</span> **<span class="title function_">x</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">// 表示函数， 函数返回值是 unsiged long int**</span></span><br><span class="line"><span class="type">char</span> *(*(**foo [][<span class="number">8</span>])())[];</span><br><span class="line"><span class="comment">// foo is ... char</span></span><br><span class="line"><span class="comment">//   *foo[] =&gt; go rihgt =&gt; foo is a array ... char</span></span><br><span class="line"><span class="comment">//   *foo[8] =&gt; go right =&gt; foo is a array of array of 8</span></span><br><span class="line"><span class="comment">//   **foo  =&gt; go left =&gt; foo is a array of array of 8 pointer to pointer</span></span><br><span class="line"><span class="comment">//   *foo() =&gt; go right =&gt; foo is a array of array of 8 pointer to pointer to function returning ... char</span></span><br><span class="line"><span class="comment">// char *(*foo)[]; =&gt; go left =&gt; returning pointer to</span></span><br><span class="line"><span class="comment">// *foo[] go right =&gt; returning pointer to array of pointer to char</span></span><br></pre></td></tr></table></figure>
+<h1 id="操作系统">操作系统</h1>
+<h2 id="einfürung">Einfürung</h2>
+<ul>
+<li><p>操作系统的任务</p></li>
+<li><p>操作系统怎么完成这些任务</p></li>
+<li><p>操作系统怎么限制用户的使用</p></li>
+</ul>
+<h3 id="计算系统定义rechensystem">计算系统定义(Rechensystem)</h3>
+<p>计算系统是<strong>开放的，动态的，技术的</strong>系统</p>
+<p>计算系统可以</p>
+<ul>
+<li>存储</li>
+<li>处理详细</li>
+<li>交流通信</li>
+</ul>
+<h4 id="开发系统">开发系统</h4>
+<p>开发系统有组件构成</p>
+<p>组件之间的连接成为依赖(Abängigkeiten)</p>
+<p>有给外部开发的接口</p>
+<h4 id="接口">接口</h4>
+<p>接口可以有不同的视角来看</p>
+<ul>
+<li><p>从外面：黑盒视角 Black-Box-Sicht</p>
+<p>组件的总结</p></li>
+<li><p>从里面：白盒视角 White-Box-Sicht</p>
+<p>子系统划分</p></li>
+</ul>
+<h4 id="动态的系统">动态的系统</h4>
+<p>一些性质可以用来描述一个系统的状态。这些性质是随着时间变化的。性质的变化就是系统状态的变化。而状态的变化就描述了系统的行为。系统通过主动的元件（CPU）和被动的元件（内存）。主动的元件的行为会改变系统状态。被动元件帮助主动元件行为</p>
+<h4 id="技术的系统">技术的系统</h4>
+<p>计算系统是用硬件和软件实现的。下图展示了操作系统在计算系统的位置</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201108173853335.png"
+alt="image-20201108173853335" />
+<figcaption aria-hidden="true">image-20201108173853335</figcaption>
+</figure>
+<h4 id="操作系统定义">操作系统定义</h4>
+<p>操作系统本身是一个程序。他控制和监管系统程序和应用程序。他给引用程序提供了一个和硬件交互的接口。</p>
+<p>这些接口可以是读写操作，存取操作</p>
+<h3 id="操作系统任务">操作系统任务</h3>
+<h4 id="抽象化-abstraktion">抽象化 Abstraktion</h4>
+<ul>
+<li>简化，分配抽象的原件和共同的接口。 比如文件</li>
+</ul>
+<h4 id="资源管理">资源管理</h4>
+<p>操控检查程序的执行</p>
+<h4 id="影响操作系统发展的因素">影响操作系统发展的因素</h4>
+<ul>
+<li>硬件技术</li>
+<li>数据计算的传递</li>
+<li>新的应用场景</li>
+</ul>
+<h4 id="操控种类">操控种类</h4>
+<ul>
+<li>批处理 Stapelverarbeitung</li>
+<li>交互操控 Transaktionsbetrieb</li>
+<li>窗口操控 Dialogbetrieb</li>
+<li>实时处理 Echtzeitbetrieb</li>
+</ul>
+<h3 id="操作系统种类">操作系统种类</h3>
+<ul>
+<li>服务器操作系统 Server-Betriebssystem
+<ul>
+<li>SuperMUC, MPI</li>
+<li>Dedizierte BS für Datenzentren</li>
+</ul></li>
+<li>服务器和桌面操作系统Server- und Desktop-Betriebssystem
+<ul>
+<li>Linux, Windows, MacOS</li>
+</ul></li>
+<li>移动系统 Mobile Betriebssystem
+<ul>
+<li>Android, IOS</li>
+</ul></li>
+<li>嵌入式系统 Eingebettete Betriebssystem
+<ul>
+<li>QNX, L4, PikeOS, TinyOS, RTOS, RIOT</li>
+</ul></li>
+</ul>
+<h3 id="基础概念">基础概念</h3>
+<ul>
+<li>资源和它的分类</li>
+<li>进程是抽象化的处理器</li>
+<li>文件是抽象化的存储器</li>
+<li>操作系统模式</li>
+<li>系统调用</li>
+</ul>
+<h4 id="资源的分类">资源的分类</h4>
+<ul>
+<li>使用次数 Anzahl der Nutzung
+<ul>
+<li>只能用一次，可以用多次</li>
+</ul></li>
+<li>并行 Paralllelität
+<ul>
+<li>可以并行</li>
+</ul></li>
+<li>持续性 Dauerhaftigkeit
+<ul>
+<li>可打断，不可打断</li>
+</ul></li>
+<li>中心资源 Zentrale Ressouren
+<ul>
+<li>处理器，内存</li>
+</ul></li>
+<li>边缘资源 Periphere Ressourcen
+<ul>
+<li>存储单元</li>
+</ul></li>
+</ul>
+<h4 id="进程">进程</h4>
+<ul>
+<li>一个进程是一个执行的程序</li>
+</ul>
+<h4 id="线性进程和并行进程">线性进程和并行进程</h4>
+<ul>
+<li>线性进程是控制流程，和指令计数器</li>
+<li>多线程进程是有很多控制流程，每个线程都有子集的指令计数器和寄存器，每个线程都用自己单独的栈</li>
+</ul>
+<h4 id="文件和文件系统">文件和文件系统</h4>
+<p>比如这样的结构</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201108180958540.png"
+alt="image-20201108180958540" />
+<figcaption aria-hidden="true">image-20201108180958540</figcaption>
+</figure>
+<h4 id="操作系统模式-betriebssystem-modi">操作系统模式
+Betriebssystem-Modi</h4>
+<h5 id="用户模式-benutzermodus-user-mode">用户模式 Benutzermodus (User
+Mode)</h5>
+<p>不能直接接触硬件</p>
+<p>不能运行有权限的指令</p>
+<p>只能读取虚拟地址</p>
+<h5 id="系统模式-systemmoduskernel-mode">系统模式 Systemmodus(Kernel
+Mode)</h5>
+<p>有权限的模式：可以执行所有命令</p>
+<p>直接控制硬件</p>
+<h4 id="系统调用">系统调用</h4>
+<p>它提供与硬件交互的接口</p>
+<p>比如 <code>open, close, read, write</code> ,
+<code>mkdir, rmdir, link</code></p>
+<h3 id="操作系统架构">操作系统架构</h3>
+<h4 id="单片机系统-monolithisches-system">单片机系统 Monolithisches
+System</h4>
+<p>比如 Unix/Linux</p>
+<ul>
+<li>它完全在 Kernel Mode 上</li>
+<li>有高的运行优先度</li>
+</ul>
+<h4 id="mikrokerne">Mikrokerne</h4>
+<p>比如 L4, PikeOS, Mach, QNX, MINIX</p>
+<h3 id="系统编程">系统编程</h3>
+<p>系统编程就是写系统程序</p>
+<h2 id="进程和进程管理">进程和进程管理</h2>
+<h3 id="进程在栈中">进程在栈中</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201112112042434.png"
+alt="image-20201112112042434" />
+<figcaption aria-hidden="true">image-20201112112042434</figcaption>
+</figure>
+<p>比如</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201112111735189.png"
+alt="image-20201112111735189" />
+<figcaption aria-hidden="true">image-20201112111735189</figcaption>
+</figure>
+<h3 id="进程的状态">进程的状态</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201112132418657.png"
+alt="image-20201112132418657" />
+<figcaption aria-hidden="true">image-20201112132418657</figcaption>
+</figure>
+<ul>
+<li>add 添加一个新的进程</li>
+<li>assign 分配CPU资源</li>
+<li>block 由于输入输出或者协同的调用，线程在等待</li>
+<li>resign 线程重新回到ready状态</li>
+<li>retire当前计算的进程终止</li>
+<li>swap out 当前的线程转移到硬盘上</li>
+<li>swap in 当前线程从硬盘上转移过来</li>
+</ul>
+<h3 id="多线程的原因">多线程的原因</h3>
+<ul>
+<li>Overhead</li>
+<li>Performance</li>
+</ul>
+<h3 id="进程的实现">进程的实现</h3>
+<h4 id="process-control-block">Process Control Block</h4>
+<h3 id="操作系统的任务">操作系统的任务</h3>
+<ul>
+<li>生成进程</li>
+<li>结束进程</li>
+<li>分配CPU</li>
+<li>调度CPU</li>
+</ul>
+<h3 id="进程调度策略">进程调度策略</h3>
+<h4 id="first-come-first-served">First-Come First-Served</h4>
+<p>先到先得策略</p>
+<h4 id="shortest-jobs-first">Shortest-Jobs-First</h4>
+<p>最短的先</p>
+<h4 id="round-robin">Round Robin</h4>
+<p>维护一个按index排序的队列，然后循环队列每个干一点。</p>
+<h2 id="多线程系统和同步">多线程系统和同步</h2>
+<h3 id="sequetielle-und-parallele-programme">Sequetielle und Parallele
+Programme</h3>
+<p>一个程序实现一个算法，一个程序是一系列的指令</p>
+<ul>
+<li><p>Sequentielle Programmausführung</p>
+<p>程序的结果是确定的。相同的程序出相同的结果</p></li>
+<li><p>多线程程序运行</p>
+<p>一个程序分成多个执行的序列</p>
+<p>有许多的CPU和核心共同跑程序</p>
+<p>程序的结果不是确定的</p></li>
+</ul>
+<h4 id="interaktion-交互">Interaktion 交互</h4>
+<p>同时运行的程序可以相互交互</p>
+<ul>
+<li><p>Kausale Beziehungen</p>
+<p>比如信号灯和行人的交互</p></li>
+<li><p>Kommunikation</p>
+<p>相同计算系统或者不同计算系统的处理器交换信息</p></li>
+<li><p>Koordinierung</p>
+<p>比如 Clinet- Server</p></li>
+<li><p>Konkurrenz</p>
+<p>多个进程使用同一个资源</p></li>
+</ul>
+<h4 id="描述一个多线程的活动">描述一个多线程的活动</h4>
+<p>我们可以用不同的抽象层面描述</p>
+<ul>
+<li><p>Modell- Ebene</p>
+<p>关注行动和依赖关系</p></li>
+<li><p>Programmiersprachen-Ebene</p>
+<p>线程。fork, join, send, recv, lock, unlock 等等</p></li>
+<li><p>Betriebssystem-Ebene</p>
+<p>程序使用的自己的地址，进程的线程共享一个地址空间</p></li>
+</ul>
+<h4 id="描述活动的行为">描述活动的行为</h4>
+<ul>
+<li><p>Aktion动作</p>
+<p>比如C指令，及其指令</p></li>
+<li><p>Ereignisse 事件</p>
+<p>可以产生影响的单位</p></li>
+</ul>
+<h4 id="多线程系统的特征">多线程系统的特征</h4>
+<ul>
+<li><p>确定性 Determiniertheit</p>
+<p>相同的条件产生相同的结果</p></li>
+<li><p>Störungsfreiheit</p>
+<p>并行的进程之间互不影响</p></li>
+<li><p>Wechselseitiger Ausschluss exklusiv nutzbarerer Ressourcen</p>
+<p>对于一个相同的点，最多只有一个进程访问同一个资源</p></li>
+<li><p>Verklemmungsfreiheit 死锁</p>
+<p>相互循环等待，无法继续</p></li>
+<li><p>Kein Verhungern</p>
+<p>不存在无限推迟运行的进程</p></li>
+</ul>
+<h3 id="同步">同步</h3>
+<p>Race Codition:</p>
+<blockquote>
+<p><strong>竞争冒险</strong>（race
+hazard）又名<strong>竞态条件</strong>、<strong>竞争条件</strong>（race
+condition），它旨在描述一个系统或者进程的输出依赖于不受控制的事件出现顺序或者出现时机。此词源自于两个信号试着彼此竞争，来影响谁先输出。</p>
+<p>举例来说，如果计算机中的两个<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/进程">进程</a>同时试图修改一个共享内存的内容，在没有<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/并发控制">并发控制</a>的情况下，最后的结果依赖于两个进程的执行顺序与时机。而且如果发生了并发访问冲突，则最后的结果是不正确的。</p>
+</blockquote>
+<p>至少2个进程读写同一个资源，结果取决于进程执行的顺序</p>
+<h4 id="kritischer-abschnitt">Kritischer Abschnitt</h4>
+<blockquote>
+<p><strong>临界区段</strong>（Critical
+section）指的是一个访问共享资源（例如：共享设备或是共享存储器）的程序片段，而这些共享资源又无法同时被多个<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/執行緒">线程</a>访问的特性。</p>
+<p>当有线程进入临界区段时，其他线程或是<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/行程">行程</a>必须等待（例如：bounded
+waiting
+等待法），有一些同步的机制必须在临界区段的进入点与离开点实现，以确保这些共享资源是被<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/逻辑异或">异或</a>的使用，例如：<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Semaphore">semaphore</a>。</p>
+</blockquote>
+<p>在临界区段里，很多进程同时访问一个资源，</p>
+<p>线程必须协调来避免竞争条件</p>
+<p>进入临界区段的步骤</p>
+<ol type="1">
+<li>执行非临界区段的代码</li>
+<li>进入临界区段</li>
+<li>执行临界区段的指令</li>
+<li>离开临界区段</li>
+</ol>
+<h4 id="wechselseitiger-ausschluss互斥锁mutex">Wechselseitiger
+Ausschluss互斥锁（Mutex）</h4>
+<p>实现互斥锁的要求</p>
+<ol type="1">
+<li>临界区段不可以进行交换</li>
+<li>实现不可以依赖于进程的执行顺序</li>
+<li>实现不可以依赖于进程的运行时间</li>
+<li>进程不允许无休止的干扰其他进程进入临界区段</li>
+</ol>
+<h3 id="automare-maschinenbefehle">Automare Maschinenbefehle</h3>
+<p>TLS (Test-and-Set Lock)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">enter_crit_region:</span><br><span class="line">    tsl rax, [lock] ; Copy lock to rx</span><br><span class="line">    ; and set lock to 1</span><br><span class="line">    cmp rax, $0 ; Was lock zero?</span><br><span class="line">    jne enter_crit_region ; Busy-Waiting</span><br><span class="line">    ret ; Process can enter</span><br><span class="line">    </span><br><span class="line">leave_crit_region:</span><br><span class="line">    mov [lock], $0 ; Reset lock to 0</span><br><span class="line">    ret</span><br></pre></td></tr></table></figure>
+<h3 id="semaphore-信号量">Semaphore 信号量</h3>
+<blockquote>
+<p><strong>信号量</strong>（英语：<strong>semaphore</strong>）又称为<strong>信号标</strong>，是一个同步对象，用于保持在0至指定最大值之间的一个计数值。当线程完成一次对该semaphore对象的等待（wait）时，该计数值减一；当线程完成一次对semaphore对象的释放（release）时，计数值加一。当计数值为0，则线程等待该semaphore对象不再能成功直至该semaphore对象变成signaled状态。semaphore对象的计数值大于0，为signaled状态；计数值等于0，为nonsignaled状态.</p>
+</blockquote>
+<h4 id="mutex">Mutex</h4>
+<p>二进制的信号量</p>
+<p>定义：• Ein Mutex ist ein binäres Semaphor, mit s ∊ {0; 1}</p>
+<h3 id="monitore-管程">Monitore 管程</h3>
+<blockquote>
+<p><strong>管程</strong> (英语：Monitors，也称为<strong>监视器</strong>)
+是一种程序结构，结构内的多个子程序（<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/对象_(计算机科学)">对象</a>或<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/模組_(程式設計)">模块</a>）形成的多个<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/工作_(資訊科學)">工作线程</a>互斥访问共享资源。这些共享资源一般是<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=硬體裝置&amp;action=edit&amp;redlink=1">硬件</a>或一群<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/變數">变量</a>。管程实现了在一个时间点，最多只有一个<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/线程">线程</a>在执行管程的某个<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/子程序">子程序</a>。与那些通过修改数据结构实现互斥访问的并发程序设计相比，管程实现很大程度上简化了程序设计。</p>
+</blockquote>
+<h4 id="verhungern">Verhungern</h4>
+<p>Es gibt keine Prozesse, deren Ausführung unendlich lange aufgeschoben
+wird, obwohl sie nicht in einem Deadlock sind</p>
+<h3 id="deadlocks">Deadlocks</h3>
+<p><strong>定义</strong></p>
+<p>Zyklische Wartesituation zwischen mehreren Prozessen: jeder dieser
+Prozesse wartet auf ein Ereignis, das nur ein anderer Prozess aus dieser
+Menge verursachen kann</p>
+<p>出现死锁的条件（4个同时满足）</p>
+<ol type="1">
+<li><p>Exklusiv nutzbare Ressource 互斥</p>
+<p>资源只能同时分配给一个行程，无法多个行程共享。</p></li>
+<li><p>Belegen und Anfordern 持有和等待</p>
+<p>进程占用资源，然后取找其他资源了</p></li>
+<li><p>Nicht Entziehbar 禁止抢占</p>
+<p>系统资源不能被强制从一个进程中退出。</p></li>
+<li><p>Zyklische Wartebedingung 循环等待</p>
+<p>一系列进程互相持有其他进程所需要的资源</p></li>
+</ol>
+<h4 id="bankier-algorithmus">Bankier-Algorithmus</h4>
+<h2 id="并发系统建模">并发系统建模</h2>
+<h3 id="动作结构">动作结构</h3>
+<h4 id="定义">定义</h4>
+<ul>
+<li><span class="math inline">\(E^*\)</span> 事件的集合</li>
+<li><span class="math inline">\(A\)</span> 动作的集合</li>
+</ul>
+<p>三元组 <span class="math inline">\(p=(E, \le, \alpha)\)</span> 是进程
+<span class="math inline">\(p\)</span> 的动作结构，若满足</p>
+<ul>
+<li>对于事件集合满足 <span class="math inline">\(E \subseteq
+E^*\)</span></li>
+<li><span class="math inline">\(\le\)</span> 是在 <span
+class="math inline">\(E\)</span> 上的 partielle Ordnung</li>
+<li>映射 <span class="math inline">\(\alpha:E\rightarrow A\)</span>
+是动作标记</li>
+<li><span class="math inline">\(\alpha\)</span>
+把每个事件和动作一一对应</li>
+</ul>
+<h3 id="进程的性质">进程的性质</h3>
+<ul>
+<li>在一个进程里，每个事件是唯一的</li>
+<li>可能存在不同的事件有相同的动作</li>
+<li>对于一个进程 <span class="math inline">\(p=(E, \le, \alpha)\)</span>
+，我们说两个事件 <span class="math inline">\(e_1,e_2 \in E\)</span>
+是并发的，若
+<ul>
+<li><span class="math inline">\(\neg(e 1 \leq e 2 \lor e 2 \leq e
+1)\)</span></li>
+</ul></li>
+<li>一个进程是有限的，若事件集合有限</li>
+<li>一个进程是序列的sequentiell, 若关系 <span
+class="math inline">\(\le\)</span> 是一个线性关系</li>
+</ul>
+<h4 id="动作间的因果关系">动作间的因果关系</h4>
+<ul>
+<li><p>真因果关系</p>
+<p><span class="math inline">\(e\)</span> 是 <span
+class="math inline">\(d\)</span> 的原因，若 <span
+class="math inline">\(d\)</span> 没有 <span
+class="math inline">\(e\)</span> 永不发生</p></li>
+<li><p>时间关系</p>
+<p><span class="math inline">\(e\)</span> 的结束在 <span
+class="math inline">\(d\)</span> 的开始之前</p>
+<p>因果关系可以推出时间关系</p></li>
+<li><p>系统限制</p>
+<p><span class="math inline">\(e\)</span> 不允许与 <span
+class="math inline">\(d\)</span> 并发运行</p></li>
+</ul>
+<h3 id="序列化">序列化</h3>
+<p>通过序列化可以简化并发过程</p>
+<p>我们可以通过拓扑排序来序列化。</p>
+<h3 id="状态自动机">状态自动机</h3>
+<h3 id="佩特里网-petri-netze">佩特里网 Petri-Netze</h3>
+<p>它是一个除了 Aktionsstruktur 图形化建模的另一种选择数</p>
+<h4 id="定义-1">定义</h4>
+<p>它是一个三元组 <span class="math inline">\((S,T,F)\)</span> ,</p>
+<ul>
+<li><p><span class="math inline">\(S\)</span> 是位置 Stelle(用圆形表示)
+, 它可以表示被动单元如存储单元</p></li>
+<li><p><span class="math inline">\(T\)</span> 是传递
+Transition(用方形表示)，它可以表示动态单元如进程</p></li>
+<li><p>S 和 T 没有交集</p></li>
+<li><p><span class="math inline">\(F\)</span> 是 Flussrelation , <span
+class="math inline">\(\mathrm{F} \subseteq(\mathrm{S} \times \mathrm{T})
+\cup(\mathrm{T} \times \mathrm{S})\)</span></p></li>
+<li><p><span class="math inline">\(F\)</span>
+在图上面用有向箭头表示</p></li>
+<li><p>对于一个节点<span class="math inline">\(x \in (S \cup
+T)\)</span>来说</p>
+<ul>
+<li>Vorbereich: <span class="math inline">\(\cdot x=\{y \mid y F
+x\}\)</span> 是前驱</li>
+<li>Nachbereich: <span class="math inline">\(x^{\bullet}=\{y \mid x F
+y\}\)</span> 是后继</li>
+</ul></li>
+</ul>
+<p>比如下面这个就是一个Petri-Netze</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201216184040070.png"
+alt="image-20201216184040070" />
+<figcaption aria-hidden="true">image-20201216184040070</figcaption>
+</figure>
+<h4 id="改善">改善</h4>
+<p>佩特里网可以一步步简化</p>
+<ul>
+<li>Transition 可以简化成一个黑盒</li>
+<li>总的结构保持不变</li>
+<li>里面的结构可以还有Stelle 和 Transition</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201216184409212.png"
+alt="image-20201216184409212" />
+<figcaption aria-hidden="true">image-20201216184409212</figcaption>
+</figure>
+<h4 id="佩特里网的动态表现">佩特里网的动态表现</h4>
+<p><strong>定义：标记网Markiertes
+Netz,Stellen-Transitonsnetz</strong></p>
+<p>给定一个佩特里网 <span class="math inline">\((S,T,F)\)</span></p>
+<ul>
+<li>一个 Stelle 的 Kapazität 是一个映射 <span class="math inline">\(c:
+S\rightarrow \mathrm{IN} \cup \{\infin\}\)</span> 如果没有默认标记为
+<span class="math inline">\(\infin\)</span></li>
+<li>一个边的重量 Gewichtung 是映射 <span
+class="math inline">\(\mathrm{w}: \mathrm{F} \rightarrow \mathrm{IN}
+\cup\{0\}\)</span> 如果没有默认标记为 <span
+class="math inline">\(1\)</span></li>
+</ul>
+<p>一个 Stellen-Transitionsnetz 是一个以自然数标记的网络: <span
+class="math inline">\(M: S \rightarrow N\)</span></p>
+<ul>
+<li>自然数标记的 Stellen 是这个网络的状态</li>
+<li>必须满足 <span class="math inline">\(\forall s \in S ,M(s) \leq
+c(s)\)</span></li>
+<li>一个标记也可以说是一个 Token</li>
+</ul>
+<p>一个条件/布尔网络也可以 <span class="math inline">\(M: S \rightarrow
+IB\)</span></p>
+<h4 id="定义开关条件">定义：开关条件</h4>
+<p>给定一个佩特里网 <span class="math inline">\((S,T,F)\)</span> , 函数
+<span class="math inline">\(c,w\)</span> 和开始标记 <span
+class="math inline">\(M_0\)</span></p>
+<ul>
+<li>状态转移在打开一个 Transiton 后开始</li>
+<li>Transition 的打开时间在这个模型中忽略不计</li>
+</ul>
+<p>一个 Transition <span class="math inline">\(t \in T\)</span>
+可以打开，若</p>
+<p>$s t $ 满足 <span class="math inline">\(\mathrm{M}(\mathrm{s}) \geq
+\mathrm{w}((\mathrm{s}, \mathrm{t}))\)</span></p>
+<p><span class="math inline">\(\forall s \in t \cdot\)</span> 满足 <span
+class="math inline">\(\mathrm{M}(\mathrm{s}) \leq
+\mathrm{c}(\mathrm{s})-\mathrm{w}((\mathrm{t}, \mathrm{s}))\)</span></p>
+<p>开启之后，状态的变化后的 <span class="math inline">\(M&#39;\)</span>
+是</p>
+<p>$s t t $ 满足 <span
+class="math inline">\(\mathrm{M}^{\prime}(\mathrm{s})=\mathrm{M}(\mathrm{s})-\mathrm{w}((\mathrm{s},
+\mathrm{t}))\)</span></p>
+<p>$s’ tt $ 满足 <span
+class="math inline">\(\mathrm{M}^{\prime}(\mathrm{s&#39;})=\mathrm{M}(\mathrm{s&#39;})-\mathrm{w}((\mathrm{t},
+\mathrm{s&#39;}))\)</span></p>
+<p>$s’’ t t $ 满足 <span
+class="math inline">\(\mathrm{M}^{\prime}\left(\mathrm{s}^{\prime
+\prime}\right)=\mathrm{M}\left(\mathrm{s}^{\prime
+\prime}\right)-\mathrm{w}\left(\left(\mathrm{s}^{\prime \prime},
+\mathrm{t}\right)\right)+\mathrm{w}\left(\left(\mathrm{t},
+\mathrm{s}^{\prime \prime}\right)\right)\)</span></p>
+<p>其他的满足 <span
+class="math inline">\(\mathrm{M}^{\prime}(\mathrm{s})=\mathrm{M}(\mathrm{s})\)</span></p>
+<h3 id="建模系统性质">建模系统性质</h3>
+<ul>
+<li>子系统 Nebenläufige Systeme</li>
+</ul>
+<p>例子：4个活动 <span class="math inline">\(t1,...,t4\)</span> ，</p>
+<p><span class="math inline">\(t1\)</span> 结束后，开始 <span
+class="math inline">\(t2,t3\)</span></p>
+<p>s在 <span class="math inline">\(t2,t3\)</span> 结束后才能开始 <span
+class="math inline">\(t4\)</span></p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201216194639052.png"
+alt="image-20201216194639052" />
+<figcaption aria-hidden="true">image-20201216194639052</figcaption>
+</figure>
+<ul>
+<li>非确定性</li>
+</ul>
+<p>下面的那个标记不一定会走哪一边</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20201216194933199.png"
+alt="image-20201216194933199" />
+<figcaption aria-hidden="true">image-20201216194933199</figcaption>
+</figure>
+<h4 id="可到达性-erreichbarkeit">可到达性 Erreichbarkeit</h4>
+<p>一个网络可以从一个状态到达另一个状态吗</p>
+<p><strong>定义：Erreichbarkeit</strong></p>
+<p>给定一个佩特里网 <span class="math inline">\((S,T,F)\)</span>
+和一个标记 <span class="math inline">\(M\)</span></p>
+<p>一个有限的序列 <span class="math inline">\(\rho=t_{1}, t_{2}, \ldots,
+t_{n}\)</span> 是 <span class="math inline">\(M\)</span>
+的激活序列，那么 <span class="math display">\[
+M_{0} \stackrel{t_{1}}{\longrightarrow} M_{1}
+\stackrel{t_{2}}{\longrightarrow} \ldots
+\stackrel{t_{n}}{\longrightarrow} M_{n}, \text { also } M_{0}
+\stackrel{\rho}{\longrightarrow} M_{n}
+\]</span> <span class="math inline">\(M&#39;\)</span> 是从 <span
+class="math inline">\(M\)</span> 可以到大的，若存在一个从 <span
+class="math inline">\(M\)</span> 到 <span
+class="math inline">\(M&#39;\)</span> 的序列</p>
+<h4 id="活跃性-lebendigkeit">活跃性 Lebendigkeit</h4>
+<p><strong>定义 : Lebendigkeit</strong></p>
+<p>给定一个佩特里网 <span class="math inline">\((S,T,F)\)</span>
+和一个开始状态 <span class="math inline">\(M_0\)</span></p>
+<p>这个网络是活跃的，若对于每个可到达的 <span
+class="math inline">\(M\)</span> ，并且对于每个Transition <span
+class="math inline">\(t \in T\)</span> 存在一个 <span
+class="math inline">\(M&#39;\)</span> 使得，从 <span
+class="math inline">\(M\)</span> 可到达，并且 <span
+class="math inline">\(t\)</span> 是可以传递的</p>
+<p><strong>定义：Verklemmung</strong></p>
+<p>给定一个佩特里网 <span class="math inline">\((S,T,F)\)</span>
+和一个开始状态 <span class="math inline">\(M_0\)</span></p>
+<p>从 <span class="math inline">\(M_0\)</span> 出发的一个可到达的状态
+<span class="math inline">\(M\)</span>
+是一个完全死锁，若它没有可以打开的 Transition</p>
+<p><strong>局部死锁 lokale Verklemmung</strong></p>
+<p>从 <span class="math inline">\(M_0\)</span> 出发可以到大的 <span
+class="math inline">\(M\)</span> 是局部死锁，若存在 <span
+class="math inline">\(t\in T\)</span> , 使得没有 <span
+class="math inline">\(M\)</span> 以及 <span
+class="math inline">\(M\)</span>的后续状态 <span
+class="math inline">\(M&#39;\)</span> 可以让 <span
+class="math inline">\(t\)</span> 继续传递</p>
+<h4 id="公平-fairness">公平 Fairness</h4>
+<p>对于一个Transiton <span class="math inline">\(t\)</span> 是不公平
+unfair 的，若 <span class="math inline">\(t\)</span>
+可以无限次transitionsbereit</p>
+<h4 id="饥饿-verhungern">饥饿 Verhungern</h4>
+<p>一个 <span class="math inline">\(t\)</span>
+是饥饿的，若存在一个无穷序列，其中 <span
+class="math inline">\(t\)</span> 没有出现过</p>
+<h2 id="进程通信-ipc">进程通信 IPC</h2>
+<h3 id="通信的带宽">通信的带宽</h3>
+<ul>
+<li>窄带通道 Schmalbandige Kanäle</li>
+</ul>
+<p>携带少量信息，事件，需要同步和打断</p>
+<p>比如Linux的信号</p>
+<ul>
+<li>宽带通道 Breitbandige Kanäle</li>
+</ul>
+<p>携带大量信息</p>
+<h3 id="隐式通信">隐式通信</h3>
+<p>在共同的操作媒介上的隐式通信</p>
+<p>Vorteil: Einfach und schnell, da kein Kopieren zwischen
+Adressräumen</p>
+<p>例如：存储器，寄存器，文件</p>
+<h3 id="显示通信">显示通信</h3>
+<p>发送信息</p>
+<p>如: send, recv 函数</p>
+<h3 id="同步和异步">同步和异步</h3>
+<p>进程间的耦合度 Kopplungsgrad</p>
+<p>同步：两个进程间在信息传递的时候同步，阻塞。</p>
+<p>异步：结合发送和收取，非阻塞。</p>
+<h3 id="异步通知-asynchrone-meldung">异步通知 Asynchrone Meldung</h3>
+<p>发送端把消息发送给操作系统的消息处，然后接收者接收消息。如果没有消息，那么接收端会阻塞。其中发送端不会等待接收端接收到消息，发送端非阻塞。</p>
+<h3 id="同步通知-synchrone-meldung">同步通知 Synchrone Meldung</h3>
+<p>发送选发送消息后 ，会阻塞并且等待接收端确认收到消息。</p>
+<h4 id="同步和异步的优缺点">同步和异步的优缺点</h4>
+<p>Vorteile von asynchronem Senden:</p>
+<ul>
+<li>Nützlich für Echtzeitanwendungen, wenn sendender Prozess nicht
+blockiert werden darf</li>
+<li>Ermöglicht parallele Abarbeitung durch Sender und Empfänger</li>
+<li>Anwendbar zum Signalisieren von Ereignissen</li>
+</ul>
+<p>Nachteile</p>
+<ul>
+<li>Verwaltungsoverhead im Betriebssystem (Puffer für Nachrichten)</li>
+<li>Behandlung von Fehlern schwieriger</li>
+<li>Keine direkte Benachrichtigung des Senders möglich</li>
+<li>Paketverlust (durch volle Puffer, insbesondere bei
+Netzkommunikation)</li>
+<li>Wiederholung von Paketen</li>
+</ul>
+<h2 id="存储管理">存储管理</h2>
+<h4 id="von-neumann-flaschenhals">Von-Neumann-Flaschenhals</h4>
+<p>Der Von-Neumann-Flaschenhals bezeichnet die zunehmende Diskrepanz der
+Geschwindigkeiten von Prozessor und Hauptspeicher.</p>
+<p>Dem Problem begegnet man üblicher Weise durch Einführung einer
+Speicherhierarchie.</p>
+<h3 id="要求">要求</h3>
+<ul>
+<li><p>理想世界</p>
+<p>内存无限大，无限快</p></li>
+<li><p>现实</p>
+<p>高速的内存很贵</p></li>
+<li><p>结果</p>
+<p>大量的数据存储在较慢的硬盘里</p>
+<p>处理数据，先加载到内存中</p>
+<p>内存资源很少</p></li>
+<li><p>其他问题</p>
+<p>处理器一直在进步，但是内存读取时间没有</p></li>
+</ul>
+<h3 id="存储器层次">存储器层次</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210217194607575.png"
+alt="image-20210217194607575" />
+<figcaption aria-hidden="true">image-20210217194607575</figcaption>
+</figure>
+<h3 id="地址空间概念">地址空间概念</h3>
+<ul>
+<li><p>管理物理存储器</p>
+<p>所有程序有对物理存储器的全部的存取权限</p></li>
+<li><p>问题</p>
+<ul>
+<li>每个程序可能会占用整个内存</li>
+<li>程序可能会让在内存中的操作系统瘫痪</li>
+<li>程序会互相干扰</li>
+</ul></li>
+<li><p>解决办法：抽象化物理内存</p>
+<ul>
+<li>引入地址空间的概念</li>
+<li>进程可以读取的虚拟的存储单元</li>
+<li>每个进程有独立的地址空间</li>
+</ul></li>
+</ul>
+<h3 id="通过操作系统管理地址空间">通过操作系统管理地址空间</h3>
+<ul>
+<li>内存的物理地址空间
+<ul>
+<li>从0开始的带编号的字节</li>
+<li>一个字节的位置(物理地址) 描述了它在物理上的内存地址</li>
+</ul></li>
+<li>进程的逻辑地址空间
+<ul>
+<li>可以访问的存储集合</li>
+<li>用虚拟地址来描述它在逻辑地址空间的位置</li>
+<li>在一个4GB大小的逻辑地址空间使用大小为32bit的地址</li>
+</ul></li>
+<li>内存映射
+<ul>
+<li>从逻辑地址空间映射到物理地址空间</li>
+</ul></li>
+</ul>
+<h3 id="直接寻址">直接寻址</h3>
+<ul>
+<li>每个虚拟地址对应一个物理地址</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210217195859969.png"
+alt="image-20210217195859969" />
+<figcaption aria-hidden="true">image-20210217195859969</figcaption>
+</figure>
+<p>比如：8080, Z80, 6502</p>
+<ul>
+<li>多个程序可以在这里运行</li>
+<li>选择1：交换
+<ul>
+<li>在每个时间点只允许1个程序运行</li>
+<li>如果要运行其他程序，那么先把当前的运行状态保存到硬盘里</li>
+<li>很慢</li>
+</ul></li>
+<li>选择2：重定位
+<ul>
+<li>程序在不同的位置加载</li>
+<li>加载的时候需要再计算物理地址的位置</li>
+<li>代价昂贵</li>
+<li>程序会相互影响</li>
+</ul></li>
+</ul>
+<h3 id="基地址寻址basis-adressierung">基地址寻址Basis-Adressierung</h3>
+<ul>
+<li>每个进程有个基地址</li>
+<li>在进程开始时，基地址会加载到 Basisregister 里</li>
+<li>地址计算
+<ul>
+<li>物理地址=逻辑地址+基地址</li>
+</ul></li>
+<li>优点：
+<ul>
+<li>操作系统可以可以移动在内存中的程序 relocation</li>
+<li>多个进程可以同时在内存中</li>
+</ul></li>
+<li>缺点：需要很多加法操作，代价昂贵</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210217200920193.png"
+alt="image-20210217200920193" />
+<figcaption aria-hidden="true">image-20210217200920193</figcaption>
+</figure>
+<h3 id="段寻址-segmentadressierung">段寻址 Segmentadressierung</h3>
+<ul>
+<li>把地址空间分成不同长度的逻辑线段
+<ul>
+<li>比如进程有： Stack- , Daten-, Code-Segment</li>
+</ul></li>
+<li>线段化的使用
+<ul>
+<li>不同线段有不同权限</li>
+</ul></li>
+<li>段寻址：每个段都需要
+<ul>
+<li>一个段开始地址，对应基地址</li>
+<li>段的长度</li>
+</ul></li>
+<li>CPU有一个Segmentregister</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210217201444452.png"
+alt="image-20210217201444452" />
+<figcaption aria-hidden="true">image-20210217201444452</figcaption>
+</figure>
+<h3 id="段寻址交换swapping">段寻址：交换Swapping</h3>
+<ul>
+<li>有时候内存会满</li>
+<li>进程会暂时放在硬盘上</li>
+<li>如果有空间了还会放回来</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210217201740442.png"
+alt="image-20210217201740442" />
+<figcaption aria-hidden="true">image-20210217201740442</figcaption>
+</figure>
+<ul>
+<li>如果程序增长会怎么样</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210217201856780.png"
+alt="image-20210217201856780" />
+<figcaption aria-hidden="true">image-20210217201856780</figcaption>
+</figure>
+<h3 id="空余内存分配">空余内存分配</h3>
+<ul>
+<li>空闲内存管理的数据结构
+<ul>
+<li>Bitmap</li>
+<li>链表</li>
+</ul></li>
+<li>空闲存储区域管理的策略
+<ul>
+<li>First Fit，Next Fit，Best Fit，Worst-Fit</li>
+<li>Buddy算法</li>
+</ul></li>
+</ul>
+<h4 id="数据结构bitmap">数据结构：Bitmap</h4>
+<ul>
+<li>把内存分为相同大小的块</li>
+<li>改内存占用了则为1，空闲则为0</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210217202337636.png"
+alt="image-20210217202337636" />
+<figcaption aria-hidden="true">image-20210217202337636</figcaption>
+</figure>
+<ul>
+<li><p>问题：选择块的大小</p>
+<ul>
+<li>块太小：需要的Bitmap很大</li>
+<li>块太大：浪费内存的风险</li>
+</ul></li>
+<li><p>Bitmap的有点</p>
+<p>简单快速的读取速度</p></li>
+<li><p>缺点</p>
+<p>若进程P要k个主内存块，那么久需要k个连在一起的内存块.
+那么就需要线性查找的时间。</p></li>
+</ul>
+<h4 id="链表">链表</h4>
+<ul>
+<li>给定若干长度为b的内存块</li>
+<li>操作系统维护一个存放连接内存块的链表</li>
+<li>每个区域要么是有个进程P，要么空闲F</li>
+<li>每个列表的格子包含
+<ul>
+<li>该区域的开始地址</li>
+<li>区域长度</li>
+<li>指向下一个格子的指针</li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210218205534021.png"
+alt="image-20210218205534021" />
+<figcaption aria-hidden="true">image-20210218205534021</figcaption>
+</figure>
+<ul>
+<li><p>优点</p>
+<p>弹性的内存分配</p></li>
+<li><p>缺点</p>
+<p>线性查找，没有固定管理结构，会动态增长</p></li>
+<li><p>优化方案</p>
+<ul>
+<li>分离出占用和空闲两个链表</li>
+<li>对大小排序</li>
+<li>用树结构管理</li>
+</ul></li>
+</ul>
+<h3 id="占用策略belegungstrategien">占用策略Belegungstrategien</h3>
+<ul>
+<li>内存释放和空闲区域的合并
+<ul>
+<li>使用双向链表简化链表管理</li>
+<li>优点：对起始地址排序</li>
+</ul></li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210218205857769.png"
+alt="image-20210218205857769" />
+<figcaption aria-hidden="true">image-20210218205857769</figcaption>
+</figure>
+<ul>
+<li>问题：不能合并空闲区域</li>
+<li>后果：内存随时间肢解</li>
+<li>需要高效的内存占用策略</li>
+</ul>
+<h4 id="first-fit">First-Fit</h4>
+<ul>
+<li><p>从链表的开始寻找空闲区域</p>
+<ul>
+<li>第一个空闲区域被占用</li>
+<li>不需要的空间会加入到空闲列表</li>
+</ul></li>
+<li><p>优点</p>
+<p>简单，快速找到一个合适的空闲区域</p></li>
+</ul>
+<h4 id="next-fit">Next-Fit</h4>
+<ul>
+<li>一种First-Fit
+<ul>
+<li>从上次占用区域开始寻找空闲区域</li>
+</ul></li>
+</ul>
+<h4 id="best-fit和worst-fit">Best-Fit和Worst-Fit</h4>
+<ul>
+<li><p>Best-Fit</p>
+<p>完全查找链表的空闲区域，最少的零头被占用</p></li>
+<li><p>Worst-Fit</p>
+<p>完全查找链表的空闲区域，最大的零头被占用</p></li>
+</ul>
+<h3 id="buddy算法">Buddy算法</h3>
+<ul>
+<li>管理内存大小为 <span class="math inline">\(2^k\)</span> 的块，其中
+<span class="math inline">\(l \le k \le u\)</span></li>
+<li><span class="math inline">\(2^l\)</span> 最小的可被占用的内存块</li>
+<li><span class="math inline">\(2^u\)</span> 最大的可被占用的内存块</li>
+<li>通常来说 <span class="math inline">\(2^u\)</span>
+是整个可以占用的内存</li>
+</ul>
+<h4 id="内存占用">内存占用</h4>
+<ul>
+<li><p>开始有一个长度为 <span class="math inline">\(2^u\)</span>
+大小的连续区域</p></li>
+<li><p>系统为长度为<span
+class="math inline">\(2^i\)</span>的块管理一个空闲链表</p></li>
+<li><p>开始只有一个链表，管理大小为 <span
+class="math inline">\(2^u\)</span> 的块</p></li>
+<li><p>占用大小为 <span class="math inline">\(s\)</span> 区域的要求</p>
+<ul>
+<li><p>若 <span class="math inline">\(2^{u-1}&lt;s\le 2^u\)</span></p>
+<p>那么那么整个空闲的 <span class="math inline">\(2^u\)</span> 大小的
+块被占用，并且从空闲链表中移除</p></li>
+<li><p>否则</p>
+<p>这个块会从<span class="math inline">\(2^u\)</span>
+的空闲链表中移除，并且分成2个大小为<span
+class="math inline">\(2^{u-1}\)</span> 的块。如果大小合适 <span
+class="math inline">\(2^{u-2}&lt;s\le2^{u-1}\)</span>
+那么就停止，否则继续分解，知道最小的块被找到</p></li>
+</ul></li>
+</ul>
+<h4 id="评价">评价</h4>
+<ul>
+<li>非常快速实现，有效率的查找</li>
+<li>零头最多是一半的块</li>
+<li>融合很快速</li>
+</ul>
+<h3 id="分段fragmentierung">分段Fragmentierung</h3>
+<ul>
+<li><p>内部分段</p>
+<p>在块状分配内存是需要</p></li>
+<li><p>外部分段</p></li>
+</ul>
+<h3 id="虚拟存储virtueller-speicher">虚拟存储Virtueller Speicher</h3>
+<ul>
+<li><p>问题</p>
+<p>虚拟进程地址空间会比现有的物理内存的大小大</p>
+<p>手动分配虚拟地址很麻烦</p>
+<p>操作系统应该自己解决这个问题</p></li>
+<li><p>解决方案：虚拟内存管理Paging</p></li>
+</ul>
+<h3 id="分页paging">分页Paging</h3>
+<ul>
+<li>虚拟地址空间被分成很多页</li>
+<li>内存是分成很多物理框架的Kacheln</li>
+<li>操作系统的任务是把分页映射到物理框架上</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210219194826300.png"
+alt="image-20210219194826300" />
+<figcaption aria-hidden="true">image-20210219194826300</figcaption>
+</figure>
+<ul>
+<li><p>分页表</p>
+<p>管理从分页到框架的映射</p>
+<p>操作系统为每一个程序管理一个分页表</p>
+<p>交换进程的时候，新的程序分页表的开始地址会加载到CPU的分页表寄存器Sitentabellenregister里</p></li>
+<li><p>页错误</p>
+<p>在调用一个没有框架的虚拟地址</p></li>
+<li><p>嵌入页</p>
+<p>若所有框架都被占用，那么页必须被更换</p></li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210219200548456.png"
+alt="image-20210219200548456" />
+<figcaption aria-hidden="true">image-20210219200548456</figcaption>
+</figure>
+<h4 id="计算地址映射">计算地址映射</h4>
+<p>虚拟地址 <span class="math inline">\(v=(s,w)\)</span>
+，s是分页表的编号，w是偏移量</p>
+<p>物理地址 <span
+class="math inline">\(p=(k,w)\)</span>，k是框架的编号</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210219200627392.png"
+alt="image-20210219200627392" />
+<figcaption aria-hidden="true">image-20210219200627392</figcaption>
+</figure>
+<p>例如下面是一个例子</p>
+<p>16Bit虚拟地址空间，4K的分页表大小。这说明地址空间被分成16页，需要4Bit表示分页编号，12bit表示4096Byte的偏移量</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210219200848770.png"
+alt="image-20210219200848770" />
+<figcaption aria-hidden="true">image-20210219200848770</figcaption>
+</figure>
+<h3 id="mmu内存管理单元">MMU内存管理单元</h3>
+<p>Memory Management Unit是硬件的一部分，用于计算地址。</p>
+<p>地址映射很非时间，用缓存来解决</p>
+<h3 id="tlb">TLB</h3>
+<p>Translation Lookaside Buffer</p>
+<p>从分页映射到内存的缓存，先在TLB查找，如果找不到，再到映射表里面找</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210219195518751.png"
+alt="image-20210219195518751" />
+<figcaption aria-hidden="true">image-20210219195518751</figcaption>
+</figure>
+<h3 id="分页错误">分页错误</h3>
+<ul>
+<li>当Pbit没有被设置</li>
+<li>硬件出错</li>
+<li>出错后运行Page-Fault-Handlers</li>
+</ul>
+<h3 id="查找过程">查找过程</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210219202726454.png"
+alt="image-20210219202726454" />
+<figcaption aria-hidden="true">image-20210219202726454</figcaption>
+</figure>
+<h3 id="fifo策略">FIFO策略</h3>
+<p>每次弹出最老的那一页。这样就没办法考虑“经常性使用的变量”</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210219204130036.png"
+alt="image-20210219204130036" />
+<figcaption aria-hidden="true">image-20210219204130036</figcaption>
+</figure>
+<h2 id="文件系统">文件系统</h2>
+<h3 id="文件系统的要求">文件系统的要求</h3>
+<ul>
+<li>Speicherplatz für (sehr) große Datenmengen bereitstellen</li>
+<li>Datenverlust vermeiden</li>
+<li>Nebenläufigen Zugriff auf Daten ermöglichen</li>
+</ul>
+<h3 id="文件">文件</h3>
+<p>Dateien als zu verwaltende Einheiten</p>
+<ul>
+<li>Dateien können von unterschiedlichen Prozessen genutzt werden</li>
+<li>Dateien müssen benannt werden: bei ihrer Erzeugung erhält eine Datei
+einen Namen</li>
+</ul>
+<h4 id="文件类型">文件类型</h4>
+<ul>
+<li><p>普通文件 Dateien (engl. regular files) enthalten
+Benutzerdaten</p>
+<ul>
+<li>Textdatei, Binärdateien</li>
+</ul></li>
+<li><p>Verzeichnisse</p></li>
+<li><p>字符特殊文件 Character Special Files</p>
+<p>用于串行IO设备</p></li>
+<li><p>块特殊文件 Block Special Files</p>
+<p>磁盘类文件</p></li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210302105311455.png"
+alt="image-20210302105311455" />
+<figcaption aria-hidden="true">image-20210302105311455</figcaption>
+</figure>
+<h4 id="文件访问">文件访问</h4>
+<ul>
+<li>Sequential access
+<ul>
+<li>Geeignet für Magnetbänder als Speichermedium, aber unflexibel</li>
+</ul></li>
+<li>Random-access
+<ul>
+<li>Random-access ist essentiell unter anderem in Datenbanksystemen •
+Der lseek Systemcall unter UNIX erlaubt es, die aktuelle Position in der
+Datei zu spezifizieren • Beispiel: lseek (fd, 10, SEEK_SET);</li>
+</ul></li>
+</ul>
+<h4 id="文件属性">文件属性</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210302110002905.png"
+alt="image-20210302110002905" />
+<figcaption aria-hidden="true">image-20210302110002905</figcaption>
+</figure>
+<h4 id="文件操作">文件操作</h4>
+<p>Erzeugen und Löschen einer Datei</p>
+<ul>
+<li>Open: Vor einem Zugriff auf eine Datei muss diese geöffnet werden •
+Damit lädt das BS die Dateiattribute und andere Infos in den
+Hauptspeicher, für eine schnelle Bearbeitung wichtig • Open liefert
+einen Datei-Deskriptor als Ausgabe, das ist ein kleiner Integerwert</li>
+<li>Unlink: entfernt eine Datei</li>
+</ul>
+<p>Nachfolgende Zugriffe auf die Datei unter Nutzung des
+Deskriptors.</p>
+<ul>
+<li>Close: Angabe des Datei-Deskriptors, Freigabe von internen
+Datenstrukturen, manche BS erlauben nur eine festgelegte Zahl von
+offenen Dateien pro Prozess</li>
+<li>Read: Angabe der gewünschten Daten und Angabe eines Puffers, in den
+die Daten geschrieben werden sollen.</li>
+<li>Write: Schreiben von Daten an der aktuellen Position Daten werden
+ggf. überschrieben</li>
+<li>Seek: Positionieren des Datei-Zeigers auf eine spezifische Position
+(ab der gelesen oder geschrieben werden soll)</li>
+</ul>
+<h3 id="文件夹">文件夹</h3>
+<ul>
+<li>一级目录系统</li>
+</ul>
+<p>Single-Level Verzeichnisstrukturen</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210302110315233.png"
+alt="image-20210302110315233" />
+<figcaption aria-hidden="true">image-20210302110315233</figcaption>
+</figure>
+<ul>
+<li>层次目录系统</li>
+</ul>
+<p>Hierarchische Verzeichnisstrukturen</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210302110327655.png"
+alt="image-20210302110327655" />
+<figcaption aria-hidden="true">image-20210302110327655</figcaption>
+</figure>
+<h3 id="路径名">路径名</h3>
+<ul>
+<li>绝对路径 Absolute Pfadnamen</li>
+<li>相对路径 Relative Pfadnamen</li>
+</ul>
+<h3 id="文件系统的实现">文件系统的实现</h3>
+<h4 id="文件系统布局">文件系统布局</h4>
+<p>磁盘被划分为分区Partitionen 磁盘的0区是主引导记录Master Boot Record
+(MBR)</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210302111142319.png"
+alt="image-20210302111142319" />
+<figcaption aria-hidden="true">image-20210302111142319</figcaption>
+</figure>
+<p>MBR
+的结尾是分区表。在计算机被引导时候，MBR先确定活动分区，入去引导块，并执行。引导块中的程序将装载该分区中的操作系统。</p>
+<h3 id="文件的实现">文件的实现</h3>
+<h4 id="连续分配-contiguous-allocation">连续分配 Contiguous
+Allocation</h4>
+<p>把每个文件作为一连串的数据存储到磁盘上 Vorteile: • Einfache
+Implementierung • Speichern der Adresse des ersten Blocks und Anzahl der
+Blöcke pro Datei • Lesen ist sehr performant • Nur eine
+Positionierungs-Operation für den Schreib/Lesekopf notwendig, um die
+gesamte Datei von der Platte einzulesen • Nachteile • (Externe)
+Fragmentierung • Mit der Zeit entstehen “Löcher” von freien
+Speicherbereichen • Defragmentierung des Speichers ist sehr
+zeitaufwendig</p>
+<h4 id="链表分配-linked-list-allocation">链表分配 Linked List
+Allocation</h4>
+<p>为每个文件创建磁盘块链表。每个块的第一个字作为指向下一个块的指针，块的其他部分存放数据</p>
+<p>Vorteile • Es geht kein Speicherplatz verloren • bis auf interne
+Fragmentierung im letzten Block • Nachteile • Niedrige Performance bei
+Random-Access • Um Block n zu finden, müssen die ersten n−1 Blöcke
+gelesen werden • Festplattenzugriff ist sehr langsam. • Größe des
+verfügbaren Speichers in einem Block keine 2er-Potenz • Zeiger auf den
+nächsten Block nimmt Platz im Block ein • Operationen nutzen i.d.R.
+Blockgrößen als Parameter • zum Lesen eines Bereichs, der eine
+Blockgröße umfasst, müssen 2 Blöcke geladen werden</p>
+<h4 id="linked-list-allocation-mit-file-allocation-table-fat">Linked
+List Allocation mit File Allocation Table (FAT)</h4>
+<p>采用内存中的表进行链表分配：
+去除每个磁盘块的指针字，把他们放在内存的一个表中。这样的表格叫文件分配表
+File Allocation Table (FAT)</p>
+<h4 id="i节点i-node">i节点（i-node）</h4>
+<p>给每个文件富裕一个称为i节点的数据结构，其中列出了文件属性和文件块的磁盘地址。给定i节点，就能找到文件的所有块。</p>
+<p>Vorteile • Ein i-node muss nur für eine geöffnete Datei in den
+Speicher geladen werden • Speicherbedarf proportional zur Anzahl von
+Dateien, die gleichzeitig geöffnet sein dürfen (nicht zur
+Festplattenkapazität) • Nachteile • Jeder i-node enthält eine feste
+Anzahl an Blockadressen: begrenzt max. Dateigröße • Umgehung: Der letzte
+i-node Eintrag zeigt auf einen Block mit weiteren Blockadressen</p>
+<h5 id="存储的einträge">存储的Einträge</h5>
+<p>• Typ (FIFO, Character device, Directory, Block device, Regular file,
+Symbolic link, Socket), • Besitzer (User und Gruppe), • Dateirechte, •
+verschiedene Timestamps (created, accessed, modified), • Anzahl der
+Hardlinks die auf den Inode verweisen, • Anzahl der Blöcke, •
+verschiedene Flags, • Adressen der referenzierten Blöcke (Single-,
+Double-, Triple-Indirection)</p>
+<h3 id="目录的实现">目录的实现</h3>
+<p>目录的任务：Pfadname auflösen, Datei auf der Festplatte finden</p>
+<ul>
+<li><p>Verzeichniseintrag</p>
+<p>Verzeichnisse bestehen aus einer Menge von Verzeichniseinträgen •
+Beispiel: /home/eva, /home/heinz, /home/karl • Verzeichnis /home enthält
+3 Dateien, mit jeweils einem Eintrag in /home</p></li>
+</ul>
+<p>不同的维护操作</p>
+<ol type="1">
+<li>把文件属性直接放在目录项中Direkt im Verzeichniseintrag</li>
+</ol>
+<p>Annahme, dass Dateinamen eine kurze (maximale) Länge haben • Wie
+können wir längere Dateinamen mit variabler Länge verwalten? •
+Dateinamenlänge limitieren • z.B. auf 255 Zeichen • Nicht alle
+Dateinamen sind gleich lang • Verschwendung von Speicherplatz</p>
+<ol start="2" type="1">
+<li>In den i-nodes • Verzeichniseintrag besteht nur aus dem Dateinamen
+und einer i-node Nummer.</li>
+</ol>
+<p>erzeichniseinträge mit Referenzen zum Heap, der die Datei-Namen
+speichert • Vorteil: Keine Fragmentierung beim Löschen von Dateien. Ein
+neuer Eintrag wird immer an die Stelle des gelöschten Eintrags passen •
+Problem • Suchen von Dateien in Verzeichnissen mit vielen Einträgen ist
+langsam</p>
+<h3 id="共享文件">共享文件</h3>
+<p>C的文件同时出现在B的目录下，这样的练习叫链接
+link，这样文件系统是一个有向无环图。 Zwei Ansätze</p>
+<ul>
+<li>Hard Links • Verzeichnisse verweisen auf i-nodes • i-nodes
+beschreiben die Dateien • Weitere Verweise auf i-nodes z ulassen • Keine
+Unterscheidung zwischen 1. und n. Link • i-nodes erhalten Reference
+Counts • Zeigt an, wann die Datenstruktur freigegeben warden kann •
+Erklärt den Namen des Systemcalls zum Löschen unter UNIX: unlink()</li>
+</ul>
+<p>删除时的i-node：</p>
+<p>Der Linkzähler wird um eins dekrementiert. Falls er danach auf 0
+steht, wird die Datei tatsächlich gelöscht.</p>
+<ul>
+<li>Symbolic Links • Erzeugen einer besonderen Datei mit Verweis auf die
+verlinkte Datei durch Angabe des Pfadnamens (je nach Länge in i-Node
+oder Datenblock)</li>
+</ul>
+<p>删除时的i-node：</p>
+<p>nichts passiert</p>
+<h4 id="journaling-dateisysteme">Journaling-Dateisysteme</h4>
+<p>日志结构文件系统 (Log-structured File System, LFS)</p>
+<h3 id="虚拟文件系统vfs">虚拟文件系统VFS</h3>
+<p>把多种文件系统统一成一个有序的结构。</p>
+<p>VFS stellt einheitliche (POSIX) Schnittstelle zur Verfügung • open,
+read, write, lseek usw.</p>
+<h3 id="文件系统优化">文件系统优化</h3>
+<ul>
+<li>Buffer Cache缓冲区告诉缓存</li>
+</ul>
+<h2 id="虚拟化">虚拟化</h2>
+<h4 id="虚拟化的要求">虚拟化的要求</h4>
+<ul>
+<li>Equivalence / Fidelity • Betriebssysteme und Anwendungen
+funktionieren ohne Änderungen • Ggf. minimale Änderungen / Ergänzungen
+am Gast-BS • Verhalten sich genauso wie auf einem nativen System</li>
+<li>Resource Control / Safety (Isolation) • Hypervisor muss in Kontrolle
+sein • Hypervisor schützt Ressourcen vor und Gast-BS gegeneinander</li>
+<li>Efficiency / Performance • Die meisten Instruktionen müssen ohne
+Intervention des Virtualisierungssystems ausgeführt werden •
+Virtualisierungssystem fügt eine weitere Software-Schicht hinzu
+(Overhead)</li>
+</ul>
+<h4 id="系统虚拟机">系统虚拟机</h4>
+<p>Virtual Machine Monitor (VMM) – Hypervisor</p>
+<h3 id="system-virtual-machines">System Virtual Machines</h3>
+<p>Virtual Machine Monitor (VMM) – Hypervisor – bietet eine
+Laufzeitumgebung für Betriebssysteme</p>
+<ul>
+<li>Typ 1 Hypervisor: Direkt auf der Hardware ausgeführt z.B. Xen,
+Hyper-V, VMware ESX</li>
+<li>Typ 2 Hypervisor: Verwendet Dienste des Host-BS z.B. KVM,
+VirtualBox, VMware Workstation</li>
+</ul>
+<p>Ein Typ I Hypervisor läuft direkt auf der Hardware, wobei ein Typ II
+Hypervisor als Teil des Betriebssystems ausgeführt wird.</p>
+<h4 id="原因">原因</h4>
+<ul>
+<li><p>Emulation • Betriebssysteme können auf verschiedenen ISAs
+ausgeführt werden • Debuggen von BS in Virtuellen Maschinen ist oft
+bequemer als auf der echten Hardware („Bare-Metal“) • ISA-Design: eine
+ISA ist einfacher in SW zu implementieren als in HW</p></li>
+<li><p>Isolation • Verschiedene BS laufen isoliert in einer VM auf der
+gleichen HW • Sandboxing von Gast-Betriebssystemen • Ein
+kompromittiertes Gast-BS kann weder den Zustand weiterer VMs auf dem
+System noch den Hypervisor selbst manipulieren</p></li>
+<li><p>Sicherheit • Security-Mechanismen im BS können durch Malware
+umgangen oder ausgeschaltet werden • Hypervisor ist leichter zu sichern
+(kleiner, höhere Privilegien) • Sicherheitsmechanismen für Gast-BS
+können im Hypervisor plaziert werden</p></li>
+<li><p>Ressourcennutzung • Hardware-Ressourcen können besser (flexibler)
+ausgeschöpft werden</p></li>
+</ul>
+<h4 id="cpu-虚拟化">CPU-虚拟化</h4>
+<ul>
+<li><p>Paravirtualization</p>
+<p>在VM中修改的操作系统,</p>
+<p>Gast VM 和 BS 合作</p></li>
+<li><p>Binary Translation</p></li>
+<li><p>Hardware-assisted Virtualization</p></li>
+<li><p>Privileged Instructions</p></li>
+<li><p>Sensitive Instructions</p></li>
+<li><p>Innocuous Instructions</p></li>
+</ul>
+<p>Hohe Komplexität im Hypervisor → Binary Translation,</p>
+<p>Dedizierte Geräte Treiber kommunizieren mit dem Hypervisor durch
+sog.</p>
+<p>Hypercalls → Para Virtualization,</p>
+<p>Benutzung von Intel VT-x, AMD-V, etc. → Hardware-assisted
+Virtualization,</p>
+<p>Kooperation zwischen dem BS in der Gast VM und dem Hypervisor → Para
+Virtualization,</p>
+<p>Hypervisor interpretiert/emuliert (Teile des) Binärcode(s) der
+Gast-VM in Software → Binary Translation,</p>
+<p>Modifiziertes Betriebssystem in VM → Para Virtualization</p>
+<h4 id="内存虚拟化">内存虚拟化</h4>
+<ul>
+<li>Betriebssystem hat normalerweise uneingeschränkte Kontrolle über den
+physischen Speicher • Verwalten virtuellen Speicher für Prozesse •
+Seitentabellen zur Abbildung auf den physischen Speicher</li>
+<li>Durch Virtualisierung konkurrieren plötzlich mehrere BS • Hypervisor
+ist die übergeordnete Instanz</li>
+</ul>
+<h4 id="shadow-page-tables-spt">Shadow Page Tables (SPT)</h4>
+<p>影子页表(shadow page table)</p>
+<h4 id="second-level-address-translation-slat">Second Level Address
+Translation (SLAT)</h4>
+<h4 id="io-virtualisierung">I/O-Virtualisierung</h4>
+<ul>
+<li><p>Full Virtualization/Emulation • Hypervisor multiplext oder
+emuliert virtuelle I/O-Geräte in Software • Gast-I/O-Anfragen vom
+Hypervisor abgefangen und an das I/O-Gerät geleitet • Vorteile •
+Gemultiplexte I/O-Geräte sind effizient • Transparentes
+Geräte-Management • Probleme • Hohe Komplexität in Software • Hypervisor
+benötigt Treiber für viele I/O-Geräte • Falls Geräte emuliert werden
+müssen, so entsteht ein hoher Overhead</p></li>
+<li><p>Paravirtualization • Verwendet eine Split-Driver-Architektur •
+Backend-Treiber: Dedizierte privilegierte VM greift direkt auf Geräte zu
+• Frontend-Treiber in Gast-VMs kommuniziert mit dem Backend-Treiber •
+Vorteile • Geringer Overhead • Im Vergleich zu Full Virtualization
+leichter zu implementieren • Adaption für Gast-BS: z.B. neue Geräte
+mittels bestehender Treiber anbieten • Probleme • Benötigt
+Modifikationen/Treiber im Gast-Betriebssystem</p></li>
+</ul>
+<h3 id="container">Container</h3>
+<h4 id="namespaces">Namespaces</h4>
+<p>Bieten per Namespace eine isolierte Sicht auf globale Ressourcen
+(Prozesse, Netzwerk, Mount-Points, etc.).</p>
+<h4 id="control-groups">Control Groups</h4>
+<p>Systemressourcen werden für Prozessgruppen allokiert/limitiert und
+überwacht.</p>
+<h4 id="seccomp">SECCOMP</h4>
+<p>Secure Computing Mode(SECCOMP) Systemressourcen werden für
+Prozessgruppen allokiert/limitiert und überwacht.</p>
+<h1 id="考试复习">考试复习</h1>
+<h4 id="betriebsmodi">Betriebsmodi</h4>
+<ul>
+<li><p>Benutzermodus 用户模式 Ausführung von Benutzer Prozessen kein
+direkter Zugriff auf Hardware kein oder nur lesender Zugriff auf
+Systemcode oder Dateien</p></li>
+<li><p>Systemmodus 系统模式 Ausführung des Betriebssystemkerns
+Ausführung von privilegierten Befehlen</p></li>
+</ul>
+<h3 id="systemaufruf系统调用">Systemaufruf系统调用</h3>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210301164146563.png"
+alt="image-20210301164146563" />
+<figcaption aria-hidden="true">image-20210301164146563</figcaption>
+</figure>
+<p>在Benutzermodi
+不会直接系统调用函数而是通过和Systembibilothek连接，调用的。
+系统调用会导致，从用户模式转化到系统模式
+系统调用是通过TRAP指令(SysCall)来实现的</p>
+<p>Systemcalls bieten dem Benutzermodus die Möglichkeit z.B. auf die
+Hardware zugreifen zu können.</p>
+<p>Eine Anwendung ruft im Benutzermodus eine Bibliotheksfunktion auf
+(z.B. printf).Bibliotheksfunktion ruft den Systemcall auf. Der
+Systemcall unterbricht den Prozess und wechselt in den Systemmodus, in
+dem er ausgeführt wird. Nachdem der Systemcall beendet ist wird der
+Prozess im Usermodus weiter ausgeführt.</p>
+<p>所有systemcall的列表：</p>
+<p>https://blog.csdn.net/wukery/article/details/79295567</p>
+<h4 id="读取文件最后200byte">读取文件最后200byte</h4>
+<p>• open: Öffnen der Datei. • seek|lseek: Setzen der Position auf die
+relative Länge - 200 Byte. • read: Lesen des Inhalts der Datei in einen
+Puffer. • printf: Ausgeben der Datei auf die Standardausgabe. • close:
+Schließen der Datei.</p>
+<h4 id="内存分配">内存分配</h4>
+<p>局部变量在Stack里，malloc的再堆里，地址指针的大小是和计算机的位数一样（64bit就是8Byte的指针）</p>
+<h4 id="posix函数">POSIX函数</h4>
+<ul>
+<li><p>Pipe</p>
+<p>Eine Pipe ist ein unidirektionaler Kommunikationskanal und hat damit
+immer ein lesendes und ein schreibendes Ende.</p></li>
+</ul>
+<p>• socket: Öffnen eines neuen Sockets. X • connect: Verbinden des
+Sockets zu einem Server. X • bind: Binden des Sockets an einen Port. X •
+listen: Warten auf eine neue eingehende Verbindung. X • accept: Offen
+der eingehenden Verbindung als eigener File Deskriptor. X • close:
+Schließen der Datei.</p>
+<p>例如：</p>
+<p>• Server: socket, bind, listen, accept, close (pro Client Socket),
+close (Server Socket) • Client: socket, connect, close</p>
+<h2 id="内存分配-1">内存分配</h2>
+<h4
+id="problem-direkter-adressierung-des-physischen-arbeitsspeichers">Problem
+direkter Adressierung des physischen Arbeitsspeichers</h4>
+<ol type="1">
+<li>Jedes Programm belegt potentiell den gesamten Hauptspeicher</li>
+<li>Maximal ein Prozess pro Zeiteinheit im Speicher</li>
+<li>Programme können das ebenfalls im Speicher befindliche
+Betriebssystem unbrauchbar machen</li>
+<li>Der Adressraum eines Prozesses ist beschränkt durch die Größe des
+physischen Speichers</li>
+</ol>
+<h4 id="adressierungen">Adressierungen</h4>
+<p>• Direkter Adressierung: Jede logische Adresse entspricht ihrer
+physischen Adresse. • Basisadressierung: Die Berechnung der physischen
+Adresse erfolgt beim Addieren der logischen und der Basisadresse. •
+Seitenadressierung: Das Betriebssystem verwaltet eine Seitentabelle, die
+virtuelle Adressen auf physische Adressen abbildet.</p>
+<h4 id="fragmentierung">Fragmentierung</h4>
+<p>Fragmentierung handelt es sich um Speicherbereiche, die nicht mehr
+verwendet werden können. • Interne Fragmentierung: Ungenutzte Bereiche
+eines Blocks (wenn Dateigröße &lt;&lt; Blockgröße) • Externe
+Fragmentierung: Dateien werden wenn möglich in aufeinanderfolgenden
+Blöcken gespeichert. Wenn nur noch einzelne Blöcke und keine langen
+Bereiche zusammenhängender freier Blöcke vorhanden sind, spricht man von
+externer Fragmentierung.</p>
+<p>• Interne Fragmentierung: Verkleinerung der Blockgröße. • Externe
+Fragmentierung: Neuordnung (Defragmentierung) der fragmentierten
+Blöcke.</p>
+<h4 id="belay-anomalie">Belay-Anomalie</h4>
+<p>Die Belady-Anomalie kann beim
+FIFO-SeitenersetzungsverfahrenXauftreten. Sie beschreibt, dass das
+Erhöhen der Kachelzahl in einem Rechensystem zu mehr
+SeitenfehlernXführen kann (anstatt intuitiv zu weniger).</p>
+<h2 id="多线程系统">多线程系统</h2>
+<h4 id="pcb">PCB</h4>
+<p>Der Scheduler wählt gemäß seiner Schedulingstrategie einen Prozess
+aus der Liste der rechenwilligen Prozesse, der als nächstes die CPU
+zugewiesen bekommen soll.</p>
+<p>• Der Dispatcher ist für den eigentlichen Kontextwechsel zuständig. •
+Z.B. Bei preemptive Scheduling-Strategien, entzieht der Dispatcher dem
+rechnenden Prozess die CPU und weist sie dem nächsten, vom Scheduler
+ausgewählten Prozess zu. • Der PCB enthält alle für diese Aufgaben
+relevanten Informationen und Datenstrukturen</p>
+<h4
+id="datenstrukturen-beim-prozesskontrollblock-pcb-für-einen-prozesswechsel-benötigt-werden">Datenstrukturen
+beim Prozesskontrollblock (PCB) für einen Prozesswechsel benötigt
+werden</h4>
+<p>• Run Queue:Verwaltet Prozesse, die sich im Zustand rechenwillig
+befinden. Der Scheduler entscheidet, welcher dieser Prozesse als
+nächstes die CPU bekommen soll. • Wait Queue:Verwaltet Prozesse, die
+blockiert bzw. im Zustand wartend sind. Der Dispatcher legt blockierende
+Prozesse in die Wait Queue.</p>
+<h4 id="schedulingverfahren">Schedulingverfahren</h4>
+<p>• Batch-Systeme: – FCFS (non-preemptive), SJF (non-preemptive), SRTN
+• Interaktive Systeme: – Round-Robin (preemptive), Priority Scheduling
+(preemptive) • Echtzeit Systeme:<br />
+– EDF (preemptive/non-preemptive) – RMS (non-preemptive)</p>
+<p>Preemptive Scheduling : Prozesse können vom Scheduler unterbrochen
+werden (SRTN ) • Non-Preemptive Scheduling : Der aktuell ausführende
+Prozess wird so lange ausgeführt bis er (i) terminiert oder (ii)
+blockiert (SJF ).</p>
+<p>SRTN Scheduling ist die unterbrechbare Variante von SJFX. Das Problem
+an SRTN ist, dass man die Rechenzeit der Prozesse im Voraus kennen muss
+. Dies ist in der Praxis nicht immer möglich</p>
+<h4 id="kontextwechseln">Kontextwechseln</h4>
+<p>• Die Aufgabe wird vom Dispatcher übernommen. Dieser entzieht dem
+rechnenden Prozess die CPU und teilt sie einem rechenbereitem Prozess
+zu. • Ändern des Zustands des rechnenden Prozesses zu wartend oder
+rechenbereit. • Sichern des PCB (TCB) des alten Prozesses • Laden des
+PCB des neuen Prozesses • Ändern des Zustands des neuen, rechenbereiten,
+Prozesses zu rechnend.</p>
+<h4 id="thread-und-prozesse">Thread und Prozesse</h4>
+<p>Prozesse besitzen einen eigenen (virtuellen) Adressraum.</p>
+<p>Threads führen den Programmcode aus und teilen sich die Ressourcen
+(den Adressraum) eines Prozesses</p>
+<p>Um Race Conditions zu vermeiden müssen Threads eines Prozesses
+synchronisiert werden</p>
+<h4 id="pid">PID</h4>
+<p>Jeder Prozess hat eine eindeutige Prozess ID (PID) die den Prozess
+identifiziert.X • Jeder Prozess (bis auf Init) besitzt einen
+Vaterprozess. Diese Zuordnung wird in der Parent PID (PPID) verwaltetX.
+• Jeder Prozess inkl. Kinder formen eine Prozessgruppe (PGID)</p>
+<h4 id="zombie-und-waise">Zombie und Waise</h4>
+<p>• Waisen: Der Kindprozess verwaist, wenn der Vaterprozess sich
+beendet, bevor der Kindprozess seine Ausführung beenden kann . •
+Zombies: Wenn sich der Kindprozess vor dem Vaterprozess beendet und der
+Vater nicht auf das Ende des Kindprozesses wartet, so wird der
+Kindprozess zu einem Zombie . • Dämonen sind Waisen-Prozesse.</p>
+<h4 id="prozesskomunikation">Prozesskomunikation</h4>
+<p>• Signal: Benachrichtigungsmechanismus, der den Kontrollfluss eines
+Prozesses zu beliebigen Zeitpunkten unterbrechen kann. XEs wird ein
+Signal bei der Eingabe von Strg-c generiert und an den Laufenden Prozess
+gesendet. X • Pipe: Einseitiger Nachrichtenkanal. XZwei Pipes sind
+notwendig für bidirektionale Kommunikation (eine zum Schreiben, eine zum
+Lesen). Programme können sequenziel Daten verarbeiten, z.B. grep | sed |
+sort | uniq -c. X • Socket: Breitbandiger bidirektionaler
+Kommunikationskanal. XVerwendung u.a. für TCP/IP Verbindungen und höhere
+Protokolle.</p>
+<h4 id="死锁-deadlock">死锁 Deadlock</h4>
+<p>Bei Deadlocks sind Prozesse blockiert, da sie auf Ressourcen warten,
+die zugleich von anderen Prozessen blockiert werden</p>
+<h5 id="prevention-und-avoidance">Prevention und Avoidance</h5>
+<p>• Deadlock Prevention: Dafür sorgen, dass eine der vier Deadlock
+Bedingungen nicht erfüllt ist (die Bedingungen müssen nicht genannt
+werden sondern nur schreiben dass es sie gibt) • Deadlock Avoidance: Das
+Betriebssystem prüft dynamisch, ob eine Ressourcen-Anforderung erfolgen
+kann oder nicht (gegebenenfalls werden Ressourcen zurückgehalten, bis
+das der Fall ist).</p>
+<h5 id="bedingungen-für-auftreten">Bedingungen für Auftreten</h5>
+<p>• Mutual Exclusion: XDie gemeinsam genutzten Ressourcen sind nur
+exklusiv nutzbar, d.h. eine Ressource ist entweder verfügbar oder genau
+einem Prozess zugeordnet.X • Hold-and-Wait: XProzesse, die bereits
+Ressourcen zugeteilt haben, belegen diese Ressourcen, auch wenn sie noch
+weitere Ressourcen anfordern.X • No-Preemption: XZugeteilte Ressourcen
+können einem Prozess nicht entzogen werden,d.h. die Ressourcennutzung
+ist nicht unterbrechbar.X • Circular Wait: XEs gibt eine zyklische Kette
+von min. zwei Prozessen, die jeweils auf eine Ressource warten, die vom
+nächsten Prozess in der Kette belegt ist.</p>
+<h4 id="活锁-livelock">活锁 Livelock</h4>
+<p>Prozesse geben freiwillig belegte Ressourcen ab, sobald sie merken,
+dass sie die nächste Ressource nicht belegen können. Sie blockieren
+nicht, sondern versuchen wieder die erforderlichen Ressourcen zu
+belegen. Obwohl beide Prozesse weiterhin ausgeführt werden, machen sie
+keinen Fortschritt</p>
+<h5 id="不同处">不同处</h5>
+<p>• Bei Deadlocks sind Prozesse blockiert, da sie zirkulär auf
+Ressourcen warten; • bei einem Livelock sind Prozesse blockiert, da sie
+zirkular auf exklusiv vergebene, nicht präemptive Ressourcen warten</p>
+<h4 id="starvation">Starvation</h4>
+<p>Starvation: Ein Prozess kann verhungern, wenn seine Ressourcenanfrage
+nie erfüllt wird, da stets andere (höher priorisierte) Prozesse Vorrang
+haben.</p>
+<h4 id="singale">Singale</h4>
+<p>Zur Interprozesskommunikation</p>
+<p>Das Signal kann ignoriert oder behandelt werden, sonst wird der
+Prozess terminiert.</p>
+<p>syscalls:</p>
+<p>singal, kill</p>
+<h2 id="dateisystem">Dateisystem</h2>
+<h4 id="unix-dateitypen">Unix Dateitypen</h4>
+<p>• Dateien (engl. regular files) beinhalten Benutzerinformationen. Man
+unterscheidet zwischen ASCII- und Binär-Dateien. • Verzeichnisse (engl.
+directories) sind Systemdateien zur Verwaltung des Dateisystems. Sie
+enthalten Verweise auf andere Dateien und Verzeichnisse und ermöglichen
+somit eine hierarchische Verwaltung. • Character Special und Block
+Special Files Xsind Gerätedateien für zeichen- und blockorientierte I/O
+Geräte. • Named Pipes Xsind unidirektionale Kommunikationskanäle. •
+Sockets Xsind bidirektionale Kommunikationskanäle.</p>
+<h5 id="dateitypen-erkennen">Dateitypen erkennen</h5>
+<p>• Spezielle Magicnumbers können den Dateitypen repräsentieren.X •
+Unterschiedliche Dateiendungen (File Extensions)X, können vom
+Betriebssystem erkannt und interpretiert werden. (Somit erkennt das
+Betriebssystem zu welchem Programm die zu öffnende Datei gehört).</p>
+<h3 id="inodes">Inodes</h3>
+<p>Der Name einer Datei ist in den Daten des Inodes gespeichert, der das
+Verzeichnis darstellt, in dem die Datei referenziert wird.Dies liegt
+daran, dass eine Datei als Hardlink in mehreren Verzeichnissen mit
+unterschiedlichen Namen verlinkt sein kann.</p>
+<h4 id="speicherte-eintrag">speicherte Eintrag</h4>
+<p>• Typ (FIFO, Character device, Directory, Block device, Regular file,
+Symbolic link, Socket), • Besitzer (User und Gruppe), • Dateirechte, •
+verschiedene Timestamps (created, accessed, modified), • Anzahl der
+Hardlinks die auf den Inode verweisen, • Anzahl der Blöcke, •
+verschiedene Flags, • Adressen der referenzierten Blöcke (Single-,
+Double-, Triple-Indirection)</p>
+<h3 id="syscalls">Syscalls</h3>
+<h4 id="ls">ls</h4>
+<p>Verzeichnis öffnen; alle Einträge sukzessive lesen und die Dateinamen
+ausgeben , Verzeichnis schließen. opendir() , readdir() , closedir() –
+ggf. rewinddir()</p>
+<h3 id="fat">FAT</h3>
+<p>Verwaltung als Linked List in einer Tabelle.</p>
+<p>Man braucht einen Eintrag pro Block -&gt; FAT wird groß</p>
+<h4 id="hardlink-und-softlink">Hardlink und softlink</h4>
+<p>• Bei Hardlinks wird eine Datei I-Node aus mehreren Verzeichnis
+I-Nodes referenziert. X • Ein Softlink ist eine dedizierte I-Node, die
+den Pfad der Referenzierten Datei angibt.</p>
+<h2 id="ein-und-ausgabe">Ein und Ausgabe</h2>
+<h3 id="arten-von-geräten设备文件类型">Arten von
+Geräten设备文件类型</h3>
+<p>设备文件分为字符设备(Block Device)和块设备(Character
+Device),这两种设备的本质区别在于他们是否可以被随机访问。典型的字符设备(不能随机读取)有:键盘、串口，典型的块设备(random
+access)有：硬盘，SSD，CD-ROM等。 ### DMA-Controller
+直接存储器存储（Direct Memory Access）。</p>
+<p>没有DMA时磁盘如何读:控制器从磁盘驱动器串行地、一位一位地读取一个块（或一个扇区），直到将整块信息放入控制器的内部缓冲区中。接着，计算校验合，以保证没有读错误发生，然后控制器产生一个中断。当操作系统开始运行时，它重复地从控制器的缓冲区一次一个字节或一个字地读取该块的信息，并将其存入内存中。</p>
+<p>使用DMA时：</p>
+<p>1、CPU通过设置DMA的寄存器对它进行编程，所以DMA控制器知道将什么数据传送到什么地方（图中第一步）。DMA控制器向磁盘控制器发出一个命令，通知它从磁盘读取到其内部的缓冲区中，并对其校验和检验。如果磁盘控制器的缓冲区中的数据是有效的，那么DMA就可以开始了。Programmiert
+DMA-Register</p>
+<p>2、DMA控制器通过在总线上发出一个读请求到磁盘控制器而发起DMA传送。Disk-Controller
+muss Daten in Puffer bereitstellen</p>
+<p>3、写到内存是另一个标准总线周期 DMA-Controller iniiert die
+Übertragung von Disk in RAM</p>
+<p>4、当写操作完成时，磁盘控制器在总线上发出一个应答信号到DMA控制器。
+Disk-Controller meldet (Ack) Beendigung der Übertragung</p>
+<h4 id="datenaustausch-mit-einem-gerät">Datenaustausch mit einem
+Gerät</h4>
+<p>• Programmed I/O : CPU kopiert und wartet synchron darauf, dass das
+Gerät die jeweiligen Aktionen ausführt. • Interrupts : CPU initiiert das
+Lesen/Schreiben eines Datum, und das Gerät meldet asynchron, sobald die
+Aktion abgeschlossen wurde.(CPU kann in der Zwischenzeit was anderes
+tun, kopiert aber noch selbst.) • DMA : CPU konfiguriert DMA-Controller,
+der interagiert mit dem Gerät, stößt den Transfer an; Abschluss
+signalisiert ein Interrupt.</p>
+<h3 id="io软件层次struktur-eines-ea-systems">IO软件层次(Struktur eines
+E/A-Systems)</h3>
+<p>Hardware(硬件)</p>
+<p>Interrupt-Handler(中断处理程序)</p>
+<p>Device Drivers(设备驱动程序)</p>
+<p>Device-independent operating system
+software(与设备无关的操作系统软件)</p>
+<p>User-level I/O software(用户级IO软件)</p>
+<h3 id="raid-systeme">RAID-Systeme</h3>
+<p>Raid: Redundant Array of Inexpensive (Independent)
+Disks(独立硬盘冗余阵列，简称磁盘阵列)</p>
+<p>利用虚拟化存储技术把多个硬盘组合起来，成为一个或多个硬盘阵列组，目的为提升性能或资料冗余。</p>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20210304094327290.png"
+alt="image-20210304094327290" />
+<figcaption aria-hidden="true">image-20210304094327290</figcaption>
+</figure>
+<h3 id="时钟">时钟</h3>
+<p>时钟的任务：</p>
+<p>• Tageszeit und Datum verwalten(维护日时间)</p>
+<p>• Prozesse unterbrechen und umschalten
+(Scheduling)（防止进程超时运行）</p>
+<p>• Rechenzeitverbrauch eines Prozesses messen
+（对CPU使用情况进行记账）</p>
+<p>• Zeitschaltuhren den Anwendungen zur Verfügung stellen
+（处理用户进程提出的alarm系统调用）</p>
+<p>• Funktionsfähigkeitsüberwachung (watchdog timer)
+（为系统本身的各个部分提供监视定时器）</p>
+<p>• Profiling, Monitoring,
+Statistik（完成概要剖析、监视和统计信息收集）</p>
+<h4 id="softtimer">SoftTimer</h4>
+<p>• Soft-Timers reduzieren die Anzahl von InterruptsX, die sonst durch
+Hardware Timer erzeugt werden würden.X • Bevor das Betriebssystem den
+Kernel Mode verlässt, überprüft es ob einer der Soft-Timers abgelaufen
+ist. Falls ja, so wird das zugehörige Event behandelt.</p>
+<h3 id="终端">终端</h3>
+<p>Line Descipline(行规范) • Zeilenweise Verarbeitung • Zeilen editieren
+• Echo-Funktion</p>
+<p>Cooked Mode(Canonical Mode)(规范模式):</p>
+<p>zeilenorientiert</p>
+<p>Echo, Editieren (Backspace) usw.</p>
+<h2 id="sicherheit-安全">Sicherheit 安全</h2>
+<h3 id="目标">目标</h3>
+<p>• Prüfung der Korrektheit der Identität der Akteure: Authentizität
+(engl. authenticity) 数据真实性</p>
+<p>• Schutz der Daten gegen Manipulation: Daten-Integrität (engl.
+integrity) 数据完整性</p>
+<p>• Schutz vor unberechtigten Zugriffen, Vertraulichkeit (engl.
+confidentiality) 数据保密性</p>
+<p>• Nicht-Abstreitbarkeit von durchgeführten Aktionen (engl.
+non-repudiation) -&gt;Verwandt: Accountability 问责制</p>
+<p>• Gewährleistung der Verfügbarkeit (engl. availability) von
+IT-Diensten 系统可用性</p>
+<h3
+id="sicherheitskern-trusted-computing-base可信计算基">Sicherheitskern
+(Trusted Computing Base)可信计算基</h3>
+<p>• Großteil der Hardware (außer E/A-Geräte, die die Sicherheit nicht
+beeinflussen) 大多数硬件</p>
+<p>• Teile des Kerns oder der ganze Kern 操作系统核心的一部分</p>
+<p>• Im Kern: Prozesswechsel, Speicherverwaltung und Teile des
+E/A-Management</p>
+<p>• Alle Programme mit Superuser-Rechten (z.B: setuid-root-Programme)
+所有掌握超级用户权限的用户程序</p>
+<p>• TCB sollte so klein wie möglich gestaltet werden, um verifizierbar
+zu bleiben</p>
+<h3 id="kryptographie密码学">Kryptographie(密码学)</h3>
+<h4 id="verschlüsselung">Verschlüsselung</h4>
+<p>Symmetrische Kryptographie(加解密用同一密钥）</p>
+<p>Asymmetrische Kryptographie(加解密用不同密钥) ist aufwendig</p>
+<p>两者结合使用效率最高</p>
+<h4 id="hashfunktion哈希函数">Hashfunktion哈希函数</h4>
+<h4 id="hmacmessage-authentication-codes消息认证码">HMAC（Message
+Authentication Codes）消息认证码</h4>
+<p>是一种确认完整性并进行认证的技术</p>
+<p>消息认证码的输入包括任意长度的<strong>消息</strong>和一个发送者与接收者之间的<strong>共享密钥</strong>。输出固定长度的数据，输出的数据就是
+MAC 值。（关键：完整性和认证）</p>
+<h4 id="digitale-signatur数字签名">Digitale Signatur数字签名</h4>
+<p>Basiert auf <strong>asymmetrischer Kryptographie</strong></p>
+<h4 id="zertifikate证书">Zertifikate证书</h4>
+<h3 id="authentifizierung认证">Authentifizierung认证</h3>
+<p>当人们试图登录系统时，大多数用户登陆的方法基于下列三个方面考虑：</p>
+<ol type="1">
+<li><p>Wissen: z.B. password, PIN, Krypto-Schlüssel
+用户已知的信息</p></li>
+<li><p>Besitz: z.B. Smartcard, USB Token, SIM Karte
+用户已有的信息</p></li>
+<li><p>Person (Biometrie): z.B. Fingerabdruck, Retina 用户是谁</p></li>
+</ol>
+<h3 id="zugriffskontrolle">Zugriffskontrolle</h3>
+<h3 id="speicherschutz-robustheit">Speicherschutz (Robustheit)</h3>
+<h3 id="secure-boot">Secure Boot</h3>
+<h3 id="angriffsmethoden">Angriffsmethoden</h3>
+<h4 id="buffer-overflow">Buffer-Overflow</h4>
+<p>解决办法：</p>
+<ul>
+<li><p>Stack Canaries</p>
+<p>werden vom Compiler zwischen der Return Adresse und lokalen Variablen
+auf dem Stack einer Funktion eingefügt. Das Betriebssystem überprüft die
+Integrität des Stack</p></li>
+<li><p>Data Execution Prevention(DEP) Der Stack wird vom Betriebssystem
+durch das NX-Bit (XN) als non-executable markiert und verhindert somit
+die Ausführung vom einem potenziell</p></li>
+<li><p>Address Space Layout Randomization (ASLR)</p></li>
+</ul>
+<p>randomisiert die Adresse des Stacks und erschwert dem Angreifer
+diesen zu finden.</p>
+<h4 id="salt-wert">Salt-Wert</h4>
+<p>• Das Passwort wird nicht im Klartext gespeichert; Eine
+kryptografische Hashfunktion ist nicht umkehrbar • Der Salt-Wert
+verhindert, dass gleiche Passworte unterschiedlicher Nutzer den gleichen
+Hashwert haben. • Salt verhindert, dass ein Angreifer Hashwerte für alle
+gängigen Passwörter vorberechnen kann (Rainbow Tables). Das ist zu
+aufwändig.</p>
+<h4 id="dep">DEP</h4>
+<p>• Grundidee ist, dass kein Speicher gleichzeitig als ausführbar und
+schreibbar markiert ist. Damit kann kein neuer Code ins bestehende
+System eingeführt werden. • CPU-Feature NX-bit (No-eXecute) ermöglicht
+es, Seiten als nicht ausführbar zu markieren; Zusätzlich sollten
+ausführbare Seiten nicht schreibbar sein. • Durch DEP können
+Code-Reuse-Angriffe können nicht verhindert werden, da der Angreifer
+bereits vorhandenen Code in Speicher nutzt.</p>
+<h4 id="setuid">SETUID</h4>
+<p>• SETUID-Programme werden im Kontext der Benutzer-ID des Besitzers
+der Datei ausgeführt, nicht mit der des aufrufenden Nutzers. • Bugs in
+SETUID-Programmen ermöglichen die Komprommitierung des Besitzer-Accounts
+der Binary. (Privilege Escalation.) • /bin/passwd benötigt Lese- und
+Schreibzugriff auf die Datei /etc/shadow, welche nur von root
+gelesen/geschrieben werden darf.Das SETUID-Bit erlaubt es daher in
+diesem Kontext, dass ein Nutzer sein eigenes Passwort ändern kann.</p>
+<h2 id="linker-loader">Linker Loader</h2>
+<h4 id="relocation">Relocation</h4>
+<p>Bibliotheksfunktionen: Load-Time-Relocation • Statische Funktionen
+gehören zu keiner Relocation-Klasse. Sie werden vom Assembler direkt
+aufgelöst. • Nicht-Statische Funktionen: Link-Time-Relocation</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2020/11/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">http://fyind.de/2020/11/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2020/11/08/%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8/" title="网络空间安全"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">网络空间安全</div></div><div class="info-2"><div class="info-item-1">Netzsicherheit 作业 Hack 进入作业的服务器 1nc netsec.net.in.tum.de 20001 Exercise 1 首先安装一下 netcat 1sudo pacman -S netcat base64加密解密 123import base64data_enc = base64.b64encode(data)data_dec = base64.b64decode(data_enc) Networt Insecure Do not Trust a Network Connection 网络是不安全的 Capabilities of Attackers  Passive attacks (observation)  Eavesdropping of messages Traffic Analysis  active attacks (observation + manipulation)  All passive attacks Delay Replay Deletion Modificatioin Insertion   Attacker Model...</div></div></div></a><a class="pagination-related" href="/2020/11/04/%E5%89%8D%E7%BC%80%E5%92%8C/" title="枚举,二分,前缀和"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">枚举,二分,前缀和</div></div><div class="info-2"><div class="info-item-1">枚举，二分，前缀和 前缀和 ABC181E: Transformable Teacher  1200  题意 \(N \le 2 \times 10^5\) (奇数)个小朋友，第 \(i\) 身高为 \(H_i\) ，老师的身高可以变换，共有\(M \le 2 \times 10^5\) 种形态，第 \(i\) 种身高为 \(W_i\) . 现在小朋友和老师一起做游戏，两个人一组。配对花费为 \[ \sum_{i=1}^{(N+1)/2}|x_i-y_i| \] \(x_i,y_i\) 是第 \(i\) 组两个人的身高 求最小的的配对花费。 分析 老师必定要匹配一个小朋友。那么可以枚举小朋友和老师匹配，剩下的小朋友自己匹配。自己匹配的最优解一定是排序后两个相邻的匹配。小朋友和老师匹配，就是老师选一个和小朋友最接近的升高来匹配。这个可以排序后用二分 \(O(logM)\) 实现。小朋友两两匹配可以用前缀和预处理好, 枚举的时候 \(O(1)\) 查询. 代码 12345678910111213141516171819202122232425262728293031323334353...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">85</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">83</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:tarjan0025@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">C语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88"><span class="toc-number">1.0.1.</span> <span class="toc-text">指针</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#einf%C3%BCrung"><span class="toc-number">2.1.</span> <span class="toc-text">Einfürung</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F%E5%AE%9A%E4%B9%89rechensystem"><span class="toc-number">2.1.1.</span> <span class="toc-text">计算系统定义(Rechensystem)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">开发系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.1.3.</span> <span class="toc-text">动态的系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%9A%84%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.1.4.</span> <span class="toc-text">技术的系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.1.5.</span> <span class="toc-text">操作系统定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%BB%E5%8A%A1"><span class="toc-number">2.1.2.</span> <span class="toc-text">操作系统任务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%8C%96-abstraktion"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">抽象化 Abstraktion</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">资源管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%91%E5%B1%95%E7%9A%84%E5%9B%A0%E7%B4%A0"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">影响操作系统发展的因素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E6%8E%A7%E7%A7%8D%E7%B1%BB"><span class="toc-number">2.1.2.4.</span> <span class="toc-text">操控种类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%A7%8D%E7%B1%BB"><span class="toc-number">2.1.3.</span> <span class="toc-text">操作系统种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.4.</span> <span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">资源的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.1.4.2.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%B9%B6%E8%A1%8C%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.1.4.3.</span> <span class="toc-text">线性进程和并行进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.4.4.</span> <span class="toc-text">文件和文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%BC%8F-betriebssystem-modi"><span class="toc-number">2.1.4.5.</span> <span class="toc-text">操作系统模式
+Betriebssystem-Modi</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F-benutzermodus-user-mode"><span class="toc-number">2.1.4.5.1.</span> <span class="toc-text">用户模式 Benutzermodus (User
+Mode)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%BC%8F-systemmoduskernel-mode"><span class="toc-number">2.1.4.5.2.</span> <span class="toc-text">系统模式 Systemmodus(Kernel
+Mode)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">2.1.4.6.</span> <span class="toc-text">系统调用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.5.</span> <span class="toc-text">操作系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E7%89%87%E6%9C%BA%E7%B3%BB%E7%BB%9F-monolithisches-system"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">单片机系统 Monolithisches
+System</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mikrokerne"><span class="toc-number">2.1.5.2.</span> <span class="toc-text">Mikrokerne</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B"><span class="toc-number">2.1.6.</span> <span class="toc-text">系统编程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">进程和进程管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%9C%A8%E6%A0%88%E4%B8%AD"><span class="toc-number">2.2.1.</span> <span class="toc-text">进程在栈中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81"><span class="toc-number">2.2.2.</span> <span class="toc-text">进程的状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">2.2.3.</span> <span class="toc-text">多线程的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.4.</span> <span class="toc-text">进程的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#process-control-block"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">Process Control Block</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="toc-number">2.2.5.</span> <span class="toc-text">操作系统的任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5"><span class="toc-number">2.2.6.</span> <span class="toc-text">进程调度策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#first-come-first-served"><span class="toc-number">2.2.6.1.</span> <span class="toc-text">First-Come First-Served</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shortest-jobs-first"><span class="toc-number">2.2.6.2.</span> <span class="toc-text">Shortest-Jobs-First</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#round-robin"><span class="toc-number">2.2.6.3.</span> <span class="toc-text">Round Robin</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%90%8C%E6%AD%A5"><span class="toc-number">2.3.</span> <span class="toc-text">多线程系统和同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sequetielle-und-parallele-programme"><span class="toc-number">2.3.1.</span> <span class="toc-text">Sequetielle und Parallele
+Programme</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#interaktion-%E4%BA%A4%E4%BA%92"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">Interaktion 交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0%E4%B8%80%E4%B8%AA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%B4%BB%E5%8A%A8"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">描述一个多线程的活动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0%E6%B4%BB%E5%8A%A8%E7%9A%84%E8%A1%8C%E4%B8%BA"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">描述活动的行为</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E5%BE%81"><span class="toc-number">2.3.1.4.</span> <span class="toc-text">多线程系统的特征</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5"><span class="toc-number">2.3.2.</span> <span class="toc-text">同步</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#kritischer-abschnitt"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">Kritischer Abschnitt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wechselseitiger-ausschluss%E4%BA%92%E6%96%A5%E9%94%81mutex"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">Wechselseitiger
+Ausschluss互斥锁（Mutex）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#automare-maschinenbefehle"><span class="toc-number">2.3.3.</span> <span class="toc-text">Automare Maschinenbefehle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#semaphore-%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-number">2.3.4.</span> <span class="toc-text">Semaphore 信号量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mutex"><span class="toc-number">2.3.4.1.</span> <span class="toc-text">Mutex</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#monitore-%E7%AE%A1%E7%A8%8B"><span class="toc-number">2.3.5.</span> <span class="toc-text">Monitore 管程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#verhungern"><span class="toc-number">2.3.5.1.</span> <span class="toc-text">Verhungern</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deadlocks"><span class="toc-number">2.3.6.</span> <span class="toc-text">Deadlocks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bankier-algorithmus"><span class="toc-number">2.3.6.1.</span> <span class="toc-text">Bankier-Algorithmus</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.4.</span> <span class="toc-text">并发系统建模</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E7%BB%93%E6%9E%84"><span class="toc-number">2.4.1.</span> <span class="toc-text">动作结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.4.1.1.</span> <span class="toc-text">定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">2.4.2.</span> <span class="toc-text">进程的性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C%E9%97%B4%E7%9A%84%E5%9B%A0%E6%9E%9C%E5%85%B3%E7%B3%BB"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">动作间的因果关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">2.4.3.</span> <span class="toc-text">序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="toc-number">2.4.4.</span> <span class="toc-text">状态自动机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A9%E7%89%B9%E9%87%8C%E7%BD%91-petri-netze"><span class="toc-number">2.4.5.</span> <span class="toc-text">佩特里网 Petri-Netze</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">2.4.5.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E5%96%84"><span class="toc-number">2.4.5.2.</span> <span class="toc-text">改善</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%A9%E7%89%B9%E9%87%8C%E7%BD%91%E7%9A%84%E5%8A%A8%E6%80%81%E8%A1%A8%E7%8E%B0"><span class="toc-number">2.4.5.3.</span> <span class="toc-text">佩特里网的动态表现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%BC%80%E5%85%B3%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.4.5.4.</span> <span class="toc-text">定义：开关条件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E6%A8%A1%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%B4%A8"><span class="toc-number">2.4.6.</span> <span class="toc-text">建模系统性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%88%B0%E8%BE%BE%E6%80%A7-erreichbarkeit"><span class="toc-number">2.4.6.1.</span> <span class="toc-text">可到达性 Erreichbarkeit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BB%E8%B7%83%E6%80%A7-lebendigkeit"><span class="toc-number">2.4.6.2.</span> <span class="toc-text">活跃性 Lebendigkeit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AC%E5%B9%B3-fairness"><span class="toc-number">2.4.6.3.</span> <span class="toc-text">公平 Fairness</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A5%A5%E9%A5%BF-verhungern"><span class="toc-number">2.4.6.4.</span> <span class="toc-text">饥饿 Verhungern</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-ipc"><span class="toc-number">2.5.</span> <span class="toc-text">进程通信 IPC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E7%9A%84%E5%B8%A6%E5%AE%BD"><span class="toc-number">2.5.1.</span> <span class="toc-text">通信的带宽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E9%80%9A%E4%BF%A1"><span class="toc-number">2.5.2.</span> <span class="toc-text">隐式通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E9%80%9A%E4%BF%A1"><span class="toc-number">2.5.3.</span> <span class="toc-text">显示通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="toc-number">2.5.4.</span> <span class="toc-text">同步和异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E9%80%9A%E7%9F%A5-asynchrone-meldung"><span class="toc-number">2.5.5.</span> <span class="toc-text">异步通知 Asynchrone Meldung</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E9%80%9A%E7%9F%A5-synchrone-meldung"><span class="toc-number">2.5.6.</span> <span class="toc-text">同步通知 Synchrone Meldung</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.5.6.1.</span> <span class="toc-text">同步和异步的优缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="toc-number">2.6.</span> <span class="toc-text">存储管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#von-neumann-flaschenhals"><span class="toc-number">2.6.0.1.</span> <span class="toc-text">Von-Neumann-Flaschenhals</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%81%E6%B1%82"><span class="toc-number">2.6.1.</span> <span class="toc-text">要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1"><span class="toc-number">2.6.2.</span> <span class="toc-text">存储器层次</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E6%A6%82%E5%BF%B5"><span class="toc-number">2.6.3.</span> <span class="toc-text">地址空间概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-number">2.6.4.</span> <span class="toc-text">通过操作系统管理地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80"><span class="toc-number">2.6.5.</span> <span class="toc-text">直接寻址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%9C%B0%E5%9D%80%E5%AF%BB%E5%9D%80basis-adressierung"><span class="toc-number">2.6.6.</span> <span class="toc-text">基地址寻址Basis-Adressierung</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E5%AF%BB%E5%9D%80-segmentadressierung"><span class="toc-number">2.6.7.</span> <span class="toc-text">段寻址 Segmentadressierung</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E5%AF%BB%E5%9D%80%E4%BA%A4%E6%8D%A2swapping"><span class="toc-number">2.6.8.</span> <span class="toc-text">段寻址：交换Swapping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E4%BD%99%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">2.6.9.</span> <span class="toc-text">空余内存分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84bitmap"><span class="toc-number">2.6.9.1.</span> <span class="toc-text">数据结构：Bitmap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">2.6.9.2.</span> <span class="toc-text">链表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%A0%E7%94%A8%E7%AD%96%E7%95%A5belegungstrategien"><span class="toc-number">2.6.10.</span> <span class="toc-text">占用策略Belegungstrategien</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#first-fit"><span class="toc-number">2.6.10.1.</span> <span class="toc-text">First-Fit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#next-fit"><span class="toc-number">2.6.10.2.</span> <span class="toc-text">Next-Fit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#best-fit%E5%92%8Cworst-fit"><span class="toc-number">2.6.10.3.</span> <span class="toc-text">Best-Fit和Worst-Fit</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#buddy%E7%AE%97%E6%B3%95"><span class="toc-number">2.6.11.</span> <span class="toc-text">Buddy算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8"><span class="toc-number">2.6.11.1.</span> <span class="toc-text">内存占用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7"><span class="toc-number">2.6.11.2.</span> <span class="toc-text">评价</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%AE%B5fragmentierung"><span class="toc-number">2.6.12.</span> <span class="toc-text">分段Fragmentierung</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8virtueller-speicher"><span class="toc-number">2.6.13.</span> <span class="toc-text">虚拟存储Virtueller Speicher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5paging"><span class="toc-number">2.6.14.</span> <span class="toc-text">分页Paging</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84"><span class="toc-number">2.6.14.1.</span> <span class="toc-text">计算地址映射</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mmu%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%8D%95%E5%85%83"><span class="toc-number">2.6.15.</span> <span class="toc-text">MMU内存管理单元</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tlb"><span class="toc-number">2.6.16.</span> <span class="toc-text">TLB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E9%94%99%E8%AF%AF"><span class="toc-number">2.6.17.</span> <span class="toc-text">分页错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E8%BF%87%E7%A8%8B"><span class="toc-number">2.6.18.</span> <span class="toc-text">查找过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fifo%E7%AD%96%E7%95%A5"><span class="toc-number">2.6.19.</span> <span class="toc-text">FIFO策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.7.</span> <span class="toc-text">文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A6%81%E6%B1%82"><span class="toc-number">2.7.1.</span> <span class="toc-text">文件系统的要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6"><span class="toc-number">2.7.2.</span> <span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.7.2.1.</span> <span class="toc-text">文件类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AE%BF%E9%97%AE"><span class="toc-number">2.7.2.2.</span> <span class="toc-text">文件访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7"><span class="toc-number">2.7.2.3.</span> <span class="toc-text">文件属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-number">2.7.2.4.</span> <span class="toc-text">文件操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">2.7.3.</span> <span class="toc-text">文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%90%8D"><span class="toc-number">2.7.4.</span> <span class="toc-text">路径名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.7.5.</span> <span class="toc-text">文件系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%B8%83%E5%B1%80"><span class="toc-number">2.7.5.1.</span> <span class="toc-text">文件系统布局</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.7.6.</span> <span class="toc-text">文件的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D-contiguous-allocation"><span class="toc-number">2.7.6.1.</span> <span class="toc-text">连续分配 Contiguous
+Allocation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E5%88%86%E9%85%8D-linked-list-allocation"><span class="toc-number">2.7.6.2.</span> <span class="toc-text">链表分配 Linked List
+Allocation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#linked-list-allocation-mit-file-allocation-table-fat"><span class="toc-number">2.7.6.3.</span> <span class="toc-text">Linked
+List Allocation mit File Allocation Table (FAT)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#i%E8%8A%82%E7%82%B9i-node"><span class="toc-number">2.7.6.4.</span> <span class="toc-text">i节点（i-node）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E7%9A%84eintr%C3%A4ge"><span class="toc-number">2.7.6.4.1.</span> <span class="toc-text">存储的Einträge</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.7.7.</span> <span class="toc-text">目录的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6"><span class="toc-number">2.7.8.</span> <span class="toc-text">共享文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#journaling-dateisysteme"><span class="toc-number">2.7.8.1.</span> <span class="toc-text">Journaling-Dateisysteme</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9Fvfs"><span class="toc-number">2.7.9.</span> <span class="toc-text">虚拟文件系统VFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96"><span class="toc-number">2.7.10.</span> <span class="toc-text">文件系统优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">2.8.</span> <span class="toc-text">虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E8%A6%81%E6%B1%82"><span class="toc-number">2.8.0.1.</span> <span class="toc-text">虚拟化的要求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">2.8.0.2.</span> <span class="toc-text">系统虚拟机</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#system-virtual-machines"><span class="toc-number">2.8.1.</span> <span class="toc-text">System Virtual Machines</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0"><span class="toc-number">2.8.1.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cpu-%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">2.8.1.2.</span> <span class="toc-text">CPU-虚拟化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">2.8.1.3.</span> <span class="toc-text">内存虚拟化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shadow-page-tables-spt"><span class="toc-number">2.8.1.4.</span> <span class="toc-text">Shadow Page Tables (SPT)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#second-level-address-translation-slat"><span class="toc-number">2.8.1.5.</span> <span class="toc-text">Second Level Address
+Translation (SLAT)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#io-virtualisierung"><span class="toc-number">2.8.1.6.</span> <span class="toc-text">I&#x2F;O-Virtualisierung</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#container"><span class="toc-number">2.8.2.</span> <span class="toc-text">Container</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#namespaces"><span class="toc-number">2.8.2.1.</span> <span class="toc-text">Namespaces</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#control-groups"><span class="toc-number">2.8.2.2.</span> <span class="toc-text">Control Groups</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#seccomp"><span class="toc-number">2.8.2.3.</span> <span class="toc-text">SECCOMP</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%80%83%E8%AF%95%E5%A4%8D%E4%B9%A0"><span class="toc-number">3.</span> <span class="toc-text">考试复习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#betriebsmodi"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">Betriebsmodi</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#systemaufruf%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">3.0.1.</span> <span class="toc-text">Systemaufruf系统调用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E6%9C%80%E5%90%8E200byte"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">读取文件最后200byte</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">内存分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#posix%E5%87%BD%E6%95%B0"><span class="toc-number">3.0.1.3.</span> <span class="toc-text">POSIX函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D-1"><span class="toc-number">3.1.</span> <span class="toc-text">内存分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#problem-direkter-adressierung-des-physischen-arbeitsspeichers"><span class="toc-number">3.1.0.1.</span> <span class="toc-text">Problem
+direkter Adressierung des physischen Arbeitsspeichers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#adressierungen"><span class="toc-number">3.1.0.2.</span> <span class="toc-text">Adressierungen</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fragmentierung"><span class="toc-number">3.1.0.3.</span> <span class="toc-text">Fragmentierung</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#belay-anomalie"><span class="toc-number">3.1.0.4.</span> <span class="toc-text">Belay-Anomalie</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.2.</span> <span class="toc-text">多线程系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pcb"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">PCB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#datenstrukturen-beim-prozesskontrollblock-pcb-f%C3%BCr-einen-prozesswechsel-ben%C3%B6tigt-werden"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">Datenstrukturen
+beim Prozesskontrollblock (PCB) für einen Prozesswechsel benötigt
+werden</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#schedulingverfahren"><span class="toc-number">3.2.0.3.</span> <span class="toc-text">Schedulingverfahren</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#kontextwechseln"><span class="toc-number">3.2.0.4.</span> <span class="toc-text">Kontextwechseln</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#thread-und-prozesse"><span class="toc-number">3.2.0.5.</span> <span class="toc-text">Thread und Prozesse</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pid"><span class="toc-number">3.2.0.6.</span> <span class="toc-text">PID</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#zombie-und-waise"><span class="toc-number">3.2.0.7.</span> <span class="toc-text">Zombie und Waise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#prozesskomunikation"><span class="toc-number">3.2.0.8.</span> <span class="toc-text">Prozesskomunikation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%BB%E9%94%81-deadlock"><span class="toc-number">3.2.0.9.</span> <span class="toc-text">死锁 Deadlock</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#prevention-und-avoidance"><span class="toc-number">3.2.0.9.1.</span> <span class="toc-text">Prevention und Avoidance</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#bedingungen-f%C3%BCr-auftreten"><span class="toc-number">3.2.0.9.2.</span> <span class="toc-text">Bedingungen für Auftreten</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BB%E9%94%81-livelock"><span class="toc-number">3.2.0.10.</span> <span class="toc-text">活锁 Livelock</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%A4%84"><span class="toc-number">3.2.0.10.1.</span> <span class="toc-text">不同处</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#starvation"><span class="toc-number">3.2.0.11.</span> <span class="toc-text">Starvation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#singale"><span class="toc-number">3.2.0.12.</span> <span class="toc-text">Singale</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dateisystem"><span class="toc-number">3.3.</span> <span class="toc-text">Dateisystem</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#unix-dateitypen"><span class="toc-number">3.3.0.1.</span> <span class="toc-text">Unix Dateitypen</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#dateitypen-erkennen"><span class="toc-number">3.3.0.1.1.</span> <span class="toc-text">Dateitypen erkennen</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#inodes"><span class="toc-number">3.3.1.</span> <span class="toc-text">Inodes</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#speicherte-eintrag"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">speicherte Eintrag</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#syscalls"><span class="toc-number">3.3.2.</span> <span class="toc-text">Syscalls</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ls"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">ls</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fat"><span class="toc-number">3.3.3.</span> <span class="toc-text">FAT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hardlink-und-softlink"><span class="toc-number">3.3.3.1.</span> <span class="toc-text">Hardlink und softlink</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ein-und-ausgabe"><span class="toc-number">3.4.</span> <span class="toc-text">Ein und Ausgabe</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#arten-von-ger%C3%A4ten%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.4.1.</span> <span class="toc-text">Arten von
+Geräten设备文件类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#datenaustausch-mit-einem-ger%C3%A4t"><span class="toc-number">3.4.1.1.</span> <span class="toc-text">Datenaustausch mit einem
+Gerät</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#io%E8%BD%AF%E4%BB%B6%E5%B1%82%E6%AC%A1struktur-eines-ea-systems"><span class="toc-number">3.4.2.</span> <span class="toc-text">IO软件层次(Struktur eines
+E&#x2F;A-Systems)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#raid-systeme"><span class="toc-number">3.4.3.</span> <span class="toc-text">RAID-Systeme</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%92%9F"><span class="toc-number">3.4.4.</span> <span class="toc-text">时钟</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#softtimer"><span class="toc-number">3.4.4.1.</span> <span class="toc-text">SoftTimer</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF"><span class="toc-number">3.4.5.</span> <span class="toc-text">终端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sicherheit-%E5%AE%89%E5%85%A8"><span class="toc-number">3.5.</span> <span class="toc-text">Sicherheit 安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">3.5.1.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sicherheitskern-trusted-computing-base%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97%E5%9F%BA"><span class="toc-number">3.5.2.</span> <span class="toc-text">Sicherheitskern
+(Trusted Computing Base)可信计算基</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kryptographie%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="toc-number">3.5.3.</span> <span class="toc-text">Kryptographie(密码学)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#verschl%C3%BCsselung"><span class="toc-number">3.5.3.1.</span> <span class="toc-text">Verschlüsselung</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hashfunktion%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">3.5.3.2.</span> <span class="toc-text">Hashfunktion哈希函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hmacmessage-authentication-codes%E6%B6%88%E6%81%AF%E8%AE%A4%E8%AF%81%E7%A0%81"><span class="toc-number">3.5.3.3.</span> <span class="toc-text">HMAC（Message
+Authentication Codes）消息认证码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#digitale-signatur%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-number">3.5.3.4.</span> <span class="toc-text">Digitale Signatur数字签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#zertifikate%E8%AF%81%E4%B9%A6"><span class="toc-number">3.5.3.5.</span> <span class="toc-text">Zertifikate证书</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#authentifizierung%E8%AE%A4%E8%AF%81"><span class="toc-number">3.5.4.</span> <span class="toc-text">Authentifizierung认证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zugriffskontrolle"><span class="toc-number">3.5.5.</span> <span class="toc-text">Zugriffskontrolle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#speicherschutz-robustheit"><span class="toc-number">3.5.6.</span> <span class="toc-text">Speicherschutz (Robustheit)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secure-boot"><span class="toc-number">3.5.7.</span> <span class="toc-text">Secure Boot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#angriffsmethoden"><span class="toc-number">3.5.8.</span> <span class="toc-text">Angriffsmethoden</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#buffer-overflow"><span class="toc-number">3.5.8.1.</span> <span class="toc-text">Buffer-Overflow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#salt-wert"><span class="toc-number">3.5.8.2.</span> <span class="toc-text">Salt-Wert</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dep"><span class="toc-number">3.5.8.3.</span> <span class="toc-text">DEP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#setuid"><span class="toc-number">3.5.8.4.</span> <span class="toc-text">SETUID</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linker-loader"><span class="toc-number">3.6.</span> <span class="toc-text">Linker Loader</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#relocation"><span class="toc-number">3.6.0.1.</span> <span class="toc-text">Relocation</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/C-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/" title="C++高性能编程">C++高性能编程</a><time datetime="2025-07-17T19:47:19.000Z" title="Created 2025-07-17 19:47:19">2025-07-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
