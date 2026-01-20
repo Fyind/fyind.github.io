@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Fyind&#39;s Blog">
+<meta property="og:url" content="http://fyind.de/page/2/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:author" content="Fyind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Fyind\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Fyind's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:contact@fyind.de" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/16/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5/" title="操作系统概念">操作系统概念</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-16T20:55:14.000Z" title="Created 2025-07-16 20:55:14">2025-07-16</time></span></div><div class="content">目录 第一章 操作系统基础  1.1 操作系统的作用 1.2 计算机系统组织 1.3 计算机系统架构 1.4 操作系统操作 1.5 资源管理 1.6 安全与保护 1.7 虚拟化 1.8 分布式系统  第二章 操作系统结构与设计  2.1 操作系统服务 2.2 用户与操作系统接口 2.3 系统调用 2.4 系统服务 2.5 链接器与加载器  第三章 进程管理管理  3.1 进程概念 3.2 进程操作 3.3 进程间通信(IPC) 3.4 共享内存与消息传递 3.5 客户端-服务器通信  第四章 CPU调度  4.1 CPU调度基础 4.2 调度算法 4.3 算法评估  第五章 进程同步  5.1 同步工具 5.2 同步问题   第一章 操作系统基础 1.1 操作系统的作用  用户视图：操作系统的界面因设备而异，如PC、移动设备和嵌入式系统。 系统视图：操作系统作为资源分配器和控制程序，管理CPU、内存、I/O设备等资源。 定义操作系统：操作系统没有统一定义，但通常指核心内核、中间件框架及系统程序。  1.2 计算机系统组织 1.2.1 中断  中断机制用于处理异步事件，通过中断服务...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/15/Kubuntu%E9%85%8D%E7%BD%AE/" title="Kubuntu配置">Kubuntu配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-15T05:25:37.000Z" title="Created 2025-07-15 05:25:37">2025-07-15</time></span></div><div class="content">Kubuntu 首先安装Kubuntu,完成后的 系统配置  更新系统 设置中文 安装GPU驱动  安装软件  Google Chrome Typora  Zsh 12345678910111213141516171819202122sudo apt updatesudo apt install zshchsh -s $(which zsh)sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;# 克隆 Powerlevel10k 仓库git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k# 修改 .zshrc 配置文件sed -i &#x27;s/ZSH_THEME=&quot;robbyrussell&quot;/ZSH_THEME=&quot;powerlevel10k\/power...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/12/%E6%88%91%E4%BB%AC%E5%9C%A8AI%E6%97%B6%E4%BB%A3%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/" title="我们在AI时代该如何学习">我们在AI时代该如何学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-12T23:12:19.000Z" title="Created 2025-07-12 23:12:19">2025-07-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/">Talk</a></span></div><div class="content">我们在AI时代该如何学习 作者: Fyind, ChatGPT 随着人工智能的迅猛发展，特别是大语言模型（LLM）的广泛应用，我们已经步入了一个学习方式正被深刻改变的新时代。这篇文章将探讨AI如何改变我们的学习效率，以及我们应该如何使用AI来提升个人学习效能。  AI使得效率爆炸式提升 传统学习方式往往依赖于反复阅读、听讲和做笔记，而这一切都需要耗费大量时间和精力。而现在，AI的出现正在彻底改变这一局面。特别是具备自然语言处理能力的大语言模型，使得人与知识之间的距离被极大缩短。 例如，一位大学生在准备期末考试时，不再需要花几个小时翻阅教科书、做笔记或上网搜索疑难点。他只需将考纲、教材甚至笔记内容交给AI，AI就能在几分钟内生成一份系统的知识梳理、重点总结，甚至可以为他设计模拟练习题和错题分析。这种以往几小时的任务被压缩到几分钟完成，大幅度提升了学习效率和精力利用率。 不仅是学生，职场人士学习新技能、准备演讲、汇报时，也可以通过AI快速获取相关内容要点、生成演讲草稿，甚至进行模拟提问训练。  传统的学习模式的问题 尽管过去的学习方式曾被广泛认可，但在当今知识快速更新、时间碎片化的社...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9CA-Top-Down-Approach/" title="计算机网络A Top Down Approach">计算机网络A Top Down Approach</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-12T22:02:58.000Z" title="Created 2025-07-12 22:02:58">2025-07-12</time></span></div><div class="content">计算机网络与因特网 1.1 因特网是什么？ 1.1.1 组成结构描述  因特网连接了全球数十亿计算设备，包括传统计算机、服务器、智能手机、平板电脑和物联网设备。 所有设备统称为“主机”或“终端系统”，2017年约有180亿设备接入，预计2022年达到285亿。 网络通过通信链路和分组交换机将终端系统互联。 数据传输时被分割为数据包，并添加头部信息。 分组交换机主要包括路由器和链路层交换机，分别用于核心网络和接入网络。 数据包在网络中经过的路径称为路由或路径。 Cisco预测到2022年全球IP流量将达到每年近5泽字节（Zettabytes）。 网络服务提供商（ISP）提供多种接入方式，如宽带、局域网、移动无线等。 ISP之间通过国家和国际层级的上层ISP互连。 因特网运行协议控制信息发送和接收，其中TCP和IP是最重要的两个协议。 因特网标准由IETF制定，文档称为RFC（请求评论），定义了TCP、IP、HTTP、SMTP等协议。 IEEE 802委员会制定了以太网和WiFi等链路标准。  1.1.2 服务视角描述  因特网可看作一个为分布式应用提供服务的基础设施。 常见应用包括...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/12/%E7%A7%91%E7%A0%94%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/" title="科研工具集合">科研工具集合</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-07-12T20:24:28.000Z" title="Created 2025-07-12 20:24:28">2025-07-12</time></span></div><div class="content">科研工具集合 搜索工具 paperdigest 自动文献综述 phind/perplexity AI 搜索网站总结 google scholar/open alex 论文搜索 Elict 深度文献搜索总结 PDF UPDF 可以自动总结PDF 自动生成思维导图，很好用 ChatPDF AI读取PDF内容，进行提问 文献管理工具 Zotero 文献数据库，支持多端同步  浏览器插件，支持在浏览的同时加入文献集合  网站 浏览器 Print成PDF，然后使用PDF工具 代码Project AI阅读代码 https://github.com/sourcegraph/cody </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/05/22/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/" title="嵌入式开发">嵌入式开发</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-05-22T17:09:28.000Z" title="Created 2025-05-22 17:09:28">2025-05-22</time></span></div><div class="content">野火STM32F407 配置 下载 arm 编译器： https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads 在这里拉下去下载 设置里面如果缺少的话，用target 里面 compiler version 6 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/04/22/Linux%E5%86%85%E6%A0%B8/" title="Linux内核">Linux内核</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-04-22T17:09:28.000Z" title="Created 2025-04-22 17:09:28">2025-04-22</time></span></div><div class="content">中断 中断机制： 中断分为硬件中断和软件中断  硬件中断是由硬件中断控制芯片发出的 软中断是异常  代码实现： asm.s, system_call.s, trap.c, fork.c, signal.c, sys.c 中断的工作流程 CPU的工作模式转换，寄存器拷贝压栈，中断异常向量表，保存正常运行函数的返回值, 跳转到对应的中断服务函数上运行, 模式复原， 跳转回正常函数 硬件中断前处理 asm.s 中断执行 trap.c 软件中断前 system_call.s 执行 fork.c signal.c exit.c sys.c 进程管理 系统时间： CPU内部有个RTC，mktime函数计算从1970年1月1日0时的秒数 给mktime的参数是从RTC(CMOS)读出的,放到全局遍历里，为jiffies所用 jiffies 是系统时钟的滴答，一个滴答是10ms dotimer cpl 是内核中只是状态的变量：当前是内核态(0)还是用户态(1) Linux内核设计与实现 进程管理 进程是处于执行期的程序,还包含其他资源。线程是在进程中活动的对象。Linux不对线程和进程特别区分,...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" title="计算机组成原理">计算机组成原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-03-30T10:59:19.000Z" title="Created 2025-03-30 10:59:19">2025-03-30</time></span></div><div class="content">计算机组成原理 计算机基本组成 现代计算机硬件   image-20250330110412805  存储器基本组成   image-20250330110557695  控制器基本组成   image-20250330110701305  完成一条指令的过程   image-20250330110807132  计算机硬件的主要技术指标 机器字长 CPU 一次能处理数据的位数 ， 与 CPU 中的 寄存器位数 有关 运算速度  主频 核数，每个核支持的线程数 吉普森法  CPI 执行一条指令所需时钟周期数  MIPS 每秒执行百万条指令 FLOPS 每秒浮点运算次数  存储容量 总线 总线是连接各个部件的信息传输线， 是 各个部件共享的传输介质 并行和串行   image-20250330111037133  总线的性能指标  总线宽度 ：数据线 的根数 标准传输率，每秒传输的最大字节数（MBps） 时钟同步/异步 总线复用：地址线 与 数据线 复用 信号线数 总线控制方式 其他指标  总线标准   image-20250330111218648  总线结构 单总线结构   i...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/21/windows%E5%AE%89%E8%A3%85/" title="Windows安装">Windows安装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-05-21T17:09:28.000Z" title="Created 2024-05-21 17:09:28">2024-05-21</time></span></div><div class="content">安装完windows后的设置 键盘要插机箱后面，不然音量旋钮用不了 跳过联网 shift + F10 然后运行 1oobe\bypassnro 安装驱动 在另一台电脑上，去主板官网下载联网驱动 下载显卡驱动gforce experience windows 设置  右键任务栏，一场搜索框，任务视图，小组件 卸载one drive 右键回win10: cmd里面  1reg add &quot;HKCU\Software\Classes\CLSID\&#123;86ca1aa0-34aa-4e8b-a509-50c905bae2a2&#125;\InprocServer32&quot; /f /ve  语言和区域里面加入ENG，DEU windows+E 然后点三个点里面的选项，设置打开时候是此电脑 关掉睡眠,电源里改成最佳能效，关闭睡眠  勾选掉隐私  隐私和安全性里面，勾选掉所有的 声音设置里面，更多设置，windwos声音方案选择无声  关闭杀毒 win+r运行 gpedit.msc 计算机配置，管理模板,windows组件，microsoft defender防病毒,实时防...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/12/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A82/" title="信息安全2">信息安全2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-05-12T20:45:03.000Z" title="Created 2024-05-12 20:45:03">2024-05-12</time></span></div><div class="content">IT Security 2 Digitale Identität: ID Token Basis für Authentisierung und Autorisierung Formfaktor Smartcard Smardcard可以应用在Mobilfunk, PA, Health, Payment这些领域，它可以用来特殊的安全服务：  2-Faktor-Authentisierung, Sicherer Speicher, Secure Boot • Schlüssel-Generierung, -Speicherung, Signieren, Verschlüsseln   FormFaktor 波形因数  Smardcard分类  Kontaktlose Karte 无接触的 Kontaktbehaftete Karte Protokolle  ISO/IEC Standard 7816 Mikrocontroller-Architektur   image-20240512212417348  Control  Reset 可以通过读卡器触发，对于非接触式卡：如果场强...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:contact@fyind.de" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/02/cuda-programming/" title="cuda-programming">cuda-programming</a><time datetime="2026-01-02T19:58:41.000Z" title="Created 2026-01-02 19:58:41">2026-01-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/02/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="邮件服务器">邮件服务器</a><time datetime="2025-10-02T17:39:45.000Z" title="Created 2025-10-02 17:39:45">2025-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="虚拟机">虚拟机</a><time datetime="2025-09-23T17:43:21.000Z" title="Created 2025-09-23 17:43:21">2025-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/" title="机器学习实战">机器学习实战</a><time datetime="2025-09-21T20:39:40.000Z" title="Created 2025-09-21 20:39:40">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/02/Rowhammer%E6%94%BB%E5%87%BB/" title="Rowhammer攻击">Rowhammer攻击</a><time datetime="2025-09-02T14:46:19.000Z" title="Created 2025-09-02 14:46:19">2025-09-02</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/TUM%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">TUM笔记</span><span class="card-category-list-count">22</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/"><span class="card-category-list-name">Talk</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows/"><span class="card-category-list-name">Windows</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" style="font-size: 1.23em; color: #999ea6">计算几何</a> <a href="/tags/atcoder/" style="font-size: 1.23em; color: #999ea6">atcoder</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">操作系统</a> <a href="/tags/LaTeX/" style="font-size: 1.1em; color: #999">LaTeX</a> <a href="/tags/Archlinux/" style="font-size: 1.23em; color: #999ea6">Archlinux</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 1.5em; color: #99a9bf">网络安全</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.1em; color: #999">线性代数</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 1.37em; color: #99a4b2">题解</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" style="font-size: 1.1em; color: #999">统计学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9E%B6%E6%9E%84/" style="font-size: 1.1em; color: #999">计算机架构</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 1.1em; color: #999">人工智能</a> <a href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/" style="font-size: 1.1em; color: #999">理论计算机学</a> <a href="/tags/Linux%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">Linux命令</a> <a href="/tags/%E5%AE%A2%E5%88%B6%E5%8C%96/" style="font-size: 1.1em; color: #999">客制化</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" style="font-size: 1.1em; color: #999">网络流</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" style="font-size: 1.1em; color: #999">线性规划</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">汇编语言</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">离散数学</a> <a href="/tags/Machine-Learning/" style="font-size: 1.1em; color: #999">Machine Learning</a> <a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 1.1em; color: #999">二分</a> <a href="/tags/Java/" style="font-size: 1.37em; color: #99a4b2">Java</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 1.1em; color: #999">总结</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">编程语言</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">软件技术</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 1.1em; color: #999">前缀和</a> <a href="/tags/Visual-Studio/" style="font-size: 1.1em; color: #999">Visual-Studio</a> <a href="/tags/Python/" style="font-size: 1.37em; color: #99a4b2">Python</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/AtCoder/" style="font-size: 1.1em; color: #999">AtCoder</a> <a href="/tags/Web/" style="font-size: 1.1em; color: #999">Web</a> <a href="/tags/%E5%89%AA%E8%BE%91%E8%BD%AF%E4%BB%B6/" style="font-size: 1.1em; color: #999">剪辑软件</a> <a href="/tags/i3/" style="font-size: 1.1em; color: #999">i3</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 1.1em; color: #999">面向对象</a> <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" style="font-size: 1.1em; color: #999">逆向工程</a> <a href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" style="font-size: 1.1em; color: #999">高斯消元</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">计算机网络</a> <a href="/tags/Operating-System/" style="font-size: 1.1em; color: #999">Operating System</a> <a href="/tags/Functional-Programming/" style="font-size: 1.1em; color: #999">Functional Programming</a> <a href="/tags/%E6%95%B0%E5%AD%A6-R%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">数学 - R语言</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              January 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              October 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              September 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              March 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/05/">
+            <span class="card-archive-list-date">
+              May 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">90</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-20T15:13:25.059Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

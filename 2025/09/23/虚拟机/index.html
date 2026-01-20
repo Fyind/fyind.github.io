@@ -1,0 +1,1250 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>虚拟机 | Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="虚拟机 Emulation 指令集模拟是在一个平台上模拟另一个（或同一）CPU 的指令与执行语义。常见场景包括：跨架构仿真（比如在 x86 上跑 ARM 二进制）、系统模拟（Bochs）、动态二进制分析 Interpretation 解释执行（Interpretation）：逐条取出目标指令，解析并执行对应的宿主（host）操作。 simple interpreter 是一种执行程序的方法，它不直">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟机">
+<meta property="og:url" content="http://fyind.de/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:description" content="虚拟机 Emulation 指令集模拟是在一个平台上模拟另一个（或同一）CPU 的指令与执行语义。常见场景包括：跨架构仿真（比如在 x86 上跑 ARM 二进制）、系统模拟（Bochs）、动态二进制分析 Interpretation 解释执行（Interpretation）：逐条取出目标指令，解析并执行对应的宿主（host）操作。 simple interpreter 是一种执行程序的方法，它不直">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:published_time" content="2025-09-23T17:43:21.000Z">
+<meta property="article:modified_time" content="2026-01-20T15:12:33.405Z">
+<meta property="article:author" content="Fyind">
+<meta property="article:tag" content="Virtual Machine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "虚拟机",
+  "url": "http://fyind.de/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/",
+  "image": "http://fyind.de/img/pic1.PNG",
+  "datePublished": "2025-09-23T17:43:21.000Z",
+  "dateModified": "2026-01-20T15:12:33.405Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Fyind",
+      "url": "http://fyind.de"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '虚拟机',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">虚拟机</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">虚拟机</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-23T17:43:21.000Z" title="Created 2025-09-23 17:43:21">2025-09-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-01-20T15:12:33.405Z" title="Updated 2026-01-20 15:12:33">2026-01-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="虚拟机">虚拟机</h1>
+<h2 id="emulation">Emulation</h2>
+<p><strong>指令集模拟</strong>是在一个平台上模拟另一个（或同一）CPU
+的指令与执行语义。常见场景包括：跨架构仿真（比如在 x86 上跑 ARM
+二进制）、系统模拟（Bochs）、动态二进制分析</p>
+<h3 id="interpretation">Interpretation</h3>
+<p><strong>解释执行（Interpretation）</strong>：逐条取出目标指令，解析并执行对应的宿主（host）操作。</p>
+<h3 id="simple-interpreter">simple interpreter</h3>
+<p>是一种执行程序的方法，它不直接在硬件上运行目标二进制，而是
+<strong>逐条读取（decode）、理解（dispatch）、执行（interpret）指令的语义</strong>。Decode-and-Dispatch
+模式</p>
+<ul>
+<li><strong>核心机制</strong>：有一个大循环（interpreter
+loop），每次循环：
+<ol type="1">
+<li><strong>取指
+(fetch)</strong>：从“程序计数器（PC）”指向的内存里读一条指令。</li>
+<li><strong>解码
+(decode)</strong>：解析这条指令是什么类型（加法？加载？跳转？）。</li>
+<li><strong>分发
+(dispatch)</strong>：根据指令类型，跳转到对应的解释函数/分支逻辑。</li>
+<li><strong>执行
+(execute)</strong>：修改解释器内部维护的状态（寄存器、内存、标志位等）。</li>
+<li><strong>更新 PC</strong>：让 PC 指向下一条指令，然后继续循环。</li>
+</ol></li>
+<li>这种结构叫 <strong>decode-and-dispatch
+interpreter</strong>，因为它的循环主要做两件事：<strong>解码 +
+分发</strong>。</li>
+</ul>
+<h3 id="threaded-interpretation">Threaded Interpretation</h3>
+<p>其中 <strong>dispatch（分派）开销很大</strong>：</p>
+<ul>
+<li>每条 guest 指令都要走一次
+<code>switch-case</code>，即使宿主已经知道下一条指令的类型。</li>
+<li>分支预测容易失败（尤其是 guest 指令随机混合时）。</li>
+</ul>
+<p>Threaded Interpretation 的核心思想</p>
+<ul>
+<li><strong>提前把“分派信息”存好</strong>，减少运行时的 switch-case
+开销。</li>
+<li>通过 <strong>直接跳转表（jump table）</strong> 或
+<strong>函数指针数组</strong>，让解释器在执行完一条指令后，能<strong>直接跳到下一条指令对应的解释代码</strong>。</li>
+</ul>
+<h4 id="a-指令预处理">(a) 指令预处理</h4>
+<ul>
+<li>把 guest 指令流转成一组“解释器操作码（interpreter opcodes）”，</li>
+<li>每个操作码对应一个 <strong>函数指针 / 标签地址</strong>。</li>
+</ul>
+<h4 id="b-执行循环">(b) 执行循环</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每个指令对应的函数（handler）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">op_add</span><span class="params">(State *s, Instr *pc)</span> </span>&#123;</span><br><span class="line">    s-&gt;regs[pc-&gt;rd] = s-&gt;regs[pc-&gt;ra] + s-&gt;regs[pc-&gt;rb];</span><br><span class="line">    <span class="keyword">goto</span> * (++pc)-&gt;handler;  <span class="comment">// 直接跳到下一条指令的 handler</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">op_load</span><span class="params">(State *s, Instr *pc)</span> </span>&#123;</span><br><span class="line">    s-&gt;regs[pc-&gt;rd] = s-&gt;mem[s-&gt;regs[pc-&gt;ra] + pc-&gt;offset];</span><br><span class="line">    <span class="keyword">goto</span> * (++pc)-&gt;handler;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主循环</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">run</span><span class="params">(Instr *pc, State *s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">goto</span> *pc-&gt;handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>性能大幅提升</strong>：消除了大 <code>switch</code>
+的分支预测开销，指令执行效率更接近 DBT。</p>
+<p><strong>结构紧凑</strong>：代码逻辑更接近汇编跳转流程。</p>
+<p><strong>易扩展</strong>：只要给新指令定义 handler 即可。</p>
+<h3 id="predecoding-and-direct-threaded-interpretation">Predecoding and
+Direct Threaded Interpretation</h3>
+<p><strong>Threaded Interpretation</strong> 优化掉了分派开销（通过
+<code>goto *pc-&gt;handler</code>），但还有一个问题：<strong>解码成本仍然存在</strong>。真实
+ISA 的二进制指令通常比较复杂（如 x86 可变长指令）。</p>
+<p>每次执行前都要从原始二进制里解码 → 很浪费</p>
+<h4 id="predecoding预解码">Predecoding（预解码）</h4>
+<p>在程序加载或第一次扫描时，把原始二进制指令解码成一种更容易解释的“中间表示（IR）”。</p>
+<ul>
+<li>把 guest 二进制逐条读取 →
+解码成一个结构体（保存操作码、寄存器编号、立即数、偏移量等）。</li>
+<li>在结构体里额外存一个指向 <strong>解释函数 handler</strong>
+的指针。</li>
+</ul>
+<p>这样一来，解释器执行时就不用再做复杂解码了，直接使用预先存好的
+handler 地址和参数即可。</p>
+<h4 id="direct-threaded-interpretation">Direct Threaded
+Interpretation</h4>
+<ul>
+<li>每个预解码后的指令条目都带有 <strong>直接跳转到对应 handler
+的地址</strong>。</li>
+<li>执行时：<code>goto *pc-&gt;handler</code>，执行 handler，handler
+里再跳到下一条。</li>
+</ul>
+<p>这样：</p>
+<ul>
+<li>无需中心调度循环。</li>
+<li>无需在执行时再查找 opcode → handler 的映射。</li>
+</ul>
+<h3 id="interpreting-a-complex-instruction-set">Interpreting a Complex
+Instruction Set</h3>
+<p><strong>RISC（简化指令集）</strong>：指令长度固定、格式统一、操作数数量有限、寻址方式少。比如
+PowerPC、MIPS、RISC-V。→ 解释器很容易写：PC 每次 +4，解码也很简单。</p>
+<p><strong>CISC（复杂指令集）</strong>：指令长度不固定、寻址模式多、单条指令可能做很多事（如加载、算术、存储、条件更新标志）。典型代表：<strong>x86</strong>。</p>
+<h4 id="interpretation-of-the-ia-32-isa">Interpretation of the IA-32
+ISA</h4>
+<p>IA-32 的解释器通常分成 <strong>两步走</strong>：</p>
+<ol type="1">
+<li><strong>填充通用指令模板</strong>
+<ul>
+<li>把原始字节流解码成一个“中间表示”（类似指令对象），包括操作码、操作数类型、寻址模式、立即数/位移等。</li>
+<li>这一步解决变长指令与复杂寻址的解析。</li>
+</ul></li>
+<li><strong>分发至专用例程</strong>
+<ul>
+<li>根据解码结果（操作码、寻址模式等），调用相应的解释函数来模拟执行。</li>
+</ul></li>
+</ol>
+<p>👉 实现方式通常依赖一个 <strong>大型查找表</strong>：</p>
+<ul>
+<li>输入是操作码，输出是对应的解码/执行函数。</li>
+<li>遇到 ModR/M、SIB、位移、立即数时，还要进一步解析并存入模板。</li>
+</ul>
+<h4 id="threaded-interpretation-1">Threaded Interpretation</h4>
+<p>问题：如果每个解释例程都内嵌完整的“解码逻辑”，代码会非常庞大、冗余。</p>
+<p><strong>优化思路：混合模型</strong></p>
+<ul>
+<li><strong>简单、常见指令</strong> → 用轻量级 <strong>direct
+threading</strong> 技术，直接跳转到 handler，避免大开销。</li>
+<li><strong>复杂、少见指令</strong> → 回退到
+<strong>集中式解码器</strong>，统一解析。</li>
+</ul>
+<h3 id="binary-translation">Binary Translation</h3>
+<p>它是比“逐条解释”更高效的一种指令集模拟技术，同时涉及
+<strong>代码发现与动态翻译（DBT, Dynamic Binary
+Translation）</strong>。</p>
+<p><strong>二进制翻译</strong>：把一段源 ISA 的指令序列（通常是基本块
+<em>basic block</em>）一次性翻译为目标 ISA 的等效代码。</p>
+<h4 id="代码块翻译与缓存"><strong>代码块翻译与缓存</strong></h4>
+<ul>
+<li>单位：基本块（single-entry,
+single-exit），因为控制流简单，便于翻译。</li>
+<li>翻译后存入 <strong>代码缓存（code
+cache）</strong>，下次遇到直接跳转到缓存的机器码。</li>
+<li>若源代码有 <strong>自修改（self-modifying
+code）</strong>，需要失效并重新翻译。</li>
+</ul>
+<h4 id="寄存器状态映射"><strong>寄存器状态映射</strong></h4>
+<ul>
+<li>源 ISA 的寄存器数量/功能 ≠ 目标 ISA。</li>
+<li>通过
+<strong>寄存器映射</strong>，把源寄存器直接绑定到目标物理寄存器，减少访存。</li>
+<li>比如：IA-32 的 <code>EAX</code> 直接映射到 PowerPC 的
+<code>r5</code>。</li>
+</ul>
+<h4 id="指令序列优化">指令序列优化</h4>
+<p>翻译不仅是逐条对等替换，还能做优化：</p>
+<ul>
+<li><strong>死代码消除</strong>（eliminate dead code）。</li>
+<li><strong>公共子表达式消除</strong>（common subexpression
+elimination）。</li>
+<li><strong>寄存器复用</strong>（避免多余 load/store）。</li>
+<li><strong>常量折叠</strong>（constant folding）。</li>
+</ul>
+<h3 id="code-discovery-and-dynamic-translation">Code Discovery and
+Dynamic Translation</h3>
+<h4 id="the-code-discovery-problem">The Code-Discovery Problem</h4>
+<p>翻译器必须知道哪些字节是
+<strong>可执行的指令</strong>，才能正确解码。但在 <strong>CISC 架构（如
+IA-32/x86）</strong> 上，这个过程非常棘手。</p>
+<p>难点</p>
+<ol type="1">
+<li><strong>变长指令</strong></li>
+<li><strong>间接跳转（Indirect Jumps/Calls）</strong>
+<ul>
+<li>目标地址不是立即数，而是寄存器值或内存取值。</li>
+<li>只有运行时才能知道跳到哪里。</li>
+<li>静态分析无法提前收集所有目标地址。</li>
+</ul></li>
+<li><strong>数据混杂在代码段中</strong>
+<ul>
+<li>某些程序在代码段中嵌入数据（例如查表、只读掩码、对齐填充）。</li>
+<li>如果翻译器误把这些数据当成指令解码，就会出错。</li>
+</ul></li>
+<li><strong>指令对齐（Alignment）问题</strong>
+<ul>
+<li>编译器可能在代码里插入对齐填充（如 <code>0x90</code> NOP），</li>
+<li>甚至可能造成某些字节既是对齐填充又可能被跳转到作为指令入口。</li>
+<li>这使得静态预解码更加困难。</li>
+</ul></li>
+</ol>
+<p>👉 结论：<strong>CISC
+上几乎无法通过静态分析完整、准确地发现所有代码块</strong>。
+因此，<strong>动态二进制翻译（DBT）</strong>一般采用 <strong>运行时发现
++ 按需翻译</strong>。</p>
+<h4 id="the-code-location-problem">The Code-Location Problem</h4>
+<p>当源代码被翻译为目标 ISA 代码后，就存在 <strong>两套
+PC（程序计数器）</strong>：</p>
+<ul>
+<li><strong>SPC（Source PC）</strong>：源 ISA 的指令地址。</li>
+<li><strong>TPC（Target PC）</strong>：翻译后代码在宿主 ISA
+中的地址。</li>
+</ul>
+<p>问题：</p>
+<ul>
+<li>guest 程序在执行时，寄存器保存的是 <strong>SPC</strong> 地址。</li>
+<li>但 DBT 翻译后的代码在宿主机器上运行时，需要跳转到
+<strong>TPC</strong>。</li>
+<li>如果直接用 SPC 跳转，会跳到错误的地方（因为 SPC ≠ TPC）。</li>
+</ul>
+<p>解决办法：</p>
+<ul>
+<li><strong>建立映射表（Mapping Table）</strong>：
+<ul>
+<li>记录每个 SPC 对应的 TPC。</li>
+<li>在执行间接跳转时：
+<ol type="1">
+<li>取出 guest 代码给的 SPC；</li>
+<li>查映射表找到对应的 TPC；</li>
+<li>跳转到 TPC。</li>
+</ol></li>
+</ul></li>
+<li><strong>优化手段</strong>：
+<ul>
+<li><strong>直接插桩</strong>：在翻译后的代码里，用跳转表或内联检查，把
+SPC → TPC 的转换直接嵌入。</li>
+<li><strong>快速路径 + 慢路径</strong>：
+<ul>
+<li>常见的目标 SPC 直接内联成直接跳转。</li>
+<li>不常见的 SPC 则走查表。</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="incremental-predecoding-and-translation">Incremental Predecoding
+and Translation</h4>
+<p>动态二进制翻译系统（DBT）通常包含：</p>
+<ul>
+<li><strong>解释器
+(Interpreter)</strong>：兜底执行，或者在翻译前先跑一段。</li>
+<li><strong>二进制翻译器 (Translator)</strong>：把源 ISA
+指令块转换为目标 ISA 代码。</li>
+<li><strong>仿真管理器 (EM, Execution
+Manager)</strong>：调度运行时流程，负责 SPC→TPC
+映射、桩代码管理、异常/中断恢复。</li>
+<li><strong>代码缓存 (Code
+Cache)</strong>：存放已经翻译好的目标代码。</li>
+<li><strong>SPC-TPC 映射表</strong>：源地址（Source
+PC）和目标地址（Target PC）的映射，用于间接跳转和异常处理。</li>
+</ul>
+<h5 id="dynamic-basic-block">Dynamic Basic Block</h5>
+<p>使用动态基本块作为翻译单元
+，从一个控制流入口（通常是分支/跳转目标）开始，顺序包含多条指令，直到遇到下一个分支/跳转结束。</p>
+<p>与 <strong>静态基本块</strong>的区别：</p>
+<ul>
+<li>静态基本块由编译器分析决定，唯一划分。</li>
+<li>动态基本块依赖运行时的控制流路径 →
+<strong>更大、更多样</strong>。</li>
+<li>同一条指令可能出现在多个不同的动态块里（因为来自不同路径）。</li>
+</ul>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20250923185037039.png"
+alt="image-20250923185037039" />
+<figcaption aria-hidden="true">image-20250923185037039</figcaption>
+</figure>
+<p>DBT 不会在运行前翻译整个程序（那是静态翻译的思路）。</p>
+<p>采用 <strong>增量式</strong>：</p>
+<ul>
+<li>第一次执行某段 SPC 时 → 翻译成目标代码，存入缓存。</li>
+<li>下一次再遇到同一 SPC → 直接跳转到缓存好的 TPC。</li>
+</ul>
+<h5 id="spc-tpc-映射表">SPC-TPC 映射表</h5>
+<ul>
+<li>功能：把源程序的 PC（SPC）转换成翻译后目标代码的入口（TPC）。</li>
+<li><strong>典型实现</strong>：哈希表，查询快、可扩展。</li>
+</ul>
+<h5 id="桩代码stubs">桩代码（Stubs）</h5>
+<ul>
+<li>动态块通常以 <strong>分支或跳转</strong>结束。</li>
+<li>DBT 会在末尾插入 <strong>桩代码 (stub)</strong>：
+<ul>
+<li>保存下一个 SPC 值。</li>
+<li>把控制权交回仿真管理器（EM）。</li>
+</ul></li>
+<li>EM 根据 SPC 查映射表：
+<ul>
+<li>如果已翻译 → 跳到对应的 TPC。</li>
+<li>如果没翻译 → 调用翻译器生成新块。</li>
+</ul></li>
+</ul>
+<p>👉 桩代码相当于
+<strong>中转站</strong>，保证动态控制流始终能正确跳转。</p>
+<p><strong>自修改代码 (Self-Modifying Code)</strong></p>
+<ul>
+<li>如果源程序修改了自己（写入代码段），则对应的翻译版本失效。</li>
+<li>需要检测并 <strong>重新翻译</strong>该代码块。</li>
+</ul>
+<p><strong>自引用代码 (Self-Referential Code)</strong></p>
+<ul>
+<li>程序有时会读取自身指令字节作为数据。</li>
+<li>在这种情况下，必须返回
+<strong>原始二进制</strong>，而不是翻译后的版本。</li>
+<li>因此，DBT 系统必须同时保留原始代码副本</li>
+</ul>
+<p>源 ISA
+可能要求某些异常/中断发生时，必须在<strong>精确的指令边界</strong>恢复上下文。</p>
+<p>DBT 在翻译时必须保证：</p>
+<ul>
+<li>如果 TPC 执行时出错（如访问越界），系统能回溯到对应的 SPC。</li>
+<li>并且恢复源寄存器、标志位等上下文。</li>
+</ul>
+<p>这要求翻译器在生成代码时插入 <strong>映射点 (mapping
+points)</strong>，保证能从宿主状态恢复出精确的源状态。</p>
+<h4 id="same-isa-emulation">Same-ISA Emulation</h4>
+<p>虽然源程序和宿主机器的
+<strong>指令集架构（ISA）相同</strong>，理论上可以直接运行，但仍然通过一个“仿真层”来间接执行程序。这样做的目的，不是跨平台，而是为了
+<strong>控制、监控和优化</strong> 程序运行。</p>
+<h5 id="应用场景">应用场景</h5>
+<ol type="1">
+<li><strong>程序性能模拟</strong>
+<ul>
+<li>例如 <strong>Shade 系统</strong>（早期的 SPARC 同 ISA
+仿真器），通过插桩收集性能数据，评估程序行为。</li>
+</ul></li>
+<li><strong>操作系统调用模拟</strong>
+<ul>
+<li>即使 ISA 一样，不同 OS 也有差异（如 Linux vs. BSD）。</li>
+<li>仿真层可以把源 OS 的系统调用转化为宿主 OS 的调用。</li>
+</ul></li>
+<li><strong>特权操作检测与处理</strong>
+<ul>
+<li>捕获内核相关指令（如
+I/O、内存管理指令），避免直接执行带来安全风险。</li>
+</ul></li>
+<li><strong>安全防护</strong>
+<ul>
+<li>在仿真层中插入监控逻辑，比如控制流完整性检查，防止攻击者劫持跳转。</li>
+</ul></li>
+<li><strong>动态二进制优化</strong>
+<ul>
+<li>DBT
+技术可以利用运行时信息（热点路径、分支预测结果等）来做动态优化。</li>
+<li>例如在运行时对频繁执行的循环进行指令级优化，提高整体性能。</li>
+</ul></li>
+</ol>
+<p>同 ISA 仿真器往往不需要复杂的“翻译”工作，因为源/目标 ISA 一致。</p>
+<p>实际做法类似于 <strong>源码复制 + 轻量包装</strong>：</p>
+<ul>
+<li>普通指令 → 直接执行或简单转发；</li>
+<li>系统调用、特权指令等特殊情况 → 拦截并处理。</li>
+</ul>
+<h3 id="control-transfer-optimizations">Control Transfer
+Optimizations</h3>
+<p><strong>动态二进制翻译（DBT）中的控制流优化</strong>，目标是减少“翻译块之间的切换开销”，让程序在缓存好的翻译代码中更顺畅地执行。</p>
+<h4 id="translation-chaining">Translation Chaining</h4>
+<p><strong>问题</strong>：在基础的 DBT 中，每个翻译块（Translation
+Block,
+TB）执行结束时，通常会通过桩代码（stub）返回到仿真管理器（EM），再由 EM
+决定下一个要执行的 TB。这样一来，每个跳转都会有 EM
+介入，性能开销很大。</p>
+<p><strong>优化</strong>：</p>
+<ul>
+<li>初始时，块末尾放一段跳转到 EM 的桩代码。</li>
+<li>当后续块被翻译出来后，可以 <strong>回填（patch）</strong>
+前一块的桩代码 → 直接跳转到新块的入口。</li>
+<li>这样两个翻译块就被“链”在一起，运行时直接跳过去，减少 EM 调度。</li>
+</ul>
+<p><strong>限制</strong>：</p>
+<ul>
+<li>仅适用于 <strong>直接跳转（目标固定可知）</strong>。</li>
+<li><strong>间接跳转</strong>（比如函数返回，目标依赖寄存器或内存值）不适合直接链接。</li>
+</ul>
+<h4 id="software-indirect-jump-prediction">Software Indirect Jump
+Prediction</h4>
+<p><strong>问题</strong>：间接跳转（如函数指针调用、虚函数调用、switch
+表、返回地址）在运行时目标可能变化。没法提前静态链接，只能依赖查表 →
+成本高。</p>
+<p><strong>优化：内联缓存 (Inline Caching, IC)</strong></p>
+<ul>
+<li>在翻译块中直接嵌入“快速判断逻辑”：
+<ul>
+<li>如果当前跳转目标 = 最近一次/常见的 SPC → 直接跳转到缓存的 TPC。</li>
+<li>如果不匹配 → 回退到 EM，通过映射表查找正确目标。</li>
+</ul></li>
+</ul>
+<h4 id="shadow-stack">Shadow Stack</h4>
+<p><strong>问题</strong>：函数调用/返回是最常见的间接跳转。如果每次返回都要查映射表，成本高。</p>
+<p><strong>优化</strong>：</p>
+<ul>
+<li>在
+<strong>函数调用时</strong>，除了正常把返回地址压入源栈，还把该返回地址（SPC）和对应的
+TPC 压入 <strong>影子栈</strong>。</li>
+<li>在 <strong>函数返回时</strong>：
+<ul>
+<li>比较源栈顶的 SPC 与影子栈顶的 SPC。</li>
+<li>如果匹配 → 直接用影子栈中的 TPC 跳转，避免查表。</li>
+<li>如果不匹配 → 回退到正常查表机制。</li>
+</ul></li>
+</ul>
+<p><strong>安全性</strong>：</p>
+<ul>
+<li>同时保存源栈指针（SP）值，检测栈截断或修改，保证影子栈和源栈同步。</li>
+</ul>
+<h3 id="instruction-set-issues">Instruction Set Issues</h3>
+<p><strong>动态二进制翻译（DBT）中与指令集差异相关的挑战</strong>。当源
+ISA 和目标 ISA
+不同的时候，必须解决寄存器、条件码和数据表示等方面的不匹配问题，否则翻译出来的代码要么不能执行，要么语义不对。</p>
+<h4 id="register-architectures">Register Architectures</h4>
+<p><strong>挑战</strong>：目标架构的寄存器既要保存源程序的寄存器值，还要承担运行时环境管理（比如指向上下文块）和翻译过程中生成的中间值。如果目标架构寄存器数量少，就容易不够用。</p>
+<p><strong>情况一：寄存器宽裕（RISC 模拟 CISC）</strong></p>
+<ul>
+<li>比如用 PowerPC/RISC-V 来模拟 x86，目标寄存器数量多，可以
+<strong>静态分配</strong>。</li>
+<li>常用策略：给源寄存器分配固定的目标寄存器，把一部分寄存器专门用来保存上下文指针或中间值。</li>
+</ul>
+<p><strong>情况二：寄存器紧张</strong></p>
+<ul>
+<li>比如在寄存器少的目标 ISA 上模拟寄存器多的源 ISA。</li>
+<li>必须
+<strong>动态管理</strong>：在翻译块入口/出口处，把源寄存器状态保存/恢复到内存的“上下文块”，在块内灵活分配寄存器。</li>
+</ul>
+<h4 id="condition-codes">Condition Codes</h4>
+<p><strong>差异来源</strong>：</p>
+<ul>
+<li><strong>IA-32
+(x86)</strong>：有隐式条件码（EFLAGS），每次算术操作自动更新。</li>
+<li><strong>SPARC /
+PowerPC</strong>：条件码是显式设置的（需要单独指令）。</li>
+<li><strong>MIPS</strong>：没有条件码，而是通过比较指令直接得到分支结果。</li>
+</ul>
+<p><strong>最难情况</strong>：源 ISA 有隐式条件码（x86），但目标 ISA
+没有（MIPS）。这意味着必须模拟条件码更新，但不能直接映射寄存器。</p>
+<p><strong>常见优化</strong>：</p>
+<ul>
+<li><strong>惰性求值 (Lazy
+Evaluation)</strong>：不立即计算条件码，而是记录“由哪条操作生成了哪些标志位”，只有当真正用到时才计算。</li>
+<li><strong>数据流分析</strong>：如果确定某些条件码值根本没被用到，可以完全跳过，减少开销。</li>
+</ul>
+<p><strong>异常情况</strong>：如果程序在一条指令后触发异常，必须立即
+<strong>物化（materialize）</strong>
+出所有相关条件码，确保系统能恢复到与源 ISA 完全一致的状态。</p>
+<h4 id="data-formats-and-arithmetic">Data Formats and Arithmetic</h4>
+<p><strong>相对容易的情况</strong>：</p>
+<ul>
+<li>整数：大多数 ISA 都用二进制补码。</li>
+<li>浮点：大多数遵循 IEEE 754 标准。</li>
+<li>→ 这部分通常能直接映射。</li>
+</ul>
+<p><strong>差异与挑战</strong>：</p>
+<ul>
+<li><strong>IA-32</strong>：使用 80 位浮点中间结果（比常见的 64
+位双精度更高）。在模拟时，可能需要额外保存精度，否则结果不一致。</li>
+<li><strong>PowerPC</strong>：部分浮点乘加指令精度高于 IEEE 标准 →
+必须小心保持一致性。</li>
+</ul>
+<p><strong>缺失功能的替代</strong>：</p>
+<ul>
+<li>目标 ISA 没有对应指令时，可以用多条指令组合实现。例如：
+<ul>
+<li>除法缺失 → 用移位和减法迭代实现。</li>
+<li>复杂寻址模式（如 x86 的 <code>[base+index*scale+disp]</code>） →
+拆解为加法 + 乘法 + 加载序列。</li>
+</ul></li>
+<li>立即数长度不够 → 用多条加载/移位/或运算组合出完整常量。</li>
+</ul>
+<h4 id="memory-address-resolution">Memory Address Resolution</h4>
+<p><strong>问题</strong>：不同 ISA 支持的最小存取单位不同。</p>
+<ul>
+<li>有的 ISA 是 <strong>字节寻址</strong>（x86、ARM 等），最小单位 1
+byte。</li>
+<li>有的 ISA 是 <strong>字寻址</strong>（早期的 PDP-11、部分
+DSP），最小单位是 word。</li>
+</ul>
+<p><strong>挑战</strong>：</p>
+<ul>
+<li>如果目标 ISA 只支持 word 级访问，但源 ISA 允许 byte
+访问，就需要用移位、掩码来提取特定字节。</li>
+<li>反之，如果目标 ISA 是 byte 寻址，模拟 word
+寻址的源机就比较容易（属于“强模拟弱”）。</li>
+</ul>
+<h4 id="memory-data-alignment">Memory Data Alignment</h4>
+<p><strong>问题</strong>：</p>
+<ul>
+<li>有些 ISA 要求 <strong>自然对齐</strong>（比如 4 字节 word 必须在 4
+的倍数地址）。</li>
+<li>但像 x86 允许非对齐访问。</li>
+</ul>
+<p><strong>挑战</strong>：</p>
+<ul>
+<li>如果目标 ISA 不支持非对齐访问，就要在 DBT 中拆成多个 byte
+load/store，或使用目标 ISA 的专用指令（如 ARM 的
+<code>LDRD</code>/<code>STRD</code> 辅助）。</li>
+</ul>
+<p><strong>优化</strong>：</p>
+<ul>
+<li>运行时分析访问地址是否对齐：
+<ul>
+<li>若对齐 → 用高效的 word 访问。</li>
+<li>若不对齐 → 退化成字节级操作。</li>
+</ul></li>
+</ul>
+<h4 id="byte-order">Byte Order</h4>
+<p><strong>差异</strong>：</p>
+<ul>
+<li><strong>大端
+(Big-endian)</strong>：最高有效字节在低地址（PowerPC、SPARC）。</li>
+<li><strong>小端
+(Little-endian)</strong>：最低有效字节在低地址（x86、RISC-V）。</li>
+</ul>
+<p><strong>挑战</strong>：</p>
+<ul>
+<li>若源/目标 ISA 字节序不同，每次 load/store 都要做字节翻转。</li>
+<li><strong>非对齐访问</strong>时更麻烦，往往需要逐字节重组，或者利用双字加载+移位来拼接。</li>
+</ul>
+<p><strong>优化</strong>：</p>
+<ul>
+<li>如果目标 ISA
+硬件支持双端模式（bi-endian），直接切换模式，避免软件翻转。</li>
+<li>系统调用数据交互时，也要用包装代码保证字节序一致。</li>
+</ul>
+<h4 id="addressing-architecture">Addressing Architecture</h4>
+<p><strong>问题</strong>：ISA
+在地址空间、页面大小、特权机制上可能不同。</p>
+<ul>
+<li>比如源 ISA 支持 32 位虚拟地址，目标 ISA 是 64 位。</li>
+<li>或者源机有段式内存模型，目标机没有。</li>
+</ul>
+<p><strong>挑战</strong>：</p>
+<ul>
+<li>这类问题不是单条 load/store 就能解决的，而是涉及
+<strong>整个虚拟内存系统设计</strong>。</li>
+<li>必须通过 <strong>虚拟机架构</strong> 来协调，例如 shadow page
+table、二级地址翻译。</li>
+</ul>
+<p><strong>结论</strong>：这个部分通常被延迟到更高层的虚拟机设计里讨论，而不是在单纯的指令翻译阶段处理。</p>
+<h2 id="system-virtual-machines">System Virtual Machines</h2>
+<h4 id="应用场景-1">应用场景</h4>
+<ul>
+<li>实现多道程序与时间共享：使用多个单用户虚拟机替代复杂的多道程序操作系统，提升效率与灵活性。</li>
+<li>多个单应用虚拟机：提高系统鲁棒性，一个应用或操作系统的故障不会影响其他虚拟机。</li>
+<li>多安全环境：提供沙箱机制，确保不同用户环境之间的隔离，防止数据泄露或监控。</li>
+<li>受控应用环境：核心应用运行于受保护虚拟机中，用户自定义应用运行于另一虚拟机，避免干扰。</li>
+<li>混合操作系统环境：同一硬件平台同时运行不同操作系统，满足多样化需求。</li>
+<li>遗留应用支持：在旧操作系统虚拟机中运行性能敏感的旧应用，在新系统中利用新特性。</li>
+<li>多平台开发：开发者可在同一硬件上测试跨操作系统软件，降低成本与复杂性。</li>
+<li>系统迁移过渡：逐步迁移到新操作系统，旧系统继续运行关键应用直至验证完成。</li>
+<li>系统软件开发：开发与生产环境分离，避免开发中的错误导致系统崩溃。</li>
+<li>操作系统培训：在虚拟机中进行参数调整实验，不影响真实系统用户。</li>
+<li>帮助台支持：模拟客户硬件配置以诊断问题，无需物理设备。</li>
+<li>操作系统仪器化：VMM
+可监控硬件访问行为，记录事件详情用于研究与调试。</li>
+<li>事件监控：支持执行轨迹记录、状态快照与重放，便于分析异常行为。</li>
+<li>系统封装：完整保存虚拟机状态，支持检查点与迁移。</li>
+</ul>
+<h3 id="key-concepts">Key Concepts</h3>
+<ul>
+<li>系统虚拟机通过虚拟机监控器（VMM）在主机硬件上创建多个隔离的虚拟系统环境，每个虚拟机运行独立的操作系统和应用程序。</li>
+<li>VMM
+拥有对真实硬件资源的控制权，并将其分配给多个客户操作系统，使每个客户系统以为自己独占资源。</li>
+<li>虚拟资源可对应真实物理资源（如CPU、内存、I/O设备），也可由VMM通过软件模拟实现。</li>
+</ul>
+<h4 id="outward-appearance">Outward Appearance</h4>
+<p>虚拟机给用户的“错觉”是：它就像一台独立的计算机。</p>
+<p>这种表现可通过软件模拟（纯软件复制）或硬件支持（部分功能直接由硬件加速）实现。</p>
+<p>用户专用的设备（键盘、显示器等）可以：</p>
+<ul>
+<li><strong>物理复制</strong> → 每个虚拟机独立拥有。</li>
+<li><strong>共享切换</strong> →
+多个虚拟机通过时分/窗口机制共享同一设备。</li>
+</ul>
+<p>在宿主操作系统上，客户机界面甚至可以嵌入窗口，比如 DOS 程序运行在
+Windows 的窗口中。</p>
+<h4 id="state-management">State Management</h4>
+<p>每个虚拟机需要独立的体系结构状态（寄存器、内存、I/O 设备状态）。</p>
+<p>状态管理方式：</p>
+<ul>
+<li><strong>间接访问</strong>：虚拟机的寄存器状态保存在主机内存中，通过指针访问。优点是容易实现，但性能较差。</li>
+<li><strong>直接复制</strong>：切换虚拟机时，把客户机寄存器状态复制到物理寄存器中，以获得更高性能。</li>
+</ul>
+<p><strong>权衡点</strong>：使用频率高的状态（如寄存器）更适合直接复制；使用不频繁或不匹配的资源，可以存放在内存里，用间接方式访问。</p>
+<h4 id="resource-control">Resource Control</h4>
+<ul>
+<li>VMM 必须拥有硬件的
+<strong>最终控制权</strong>，哪怕资源在客户机手中。</li>
+<li>实现方式类似操作系统：
+<ul>
+<li>操作系统依赖定时器中断来收回 CPU。</li>
+<li>VMM 截获对特权资源（如定时器）的访问，向客户机提供
+<strong>虚拟定时器</strong>。</li>
+<li>这样可以防止某个客户机垄断资源，保证公平调度。</li>
+</ul></li>
+<li><strong>调度权衡</strong>：
+<ul>
+<li>时间片过大 → 响应慢，不公平。</li>
+<li>时间片过小 → 上下文切换开销太大。</li>
+</ul></li>
+</ul>
+<h4 id="native-and-hosted-virtual-machines">Native and Hosted Virtual
+Machines</h4>
+<p><strong>原生虚拟机 (Native VM)</strong>：</p>
+<ul>
+<li>VMM 直接运行在最高特权级，直接控制硬件。</li>
+<li>客户机 OS 在较低特权级运行。</li>
+<li>优点：性能高，开销小。</li>
+</ul>
+<p><strong>托管虚拟机 (Hosted VM)</strong>：</p>
+<ul>
+<li>VMM 作为应用运行在宿主操作系统之上。</li>
+<li><strong>用户态托管</strong>：VMM
+全部运行在用户态，灵活但性能较差。</li>
+<li><strong>双模式托管</strong>：部分组件（如驱动）运行在宿主内核中，性能更高。</li>
+<li>优点：易于部署和维护，不需要完全控制底层硬件。</li>
+</ul>
+<p><strong>对比</strong>：原生更高效，托管更方便。</p>
+<h4 id="ibm-vm370">IBM VM/370</h4>
+<p><strong>历史意义</strong>：最早的系统虚拟机环境之一。</p>
+<p><strong>硬件基础</strong>：基于 IBM System/360 Model 40，后来发展到
+System/370。</p>
+<p><strong>设计目标</strong>：把虚拟内存的概念推广到整个系统级别，让每个虚拟机都看到完整的
+ISA。</p>
+<p><strong>模块化结构</strong>：</p>
+<ul>
+<li>控制程序 (CP) = VMM，负责资源管理。</li>
+<li>单用户操作系统 CMS = 用户环境。</li>
+<li>CP 和 CMS 分离，使得资源管理与用户服务职责清晰。</li>
+</ul>
+<p><strong>硬件演进</strong>：System/370 增加了专门的虚拟化支持，降低
+VMM 开销。这种思路延续至现代 IBM z/VM。</p>
+<h3 id="resource-virtualization-processors">Resource Virtualization —
+Processors</h3>
+<p><strong>处理器资源虚拟化</strong> 的主题，核心是
+<strong>客户指令如何在虚拟机上被执行</strong>。</p>
+<ul>
+<li><strong>关键问题</strong>：客户机（guest）指令要么直接执行在硬件上（原生执行），要么由
+VMM 模拟（interpret/translate）。</li>
+<li><strong>ISA 相同</strong>时 →
+尽量让无害指令直接跑在硬件上，性能最佳；只有涉及特权或敏感行为的指令才需要
+VMM 截获并模拟。</li>
+</ul>
+<h4 id="conditions-for-isa-virtualizability">Conditions for ISA
+Virtualizability</h4>
+<ul>
+<li><strong>Popek 与 Goldberg 三条件</strong>：
+<ol type="1">
+<li><strong>效率 (Efficiency)</strong>：绝大多数无害指令无需 VMM
+干预，能直接在硬件执行。</li>
+<li><strong>资源控制 (Resource
+control)</strong>：客户机软件不能直接改系统资源，VMM
+保持最终控制权。</li>
+<li><strong>等价性
+(Equivalence)</strong>：虚拟机上运行程序的效果必须和真实机器上一致（性能差异除外）。</li>
+</ol></li>
+<li><strong>定理 1</strong>：若“敏感指令集” ⊆ “特权指令集”，则该 ISA
+可高效虚拟化。
+<ul>
+<li><strong>敏感指令</strong>：分为控制敏感（改变资源配置）、行为敏感（结果依赖资源状态）。</li>
+<li><strong>特权指令</strong>：只能在内核态执行，用户态执行会陷阱（trap）到
+VMM。</li>
+</ul></li>
+<li>理想情况：所有敏感指令都是特权指令 → 可以通过陷阱交给 VMM
+处理。</li>
+</ul>
+<h4 id="recursive-virtualization">Recursive Virtualization</h4>
+<p>概念：在一个 VM 内再运行另一个 VMM，形成层次化虚拟化。</p>
+<p>要求：VMM 本身不能依赖“绝对时间”，否则破坏等价性。</p>
+<p>局限：每层 VMM 占用资源（尤其内存），递归层数有限；一般 ≤2
+层可接受。</p>
+<h4 id="handling-problem-instructions">Handling Problem
+Instructions</h4>
+<p>问题：一些 ISA 不满足定理 1。</p>
+<ul>
+<li>例如 Intel IA-32 存在 <strong>敏感但非特权</strong> 指令（称为
+<strong>关键指令</strong>），在用户态不会陷阱，但会暴露硬件状态 →
+威胁虚拟化。</li>
+<li>例子：<code>POPF</code>（修改标志寄存器），在用户态也能执行部分操作。</li>
+</ul>
+<p>解决办法：</p>
+<ul>
+<li><strong>扫描并修补
+(patching)</strong>：运行前扫描代码流，把关键指令替换为会触发陷阱的指令，从而交由
+VMM 处理。</li>
+</ul>
+<h4 id="patching-of-critical-instructions">Patching of Critical
+Instructions</h4>
+<ul>
+<li>执行步骤：
+<ul>
+<li>VMM 扫描客户机代码流，遇到关键指令时 → 插入陷阱。</li>
+<li>陷阱触发后 → VMM 执行模拟逻辑，并继续扫描后续基本块。</li>
+</ul></li>
+<li>优化：
+<ul>
+<li>已修补的基本块可以
+<strong>直接链接</strong>（类似代码缓存），减少重复陷阱。</li>
+<li>间接跳转目标难预测 → 通常保留陷阱机制。</li>
+</ul></li>
+<li>范围：扫描仅限
+<strong>已加载到内存的代码页</strong>，避免因换页带来开销。</li>
+</ul>
+<h4 id="caching-emulation-code">Caching Emulation Code</h4>
+<p>问题：高频关键指令若每次都解释，会产生巨大开销。</p>
+<p>解决：</p>
+<ul>
+<li>把模拟动作编译成
+<strong>缓存代码块</strong>，下次执行时直接运行缓存逻辑，而不是重复解释。</li>
+<li>缓存以“陷阱地址”为索引。</li>
+<li>返回时直接跳过已模拟过的部分，提高效率。</li>
+<li>若客户机代码自修改 → 必须检测并使缓存失效，避免错误执行</li>
+</ul>
+<h4 id="efficient-virtualizability-of-common-instruction-sets">Efficient
+Virtualizability of Common Instruction Sets</h4>
+<p><strong>IBM System/370</strong></p>
+<ul>
+<li>所有敏感指令 = 特权指令 → 天然可虚拟化。</li>
+<li>VM/370 中大多数指令原生执行，特权指令陷阱交给 VMM。</li>
+<li>客户 OS（CMS）允许用户发特权指令，VMM 安全模拟。</li>
+</ul>
+<p><strong>Intel IA-32</strong></p>
+<ul>
+<li>存在“敏感但非特权”指令（如 <code>POPF</code>），不满足定理 1。</li>
+<li>必须用 <strong>修补</strong> 或 <strong>二进制翻译 (binary
+translation)</strong> 解决。</li>
+</ul>
+<p><strong>历史转折</strong>：</p>
+<ul>
+<li>早期（硬件便宜时）一度认为虚拟机没价值。</li>
+<li>但随着安全、服务器整合、跨平台需求的兴起，虚拟化重新变得重要。</li>
+</ul>
+<h3 id="resource-virtualization-memory">Resource Virtualization —
+Memory</h3>
+<h4
+id="virtual-memory-support-in-a-system-virtual-machine-environment">Virtual
+Memory Support in a System Virtual Machine Environment</h4>
+<p>在普通系统中：</p>
+<ul>
+<li><strong>应用程序</strong> 看到的是逻辑地址空间。</li>
+<li><strong>操作系统</strong>
+通过页表把逻辑地址映射到真实硬件的物理内存。</li>
+</ul>
+<p>在 <strong>系统虚拟机</strong> 中：</p>
+<ul>
+<li>每个客户 VM 以为自己独占物理内存（称为“实内存”）。</li>
+<li>实际上，这个“实内存”只是 <strong>VMM 虚拟出来的错觉</strong>。</li>
+<li>VMM 把客户 VM 的“实地址”再映射到宿主机的
+<strong>物理内存</strong>。</li>
+</ul>
+<p>资源过订阅问题：</p>
+<ul>
+<li>多个 VM 的实内存总和可能 &gt; 宿主机实际物理内存。</li>
+<li>VMM 需要维护独立的 <strong>交换区 (swap
+space)</strong>，负责页的换入换出。</li>
+</ul>
+<h4 id="影子页表机制-shadow-page-tables">影子页表机制 (Shadow Page
+Tables)</h4>
+<ul>
+<li><strong>问题</strong>：如果直接使用两层映射（虚→实→物），性能会很差。</li>
+<li><strong>解决方案</strong>：影子页表
+<ul>
+<li>客户 OS 仍维护 <strong>虚拟地址 → 实地址</strong> 的页表。</li>
+<li>VMM 维护 <strong>虚拟地址 → 物理地址</strong> 的
+<strong>影子页表</strong>，交由硬件直接使用。</li>
+</ul></li>
+<li><strong>机制</strong>：
+<ul>
+<li>VMM 虚拟化页表寄存器：客户机切换页表时，VMM
+让硬件实际加载影子页表。</li>
+<li>客户机对页表寄存器的读写会触发陷阱，由 VMM 拦截并维护同步。</li>
+<li><strong>保证等价性</strong>：如果客户 OS
+认为某页不可用，影子页表中也必须保持不可用。</li>
+</ul></li>
+<li><strong>缺页异常处理</strong>：
+<ol type="1">
+<li>如果客户 OS 已经映射该页 → VMM 从 swap
+恢复物理页，更新影子页表。</li>
+<li>如果客户 OS 未映射该页 → VMM 把缺页异常传递给客户 OS，由其加载
+I/O；VMM 再同步更新影子页表。</li>
+</ol></li>
+<li><strong>I/O 映射问题</strong>：
+<ul>
+<li>I/O 操作常用实地址，VMM 必须转换成宿主物理地址。</li>
+<li>可能涉及非连续页 → VMM 需要拆分请求或提前换页。</li>
+</ul></li>
+</ul>
+<h4 id="virtualizing-an-architected-tlb">Virtualizing an Architected
+TLB</h4>
+<p><strong>背景</strong>：TLB 是硬件缓存，用来加速地址转换。</p>
+<p><strong>问题</strong>：当 ISA 采用 <strong>软件管理 TLB</strong>
+时，客户 OS 可能直接写 TLB，这就需要 VMM 进行虚拟化。</p>
+<p><strong>方法一：重写物理 TLB</strong></p>
+<ul>
+<li>每次 VM 切换时，VMM 重写 TLB，把客户的虚拟 TLB 条目翻译后写入物理
+TLB。</li>
+<li>缺点：频繁刷新，开销大。</li>
+</ul>
+<p><strong>方法二：ASID 映射机制</strong></p>
+<ul>
+<li>硬件支持 <strong>ASID (Address Space Identifier)</strong> →
+区分不同地址空间。</li>
+<li>VMM 维护 <strong>虚拟 ASID → 物理 ASID</strong> 的映射表。</li>
+<li>多个 VM 的地址空间可以共存于物理 TLB，不必频繁刷新。</li>
+<li>当客户 OS 写 ASID 寄存器时：VMM
+截获，更新虚拟副本，并调整映射关系。</li>
+<li>例如：两个 VM 都认为自己用 ASID=1，VMM 实际分配给它们不同的物理
+ASID，避免冲突。</li>
+</ul>
+<h3 id="resource-virtualization-inputoutput">Resource Virtualization —
+Input/Output</h3>
+<p>I/O 虚拟化比
+CPU、内存更复杂，因为设备种类多、操作系统抽象不同。基本策略是
+<strong>构建虚拟设备模型</strong>，拦截客户机的 I/O
+请求并转发/模拟。</p>
+<h4 id="virtualizing-devices">Virtualizing Devices</h4>
+<ul>
+<li><strong>专用设备</strong>：如键盘、鼠标、显示器 → 必须分配给特定
+VM，VMM 负责转发请求和中断。</li>
+<li><strong>分区设备</strong>：如磁盘 → VMM
+把物理磁盘划分成多个虚拟磁盘，维护参数映射（磁道、扇区）。</li>
+<li><strong>共享设备</strong>：如网卡 → 多 VM 共享，VMM
+维护虚拟状态（虚拟 MAC/IP），负责路由数据包。</li>
+<li><strong>缓冲池设备（spooled devices）</strong>：如打印机 → 客户 OS
+先写入 VMM 的缓冲池，由 VMM 统一调度输出。</li>
+<li><strong>无物理对应的虚拟设备</strong>：如虚拟网卡 → 专供 VM
+间通信，VMM 拦截 I/O 请求并注入中断。</li>
+</ul>
+<h4 id="virtualizing-io-activity">Virtualizing I/O Activity</h4>
+<figure>
+<img src="https://fyindex.work/PicGo/image-20250923212414427.png"
+alt="image-20250923212414427" />
+<figcaption aria-hidden="true">image-20250923212414427</figcaption>
+</figure>
+<h5
+id="virtualizing-at-the-io-operation-level-操作级虚拟化">Virtualizing at
+the I/O Operation Level （操作级虚拟化）</h5>
+<ul>
+<li><strong>机制</strong>：
+<ul>
+<li>I/O 操作通过 <strong>内存映射 I/O (MMIO)</strong> 或 <strong>特权
+I/O 指令 (如 IA-32 的 in/out, System/360 的 SIO)</strong> 来完成。</li>
+<li>用户态程序不能直接执行这些操作，必须通过系统调用进入内核。</li>
+<li>在虚拟机中，这些特权操作触发陷阱，交给 VMM 来处理 → 所以 VMM
+很容易“截获”到。</li>
+</ul></li>
+<li><strong>难点</strong>：
+<ul>
+<li>一次完整 I/O 动作（例如“磁盘读一块”）通常不是一条 I/O
+指令完成的，而是由设备驱动发出的
+<strong>一系列小粒度操作</strong>（读写寄存器、加载地址、分段传输）。</li>
+<li>VMM 截获到的只是零散的低级指令，必须 <strong>反向推导 (reverse
+engineer)</strong> 才能理解高层 I/O 意图。</li>
+<li>这种推导非常复杂，在实践中几乎不可行。</li>
+</ul></li>
+</ul>
+<p>📌 <strong>总结</strong>：截获简单，但难以理解语义。</p>
+<h5
+id="virtualizing-at-the-device-driver-level-驱动级虚拟化">Virtualizing
+at the Device Driver Level （驱动级虚拟化）</h5>
+<ul>
+<li><strong>机制</strong>：
+<ul>
+<li>操作系统把系统调用（如 <code>read()</code>）转换成
+<strong>驱动调用</strong>，交给设备驱动。</li>
+<li>如果 VMM 能拦截驱动层接口，就能把 <strong>虚拟设备请求 →
+物理设备驱动请求</strong>。</li>
+<li>实现方式：
+<ul>
+<li>为每个客户 OS 提供一套 <strong>虚拟设备驱动</strong>（例如
+VirtualBox/VMware Tools 中的“虚拟网卡/虚拟磁盘驱动”）。</li>
+<li>安装客户 OS 时，虚拟驱动也会随 VMM 一起安装。</li>
+</ul></li>
+</ul></li>
+<li><strong>优点</strong>：
+<ul>
+<li>截获点自然，不必拼凑零碎的 I/O 操作。</li>
+<li>可以直接利用客户 OS 的抽象层次。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>需要对客户 OS 内部接口有了解。</li>
+<li>对未知/任意 OS 很难做到，但对主流 OS（如 Windows,
+Linux）是可行的。</li>
+</ul></li>
+<li><strong>扩展</strong>：
+<ul>
+<li>在 <strong>原生 VM 系统</strong> 中，VMM 需要同时拥有
+<strong>虚拟设备驱动</strong>和<strong>物理设备驱动</strong>。</li>
+<li>在 <strong>托管 VM 系统</strong> 中，VMM 可以直接“借用”宿主 OS
+的驱动（例如 Linux 的驱动），减少开发成本。</li>
+</ul></li>
+</ul>
+<p>📌 <strong>总结</strong>：适合常见 OS，开发成本较高，但效果好。</p>
+<h5
+id="virtualizing-at-the-system-call-level-系统调用级虚拟化">Virtualizing
+at the System Call Level （系统调用级虚拟化）</h5>
+<ul>
+<li><strong>机制</strong>：
+<ul>
+<li>在 ABI 层直接截获系统调用（例如应用程序的
+<code>read()</code>）。</li>
+<li>VMM 模拟整个 ABI 接口，由它直接完成 I/O 请求。</li>
+</ul></li>
+<li><strong>优点</strong>：
+<ul>
+<li>截获在最上层，一次性理解完整的 I/O 意图，不需要反向推导。</li>
+</ul></li>
+<li><strong>缺点</strong>：
+<ul>
+<li>VMM 必须为每个客户 OS 编写一整套 <strong>ABI 模拟库</strong>。</li>
+<li>开发难度极高，因为需要完整理解客户 OS 的系统调用语义，并正确模拟与
+OS 其他部分的交互。</li>
+<li>只有在 <strong>客户 OS 结构非常清晰且被深度掌握</strong>
+的情况下才可能实现。</li>
+</ul></li>
+</ul>
+<p>📌
+<strong>总结</strong>：理论上最简洁，但实际难度最大，几乎只适合非常有限的场景。</p>
+<h5 id="网络虚拟化示例">网络虚拟化示例</h5>
+<ul>
+<li>场景一：客户VM发送数据包至外部主机。
+<ul>
+<li>客户OS生成OUTS指令 → VMM截获并转换为目标物理NIC端口指令。</li>
+<li>数据地址转换至VMM空间，由物理NIC驱动发送。</li>
+</ul></li>
+<li>场景二：客户VM间通信。
+<ul>
+<li>VMM识别目标为本地VM，不触发物理信号，直接在内部转发数据包。</li>
+<li>目标VM的中断处理程序接收数据，实现高效零拷贝通信。</li>
+</ul></li>
+<li>可通过VMM内核层重定向进一步提升效率，如z/VM的minidisk缓存减少磁盘I/O。</li>
+</ul>
+<h4
+id="inputoutput-virtualization-and-hosted-virtual-machines">Input/Output
+Virtualization and Hosted Virtual Machines</h4>
+<ul>
+<li><strong>托管型 VM</strong>：运行在已有宿主操作系统 (host OS)
+上，依赖宿主 OS 提供底层服务。</li>
+<li>与 <strong>原生型 VM (native VM)</strong>
+不同，它不直接管理所有硬件，而是把很多工作交给宿主 OS 完成。</li>
+<li>优势：省去了 VMM 自己实现完整设备驱动的负担（PC
+生态下设备种类繁多，驱动维护难度大）。</li>
+</ul>
+<p>为了实现高效虚拟化，托管型 VM 被分成三个主要部分：</p>
+<ul>
+<li><strong>VMM-n (native 部分)</strong>
+<ul>
+<li>运行在硬件的最高特权级（内核态）。</li>
+<li>类似于原生 VMM
+的角色，负责拦截客户机执行的特权指令或关键指令（通过陷阱或补丁）。</li>
+<li>可能为少数性能关键或宿主 OS 不支持的设备提供专用驱动。</li>
+</ul></li>
+<li><strong>VMM-u (user 部分)</strong>
+<ul>
+<li>运行在宿主 OS 的用户态，表现为一个普通进程。</li>
+<li>负责代表 VMM-n 向宿主 OS 发起
+<strong>资源请求</strong>（例如内存分配、I/O 调用），通常调用宿主 OS
+的库函数（如 <code>read()</code>）。</li>
+<li>等于把客户机的请求转译为宿主 OS 的请求。</li>
+</ul></li>
+<li><strong>VMM-d (driver 部分)</strong>
+<ul>
+<li>是安装在宿主 OS 内核中的一个特殊驱动。</li>
+<li>它让 VMM-n 看起来像宿主 OS 上的一个“设备”，从而使 VMM-u 能与 VMM-n
+通信。</li>
+<li>VMM-u 是唯一能访问这个“设备”的用户程序。</li>
+</ul></li>
+</ul>
+<h5 id="优点">4. 优点</h5>
+<ul>
+<li><strong>驱动复用</strong>：不需要 VMM
+自己维护庞大的驱动库，直接利用宿主 OS 的现有驱动。</li>
+<li><strong>易部署</strong>：用户可以在已有操作系统上快速安装虚拟机系统，非常适合
+PC 桌面环境。</li>
+</ul>
+<h5 id="缺点">5. 缺点</h5>
+<ul>
+<li><strong>安全风险</strong>：VMM-n 与宿主 OS
+都运行在特权级，彼此可能互相干扰；宿主 OS 并未以 VMM
+共存为前提来设计。</li>
+<li><strong>资源不可控</strong>：资源调度完全由宿主 OS 决定，VMM
+难以掌握或预测实际资源分配策略。</li>
+<li><strong>性能损耗</strong>：
+<ul>
+<li>频繁发生 <strong>世界切换 (world switch)</strong>：在 VMM-n 与宿主
+OS 之间切换时，需要保存和恢复大量状态。</li>
+<li>特别是在 I/O 密集型工作负载下，性能下降比 CPU
+密集型场景更显著。</li>
+</ul></li>
+</ul>
+<h4 id="inputoutput-virtualization-in-vm370">Input/Output Virtualization
+in VM/370</h4>
+<p><strong>背景</strong>：VM/370 是 IBM
+的经典系统虚拟机，直接运行在硬件上（原生型 VMM）。</p>
+<p><strong>机制</strong>：</p>
+<ul>
+<li><strong>通道 (IOP)</strong> + <strong>CCW (通道命令字)</strong>：I/O
+操作通过 CCW 链描述。</li>
+<li>客户机构建 CCW 链 → 执行 <code>SIO</code> → 陷入 VMM (CP)。</li>
+<li>CP 查影子页表，生成对应的物理 CCW，保证数据页在内存中。</li>
+<li>如果跨页，要拆分为多个 CCW。</li>
+<li>CP 把 CCW 交给物理设备执行，I/O 完成后通过中断返回，再由 CP
+注入到客户机。</li>
+</ul>
+<p><strong>优化点</strong>：</p>
+<ul>
+<li><strong>spooling</strong>：对于慢速设备（如打印机），采用缓冲池，避免阻塞，提高并发。</li>
+<li><strong>虚拟设备</strong>：比如
+minidisk，没有直接物理对应，方便资源高效共享。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://fyind.de">Fyind</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://fyind.de/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/">http://fyind.de/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Virtual-Machine/">Virtual Machine</a></div><div class="post-share"><div class="social-share" data-image="/img/pic1.PNG" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/10/02/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="邮件服务器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">邮件服务器</div></div><div class="info-2"><div class="info-item-1">邮件服务器 添加邮件用户 1sudo adduser alice 修改 1sudo vim /etc/postfix/virtual_sender_maps 添加 12# 允许 alice 用户发送的地址列表alice@fyind.de      alice 更新 Postfix 的数据库文件（关键步骤！ 每次修改完 virtual_sender_maps 都必须运行此命令。 重启 Postfix 以加载新的授权规则 12sudo postmap /etc/postfix/virtual_sender_mapssudo systemctl restart postfix </div></div></div></a><a class="pagination-related" href="/2025/09/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/" title="机器学习实战"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">机器学习实战</div></div><div class="info-2"><div class="info-item-1">输入数据集合 导入CSV 1234567import pandas as pddf = pd.read_csv(    &quot;book_sales.csv&quot;,    index_col=&#x27;Date&#x27;,    parse_dates=[&#x27;Date&#x27;],) 返回一个 Dataframe 类型  index_col 把 Date 这一列设置为 DataFrame 的索引（行标签） parse_dates 把 Date 这一列解析为 日期类型（datetime），而不是普通字符串。  period 1tunnel = tunnel.to_period() 默认 Pandas 使用 DatetimeIndex（时间戳，表示一个具体时刻）。 .to_period() 转换为 PeriodIndex（时间段，表示一个统计周期，比如“2020-01”表示整个 1 月）。 在一些时间序列分析场景下，PeriodIndex 更直观和方便，比如按月份、季度分析数据。 DataFrame 信息查看  df.index index的那一列  去除一列...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:contact@fyind.de" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text">虚拟机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#emulation"><span class="toc-number">1.1.</span> <span class="toc-text">Emulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interpretation"><span class="toc-number">1.1.1.</span> <span class="toc-text">Interpretation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#simple-interpreter"><span class="toc-number">1.1.2.</span> <span class="toc-text">simple interpreter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#threaded-interpretation"><span class="toc-number">1.1.3.</span> <span class="toc-text">Threaded Interpretation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-%E6%8C%87%E4%BB%A4%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">(a) 指令预处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-%E6%89%A7%E8%A1%8C%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">(b) 执行循环</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#predecoding-and-direct-threaded-interpretation"><span class="toc-number">1.1.4.</span> <span class="toc-text">Predecoding and
+Direct Threaded Interpretation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#predecoding%E9%A2%84%E8%A7%A3%E7%A0%81"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">Predecoding（预解码）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#direct-threaded-interpretation"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">Direct Threaded
+Interpretation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interpreting-a-complex-instruction-set"><span class="toc-number">1.1.5.</span> <span class="toc-text">Interpreting a Complex
+Instruction Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#interpretation-of-the-ia-32-isa"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">Interpretation of the IA-32
+ISA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#threaded-interpretation-1"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">Threaded Interpretation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binary-translation"><span class="toc-number">1.1.6.</span> <span class="toc-text">Binary Translation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E7%BF%BB%E8%AF%91%E4%B8%8E%E7%BC%93%E5%AD%98"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">代码块翻译与缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%8A%B6%E6%80%81%E6%98%A0%E5%B0%84"><span class="toc-number">1.1.6.2.</span> <span class="toc-text">寄存器状态映射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%BA%8F%E5%88%97%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.6.3.</span> <span class="toc-text">指令序列优化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#code-discovery-and-dynamic-translation"><span class="toc-number">1.1.7.</span> <span class="toc-text">Code Discovery and
+Dynamic Translation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#the-code-discovery-problem"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">The Code-Discovery Problem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#the-code-location-problem"><span class="toc-number">1.1.7.2.</span> <span class="toc-text">The Code-Location Problem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#incremental-predecoding-and-translation"><span class="toc-number">1.1.7.3.</span> <span class="toc-text">Incremental Predecoding
+and Translation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#dynamic-basic-block"><span class="toc-number">1.1.7.3.1.</span> <span class="toc-text">Dynamic Basic Block</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#spc-tpc-%E6%98%A0%E5%B0%84%E8%A1%A8"><span class="toc-number">1.1.7.3.2.</span> <span class="toc-text">SPC-TPC 映射表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A1%A9%E4%BB%A3%E7%A0%81stubs"><span class="toc-number">1.1.7.3.3.</span> <span class="toc-text">桩代码（Stubs）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#same-isa-emulation"><span class="toc-number">1.1.7.4.</span> <span class="toc-text">Same-ISA Emulation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.7.4.1.</span> <span class="toc-text">应用场景</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#control-transfer-optimizations"><span class="toc-number">1.1.8.</span> <span class="toc-text">Control Transfer
+Optimizations</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#translation-chaining"><span class="toc-number">1.1.8.1.</span> <span class="toc-text">Translation Chaining</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#software-indirect-jump-prediction"><span class="toc-number">1.1.8.2.</span> <span class="toc-text">Software Indirect Jump
+Prediction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shadow-stack"><span class="toc-number">1.1.8.3.</span> <span class="toc-text">Shadow Stack</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instruction-set-issues"><span class="toc-number">1.1.9.</span> <span class="toc-text">Instruction Set Issues</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#register-architectures"><span class="toc-number">1.1.9.1.</span> <span class="toc-text">Register Architectures</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#condition-codes"><span class="toc-number">1.1.9.2.</span> <span class="toc-text">Condition Codes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#data-formats-and-arithmetic"><span class="toc-number">1.1.9.3.</span> <span class="toc-text">Data Formats and Arithmetic</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#memory-address-resolution"><span class="toc-number">1.1.9.4.</span> <span class="toc-text">Memory Address Resolution</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#memory-data-alignment"><span class="toc-number">1.1.9.5.</span> <span class="toc-text">Memory Data Alignment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#byte-order"><span class="toc-number">1.1.9.6.</span> <span class="toc-text">Byte Order</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#addressing-architecture"><span class="toc-number">1.1.9.7.</span> <span class="toc-text">Addressing Architecture</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#system-virtual-machines"><span class="toc-number">1.2.</span> <span class="toc-text">System Virtual Machines</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">应用场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key-concepts"><span class="toc-number">1.2.1.</span> <span class="toc-text">Key Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#outward-appearance"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Outward Appearance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#state-management"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">State Management</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resource-control"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Resource Control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#native-and-hosted-virtual-machines"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">Native and Hosted Virtual
+Machines</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ibm-vm370"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">IBM VM&#x2F;370</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#resource-virtualization-processors"><span class="toc-number">1.2.2.</span> <span class="toc-text">Resource Virtualization —
+Processors</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#conditions-for-isa-virtualizability"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">Conditions for ISA
+Virtualizability</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#recursive-virtualization"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">Recursive Virtualization</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#handling-problem-instructions"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">Handling Problem
+Instructions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#patching-of-critical-instructions"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">Patching of Critical
+Instructions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#caching-emulation-code"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">Caching Emulation Code</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#efficient-virtualizability-of-common-instruction-sets"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">Efficient
+Virtualizability of Common Instruction Sets</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#resource-virtualization-memory"><span class="toc-number">1.2.3.</span> <span class="toc-text">Resource Virtualization —
+Memory</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#virtual-memory-support-in-a-system-virtual-machine-environment"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Virtual
+Memory Support in a System Virtual Machine Environment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%B1%E5%AD%90%E9%A1%B5%E8%A1%A8%E6%9C%BA%E5%88%B6-shadow-page-tables"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">影子页表机制 (Shadow Page
+Tables)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#virtualizing-an-architected-tlb"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">Virtualizing an Architected
+TLB</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#resource-virtualization-inputoutput"><span class="toc-number">1.2.4.</span> <span class="toc-text">Resource Virtualization —
+Input&#x2F;Output</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#virtualizing-devices"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">Virtualizing Devices</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#virtualizing-io-activity"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">Virtualizing I&#x2F;O Activity</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#virtualizing-at-the-io-operation-level-%E6%93%8D%E4%BD%9C%E7%BA%A7%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">1.2.4.2.1.</span> <span class="toc-text">Virtualizing at
+the I&#x2F;O Operation Level （操作级虚拟化）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#virtualizing-at-the-device-driver-level-%E9%A9%B1%E5%8A%A8%E7%BA%A7%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">1.2.4.2.2.</span> <span class="toc-text">Virtualizing
+at the Device Driver Level （驱动级虚拟化）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#virtualizing-at-the-system-call-level-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%BA%A7%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-number">1.2.4.2.3.</span> <span class="toc-text">Virtualizing
+at the System Call Level （系统调用级虚拟化）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.4.2.4.</span> <span class="toc-text">网络虚拟化示例</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inputoutput-virtualization-and-hosted-virtual-machines"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">Input&#x2F;Output
+Virtualization and Hosted Virtual Machines</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.2.4.3.1.</span> <span class="toc-text">4. 优点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">1.2.4.3.2.</span> <span class="toc-text">5. 缺点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inputoutput-virtualization-in-vm370"><span class="toc-number">1.2.4.4.</span> <span class="toc-text">Input&#x2F;Output Virtualization
+in VM&#x2F;370</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/02/cuda-programming/" title="cuda-programming">cuda-programming</a><time datetime="2026-01-02T19:58:41.000Z" title="Created 2026-01-02 19:58:41">2026-01-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/02/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="邮件服务器">邮件服务器</a><time datetime="2025-10-02T17:39:45.000Z" title="Created 2025-10-02 17:39:45">2025-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="虚拟机">虚拟机</a><time datetime="2025-09-23T17:43:21.000Z" title="Created 2025-09-23 17:43:21">2025-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/" title="机器学习实战">机器学习实战</a><time datetime="2025-09-21T20:39:40.000Z" title="Created 2025-09-21 20:39:40">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/02/Rowhammer%E6%94%BB%E5%87%BB/" title="Rowhammer攻击">Rowhammer攻击</a><time datetime="2025-09-02T14:46:19.000Z" title="Created 2025-09-02 14:46:19">2025-09-02</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'all',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

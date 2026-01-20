@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Fyind&#39;s Blog">
+<meta property="og:url" content="http://fyind.de/page/4/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:author" content="Fyind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/page/4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Fyind\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Fyind's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:contact@fyind.de" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/19/%E5%AE%A2%E5%88%B6%E5%8C%96%E9%94%AE%E7%9B%98%E8%AE%BE%E8%AE%A1/" title="客制化键盘设计">客制化键盘设计</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-04-19T16:35:49.000Z" title="Created 2023-04-19 16:35:49">2023-04-19</time></span></div><div class="content">客制化键盘设计 设计布局 这个网站 可以在线设计布局，设计完成之后可以复制 Raw Data 来进行下一步。   image-20230419164533764  123456[&quot;Esc&quot;,&#123;x:1&#125;,&quot;F1&quot;,&quot;F2&quot;,&quot;F3&quot;,&quot;F4&quot;,&#123;x:0.5&#125;,&quot;F5&quot;,&quot;F6&quot;,&quot;F7&quot;,&quot;F8&quot;,&#123;x:0.5&#125;,&quot;F9&quot;,&quot;F10&quot;,&quot;F11&quot;,&quot;F12&quot;,&#123;x:0.25&#125;,&quot;PrtSc&quot;,&quot;Scroll Lock&quot;,&quot;Pause\nBreak&quot;],[&#123;y:0.5&#125;,&quot;~\n`&quot;,&quot;!\n1&quot;,&quot;@\n2&quot;,...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/11/18/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/" title="统计学基础">统计学基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-11-18T16:41:01.000Z" title="Created 2021-11-18 16:41:01">2021-11-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a></span></div><div class="content">统计学基础 Varianece 方差 运算法则 \[ Var(aX+bY)=a^2Var(X)+b^2Var(Y)+2abCov(X,Y) \] \[ \operatorname{Var}(Y)=\operatorname{Var}(a X+b)=a^{2} \operatorname{Var}(X) \] Corvariance 协方差 对于两个随机变量 \(X_1,X_2\) \[ \operatorname{Cov}\left(X_{1}, X_{2}\right)=E\left(\left(X_{1}-\mu_{1}\right)\left(X_{2}-\mu_{2}\right)\right) \] 另一个等价的公式 \[ \operatorname{Cov}\left(X_{1}, X_{2}\right)=E\left(X_{1} X_{2}\right)-\mu_{1} \mu_{2} \] 若两个随机变量 \(X_1, X_2\) 是独立的 \[ \operatorname{Cov}\left(X_{1}, X_{2}\right)=0 \] 有一个数据集的两个...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/10/30/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93DIV1C/" title="刷题总结DIV1C">刷题总结DIV1C</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-30T22:10:14.000Z" title="Created 2021-10-30 22:10:14">2021-10-30</time></span></div><div class="content">知识点 枚举 cnt枚举2个量 在一个数组中, \(cnt[x]\) 代表 \(x\) 出现的次数 \[ \sum_x cnt[x] \le n \] 于是可以枚举所有 \(x\) 在枚举所有小于 \(cnt[x]\) 的数，总复杂度不超过 \(O(n)\)  CF1637E(2100)  枚举 \(2^k\) 长度是 \(2^k\) 那么直接枚举 \(k\) 即可  CF1626D(2100)  二分 同时检查多个参数: 用二进制表示，0表示不符合，1表示符合，放到一个集合里，再枚举集合  zone2021_c  对 $x_i \(找下一个不超过\)L$ 的点，可以用lowerbound查询 倍增dp  arc060_c  整体二分  CF1601C  并查集 对于两者选1的问题，用边建图，然后分析。  arc111_b  数据结构，小的向大的合成可以降低复杂度  abc183_f  神奇构造 分式 \[ \frac{1}{x(x+1)} = \frac{1}{x} - \frac{1}{x+1} \]  arc163c  拆分再组合  agc055_a  构造部分解，然后组合...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/10/22/%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" title="非线性优化">非线性优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-22T17:26:33.000Z" title="Created 2021-10-22 17:26:33">2021-10-22</time></span></div><div class="content">问题设置 一般的非线性优化问题 \[ \min _{x \in \mathbb{R}^{n}} f(x) \quad \text { s.t. } \quad g(x) \leq 0, \quad h(x)=0 \] \(f\) 是目标函数，连续可导 \(g\) 是\(m\) 个不等号约束条件 \(h\) 是 \(p\) 个等号约束条件 定义1 feasible set 集合 \[ X=\left\{x \in \mathbb{R}^{n} ; g(x) \leq 0, h(x)=0\right\} \] 是feasible set (可行的集合), \(x\) 是 feasible 若它在这个集合中。index set of active inequality constraints \(\mathcal{A}(x)\) 是在不等式中使得等号成立的集合。\(\mathcal{I}(x)\) 是不等号严格成立的集合 \[ \begin{aligned} &amp;\mathcal{A}(x)=\left\{i ; 1 \leq i \leq m, g_{i}(x)=0\right...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/10/13/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" title="线性规划">线性规划</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-13T14:29:31.000Z" title="Created 2021-10-13 14:29:31">2021-10-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">线性规划问题 我们要优化一个目标函数 \[ F(x_1,x_2,...x_p)=c_1x_1 + c_2x_2+...+c_px_p \] 也就是求它的最大值或者最小值。同时还有很多约束条件 \[ a_{i1}x_1+...+a_{ip}x_p \le b_i \\ a_{i1}x_1+...+a_{ip}x_p \ge b_i \\ a_{i1}x_1+...+a_{ip}x_p = b_i \] 以及非负的限制条件 \[ x_j \ge 0 \] 解集的定义  \(\textbf{x}=(x_1,x_2,...,x_p)\)​​​ 满足线性约束条件的是一个解 如果 \(\textbf{x}\)​​ 还满足非负限制条件，那么是一个可行解 \[x^{*}\] 是最优解 \[X^*\] 是所有最优解的集合  转化问题 每个线性规划问题可以转化成最大值的线性规划问题： 最大化目标函数 \[ F(x_1,x_2,...x_p)=c_1x_1 + c_2x_2+...+c_px_p \] 约束条件： \[ \sum_{j=1}^{p} a_{ij} x_j \le b_i \\ x_j ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/09/23/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="二进制与位运算">二进制与位运算</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-09-23T13:53:43.000Z" title="Created 2021-09-23 13:53:43">2021-09-23</time></span></div><div class="content">二进制与位运算 数的表示有很多种，我们最常用的是 \(10\) 进制。也就是缝 \(10\) 进位。在计算机中，数都是由二进制的形式存储的。而二进制的意思就是缝 \(2\) 进位。因此二进制的数中，只有 \(0\) 和 \(1\) 二进制 下面这个是一个二进制数 \(101011\) , 我们把它转化成 \(10\) 进制 \[ (101011)_2 \] 怎么转化, 我们从右往左看 \[ \begin{aligned} (101011)_2&amp;=  1*2^5 +0*2^{4}+1*2^{3}+0*2^{2}+1*2^{1}+ 1*2^{0}\\ &amp;=1+2+8+32 \\ &amp;=43 \end{aligned} \] 把一个十进制数转化成二进制 \[ \begin{aligned} 43 /2 = 21 ...&amp; 1 \\ 21/2= 10 ... &amp; 1 \\ 10/2=5 ... &amp; 0 \\ 5/2 = 2 ... &amp; 1 \\ 2/2 = 1 ... &amp; 0 \\ 1/2 = 0 ... &amp; 1 \e...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/24/%E6%95%B0%E5%AD%97%E5%8C%96%E7%BC%96%E7%A8%8B/" title="数字化编程">数字化编程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-24T04:03:05.000Z" title="Created 2021-07-24 04:03:05">2021-07-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">第1章 定义2.1 机器数字Maschinenzahlen 有限集合 \(M\) 计算机可以表示的数字 定义2.2 取整Rundung 映射 \(\mathbb{R} \rightarrow M\) 是一个Rundung \[ |x-r d(x)|=\min _{m \in M}|x-m| \] 于是产生absolute Rundungsfehler \[ f_{r d}(x):=x-r d(x) \] 定义2.3 Festkommazahlen \[ \begin{aligned} &amp;n_{1} n_{2} \cdots n_{k}, m_{1} \cdots m_{j} \quad \text { mit } \\ &amp;n_{1}, n_{2}, \ldots, n_{k}, m_{1}, \ldots, m_{j} \in\{0,1, \ldots, 9\}, \quad k, j \in I N \end{aligned} \] 补码  取反后+1 最高位符号为负数  浮点数 \(x\in \mathbb{R}\) 可以如下表示， \(m\) 是Mantis...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/17/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" title="统计学">统计学</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-17T08:17:39.000Z" title="Created 2021-07-17 08:17:39">2021-07-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">统计学 概述 什么是统计学 研究量化数据的方法的科学 Statisticsis the study of methods for dealing with quantitative information (data). 从数据中获得信息和知识 分为  Descriptive Statistics  制作图表 Explorative Data Analysis 分析数据得出结论  Inductive Statistics(inferential statistics)  研究数据间的关系 预测未来趋势   统计学基本概念 Statistical units统计单元 Objects on which data is observed 被研究数据的对象 Population 所有需要的统计单元的集合  可以有限(finite)，无限(infinite)，假设的(hypothetical)  Subpopulations sub set of the population Sample Actual subset of the population surveyed Character...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/07/01/%E5%BB%BA%E6%A8%A1%E5%92%8C%E4%BB%BF%E7%9C%9F/" title="建模和仿真">建模和仿真</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-01T10:32:54.000Z" title="Created 2021-07-01 10:32:54">2021-07-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">Focus Analysis 基础部分 多变量函数 定义 \[ f: D \rightarrow W, D \subseteq \mathbb{R}^{n}, W \subseteq \mathbb{R}^{m} \] 对于自然数 \(n\) 和 \(m\) 这个函数可以这样表示： \[ f: D \subseteq \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, x=\left(\begin{array}{c} x_{1} \\ \vdots \\ x_{n} \end{array}\right) \mapsto f(x)=\left(\begin{array}{c} f_{1}\left(x_{1}, \ldots, x_{n}\right) \\ \vdots \\ f_{m}\left(x_{1}, \ldots, x_{n}\right) \end{array}\right) \] 高维度拓扑学 定义域Domain \(D\subseteq \mathbb{R} ^n\) 定义补集complement 为 \(D^c=\mathbb...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2021/04/02/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B9%A0%E9%A2%98/" title="概率论习题">概率论习题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-04-02T14:25:48.000Z" title="Created 2021-04-02 14:25:48">2021-04-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">概率论 习题1 例1 A,B,C 三匹马比赛跑步，构造一个离散概率空间，使得事件“A比B快”，“B比C快”，“C比A快”出现的概率都大于 \(1/2\) 例2 已知带偶数条纹的斑马出现的概率是带奇数条纹斑马的2倍。设事件 \(E_n\) 为随机选取一个斑马，发现它有数量为 \(n\) 的条纹。构造一个离散概率空间，使得 \(E_n\) 所有正整数的概率都大于0，且符合题意。 例3 现在要做 \(m\) 个蓝莓蛋糕，一共有 \(n\) 个蓝莓。现在把这 \(n\) 个蓝莓等可能随机放到 \(m\) 个蛋糕上。  求第 \(i\) 个蛋糕没有蓝莓的概率 求所有蛋糕至少有 \(1\) 个蓝莓的概率  例4 有一个幸运轮盘，上面写有 \(1\) 至 \(125\) 的数字（包含1和125），每一个数字等可能出现  求转出的数字是4的倍数或者是平方数的概率 转出的数，每位上数字的和大于3的概率  例5 A，B，C轮流扔硬币（从A开始），硬币是正面的概率是 \(0&lt;p&lt;1\) ，第1次扔到反面的人赢。求A，B，C各自赢的概率 例6 有 \(n\) 份没有名字的作业。把这 \(n\...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:contact@fyind.de" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/02/cuda-programming/" title="cuda-programming">cuda-programming</a><time datetime="2026-01-02T19:58:41.000Z" title="Created 2026-01-02 19:58:41">2026-01-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/02/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="邮件服务器">邮件服务器</a><time datetime="2025-10-02T17:39:45.000Z" title="Created 2025-10-02 17:39:45">2025-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="虚拟机">虚拟机</a><time datetime="2025-09-23T17:43:21.000Z" title="Created 2025-09-23 17:43:21">2025-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/" title="机器学习实战">机器学习实战</a><time datetime="2025-09-21T20:39:40.000Z" title="Created 2025-09-21 20:39:40">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/02/Rowhammer%E6%94%BB%E5%87%BB/" title="Rowhammer攻击">Rowhammer攻击</a><time datetime="2025-09-02T14:46:19.000Z" title="Created 2025-09-02 14:46:19">2025-09-02</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/TUM%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">TUM笔记</span><span class="card-category-list-count">22</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/"><span class="card-category-list-name">Talk</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows/"><span class="card-category-list-name">Windows</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" style="font-size: 1.23em; color: #999ea6">计算几何</a> <a href="/tags/atcoder/" style="font-size: 1.23em; color: #999ea6">atcoder</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">操作系统</a> <a href="/tags/LaTeX/" style="font-size: 1.1em; color: #999">LaTeX</a> <a href="/tags/Archlinux/" style="font-size: 1.23em; color: #999ea6">Archlinux</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 1.5em; color: #99a9bf">网络安全</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.1em; color: #999">线性代数</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 1.37em; color: #99a4b2">题解</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" style="font-size: 1.1em; color: #999">统计学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9E%B6%E6%9E%84/" style="font-size: 1.1em; color: #999">计算机架构</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 1.1em; color: #999">人工智能</a> <a href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/" style="font-size: 1.1em; color: #999">理论计算机学</a> <a href="/tags/Linux%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">Linux命令</a> <a href="/tags/%E5%AE%A2%E5%88%B6%E5%8C%96/" style="font-size: 1.1em; color: #999">客制化</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" style="font-size: 1.1em; color: #999">网络流</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" style="font-size: 1.1em; color: #999">线性规划</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">汇编语言</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">离散数学</a> <a href="/tags/Machine-Learning/" style="font-size: 1.1em; color: #999">Machine Learning</a> <a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 1.1em; color: #999">二分</a> <a href="/tags/Java/" style="font-size: 1.37em; color: #99a4b2">Java</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 1.1em; color: #999">总结</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">编程语言</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">软件技术</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 1.1em; color: #999">前缀和</a> <a href="/tags/Visual-Studio/" style="font-size: 1.1em; color: #999">Visual-Studio</a> <a href="/tags/Python/" style="font-size: 1.37em; color: #99a4b2">Python</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/AtCoder/" style="font-size: 1.1em; color: #999">AtCoder</a> <a href="/tags/Web/" style="font-size: 1.1em; color: #999">Web</a> <a href="/tags/%E5%89%AA%E8%BE%91%E8%BD%AF%E4%BB%B6/" style="font-size: 1.1em; color: #999">剪辑软件</a> <a href="/tags/i3/" style="font-size: 1.1em; color: #999">i3</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 1.1em; color: #999">面向对象</a> <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" style="font-size: 1.1em; color: #999">逆向工程</a> <a href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" style="font-size: 1.1em; color: #999">高斯消元</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">计算机网络</a> <a href="/tags/Operating-System/" style="font-size: 1.1em; color: #999">Operating System</a> <a href="/tags/Functional-Programming/" style="font-size: 1.1em; color: #999">Functional Programming</a> <a href="/tags/%E6%95%B0%E5%AD%A6-R%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">数学 - R语言</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              January 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              October 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              September 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              March 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/05/">
+            <span class="card-archive-list-date">
+              May 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">90</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-20T15:13:25.059Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Fyind's Blog</title><meta name="author" content="Fyind"><meta name="copyright" content="Fyind"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Fyind&#39;s Blog">
+<meta property="og:url" content="http://fyind.de/page/8/index.html">
+<meta property="og:site_name" content="Fyind&#39;s Blog">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://fyind.de/img/pic1.PNG">
+<meta property="article:author" content="Fyind">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fyind.de/img/pic1.PNG"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/pic1.PNG"><link rel="canonical" href="http://fyind.de/page/8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Fyind\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><div class="bg-animation" id="web_bg" style="background-image: url(https://fyindex.work/PicGo/liuyin.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/yae.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Fyind's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-home"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/categories/TUM%E7%AC%94%E8%AE%B0"><i class="fa-fw fas fa-folder-open"></i><span> TUM笔记</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Fyind's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:contact@fyind.de" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/04/23/%E4%BF%A1%E5%8F%B7%E5%AD%A6/" title="信号学">信号学</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-23T08:07:04.000Z" title="Created 2020-04-23 08:07:04">2020-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BF%A1%E5%8F%B7%E5%AD%A6/">信号学</a></span></div><div class="content">信号与系统 信号系统概念 信号的分类 确定信号：可以用函数描述的  连续信号：在 时间内有定义 离散信号 可以写成   随机信号：不能用函数描述的，只能知道概率 周期信号和非周期信号 连续信号的周期 连续周期信号 ，周期是，满足：  比如余弦信号  ，周期是  若两个周期信号相加，判断 是有理数。如果是那就是。 离散信号周期 周期是 :  能量与功率信号 能量等于损失功率的积分，可以想象成是一个1欧姆的电阻的电功率 将信号  施加于 的电阻上，它所消耗的瞬时功率为 ,于是能量定义为：  平均功率：  能量有限信号： ，此时  功率有限信号： ，此时  对于离散信号也有能量信号和功率信号：  因果和反因果信号 因果信号： 的信号 ,也就是时接入的信号 反因果信号： (除0信号外) 基本信号 阶跃函数 选的一个函数序列 ,求极限    它可以用来叠加表示其他信号，比如    image-20200423114537474   可以表示信号作用的区间    image-20200423114640594   积分   冲激函数 单位冲激函数：是奇异函数，它是对强度极大，作用时间 极短的...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/04/21/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" title="线性代数"><img class="post-bg" src="/img/a2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="线性代数"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/04/21/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" title="线性代数">线性代数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-21T22:00:23.000Z" title="Created 2020-04-21 22:00:23">2020-04-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">矩阵 \(K\) 永远是个物体(Körper) ，比如\(K= R , C , Q , F _{2} \ldots\) 定义1.1 矩阵的定义 \(m,n \in N_{&gt;0}\) , 一个\(m*n\)的矩阵式一个矩形的序列 \[ A=\left(\begin{array}{cccc} a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1, n} \\ a_{2,1} &amp; a_{2,2} &amp; \cdots &amp; a_{2, n} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a_{m, 1} &amp; a_{m, 2} &amp; \cdots &amp; a_{m, n} \end{array}\right) \] 其中 \(a_{i, j} \in K\) 。根据定义我们知道，若两个矩阵相等，当且仅当它里面所有元素都相等。矩阵还有其他写法： \[ A=\left(a_{i, j}\right)_{i=1, \ldots, m\atop j=1,\dots,n}=\...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/04/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">计算机网络</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-20T10:56:23.000Z" title="Created 2020-04-20 10:56:23">2020-04-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">层次模型 一共有7层   image-20200426100702045  物理层 信号是随时间变换的，可物理测量的量。信号变化可以对于一个符号。这些符号就是信息。 信息含量(Informationsgehalt)是这个符号可以传递多少信息。  一个信息出现次数越少，它的信息含量越高 字符串的信息含量是所有字符信息含量的和 可预测的字符信息含量是0  信息的定义 信息存在于一个信号的变化预知的不确定性。一个字符 \(x \in X\) 的信息含量与它出现的概率 \(p(x)\) 有关。 \[ I(x)=-\log _{2} p(x) \quad \text { mit } \quad[I]= bit. \] 熵(Entropie)是一个信息源的信息含量 \[ H(X)=\sum_{x \in X } p(x) I(x)=-\sum_{x \in X } p(x) \log _{2}(p(x)) \] 其中的\(p(x)\) 也可以写成 \(Pr[X=x]\) 有条件的熵 有条件的熵(bedingte Entropie)指当X已知的时候Y的不确定性 \[ H(Y | X)=\sum...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/04/02/%E6%A6%82%E7%8E%87%E8%AE%BA/" title="概率论">概率论</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-02T22:57:22.000Z" title="Created 2020-04-02 22:57:22">2020-04-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">离散概率空间 基础部分 定义1 离散概率空间 离散概率空间(diskreter Wahrscheinlichkeitsraum)是单位元事件(Elementarereignis)的所有结果集合(Ergebnismenge)  。 定义2 单位元事件 每个事件元素  都对应一个可能性  ,其中, 并且  #### 定义3 事件 集合  是事件，该事件的概率是  事件  是事件  的对立事件(komplementäres Ereignis)。两个事件是分离的(disjunkt/unvereinbar)若  . 定义4 相对频繁度(relative Häufigkeit) 事件相对频繁度的绝对频繁度所有观测次数的所有出现次数所有观测次数 定义5 无限概率空间 概率空间  是有限概率空间。关于无限概率空间，我们只考虑  ，也就是离散的情况 例子 假设我们扔一个硬币，直到正面出现。 是反面出现的概率，正面出现的概率是  .那么概率空间我们可以表示为丢硬币的次数直到正面出现。  设  仍硬币  次的事件元素。那么  . 并且：  #### 数学公式补充   定理8 性质 对于事件  有：  ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/03/21/%E7%BD%91%E7%BB%9C%E6%B5%81%E6%80%9D%E8%B7%AF%E6%B1%87%E6%80%BB/" title="网络流思路汇总"><img class="post-bg" src="/img/a3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网络流思路汇总"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/03/21/%E7%BD%91%E7%BB%9C%E6%B5%81%E6%80%9D%E8%B7%AF%E6%B1%87%E6%80%BB/" title="网络流思路汇总">网络流思路汇总</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-21T11:53:29.000Z" title="Created 2020-03-21 11:53:29">2020-03-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/%E7%BD%91%E7%BB%9C%E6%B5%81/">网络流</a></span></div><div class="content">网络流理论 网络 定义1.1 一个网络 \(N=(V,A)\) 是指一个连通无环弧且满足下列条件的有向图：  由一个顶点子集 \(X\)，其每个顶点的入读都为0 由一个与 \(X\) 不相交的顶点子集 \(Y\) ，其每个顶点出度都为0 每条弧都有一个非负的权值，成为弧的容量  上述网络可以写成 \(N=(V,X,Y,A,C)\) ，\(X\) 是源点集，\(Y\)是汇点集合，其他顶点成为中转点，\(C\) 是网络的容量函数。它是定义在弧 \(A\) 上的非负函数 如果源点集和汇点集都只含一个顶点，那么这个网络是单源单汇网络 。任何一个网络可以转换成一个单源单汇的网络，方法是加一个超级源点和超级汇点   image-20200326111029177  如果顶点需有容量，那么可以用拆点的方法实现：   image-20200326111150935  网络流与割 定义1.2 网络 \(N=(V,X,Y,A,C)\) 中的一个(可行)流是指定义在 \(A\) 上的一个整值函数\(f\) ，使得  对 \(\forall a \in A, 0 \leqslant f(a) \leqs...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/03/07/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" title="离散数学">离散数学</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-07T10:24:49.000Z" title="Created 2020-03-07 10:24:49">2020-03-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/TUM%E7%AC%94%E8%AE%B0/">TUM笔记</a></span></div><div class="content">离散数学 基础概念 集合的概念 包含 : 每一个的元素都属于 不包含于 $ M_{1} M_{2}：有一个M_{1}的元素不属于M_{2}$ 差集 : 里去除 的元素 真包含于 : 满足，且 不是空集 对称差集 (symmetrische Diﬀerenz) ： 在不在和在不在的元素 集合的容量(Mächtigkeit/Kardinalität) : 集合中(不同)元素的个数 有限集：  全集(Universum)： 补集(Komplement)： 交集和并集(Schnitt und Vereinigung ) 交集：  如果 ，那么和是分离的(disjunkt)   是集合的集合。交集表示所有M取交集，并集表示苏哟M取并集 若  ,那么可以写成  幂集(Potenzmenge)  幂集包含所有子集，比如  划分(Partition) 划分是幂集的子集，它们之间都是分离的，而且并起来刚好是M全集  比如的划分可以是：  韦恩图和卡诺图  4个变量：  5个变量：   image-20200303111311065  集合的关系公式 交换律，结合律  德摩根定律，和其他性质  带全...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/03/05/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" title="人工智能">人工智能</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-05T11:20:56.000Z" title="Created 2020-03-05 11:20:56">2020-03-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span></div><div class="content">人工智能 Intelligent Agent  通过传感器(sensors)察觉周围环境 执行器(actuators)根据环境做出反应  Agents interact with environments through actuators and sensors. Percept sequence 感知的序列 Agent function 根据感知的序列映射出一个动作 可以选择列表(Tabular Agent Function)或者写程序(Agent Program)。 表格可以在理论上很好的描述(Expressiveness)一个agent的行为，但是缺乏实践意义(Practicality) Agent program 是agent function的实际实现(practical implementation) Rational Agent 理想的agent， 一直做”正确的”事情  显然的表现评估法则(performance measure)并不总有 设计者需要找到一个可接受的评估法则  对于一个感知序列，一个理想的agent需要选择行动，使得它在给定的知识范围的表现期望最...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/02/11/windows%E5%9F%BA%E7%A1%80/" title="windows基础">windows基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-11T23:31:15.000Z" title="Created 2020-02-11 23:31:15">2020-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Windows/">Windows</a></span></div><div class="content">Windows 基础 一、一些重要的目录 用户 用户登录后的配置文件。 开机启动目录 C:Menu 在这个目录下存放的文件会开机自启动 MyDrivers 存放驱动 System32 Windows 目录下的SAM文件，存储的是计算机的用户名和密码 Windows 用来解析域名 PerfLogs 用于存放系统日志。计算机管理中的windows日志中的安全可以查看访问情况 Program files 存放安装程序目录，(x86)目录下安装的是32位程序 二、服务 打开服务：  运行中输入 services.msc  或者  右键计算机管理，点开服务  常见的服务 web, dns, dhcp(自动获取ip), 邮件, telnet, ssh ,ftp, smb telnet 打开服务，找到telnet，右键属性   image-20200210222628468  然后调成自动，然后就可以启动服务了   image-20200210222719035  然后再另一台计算机上打开telnet的客户端 找到应用中的程序和功能，打开“启动或关闭Windows功能”   image-202...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/02/11/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E7%BD%91%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/" title="虚拟机安装以及网站的搭建">虚拟机安装以及网站的搭建</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-11T23:30:51.000Z" title="Created 2020-02-11 23:30:51">2020-02-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%99%9A%E6%8B%9F%E6%9C%BA/">虚拟机</a></span></div><div class="content">虚拟机安装以及网站的搭建 一、 VMware WorkStation 安装和使用 Unity 模式 在该模式下，可以把虚拟机的窗口拖到真实机上。   image-20200203165854913  快照 在这里添加快照   image-20200203170140749  二、Windows Server 2003 下载安装完成后： 设置虚拟机交换机 设置虚拟机的交换机为VMnet1，下面的xp也一样设置   image-20200204050331629  设置ip地址 运行中输入ncpa.cpl可以打开网络设置/网卡 右键本地连接属性-&gt; tcp/ip协议 ，右键属性 在这里可以更改ip地址，下面的xp也一样设置，注意地址不要改一样的   image-20200204050717616  三、Windows Xp sp3 下载镜像后安装 序列号：MRX3F-47B9T-2487J-KWKMF-RPWBY Windows也和上面一样设置，然后关闭防火墙，它们就可以ping通过了 关闭防火墙 控制面板—&gt;安全中心—&gt;关闭防火墙   image-20200204...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/01/19/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" title="Java编程思想">Java编程思想</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-19T21:23:27.000Z" title="Created 2020-01-19 21:23:27">2020-01-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">Java 编程思想 安装编程环境 jdk下载链接 Eclipse下载链接 一、对象导论 1、 抽象机制 1.1 抽象过程 所有编程语言都提供抽象机制。汇编语言是对机器指令的抽象，高级语言是对汇编语言的一种抽象。但它们抽象出来的东西还是基于计算机的一下东西，和问题没有直接关联。而面向对象是直接对问题的抽象。 对象：问题空间中的元素及其在空间中的表示。 面向对象的实质：程序可以通过添加新类型的对象使自身适应问题。OOP允许根据问题描述问题，而不是根据计算机描述问题。 Java语言五个基本特性：  万物皆对象 程序是对象的几何，通过发送消息告诉彼此要做的 每个对象都有自己的由其他对象构成的存储 每个对象都有其类型 某一特定类型的所有对象都可以接受相同的信息  1.2 每个对象都有接口 接口对应了某一特定对象所能发出的请求。但是，在程序中，不许有实现这些请求的代码，于是就有了实现。每一个请求都有方法与之关联。 1.3 每个对象都提供服务 当试图开发或者理解一个程序设计时，最好的办法时把对象想象成“服务提供者”。 1.4 被隐藏的具体实现 将程序开发人员按角色分为类创建者和客户端程序员是大...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/7/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#content-inner">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/#content-inner">9</a><a class="extend next" rel="next" href="/page/9/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/pic1.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Fyind</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">90</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">86</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">27</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Fyind"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Fyind" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:contact@fyind.de" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=d0kMY0nN" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">欢迎来逛逛我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/02/cuda-programming/" title="cuda-programming">cuda-programming</a><time datetime="2026-01-02T19:58:41.000Z" title="Created 2026-01-02 19:58:41">2026-01-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/02/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="邮件服务器">邮件服务器</a><time datetime="2025-10-02T17:39:45.000Z" title="Created 2025-10-02 17:39:45">2025-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/23/%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="虚拟机">虚拟机</a><time datetime="2025-09-23T17:43:21.000Z" title="Created 2025-09-23 17:43:21">2025-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98/" title="机器学习实战">机器学习实战</a><time datetime="2025-09-21T20:39:40.000Z" title="Created 2025-09-21 20:39:40">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/02/Rowhammer%E6%94%BB%E5%87%BB/" title="Rowhammer攻击">Rowhammer攻击</a><time datetime="2025-09-02T14:46:19.000Z" title="Created 2025-09-02 14:46:19">2025-09-02</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="View More">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Hexo/"><span class="card-category-list-name">Hexo</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/TUM%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">TUM笔记</span><span class="card-category-list-count">22</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/"><span class="card-category-list-name">Talk</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows/"><span class="card-category-list-name">Windows</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" style="font-size: 1.23em; color: #999ea6">计算几何</a> <a href="/tags/atcoder/" style="font-size: 1.23em; color: #999ea6">atcoder</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">操作系统</a> <a href="/tags/LaTeX/" style="font-size: 1.1em; color: #999">LaTeX</a> <a href="/tags/Archlinux/" style="font-size: 1.23em; color: #999ea6">Archlinux</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 1.5em; color: #99a9bf">网络安全</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 1.1em; color: #999">线性代数</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 1.37em; color: #99a4b2">题解</a> <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" style="font-size: 1.1em; color: #999">统计学</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9E%B6%E6%9E%84/" style="font-size: 1.1em; color: #999">计算机架构</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 1.1em; color: #999">人工智能</a> <a href="/tags/%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6/" style="font-size: 1.1em; color: #999">理论计算机学</a> <a href="/tags/Linux%E5%91%BD%E4%BB%A4/" style="font-size: 1.1em; color: #999">Linux命令</a> <a href="/tags/%E5%AE%A2%E5%88%B6%E5%8C%96/" style="font-size: 1.1em; color: #999">客制化</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" style="font-size: 1.1em; color: #999">网络流</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" style="font-size: 1.1em; color: #999">线性规划</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.1em; color: #999">工具</a> <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">汇编语言</a> <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">离散数学</a> <a href="/tags/Machine-Learning/" style="font-size: 1.1em; color: #999">Machine Learning</a> <a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 1.1em; color: #999">二分</a> <a href="/tags/Java/" style="font-size: 1.37em; color: #99a4b2">Java</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 1.1em; color: #999">总结</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">编程语言</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">软件技术</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 1.1em; color: #999">前缀和</a> <a href="/tags/Visual-Studio/" style="font-size: 1.1em; color: #999">Visual-Studio</a> <a href="/tags/Python/" style="font-size: 1.37em; color: #99a4b2">Python</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/AtCoder/" style="font-size: 1.1em; color: #999">AtCoder</a> <a href="/tags/Web/" style="font-size: 1.1em; color: #999">Web</a> <a href="/tags/%E5%89%AA%E8%BE%91%E8%BD%AF%E4%BB%B6/" style="font-size: 1.1em; color: #999">剪辑软件</a> <a href="/tags/i3/" style="font-size: 1.1em; color: #999">i3</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 1.1em; color: #999">面向对象</a> <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" style="font-size: 1.1em; color: #999">逆向工程</a> <a href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" style="font-size: 1.1em; color: #999">高斯消元</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.1em; color: #999">计算机网络</a> <a href="/tags/Operating-System/" style="font-size: 1.1em; color: #999">Operating System</a> <a href="/tags/Functional-Programming/" style="font-size: 1.1em; color: #999">Functional Programming</a> <a href="/tags/%E6%95%B0%E5%AD%A6-R%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">数学 - R语言</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              January 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              October 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              September 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              July 2025
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/04/">
+            <span class="card-archive-list-date">
+              April 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              March 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/05/">
+            <span class="card-archive-list-date">
+              May 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">90</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-20T15:13:25.059Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Fyind</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["未来可期","Only hard problems make you progress","\\#include<bits/stdc++.h>"])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
